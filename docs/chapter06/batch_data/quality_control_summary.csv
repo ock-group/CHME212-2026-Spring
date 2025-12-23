@@ -1,0 +1,4 @@
+batch,purity,yield,status
+batch_001,0.9635,0.885,PASS
+batch_002,0.9464999999999999,0.905,FAIL
+batch_003,0.9764999999999999,0.855,PASS

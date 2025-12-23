@@ -1,0 +1,1382 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lecture 1: Basic Python - Numbers &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lecture01/01_notebook';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Lecture 0: Introduction to Python &amp; Jupyter Notebooks" href="../lecture00/00_notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture00/00_notebook.html">Lecture 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lecture 1: Basic Python - Numbers</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lecture01/01_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lecture01/01_notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lecture 1: Basic Python - Numbers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-python-math">1.1 Basic Python Math</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-python-math-operators">Basic Python Math Operators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integers-floats">1.2 Integers &amp; Floats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-data-types">What Are Data Types?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-main-number-types-in-python">Two Main Number Types in Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-python-decides-the-result-type">How Python Decides the Result Type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-data-types-matter">Why Data Types Matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-float32-vs-float64">Example: <code class="docutils literal notranslate"><span class="pre">float32</span></code> vs. <code class="docutils literal notranslate"><span class="pre">float64</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-usage"><strong>Memory Usage</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy"><strong>Accuracy</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaway">💡 Key Takeaway</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-functions">1.3 Python Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-python-math-functions">Common Python Math Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">1.4 Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-variables">What Are Variables?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-assigning-variables">1.4.1 Creating &amp; Assigning Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-naming-rules">Variable Naming Rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-reserved-words-keywords">Python Reserved Words (Keywords)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-to-avoid">Common Mistakes to Avoid:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pro-tip">Pro Tip:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-variables-matter-in-engineering">Why Variables Matter in Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment">1.4.2 Compound Assignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment-operators">Compound Assignment Operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-compound-assignment">Why Use Compound Assignment?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-1-basic-python-numbers">
+<span id="id1"></span><h1>Lecture 1: Basic Python - Numbers<a class="headerlink" href="#lecture-1-basic-python-numbers" title="Link to this heading">#</a></h1>
+<section id="basic-python-math">
+<span id="id2"></span><h2>1.1 Basic Python Math<a class="headerlink" href="#basic-python-math" title="Link to this heading">#</a></h2>
+<p>Python can be used as a powerful calculator! Think of it like a super-charged graphing calculator that can handle both simple arithmetic and complex mathematical operations.</p>
+<p>In Jupyter notebooks, you simply type a mathematical expression in a code cell, press <strong>Shift+Enter</strong>, and the result appears right below. Let’s explore the basic mathematical operators that Python provides:</p>
+<section id="basic-python-math-operators">
+<h3>Basic Python Math Operators<a class="headerlink" href="#basic-python-math-operators" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head text-center"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>Addition</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">+</span> <span class="pre">3</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Subtraction</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">-</span> <span class="pre">3</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>Multiplication</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">3</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">15</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p>Division (floating point)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">/</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">3.5</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">//</span></code></p></td>
+<td><p>Floor division (integer)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">//</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>Modulus (remainder)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">%</span> <span class="pre">3</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">**</span></code></p></td>
+<td><p>Exponentiation (power)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">**</span> <span class="pre">3</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">()</span></code></p></td>
+<td><p>Parentheses (grouping)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(2</span> <span class="pre">+</span> <span class="pre">3)</span> <span class="pre">*</span> <span class="pre">4</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">20</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Let’s try some of these operators with real examples:</p>
+<p>Python uses the standard math operators for addition, subtraction, multiplication, and division, and follows the usual order of operations. You can use parentheses to control how calculations are evaluated. Python ignores spaces within a line (so you can format expressions for readability), but it does care about spaces at the beginning of a line—an important concept we’ll discuss later when we cover conditions and loops.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic arithmetic</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5 + 3 = </span><span class="si">{</span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5 * 3 = </span><span class="si">{</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5 / 3 = </span><span class="si">{</span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5 ** 3 (5 to the power of 3) = </span><span class="si">{</span><span class="mi">5</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 + 3 = 8
+5 * 3 = 15
+5 / 3 = 1.6666666666666667
+5 ** 3 (5 to the power of 3) = 125
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two operators that often confuse beginners are <strong>floor division</strong> and <strong>modulo</strong>. Let’s understand what they do:</p>
+<p><strong>Floor Division (<code class="docutils literal notranslate"><span class="pre">//</span></code>)</strong>:</p>
+<ul class="simple">
+<li><p>Returns the <strong>whole number</strong> part of division (rounds down to nearest integer)</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">//</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">3</span></code> (not 3.5)</p></li>
+<li><p>Useful when you need to know “how many complete groups” you can make</p></li>
+</ul>
+<p><strong>Modulo (<code class="docutils literal notranslate"><span class="pre">%</span></code>)</strong>:</p>
+<ul class="simple">
+<li><p>Returns the <strong>remainder</strong> after division</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">1</span></code> (because 7 ÷ 2 = 3 remainder 1)</p></li>
+<li><p>Useful for finding what’s “left over” after dividing</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;25 // 7 = </span><span class="si">{</span><span class="mi">25</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="mi">7</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;25 % 7 = </span><span class="si">{</span><span class="mi">25</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">7</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 // 7 = 3
+25 % 7 = 4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="integers-floats">
+<span id="id3"></span><h2>1.2 Integers &amp; Floats<a class="headerlink" href="#integers-floats" title="Link to this heading">#</a></h2>
+<section id="what-are-data-types">
+<h3>What Are Data Types?<a class="headerlink" href="#what-are-data-types" title="Link to this heading">#</a></h3>
+<p>A <strong>data type</strong> tells Python what kind of information a value represents and what operations can be performed on it. Think of it like categories that help Python understand how to handle different kinds of data. Just like you wouldn’t try to multiply a word by a number in real life, Python uses types to keep track of what makes sense to do with each piece of data.</p>
+</section>
+<section id="two-main-number-types-in-python">
+<h3>Two Main Number Types in Python<a class="headerlink" href="#two-main-number-types-in-python" title="Link to this heading">#</a></h3>
+<p>Python has two primary types for numbers:</p>
+<p><strong>1. Integers (<code class="docutils literal notranslate"><span class="pre">int</span></code>)</strong></p>
+<ul class="simple">
+<li><p>Whole numbers with <strong>no decimal point</strong></p></li>
+<li><p>Examples: <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">53</span></code>, <code class="docutils literal notranslate"><span class="pre">-10</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p>Used for counting, indexing, exact quantities</p></li>
+<li><p>Perfect for things like: number of reactors, batch count, sample size</p></li>
+</ul>
+<p><strong>2. Floats (<code class="docutils literal notranslate"><span class="pre">float</span></code>)</strong></p>
+<ul class="simple">
+<li><p>Numbers with <strong>decimal points</strong> (even if the decimal part is zero)</p></li>
+<li><p>Examples: <code class="docutils literal notranslate"><span class="pre">3.0</span></code>, <code class="docutils literal notranslate"><span class="pre">1.2</span></code>, <code class="docutils literal notranslate"><span class="pre">-5.7</span></code>, <code class="docutils literal notranslate"><span class="pre">2.5e-3</span></code> (scientific notation)</p></li>
+<li><p>Used for measurements, calculations, continuous values</p></li>
+<li><p>Perfect for things like: temperature, pressure, concentration, flow rates</p></li>
+</ul>
+</section>
+<section id="how-python-decides-the-result-type">
+<h3>How Python Decides the Result Type<a class="headerlink" href="#how-python-decides-the-result-type" title="Link to this heading">#</a></h3>
+<p>Python follows simple rules when doing math:</p>
+<ol class="arabic simple">
+<li><p><strong>All integers + whole number result</strong> → Integer</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">+</span> <span class="pre">3</span> <span class="pre">=</span> <span class="pre">8</span></code> (integer)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">*</span> <span class="pre">4</span> <span class="pre">=</span> <span class="pre">40</span></code> (integer)</p></li>
+</ul>
+</li>
+<li><p><strong>Any float involved</strong> → Float</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">5.0</span> <span class="pre">+</span> <span class="pre">3</span> <span class="pre">=</span> <span class="pre">8.0</span></code> (float, because 5.0 is a float)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">3.5</span> <span class="pre">=</span> <span class="pre">7.0</span></code> (float, because 3.5 is a float)</p></li>
+</ul>
+</li>
+<li><p><strong>Division always produces floats</strong> (even with integers)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">6</span> <span class="pre">/</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">3.0</span></code> (float, even though result is whole)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">/</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">3.5</span></code> (float)</p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integers vs Floats Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Integer Examples ===&quot;</span><span class="p">)</span>
+<span class="n">batch_count</span> <span class="o">=</span> <span class="mi">5</span>           <span class="c1"># Integer: whole number of batches</span>
+<span class="n">reactor_num</span> <span class="o">=</span> <span class="mi">2</span>           <span class="c1"># Integer: reactor identifier</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;batch_count = </span><span class="si">{</span><span class="n">batch_count</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">batch_count</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;reactor_num = </span><span class="si">{</span><span class="n">reactor_num</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">reactor_num</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Float Examples ===&quot;</span><span class="p">)</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.7</span>        <span class="c1"># Float: temperature measurement</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.0</span>            <span class="c1"># Float: even though it&#39;s whole, it has decimal</span>
+<span class="n">flow_rate</span> <span class="o">=</span> <span class="mf">1.25e2</span>        <span class="c1"># Float: scientific notation = 125.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;temperature = </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pressure = </span><span class="si">{</span><span class="n">pressure</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;flow_rate = </span><span class="si">{</span><span class="n">flow_rate</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">flow_rate</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== How Python Decides Result Types ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Integer operations</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">5</span>          <span class="c1"># Both integers → integer result</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;10 + 5 = </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Mixed operations (float involved)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="mf">5.0</span>        <span class="c1"># One float → float result</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;10 + 5.0 = </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="n">result3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">3.5</span>         <span class="c1"># One float → float result</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2 * 3.5 = </span><span class="si">{</span><span class="n">result3</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result3</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Division always gives float</span>
+<span class="n">result4</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">2</span>           <span class="c1"># Division → always float</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;6 / 2 = </span><span class="si">{</span><span class="n">result4</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result4</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="n">result5</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">2</span>           <span class="c1"># Division → always float</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;7 / 2 = </span><span class="si">{</span><span class="n">result5</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result5</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Floor division gives integer if inputs are integers</span>
+<span class="n">result6</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">//</span> <span class="mi">2</span>          <span class="c1"># Floor division with integers → integer</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;7 // 2 = </span><span class="si">{</span><span class="n">result6</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result6</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Integer Examples ===
+batch_count = 5 (type: int)
+reactor_num = 2 (type: int)
+
+=== Float Examples ===
+temperature = 85.7 (type: float)
+pressure = 2.0 (type: float)
+flow_rate = 125.0 (type: float)
+
+=== How Python Decides Result Types ===
+10 + 5 = 15 (type: int)
+10 + 5.0 = 15.0 (type: float)
+2 * 3.5 = 7.0 (type: float)
+6 / 2 = 3.0 (type: float)
+7 / 2 = 3.5 (type: float)
+7 // 2 = 3 (type: int)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-data-types-matter">
+<h3>Why Data Types Matter<a class="headerlink" href="#why-data-types-matter" title="Link to this heading">#</a></h3>
+<p>In Python (and scientific computing), the <strong>data type</strong> you choose affects:</p>
+<ol class="arabic simple">
+<li><p><strong>How much memory your data uses</strong></p></li>
+<li><p><strong>How precise your numerical calculations are</strong></p></li>
+</ol>
+<p>Choosing the right data type helps you balance <strong>accuracy</strong>, <strong>performance</strong>, and <strong>memory efficiency</strong>, especially for large datasets or simulations.</p>
+</section>
+<hr class="docutils" />
+<section id="example-float32-vs-float64">
+<h3>Example: <code class="docutils literal notranslate"><span class="pre">float32</span></code> vs. <code class="docutils literal notranslate"><span class="pre">float64</span></code><a class="headerlink" href="#example-float32-vs-float64" title="Link to this heading">#</a></h3>
+<p>Two common numeric types are:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">float32</span></code></strong> — 32-bit floating-point number</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">float64</span></code></strong> — 64-bit floating-point number (NumPy’s default)</p></li>
+</ul>
+<section id="memory-usage">
+<h4><strong>Memory Usage</strong><a class="headerlink" href="#memory-usage" title="Link to this heading">#</a></h4>
+<p>Each type uses a fixed amount of memory per number:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data Type</p></th>
+<th class="head"><p>Size per Value</p></th>
+<th class="head"><p>Memory for 1 Million Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">float32</span></code></p></td>
+<td><p>4 bytes</p></td>
+<td><p>~4 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">float64</span></code></p></td>
+<td><p>8 bytes</p></td>
+<td><p>~8 MB</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">float64</span></code> uses <strong>twice the memory</strong> of <code class="docutils literal notranslate"><span class="pre">float32</span></code>. For large simulations or datasets, this difference becomes significant.</p>
+</section>
+<hr class="docutils" />
+<section id="accuracy">
+<h4><strong>Accuracy</strong><a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">float64</span></code> stores more bits, giving more precise numerical results.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">float32</span></code> precision:</strong> ~7 decimal digits</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">float64</span></code> precision:</strong> ~15–16 decimal digits</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Why do float32 and float64 give different results?</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">x32</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">x64</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== The Results ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float32: </span><span class="si">{</span><span class="n">x32</span><span class="si">}</span><span class="s2"> × 3 = </span><span class="si">{</span><span class="n">x32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float64: </span><span class="si">{</span><span class="n">x64</span><span class="si">}</span><span class="s2"> × 3 = </span><span class="si">{</span><span class="n">x64</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Why Are They Different? ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The issue is that 0.1 cannot be represented exactly in binary!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Just like 1/3 = 0.333... in decimal (goes on forever),&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;0.1 in binary is 0.000110011001100... (repeating pattern)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== How Each Type Stores 0.1 ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float32 stores 0.1 as: </span><span class="si">{</span><span class="n">x32</span><span class="si">:</span><span class="s2">.17f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float64 stores 0.1 as: </span><span class="si">{</span><span class="n">x64</span><span class="si">:</span><span class="s2">.17f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True decimal 0.1:      0.10000000000000000&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== The Multiplication Results ===&quot;</span><span class="p">)</span>
+<span class="n">result32</span> <span class="o">=</span> <span class="n">x32</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="n">result64</span> <span class="o">=</span> <span class="n">x64</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float32: </span><span class="si">{</span><span class="n">x32</span><span class="si">:</span><span class="s2">.17f</span><span class="si">}</span><span class="s2"> × 3 = </span><span class="si">{</span><span class="n">result32</span><span class="si">:</span><span class="s2">.17f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float64: </span><span class="si">{</span><span class="n">x64</span><span class="si">:</span><span class="s2">.17f</span><span class="si">}</span><span class="s2"> × 3 = </span><span class="si">{</span><span class="n">result64</span><span class="si">:</span><span class="s2">.17f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected: 0.3 exactly&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Error Analysis ===&quot;</span><span class="p">)</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">error32</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result32</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span>
+<span class="n">error64</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result64</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float32 error: </span><span class="si">{</span><span class="n">error32</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float64 error: </span><span class="si">{</span><span class="n">error64</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float64 is </span><span class="si">{</span><span class="n">error32</span><span class="o">/</span><span class="n">error64</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x more accurate!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== The Results ===
+float32: 0.10000000149011612 × 3 = 0.30000001192092896
+float64: 0.1 × 3 = 0.30000000000000004
+
+=== Why Are They Different? ===
+The issue is that 0.1 cannot be represented exactly in binary!
+Just like 1/3 = 0.333... in decimal (goes on forever),
+0.1 in binary is 0.000110011001100... (repeating pattern)
+
+=== How Each Type Stores 0.1 ===
+float32 stores 0.1 as: 0.10000000149011612
+float64 stores 0.1 as: 0.10000000000000001
+True decimal 0.1:      0.10000000000000000
+
+=== The Multiplication Results ===
+float32: 0.10000000149011612 × 3 = 0.30000001192092896
+float64: 0.10000000000000001 × 3 = 0.30000000000000004
+Expected: 0.3 exactly
+
+=== Error Analysis ===
+float32 error: 0.00e+00
+float64 error: 5.55e-17
+float64 is 0.0x more accurate!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="key-takeaway">
+<h2>💡 Key Takeaway<a class="headerlink" href="#key-takeaway" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Computers can’t store all decimal numbers exactly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float64</span></code> is more precise than <code class="docutils literal notranslate"><span class="pre">float32</span></code>.</p></li>
+<li><p>For most engineering work, these tiny errors don’t matter.</p></li>
+<li><p>But in long calculations, small errors can add up!</p></li>
+</ul>
+</section>
+<section id="python-functions">
+<span id="id4"></span><h2>1.3 Python Functions<a class="headerlink" href="#python-functions" title="Link to this heading">#</a></h2>
+<p>In addition to basic mathematical operators, Python contains a number of built-in functions. As in mathematics, a function has a name (e.g., <code class="docutils literal notranslate"><span class="pre">abs()</span></code> or <code class="docutils literal notranslate"><span class="pre">round()</span></code>) and the arguments are placed inside parentheses after the name. An <strong>argument</strong> is any value or piece of information fed into a function.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">abs(-5)</span></code> requires a single argument (the number -5) and returns its absolute value.</p>
+<section id="common-python-math-functions">
+<h3>Common Python Math Functions<a class="headerlink" href="#common-python-math-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head text-center"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">abs(x)</span></code></p></td>
+<td><p>Absolute value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">abs(-7.5)</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7.5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">round(x)</span></code></p></td>
+<td><p>Round to nearest integer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">round(3.7)</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">4</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">round(x,</span> <span class="pre">n)</span></code></p></td>
+<td><p>Round to n decimal places</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">round(3.14159,</span> <span class="pre">2)</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">3.14</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">max(a,</span> <span class="pre">b,</span> <span class="pre">...)</span></code></p></td>
+<td><p>Maximum value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">max(5,</span> <span class="pre">2,</span> <span class="pre">9)</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">9</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">min(a,</span> <span class="pre">b,</span> <span class="pre">...)</span></code></p></td>
+<td><p>Minimum value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">min(5,</span> <span class="pre">2,</span> <span class="pre">9)</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">pow(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>x to the power of y</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pow(2,</span> <span class="pre">3)</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">len(x)</span></code></p></td>
+<td><p>Length of sequence</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">len([1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Important Note:</strong> The <code class="docutils literal notranslate"><span class="pre">round()</span></code> function uses “Banker’s rounding” (also called “round half to even”). If a number is exactly halfway between two integers (e.g., 4.5), it rounds toward the <strong>even</strong> integer. So <code class="docutils literal notranslate"><span class="pre">round(4.5)</span> <span class="pre">=</span> <span class="pre">4</span></code> and <code class="docutils literal notranslate"><span class="pre">round(5.5)</span> <span class="pre">=</span> <span class="pre">6</span></code>.</p>
+<p>Let’s try some examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python Built-in Math Functions Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Absolute Value Function ===&quot;</span><span class="p">)</span>
+<span class="n">temperature_error</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.5</span>  <span class="c1"># °C</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature error: </span><span class="si">{</span><span class="n">temperature_error</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">temperature_error</span><span class="p">)</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Rounding Functions ===&quot;</span><span class="p">)</span>
+<span class="n">measurement</span> <span class="o">=</span> <span class="mf">15.6789</span>  <span class="c1"># some measured value</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original measurement: </span><span class="si">{</span><span class="n">measurement</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rounded to integer: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">measurement</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rounded to 2 decimal places: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">measurement</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rounded to 1 decimal place: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">measurement</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Banker&#39;s Rounding Examples ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;round(4.5) = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="mf">4.5</span><span class="p">)</span><span class="si">}</span><span class="s2"> (rounds to even)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;round(5.5) = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="mf">5.5</span><span class="p">)</span><span class="si">}</span><span class="s2"> (rounds to even)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;round(3.5) = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="mf">3.5</span><span class="p">)</span><span class="si">}</span><span class="s2"> (rounds to even)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;round(6.5) = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="mf">6.5</span><span class="p">)</span><span class="si">}</span><span class="s2"> (rounds to even)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Min/Max Functions ===&quot;</span><span class="p">)</span>
+<span class="n">reactor_temps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">78.5</span><span class="p">,</span> <span class="mf">82.1</span><span class="p">,</span> <span class="mf">79.3</span><span class="p">,</span> <span class="mf">85.7</span><span class="p">,</span> <span class="mf">77.9</span><span class="p">]</span>  <span class="c1"># °C</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reactor temperatures: </span><span class="si">{</span><span class="n">reactor_temps</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Minimum temperature: </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">reactor_temps</span><span class="p">)</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum temperature: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">reactor_temps</span><span class="p">)</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature range: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">reactor_temps</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="n">reactor_temps</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Power and Length Functions ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pow(2, 3) = </span><span class="si">{</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2"> (same as 2**3 = </span><span class="si">{</span><span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length of temperature list: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">reactor_temps</span><span class="p">)</span><span class="si">}</span><span class="s2"> measurements&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Absolute Value Function ===
+Temperature error: -2.5°C
+Absolute error: 2.5°C
+
+=== Rounding Functions ===
+Original measurement: 15.6789
+Rounded to integer: 16
+Rounded to 2 decimal places: 15.68
+Rounded to 1 decimal place: 15.7
+
+=== Banker&#39;s Rounding Examples ===
+round(4.5) = 4 (rounds to even)
+round(5.5) = 6 (rounds to even)
+round(3.5) = 4 (rounds to even)
+round(6.5) = 6 (rounds to even)
+
+=== Min/Max Functions ===
+Reactor temperatures: [78.5, 82.1, 79.3, 85.7, 77.9]
+Minimum temperature: 77.9°C
+Maximum temperature: 85.7°C
+Temperature range: 7.8°C
+
+=== Power and Length Functions ===
+pow(2, 3) = 8 (same as 2**3 = 8)
+Length of temperature list: 5 measurements
+</pre></div>
+</div>
+</div>
+</div>
+<p>Other than mathematical operation Python has basic functions,l ike print(), open(), type(), etc</p>
+</section>
+</section>
+<section id="variables">
+<span id="id5"></span><h2>1.4 Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h2>
+<p><strong>Variables</strong> are like labeled containers that store values in your computer’s memory. Think of them as storage boxes with names written on them - you can put different things inside and refer to them by their labels.</p>
+<section id="what-are-variables">
+<h3>What Are Variables?<a class="headerlink" href="#what-are-variables" title="Link to this heading">#</a></h3>
+<p>A variable has three key components:</p>
+<ol class="arabic simple">
+<li><p><strong>Name</strong> - What you call it (e.g., <code class="docutils literal notranslate"><span class="pre">temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">pressure</span></code>)</p></li>
+<li><p><strong>Value</strong> - What’s stored inside (e.g., <code class="docutils literal notranslate"><span class="pre">85.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;distillation&quot;</span></code>)</p></li>
+<li><p><strong>Type</strong> - What kind of data it is (e.g., number, text)</p></li>
+</ol>
+</section>
+<section id="creating-assigning-variables">
+<span id="id6"></span><h3>1.4.1 Creating &amp; Assigning Variables<a class="headerlink" href="#creating-assigning-variables" title="Link to this heading">#</a></h3>
+<p>In Python, you create a variable by simply assigning a value to a name using the <code class="docutils literal notranslate"><span class="pre">=</span></code> sign:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.5</span>          <span class="c1"># Creates a variable named &#39;temperature&#39;</span>
+<span class="n">process_name</span> <span class="o">=</span> <span class="s2">&quot;reactor&quot;</span>    <span class="c1"># Creates a variable named &#39;process_name&#39;</span>
+<span class="n">sample_count</span> <span class="o">=</span> <span class="mi">10</span>           <span class="c1"># Creates a variable named &#39;sample_count&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="variable-naming-rules">
+<h3>Variable Naming Rules<a class="headerlink" href="#variable-naming-rules" title="Link to this heading">#</a></h3>
+<p><strong>Required Rules</strong> (Python will give an error if broken):</p>
+<ul class="simple">
+<li><p>Must start with a letter (a-z, A-Z) or underscore (_)</p></li>
+<li><p>Can contain letters, numbers, and underscores</p></li>
+<li><p>Cannot contain spaces or special characters (&#64;, #, $, etc.)</p></li>
+<li><p>Cannot be Python keywords (like <code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>)</p></li>
+</ul>
+<p><strong>Best Practices</strong> (for readable code):</p>
+<ul class="simple">
+<li><p>Use descriptive names: <code class="docutils literal notranslate"><span class="pre">reactor_temperature</span></code> not <code class="docutils literal notranslate"><span class="pre">temp</span></code></p></li>
+<li><p>Use lowercase with underscores: <code class="docutils literal notranslate"><span class="pre">flow_rate</span></code> not <code class="docutils literal notranslate"><span class="pre">FlowRate</span></code></p></li>
+<li><p>Avoid confusing names: <code class="docutils literal notranslate"><span class="pre">pressure_1</span></code> and <code class="docutils literal notranslate"><span class="pre">pressure_2</span></code> instead of <code class="docutils literal notranslate"><span class="pre">p1</span></code> and <code class="docutils literal notranslate"><span class="pre">p2</span></code></p></li>
+</ul>
+</section>
+<section id="python-reserved-words-keywords">
+<h3>Python Reserved Words (Keywords)<a class="headerlink" href="#python-reserved-words-keywords" title="Link to this heading">#</a></h3>
+<p>These words have special meanings in Python and <strong>cannot</strong> be used as variable names. Python will give you an error if you try to use them:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Reserved Word</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Example Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></td>
+<td><p>Logical AND operator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">temp</span> <span class="pre">&gt;</span> <span class="pre">80</span> <span class="pre">and</span> <span class="pre">pressure</span> <span class="pre">&lt;</span> <span class="pre">5:</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
+<td><p>Logical OR operator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">status</span> <span class="pre">==</span> <span class="pre">&quot;error&quot;</span> <span class="pre">or</span> <span class="pre">count</span> <span class="pre">==</span> <span class="pre">0:</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">not</span></code></p></td>
+<td><p>Logical NOT operator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">is_running:</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">if</span></code></p></td>
+<td><p>Conditional statement</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">temperature</span> <span class="pre">&gt;</span> <span class="pre">100:</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">elif</span></code></p></td>
+<td><p>Else-if in conditional</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">pressure</span> <span class="pre">&gt;</span> <span class="pre">5:</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">else</span></code></p></td>
+<td><p>Else in conditional</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">else:</span> <span class="pre">print(&quot;Normal&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">for</span></code></p></td>
+<td><p>For loop</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(10):</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">while</span></code></p></td>
+<td><p>While loop</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">temp</span> <span class="pre">&lt;</span> <span class="pre">80:</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">in</span></code></p></td>
+<td><p>Membership test</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">&quot;error&quot;</span> <span class="pre">in</span> <span class="pre">status:</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">is</span></code></p></td>
+<td><p>Identity test</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">result</span> <span class="pre">is</span> <span class="pre">None:</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">def</span></code></p></td>
+<td><p>Define function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">calculate_pressure():</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">class</span></code></p></td>
+<td><p>Define class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Reactor:</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">return</span></code></p></td>
+<td><p>Return from function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">pressure</span> <span class="pre">*</span> <span class="pre">volume</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">import</span></code></p></td>
+<td><p>Import module</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">from</span></code></p></td>
+<td><p>Import specific items</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">pi</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">as</span></code></p></td>
+<td><p>Create alias</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib</span> <span class="pre">as</span> <span class="pre">plt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">try</span></code></p></td>
+<td><p>Try block (error handling)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">try:</span> <span class="pre">result</span> <span class="pre">=</span> <span class="pre">10/0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">except</span></code></p></td>
+<td><p>Except block</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">ZeroDivisionError:</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">finally</span></code></p></td>
+<td><p>Finally block</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">finally:</span> <span class="pre">cleanup()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">with</span></code></p></td>
+<td><p>Context manager</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open(&quot;data.txt&quot;)</span> <span class="pre">as</span> <span class="pre">f:</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">lambda</span></code></p></td>
+<td><p>Anonymous function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">square</span> <span class="pre">=</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x**2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Boolean true value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">is_running</span> <span class="pre">=</span> <span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Boolean false value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">is_complete</span> <span class="pre">=</span> <span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Null value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">result</span> <span class="pre">=</span> <span class="pre">None</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="common-mistakes-to-avoid">
+<h3>Common Mistakes to Avoid:<a class="headerlink" href="#common-mistakes-to-avoid" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ❌ These will cause errors:</span>
+<span class="k">if</span> <span class="o">=</span> <span class="mf">85.5</span>        <span class="c1"># &#39;if&#39; is reserved</span>
+<span class="k">for</span> <span class="o">=</span> <span class="s2">&quot;reactor&quot;</span>  <span class="c1"># &#39;for&#39; is reserved  </span>
+<span class="k">class</span><span class="w"> </span><span class="err">= 10       # &#39;</span><span class="nc">class</span><span class="s1">&#39; is reserved</span>
+
+<span class="c1"># ✅ Use these instead:</span>
+<span class="n">condition</span> <span class="o">=</span> <span class="mf">85.5</span>
+<span class="n">process</span> <span class="o">=</span> <span class="s2">&quot;reactor&quot;</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</section>
+<section id="pro-tip">
+<h3>Pro Tip:<a class="headerlink" href="#pro-tip" title="Link to this heading">#</a></h3>
+<p>If you accidentally use a reserved word, Python will show an error like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span>
+</pre></div>
+</div>
+<p>Choose descriptive variable names that don’t conflict with these keywords!</p>
+</section>
+<section id="why-variables-matter-in-engineering">
+<h3>Why Variables Matter in Engineering<a class="headerlink" href="#why-variables-matter-in-engineering" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Store measurements</strong>: <code class="docutils literal notranslate"><span class="pre">pressure</span> <span class="pre">=</span> <span class="pre">2.5</span></code>, <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">=</span> <span class="pre">85.0</span></code></p></li>
+<li><p><strong>Track calculations</strong>: <code class="docutils literal notranslate"><span class="pre">efficiency</span> <span class="pre">=</span> <span class="pre">output</span> <span class="pre">/</span> <span class="pre">input</span> <span class="pre">*</span> <span class="pre">100</span></code></p></li>
+<li><p><strong>Label data</strong>: <code class="docutils literal notranslate"><span class="pre">process_name</span> <span class="pre">=</span> <span class="pre">&quot;distillation&quot;</span></code></p></li>
+<li><p><strong>Reuse values</strong>: Calculate once, use many times</p></li>
+<li><p><strong>Make code readable</strong>: <code class="docutils literal notranslate"><span class="pre">reactor_volume</span></code> is clearer than just <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+</ul>
+<p>Let’s see variables in action:</p>
+</section>
+<section id="compound-assignment">
+<span id="id7"></span><h3>1.4.2 Compound Assignment<a class="headerlink" href="#compound-assignment" title="Link to this heading">#</a></h3>
+<p><strong>Compound assignment operators</strong> are shortcuts that combine an operation with variable assignment. Instead of writing <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">=</span> <span class="pre">temperature</span> <span class="pre">+</span> <span class="pre">5</span></code>, you can write <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">+=</span> <span class="pre">5</span></code>. These operators make your code more concise and are commonly used in engineering calculations.</p>
+<section id="compound-assignment-operators">
+<h4>Compound Assignment Operators<a class="headerlink" href="#compound-assignment-operators" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Operator</p></th>
+<th class="head text-center"><p>Equivalent</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head text-center"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">+=</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code></p></td>
+<td><p>Add and assign</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">temp</span> <span class="pre">+=</span> <span class="pre">10</span></code></p></td>
+<td class="text-center"><p>Increase temp by 10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">-=</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">-</span> <span class="pre">y</span></code></p></td>
+<td><p>Subtract and assign</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pressure</span> <span class="pre">-=</span> <span class="pre">0.5</span></code></p></td>
+<td class="text-center"><p>Decrease pressure by 0.5</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">*=</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></code></p></td>
+<td><p>Multiply and assign</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">volume</span> <span class="pre">*=</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p>Double the volume</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">/=</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span></code></p></td>
+<td><p>Divide and assign</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">concentration</span> <span class="pre">/=</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p>Halve concentration</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">//=</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">//</span> <span class="pre">y</span></code></p></td>
+<td><p>Floor divide and assign</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">//=</span> <span class="pre">3</span></code></p></td>
+<td class="text-center"><p>Integer division</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">%=</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span></code></p></td>
+<td><p>Modulo and assign</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">remainder</span> <span class="pre">%=</span> <span class="pre">10</span></code></p></td>
+<td class="text-center"><p>Get remainder</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">**=</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">**</span> <span class="pre">y</span></code></p></td>
+<td><p>Power and assign</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">area</span> <span class="pre">**=</span> <span class="pre">0.5</span></code></p></td>
+<td class="text-center"><p>Square root of area</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="why-use-compound-assignment">
+<h4>Why Use Compound Assignment?<a class="headerlink" href="#why-use-compound-assignment" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Shorter code</strong>: <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">+=</span> <span class="pre">1</span></code> vs <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">=</span> <span class="pre">count</span> <span class="pre">+</span> <span class="pre">1</span></code></p></li>
+<li><p><strong>Less typing</strong>: Fewer chances for typos</p></li>
+<li><p><strong>Clearer intent</strong>: Shows you’re modifying the existing variable</p></li>
+<li><p><strong>Common pattern</strong>: Very frequently used in loops and iterative calculations</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compound Assignment Operators Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic Compound Assignment Examples ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Starting values</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">75.0</span>  <span class="c1"># °C</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.0</span>      <span class="c1"># bar</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1"># L</span>
+<span class="n">batch_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial values:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pressure: </span><span class="si">{</span><span class="n">pressure</span><span class="si">}</span><span class="s2"> bar&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Volume: </span><span class="si">{</span><span class="n">volume</span><span class="si">}</span><span class="s2"> L&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Batch count: </span><span class="si">{</span><span class="n">batch_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Addition Assignment (+=) ===&quot;</span><span class="p">)</span>
+<span class="n">temperature</span> <span class="o">+=</span> <span class="mf">15.5</span>  <span class="c1"># Same as: temperature = temperature + 15.5</span>
+<span class="n">batch_count</span> <span class="o">+=</span> <span class="mi">1</span>     <span class="c1"># Increment batch counter</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After heating: temperature = </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After processing: batch_count = </span><span class="si">{</span><span class="n">batch_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Subtraction Assignment (-=) ===&quot;</span><span class="p">)</span>
+<span class="n">pressure</span> <span class="o">-=</span> <span class="mf">0.3</span>      <span class="c1"># Pressure drop</span>
+<span class="n">volume</span> <span class="o">-=</span> <span class="mi">25</span>         <span class="c1"># Volume consumed</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After pressure drop: pressure = </span><span class="si">{</span><span class="n">pressure</span><span class="si">}</span><span class="s2"> bar&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After consumption: volume = </span><span class="si">{</span><span class="n">volume</span><span class="si">}</span><span class="s2"> L&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Multiplication Assignment (*=) ===&quot;</span><span class="p">)</span>
+<span class="c1"># Scale up production</span>
+<span class="n">production_rate</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># kg/hr</span>
+<span class="n">production_rate</span> <span class="o">*=</span> <span class="mf">1.5</span>  <span class="c1"># Increase by 50%</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scaled production rate: </span><span class="si">{</span><span class="n">production_rate</span><span class="si">}</span><span class="s2"> kg/hr&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Division Assignment (/=) ===&quot;</span><span class="p">)</span>
+<span class="n">concentration</span> <span class="o">=</span> <span class="mf">25.0</span>  <span class="c1"># mol/L</span>
+<span class="n">concentration</span> <span class="o">/=</span> <span class="mi">2</span>    <span class="c1"># Dilute by half</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After dilution: concentration = </span><span class="si">{</span><span class="n">concentration</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Power Assignment (**=) ===&quot;</span><span class="p">)</span>
+<span class="c1"># Calculate area from diameter</span>
+<span class="n">diameter</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c1"># m</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="n">diameter</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">radius</span>  <span class="c1"># Start with radius</span>
+<span class="n">area</span> <span class="o">**=</span> <span class="mi">2</span>     <span class="c1"># Square it (r²)</span>
+<span class="n">area</span> <span class="o">*=</span> <span class="mf">3.14159</span>  <span class="c1"># Multiply by π</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Circle area (d=</span><span class="si">{</span><span class="n">diameter</span><span class="si">}</span><span class="s2">m): </span><span class="si">{</span><span class="n">area</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m²&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic Compound Assignment Examples ===
+Initial values:
+Temperature: 75.0°C
+Pressure: 2.0 bar
+Volume: 100 L
+Batch count: 0
+
+=== Addition Assignment (+=) ===
+After heating: temperature = 90.5°C
+After processing: batch_count = 1
+
+=== Subtraction Assignment (-=) ===
+After pressure drop: pressure = 1.7 bar
+After consumption: volume = 75 L
+
+=== Multiplication Assignment (*=) ===
+Scaled production rate: 75.0 kg/hr
+
+=== Division Assignment (/=) ===
+After dilution: concentration = 12.5 mol/L
+
+=== Power Assignment (**=) ===
+Circle area (d=4.0m): 12.57 m²
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lecture01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lecture00/00_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lecture 0: Introduction to Python &amp; Jupyter Notebooks</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-python-math">1.1 Basic Python Math</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-python-math-operators">Basic Python Math Operators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integers-floats">1.2 Integers &amp; Floats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-data-types">What Are Data Types?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-main-number-types-in-python">Two Main Number Types in Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-python-decides-the-result-type">How Python Decides the Result Type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-data-types-matter">Why Data Types Matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-float32-vs-float64">Example: <code class="docutils literal notranslate"><span class="pre">float32</span></code> vs. <code class="docutils literal notranslate"><span class="pre">float64</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-usage"><strong>Memory Usage</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy"><strong>Accuracy</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaway">💡 Key Takeaway</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-functions">1.3 Python Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-python-math-functions">Common Python Math Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">1.4 Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-variables">What Are Variables?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-assigning-variables">1.4.1 Creating &amp; Assigning Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-naming-rules">Variable Naming Rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-reserved-words-keywords">Python Reserved Words (Keywords)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-to-avoid">Common Mistakes to Avoid:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pro-tip">Pro Tip:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-variables-matter-in-engineering">Why Variables Matter in Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment">1.4.2 Compound Assignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment-operators">Compound Assignment Operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-compound-assignment">Why Use Compound Assignment?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

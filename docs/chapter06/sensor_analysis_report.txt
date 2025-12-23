@@ -1,0 +1,13 @@
+SENSOR ANALYSIS REPORT
+==================================================
+
+Total readings: 6
+Average temperature: 73.0°C
+Maximum temperature: 105.3°C
+Minimum temperature: 25.3°C
+
+Warnings: 2
+Critical alerts: 1
+
+CRITICAL EVENTS:
+  2024-01-15 08:15:00: T=105.3°C, P=3.15 bar

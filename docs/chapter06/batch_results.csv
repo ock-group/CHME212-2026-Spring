@@ -1,0 +1,5 @@
+Batch_ID,Purity,Yield,Status
+B-001,0.965,0.88,Pass
+B-002,0.942,0.91,Fail
+B-003,0.978,0.85,Pass
+B-004,0.955,0.89,Pass

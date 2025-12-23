@@ -1,0 +1,7 @@
+Reactor Status Report
+========================================
+
+R-101: Temp=85.0°C, Pressure=2.5 bar
+R-102: Temp=92.0°C, Pressure=2.8 bar
+R-103: Temp=78.5°C, Pressure=2.3 bar
+R-104: Temp=88.5°C, Pressure=2.6 bar

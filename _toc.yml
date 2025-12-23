@@ -5,9 +5,31 @@ format: jb-book
 root: docs/introduction/intro
 
 parts:
-  - caption: Basic Scientific Computing Skills
+  - caption: Basic Python
     chapters:
       - file: docs/chapter00/00_notebook
+      - file: docs/chapter01/01_notebook
+      - file: docs/chapter02/02_notebook
+      - file: docs/chapter03/03_notebook
+      - file: docs/chapter04/04_notebook
+      - file: docs/chapter05/05_notebook 
+      - file: docs/chapter06/06_notebook 
+      - file: docs/chapter07/07_notebook
+      - file: docs/chapter08/08_notebook
+      - file: docs/chapter09/09_notebook
+  - caption: Numerical Computation
+    chapters:
+      - file: docs/chapter10/10_notebook
+      - file: docs/chapter11/11_notebook 
+      - file: docs/chapter12/12_notebook 
+      - file: docs/chapter13/13_notebook 
+      - file: docs/chapter14/14_notebook 
+      - file: docs/chapter15/15_notebook 
+      - file: docs/chapter16/16_notebook 
+      - file: docs/chapter17/17_notebook
+      - file: docs/chapter18/18_notebook 
   - caption: Advanced Topics & Applications
     chapters:
-      - file: docs/chapter06/06_notebook
+      - file: docs/chapter19/19_notebook (image analysis for particle/phase characterization)
+      - file: docs/chapter20/20_notebook (cheminformatics with RDKit)
+      - file: docs/chapter21/21_notebook (simulation - Brownian motion / diffusion / random walks)

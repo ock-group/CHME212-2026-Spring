@@ -1,0 +1,6 @@
+student_id,name,email,major,gpa,enrollment_year
+1001,Alice Johnson,alice.j@university.edu,Chemical Engineering,3.85,2022
+1002,Bob Smith,bob.smith@university.edu,Mechanical Engineering,3.62,2021
+1003,Carol White,carol.w@university.edu,Chemical Engineering,3.91,2023
+1004,David Lee,david.lee@university.edu,Electrical Engineering,3.45,2022
+1005,Emma Davis,emma.d@university.edu,Chemical Engineering,3.78,2022

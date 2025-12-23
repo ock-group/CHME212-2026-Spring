@@ -1,0 +1,1598 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 2: Working with Text (Strings) &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter02/02_notebook';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chapter 3: Boolean Logic" href="../chapter03/03_notebook.html" />
+    <link rel="prev" title="Chapter 1: Basic Python Math" href="../chapter01/01_notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter02/02_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter02/02_notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 2: Working with Text (Strings)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string">2.1 String</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-strings">2.1.1 Creating Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-slicing">2.1.2 Indexing &amp; Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-string-operations">2.1.3 Common String Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-string-methods">Basic String Methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#real-examples-standardization-data-cleaning">Real Examples: Standardization &amp; Data Cleaning</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-formatting">2.1.4 String Formatting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-concatenation-operator">Method 1: Concatenation Operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-format-method">Method 2: <code class="docutils literal notranslate"><span class="pre">.format()</span></code> Method</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-3-f-strings-formatted-string-literals">Method 3: f-strings (Formatted String Literals)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-summary-what-you-should-use">Practical Summary: What You Should Use</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2-working-with-text-strings">
+<span id="id1"></span><h1>Chapter 2: Working with Text (Strings)<a class="headerlink" href="#chapter-2-working-with-text-strings" title="Link to this heading">#</a></h1>
+<section id="string">
+<span id="id2"></span><h2>2.1 String<a class="headerlink" href="#string" title="Link to this heading">#</a></h2>
+<p>A <strong>string</strong> is Python’s way of storing and working with text. Think of it as a sequence of characters (letters, numbers, symbols, spaces) that represent words, names, labels, or any text information.</p>
+<p><strong>Simple Definition:</strong> A string is text data enclosed in quotes.</p>
+<section id="creating-strings">
+<span id="id3"></span><h3>2.1.1 Creating Strings<a class="headerlink" href="#creating-strings" title="Link to this heading">#</a></h3>
+<p>You can create strings using either single quotes (<code class="docutils literal notranslate"><span class="pre">'</span></code>) or double quotes (<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">process_name</span> <span class="o">=</span> <span class="s2">&quot;distillation&quot;</span>        <span class="c1"># Double quotes</span>
+<span class="n">operator</span> <span class="o">=</span> <span class="s1">&#39;Alice&#39;</span>                   <span class="c1"># Single quotes</span>
+<span class="n">reaction</span> <span class="o">=</span> <span class="s2">&quot;2H2 + O2 → 2H2O&quot;</span>        <span class="c1"># Chemical equation as text</span>
+<span class="n">status_message</span> <span class="o">=</span> <span class="s1">&#39;Reactor is running normally&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="indexing-slicing">
+<span id="id4"></span><h3>2.1.2 Indexing &amp; Slicing<a class="headerlink" href="#indexing-slicing" title="Link to this heading">#</a></h3>
+<p><strong>Indexing</strong> lets you access individual characters in a string, while <strong>slicing</strong> lets you extract parts of a string. This is very useful when you need to work with specific portions of text data.</p>
+<p>The key concept: <strong>Python starts counting from 0</strong>, not 1!</p>
+<p>If we have the string <code class="docutils literal notranslate"><span class="pre">&quot;Python&quot;</span></code>, here’s how the indexing works:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="p">:</span>  <span class="n">P</span>  <span class="n">y</span>  <span class="n">t</span>  <span class="n">h</span>  <span class="n">o</span>  <span class="n">n</span>
+<span class="n">Index</span><span class="p">:</span>   <span class="mi">0</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">3</span>  <span class="mi">4</span>  <span class="mi">5</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>First character <code class="docutils literal notranslate"><span class="pre">&quot;P&quot;</span></code> is at index <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p>Second character <code class="docutils literal notranslate"><span class="pre">&quot;y&quot;</span></code> is at index <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p>Last character <code class="docutils literal notranslate"><span class="pre">&quot;n&quot;</span></code> is at index <code class="docutils literal notranslate"><span class="pre">5</span></code></p></li>
+</ul>
+<p><strong>Remember: Python indexing starts at 0, not 1!</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># Gets first character: &quot;P&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># Gets second character: &quot;y&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>    <span class="c1"># Gets last character: &quot;n&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P
+y
+n
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also count backwards from the end using negative numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># Last character: &quot;n&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>   <span class="c1"># Second to last: &quot;o&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n
+o
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># String Indexing Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic String Indexing ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create a simple string</span>
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;String: &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Positive Indexing (counting from start) ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[0] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # First character&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[1] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Second character&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[2] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Third character&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[3] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Fourth character&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[4] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Fifth character&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[5] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Sixth character&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Negative Indexing (counting from end) ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[-1] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Last character&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[-2] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Second to last&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[-3] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Third to last&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[-4] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Fourth to last&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[-5] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Fifth to last&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;word[-6] = &#39;</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Sixth to last (first)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Index Diagram ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String:  P  y  t  h  o  n&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index:   0  1  2  3  4  5&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Negative:-6 -5 -4 -3 -2 -1&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Practical Example ===&quot;</span><span class="p">)</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Hello World&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message: &#39;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First character: &#39;</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last character: &#39;</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Middle character: &#39;</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic String Indexing ===
+String: &#39;Python&#39;
+Length: 6 characters
+
+=== Positive Indexing (counting from start) ===
+word[0] = &#39;P&#39;  # First character
+word[1] = &#39;y&#39;  # Second character
+word[2] = &#39;t&#39;  # Third character
+word[3] = &#39;h&#39;  # Fourth character
+word[4] = &#39;o&#39;  # Fifth character
+word[5] = &#39;n&#39;  # Sixth character
+
+=== Negative Indexing (counting from end) ===
+word[-1] = &#39;n&#39;  # Last character
+word[-2] = &#39;o&#39;  # Second to last
+word[-3] = &#39;h&#39;  # Third to last
+word[-4] = &#39;t&#39;  # Fourth to last
+word[-5] = &#39;y&#39;  # Fifth to last
+word[-6] = &#39;P&#39;  # Sixth to last (first)
+
+=== Index Diagram ===
+String:  P  y  t  h  o  n
+Index:   0  1  2  3  4  5
+Negative:-6 -5 -4 -3 -2 -1
+
+=== Practical Example ===
+Message: &#39;Hello World&#39;
+First character: &#39;H&#39;
+Last character: &#39;d&#39;
+Middle character: &#39; &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Slicing</strong> lets you extract a portion (substring) of a string. The syntax is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">string</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code>: Index where slice begins (included)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: Index where slice ends (excluded)</p></li>
+</ul>
+<p><strong>Important:</strong> The end index is <strong>not included</strong> in the slice!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>    <span class="c1"># Gets characters from index 1 to 3: &quot;yth&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>    <span class="c1"># Gets characters from index 0 to 2: &quot;Pyt&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>     <span class="c1"># Gets from index 2 to end: &quot;thon&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>     <span class="c1"># Gets from start to index 3: &quot;Pyth&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yth
+Pyt
+thon
+Pyth
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># text[start:end:step]    # Every &#39;step&#39; characters</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>               <span class="c1"># Every 2nd character</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>              <span class="c1"># Reverse the string!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pto
+nohtyP
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># String Slicing Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== String Slicing ===&quot;</span><span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Programming&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original string: &#39;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Basic Slicing [start:end] ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[0:4] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Characters 0,1,2,3&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[1:5] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Characters 1,2,3,4&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[3:7] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Characters 3,4,5,6&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Slicing from Start or to End ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[:5] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;    # From beginning to index 4&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[5:] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span><span class="si">}</span><span class="s2">&#39;    # From index 5 to end&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[:] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[:]</span><span class="si">}</span><span class="s2">&#39;      # Entire string (copy)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Negative Slicing ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[-4:] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="si">}</span><span class="s2">&#39;   # Last 4 characters&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[:-3] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;   # All except last 3&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[-7:-2] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; # From -7 to -3&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Slicing with Step ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[::2] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;   # Every 2nd character&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[1::2] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; # Every 2nd, starting from index 1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[::3] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[::</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;   # Every 3rd character&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Reverse String ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[::-1] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; # Reverse the entire string!&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Practical Examples ===&quot;</span><span class="p">)</span>
+<span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;user@example.com&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Email: &#39;</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Username: &#39;</span><span class="si">{</span><span class="n">email</span><span class="p">[:</span><span class="n">email</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>  <span class="c1"># Before @</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Domain: &#39;</span><span class="si">{</span><span class="n">email</span><span class="p">[</span><span class="n">email</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>  <span class="c1"># After @</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;data.txt&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Filename: &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Name part: &#39;</span><span class="si">{</span><span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>  <span class="c1"># Without extension</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extension: &#39;</span><span class="si">{</span><span class="n">filename</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>  <span class="c1"># Just extension</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== String Slicing ===
+Original string: &#39;Programming&#39;
+Length: 11 characters
+
+=== Basic Slicing [start:end] ===
+text[0:4] = &#39;Prog&#39;  # Characters 0,1,2,3
+text[1:5] = &#39;rogr&#39;  # Characters 1,2,3,4
+text[3:7] = &#39;gram&#39;  # Characters 3,4,5,6
+
+=== Slicing from Start or to End ===
+text[:5] = &#39;Progr&#39;    # From beginning to index 4
+text[5:] = &#39;amming&#39;    # From index 5 to end
+text[:] = &#39;Programming&#39;      # Entire string (copy)
+
+=== Negative Slicing ===
+text[-4:] = &#39;ming&#39;   # Last 4 characters
+text[:-3] = &#39;Programm&#39;   # All except last 3
+text[-7:-2] = &#39;rammi&#39; # From -7 to -3
+
+=== Slicing with Step ===
+text[::2] = &#39;Pormig&#39;   # Every 2nd character
+text[1::2] = &#39;rgamn&#39; # Every 2nd, starting from index 1
+text[::3] = &#39;Pgmn&#39;   # Every 3rd character
+
+=== Reverse String ===
+text[::-1] = &#39;gnimmargorP&#39; # Reverse the entire string!
+
+=== Practical Examples ===
+Email: &#39;user@example.com&#39;
+Username: &#39;user&#39;
+Domain: &#39;example.com&#39;
+
+Filename: &#39;data.txt&#39;
+Name part: &#39;data&#39;
+Extension: &#39;.txt&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="common-string-operations">
+<span id="id5"></span><h3>2.1.3 Common String Operations<a class="headerlink" href="#common-string-operations" title="Link to this heading">#</a></h3>
+<p>Strings have many useful methods (functions) that help you work with text:</p>
+<section id="basic-string-methods">
+<h4>Basic String Methods<a class="headerlink" href="#basic-string-methods" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head text-center"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">.upper()</span></code></p></td>
+<td><p>Convert to uppercase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;reactor&quot;.upper()</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">&quot;REACTOR&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">.lower()</span></code></p></td>
+<td><p>Convert to lowercase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;REACTOR&quot;.lower()</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">&quot;reactor&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">.title()</span></code></p></td>
+<td><p>Title case (first letter caps)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;batch</span> <span class="pre">reactor&quot;.title()</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">&quot;Batch</span> <span class="pre">Reactor&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">.len()</span></code></p></td>
+<td><p>Length of string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">len(&quot;benzene&quot;)</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">.replace()</span></code></p></td>
+<td><p>Replace text</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;pump</span> <span class="pre">A&quot;.replace(&quot;A&quot;,</span> <span class="pre">&quot;B&quot;)</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">&quot;pump</span> <span class="pre">B&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="real-examples-standardization-data-cleaning">
+<h4>Real Examples: Standardization &amp; Data Cleaning<a class="headerlink" href="#real-examples-standardization-data-cleaning" title="Link to this heading">#</a></h4>
+<p><strong>Standardization Example:</strong>
+Imagine you have equipment data from different sources with inconsistent naming:</p>
+<ul class="simple">
+<li><p>Raw data: <code class="docutils literal notranslate"><span class="pre">&quot;pump</span> <span class="pre">a&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;PUMP</span> <span class="pre">B&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Pump-C&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;centrifugal_pump_d&quot;</span></code></p></li>
+<li><p>Standardized: <code class="docutils literal notranslate"><span class="pre">&quot;Pump</span> <span class="pre">A&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Pump</span> <span class="pre">B&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Pump</span> <span class="pre">C&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Centrifugal</span> <span class="pre">Pump</span> <span class="pre">D&quot;</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standardization and Data Cleaning Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== STANDARDIZATION EXAMPLE ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Problem: Equipment names from different sources are inconsistent</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Raw equipment data (messy, from different sources)</span>
+<span class="n">raw_equipment</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;pump a&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PUMP B&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;Pump-C&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;centrifugal_pump_d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;REACTOR r101&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;heat exchanger #1&quot;</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raw equipment data:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">equipment</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw_equipment</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. &#39;</span><span class="si">{</span><span class="n">equipment</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Standardized equipment data:&quot;</span><span class="p">)</span>
+<span class="c1"># Standardize each equipment name</span>
+<span class="n">standardized_equipment</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">equipment</span> <span class="ow">in</span> <span class="n">raw_equipment</span><span class="p">:</span>
+    <span class="c1"># Step 1: Replace underscores and hyphens with spaces</span>
+    <span class="n">clean_name</span> <span class="o">=</span> <span class="n">equipment</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="c1"># Step 2: Replace # symbol</span>
+    <span class="n">clean_name</span> <span class="o">=</span> <span class="n">clean_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="c1"># Step 3: Convert to title case</span>
+    <span class="n">clean_name</span> <span class="o">=</span> <span class="n">clean_name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+    <span class="c1"># Step 4: Clean up extra spaces</span>
+    <span class="n">clean_name</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">clean_name</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>  <span class="c1"># Remove extra spaces</span>
+    
+    <span class="n">standardized_equipment</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clean_name</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">equipment</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">standardized_equipment</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. &#39;</span><span class="si">{</span><span class="n">equipment</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== STANDARDIZATION EXAMPLE ===
+Problem: Equipment names from different sources are inconsistent
+
+Raw equipment data:
+1. &#39;pump a&#39;
+2. &#39;PUMP B&#39;
+3. &#39;Pump-C&#39;
+4. &#39;centrifugal_pump_d&#39;
+5. &#39;REACTOR r101&#39;
+6. &#39;heat exchanger #1&#39;
+
+Standardized equipment data:
+1. &#39;Pump A&#39;
+2. &#39;Pump B&#39;
+3. &#39;Pump C&#39;
+4. &#39;Centrifugal Pump D&#39;
+5. &#39;Reactor R101&#39;
+6. &#39;Heat Exchanger 1&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Data Cleaning Example:</strong>
+Sensor data files often have messy formatting:</p>
+<ul class="simple">
+<li><p>Raw data: <code class="docutils literal notranslate"><span class="pre">&quot;</span>&#160; <span class="pre">TEMPERATURE:85.5°c</span>&#160; <span class="pre">&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;pressure:</span> <span class="pre">2.3</span> <span class="pre">BAR&quot;</span></code></p></li>
+<li><p>Cleaned: <code class="docutils literal notranslate"><span class="pre">&quot;Temperature:</span> <span class="pre">85.5°C&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Pressure:</span> <span class="pre">2.3</span> <span class="pre">bar&quot;</span></code></p></li>
+</ul>
+<p>Let’s see these in action:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== DATA CLEANING EXAMPLE ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Problem: Sensor data has inconsistent formatting</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Raw sensor data (messy, from log files)</span>
+<span class="n">raw_sensor_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;  TEMPERATURE:85.5°c  &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pressure: 2.3 BAR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;  Flow Rate: 125.7 L/min  &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pH VALUE: 7.2    &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONCENTRATION: 0.25 mol/L&quot;</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raw sensor data:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw_sensor_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. &#39;</span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cleaned sensor data:&quot;</span><span class="p">)</span>
+<span class="c1"># Clean each data entry</span>
+<span class="n">cleaned_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">raw_sensor_data</span><span class="p">:</span>
+    <span class="c1"># Step 1: Remove extra spaces</span>
+    <span class="n">clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="c1"># Step 2: Convert to title case for consistency</span>
+    <span class="n">clean</span> <span class="o">=</span> <span class="n">clean</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+    <span class="c1"># Step 3: Fix common unit issues</span>
+    <span class="n">clean</span> <span class="o">=</span> <span class="n">clean</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;°C&quot;</span><span class="p">,</span> <span class="s2">&quot;°C&quot;</span><span class="p">)</span>  <span class="c1"># Ensure proper degree symbol</span>
+    <span class="n">clean</span> <span class="o">=</span> <span class="n">clean</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Bar&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span>  <span class="c1"># Lowercase units</span>
+    <span class="n">clean</span> <span class="o">=</span> <span class="n">clean</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L/Min&quot;</span><span class="p">,</span> <span class="s2">&quot;L/min&quot;</span><span class="p">)</span>  <span class="c1"># Proper minute abbreviation</span>
+    
+    <span class="n">cleaned_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. &#39;</span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================================
+=== DATA CLEANING EXAMPLE ===
+Problem: Sensor data has inconsistent formatting
+
+Raw sensor data:
+1. &#39;  TEMPERATURE:85.5°c  &#39;
+2. &#39;pressure: 2.3 BAR&#39;
+3. &#39;  Flow Rate: 125.7 L/min  &#39;
+4. &#39;pH VALUE: 7.2    &#39;
+5. &#39;CONCENTRATION: 0.25 mol/L&#39;
+
+Cleaned sensor data:
+1. &#39;Temperature:85.5°C&#39;
+2. &#39;Pressure: 2.3 bar&#39;
+3. &#39;Flow Rate: 125.7 L/min&#39;
+4. &#39;Ph Value: 7.2&#39;
+5. &#39;Concentration: 0.25 Mol/L&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># String Methods Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic String Methods ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Equipment data that might need standardization</span>
+<span class="n">equipment_name</span> <span class="o">=</span> <span class="s2">&quot;centrifugal pump&quot;</span>
+<span class="n">chemical_name</span> <span class="o">=</span> <span class="s2">&quot;BENZENE&quot;</span>
+<span class="n">process_status</span> <span class="o">=</span> <span class="s2">&quot;normal operation&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original: &#39;</span><span class="si">{</span><span class="n">equipment_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Uppercase: &#39;</span><span class="si">{</span><span class="n">equipment_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Title Case: &#39;</span><span class="si">{</span><span class="n">equipment_name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Original: &#39;</span><span class="si">{</span><span class="n">chemical_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lowercase: &#39;</span><span class="si">{</span><span class="n">chemical_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Original: &#39;</span><span class="si">{</span><span class="n">process_status</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Title Case: &#39;</span><span class="si">{</span><span class="n">process_status</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== String Length ===&quot;</span><span class="p">)</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;C6H12O6&quot;</span>  <span class="c1"># Glucose</span>
+<span class="n">safety_message</span> <span class="o">=</span> <span class="s2">&quot;Wear safety goggles at all times&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chemical formula &#39;</span><span class="si">{</span><span class="n">formula</span><span class="si">}</span><span class="s2">&#39; has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Safety message has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">safety_message</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Replacing Text ===&quot;</span><span class="p">)</span>
+<span class="n">old_equipment</span> <span class="o">=</span> <span class="s2">&quot;Pump A is running&quot;</span>
+<span class="n">new_equipment</span> <span class="o">=</span> <span class="n">old_equipment</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original: &#39;</span><span class="si">{</span><span class="n">old_equipment</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Updated: &#39;</span><span class="si">{</span><span class="n">new_equipment</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Useful for updating equipment IDs</span>
+<span class="n">reactor_list</span> <span class="o">=</span> <span class="s2">&quot;R-101, R-102, R-103&quot;</span>
+<span class="n">updated_list</span> <span class="o">=</span> <span class="n">reactor_list</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;R-&quot;</span><span class="p">,</span> <span class="s2">&quot;Reactor-&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Equipment list: &#39;</span><span class="si">{</span><span class="n">reactor_list</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Formatted list: &#39;</span><span class="si">{</span><span class="n">updated_list</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Practical Example: Data Cleaning ===&quot;</span><span class="p">)</span>
+<span class="c1"># Messy data from a sensor log file</span>
+<span class="n">messy_data</span> <span class="o">=</span> <span class="s2">&quot;  REACTOR temperature:  85.5 °C  &quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raw data: &#39;</span><span class="si">{</span><span class="n">messy_data</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Clean it up</span>
+<span class="n">clean_data</span> <span class="o">=</span> <span class="n">messy_data</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># Remove extra spaces</span>
+<span class="n">clean_data</span> <span class="o">=</span> <span class="n">clean_data</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>  <span class="c1"># Consistent case</span>
+<span class="n">clean_data</span> <span class="o">=</span> <span class="n">clean_data</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>  <span class="c1"># Make it look professional</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned data: &#39;</span><span class="si">{</span><span class="n">clean_data</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic String Methods ===
+Original: &#39;centrifugal pump&#39;
+Uppercase: &#39;CENTRIFUGAL PUMP&#39;
+Title Case: &#39;Centrifugal Pump&#39;
+
+Original: &#39;BENZENE&#39;
+Lowercase: &#39;benzene&#39;
+
+Original: &#39;normal operation&#39;
+Title Case: &#39;Normal Operation&#39;
+
+=== String Length ===
+Chemical formula &#39;C6H12O6&#39; has 7 characters
+Safety message has 32 characters
+
+=== Replacing Text ===
+Original: &#39;Pump A is running&#39;
+Updated: &#39;Pump B is running&#39;
+
+Equipment list: &#39;R-101, R-102, R-103&#39;
+Formatted list: &#39;Reactor-101, Reactor-102, Reactor-103&#39;
+
+=== Practical Example: Data Cleaning ===
+Raw data: &#39;  REACTOR temperature:  85.5 °C  &#39;
+Cleaned data: &#39;Reactor Temperature:  85.5 °C&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="string-formatting">
+<span id="id6"></span><h3>2.1.4 String Formatting<a class="headerlink" href="#string-formatting" title="Link to this heading">#</a></h3>
+<p><strong>String formatting</strong> is the process of inserting variables and values into strings to create dynamic text. Instead of manually concatenating strings with the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator, Python provides several elegant methods to combine text and data.</p>
+<p><strong>Example of the problem:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hard to read and maintain</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Reactor&quot;</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.5</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.3</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;The &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; temperature is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;°C and pressure is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; bar&quot;</span>
+</pre></div>
+</div>
+<p><strong>Python offers three main formatting methods:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Concatenation Operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>)</strong> - Basic but limited</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">.format()</span></code> Method</strong> - Powerful and flexible</p></li>
+<li><p><strong>f-strings</strong> - Modern and most readable (Python 3.6+)</p></li>
+</ol>
+<section id="method-1-concatenation-operator">
+<h4>Method 1: Concatenation Operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>)<a class="headerlink" href="#method-1-concatenation-operator" title="Link to this heading">#</a></h4>
+<p>The basic method uses the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator to join strings together. <strong>Important:</strong> You must convert non-string values to strings using <code class="docutils literal notranslate"><span class="pre">str()</span></code> function first.</p>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Simple and straightforward</p></li>
+<li><p>Works in all Python versions</p></li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul class="simple">
+<li><p>Can become messy with many variables</p></li>
+<li><p>Must manually convert numbers to strings</p></li>
+<li><p>Hard to read with complex formatting</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic Concatenation Examples ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Chemical data</span>
+<span class="n">MW</span> <span class="o">=</span> <span class="mf">63.21</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="s2">&quot;Molar mass = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">MW</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; g/mol&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>
+
+<span class="c1"># Equipment status</span>
+<span class="n">reactor_id</span> <span class="o">=</span> <span class="s2">&quot;R-101&quot;</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.5</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;The reactor &quot;</span> <span class="o">+</span> <span class="n">reactor_id</span> <span class="o">+</span> <span class="s2">&quot; is at &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;°C&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic Concatenation Examples ===
+Molar mass = 63.21 g/mol
+The reactor R-101 is at 85.5°C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Problems with Concatenation ===&quot;</span><span class="p">)</span>
+<span class="c1"># This gets messy quickly!</span>
+<span class="n">reactor</span> <span class="o">=</span> <span class="s2">&quot;R-102&quot;</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="mf">92.3</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">flow_rate</span> <span class="o">=</span> <span class="mf">125.7</span>
+<span class="n">complex_message</span> <span class="o">=</span> <span class="s2">&quot;Reactor &quot;</span> <span class="o">+</span> <span class="n">reactor</span> <span class="o">+</span> <span class="s2">&quot; status: Temperature = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;°C, Pressure = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; bar, Flow rate = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">flow_rate</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; L/min&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Complex message (hard to read):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">complex_message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Problems with Concatenation ===
+Complex message (hard to read):
+Reactor R-102 status: Temperature = 92.3°C, Pressure = 2.5 bar, Flow rate = 125.7 L/min
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Common Mistakes ===&quot;</span><span class="p">)</span>
+<span class="c1"># This will cause an error - uncomment to see:</span>
+<span class="c1"># temperature = 85.5</span>
+<span class="c1"># error_message = &quot;Temperature is &quot; + temperature  # TypeError!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Remember: Must convert numbers to strings with str()&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Common Mistakes ===
+Remember: Must convert numbers to strings with str()
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-2-format-method">
+<h4>Method 2: <code class="docutils literal notranslate"><span class="pre">.format()</span></code> Method<a class="headerlink" href="#method-2-format-method" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">.format()</span></code> method provides a more powerful and flexible way to format strings. You use <code class="docutils literal notranslate"><span class="pre">{}</span></code> as placeholders and pass values to the <code class="docutils literal notranslate"><span class="pre">.format()</span></code> method.</p>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>No need to convert numbers to strings manually</p></li>
+<li><p>Placeholders make the template clear</p></li>
+<li><p>Can control number formatting (decimal places, etc.)</p></li>
+<li><p>Can reuse and reorder variables</p></li>
+</ul>
+<p><strong>Basic Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;template with </span><span class="si">{}</span><span class="s2"> placeholders&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Method 2: .format() Method</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic .format() Examples ===&quot;</span><span class="p">)</span>
+<span class="c1"># Same examples as before, but cleaner</span>
+<span class="n">MW</span> <span class="o">=</span> <span class="mf">63.21</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="s2">&quot;Molar mass = </span><span class="si">{}</span><span class="s2"> g/mol&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">MW</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic .format() Examples ===
+Molar mass = 63.21 g/mol
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple variables</span>
+<span class="n">reactor_id</span> <span class="o">=</span> <span class="s2">&quot;R-101&quot;</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.5</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;The reactor </span><span class="si">{}</span><span class="s2"> is at </span><span class="si">{}</span><span class="s2">°C&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reactor_id</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The reactor R-101 is at 85.5°C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complex example - much cleaner!</span>
+<span class="n">chemical</span> <span class="o">=</span> <span class="s2">&quot;Benzene&quot;</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;C6H6&quot;</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="mf">80.1</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">) has a boiling point of </span><span class="si">{}</span><span class="s2">°C&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chemical</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">bp</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Benzene (C6H6) has a boiling point of 80.1°C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Comparing Methods ===&quot;</span><span class="p">)</span>
+<span class="n">reactor</span> <span class="o">=</span> <span class="s2">&quot;R-102&quot;</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="mf">92.3</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.5</span>
+
+<span class="c1"># Concatenation (messy)</span>
+<span class="n">concat_msg</span> <span class="o">=</span> <span class="s2">&quot;Reactor &quot;</span> <span class="o">+</span> <span class="n">reactor</span> <span class="o">+</span> <span class="s2">&quot; is at &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;°C, &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; bar&quot;</span>
+
+<span class="c1"># .format() method (cleaner)</span>
+<span class="n">format_msg</span> <span class="o">=</span> <span class="s2">&quot;Reactor </span><span class="si">{}</span><span class="s2"> is at </span><span class="si">{}</span><span class="s2">°C, </span><span class="si">{}</span><span class="s2"> bar&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Concatenation:&quot;</span><span class="p">,</span> <span class="n">concat_msg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.format():&quot;</span><span class="p">,</span> <span class="n">format_msg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Comparing Methods ===
+Concatenation: Reactor R-102 is at 92.3°C, 2.5 bar
+.format(): Reactor R-102 is at 92.3°C, 2.5 bar
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-3-f-strings-formatted-string-literals">
+<h4>Method 3: f-strings (Formatted String Literals)<a class="headerlink" href="#method-3-f-strings-formatted-string-literals" title="Link to this heading">#</a></h4>
+<p><strong>f-strings</strong> are the most modern and readable way to format strings in Python (available in Python 3.6+). You put an <code class="docutils literal notranslate"><span class="pre">f</span></code> before the quotes and write variables directly inside <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Most readable and concise</p></li>
+<li><p>Variables are directly visible in the string</p></li>
+<li><p>Excellent performance</p></li>
+<li><p>Can include expressions inside <code class="docutils literal notranslate"><span class="pre">{}</span></code></p></li>
+<li><p>Preferred method for new Python code</p></li>
+</ul>
+<p><strong>Basic Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sa">f</span><span class="s2">&quot;template with </span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s2"> directly inside&quot;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Method 3: f-strings (Formatted String Literals)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic f-string Examples ===&quot;</span><span class="p">)</span>
+<span class="c1"># Same examples, now with f-strings (cleanest!)</span>
+<span class="n">MW</span> <span class="o">=</span> <span class="mf">63.21</span>
+<span class="n">result3</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Molar mass = </span><span class="si">{</span><span class="n">MW</span><span class="si">}</span><span class="s2"> g/mol&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic f-string Examples ===
+Molar mass = 63.21 g/mol
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple variables - very readable</span>
+<span class="n">reactor_id</span> <span class="o">=</span> <span class="s2">&quot;R-101&quot;</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.5</span>
+<span class="n">status</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The reactor </span><span class="si">{</span><span class="n">reactor_id</span><span class="si">}</span><span class="s2"> is at </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The reactor R-101 is at 85.5°C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complex example - super clean!</span>
+<span class="n">chemical</span> <span class="o">=</span> <span class="s2">&quot;Benzene&quot;</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;C6H6&quot;</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="mf">80.1</span>
+<span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chemical</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">formula</span><span class="si">}</span><span class="s2">) has a boiling point of </span><span class="si">{</span><span class="n">bp</span><span class="si">}</span><span class="s2">°C&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Benzene (C6H6) has a boiling point of 80.1°C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Advanced f-string Features ===&quot;</span><span class="p">)</span>
+<span class="c1"># 1. Expressions inside braces</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">area_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Rectangle area = </span><span class="si">{</span><span class="n">length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="si">}</span><span class="s2"> square units&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">area_msg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Advanced f-string Features ===
+Rectangle area = 15 square units
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Function calls inside braces</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;reactor temperature&quot;</span>
+<span class="n">formatted_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Sensor: </span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">formatted_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sensor: Reactor Temperature
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Number formatting (same as .format())</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159265359</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.34567</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi = </span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>           <span class="c1"># 2 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi = </span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>           <span class="c1"># 4 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pressure = </span><span class="si">{</span><span class="n">pressure</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> bar&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pi = 3.14
+Pi = 3.1416
+Pressure = 2.3 bar
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Percentage formatting</span>
+<span class="n">efficiency</span> <span class="o">=</span> <span class="mf">0.854</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reactor efficiency: </span><span class="si">{</span><span class="n">efficiency</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reactor efficiency: 85.4%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Complex calculations</span>
+<span class="n">temp_celsius</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">temp_fahrenheit</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temp_celsius</span><span class="si">}</span><span class="s2">°C = </span><span class="si">{</span><span class="n">temp_celsius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">32</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°F&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temp_fahrenheit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperature: 25°C = 77.0°F
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Comparing All Three Methods ===&quot;</span><span class="p">)</span>
+<span class="n">reactor</span> <span class="o">=</span> <span class="s2">&quot;R-102&quot;</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="mf">92.3</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.5</span>
+
+<span class="c1"># Method 1: Concatenation (verbose)</span>
+<span class="n">concat_msg</span> <span class="o">=</span> <span class="s2">&quot;Reactor &quot;</span> <span class="o">+</span> <span class="n">reactor</span> <span class="o">+</span> <span class="s2">&quot; is at &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;°C, &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; bar&quot;</span>
+
+<span class="c1"># Method 2: .format() (good)</span>
+<span class="n">format_msg</span> <span class="o">=</span> <span class="s2">&quot;Reactor </span><span class="si">{}</span><span class="s2"> is at </span><span class="si">{}</span><span class="s2">°C, </span><span class="si">{}</span><span class="s2"> bar&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">)</span>
+
+<span class="c1"># Method 3: f-string (best!)</span>
+<span class="n">fstring_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Reactor </span><span class="si">{</span><span class="n">reactor</span><span class="si">}</span><span class="s2"> is at </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">°C, </span><span class="si">{</span><span class="n">pressure</span><span class="si">}</span><span class="s2"> bar&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Concatenation:&quot;</span><span class="p">,</span> <span class="n">concat_msg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.format():&quot;</span><span class="p">,</span> <span class="n">format_msg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f-string:&quot;</span><span class="p">,</span> <span class="n">fstring_msg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Comparing All Three Methods ===
+Concatenation: Reactor R-102 is at 92.3°C, 2.5 bar
+.format(): Reactor R-102 is at 92.3°C, 2.5 bar
+f-string: Reactor R-102 is at 92.3°C, 2.5 bar
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="practical-summary-what-you-should-use">
+<h4>Practical Summary: What You Should Use<a class="headerlink" href="#practical-summary-what-you-should-use" title="Link to this heading">#</a></h4>
+<p><strong>For this course: Use f-strings!</strong></p>
+<p>f-strings are the modern, preferred way to format strings in Python. They’re more readable, faster, and easier to write.</p>
+<p><strong>Why we showed the other methods:</strong></p>
+<ul class="simple">
+<li><p><strong>Concatenation (<code class="docutils literal notranslate"><span class="pre">+</span></code>)</strong>: You might need this for simple cases</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">.format()</span></code></strong>: You’ll encounter this when reading older Python code or tutorials</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Method</p></th>
+<th class="head"><p>When to Use</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><strong>Concatenation (<code class="docutils literal notranslate"><span class="pre">+</span></code>)</strong></p></td>
+<td><p>❌ Avoid (hard to read)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Hello</span> <span class="pre">&quot;</span> <span class="pre">+</span> <span class="pre">name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong><code class="docutils literal notranslate"><span class="pre">.format()</span></code></strong></p></td>
+<td><p>📚 Understanding old code only</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Value:</span> <span class="pre">{:.2f}&quot;.format(num)</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>f-strings</strong></p></td>
+<td><p>✅ <strong>USE THIS!</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;Value:</span> <span class="pre">{num:.2f}&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Bottom line:</strong> Always use f-strings in your assignments and projects!</p>
+<p><strong>Real-World Example: Laboratory Report</strong></p>
+<p>Imagine you’re writing a program to generate laboratory reports. Here’s how each method would look:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Real-World Example: Laboratory Report Generator</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== LABORATORY REPORT GENERATOR ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating a report for chemical analysis results...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Laboratory data</span>
+<span class="n">sample_id</span> <span class="o">=</span> <span class="s2">&quot;CHEM-2024-001&quot;</span>
+<span class="n">compound</span> <span class="o">=</span> <span class="s2">&quot;Ethanol&quot;</span>
+<span class="n">purity</span> <span class="o">=</span> <span class="mf">0.9534</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">25.0</span>
+<span class="n">analyst</span> <span class="o">=</span> <span class="s2">&quot;Dr. Smith&quot;</span>
+<span class="n">date</span> <span class="o">=</span> <span class="s2">&quot;2024-11-19&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Method 1: Concatenation (Verbose) ===&quot;</span><span class="p">)</span>
+<span class="n">report1</span> <span class="o">=</span> <span class="s2">&quot;Sample ID: &quot;</span> <span class="o">+</span> <span class="n">sample_id</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+          <span class="s2">&quot;Compound: &quot;</span> <span class="o">+</span> <span class="n">compound</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+          <span class="s2">&quot;Purity: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">purity</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;%</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+          <span class="s2">&quot;Analysis Temperature: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;°C</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+          <span class="s2">&quot;Analyst: &quot;</span> <span class="o">+</span> <span class="n">analyst</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+          <span class="s2">&quot;Date: &quot;</span> <span class="o">+</span> <span class="n">date</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">report1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Method 2: .format() (Better) ===&quot;</span><span class="p">)</span>
+<span class="n">report2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Sample ID: </span><span class="si">{}</span>
+<span class="s2">Compound: </span><span class="si">{}</span>
+<span class="s2">Purity: </span><span class="si">{:.1%}</span>
+<span class="s2">Analysis Temperature: </span><span class="si">{}</span><span class="s2">°C</span>
+<span class="s2">Analyst: </span><span class="si">{}</span>
+<span class="s2">Date: </span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sample_id</span><span class="p">,</span> <span class="n">compound</span><span class="p">,</span> <span class="n">purity</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">analyst</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">report2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Method 3: f-strings (Best!) ===&quot;</span><span class="p">)</span>
+<span class="n">report3</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Sample ID: </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span>
+<span class="s2">Compound: </span><span class="si">{</span><span class="n">compound</span><span class="si">}</span>
+<span class="s2">Purity: </span><span class="si">{</span><span class="n">purity</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span>
+<span class="s2">Analysis Temperature: </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C</span>
+<span class="s2">Analyst: </span><span class="si">{</span><span class="n">analyst</span><span class="si">}</span>
+<span class="s2">Date: </span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">report3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Advanced f-string Features in Reports ===&quot;</span><span class="p">)</span>
+<span class="c1"># Calculate derived values directly in the f-string</span>
+<span class="n">molecular_weight</span> <span class="o">=</span> <span class="mf">46.07</span>  <span class="c1"># g/mol for ethanol</span>
+<span class="n">concentration</span> <span class="o">=</span> <span class="mf">0.250</span>     <span class="c1"># mol/L</span>
+
+<span class="n">advanced_report</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">ADVANCED ANALYSIS REPORT</span>
+<span class="s2">========================</span>
+<span class="s2">Sample: </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">compound</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">Molecular Weight: </span><span class="si">{</span><span class="n">molecular_weight</span><span class="si">}</span><span class="s2"> g/mol</span>
+<span class="s2">Concentration: </span><span class="si">{</span><span class="n">concentration</span><span class="si">}</span><span class="s2"> mol/L</span>
+<span class="s2">Mass per Liter: </span><span class="si">{</span><span class="n">concentration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">molecular_weight</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> g/L</span>
+<span class="s2">Purity: </span><span class="si">{</span><span class="n">purity</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">purity</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> decimal)</span>
+<span class="s2">Quality Grade: </span><span class="si">{</span><span class="s1">&#39;High&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">purity</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.95</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Standard&#39;</span><span class="si">}</span>
+<span class="s2">Temperature: </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C (</span><span class="si">{</span><span class="n">temperature</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">32</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°F)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">advanced_report</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== LABORATORY REPORT GENERATOR ===
+Generating a report for chemical analysis results...
+
+=== Method 1: Concatenation (Verbose) ===
+Sample ID: CHEM-2024-001
+Compound: Ethanol
+Purity: 95.34%
+Analysis Temperature: 25.0°C
+Analyst: Dr. Smith
+Date: 2024-11-19
+
+=== Method 2: .format() (Better) ===
+Sample ID: CHEM-2024-001
+Compound: Ethanol
+Purity: 95.3%
+Analysis Temperature: 25.0°C
+Analyst: Dr. Smith
+Date: 2024-11-19
+
+=== Method 3: f-strings (Best!) ===
+Sample ID: CHEM-2024-001
+Compound: Ethanol
+Purity: 95.3%
+Analysis Temperature: 25.0°C
+Analyst: Dr. Smith
+Date: 2024-11-19
+
+=== Advanced f-string Features in Reports ===
+
+ADVANCED ANALYSIS REPORT
+========================
+Sample: CHEM-2024-001 (Ethanol)
+Molecular Weight: 46.07 g/mol
+Concentration: 0.25 mol/L
+Mass per Liter: 11.52 g/L
+Purity: 95.3% (0.9534 decimal)
+Quality Grade: High
+Temperature: 25.0°C (77.0°F)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chapter01/01_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 1: Basic Python Math</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../chapter03/03_notebook.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 3: Boolean Logic</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string">2.1 String</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-strings">2.1.1 Creating Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-slicing">2.1.2 Indexing &amp; Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-string-operations">2.1.3 Common String Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-string-methods">Basic String Methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#real-examples-standardization-data-cleaning">Real Examples: Standardization &amp; Data Cleaning</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-formatting">2.1.4 String Formatting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-concatenation-operator">Method 1: Concatenation Operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-format-method">Method 2: <code class="docutils literal notranslate"><span class="pre">.format()</span></code> Method</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#method-3-f-strings-formatted-string-literals">Method 3: f-strings (Formatted String Literals)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-summary-what-you-should-use">Practical Summary: What You Should Use</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
