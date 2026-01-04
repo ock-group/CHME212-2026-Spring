@@ -8,8 +8,7 @@ parts:
   - caption: Basic Python
     chapters:
       - file: docs/chapter00/00_notebook
-      # Chapters 01-09 will be released later
-      # - file: docs/chapter01/01_notebook
+      - file: docs/chapter01/01_notebook
       # - file: docs/chapter02/02_notebook
       # - file: docs/chapter03/03_notebook
       # - file: docs/chapter04/04_notebook
