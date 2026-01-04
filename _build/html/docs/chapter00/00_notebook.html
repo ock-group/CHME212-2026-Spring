@@ -62,7 +62,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter00/00_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Chapter 1: Basic Python Math" href="../chapter01/01_notebook.html" />
     <link rel="prev" title="Welcome to CHME 212 Course" href="../introduction/intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,12 +180,9 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
 </ul>
 
     </div>
@@ -387,7 +383,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-accessing-python-and-jupyter">0.3 Getting Started: Accessing Python and Jupyter</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-install-the-software-on-your-computer">0.3.1 Option 1: Install the Software on Your Computer</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-download-the-installer">Step 1: Download the Installer</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-anaconda-or-miniconda">Step 2: Install Anaconda or Miniconda</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-miniconda">Step 2: Install Miniconda</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-verify-installation">Step 3: Verify Installation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-create-a-new-environment-for-this-course">Step 4: Create a New Environment for This Course</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-activate-your-environment">Step 5: Activate Your Environment</a></li>
@@ -398,10 +394,10 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-launch-jupyterlab">Step 8: Launch JupyterLab</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-google-colab">0.3.2 Option 2: Use Google Colab</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-log-into-google">Step 1. Log into Google**</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-open-google-drive">Step 2. Open Google Drive**</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-the-google-colab-add-on">Step 3. Install the Google Colab Add-on**</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-option-2-use-google-colab">0.3.2 [Optional] Option 2: Use Google Colab</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-log-into-google">Step 1. Log into Google</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-open-google-drive">Step 2. Open Google Drive</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-the-google-colab-add-on">Step 3. Install the Google Colab Add-on</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-google-colab">Using Google Colab</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-extra-libraries-if-needed">Installing Extra Libraries (If Needed)</a></li>
 </ul>
@@ -445,7 +441,7 @@ document.write(`
 </section>
 <section id="jupyter-notebooks">
 <span id="id3"></span><h2>0.2 Jupyter Notebooks<a class="headerlink" href="#jupyter-notebooks" title="Link to this heading">#</a></h2>
-<p>Jupyter notebooks are an interactive computing environment widely used in science, engineering, and data analysis. Instead of writing code in a traditional script, a notebook is organized into cells that you can run independently. This lets you write code, see the output immediately, adjust your analysis, and document your reasoning—all in one place.</p>
+<p>Jupyter notebooks are an interactive computing environment widely used in science, engineering, and data analysis. Instead of writing code in a traditional script, a notebook is organized into cells that you can run independently. This lets you write code, see the output immediately, adjust your analysis, and document your reasoning—all in one place. <em>Jupyter notebooks are particularly well suited for interactive coding and step-by-step demonstrations, similar to working through examples in a classroom setting.</em></p>
 <p>This chapter uses Python together with Jupyter notebooks, which provide an interactive environment ideal for scientific computing. We will also work with several free, open-source libraries that expand Python’s capabilities for data processing, numerical analysis, and visualization.</p>
 </section>
 <section id="getting-started-accessing-python-and-jupyter">
@@ -478,22 +474,46 @@ Choose <strong>ONE</strong> option (you can switch later if you want).</p>
 </li>
 </ul>
 <p>Both options work with the exact same <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> notebook files.</p>
-<p>Choose whichever option you prefer. Beginners often start with <strong>Google Colab</strong> because it requires no installation.</p>
+<p>For this course, we will primarily use <strong>a local conda environment</strong>. Option 2 is provided only as an alternative for students who are unable to install the software locally.</p>
+<p>Also, <strong>JupyterLab</strong> will be used as the primary coding environment. All in-class demonstrations and course materials are based on Jupyter notebooks, which allow you to write and run code interactively, view results immediately, and combine code, equations, and explanations in one place—similar to working through problems in class.</p>
 <section id="option-1-install-the-software-on-your-computer">
 <span id="id5"></span><h3>0.3.1 Option 1: Install the Software on Your Computer<a class="headerlink" href="#option-1-install-the-software-on-your-computer" title="Link to this heading">#</a></h3>
 <p>If you choose to install Python locally, we recommend using <strong>Miniconda</strong> (smaller download) or <strong>Anaconda</strong> (larger but includes more packages). Both are free and provided by Anaconda Inc.</p>
+<p>A <strong>conda environment</strong> is a self-contained “bubble” that isolates one project (or a group of related projects) from others. Each environment includes its own <strong>Python version</strong> and a specific set of <strong>packages and dependencies</strong>, ensuring stable and reproducible workflows.</p>
+<p><strong>Key Features</strong></p>
+<ul class="simple">
+<li><p><strong>Project Isolation</strong><br />
+Each environment is independent. Packages installed in one environment do not affect others or the system-wide Python installation.</p></li>
+<li><p><strong>Dependency Management</strong><br />
+Environments prevent conflicts between projects that require different Python or library versions.</p></li>
+<li><p><strong>Version Control</strong><br />
+You can create environments with fixed software versions (e.g., Python 3.11) while maintaining others with newer versions.</p></li>
+<li><p><strong>Workflow Management</strong></p>
+<ul>
+<li><p>Start in the default <strong>base</strong> environment</p></li>
+<li><p><strong>Activate</strong> an environment to work on a project</p></li>
+<li><p><strong>Deactivate</strong> it when finished</p></li>
+<li><p>Install project-specific libraries (e.g., NumPy, pandas, Jupyter) only within that environment</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Analogy</strong></p>
+<p>Think of a conda environment as a <strong>dedicated toolbox</strong>. Each project has its own set of tools, preventing clutter and interference between tasks.</p>
+<blockquote>
+<div><p><strong>Key takeaway:</strong> A conda environment defines <em>what software your code runs with</em>, independently of other projects or the system.</p>
+</div></blockquote>
 <hr class="docutils" />
 <section id="step-1-download-the-installer">
 <h4>Step 1: Download the Installer<a class="headerlink" href="#step-1-download-the-installer" title="Link to this heading">#</a></h4>
 <p>Choose <strong>ONE</strong> of these options:</p>
 <ul class="simple">
-<li><p><strong>Miniconda</strong> (recommended): <a class="reference external" href="https://www.anaconda.com/download/success">https://www.anaconda.com/download/success</a></p>
+<li><p><strong>Miniconda</strong> (recommended)</p>
 <ul>
 <li><p>Smaller download (~50 MB)</p></li>
 <li><p>Install only what you need</p></li>
 </ul>
 </li>
-<li><p><strong>Anaconda</strong> (alternative): <a class="reference external" href="https://www.anaconda.com/download/success">https://www.anaconda.com/download/success</a></p>
+<li><p><strong>Anaconda</strong> (alternative)</p>
 <ul>
 <li><p>Larger download (~500 MB)</p></li>
 <li><p>Includes many packages pre-installed</p></li>
@@ -502,17 +522,26 @@ Choose <strong>ONE</strong> option (you can switch later if you want).</p>
 </ul>
 <p>Make sure to download the version for your operating system (Windows, macOS, or Linux) and choose <strong>Python 3</strong>.</p>
 </section>
-<section id="step-2-install-anaconda-or-miniconda">
-<h4>Step 2: Install Anaconda or Miniconda<a class="headerlink" href="#step-2-install-anaconda-or-miniconda" title="Link to this heading">#</a></h4>
+<section id="step-2-install-miniconda">
+<h4>Step 2: Install Miniconda<a class="headerlink" href="#step-2-install-miniconda" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p><strong>Run the downloaded installer</strong></p></li>
-<li><p><strong>Follow the installation prompts:</strong></p>
+<li><p>Download the Miniconda installer: <a class="reference external" href="https://www.anaconda.com/download/success">https://www.anaconda.com/download/success</a></p></li>
+</ol>
+<!-- <img src="img/conda.png" alt="conda page" width="500"/> -->
+<p><img alt="conta page" src="../../_images/conda.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>Follow the installation prompts:</p>
 <ul class="simple">
 <li><p>Accept the license agreement</p></li>
 <li><p>Choose installation location (default is usually fine)</p></li>
 <li><p><strong>Important</strong>: When asked about adding to PATH, choose <strong>“Add to PATH”</strong> or <strong>“Register as default Python”</strong></p></li>
 </ul>
 </li>
+</ol>
+<!-- 
+<img src="img/install.png" alt="install window" width="400"/> -->
+<p><img alt="install window" src="../../_images/install.png" /></p>
+<ol class="arabic simple" start="3">
 <li><p><strong>Complete the installation</strong></p></li>
 </ol>
 </section>
@@ -547,12 +576,20 @@ Choose <strong>ONE</strong> option (you can switch later if you want).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>jupyterlab<span class="w"> </span>numpy<span class="w"> </span>scipy<span class="w"> </span>matplotlib<span class="w"> </span>pandas<span class="w"> </span>seaborn<span class="w"> </span>scikit-learn<span class="w"> </span>scikit-image<span class="w"> </span>sympy
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">conda</span></code> command installs packages from online repositories called <em>channels</em>. By default, Conda uses the Anaconda channel, which may have licensing restrictions for large organizations (<a class="reference external" href="https://www.anaconda.com/legal/terms/terms-of-service">terms here</a>). Adding <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">conda-forge</span></code> tells Conda to use the <strong>conda-forge</strong> channel instead, which is maintained by the community and free for all users. This is why installation instructions for many packages, such as matplotlib, often include <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">conda-forge</span></code>.</p>
+</div>
 <p><strong>Method B: Install from requirements file</strong>
 If you have the course <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file, you can install all packages at once:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </pre></div>
 </div>
 <p>Both methods install everything you need. Method A uses conda-forge (which is free for everyone), while Method B uses pip with the course requirements file.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can simplify package installation by using a <strong>requirements file</strong>. This is a plain text file (e.g., <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>) listing all packages, one per line.</p>
+</div>
 <section id="step-7-register-your-environment-with-jupyter">
 <h4>Step 7: Register Your Environment with Jupyter<a class="headerlink" href="#step-7-register-your-environment-with-jupyter" title="Link to this heading">#</a></h4>
 <p>This allows you to select your <code class="docutils literal notranslate"><span class="pre">chme212</span></code> environment when creating notebooks:</p>
@@ -565,7 +602,7 @@ If you have the course <code class="docutils literal notranslate"><span class="p
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter-lab
 </pre></div>
 </div>
-<p>JupyterLab will open in your web browser. When creating a new notebook, select <strong>chme212</strong> as your kernel.</p>
+<p>JupyterLab will open in your web browser. When creating a new notebook, select <strong>chme212</strong> as your kernel. Note that <strong>JupyterLab is not a website</strong>—the browser is just used as an interface to view and interact with your files locally.</p>
 <hr class="docutils" />
 <p><strong>That’s it!</strong> You now have a complete Python environment ready for this course.</p>
 <blockquote>
@@ -573,8 +610,8 @@ If you have the course <code class="docutils literal notranslate"><span class="p
 </div></blockquote>
 </section>
 </section>
-<section id="option-2-use-google-colab">
-<span id="id6"></span><h3>0.3.2 Option 2: Use Google Colab<a class="headerlink" href="#option-2-use-google-colab" title="Link to this heading">#</a></h3>
+<section id="optional-option-2-use-google-colab">
+<span id="id6"></span><h3>0.3.2 [Optional] Option 2: Use Google Colab<a class="headerlink" href="#optional-option-2-use-google-colab" title="Link to this heading">#</a></h3>
 <p>Google Colab is an easy way to run Python <strong>without installing anything</strong> on your computer.<br />
 All the code runs on Google’s servers, and you access it through your web browser.</p>
 <p>To use Colab, you need a <strong>free Google account</strong>.<br />
@@ -582,14 +619,14 @@ If you already use Gmail or your school email is run by Google, you already have
 <p>Below is the recommended way to set up Colab through <strong>Google Drive</strong>, so you can save your notebooks and data files easily.</p>
 <hr class="docutils" />
 <section id="step-1-log-into-google">
-<h4>Step 1. Log into Google**<a class="headerlink" href="#step-1-log-into-google" title="Link to this heading">#</a></h4>
+<h4>Step 1. Log into Google<a class="headerlink" href="#step-1-log-into-google" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Go to <a class="reference external" href="https://google.com">https://google.com</a></p></li>
 <li><p>Sign in, or create a free account if needed.</p></li>
 </ul>
 </section>
 <section id="step-2-open-google-drive">
-<h4>Step 2. Open Google Drive**<a class="headerlink" href="#step-2-open-google-drive" title="Link to this heading">#</a></h4>
+<h4>Step 2. Open Google Drive<a class="headerlink" href="#step-2-open-google-drive" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Click the <strong>Google Apps</strong> icon (the 3×3 grid of dots in the top-right corner).</p></li>
 <li><p>Select <strong>Drive</strong>.</p></li>
@@ -597,7 +634,7 @@ If you already use Gmail or your school email is run by Google, you already have
 </section>
 <hr class="docutils" />
 <section id="step-3-install-the-google-colab-add-on">
-<h4>Step 3. Install the Google Colab Add-on**<a class="headerlink" href="#step-3-install-the-google-colab-add-on" title="Link to this heading">#</a></h4>
+<h4>Step 3. Install the Google Colab Add-on<a class="headerlink" href="#step-3-install-the-google-colab-add-on" title="Link to this heading">#</a></h4>
 <p>This allows you to open Jupyter notebooks directly from Drive.</p>
 <ol class="arabic simple">
 <li><p>In Google Drive, look to the right side of the screen.</p></li>
@@ -1077,15 +1114,6 @@ Pandas:     2.3.3
         <p class="prev-next-title">Welcome to CHME 212 Course</p>
       </div>
     </a>
-    <a class="right-next"
-       href="../chapter01/01_notebook.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 1: Basic Python Math</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1107,7 +1135,7 @@ Pandas:     2.3.3
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-accessing-python-and-jupyter">0.3 Getting Started: Accessing Python and Jupyter</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-install-the-software-on-your-computer">0.3.1 Option 1: Install the Software on Your Computer</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-download-the-installer">Step 1: Download the Installer</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-anaconda-or-miniconda">Step 2: Install Anaconda or Miniconda</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-miniconda">Step 2: Install Miniconda</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-verify-installation">Step 3: Verify Installation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-create-a-new-environment-for-this-course">Step 4: Create a New Environment for This Course</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-activate-your-environment">Step 5: Activate Your Environment</a></li>
@@ -1118,10 +1146,10 @@ Pandas:     2.3.3
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-launch-jupyterlab">Step 8: Launch JupyterLab</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-use-google-colab">0.3.2 Option 2: Use Google Colab</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-log-into-google">Step 1. Log into Google**</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-open-google-drive">Step 2. Open Google Drive**</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-the-google-colab-add-on">Step 3. Install the Google Colab Add-on**</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-option-2-use-google-colab">0.3.2 [Optional] Option 2: Use Google Colab</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-log-into-google">Step 1. Log into Google</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-open-google-drive">Step 2. Open Google Drive</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-the-google-colab-add-on">Step 3. Install the Google Colab Add-on</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-google-colab">Using Google Colab</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-extra-libraries-if-needed">Installing Extra Libraries (If Needed)</a></li>
 </ul>

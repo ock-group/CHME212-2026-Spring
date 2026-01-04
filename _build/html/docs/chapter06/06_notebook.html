@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -404,10 +404,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-text-files">6.2 Writing Text Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-csv-files">6.3 Working with CSV Files</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-dictreader-and-dictwriter">6.3.1 CSV DictReader and DictWriter</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-csv-files">6.3 Working with CSV Files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-paths-and-directories">6.4 File Paths and Directories</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling-with-files">6.5 Error Handling with Files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">6.6 Practical Applications</a></li>
@@ -449,14 +446,12 @@ document.write(`
 </ul>
 <p>In this chapter, we’ll cover:</p>
 <ol class="arabic simple">
-<li><p><strong>Reading text files</strong> (sensor data, logs)</p></li>
-<li><p><strong>Writing text files</strong> (results, reports)</p></li>
-<li><p><strong>Working with CSV files</strong> (tabular data)</p></li>
-<li><p><strong>File paths and directories</strong></p></li>
-<li><p><strong>Best practices</strong> (context managers, error handling)</p></li>
+<li><p>Reading files</p></li>
+<li><p>Writing files</p></li>
+<li><p>File paths and directories</p></li>
 </ol>
 <section id="reading-text-files">
-<h2>6.1 Reading Text Files<a class="headerlink" href="#reading-text-files" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h2>6.1 Reading Text Files<a class="headerlink" href="#reading-text-files" title="Link to this heading">#</a></h2>
 <p>Python provides built-in functions to read text files. The basic process is:</p>
 <ol class="arabic simple">
 <li><p><strong>Open</strong> the file</p></li>
@@ -553,6 +548,8 @@ Length: 52 characters
 
 <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results: </span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of lines: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
@@ -562,6 +559,8 @@ Length: 52 characters
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Reading Line by Line ===
+results: [&#39;Time,Temperature\n&#39;, &#39;0,25.0\n&#39;, &#39;1,27.5\n&#39;, &#39;2,30.2\n&#39;, &#39;3,32.8\n&#39;, &#39;4,35.1\n&#39;]
+
 Number of lines: 6
 
 Line 0: &#39;Time,Temperature\n&#39;
@@ -575,7 +574,7 @@ Line 5: &#39;4,35.1\n&#39;
 </div>
 </div>
 <section id="using-context-managers-best-practice">
-<h3>6.1.1 Using Context Managers (Best Practice)<a class="headerlink" href="#using-context-managers-best-practice" title="Link to this heading">#</a></h3>
+<span id="id3"></span><h3>6.1.1 Using Context Managers (Best Practice)<a class="headerlink" href="#using-context-managers-best-practice" title="Link to this heading">#</a></h3>
 <p><strong>Context managers</strong> automatically close files, even if errors occur. This is the recommended way to work with files!</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
@@ -630,7 +629,8 @@ File has been automatically closed
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="c1"># Skip header line</span>
     <span class="n">header</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Header: </span><span class="si">{</span><span class="n">header</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Header: </span><span class="si">{</span><span class="n">header</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> 
+    <span class="c1"># .strip() removes extra whitespace/newline</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data:&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
@@ -659,7 +659,7 @@ Data:
 </section>
 </section>
 <section id="writing-text-files">
-<h2>6.2 Writing Text Files<a class="headerlink" href="#writing-text-files" title="Link to this heading">#</a></h2>
+<span id="id4"></span><h2>6.2 Writing Text Files<a class="headerlink" href="#writing-text-files" title="Link to this heading">#</a></h2>
 <p>Writing files is just as important as reading them. You can:</p>
 <ul class="simple">
 <li><p>Save calculation results</p></li>
@@ -762,7 +762,7 @@ R-104: Temp=88.5°C, Pressure=2.6 bar
 </div>
 </section>
 <section id="working-with-csv-files">
-<h2>6.3 Working with CSV Files<a class="headerlink" href="#working-with-csv-files" title="Link to this heading">#</a></h2>
+<span id="id5"></span><h2>6.3 Working with CSV Files<a class="headerlink" href="#working-with-csv-files" title="Link to this heading">#</a></h2>
 <p><strong>CSV (Comma-Separated Values)</strong> files are one of the most common data formats in science and engineering.</p>
 <p><strong>Why CSV?</strong></p>
 <ul class="simple">
@@ -772,6 +772,14 @@ R-104: Temp=88.5°C, Pressure=2.6 bar
 <li><p>Easy to parse</p></li>
 </ul>
 <p>Python has a built-in <code class="docutils literal notranslate"><span class="pre">csv</span></code> module for working with CSV files.</p>
+<p>In addition, <strong>other Python packages can also be used to read and write CSV files</strong>, depending on your needs:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pandas</span></code></strong> → best for data analysis, tables, and large datasets</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">numpy</span></code></strong> → useful for numerical data stored in CSV format</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">openpyxl</span></code> / <code class="docutils literal notranslate"><span class="pre">xlsxwriter</span></code></strong> → when working with Excel files that include CSV-like data</p></li>
+</ul>
+<p>For simple tasks, the built-in <code class="docutils literal notranslate"><span class="pre">csv</span></code> module is often sufficient.<br />
+For more complex data processing and analysis, <strong><code class="docutils literal notranslate"><span class="pre">pandas</span></code> is commonly preferred</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
@@ -855,102 +863,31 @@ Data:
 </div>
 </div>
 </div>
-<section id="csv-dictreader-and-dictwriter">
-<h3>6.3.1 CSV DictReader and DictWriter<a class="headerlink" href="#csv-dictreader-and-dictwriter" title="Link to this heading">#</a></h3>
-<p><strong>DictReader</strong> and <strong>DictWriter</strong> work with dictionaries, making code more readable:</p>
-<ul class="simple">
-<li><p>Access columns by name instead of index</p></li>
-<li><p>More maintainable code</p></li>
-<li><p>Easier to understand</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using DictWriter</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Writing CSV with DictWriter ===&quot;</span><span class="p">)</span>
-
-<span class="c1"># Data as list of dictionaries</span>
-<span class="n">batch_data</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;Batch_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;B-001&quot;</span><span class="p">,</span> <span class="s2">&quot;Purity&quot;</span><span class="p">:</span> <span class="mf">0.965</span><span class="p">,</span> <span class="s2">&quot;Yield&quot;</span><span class="p">:</span> <span class="mf">0.88</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">:</span> <span class="s2">&quot;Pass&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;Batch_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;B-002&quot;</span><span class="p">,</span> <span class="s2">&quot;Purity&quot;</span><span class="p">:</span> <span class="mf">0.942</span><span class="p">,</span> <span class="s2">&quot;Yield&quot;</span><span class="p">:</span> <span class="mf">0.91</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">:</span> <span class="s2">&quot;Fail&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;Batch_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;B-003&quot;</span><span class="p">,</span> <span class="s2">&quot;Purity&quot;</span><span class="p">:</span> <span class="mf">0.978</span><span class="p">,</span> <span class="s2">&quot;Yield&quot;</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">:</span> <span class="s2">&quot;Pass&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;Batch_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;B-004&quot;</span><span class="p">,</span> <span class="s2">&quot;Purity&quot;</span><span class="p">:</span> <span class="mf">0.955</span><span class="p">,</span> <span class="s2">&quot;Yield&quot;</span><span class="p">:</span> <span class="mf">0.89</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">:</span> <span class="s2">&quot;Pass&quot;</span><span class="p">},</span>
-<span class="p">]</span>
-
-<span class="c1"># Write using DictWriter</span>
-<span class="n">fieldnames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Batch_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Purity&quot;</span><span class="p">,</span> <span class="s2">&quot;Yield&quot;</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">]</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;batch_results.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">fieldnames</span><span class="p">)</span>
-    
-    <span class="c1"># Write header</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
-    
-    <span class="c1"># Write data rows</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">batch_data</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Batch data written to batch_results.csv&quot;</span><span class="p">)</span>
-
-<span class="c1"># Display the file</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File contents:&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;batch_results.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read csv with pandas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;experiment_data.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data read with pandas:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>   
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Writing CSV with DictWriter ===
-Batch data written to batch_results.csv
-
-File contents:
-Batch_ID,Purity,Yield,Status
-B-001,0.965,0.88,Pass
-B-002,0.942,0.91,Fail
-B-003,0.978,0.85,Pass
-B-004,0.955,0.89,Pass
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data read with pandas:
+   Time (min)  Temperature (C)  Pressure (bar)  Flow Rate (L/min)
+0           0             25.0             1.0               50.0
+1           5             45.2             1.5               55.3
+2          10             65.8             2.0               60.1
+3          15             85.3             2.5               65.7
+4          20             95.1             2.8               70.2
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using DictReader</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Reading CSV with DictReader ===&quot;</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;batch_results.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Batch Quality Control Results:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
-    
-    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-        <span class="c1"># Access by column name!</span>
-        <span class="n">batch_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Batch_ID&#39;</span><span class="p">]</span>
-        <span class="n">purity</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Purity&#39;</span><span class="p">])</span>
-        <span class="n">yield_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Yield&#39;</span><span class="p">])</span>
-        <span class="n">status</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Status&#39;</span><span class="p">]</span>
-        
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">batch_id</span><span class="si">}</span><span class="s2">: Purity=</span><span class="si">{</span><span class="n">purity</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">, Yield=</span><span class="si">{</span><span class="n">yield_val</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Reading CSV with DictReader ===
-Batch Quality Control Results:
-==================================================
-B-001: Purity=96.5%, Yield=88.0% - Pass
-B-002: Purity=94.2%, Yield=91.0% - Fail
-B-003: Purity=97.8%, Yield=85.0% - Pass
-B-004: Purity=95.5%, Yield=89.0% - Pass
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="file-paths-and-directories">
-<h2>6.4 File Paths and Directories<a class="headerlink" href="#file-paths-and-directories" title="Link to this heading">#</a></h2>
+<span id="id6"></span><h2>6.4 File Paths and Directories<a class="headerlink" href="#file-paths-and-directories" title="Link to this heading">#</a></h2>
 <p>Understanding file paths is crucial for working with files in different locations.</p>
 <p><strong>Path types:</strong></p>
 <ul class="simple">
@@ -967,6 +904,25 @@ B-004: Purity=95.5%, Yield=89.0% - Pass
 </ul>
 </li>
 </ul>
+<p>Assume your current working directory is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>project/
+├── main.py
+├── data/
+│   ├── experiment.csv
+│   └── results.csv
+└── output/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data/experiment.csv</span></code><br />
+→ accesses the file inside the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/</span></code><br />
+→ refers to the <code class="docutils literal notranslate"><span class="pre">output</span></code> folder in the current directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">../project/data/experiment.csv</span></code><br />
+→ moves up one directory, then navigates into <code class="docutils literal notranslate"><span class="pre">project/data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/Users/username/project/data/experiment.csv</span></code><br />
+→ absolute path that works regardless of the current directory</p></li>
+</ul>
 <p>Python’s <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module provides a modern, cross-platform way to work with paths.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -978,15 +934,39 @@ B-004: Purity=95.5%, Yield=89.0% - Pass
 <span class="c1"># Get current working directory</span>
 <span class="n">current_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current directory: </span><span class="si">{</span><span class="n">current_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Create a Path object</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Working with Paths ===
+Current directory: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Path object</span>
 <span class="n">data_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;experiment_data.csv&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File path: </span><span class="si">{</span><span class="n">data_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute path: </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File exists: </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is file: </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Get file information</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File path: experiment_data.csv
+Absolute path: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06/experiment_data.csv
+File exists: True
+Is file: True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get file information</span>
 <span class="k">if</span> <span class="n">data_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File name: </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File stem (no extension): </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -996,17 +976,12 @@ B-004: Purity=95.5%, Yield=89.0% - Pass
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Working with Paths ===
-Current directory: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06
-
-File path: experiment_data.csv
-Absolute path: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06/experiment_data.csv
-File exists: True
-Is file: True
-File name: experiment_data.csv
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File name: experiment_data.csv
 File stem (no extension): experiment_data
 File extension: .csv
-File size: 149 bytes
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File size: 149 bytes
 </pre></div>
 </div>
 </div>
@@ -1022,8 +997,19 @@ File size: 149 bytes
 <span class="n">data_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># exist_ok=True won&#39;t error if exists</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created directory: </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Create subdirectories</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Creating Directory Structure ===
+Created directory: project_data
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subdirectories</span>
 <span class="n">raw_dir</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="s1">&#39;raw&#39;</span>
 <span class="n">processed_dir</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="s1">&#39;processed&#39;</span>
 
@@ -1032,8 +1018,19 @@ File size: 149 bytes
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created: </span><span class="si">{</span><span class="n">raw_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created: </span><span class="si">{</span><span class="n">processed_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Write a file in the subdirectory</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Created: project_data/raw
+Created: project_data/processed
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a file in the subdirectory</span>
 <span class="n">output_file</span> <span class="o">=</span> <span class="n">processed_dir</span> <span class="o">/</span> <span class="s1">&#39;results.txt&#39;</span>
 <span class="n">output_file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">&quot;Analysis complete: All tests passed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -1043,12 +1040,7 @@ File size: 149 bytes
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Creating Directory Structure ===
-Created directory: project_data
-Created: project_data/raw
-Created: project_data/processed
-
-Wrote file: project_data/processed/results.txt
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wrote file: project_data/processed/results.txt
 Contents: Analysis complete: All tests passed
 </pre></div>
 </div>
@@ -1056,7 +1048,7 @@ Contents: Analysis complete: All tests passed
 </div>
 </section>
 <section id="error-handling-with-files">
-<h2>6.5 Error Handling with Files<a class="headerlink" href="#error-handling-with-files" title="Link to this heading">#</a></h2>
+<span id="id7"></span><h2>6.5 Error Handling with Files<a class="headerlink" href="#error-handling-with-files" title="Link to this heading">#</a></h2>
 <p>Files can cause many errors:</p>
 <ul class="simple">
 <li><p>File doesn’t exist</p></li>
@@ -1067,11 +1059,7 @@ Contents: Analysis complete: All tests passed
 <p><strong>Good practice:</strong> Always handle potential errors!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Error Handling Examples</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Handling File Errors ===&quot;</span><span class="p">)</span>
-
-<span class="c1"># Example 1: File doesn&#39;t exist</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: File doesn&#39;t exist</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Trying to read non-existent file:&quot;</span><span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;nonexistent_file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
@@ -1082,8 +1070,18 @@ Contents: Analysis complete: All tests passed
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;nonexistent_file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Default content</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Default file created.&quot;</span><span class="p">)</span>
-
-<span class="c1"># Example 2: Check if file exists before reading</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1. Trying to read non-existent file:
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Check if file exists before reading</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Checking file existence first:&quot;</span><span class="p">)</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;data_file.txt&#39;</span>
 <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
@@ -1092,49 +1090,45 @@ Contents: Analysis complete: All tests passed
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   File read successfully: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   File &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; does not exist&quot;</span><span class="p">)</span>
-
-<span class="c1"># Example 3: Comprehensive error handling</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Comprehensive error handling:&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">safe_read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safely read a file with error handling&quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Error: &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">except</span> <span class="ne">PermissionError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Error: No permission to read &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Unexpected error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span>
-
-<span class="c1"># Test the function</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">safe_read_file</span><span class="p">(</span><span class="s1">&#39;experiment_data.csv&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Successfully read </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Handling File Errors ===
-
-1. Trying to read non-existent file:
-
-2. Checking file existence first:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2. Checking file existence first:
    File &#39;data_file.txt&#39; does not exist
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print(&quot;\n3. Comprehensive error handling:&quot;)</span>
 
-3. Comprehensive error handling:
-   Successfully read 143 characters
+<span class="c1"># def safe_read_file(filename):</span>
+<span class="c1">#     &quot;&quot;&quot;Safely read a file with error handling&quot;&quot;&quot;</span>
+<span class="c1">#     try:</span>
+<span class="c1">#         with open(filename, &#39;r&#39;) as file:</span>
+<span class="c1">#             return file.read()</span>
+<span class="c1">#     except FileNotFoundError:</span>
+<span class="c1">#         print(f&quot;   Error: &#39;{filename}&#39; not found&quot;)</span>
+<span class="c1">#         return None</span>
+<span class="c1">#     except PermissionError:</span>
+<span class="c1">#         print(f&quot;   Error: No permission to read &#39;{filename}&#39;&quot;)</span>
+<span class="c1">#         return None</span>
+<span class="c1">#     except Exception as e:</span>
+<span class="c1">#         print(f&quot;   Unexpected error: {e}&quot;)</span>
+<span class="c1">#         return None</span>
+    
+<span class="c1"># content = safe_read_file(&#39;experiment_data.csv&#39;)</span>
+<span class="c1"># if content:</span>
+<span class="c1">#     print(f&quot;   Successfully read {len(content)} characters&quot;)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="practical-applications">
-<h2>6.6 Practical Applications<a class="headerlink" href="#practical-applications" title="Link to this heading">#</a></h2>
+<span id="id8"></span><h2>6.6 Practical Applications<a class="headerlink" href="#practical-applications" title="Link to this heading">#</a></h2>
 <p>Let’s put everything together with realistic examples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1541,10 +1535,7 @@ Pass rate: 66.7%
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-text-files">6.2 Writing Text Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-csv-files">6.3 Working with CSV Files</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-dictreader-and-dictwriter">6.3.1 CSV DictReader and DictWriter</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-csv-files">6.3 Working with CSV Files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-paths-and-directories">6.4 File Paths and Directories</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling-with-files">6.5 Error Handling with Files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">6.6 Practical Applications</a></li>
