@@ -18,7 +18,4 @@ Learning programming allows students to implement these models, analyze results,
 
 Learning Python equips students to perform traditional modeling tasks **and extend their work to machine learning, predictive modeling, process optimization, and advanced data analysis**, preparing them to tackle modern challenges in chemical engineering.
 
-![alt text](docs/introduction/image.png)
 
-```{tableofcontents}
-```
