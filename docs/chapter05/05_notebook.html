@@ -1,0 +1,2273 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 5: Control Flow - Making Decisions in Code &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter05/05_notebook';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chapter 6: File Input/Output" href="../chapter06/06_notebook.html" />
+    <link rel="prev" title="Chapter 4: Python Collections - Lists, Tuples, and Dictionaries" href="../chapter04/04_notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Quick Review: Python Functions</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices (commenting, testing, error handling, debugging)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9. Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Numpy &amp; Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Polynomial Fitting &amp; Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Approximation with Tayloer Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Newton’s Method &amp; Parameter Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter05/05_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter05/05_notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 5: Control Flow - Making Decisions in Code</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-statements-making-decisions">5.1 If Statements - Making Decisions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-statements">5.1.1 If-Else Statements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elif-else-statements">5.1.2 If-Elif-Else Statements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops-repeating-actions-with-sequences">5.2 For Loops - Repeating Actions with Sequences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-for-loop-techniques">5.2.1 Advanced For Loop Techniques</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops-repeating-until-a-condition-changes">5.3 While Loops - Repeating Until a Condition Changes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-for-loops-when">Use <code class="docutils literal notranslate"><span class="pre">for</span></code> loops when:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-while-loops-when">Use <code class="docutils literal notranslate"><span class="pre">while</span></code> loops when:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-comparison-for-vs-while">Quick Comparison: <code class="docutils literal notranslate"><span class="pre">for</span></code> vs <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loop-best-practices-and-common-patterns">5.3.1 While Loop Best Practices and Common Patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-handling-errors-gracefully">5.4 Try-Except - Handling Errors Gracefully</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-try-except-techniques">5.4.1 Advanced Try-Except Techniques</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-and-continue-controlling-loop-flow">5.5 Break and Continue - Controlling Loop Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together-real-world-examples">5.6 Putting It All Together - Real-World Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-logic">Boolean Logic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-making">Decision Making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loops">Loops</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-5-control-flow-making-decisions-in-code">
+<span id="id1"></span><h1>Chapter 5: Control Flow - Making Decisions in Code<a class="headerlink" href="#chapter-5-control-flow-making-decisions-in-code" title="Link to this heading">#</a></h1>
+<p><strong>Control flow</strong> is how we make our programs smart enough to make decisions and respond to different conditions. Instead of running every line of code sequentially, control flow lets you:</p>
+<ul class="simple">
+<li><p>Execute code only when certain conditions are met</p></li>
+<li><p>Choose between different options</p></li>
+<li><p>Repeat actions multiple times</p></li>
+<li><p>Handle errors gracefully</p></li>
+</ul>
+<p>Think of it like decision points in real life:</p>
+<ul class="simple">
+<li><p>“If it’s raining, take an umbrella”</p></li>
+<li><p>“While studying, take breaks every hour”</p></li>
+<li><p>“For each problem, check your answer”</p></li>
+<li><p>“Try to open the file, but if it doesn’t exist, create a new one”</p></li>
+</ul>
+<p>In this chapter, we’ll cover the main control structures:</p>
+<ol class="arabic simple">
+<li><p><strong>if-else statements</strong> (making decisions)</p></li>
+<li><p><strong>for loops</strong> (repeating with sequences)</p></li>
+<li><p><strong>while loops</strong> (repeating with conditions)</p></li>
+<li><p><strong>try-except</strong> (error handling)</p></li>
+</ol>
+<section id="if-statements-making-decisions">
+<span id="id2"></span><h2>5.1 If Statements - Making Decisions<a class="headerlink" href="#if-statements-making-decisions" title="Link to this heading">#</a></h2>
+<p><strong>If statements</strong> are the foundation of decision-making in programming. They let your code choose what to do based on different conditions.</p>
+<p><strong>Basic syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+    <span class="c1"># Code to run if condition is True</span>
+    <span class="c1"># Note the indentation (4 spaces)!</span>
+</pre></div>
+</div>
+<p><strong>Key points:</strong></p>
+<ul class="simple">
+<li><p>The condition must evaluate to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p>Python uses <strong>indentation</strong> (4 spaces) to define code blocks</p></li>
+<li><p>All indented lines after the <code class="docutils literal notranslate"><span class="pre">if</span></code> belong to that if block</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Example: Reactor Temperature Safety Check ===&quot;</span><span class="p">)</span>
+<span class="n">reactor_temp</span> <span class="o">=</span> <span class="mi">95</span>  <span class="c1"># degrees Celsius</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reactor temperature: </span><span class="si">{</span><span class="n">reactor_temp</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">reactor_temp</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ WARNING: Temperature exceeds safe limit!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initiating cooling sequence...&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">reactor_temp</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Temperature below optimal range. Increasing heat input.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Example: Reactor Temperature Safety Check ===
+Reactor temperature: 95°C
+</pre></div>
+</div>
+</div>
+</div>
+<section id="if-else-statements">
+<span id="id3"></span><h3>5.1.1 If-Else Statements<a class="headerlink" href="#if-else-statements" title="Link to this heading">#</a></h3>
+<p><strong>If-else statements</strong> let you specify what to do when the condition is False. This gives you two possible paths.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+    <span class="c1"># Code if condition is True</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Code if condition is False</span>
+</pre></div>
+</div>
+<p><strong>Key insight:</strong> Exactly one of the two blocks will always run - either the <code class="docutils literal notranslate"><span class="pre">if</span></code> block or the <code class="docutils literal notranslate"><span class="pre">else</span></code> block, never both.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If-Else Examples</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example: pH Classification ===&quot;</span><span class="p">)</span>
+<span class="n">pH</span> <span class="o">=</span> <span class="mf">3.5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution pH: </span><span class="si">{</span><span class="n">pH</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">pH</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pH </span><span class="si">{</span><span class="n">pH</span><span class="si">}</span><span class="s2"> is ACIDIC&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Handle with acid-resistant equipment&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pH </span><span class="si">{</span><span class="n">pH</span><span class="si">}</span><span class="s2"> is BASIC/NEUTRAL&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard equipment acceptable&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Example: pH Classification ===
+Solution pH: 3.5
+pH 3.5 is ACIDIC
+Handle with acid-resistant equipment
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="if-elif-else-statements">
+<h3>5.1.2 If-Elif-Else Statements<a class="headerlink" href="#if-elif-else-statements" title="Link to this heading">#</a></h3>
+<p><strong>If-elif-else</strong> (else-if) statements let you check multiple conditions in sequence. This is perfect when you have more than two possible outcomes.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">condition1</span><span class="p">:</span>
+    <span class="c1"># Code if condition1 is True</span>
+<span class="k">elif</span> <span class="n">condition2</span><span class="p">:</span>
+    <span class="c1"># Code if condition1 is False and condition2 is True</span>
+<span class="k">elif</span> <span class="n">condition3</span><span class="p">:</span>
+    <span class="c1"># Code if previous conditions are False and condition3 is True</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Code if all conditions are False</span>
+</pre></div>
+</div>
+<p><strong>Important:</strong> Python checks conditions in order and executes only the <strong>first</strong> True block, then skips the rest!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If-Elif-Else Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Example: Reactor Safety Classification ===&quot;</span><span class="p">)</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">12.5</span>  <span class="c1"># bar</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reactor pressure: </span><span class="si">{</span><span class="n">pressure</span><span class="si">}</span><span class="s2"> bar&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">pressure</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;Low Pressure&quot;</span>
+    <span class="n">safety_level</span> <span class="o">=</span> <span class="s2">&quot;Standard PPE required&quot;</span>
+<span class="k">elif</span> <span class="n">pressure</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;Medium Pressure&quot;</span>
+    <span class="n">safety_level</span> <span class="o">=</span> <span class="s2">&quot;Enhanced PPE and monitoring&quot;</span>
+<span class="k">elif</span> <span class="n">pressure</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;High Pressure&quot;</span>
+    <span class="n">safety_level</span> <span class="o">=</span> <span class="s2">&quot;Specialized equipment and certification required&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;CRITICAL PRESSURE&quot;</span>
+    <span class="n">safety_level</span> <span class="o">=</span> <span class="s2">&quot;EMERGENCY PROTOCOLS - Immediate shutdown!&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classification: </span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Safety requirement: </span><span class="si">{</span><span class="n">safety_level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Example: Reactor Safety Classification ===
+Reactor pressure: 12.5 bar
+Classification: High Pressure
+Safety requirement: Specialized equipment and certification required
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="for-loops-repeating-actions-with-sequences">
+<span id="id4"></span><h2>5.2 For Loops - Repeating Actions with Sequences<a class="headerlink" href="#for-loops-repeating-actions-with-sequences" title="Link to this heading">#</a></h2>
+<p><strong>For loops</strong> let you repeat code for each item in a sequence (like a list, string, or range). They’re perfect when you know what you want to iterate over.</p>
+<p><strong>Basic syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+    <span class="c1"># Code to repeat for each item</span>
+</pre></div>
+</div>
+<p><strong>Common sequences:</strong></p>
+<ul class="simple">
+<li><p><strong>Lists</strong>: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5]</span></code></p></li>
+<li><p><strong>Strings</strong>: <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code> (iterates over each character)</p></li>
+<li><p><strong>Ranges</strong>: <code class="docutils literal notranslate"><span class="pre">range(5)</span></code> creates numbers 0, 1, 2, 3, 4</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+20
+30
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For loop visualization:</span>
+<span class="c1"># Iteration 1:  [10, 20, 30] → x = 10</span>
+<span class="c1">#                 ↑</span>
+<span class="c1"># Iteration 2:  [10, 20, 30] → x = 20</span>
+<span class="c1">#                     ↑</span>
+<span class="c1"># Iteration 3:  [10, 20, 30] → x = 30</span>
+<span class="c1">#                         ↑</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Iteration</p></th>
+<th class="head"><p>Sequence</p></th>
+<th class="head"><p>Current element</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>[10, 20, 30] → 10</p></td>
+<td><p>x = 10</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>[10, 20, 30] → 20</p></td>
+<td><p>x = 20</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>[10, 20, 30] → 30</p></td>
+<td><p>x = 30</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+2
+3
+4
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong><code class="docutils literal notranslate"><span class="pre">range</span></code></strong> is a built-in Python function that generates a sequence of integers.<br />
+It starts from a given value (default is <code class="docutils literal notranslate"><span class="pre">0</span></code>), stops <strong>before</strong> the end value,<br />
+and can optionally increment by a specified step size.</p>
+<p><code class="docutils literal notranslate"><span class="pre">range</span></code> is commonly used to control how many times a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop runs.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Example 1: Analyzing Reactor Samples ===&quot;</span><span class="p">)</span>
+<span class="n">sample_concentrations</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">]</span>  <span class="c1"># mol/L</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Analyzing concentration measurements:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">concentration</span> <span class="ow">in</span> <span class="n">sample_concentrations</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Sample: </span><span class="si">{</span><span class="n">concentration</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">concentration</span> <span class="o">&gt;</span> <span class="mf">3.0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    ⚠️ Above target concentration&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Example 1: Analyzing Reactor Samples ===
+Analyzing concentration measurements:
+  Sample: 2.5 mol/L
+  Sample: 3.1 mol/L
+    ⚠️ Above target concentration
+  Sample: 2.8 mol/L
+  Sample: 3.0 mol/L
+  Sample: 2.9 mol/L
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic For Loop Examples</span>
+
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example 2: Chemical Formula Analysis ===&quot;</span><span class="p">)</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;H2SO4&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Elements in </span><span class="si">{</span><span class="n">formula</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">formula</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">char</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Element: </span><span class="si">{</span><span class="n">char</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">char</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Subscript: </span><span class="si">{</span><span class="n">char</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example 3: Temperature Monitoring ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hourly reactor temperature readings:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>  <span class="c1"># Hours 1-5</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="mi">85</span> <span class="o">+</span> <span class="n">hour</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># Simulated temperature increase</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Hour </span><span class="si">{</span><span class="n">hour</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cooldown sequence:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">):</span>  <span class="c1"># 100, 90, 80, 70</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">°C...&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Safe temperature reached ✓&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example 4: Pressure-Volume Calculations ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ideal gas: PV = nRT (at constant n, T)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;If pressure doubles, volume is halved:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="n">P</span>  <span class="c1"># Inverse relationship</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  P = </span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s2"> atm → V = </span><span class="si">{</span><span class="n">V</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> L&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example 5: Converting Concentrations ===&quot;</span><span class="p">)</span>
+<span class="n">concentrations_molL</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>  <span class="c1"># mol/L</span>
+<span class="n">concentrations_gL</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># g/L (for NaCl, MW = 58.44 g/mol)</span>
+
+<span class="n">MW_NaCl</span> <span class="o">=</span> <span class="mf">58.44</span>  <span class="c1"># g/mol</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Converting NaCl concentrations from mol/L to g/L:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">conc_mol</span> <span class="ow">in</span> <span class="n">concentrations_molL</span><span class="p">:</span>
+    <span class="n">conc_g</span> <span class="o">=</span> <span class="n">conc_mol</span> <span class="o">*</span> <span class="n">MW_NaCl</span>
+    <span class="n">concentrations_gL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conc_g</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">conc_mol</span><span class="si">}</span><span class="s2"> mol/L = </span><span class="si">{</span><span class="n">conc_g</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> g/L&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Original (mol/L): </span><span class="si">{</span><span class="n">concentrations_molL</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Converted (g/L): </span><span class="si">{</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">concentrations_gL</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Example 2: Chemical Formula Analysis ===
+Elements in H2SO4:
+  Element: H
+    Subscript: 2
+  Element: S
+  Element: O
+    Subscript: 4
+
+=== Example 3: Temperature Monitoring ===
+Hourly reactor temperature readings:
+  Hour 1: 87°C
+  Hour 2: 89°C
+  Hour 3: 91°C
+  Hour 4: 93°C
+  Hour 5: 95°C
+
+Cooldown sequence:
+  100°C...
+  90°C...
+  80°C...
+  70°C...
+  Safe temperature reached ✓
+
+=== Example 4: Pressure-Volume Calculations ===
+Ideal gas: PV = nRT (at constant n, T)
+If pressure doubles, volume is halved:
+  P = 1 atm → V = 10.00 L
+  P = 2 atm → V = 5.00 L
+  P = 3 atm → V = 3.33 L
+  P = 4 atm → V = 2.50 L
+  P = 5 atm → V = 2.00 L
+
+=== Example 5: Converting Concentrations ===
+Converting NaCl concentrations from mol/L to g/L:
+  0.5 mol/L = 29.2 g/L
+  1.0 mol/L = 58.4 g/L
+  1.5 mol/L = 87.7 g/L
+  2.0 mol/L = 116.9 g/L
+  2.5 mol/L = 146.1 g/L
+
+Original (mol/L): [0.5, 1.0, 1.5, 2.0, 2.5]
+Converted (g/L): [29.2, 58.4, 87.7, 116.9, 146.1]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="advanced-for-loop-techniques">
+<span id="id5"></span><h3>5.2.1 Advanced For Loop Techniques<a class="headerlink" href="#advanced-for-loop-techniques" title="Link to this heading">#</a></h3>
+<p>Python provides several powerful tools that make looping more expressive, readable, and efficient.</p>
+<p><strong>enumerate()</strong> – Looping with Index and Value</p>
+<p>When looping through a sequence, you often need both the index and the value.
+enumerate() provides both at the same time.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+    <span class="c1"># use index and value</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">With enumerate (get position AND value):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fruits</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Position </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">fruit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With enumerate (get position AND value):
+  Position 0: apple
+  Position 1: banana
+  Position 2: cherry
+  Position 3: date
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>zip()</strong> – Looping Over Multiple Sequences Together</p>
+<p>zip() allows you to iterate over multiple sequences in parallel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;New York&quot;</span><span class="p">,</span> <span class="s2">&quot;London&quot;</span><span class="p">,</span> <span class="s2">&quot;Tokyo&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Combining three lists together:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">city</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ages</span><span class="p">,</span> <span class="n">cities</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old and lives in </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Combining three lists together:
+  Alice is 25 years old and lives in New York
+  Bob is 30 years old and lives in London
+  Charlie is 35 years old and lives in Tokyo
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>List Comprehension</strong> – Compact Loop for Creating Lists</p>
+<p>A list comprehension is a concise way to create a new list by looping and optionally applying a condition.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># conventional for loop</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+    <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># list comprehension</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">expression</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Traditional way with loop</span>
+<span class="n">celsius_temps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="n">fahrenheit_traditional</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">temp_c</span> <span class="ow">in</span> <span class="n">celsius_temps</span><span class="p">:</span>
+    <span class="n">temp_f</span> <span class="o">=</span> <span class="n">temp_c</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span>
+    <span class="n">fahrenheit_traditional</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conventional conversion: </span><span class="si">{</span><span class="n">fahrenheit_traditional</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compact way with list comprehension</span>
+<span class="n">fahrenheit_compact</span> <span class="o">=</span> <span class="p">[</span><span class="n">temp_c</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span> <span class="k">for</span> <span class="n">temp_c</span> <span class="ow">in</span> <span class="n">celsius_temps</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compact conversion: </span><span class="si">{</span><span class="n">fahrenheit_compact</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conventional conversion: [68.0, 77.0, 86.0, 95.0, 104.0]
+Compact conversion: [68.0, 77.0, 86.0, 95.0, 104.0]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Nested Loops</strong> – Loops Inside Loops</p>
+<p>A nested loop is a loop placed inside another loop.
+The inner loop runs completely for each iteration of the outer loop.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sequence1</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sequence2</span><span class="p">:</span>
+        <span class="c1"># code using i and j</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+<span class="c1"># i=0 → j=0, j=1</span>
+<span class="c1"># i=1 → j=0, j=1</span>
+<span class="c1"># i=2 → j=0, j=1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 0
+0 1
+1 0
+1 1
+2 0
+2 1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Nested Loops ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A loop inside another loop</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiplication table (3x3):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">j</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> × </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>  <span class="c1"># New line after each row</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Nested Loops ===
+A loop inside another loop
+
+Multiplication table (3x3):
+1 × 1 =  1  1 × 2 =  2  1 × 3 =  3  
+2 × 1 =  2  2 × 2 =  4  2 × 3 =  6  
+3 × 1 =  3  3 × 2 =  6  3 × 3 =  9  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Nested Loops ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stoichiometry table for A + 2B → C:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Moles A | Moles B | Moles C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------|---------|--------&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">moles_A</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">moles_B</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">moles_B</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">moles_A</span><span class="p">:</span>  <span class="c1"># Correct stoichiometry</span>
+            <span class="n">moles_C</span> <span class="o">=</span> <span class="n">moles_A</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">moles_A</span><span class="si">}</span><span class="s2">     |    </span><span class="si">{</span><span class="n">moles_B</span><span class="si">}</span><span class="s2">    |   </span><span class="si">{</span><span class="n">moles_C</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Nested Loops ===
+Stoichiometry table for A + 2B → C:
+Moles A | Moles B | Moles C
+--------|---------|--------
+  1     |    2    |   1
+  2     |    4    |   2
+  3     |    6    |   3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="while-loops-repeating-until-a-condition-changes">
+<h2>5.3 While Loops - Repeating Until a Condition Changes<a class="headerlink" href="#while-loops-repeating-until-a-condition-changes" title="Link to this heading">#</a></h2>
+<p><strong>While loops</strong> repeat code as long as a condition remains True. They’re perfect when you don’t know exactly how many times you need to repeat something.</p>
+<p><strong>Basic syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">condition</span><span class="p">:</span>
+    <span class="c1"># Code to repeat</span>
+    <span class="c1"># Make sure to eventually make condition False!</span>
+</pre></div>
+</div>
+<p><strong>Key difference from for loops:</strong></p>
+<ul class="simple">
+<li><p><strong>For loop</strong>: “Do this for each item” or “Do this N times”</p></li>
+<li><p><strong>While loop</strong>: “Keep doing this until something changes”</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+2
+3
+4
+</pre></div>
+</div>
+</div>
+</div>
+<section id="use-for-loops-when">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">for</span></code> loops when:<a class="headerlink" href="#use-for-loops-when" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>You know <strong>exactly how many times</strong> you want to iterate</p></li>
+<li><p>You are looping over a <strong>sequence or collection</strong> (list, string, range, tuple, dictionary)</p></li>
+<li><p>You want a <strong>concise, readable loop</strong></p></li>
+</ul>
+<p><strong>Examples:</strong></p>
+<p><strong>Looping over a list:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruits</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="use-while-loops-when">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">while</span></code> loops when:<a class="headerlink" href="#use-while-loops-when" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>You <strong>do not know in advance</strong> how many times the loop will run</p></li>
+<li><p>You want to repeat until a <strong>condition changes</strong></p></li>
+<li><p>Iteration depends on <strong>dynamic data or user input</strong></p></li>
+</ul>
+<p><strong>Examples:</strong></p>
+<p><strong>Repeat until a condition is met:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">number</span> <span class="o">+=</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="k">while</span> <span class="n">answer</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you want to continue? &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">answer</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">while</span> <span class="n">answer</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you want to continue? &quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/chemcomp/lib/python3.10/site-packages/ipykernel/kernelbase.py:1395,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1393</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1394</span>     <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1395</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1396</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1397</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1398</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_get_shell_context_var</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_shell_parent_ident</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1399</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1400</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1401</span> <span class="p">)</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="quick-comparison-for-vs-while">
+<h3>Quick Comparison: <code class="docutils literal notranslate"><span class="pre">for</span></code> vs <code class="docutils literal notranslate"><span class="pre">while</span></code><a class="headerlink" href="#quick-comparison-for-vs-while" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">for</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">while</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Iteration count</p></td>
+<td><p>Known / fixed</p></td>
+<td><p>Unknown / dynamic</p></td>
+</tr>
+<tr class="row-odd"><td><p>Best for</p></td>
+<td><p>Sequences (lists, strings, ranges)</p></td>
+<td><p>Conditional repetition</p></td>
+</tr>
+<tr class="row-even"><td><p>Risk</p></td>
+<td><p>Rare</p></td>
+<td><p>Can create infinite loops if condition never changes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Example</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(5):</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">10:</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="while-loop-best-practices-and-common-patterns">
+<h3>5.3.1 While Loop Best Practices and Common Patterns<a class="headerlink" href="#while-loop-best-practices-and-common-patterns" title="Link to this heading">#</a></h3>
+<p><strong>Infinite loop</strong>: An infinite loop occurs when the loop’s condition never becomes false, causing the loop to repeat forever. This can happen with both while and for loops (though it’s more common with while loops).</p>
+<p>Infinite loops can freeze programs or consume resources, so it’s important to understand and avoid them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== ⚠️  DANGER: Infinite Loop (Don&#39;t run this!) ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# This would run forever:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# count = 1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# while count &lt;= 5:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#     print(count)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#     # Forgot to increment count - INFINITE LOOP!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Always make sure your condition will eventually become False!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Pattern 1: Counter-Based Loop</strong></p>
+<p>Purpose: Repeat an action a fixed number of times using a counter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Step </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Always update the counter!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Step 1
+  Step 2
+  Step 3
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Pattern 2: Sentinel Value Loop</strong></p>
+<p>Purpose: Process elements until a special “stop” value is encountered.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing until we find a stop signal:&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>  <span class="c1"># -1 is our &quot;stop&quot; signal</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing data until we hit -1:&quot;</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Processing: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Stopped at sentinel value: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing until we find a stop signal:
+Processing data until we hit -1:
+  Processing: 10
+  Processing: 20
+  Processing: 30
+  Stopped at sentinel value: -1
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Pattern 3: Condition-Based Loop</strong></p>
+<p>Purpose: Repeat until a dynamic condition is met (e.g., rolling a dice until a 6 appears).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">41</span><span class="p">)</span> <span class="c1"># For consistent results</span>
+<span class="n">current_roll</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">current_roll</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+    <span class="n">current_roll</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roll: </span><span class="si">{</span><span class="n">current_roll</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Roll: 4
+Roll: 3
+Roll: 2
+Roll: 2
+Roll: 4
+Roll: 5
+Roll: 6
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Pattern 4: Input Validation Loop</strong></p>
+<p>Purpose: Keep prompting for input until valid data is received.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulating input validation:&quot;</span><span class="p">)</span>
+<span class="n">valid_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;yes&quot;</span><span class="p">,</span> <span class="s2">&quot;no&quot;</span><span class="p">]</span>
+<span class="n">user_input</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="k">while</span> <span class="n">user_input</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_inputs</span><span class="p">:</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter &#39;yes&#39; or &#39;no&#39;: &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulating input validation:
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="try-except-handling-errors-gracefully">
+<h2>5.4 Try-Except - Handling Errors Gracefully<a class="headerlink" href="#try-except-handling-errors-gracefully" title="Link to this heading">#</a></h2>
+<p><strong>Try-except blocks</strong> let your program handle errors without crashing. Instead of stopping completely when something goes wrong, you can catch the error and decide what to do.</p>
+<p><strong>Basic syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Code that might cause an error</span>
+    <span class="n">risky_operation</span><span class="p">()</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># Code to run if an error occurs</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something went wrong!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Why use try-except?</strong></p>
+<ul class="simple">
+<li><p>Prevent programs from crashing</p></li>
+<li><p>Provide helpful error messages to users</p></li>
+<li><p>Continue running even when some operations fail</p></li>
+<li><p>Handle expected problems gracefully</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Oops! You can&#39;t divide by zero.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oops! You can&#39;t divide by zero.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With error handling:&quot;</span><span class="p">)</span>
+<span class="n">velocity</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># m/s</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># m² (blocked pipe)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">flow_rate</span> <span class="o">=</span> <span class="n">velocity</span> <span class="o">*</span> <span class="n">area</span> <span class="o">/</span> <span class="n">area</span>  <span class="c1"># Division by zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flow rate: </span><span class="si">{</span><span class="n">flow_rate</span><span class="si">}</span><span class="s2"> m³/s&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ Error: Cannot calculate - pipe appears blocked (area = 0)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check for obstruction or sensor malfunction&quot;</span><span class="p">)</span>
+    <span class="n">flow_rate</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Program continues... flow_rate = </span><span class="si">{</span><span class="n">flow_rate</span><span class="si">}</span><span class="s2"> m³/s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With error handling:
+⚠️ Error: Cannot calculate - pipe appears blocked (area = 0)
+Check for obstruction or sensor malfunction
+Program continues... flow_rate = 0 m³/s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic Try-Except Examples</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Example 1: Safe Flow Rate Calculation ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculating volumetric flow rate: Q = v × A&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Without error handling (would crash):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Q = 5.0 / 0  # ZeroDivisionError if area is 0&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">With error handling:&quot;</span><span class="p">)</span>
+<span class="n">velocity</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># m/s</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># m² (blocked pipe)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">flow_rate</span> <span class="o">=</span> <span class="n">velocity</span> <span class="o">*</span> <span class="n">area</span> <span class="o">/</span> <span class="n">area</span>  <span class="c1"># Division by zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flow rate: </span><span class="si">{</span><span class="n">flow_rate</span><span class="si">}</span><span class="s2"> m³/s&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ Error: Cannot calculate - pipe appears blocked (area = 0)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check for obstruction or sensor malfunction&quot;</span><span class="p">)</span>
+    <span class="n">flow_rate</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Program continues... flow_rate = </span><span class="si">{</span><span class="n">flow_rate</span><span class="si">}</span><span class="s2"> m³/s&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example 2: Molecular Weight Calculation ===&quot;</span><span class="p">)</span>
+<span class="n">user_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;18.015&quot;</span><span class="p">,</span> <span class="s2">&quot;44.01&quot;</span><span class="p">,</span> <span class="s2">&quot;invalid&quot;</span><span class="p">,</span> <span class="s2">&quot;32.00&quot;</span><span class="p">,</span> <span class="s2">&quot;not_a_number&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">molecular_formula</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;H2O&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2&quot;</span><span class="p">,</span> <span class="s2">&quot;NaCl&quot;</span><span class="p">,</span> <span class="s2">&quot;O2&quot;</span><span class="p">,</span> <span class="s2">&quot;CH4&quot;</span><span class="p">]:</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="n">user_inputs</span><span class="p">[[</span><span class="s2">&quot;H2O&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2&quot;</span><span class="p">,</span> <span class="s2">&quot;NaCl&quot;</span><span class="p">,</span> <span class="s2">&quot;O2&quot;</span><span class="p">,</span> <span class="s2">&quot;CH4&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">molecular_formula</span><span class="p">)]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Entering molecular weight for </span><span class="si">{</span><span class="n">molecular_formula</span><span class="si">}</span><span class="s2">: &#39;</span><span class="si">{</span><span class="n">user_input</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">MW</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+        <span class="n">mass_of_moles</span> <span class="o">=</span> <span class="n">MW</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># Calculate mass of 2 moles</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ MW = </span><span class="si">{</span><span class="n">MW</span><span class="si">}</span><span class="s2"> g/mol&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mass of 2 moles: </span><span class="si">{</span><span class="n">mass_of_moles</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> g&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Error: &#39;</span><span class="si">{</span><span class="n">user_input</span><span class="si">}</span><span class="s2">&#39; is not a valid number&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Using default MW from database...&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example 3: Array Index Safety ===&quot;</span><span class="p">)</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mf">25.0</span><span class="p">,</span> <span class="mf">30.5</span><span class="p">,</span> <span class="mf">28.3</span><span class="p">]</span>  <span class="c1"># °C</span>
+<span class="n">indices_to_check</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature array: </span><span class="si">{</span><span class="n">temperatures</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">indices_to_check</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Accessing index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">temperatures</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ temperatures[</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">] = </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Error: Index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> out of range&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Valid indices: 0 to </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example 4: Reading Sensor Data Files ===&quot;</span><span class="p">)</span>
+<span class="n">data_files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;reactor_temp.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure_log.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;missing_file.csv&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">data_files</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Attempting to read &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;:&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Simulate file reading</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="s2">&quot;missing_file.csv&quot;</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;25.3,26.1,25.8,26.0&quot;</span>  <span class="c1"># Simulated data</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ File read successfully&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Data preview: </span><span class="si">{</span><span class="n">data</span><span class="p">[:</span><span class="mi">30</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Check if sensor is logging data properly&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="advanced-try-except-techniques">
+<h3>5.4.1 Advanced Try-Except Techniques<a class="headerlink" href="#advanced-try-except-techniques" title="Link to this heading">#</a></h3>
+<p>Let’s explore more sophisticated error handling techniques that make your programs more robust.</p>
+<p><strong>Multiple Exception Types</strong></p>
+<p>Python allows multiple except blocks to handle different error types specifically. This pattern is useful when a block of code may raise different kinds of exceptions, and you want custom handling for each.</p>
+<p>Example errors shown:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> → dividing by zero</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> → invalid data conversion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IndexError</span></code> → accessing a list out of bounds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Exception</span></code> → catch-all for unexpected errors</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Multiple Exception Types ===&quot;</span><span class="p">)</span>
+<span class="c1"># List of operations with simpler examples</span>
+<span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;10 / 2&quot;</span><span class="p">,</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;10 / 0&quot;</span><span class="p">,</span> <span class="s2">&quot;10 / 0&quot;</span><span class="p">),</span>         <span class="c1"># We&#39;ll handle this in try</span>
+    <span class="p">(</span><span class="s2">&quot;int(&#39;abc&#39;)&quot;</span><span class="p">,</span> <span class="s2">&quot;int(&#39;abc&#39;)&quot;</span><span class="p">),</span> <span class="c1"># Will raise ValueError</span>
+    <span class="p">(</span><span class="s2">&quot;[1,2,3][10]&quot;</span><span class="p">,</span> <span class="s2">&quot;list index out of range&quot;</span><span class="p">)</span>  <span class="c1"># Will raise IndexError</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">description</span><span class="p">,</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">operations</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying: </span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">description</span> <span class="o">==</span> <span class="s2">&quot;10 / 0&quot;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">description</span> <span class="o">==</span> <span class="s2">&quot;int(&#39;abc&#39;)&quot;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">description</span> <span class="o">==</span> <span class="s2">&quot;[1,2,3][10]&quot;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">operation</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Success: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ❌ Cannot divide by zero&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ❌ Invalid value for conversion&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ❌ Index out of range&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Unexpected error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying: 10 / 2
+  ✅ Success: 5.0
+
+Trying: 10 / 0
+  ❌ Cannot divide by zero
+
+Trying: int(&#39;abc&#39;)
+  ❌ Invalid value for conversion
+
+Trying: [1,2,3][10]
+  ❌ Index out of range
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Try-Except-Else-Finally</strong></p>
+<p>Explanation:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">try</span></code> → code that may raise an exception</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">except</span></code> → code executed if an exception occurs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else</span></code> → runs only if no exception occurs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finally</span></code> → runs regardless of whether an exception occurred or not</p></li>
+</ul>
+<p>Benefits:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">else</span></code> keeps successful code separate from error handling</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finally</span></code> ensures cleanup actions (like closing files) always run</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Simple Try-Except-Else-Finally Example ===&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ❌ Cannot divide by zero!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Division successful: </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  🔄 This always runs&quot;</span><span class="p">)</span>
+
+<span class="c1"># Simple test cases</span>
+<span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Successful division</span>
+<span class="n">divide</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1"># Division by zero</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Simple Try-Except-Else-Finally Example ===
+  ✅ Division successful: 10 / 2 = 5.0
+  🔄 This always runs
+  ❌ Cannot divide by zero!
+  🔄 This always runs
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="break-and-continue-controlling-loop-flow">
+<span id="id6"></span><h2>5.5 Break and Continue - Controlling Loop Flow<a class="headerlink" href="#break-and-continue-controlling-loop-flow" title="Link to this heading">#</a></h2>
+<p><strong>Break and continue</strong> give you fine control over how loops behave:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong>: Exit the loop immediately, no matter what</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong>: Skip the rest of the current iteration and jump to the next one</p></li>
+</ul>
+<p>These work in both <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> loops and are incredibly useful for handling special cases.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using break:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">break</span>  <span class="c1"># Stop the loop</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Using continue:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>  <span class="c1"># Skip even numbers</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Example 1: Using break to Exit Early ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Looking for the first even number:&quot;</span><span class="p">)</span>
+
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="n">found_even</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Checking </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  🎯 Found first even number: </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">found_even</span> <span class="o">=</span> <span class="n">number</span>
+        <span class="k">break</span>  <span class="c1"># Exit the loop immediately</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2"> is odd, continue searching...&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">found_even</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Search complete! First even number was </span><span class="si">{</span><span class="n">found_even</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No even numbers found&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Example 1: Using break to Exit Early ===
+Looking for the first even number:
+  Checking 1...
+    1 is odd, continue searching...
+  Checking 3...
+    3 is odd, continue searching...
+  Checking 7...
+    7 is odd, continue searching...
+  Checking 8...
+  🎯 Found first even number: 8
+Search complete! First even number was 8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example 2: Using continue to Skip Items ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing only positive numbers:&quot;</span><span class="p">)</span>
+
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Skipping negative number: </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">continue</span>  <span class="c1"># Skip to next iteration</span>
+    
+    <span class="c1"># This code only runs for positive numbers</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Processing positive number: </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">number</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sum of positive numbers: </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Count of positive numbers: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Example 2: Using continue to Skip Items ===
+Processing only positive numbers:
+  Processing positive number: 5
+  Skipping negative number: -2
+  Processing positive number: 8
+  Skipping negative number: -1
+  Processing positive number: 3
+  Skipping negative number: -7
+  Processing positive number: 10
+Sum of positive numbers: 26
+Count of positive numbers: 4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="putting-it-all-together-real-world-examples">
+<span id="id7"></span><h2>5.6 Putting It All Together - Real-World Examples<a class="headerlink" href="#putting-it-all-together-real-world-examples" title="Link to this heading">#</a></h2>
+<p>Now let’s combine all the control structures we’ve learned to solve realistic problems. These examples show how if-else, loops, try-except, break, and continue work together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Continuous Stirred Tank Reactor (CSTR) Monitoring System</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CONTINUOUS STIRRED TANK REACTOR (CSTR) MONITORING&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Hourly monitoring data</span>
+<span class="n">monitoring_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span> <span class="s2">&quot;conc_out&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s2">&quot;flow_in&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;sensor_status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span> <span class="mi">87</span><span class="p">,</span> <span class="s2">&quot;conc_out&quot;</span><span class="p">:</span> <span class="mf">0.22</span><span class="p">,</span> <span class="s2">&quot;flow_in&quot;</span><span class="p">:</span> <span class="mi">105</span><span class="p">,</span> <span class="s2">&quot;sensor_status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span> <span class="mi">92</span><span class="p">,</span> <span class="s2">&quot;conc_out&quot;</span><span class="p">:</span> <span class="mf">0.18</span><span class="p">,</span> <span class="s2">&quot;flow_in&quot;</span><span class="p">:</span> <span class="mi">98</span><span class="p">,</span> <span class="s2">&quot;sensor_status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;conc_out&quot;</span><span class="p">:</span> <span class="mf">0.20</span><span class="p">,</span> <span class="s2">&quot;flow_in&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;sensor_status&quot;</span><span class="p">:</span> <span class="s2">&quot;fault&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span> <span class="s2">&quot;conc_out&quot;</span><span class="p">:</span> <span class="mf">0.21</span><span class="p">,</span> <span class="s2">&quot;flow_in&quot;</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span> <span class="s2">&quot;sensor_status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span> <span class="mi">95</span><span class="p">,</span> <span class="s2">&quot;conc_out&quot;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span> <span class="s2">&quot;flow_in&quot;</span><span class="p">:</span> <span class="mi">110</span><span class="p">,</span> <span class="s2">&quot;sensor_status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># Target parameters</span>
+<span class="n">target_temp</span> <span class="o">=</span> <span class="mi">90</span>  <span class="c1"># °C</span>
+<span class="n">target_conc</span> <span class="o">=</span> <span class="mf">0.20</span>  <span class="c1"># mol/L</span>
+<span class="n">max_temp</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># °C</span>
+<span class="n">min_flow</span> <span class="o">=</span> <span class="mi">95</span>  <span class="c1"># L/min</span>
+<span class="n">max_flow</span> <span class="o">=</span> <span class="mi">115</span>  <span class="c1"># L/min</span>
+
+<span class="n">warnings_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">critical_alerts</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total_conversion</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">valid_hours</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">monitoring_data</span><span class="p">:</span>
+    <span class="n">hour</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;hour&quot;</span><span class="p">]</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">]</span>
+    <span class="n">conc_out</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;conc_out&quot;</span><span class="p">]</span>
+    <span class="n">flow_in</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;flow_in&quot;</span><span class="p">]</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;sensor_status&quot;</span><span class="p">]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⏰ Hour </span><span class="si">{</span><span class="n">hour</span><span class="si">}</span><span class="s2">:00&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Sensor status: </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Check sensor status first</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;ok&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️ SENSOR FAULT DETECTED&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Skipping analysis for this hour&quot;</span><span class="p">)</span>
+        <span class="n">warnings_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">continue</span>
+    
+    <span class="c1"># Handle temperature with error checking</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">temp_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Temperature: </span><span class="si">{</span><span class="n">temp_value</span><span class="si">}</span><span class="s2">°C (target: </span><span class="si">{</span><span class="n">target_temp</span><span class="si">}</span><span class="s2">°C)&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Temperature control logic</span>
+        <span class="k">if</span> <span class="n">temp_value</span> <span class="o">&gt;</span> <span class="n">max_temp</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   🚨 CRITICAL: Temperature exceeds </span><span class="si">{</span><span class="n">max_temp</span><span class="si">}</span><span class="s2">°C!&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ACTION: Emergency cooling activated&quot;</span><span class="p">)</span>
+            <span class="n">critical_alerts</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">temp_value</span> <span class="o">&gt;</span> <span class="n">target_temp</span> <span class="o">+</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️ WARNING: Temperature </span><span class="si">{</span><span class="n">temp_value</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">target_temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C above target&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ACTION: Increase cooling water flow&quot;</span><span class="p">)</span>
+            <span class="n">warnings_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">temp_value</span> <span class="o">&lt;</span> <span class="n">target_temp</span> <span class="o">-</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️ WARNING: Temperature </span><span class="si">{</span><span class="n">target_temp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">temp_value</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C below target&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ACTION: Increase heat input&quot;</span><span class="p">)</span>
+            <span class="n">warnings_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✅ Temperature within acceptable range&quot;</span><span class="p">)</span>
+            
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ❌ ERROR: Invalid temperature reading (</span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Calibrate temperature sensor&quot;</span><span class="p">)</span>
+        <span class="n">warnings_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">continue</span>
+    
+    <span class="c1"># Flow rate check</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Feed flow rate: </span><span class="si">{</span><span class="n">flow_in</span><span class="si">}</span><span class="s2"> L/min&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">flow_in</span> <span class="o">&lt;</span> <span class="n">min_flow</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️ Flow rate below minimum (</span><span class="si">{</span><span class="n">min_flow</span><span class="si">}</span><span class="s2"> L/min)&quot;</span><span class="p">)</span>
+        <span class="n">warnings_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">flow_in</span> <span class="o">&gt;</span> <span class="n">max_flow</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️ Flow rate above maximum (</span><span class="si">{</span><span class="n">max_flow</span><span class="si">}</span><span class="s2"> L/min)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Risk of overflow - check pump setting&quot;</span><span class="p">)</span>
+        <span class="n">warnings_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✅ Flow rate within operating range&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Concentration and conversion</span>
+    <span class="n">conc_in</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># mol/L (feed concentration)</span>
+    <span class="n">conversion</span> <span class="o">=</span> <span class="p">(</span><span class="n">conc_in</span> <span class="o">-</span> <span class="n">conc_out</span><span class="p">)</span> <span class="o">/</span> <span class="n">conc_in</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Outlet concentration: </span><span class="si">{</span><span class="n">conc_out</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Conversion: </span><span class="si">{</span><span class="n">conversion</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">conversion</span> <span class="o">&gt;=</span> <span class="mf">0.75</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✅ Excellent conversion!&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">conversion</span> <span class="o">&gt;=</span> <span class="mf">0.60</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✓ Acceptable conversion&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️ Low conversion - check residence time or catalyst&quot;</span><span class="p">)</span>
+        <span class="n">warnings_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="n">total_conversion</span> <span class="o">+=</span> <span class="n">conversion</span>
+    <span class="n">valid_hours</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Summary Report</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SHIFT SUMMARY REPORT&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total monitoring hours: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">monitoring_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valid data hours: </span><span class="si">{</span><span class="n">valid_hours</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warnings issued: </span><span class="si">{</span><span class="n">warnings_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Critical alerts: </span><span class="si">{</span><span class="n">critical_alerts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">valid_hours</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">avg_conversion</span> <span class="o">=</span> <span class="n">total_conversion</span> <span class="o">/</span> <span class="n">valid_hours</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average conversion: </span><span class="si">{</span><span class="n">avg_conversion</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">avg_conversion</span> <span class="o">&gt;=</span> <span class="mf">0.75</span><span class="p">:</span>
+        <span class="n">performance</span> <span class="o">=</span> <span class="s2">&quot;EXCELLENT ⭐&quot;</span>
+    <span class="k">elif</span> <span class="n">avg_conversion</span> <span class="o">&gt;=</span> <span class="mf">0.65</span><span class="p">:</span>
+        <span class="n">performance</span> <span class="o">=</span> <span class="s2">&quot;GOOD ✓&quot;</span>
+    <span class="k">elif</span> <span class="n">avg_conversion</span> <span class="o">&gt;=</span> <span class="mf">0.55</span><span class="p">:</span>
+        <span class="n">performance</span> <span class="o">=</span> <span class="s2">&quot;ACCEPTABLE ⚠️&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">performance</span> <span class="o">=</span> <span class="s2">&quot;POOR - NEEDS ATTENTION 🔧&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Overall performance: </span><span class="si">{</span><span class="n">performance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ Insufficient valid data for analysis&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">critical_alerts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🚨 ATTENTION: </span><span class="si">{</span><span class="n">critical_alerts</span><span class="si">}</span><span class="s2"> critical alert(s) during shift&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Review incident log and implement corrective actions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+CONTINUOUS STIRRED TANK REACTOR (CSTR) MONITORING
+============================================================
+
+⏰ Hour 1:00
+   Sensor status: OK
+   Temperature: 85.0°C (target: 90°C)
+   ✅ Temperature within acceptable range
+   Feed flow rate: 100 L/min
+   ✅ Flow rate within operating range
+   Outlet concentration: 0.25 mol/L
+   Conversion: 75.0%
+   ✅ Excellent conversion!
+
+⏰ Hour 2:00
+   Sensor status: OK
+   Temperature: 87.0°C (target: 90°C)
+   ✅ Temperature within acceptable range
+   Feed flow rate: 105 L/min
+   ✅ Flow rate within operating range
+   Outlet concentration: 0.22 mol/L
+   Conversion: 78.0%
+   ✅ Excellent conversion!
+
+⏰ Hour 3:00
+   Sensor status: OK
+   Temperature: 92.0°C (target: 90°C)
+   ✅ Temperature within acceptable range
+   Feed flow rate: 98 L/min
+   ✅ Flow rate within operating range
+   Outlet concentration: 0.18 mol/L
+   Conversion: 82.0%
+   ✅ Excellent conversion!
+
+⏰ Hour 4:00
+   Sensor status: FAULT
+   ⚠️ SENSOR FAULT DETECTED
+   Skipping analysis for this hour
+
+⏰ Hour 5:00
+   Sensor status: OK
+   Temperature: 88.0°C (target: 90°C)
+   ✅ Temperature within acceptable range
+   Feed flow rate: 102 L/min
+   ✅ Flow rate within operating range
+   Outlet concentration: 0.21 mol/L
+   Conversion: 79.0%
+   ✅ Excellent conversion!
+
+⏰ Hour 6:00
+   Sensor status: OK
+   Temperature: 95.0°C (target: 90°C)
+   ✅ Temperature within acceptable range
+   Feed flow rate: 110 L/min
+   ✅ Flow rate within operating range
+   Outlet concentration: 0.15 mol/L
+   Conversion: 85.0%
+   ✅ Excellent conversion!
+
+============================================================
+SHIFT SUMMARY REPORT
+============================================================
+Total monitoring hours: 6
+Valid data hours: 5
+Warnings issued: 1
+Critical alerts: 0
+Average conversion: 79.8%
+Overall performance: EXCELLENT ⭐
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Chemical Inventory Management System</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LABORATORY CHEMICAL INVENTORY MANAGEMENT&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Chemical database</span>
+<span class="n">chemicals</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;H2SO4&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="s2">&quot;min_stock&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;hazard&quot;</span><span class="p">:</span> <span class="s2">&quot;corrosive&quot;</span><span class="p">,</span> <span class="s2">&quot;cost_per_unit&quot;</span><span class="p">:</span> <span class="mf">45.00</span><span class="p">},</span>
+    <span class="s2">&quot;NaOH&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">,</span> <span class="s2">&quot;min_stock&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;kg&quot;</span><span class="p">,</span> <span class="s2">&quot;hazard&quot;</span><span class="p">:</span> <span class="s2">&quot;corrosive&quot;</span><span class="p">,</span> <span class="s2">&quot;cost_per_unit&quot;</span><span class="p">:</span> <span class="mf">25.00</span><span class="p">},</span>
+    <span class="s2">&quot;Acetone&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;min_stock&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;hazard&quot;</span><span class="p">:</span> <span class="s2">&quot;flammable&quot;</span><span class="p">,</span> <span class="s2">&quot;cost_per_unit&quot;</span><span class="p">:</span> <span class="mf">30.00</span><span class="p">},</span>
+    <span class="s2">&quot;Ethanol&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span> <span class="s2">&quot;min_stock&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;hazard&quot;</span><span class="p">:</span> <span class="s2">&quot;flammable&quot;</span><span class="p">,</span> <span class="s2">&quot;cost_per_unit&quot;</span><span class="p">:</span> <span class="mf">20.00</span><span class="p">},</span>
+    <span class="s2">&quot;HCl&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;stock&quot;</span><span class="p">:</span> <span class="s2">&quot;invalid&quot;</span><span class="p">,</span> <span class="s2">&quot;min_stock&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;hazard&quot;</span><span class="p">:</span> <span class="s2">&quot;corrosive&quot;</span><span class="p">,</span> <span class="s2">&quot;cost_per_unit&quot;</span><span class="p">:</span> <span class="mf">35.00</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Lab requisition requests</span>
+<span class="n">requisitions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;chemical&quot;</span><span class="p">:</span> <span class="s2">&quot;H2SO4&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;chemical&quot;</span><span class="p">:</span> <span class="s2">&quot;NaOH&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;chemical&quot;</span><span class="p">:</span> <span class="s2">&quot;Acetone&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span>  <span class="c1"># Out of stock</span>
+    <span class="p">{</span><span class="s2">&quot;chemical&quot;</span><span class="p">:</span> <span class="s2">&quot;Benzene&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>  <span class="c1"># Not in database</span>
+    <span class="p">{</span><span class="s2">&quot;chemical&quot;</span><span class="p">:</span> <span class="s2">&quot;Ethanol&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">},</span> <span class="c1"># Exceeds stock</span>
+    <span class="p">{</span><span class="s2">&quot;chemical&quot;</span><span class="p">:</span> <span class="s2">&quot;HCl&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span>      <span class="c1"># Invalid stock data</span>
+    <span class="p">{</span><span class="s2">&quot;chemical&quot;</span><span class="p">:</span> <span class="s2">&quot;H2SO4&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}</span>     <span class="c1"># Should work</span>
+<span class="p">]</span>
+
+<span class="n">approved_requests</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">denied_requests</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">total_cost</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">reorder_needed</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Processing requisition requests...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">req_num</span><span class="p">,</span> <span class="n">request</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">requisitions</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">chemical_name</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">&quot;chemical&quot;</span><span class="p">]</span>
+    <span class="n">amount_requested</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">&quot;amount&quot;</span><span class="p">]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request #</span><span class="si">{</span><span class="n">req_num</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">amount_requested</span><span class="si">}</span><span class="s2"> units of </span><span class="si">{</span><span class="n">chemical_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Check if chemical exists in database</span>
+    <span class="k">if</span> <span class="n">chemical_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chemicals</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ❌ Chemical &#39;</span><span class="si">{</span><span class="n">chemical_name</span><span class="si">}</span><span class="s2">&#39; not in inventory database&quot;</span><span class="p">)</span>
+        <span class="n">denied_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chemical_name</span><span class="si">}</span><span class="s2"> (not in database)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="k">continue</span>
+    
+    <span class="n">chemical</span> <span class="o">=</span> <span class="n">chemicals</span><span class="p">[</span><span class="n">chemical_name</span><span class="p">]</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Validate stock data</span>
+        <span class="n">current_stock</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">chemical</span><span class="p">[</span><span class="s2">&quot;stock&quot;</span><span class="p">])</span>
+        <span class="n">min_stock</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">chemical</span><span class="p">[</span><span class="s2">&quot;min_stock&quot;</span><span class="p">])</span>
+        <span class="n">cost_per_unit</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">chemical</span><span class="p">[</span><span class="s2">&quot;cost_per_unit&quot;</span><span class="p">])</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="n">chemical</span><span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span>
+        <span class="n">hazard</span> <span class="o">=</span> <span class="n">chemical</span><span class="p">[</span><span class="s2">&quot;hazard&quot;</span><span class="p">]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Current stock: </span><span class="si">{</span><span class="n">current_stock</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Hazard class: </span><span class="si">{</span><span class="n">hazard</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Check if chemical is out of stock</span>
+        <span class="k">if</span> <span class="n">current_stock</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ❌ OUT OF STOCK&quot;</span><span class="p">)</span>
+            <span class="n">denied_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chemical_name</span><span class="si">}</span><span class="s2"> (out of stock)&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Add to reorder list if not already there</span>
+            <span class="k">if</span> <span class="n">chemical_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reorder_needed</span><span class="p">:</span>
+                <span class="n">reorder_needed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chemical_name</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="k">continue</span>
+        
+        <span class="c1"># Check if enough stock available</span>
+        <span class="k">if</span> <span class="n">amount_requested</span> <span class="o">&gt;</span> <span class="n">current_stock</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️ Insufficient stock (only </span><span class="si">{</span><span class="n">current_stock</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2"> available)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Issuing partial amount: </span><span class="si">{</span><span class="n">current_stock</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">amount_issued</span> <span class="o">=</span> <span class="n">current_stock</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">amount_issued</span> <span class="o">=</span> <span class="n">amount_requested</span>
+        
+        <span class="c1"># Calculate cost</span>
+        <span class="n">request_cost</span> <span class="o">=</span> <span class="n">amount_issued</span> <span class="o">*</span> <span class="n">cost_per_unit</span>
+        
+        <span class="c1"># Update stock</span>
+        <span class="n">new_stock</span> <span class="o">=</span> <span class="n">current_stock</span> <span class="o">-</span> <span class="n">amount_issued</span>
+        <span class="n">chemicals</span><span class="p">[</span><span class="n">chemical_name</span><span class="p">][</span><span class="s2">&quot;stock&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_stock</span>
+        
+        <span class="c1"># Special handling for hazardous materials</span>
+        <span class="k">if</span> <span class="n">hazard</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;corrosive&quot;</span><span class="p">,</span> <span class="s2">&quot;flammable&quot;</span><span class="p">,</span> <span class="s2">&quot;toxic&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️ HAZARD: </span><span class="si">{</span><span class="n">hazard</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> - Special handling required&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Ensure proper PPE and secondary containment&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Check if reorder is needed</span>
+        <span class="k">if</span> <span class="n">new_stock</span> <span class="o">&lt;</span> <span class="n">min_stock</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   📉 Stock below minimum (</span><span class="si">{</span><span class="n">min_stock</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">chemical_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reorder_needed</span><span class="p">:</span>
+                <span class="n">reorder_needed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chemical_name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Added to reorder list&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Approve request</span>
+        <span class="n">approved_requests</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;chemical&quot;</span><span class="p">:</span> <span class="n">chemical_name</span><span class="p">,</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">amount_issued</span><span class="p">,</span>
+            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="n">unit</span><span class="p">,</span>
+            <span class="s2">&quot;cost&quot;</span><span class="p">:</span> <span class="n">request_cost</span>
+        <span class="p">})</span>
+        
+        <span class="n">total_cost</span> <span class="o">+=</span> <span class="n">request_cost</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✅ APPROVED: </span><span class="si">{</span><span class="n">amount_issued</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Cost: $</span><span class="si">{</span><span class="n">request_cost</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Remaining stock: </span><span class="si">{</span><span class="n">new_stock</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ❌ ERROR: Invalid data in database for &#39;</span><span class="si">{</span><span class="n">chemical_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Database entry needs correction&quot;</span><span class="p">)</span>
+        <span class="n">denied_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chemical_name</span><span class="si">}</span><span class="s2"> (database error)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="k">continue</span>
+    
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Generate summary report</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;REQUISITION SUMMARY REPORT&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">approved_requests</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⚠️ No requests were approved&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ APPROVED REQUESTS (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">approved_requests</span><span class="p">)</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Group by hazard class</span>
+    <span class="n">corrosive_items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">flammable_items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">other_items</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">approved_requests</span><span class="p">:</span>
+        <span class="n">chem</span> <span class="o">=</span> <span class="n">req</span><span class="p">[</span><span class="s2">&quot;chemical&quot;</span><span class="p">]</span>
+        <span class="n">hazard</span> <span class="o">=</span> <span class="n">chemicals</span><span class="p">[</span><span class="n">chem</span><span class="p">][</span><span class="s2">&quot;hazard&quot;</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">hazard</span> <span class="o">==</span> <span class="s2">&quot;corrosive&quot;</span><span class="p">:</span>
+            <span class="n">corrosive_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">hazard</span> <span class="o">==</span> <span class="s2">&quot;flammable&quot;</span><span class="p">:</span>
+            <span class="n">flammable_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">other_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+    
+    <span class="c1"># Display by hazard class</span>
+    <span class="k">if</span> <span class="n">corrosive_items</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   🧪 CORROSIVE CHEMICALS:&quot;</span><span class="p">)</span>
+        <span class="n">subtotal</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">corrosive_items</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      • </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;chemical&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - $</span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">subtotal</span> <span class="o">+=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      Subtotal: $</span><span class="si">{</span><span class="n">subtotal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">flammable_items</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   🔥 FLAMMABLE CHEMICALS:&quot;</span><span class="p">)</span>
+        <span class="n">subtotal</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">flammable_items</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      • </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;chemical&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - $</span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">subtotal</span> <span class="o">+=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      Subtotal: $</span><span class="si">{</span><span class="n">subtotal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">other_items</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   📦 OTHER CHEMICALS:&quot;</span><span class="p">)</span>
+        <span class="n">subtotal</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">other_items</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      • </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;chemical&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - $</span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">subtotal</span> <span class="o">+=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      Subtotal: $</span><span class="si">{</span><span class="n">subtotal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   TOTAL COST: $</span><span class="si">{</span><span class="n">total_cost</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display denied requests</span>
+<span class="k">if</span> <span class="n">denied_requests</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">❌ DENIED REQUESTS (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">denied_requests</span><span class="p">)</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">denied_requests</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display reorder recommendations</span>
+<span class="k">if</span> <span class="n">reorder_needed</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📋 REORDER RECOMMENDATIONS:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The following chemicals are below minimum stock levels:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">reorder_cost</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">chem</span> <span class="ow">in</span> <span class="n">reorder_needed</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chem</span> <span class="ow">in</span> <span class="n">chemicals</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">chemicals</span><span class="p">[</span><span class="n">chem</span><span class="p">][</span><span class="s2">&quot;stock&quot;</span><span class="p">])</span>
+                <span class="n">minimum</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">chemicals</span><span class="p">[</span><span class="n">chem</span><span class="p">][</span><span class="s2">&quot;min_stock&quot;</span><span class="p">])</span>
+                <span class="n">unit</span> <span class="o">=</span> <span class="n">chemicals</span><span class="p">[</span><span class="n">chem</span><span class="p">][</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span>
+                <span class="n">cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">chemicals</span><span class="p">[</span><span class="n">chem</span><span class="p">][</span><span class="s2">&quot;cost_per_unit&quot;</span><span class="p">])</span>
+                
+                <span class="c1"># Recommend ordering enough to reach 2x minimum stock</span>
+                <span class="n">order_amount</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">minimum</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">current</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">order_cost</span> <span class="o">=</span> <span class="n">order_amount</span> <span class="o">*</span> <span class="n">cost</span>
+                <span class="n">reorder_cost</span> <span class="o">+=</span> <span class="n">order_cost</span>
+                
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • </span><span class="si">{</span><span class="n">chem</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Current: </span><span class="si">{</span><span class="n">current</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">, Minimum: </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Recommended order: </span><span class="si">{</span><span class="n">order_amount</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2"> ($</span><span class="si">{</span><span class="n">order_cost</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • </span><span class="si">{</span><span class="n">chem</span><span class="si">}</span><span class="s2">: Review database entry&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   Estimated reorder cost: $</span><span class="si">{</span><span class="n">reorder_cost</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Current inventory status:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">chem</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">chemicals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">stock</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;stock&quot;</span><span class="p">])</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   </span><span class="si">{</span><span class="n">chem</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">stock</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   </span><span class="si">{</span><span class="n">chem</span><span class="si">}</span><span class="s2">: ERROR - invalid data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+LABORATORY CHEMICAL INVENTORY MANAGEMENT
+============================================================
+
+Processing requisition requests...
+
+Request #1: 2.0 units of H2SO4
+   Current stock: 5.0 L
+   Hazard class: CORROSIVE
+   ⚠️ HAZARD: CORROSIVE - Special handling required
+   Ensure proper PPE and secondary containment
+   ✅ APPROVED: 2.0 L
+   Cost: $90.00
+   Remaining stock: 3.0 L
+
+Request #2: 1.5 units of NaOH
+   Current stock: 3.5 kg
+   Hazard class: CORROSIVE
+   ⚠️ HAZARD: CORROSIVE - Special handling required
+   Ensure proper PPE and secondary containment
+   ✅ APPROVED: 1.5 kg
+   Cost: $37.50
+   Remaining stock: 2.0 kg
+
+Request #3: 0.5 units of Acetone
+   Current stock: 0.0 L
+   Hazard class: FLAMMABLE
+   ❌ OUT OF STOCK
+
+Request #4: 1.0 units of Benzene
+   ❌ Chemical &#39;Benzene&#39; not in inventory database
+
+Request #5: 10.0 units of Ethanol
+   Current stock: 8.0 L
+   Hazard class: FLAMMABLE
+   ⚠️ Insufficient stock (only 8.0 L available)
+   Issuing partial amount: 8.0 L
+   ⚠️ HAZARD: FLAMMABLE - Special handling required
+   Ensure proper PPE and secondary containment
+   📉 Stock below minimum (2.0 L)
+   Added to reorder list
+   ✅ APPROVED: 8.0 L
+   Cost: $160.00
+   Remaining stock: 0.0 L
+
+Request #6: 0.5 units of HCl
+   ❌ ERROR: Invalid data in database for &#39;HCl&#39;
+   Database entry needs correction
+
+Request #7: 1.0 units of H2SO4
+   Current stock: 3.0 L
+   Hazard class: CORROSIVE
+   ⚠️ HAZARD: CORROSIVE - Special handling required
+   Ensure proper PPE and secondary containment
+   ✅ APPROVED: 1.0 L
+   Cost: $45.00
+   Remaining stock: 2.0 L
+
+============================================================
+REQUISITION SUMMARY REPORT
+============================================================
+
+✅ APPROVED REQUESTS (4):
+
+   🧪 CORROSIVE CHEMICALS:
+      • 2.0 L H2SO4 - $90.00
+      • 1.5 kg NaOH - $37.50
+      • 1.0 L H2SO4 - $45.00
+      Subtotal: $172.50
+
+   🔥 FLAMMABLE CHEMICALS:
+      • 8.0 L Ethanol - $160.00
+      Subtotal: $160.00
+
+   TOTAL COST: $332.50
+
+❌ DENIED REQUESTS (3):
+   • Acetone (out of stock)
+   • Benzene (not in database)
+   • HCl (database error)
+
+📋 REORDER RECOMMENDATIONS:
+The following chemicals are below minimum stock levels:
+
+   • Acetone:
+     Current: 0.0 L, Minimum: 1.0 L
+     Recommended order: 2.0 L ($60.00)
+   • Ethanol:
+     Current: 0.0 L, Minimum: 2.0 L
+     Recommended order: 4.0 L ($80.00)
+
+   Estimated reorder cost: $140.00
+
+Current inventory status:
+   H2SO4: 2.0 L
+   NaOH: 2.0 kg
+   Acetone: 0.0 L
+   Ethanol: 0.0 L
+   HCl: ERROR - invalid data
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this chapter, you learned how to control the flow of your programs:</p>
+<section id="boolean-logic">
+<h3>Boolean Logic<a class="headerlink" href="#boolean-logic" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Boolean values</strong>: <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><strong>Comparison operators</strong>: <code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></li>
+<li><p><strong>Logical operators</strong>: <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code></p></li>
+</ul>
+</section>
+<section id="decision-making">
+<h3>Decision Making<a class="headerlink" href="#decision-making" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">if</span></code> statements</strong>: Execute code when condition is True</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">if-else</span></code></strong>: Choose between two options</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">if-elif-else</span></code></strong>: Choose among multiple options</p></li>
+</ul>
+</section>
+<section id="loops">
+<h3>Loops<a class="headerlink" href="#loops" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">for</span></code> loops</strong>: Repeat for each item in a sequence</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">while</span></code> loops</strong>: Repeat while a condition is True</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong>: Exit a loop early</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong>: Skip to next iteration</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chapter04/04_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../chapter06/06_notebook.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 6: File Input/Output</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-statements-making-decisions">5.1 If Statements - Making Decisions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-statements">5.1.1 If-Else Statements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elif-else-statements">5.1.2 If-Elif-Else Statements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops-repeating-actions-with-sequences">5.2 For Loops - Repeating Actions with Sequences</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-for-loop-techniques">5.2.1 Advanced For Loop Techniques</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops-repeating-until-a-condition-changes">5.3 While Loops - Repeating Until a Condition Changes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-for-loops-when">Use <code class="docutils literal notranslate"><span class="pre">for</span></code> loops when:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-while-loops-when">Use <code class="docutils literal notranslate"><span class="pre">while</span></code> loops when:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-comparison-for-vs-while">Quick Comparison: <code class="docutils literal notranslate"><span class="pre">for</span></code> vs <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loop-best-practices-and-common-patterns">5.3.1 While Loop Best Practices and Common Patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-handling-errors-gracefully">5.4 Try-Except - Handling Errors Gracefully</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-try-except-techniques">5.4.1 Advanced Try-Except Techniques</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-and-continue-controlling-loop-flow">5.5 Break and Continue - Controlling Loop Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together-real-world-examples">5.6 Putting It All Together - Real-World Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-logic">Boolean Logic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-making">Decision Making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loops">Loops</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
