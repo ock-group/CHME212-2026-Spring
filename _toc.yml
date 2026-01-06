@@ -33,6 +33,6 @@ parts:
   #     - file: docs/chapter19/19_notebook (image analysis for particle/phase characterization)
   #     - file: docs/chapter20/20_notebook (cheminformatics with RDKit)
   #     - file: docs/chapter21/21_notebook (simulation - Brownian motion / diffusion / random walks)
-  - caption: Lab Exercises
-    chapters:
-      - file: docs/lab01/01_lab
+  # - caption: Lab Exercises
+  #   chapters:
+  #     - file: docs/lab01/01_lab
