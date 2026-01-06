@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -185,6 +185,10 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -389,9 +393,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-verify-installation">Step 3: Verify Installation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-create-a-new-environment-for-this-course">Step 4: Create a New Environment for This Course</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-activate-your-environment">Step 5: Activate Your Environment</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-install-required-packages">Step 6: Install Required Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-install-required-packages">Step 6: Install Required Packages</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-register-your-environment-with-jupyter">Step 7: Register Your Environment with Jupyter</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-launch-jupyterlab">Step 8: Launch JupyterLab</a></li>
 </ul>
@@ -402,10 +404,10 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-the-google-colab-add-on">Step 3. Install the Google Colab Add-on</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-google-colab">Using Google Colab</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-extra-libraries-if-needed">Installing Extra Libraries (If Needed)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-notebooks-in-google-colab">Using Notebooks in Google Colab</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-files-on-your-google-drive-important">Accessing Files on Your Google Drive (Important)</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-notebooks-in-google-colab">Using Notebooks in Google Colab</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-files-on-your-google-drive-important">Accessing Files on Your Google Drive (Important)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-jupyter-notebooks">0.4 Using Jupyter Notebooks</a><ul class="nav section-nav flex-column">
@@ -418,12 +420,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-python-scientific-libraries">0.5 Overview of Python Scientific Libraries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-check">0.6 Environment Check</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-python-environment">What is a Python Environment?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-jupyter-kernel">What is a Jupyter Kernel?</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-check">0.6 Environment Check</a></li>
 </ul>
             </nav>
         </div>
@@ -570,9 +567,8 @@ You can create environments with fixed software versions (e.g., Python 3.11) whi
 </div>
 <p>You should see <code class="docutils literal notranslate"><span class="pre">(chme212)</span></code> appear at the beginning of your terminal prompt.</p>
 </section>
-</section>
 <section id="step-6-install-required-packages">
-<h3>Step 6: Install Required Packages<a class="headerlink" href="#step-6-install-required-packages" title="Link to this heading">#</a></h3>
+<h4>Step 6: Install Required Packages<a class="headerlink" href="#step-6-install-required-packages" title="Link to this heading">#</a></h4>
 <p>You can install all the packages you’ll need for this course using <strong>one of these two methods</strong>:</p>
 <p><strong>Method A: Install packages directly (recommended)</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>jupyterlab<span class="w"> </span>numpy<span class="w"> </span>scipy<span class="w"> </span>matplotlib<span class="w"> </span>pandas<span class="w"> </span>seaborn<span class="w"> </span>scikit-learn<span class="w"> </span>scikit-image<span class="w"> </span>sympy
@@ -592,6 +588,7 @@ If you have the course <code class="docutils literal notranslate"><span class="p
 <p class="admonition-title">Tip</p>
 <p>You can simplify package installation by using a <strong>requirements file</strong>. This is a plain text file (e.g., <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>) listing all packages, one per line.</p>
 </div>
+</section>
 <section id="step-7-register-your-environment-with-jupyter">
 <h4>Step 7: Register Your Environment with Jupyter<a class="headerlink" href="#step-7-register-your-environment-with-jupyter" title="Link to this heading">#</a></h4>
 <p>This allows you to select your <code class="docutils literal notranslate"><span class="pre">chme212</span></code> environment when creating notebooks:</p>
@@ -672,9 +669,8 @@ If Colab doesn’t appear as an option right away, refresh your Google Drive pag
 </pre></div>
 </div>
 </section>
-</section>
 <section id="using-notebooks-in-google-colab">
-<h3>Using Notebooks in Google Colab<a class="headerlink" href="#using-notebooks-in-google-colab" title="Link to this heading">#</a></h3>
+<h4>Using Notebooks in Google Colab<a class="headerlink" href="#using-notebooks-in-google-colab" title="Link to this heading">#</a></h4>
 <p>Google Colab works very similarly to Jupyter Notebook, except everything runs on Google’s servers.</p>
 <ul class="simple">
 <li><p>To <strong>open an existing notebook</strong> (.ipynb):<br />
@@ -700,7 +696,7 @@ Note: Writing Python code in a Markdown cell will <em>not</em> execute it.</p>
 </section>
 <hr class="docutils" />
 <section id="accessing-files-on-your-google-drive-important">
-<h3>Accessing Files on Your Google Drive (Important)<a class="headerlink" href="#accessing-files-on-your-google-drive-important" title="Link to this heading">#</a></h3>
+<h4>Accessing Files on Your Google Drive (Important)<a class="headerlink" href="#accessing-files-on-your-google-drive-important" title="Link to this heading">#</a></h4>
 <p>If you want your Colab notebook to load or save files on your Google Drive<br />
 (e.g., datasets, images, project files), you must “mount” your Drive inside Colab.</p>
 <p>Add the following lines at the top of your notebook:</p>
@@ -710,6 +706,7 @@ Note: Writing Python code in a Markdown cell will <em>not</em> execute it.</p>
 <span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">drive</span><span class="o">/</span><span class="n">My</span> <span class="n">Drive</span><span class="o">/</span><span class="n">project</span>
 </pre></div>
 </div>
+</section>
 </section>
 </section>
 <section id="using-jupyter-notebooks">
@@ -961,18 +958,15 @@ Expected result: 8/3 = 2.667
 <span id="id11"></span><h2>0.6 Environment Check<a class="headerlink" href="#environment-check" title="Link to this heading">#</a></h2>
 <p>We created a conda environment that includes the required python packages.
 Let’s make sure everything is working! Run the cell below:</p>
-<section id="what-is-a-python-environment">
-<h3>What is a Python Environment?<a class="headerlink" href="#what-is-a-python-environment" title="Link to this heading">#</a></h3>
-<p>A <strong>Python environment</strong> is like a separate workspace that contains a specific version of Python and a specific set of packages. Think of it like having different toolboxes for different projects:</p>
+<p><strong>What is a Python Environment?</strong>
+A <strong>Python environment</strong> is like a separate workspace that contains a specific version of Python and a specific set of packages. Think of it like having different toolboxes for different projects:</p>
 <ul class="simple">
 <li><p>Your <code class="docutils literal notranslate"><span class="pre">chme212</span></code> environment has all the scientific computing tools we need (NumPy, Matplotlib, etc.)</p></li>
 <li><p>Your base environment might have different packages</p></li>
 <li><p>This keeps projects organized and prevents conflicts between package versions</p></li>
 </ul>
-</section>
-<section id="what-is-a-jupyter-kernel">
-<h3>What is a Jupyter Kernel?<a class="headerlink" href="#what-is-a-jupyter-kernel" title="Link to this heading">#</a></h3>
-<p>A <strong>Jupyter kernel</strong> is the “engine” that runs your Python code in the notebook. When you select a kernel (like <code class="docutils literal notranslate"><span class="pre">chme212</span></code>), you’re telling Jupyter:</p>
+<p><strong>What is a Jupyter Kernel?</strong>
+A <strong>Jupyter kernel</strong> is the “engine” that runs your Python code in the notebook. When you select a kernel (like <code class="docutils literal notranslate"><span class="pre">chme212</span></code>), you’re telling Jupyter:</p>
 <ul class="simple">
 <li><p>Which Python environment to use</p></li>
 <li><p>Which packages are available</p></li>
@@ -1062,19 +1056,15 @@ Pandas:     2.3.3
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="further-reading">
-<h2>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
-<p>For further reading and exploration on Jupyter notebooks, the Jupyter Project website below is a good place to see what is happening. There are also a number of books that include chapters on the Jupyter notebooks and the interactive IPython environment.</p>
-<ol class="arabic simple">
-<li><p>Jupyter Project Website. <a class="reference external" href="https://jupyter.org/">https://jupyter.org</a> (free resource)</p></li>
-<li><p>Google Colab (and Jupyter) Cheat Sheet. <a class="reference external" href="https://colab.research.google.com/github/Tanu-N-Prabhu/Python/blob/master/Cheat_sheet_for_Google_Colab.ipynb#scrollTo=NiREgQ3iL0jc">https://colab.research.google.com</a> (free resource)</p></li>
-<li><p>SciPy Website. <a class="reference external" href="https://www.scipy.org/">https://www.scipy.org</a> (free resource)</p></li>
-<li><p>IPython Interactive Computing Website. <a class="reference external" href="https://ipython.org/">https://ipython.org</a> (free resource)</p></li>
-<li><p>VanderPlas, J. Python Data Science Handbook: Essential Tools for Working with Data, 1st ed.; O’Reilly: Sebastopol, CA, 2017, chapter 1. Freely available from the author at <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a> (free resource)</p></li>
-</ol>
-</section>
+<!-- ## Further Reading
+
+For further reading and exploration on Jupyter notebooks, the Jupyter Project website below is a good place to see what is happening. There are also a number of books that include chapters on the Jupyter notebooks and the interactive IPython environment.
+
+1. Jupyter Project Website. [https://jupyter.org](https://jupyter.org/) (free resource)
+2. Google Colab (and Jupyter) Cheat Sheet. [https://colab.research.google.com](https://colab.research.google.com/github/Tanu-N-Prabhu/Python/blob/master/Cheat_sheet_for_Google_Colab.ipynb#scrollTo=NiREgQ3iL0jc) (free resource)
+3. SciPy Website. [https://www.scipy.org](https://www.scipy.org/) (free resource)
+4. IPython Interactive Computing Website. [https://ipython.org](https://ipython.org/) (free resource)
+5. VanderPlas, J. Python Data Science Handbook: Essential Tools for Working with Data, 1st ed.; O’Reilly: Sebastopol, CA, 2017, chapter 1. Freely available from the author at [https://jakevdp.github.io/PythonDataScienceHandbook/](https://jakevdp.github.io/PythonDataScienceHandbook/) (free resource) --></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1150,9 +1140,7 @@ Pandas:     2.3.3
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-verify-installation">Step 3: Verify Installation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-create-a-new-environment-for-this-course">Step 4: Create a New Environment for This Course</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-activate-your-environment">Step 5: Activate Your Environment</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-install-required-packages">Step 6: Install Required Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-install-required-packages">Step 6: Install Required Packages</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-register-your-environment-with-jupyter">Step 7: Register Your Environment with Jupyter</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-launch-jupyterlab">Step 8: Launch JupyterLab</a></li>
 </ul>
@@ -1163,10 +1151,10 @@ Pandas:     2.3.3
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-the-google-colab-add-on">Step 3. Install the Google Colab Add-on</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-google-colab">Using Google Colab</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-extra-libraries-if-needed">Installing Extra Libraries (If Needed)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-notebooks-in-google-colab">Using Notebooks in Google Colab</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-files-on-your-google-drive-important">Accessing Files on Your Google Drive (Important)</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-notebooks-in-google-colab">Using Notebooks in Google Colab</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-files-on-your-google-drive-important">Accessing Files on Your Google Drive (Important)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-jupyter-notebooks">0.4 Using Jupyter Notebooks</a><ul class="nav section-nav flex-column">
@@ -1179,12 +1167,7 @@ Pandas:     2.3.3
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-python-scientific-libraries">0.5 Overview of Python Scientific Libraries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-check">0.6 Environment Check</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-python-environment">What is a Python Environment?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-jupyter-kernel">What is a Jupyter Kernel?</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-check">0.6 Environment Check</a></li>
 </ul>
   </nav></div>
 

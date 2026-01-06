@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter01/01_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lab 01: Python Fundamentals for Chemical Engineering" href="../lab01/01_lab.html" />
     <link rel="prev" title="Chapter 0: Introduction to Python &amp; Jupyter Notebooks" href="../chapter00/00_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,6 +183,10 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 1: Basic Python Math</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -399,14 +404,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">1.4 Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-variables">What Are Variables?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-assigning-variables">1.4.1 Creating &amp; Assigning Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-naming-rules">Variable Naming Rules</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-reserved-words-keywords">Python Reserved Words (Keywords)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-to-avoid">Common Mistakes to Avoid:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pro-tip">Pro Tip:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-variables-matter-in-engineering">Why Variables Matter in Engineering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment">1.4.2 Compound Assignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-assigning-variables">Creating &amp; Assigning Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-naming-rules">Variable Naming Rules</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-reserved-words-keywords">Python Reserved Words (Keywords)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment">Compound Assignment</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment-operators">Compound Assignment Operators</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-compound-assignment">Why Use Compound Assignment?</a></li>
 </ul>
@@ -902,26 +905,22 @@ Length of temperature list: 5 measurements
 <section id="variables">
 <span id="id5"></span><h2>1.4 Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h2>
 <p><strong>Variables</strong> are like labeled containers that store values in your computer’s memory. Think of them as storage boxes with names written on them - you can put different things inside and refer to them by their labels.</p>
-<section id="what-are-variables">
-<h3>What Are Variables?<a class="headerlink" href="#what-are-variables" title="Link to this heading">#</a></h3>
 <p>A variable has three key components:</p>
 <ol class="arabic simple">
 <li><p><strong>Name</strong> - What you call it (e.g., <code class="docutils literal notranslate"><span class="pre">temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">pressure</span></code>)</p></li>
 <li><p><strong>Value</strong> - What’s stored inside (e.g., <code class="docutils literal notranslate"><span class="pre">85.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;distillation&quot;</span></code>)</p></li>
 <li><p><strong>Type</strong> - What kind of data it is (e.g., number, text)</p></li>
 </ol>
-</section>
 <section id="creating-assigning-variables">
-<span id="id6"></span><h3>1.4.1 Creating &amp; Assigning Variables<a class="headerlink" href="#creating-assigning-variables" title="Link to this heading">#</a></h3>
+<h3>Creating &amp; Assigning Variables<a class="headerlink" href="#creating-assigning-variables" title="Link to this heading">#</a></h3>
 <p>In Python, you create a variable by simply assigning a value to a name using the <code class="docutils literal notranslate"><span class="pre">=</span></code> sign:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.5</span>          <span class="c1"># Creates a variable named &#39;temperature&#39;</span>
 <span class="n">process_name</span> <span class="o">=</span> <span class="s2">&quot;reactor&quot;</span>    <span class="c1"># Creates a variable named &#39;process_name&#39;</span>
 <span class="n">sample_count</span> <span class="o">=</span> <span class="mi">10</span>           <span class="c1"># Creates a variable named &#39;sample_count&#39;</span>
 </pre></div>
 </div>
-</section>
 <section id="variable-naming-rules">
-<h3>Variable Naming Rules<a class="headerlink" href="#variable-naming-rules" title="Link to this heading">#</a></h3>
+<h4>Variable Naming Rules<a class="headerlink" href="#variable-naming-rules" title="Link to this heading">#</a></h4>
 <p><strong>Required Rules</strong> (Python will give an error if broken):</p>
 <ul class="simple">
 <li><p>Must start with a letter (a-z, A-Z) or underscore (_)</p></li>
@@ -937,7 +936,7 @@ Length of temperature list: 5 measurements
 </ul>
 </section>
 <section id="python-reserved-words-keywords">
-<h3>Python Reserved Words (Keywords)<a class="headerlink" href="#python-reserved-words-keywords" title="Link to this heading">#</a></h3>
+<h4>Python Reserved Words (Keywords)<a class="headerlink" href="#python-reserved-words-keywords" title="Link to this heading">#</a></h4>
 <p>These words have special meanings in Python and <strong>cannot</strong> be used as variable names. Python will give you an error if you try to use them:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1046,9 +1045,7 @@ Length of temperature list: 5 measurements
 </tbody>
 </table>
 </div>
-</section>
-<section id="common-mistakes-to-avoid">
-<h3>Common Mistakes to Avoid:<a class="headerlink" href="#common-mistakes-to-avoid" title="Link to this heading">#</a></h3>
+<p>Common Mistakes to Avoid:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ❌ These will cause errors:</span>
 <span class="k">if</span> <span class="o">=</span> <span class="mf">85.5</span>        <span class="c1"># &#39;if&#39; is reserved</span>
 <span class="k">for</span> <span class="o">=</span> <span class="s2">&quot;reactor&quot;</span>  <span class="c1"># &#39;for&#39; is reserved  </span>
@@ -1060,17 +1057,13 @@ Length of temperature list: 5 measurements
 <span class="n">category</span> <span class="o">=</span> <span class="mi">10</span>
 </pre></div>
 </div>
-</section>
-<section id="pro-tip">
-<h3>Pro Tip:<a class="headerlink" href="#pro-tip" title="Link to this heading">#</a></h3>
-<p>If you accidentally use a reserved word, Python will show an error like:</p>
+<p>Pro Tip:
+If you accidentally use a reserved word, Python will show an error like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span>
 </pre></div>
 </div>
 <p>Choose descriptive variable names that don’t conflict with these keywords!</p>
-</section>
-<section id="why-variables-matter-in-engineering">
-<h3>Why Variables Matter in Engineering<a class="headerlink" href="#why-variables-matter-in-engineering" title="Link to this heading">#</a></h3>
+<p><strong>Why Variables Matter in Engineering:</strong></p>
 <ul class="simple">
 <li><p><strong>Store measurements</strong>: <code class="docutils literal notranslate"><span class="pre">pressure</span> <span class="pre">=</span> <span class="pre">2.5</span></code>, <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">=</span> <span class="pre">85.0</span></code></p></li>
 <li><p><strong>Track calculations</strong>: <code class="docutils literal notranslate"><span class="pre">efficiency</span> <span class="pre">=</span> <span class="pre">output</span> <span class="pre">/</span> <span class="pre">input</span> <span class="pre">*</span> <span class="pre">100</span></code></p></li>
@@ -1080,8 +1073,9 @@ Length of temperature list: 5 measurements
 </ul>
 <p>Let’s see variables in action:</p>
 </section>
+</section>
 <section id="compound-assignment">
-<span id="id7"></span><h3>1.4.2 Compound Assignment<a class="headerlink" href="#compound-assignment" title="Link to this heading">#</a></h3>
+<h3>Compound Assignment<a class="headerlink" href="#compound-assignment" title="Link to this heading">#</a></h3>
 <p><strong>Compound assignment operators</strong> are shortcuts that combine an operation with variable assignment. Instead of writing <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">=</span> <span class="pre">temperature</span> <span class="pre">+</span> <span class="pre">5</span></code>, you can write <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">+=</span> <span class="pre">5</span></code>. These operators make your code more concise and are commonly used in engineering calculations.</p>
 <section id="compound-assignment-operators">
 <h4>Compound Assignment Operators<a class="headerlink" href="#compound-assignment-operators" title="Link to this heading">#</a></h4>
@@ -1273,6 +1267,15 @@ Circle area (d=4.0m): 12.57 m²
         <p class="prev-next-title">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</p>
       </div>
     </a>
+    <a class="right-next"
+       href="../lab01/01_lab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 01: Python Fundamentals for Chemical Engineering</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1311,14 +1314,12 @@ Circle area (d=4.0m): 12.57 m²
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">1.4 Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-variables">What Are Variables?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-assigning-variables">1.4.1 Creating &amp; Assigning Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-naming-rules">Variable Naming Rules</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-reserved-words-keywords">Python Reserved Words (Keywords)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes-to-avoid">Common Mistakes to Avoid:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pro-tip">Pro Tip:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-variables-matter-in-engineering">Why Variables Matter in Engineering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment">1.4.2 Compound Assignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-assigning-variables">Creating &amp; Assigning Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-naming-rules">Variable Naming Rules</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-reserved-words-keywords">Python Reserved Words (Keywords)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment">Compound Assignment</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-assignment-operators">Compound Assignment Operators</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-compound-assignment">Why Use Compound Assignment?</a></li>
 </ul>
