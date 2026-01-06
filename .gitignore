@@ -16,3 +16,6 @@ __pycache__/
 .env
 venv/
 env/
+
+# release control
+lab01/
