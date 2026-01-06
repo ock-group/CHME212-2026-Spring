@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Chapter 7. Quick Review: Python Functions &#8212; Introduction to Chemical Engineering Computation</title>
+    <title>Chapter 7. Functions/Modules &#8212; Introduction to Chemical Engineering Computation</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -183,6 +183,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -368,7 +372,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 7. Quick Review: Python Functions</h1>
+    <h1>Chapter 7. Functions/Modules</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -378,11 +382,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. Quick Review: Python Functions</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-review-functions-the-building-blocks">Quick Review: Functions - The Building Blocks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-function">What is a Function?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-use-functions">Why Do We Use Functions?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-function-examples">Simple Function Examples</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. Functions/Modules</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-functions">7.1 Python Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-problem-too-many-functions">A Real Problem: Too Many Functions!</a></li>
 </ul>
 </li>
@@ -443,13 +444,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-7-quick-review-python-functions">
-<h1>Chapter 7. Quick Review: Python Functions<a class="headerlink" href="#chapter-7-quick-review-python-functions" title="Link to this heading">#</a></h1>
-<section id="quick-review-functions-the-building-blocks">
-<h2>Quick Review: Functions - The Building Blocks<a class="headerlink" href="#quick-review-functions-the-building-blocks" title="Link to this heading">#</a></h2>
-<p>Before we learn about modules, let’s quickly review <strong>functions</strong> - the essential building blocks that make modules useful!</p>
-<section id="what-is-a-function">
-<h3>What is a Function?<a class="headerlink" href="#what-is-a-function" title="Link to this heading">#</a></h3>
+  <p>(7) =</p>
+<section class="tex2jax_ignore mathjax_ignore" id="chapter-7-functions-modules">
+<h1>Chapter 7. Functions/Modules<a class="headerlink" href="#chapter-7-functions-modules" title="Link to this heading">#</a></h1>
+<section id="python-functions">
+<span id="id1"></span><h2>7.1 Python Functions<a class="headerlink" href="#python-functions" title="Link to this heading">#</a></h2>
+<p><strong>Functions</strong> are the essential building blocks that make modules useful!</p>
 <p>A <strong>function</strong> is like a mini-program that:</p>
 <ul class="simple">
 <li><p>Takes some input (called <strong>parameters</strong> or <strong>arguments</strong>)</p></li>
@@ -462,18 +462,11 @@ document.write(`
 <li><p>Follow the steps (code inside the function)</p></li>
 <li><p>Get a finished dish out (output)</p></li>
 </ul>
-</section>
-<section id="why-do-we-use-functions">
-<h3>Why Do We Use Functions?<a class="headerlink" href="#why-do-we-use-functions" title="Link to this heading">#</a></h3>
+<p>Why Do We Use Functions?</p>
 <ol class="arabic simple">
 <li><p><strong>Avoid repetition</strong> - Write code once, use it many times</p></li>
 <li><p><strong>Organization</strong> - Break big problems into smaller pieces</p></li>
-<li><p><strong>Testing</strong> - Easy to test small pieces separately</p></li>
-<li><p><strong>Teamwork</strong> - Different people can work on different functions</p></li>
 </ol>
-</section>
-<section id="simple-function-examples">
-<h3>Simple Function Examples<a class="headerlink" href="#simple-function-examples" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Simple function with no parameters</span>
@@ -545,7 +538,6 @@ Good morning, Eve!
 </div>
 </div>
 </div>
-</section>
 <section id="a-real-problem-too-many-functions">
 <h3>A Real Problem: Too Many Functions!<a class="headerlink" href="#a-real-problem-too-many-functions" title="Link to this heading">#</a></h3>
 <p>Imagine you’re working on a big project and you create lots of useful functions:</p>
@@ -628,7 +620,7 @@ Problems with this approach:
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="chapter-7-modules-and-packages">
-<span id="id1"></span><h1>Chapter 7: Modules and Packages<a class="headerlink" href="#chapter-7-modules-and-packages" title="Link to this heading">#</a></h1>
+<span id="id2"></span><h1>Chapter 7: Modules and Packages<a class="headerlink" href="#chapter-7-modules-and-packages" title="Link to this heading">#</a></h1>
 <section id="goals">
 <h2>Goals<a class="headerlink" href="#goals" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -651,7 +643,7 @@ Problems with this approach:
 <p>Think of modules like toolboxes - each one contains related tools (functions) for specific tasks.</p>
 </section>
 <section id="what-are-modules">
-<span id="id2"></span><h2>7.1 What are Modules?<a class="headerlink" href="#what-are-modules" title="Link to this heading">#</a></h2>
+<span id="id3"></span><h2>7.1 What are Modules?<a class="headerlink" href="#what-are-modules" title="Link to this heading">#</a></h2>
 <p>A <strong>module</strong> is simply a Python file (<code class="docutils literal notranslate"><span class="pre">.py</span></code>) that contains functions, variables, and classes that you can use in other programs.</p>
 <p><strong>Why use modules?</strong></p>
 <ul class="simple">
@@ -676,7 +668,7 @@ Problems with this approach:
 </div>
 </section>
 <section id="built-in-modules">
-<span id="id3"></span><h2>7.2 Built-in Modules<a class="headerlink" href="#built-in-modules" title="Link to this heading">#</a></h2>
+<span id="id4"></span><h2>7.2 Built-in Modules<a class="headerlink" href="#built-in-modules" title="Link to this heading">#</a></h2>
 <p>Python comes with many <strong>built-in modules</strong> ready to use. These are like pre-installed apps on your phone - they’re already there, you just need to import them.</p>
 <p><strong>Common Built-in Modules:</strong></p>
 <ul class="simple">
@@ -761,16 +753,16 @@ Ceiling of 4.3: 5
 Floor of 4.7: 4
 
 === Random Module ===
-Random number between 1-10: 10
-Random decimal between 0-1: 0.2281834474874882
+Random number between 1-10: 4
+Random decimal between 0-1: 0.34769041670614864
 Random color: green
-Shuffled numbers: [5, 3, 2, 4, 1]
+Shuffled numbers: [2, 4, 1, 3, 5]
 
 === DateTime Module ===
-Current date and time: 2026-01-04 15:28:16.012755
+Current date and time: 2026-01-05 17:06:41.012714
 Current year: 2026
 Current month: 1
-Current day: 4
+Current day: 5
 Birthday: 2000-05-15
 
 === OS Module ===
@@ -783,7 +775,7 @@ Does &#39;example.txt&#39; exist? False
 </div>
 </section>
 <section id="different-ways-to-import">
-<span id="id4"></span><h2>7.3 Different Ways to Import<a class="headerlink" href="#different-ways-to-import" title="Link to this heading">#</a></h2>
+<span id="id5"></span><h2>7.3 Different Ways to Import<a class="headerlink" href="#different-ways-to-import" title="Link to this heading">#</a></h2>
 <p>There are several ways to import modules, each with its own advantages:</p>
 <section id="basic-import">
 <h3>7.3.1 Basic Import<a class="headerlink" href="#basic-import" title="Link to this heading">#</a></h3>
@@ -866,11 +858,11 @@ Square root using math.sqrt: 7.0
 Pi using math.pi: 3.141592653589793
 
 === Method 2: Import with Alias ===
-Random number using rnd.randint: 94
+Random number using rnd.randint: 27
 
 === Method 3: Import Specific Functions ===
-Current time: 15:28:16
-Today&#39;s date: 2026-01-04
+Current time: 17:06:41
+Today&#39;s date: 2026-01-05
 
 === Method 4: Import Multiple Specific Functions ===
 Using sqrt directly: 8.0
@@ -894,7 +886,7 @@ Using full module names prevents confusion
 </section>
 </section>
 <section id="creating-your-own-modules">
-<span id="id5"></span><h2>7.4 Creating Your Own Modules<a class="headerlink" href="#creating-your-own-modules" title="Link to this heading">#</a></h2>
+<span id="id6"></span><h2>7.4 Creating Your Own Modules<a class="headerlink" href="#creating-your-own-modules" title="Link to this heading">#</a></h2>
 <p>Creating your own modules is easy! Just save functions in a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file and import them in other programs.</p>
 <section id="step-by-step-example">
 <h3>Step-by-Step Example:<a class="headerlink" href="#step-by-step-example" title="Link to this heading">#</a></h3>
@@ -1023,7 +1015,7 @@ Passing score is: 60
 </section>
 </section>
 <section id="what-are-packages">
-<span id="id6"></span><h2>7.5 What are Packages?<a class="headerlink" href="#what-are-packages" title="Link to this heading">#</a></h2>
+<span id="id7"></span><h2>7.5 What are Packages?<a class="headerlink" href="#what-are-packages" title="Link to this heading">#</a></h2>
 <p>A <strong>package</strong> is a collection of related modules organized in folders. Think of it like a filing cabinet:</p>
 <ul class="simple">
 <li><p><strong>Package</strong> = Filing cabinet (main folder)</p></li>
@@ -1175,7 +1167,7 @@ Deque: [0, 1, 2, 3, 4]
 </section>
 </section>
 <section id="best-practices-for-modules-and-packages">
-<span id="id7"></span><h2>7.6 Best Practices for Modules and Packages<a class="headerlink" href="#best-practices-for-modules-and-packages" title="Link to this heading">#</a></h2>
+<span id="id8"></span><h2>7.6 Best Practices for Modules and Packages<a class="headerlink" href="#best-practices-for-modules-and-packages" title="Link to this heading">#</a></h2>
 <section id="organizing-your-code">
 <h3>7.6.1 Organizing Your Code<a class="headerlink" href="#organizing-your-code" title="Link to this heading">#</a></h3>
 <p><strong>Good Module Design:</strong></p>
@@ -1396,7 +1388,7 @@ Result: {&#39;above&#39;: [0.7, 0.9, 0.8], &#39;below&#39;: [0.3, 0.2]}
 </section>
 </section>
 <section id="practical-example-building-a-simple-project">
-<span id="id8"></span><h2>7.7 Practical Example: Building a Simple Project<a class="headerlink" href="#practical-example-building-a-simple-project" title="Link to this heading">#</a></h2>
+<span id="id9"></span><h2>7.7 Practical Example: Building a Simple Project<a class="headerlink" href="#practical-example-building-a-simple-project" title="Link to this heading">#</a></h2>
 <p>Let’s see how modules work in a real project. Imagine you’re building a grade management system:</p>
 <section id="project-structure">
 <h3>Project Structure:<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h3>
@@ -1721,11 +1713,8 @@ Student: Bob Smith (ID: B67890):
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. Quick Review: Python Functions</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-review-functions-the-building-blocks">Quick Review: Functions - The Building Blocks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-function">What is a Function?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-use-functions">Why Do We Use Functions?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-function-examples">Simple Function Examples</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. Functions/Modules</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-functions">7.1 Python Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-problem-too-many-functions">A Real Problem: Too Many Functions!</a></li>
 </ul>
 </li>

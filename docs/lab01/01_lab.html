@@ -1,0 +1,879 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 01: Python Fundamentals for Chemical Engineering &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab01/01_lab';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Chapter 1: Basic Python Math" href="../chapter01/01_notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab01/01_lab.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lab01/01_lab.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 01: Python Fundamentals for Chemical Engineering</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">1. Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup-and-verification">1.1 Environment Setup and Verification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-python-math-operations">1.2 Basic Python Math Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-1-scientific-notation">Example 1.2.1: Scientific Notation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-engineering-applications">1.3. Chemical Engineering Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-1-ideal-gas-law">Example 1.3.1: Ideal Gas Law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-2-reynolds-number-calculation">Example 1.3.2: Reynolds Number Calculation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-3-mass-balance-dilution-calculation">Example 1.3.3: Mass Balance - Dilution Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-pipe-flow-calculation">Problem 1: Pipe Flow Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-concentration-calculation">Problem 2: Concentration Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-energy-balance">Problem 3: Energy Balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-pressure-drop-in-a-pipe">Problem 4: Pressure Drop in a Pipe</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-01-python-fundamentals-for-chemical-engineering">
+<h1>Lab 01: Python Fundamentals for Chemical Engineering<a class="headerlink" href="#lab-01-python-fundamentals-for-chemical-engineering" title="Link to this heading">#</a></h1>
+<p><strong>Topics Covered:</strong></p>
+<ul class="simple">
+<li><p>Setting up and verifying your Anaconda environment</p></li>
+<li><p>Basic Python math operations for engineering calculations</p></li>
+</ul>
+<section id="demonstration">
+<h2>1. Demonstration<a class="headerlink" href="#demonstration" title="Link to this heading">#</a></h2>
+<section id="environment-setup-and-verification">
+<h3>1.1 Environment Setup and Verification<a class="headerlink" href="#environment-setup-and-verification" title="Link to this heading">#</a></h3>
+<p>Before we begin calculations, let’s verify that your environment is properly configured.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify Python version and environment</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python executable: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ If you see &#39;chemcomp&#39; or &#39;chme212&#39; in the path above, you&#39;re using the correct environment!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.10.18 | packaged by conda-forge | (main, Jun  4 2025, 14:46:00) [Clang 18.1.8 ]
+Python executable: /Users/hoon/miniconda3/envs/chemcomp/bin/python
+
+✅ If you see &#39;chemcomp&#39; or &#39;chme212&#39; in the path above, you&#39;re using the correct environment!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check that key packages are installed</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy:      </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matplotlib: </span><span class="si">{</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pandas:     </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ All packages loaded successfully!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy:      2.2.6
+Matplotlib: 3.10.7
+Pandas:     2.3.3
+
+✅ All packages loaded successfully!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-python-math-operations">
+<h3>1.2 Basic Python Math Operations<a class="headerlink" href="#basic-python-math-operations" title="Link to this heading">#</a></h3>
+<p>Python can perform mathematical calculations using basic arithmetic operators. Let’s explore how to use them for engineering calculations.</p>
+<section id="example-1-2-1-scientific-notation">
+<h4>Example 1.2.1: Scientific Notation<a class="headerlink" href="#example-1-2-1-scientific-notation" title="Link to this heading">#</a></h4>
+<p>For very large or very small numbers, Python uses scientific notation with the <code class="docutils literal notranslate"><span class="pre">e</span></code> symbol.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scientific notation: 1.5e6 means 1.5 × 10⁶</span>
+<span class="n">avogadro</span> <span class="o">=</span> <span class="mf">6.022e23</span>  <span class="c1"># Avogadro&#39;s number</span>
+<span class="n">electron_mass</span> <span class="o">=</span> <span class="mf">9.109e-31</span>  <span class="c1"># kg</span>
+<span class="n">gas_constant</span> <span class="o">=</span> <span class="mf">8.314</span>  <span class="c1"># J/(mol·K)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scientific Notation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Avogadro&#39;s number: </span><span class="si">{</span><span class="n">avogadro</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Electron mass: </span><span class="si">{</span><span class="n">electron_mass</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calculations with scientific notation</span>
+<span class="n">moles</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">molecules</span> <span class="o">=</span> <span class="n">moles</span> <span class="o">*</span> <span class="n">avogadro</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">moles</span><span class="si">}</span><span class="s2"> moles = </span><span class="si">{</span><span class="n">molecules</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> molecules&quot;</span><span class="p">)</span>
+
+<span class="c1"># Engineering example: Pressure in a large reactor</span>
+<span class="n">force</span> <span class="o">=</span> <span class="mf">1.5e6</span>  <span class="c1"># N (Newtons)</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># m²</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="n">force</span> <span class="o">/</span> <span class="n">area</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Pressure = Force/Area = </span><span class="si">{</span><span class="n">pressure</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pressure = </span><span class="si">{</span><span class="n">pressure</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> kPa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scientific Notation:
+Avogadro&#39;s number: 6.022e+23
+Electron mass: 9.109e-31 kg
+
+2.5 moles = 1.506e+24 molecules
+
+Pressure = Force/Area = 3.00e+05 Pa
+Pressure = 300.0 kPa
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="chemical-engineering-applications">
+<h3>1.3. Chemical Engineering Applications<a class="headerlink" href="#chemical-engineering-applications" title="Link to this heading">#</a></h3>
+<section id="example-1-3-1-ideal-gas-law">
+<h4>Example 1.3.1: Ideal Gas Law<a class="headerlink" href="#example-1-3-1-ideal-gas-law" title="Link to this heading">#</a></h4>
+<p>Calculate pressure using the ideal gas law:</p>
+<div class="math notranslate nohighlight">
+\[
+PV = nRT
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>n = 50.0 mol</p></li>
+<li><p>R = 8.314 J·mol⁻¹·K⁻¹</p></li>
+<li><p>T = 373.15 K (100 °C)</p></li>
+<li><p>V = 0.5 m³</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Calculate pressure of gas in a reactor</span>
+<span class="c1"># n = 50.0        # moles</span>
+<span class="c1"># R = 8.314       # J/(mol·K)</span>
+<span class="c1"># T = 373.15      # K (100°C)</span>
+<span class="c1"># V = 0.5         # m³</span>
+
+<span class="c1"># # PV = nRT → P = nRT/V</span>
+<span class="c1"># P = (n * R * T) / V</span>
+
+<span class="c1"># print(&quot;Ideal Gas Law Calculation:&quot;)</span>
+<span class="c1"># print(f&quot;Number of moles: {n} mol&quot;)</span>
+<span class="c1"># print(f&quot;Temperature: {T} K ({T - 273.15}°C)&quot;)</span>
+<span class="c1"># print(f&quot;Volume: {V} m³&quot;)</span>
+<span class="c1"># print(f&quot;\nPressure: {P:.2f} Pa&quot;)</span>
+<span class="c1"># print(f&quot;Pressure: {P/1000:.2f} kPa&quot;)</span>
+<span class="c1"># print(f&quot;Pressure: {P/101325:.2f} atm&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-3-2-reynolds-number-calculation">
+<h4>Example 1.3.2: Reynolds Number Calculation<a class="headerlink" href="#example-1-3-2-reynolds-number-calculation" title="Link to this heading">#</a></h4>
+<p>Determine whether the flow is laminar or turbulent using the Reynolds number:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Re} = \frac{\rho v D}{\mu}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>ρ = 1000 kg/m³ (density of water)</p></li>
+<li><p>v = 2.5 m/s (velocity)</p></li>
+<li><p>D = 0.1 m (pipe diameter)</p></li>
+<li><p>μ = 0.001 Pa·s (dynamic viscosity)</p></li>
+</ul>
+<p>Determination criteria:</p>
+<ul class="simple">
+<li><p>Re &lt; 2300 → Laminar flow</p></li>
+<li><p>2300 ≤ Re ≤ 4000 → Transitional flow</p></li>
+<li><p>Re &gt; 4000 → Turbulent flow</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Reynolds number for water flowing in a pipe</span>
+<span class="c1"># rho = 1000      # kg/m³ (density of water)</span>
+<span class="c1"># v = 2.5         # m/s (velocity)</span>
+<span class="c1"># D = 0.1         # m (pipe diameter)</span>
+<span class="c1"># mu = 0.001      # Pa·s (dynamic viscosity)</span>
+
+<span class="c1"># # Calculate Reynolds number</span>
+<span class="c1"># Re = (rho * v * D) / mu</span>
+
+<span class="c1"># print(&quot;Reynolds Number Calculation:&quot;)</span>
+<span class="c1"># print(f&quot;Density: {rho} kg/m³&quot;)</span>
+<span class="c1"># print(f&quot;Velocity: {v} m/s&quot;)</span>
+<span class="c1"># print(f&quot;Diameter: {D} m&quot;)</span>
+<span class="c1"># print(f&quot;Viscosity: {mu} Pa·s&quot;)</span>
+<span class="c1"># print(f&quot;\nReynolds number: {Re:.0f}&quot;)</span>
+
+<span class="c1"># # Determine flow regime</span>
+<span class="c1"># if Re &lt; 2300:</span>
+<span class="c1">#     flow_type = &quot;Laminar&quot;</span>
+<span class="c1"># elif Re &gt; 4000:</span>
+<span class="c1">#     flow_type = &quot;Turbulent&quot;</span>
+<span class="c1"># else:</span>
+<span class="c1">#     flow_type = &quot;Transitional&quot;</span>
+    
+<span class="c1"># print(f&quot;Flow regime: {flow_type}&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-3-3-mass-balance-dilution-calculation">
+<h4>Example 1.3.3: Mass Balance - Dilution Calculation<a class="headerlink" href="#example-1-3-3-mass-balance-dilution-calculation" title="Link to this heading">#</a></h4>
+<p>Calculate the final concentration (<span class="math notranslate nohighlight">\(C_2\)</span>) using the dilution equation:</p>
+<div class="math notranslate nohighlight">
+\[
+C_1 V_1 = C_2 V_2
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>C₁ = 12.0 mol/L (initial concentration)</p></li>
+<li><p>V₁ = 0.250 L (initial volume)</p></li>
+<li><p>V₂ = 1.000 L (final volume after dilution)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Dilute a concentrated solution</span>
+<span class="c1"># C1 = 12.0       # mol/L (initial concentration)</span>
+<span class="c1"># V1 = 0.250      # L (initial volume)</span>
+<span class="c1"># V2 = 1.000      # L (final volume after dilution)</span>
+
+<span class="c1"># # Calculate final concentration: C2 = C1×V1/V2</span>
+<span class="c1"># C2 = (C1 * V1) / V2</span>
+
+<span class="c1"># print(&quot;Dilution Calculation:&quot;)</span>
+<span class="c1"># print(f&quot;Initial: {C1} M, {V1} L&quot;)</span>
+<span class="c1"># print(f&quot;Final volume: {V2} L&quot;)</span>
+<span class="c1"># print(f&quot;\nFinal concentration: {C2:.2f} M&quot;)</span>
+
+<span class="c1"># # Calculate how much water to add</span>
+<span class="c1"># water_to_add = V2 - V1</span>
+<span class="c1"># print(f&quot;Water to add: {water_to_add:.3f} L&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="practice-problems">
+<h2>Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<p>Now it’s your turn! Solve the following problems in the cells below. Make sure to:</p>
+<ul class="simple">
+<li><p>Show your work with comments</p></li>
+<li><p>Use appropriate variable names</p></li>
+<li><p>Format your output professionally</p></li>
+<li><p>Include units in your output</p></li>
+</ul>
+<section id="problem-1-pipe-flow-calculation">
+<h3>Problem 1: Pipe Flow Calculation<a class="headerlink" href="#problem-1-pipe-flow-calculation" title="Link to this heading">#</a></h3>
+<p>Water flows through a circular pipe with a diameter of 0.15 m at a velocity of 3.2 m/s.</p>
+<p><strong>Calculate:</strong></p>
+<ol class="arabic simple">
+<li><p>The cross-sectional area of the pipe (A = π × (D/2)², use π = 3.14159)</p></li>
+<li><p>The volumetric flow rate (Q = A × v) in m³/s</p></li>
+<li><p>Convert the flow rate to L/min (1 m³ = 1000 L, 1 min = 60 s)</p></li>
+</ol>
+<p><strong>Format your output</strong> to show all results with appropriate decimal places and units.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-2-concentration-calculation">
+<h3>Problem 2: Concentration Calculation<a class="headerlink" href="#problem-2-concentration-calculation" title="Link to this heading">#</a></h3>
+<p>You dissolve 25.5 grams of NaCl (molecular weight = 58.44 g/mol) in water to make 500 mL of solution.</p>
+<p><strong>Calculate:</strong></p>
+<ol class="arabic simple">
+<li><p>The number of moles of NaCl (moles = mass / molecular weight)</p></li>
+<li><p>The molarity of the solution (M = moles / volume in L)</p></li>
+<li><p>If you dilute 100 mL of this solution to 250 mL, what is the new concentration? (Use C₁V₁ = C₂V₂)</p></li>
+</ol>
+<p><strong>Format your output</strong> professionally with appropriate significant figures.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-3-energy-balance">
+<h3>Problem 3: Energy Balance<a class="headerlink" href="#problem-3-energy-balance" title="Link to this heading">#</a></h3>
+<p>Calculate the energy required to heat 2.5 kg of water from 20°C to 85°C.</p>
+<p>Use the formula: Q = m × Cp × ΔT</p>
+<p>Where:</p>
+<ul class="simple">
+<li><p>m = 2.5 kg (mass)</p></li>
+<li><p>Cp = 4184 J/(kg·°C) (specific heat capacity of water)</p></li>
+<li><p>ΔT = T_final - T_initial</p></li>
+</ul>
+<p><strong>Calculate:</strong></p>
+<ol class="arabic simple">
+<li><p>The temperature change ΔT</p></li>
+<li><p>The energy required in Joules</p></li>
+<li><p>Convert the energy to kJ and to kWh (1 kWh = 3.6 × 10⁶ J)</p></li>
+</ol>
+<p><strong>Create</strong> a formatted report showing all results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-4-pressure-drop-in-a-pipe">
+<h3>Problem 4: Pressure Drop in a Pipe<a class="headerlink" href="#problem-4-pressure-drop-in-a-pipe" title="Link to this heading">#</a></h3>
+<p>Calculate the pressure drop in a horizontal pipe using the Darcy-Weisbach equation:</p>
+<p>ΔP = f × (L/D) × (ρv²/2)</p>
+<p>Where:</p>
+<ul class="simple">
+<li><p>f = 0.025 (friction factor, dimensionless)</p></li>
+<li><p>L = 100 m (pipe length)</p></li>
+<li><p>D = 0.2 m (pipe diameter)</p></li>
+<li><p>ρ = 1000 kg/m³ (fluid density)</p></li>
+<li><p>v = 3.0 m/s (fluid velocity)</p></li>
+</ul>
+<p><strong>Calculate:</strong></p>
+<ol class="arabic simple">
+<li><p>The pressure drop ΔP in Pa</p></li>
+<li><p>Convert to kPa and to psi (1 psi = 6894.76 Pa)</p></li>
+</ol>
+<p><strong>Format</strong> your results with appropriate units and decimal places.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lab01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chapter01/01_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 1: Basic Python Math</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">1. Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup-and-verification">1.1 Environment Setup and Verification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-python-math-operations">1.2 Basic Python Math Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-1-scientific-notation">Example 1.2.1: Scientific Notation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-engineering-applications">1.3. Chemical Engineering Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-1-ideal-gas-law">Example 1.3.1: Ideal Gas Law</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-2-reynolds-number-calculation">Example 1.3.2: Reynolds Number Calculation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-3-mass-balance-dilution-calculation">Example 1.3.3: Mass Balance - Dilution Calculation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-pipe-flow-calculation">Problem 1: Pipe Flow Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-concentration-calculation">Problem 2: Concentration Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-energy-balance">Problem 3: Energy Balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-pressure-drop-in-a-pipe">Problem 4: Pressure Drop in a Pipe</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
