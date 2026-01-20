@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,6 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter02/02_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lab 01: Python Fundamentals for Chemical Engineering" href="../lab01/01_lab.html" />
+    <link rel="prev" title="Chapter 1: Basic Python Math" href="../chapter01/01_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,9 +180,14 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 2: Working with Text (Strings)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -421,6 +426,22 @@ document.write(`
 <span class="n">status_message</span> <span class="o">=</span> <span class="s1">&#39;Reactor is running normally&#39;</span>
 </pre></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;string &quot;example&quot;&#39;</span>
+<span class="n">string2</span> <span class="o">=</span> <span class="s2">&quot;string &#39;example&#39;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>string &quot;example&quot;
+string &#39;example&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="indexing-slicing">
 <span id="id4"></span><h3>2.1.2 Indexing &amp; Slicing<a class="headerlink" href="#indexing-slicing" title="Link to this heading">#</a></h3>
@@ -437,6 +458,17 @@ document.write(`
 <li><p>Last character <code class="docutils literal notranslate"><span class="pre">&quot;n&quot;</span></code> is at index <code class="docutils literal notranslate"><span class="pre">5</span></code></p></li>
 </ul>
 <p><strong>Remember: Python indexing starts at 0, not 1!</strong></p>
+<p>Finding Characters with .find()</p>
+<ul class="simple">
+<li><p>The .find() method returns the index of the first occurrence of a character (or substring).</p></li>
+<li><p>If the character is not found, it returns -1.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>   <span class="c1"># 2</span>
+<span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>   <span class="c1"># 5</span>
+<span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">)</span>   <span class="c1"># -1</span>
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
@@ -609,6 +641,20 @@ Pyth
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pto
 nohtyP
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;access&#39;</span>
+<span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>    <span class="c1"># Returns index of first occurrence of &#39;t&#39;: 2</span>
+<span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>    <span class="c1"># Returns -1 if &#39;x&#39; not found</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
 </pre></div>
 </div>
 </div>
@@ -799,6 +845,24 @@ Imagine you have equipment data from different sources with inconsistent naming:
 <li><p>Raw data: <code class="docutils literal notranslate"><span class="pre">&quot;pump</span> <span class="pre">a&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;PUMP</span> <span class="pre">B&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Pump-C&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;centrifugal_pump_d&quot;</span></code></p></li>
 <li><p>Standardized: <code class="docutils literal notranslate"><span class="pre">&quot;Pump</span> <span class="pre">A&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Pump</span> <span class="pre">B&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Pump</span> <span class="pre">C&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Centrifugal</span> <span class="pre">Pump</span> <span class="pre">D&quot;</span></code></p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pump a&#39;</span><span class="p">,</span> <span class="s1">&#39;Pump B&#39;</span><span class="p">,</span> <span class="s1">&#39;pump c&#39;</span><span class="p">,</span> <span class="s1">&#39;pump D&#39;</span><span class="p">,</span> <span class="s1">&#39;pump E &#39;</span><span class="p">,</span> <span class="s1">&#39;Pump f&#39;</span><span class="p">]</span>
+<span class="n">standardized_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ex</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+    <span class="n">standardized</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+    <span class="n">standardized</span> <span class="o">=</span> <span class="n">standardized</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+    <span class="n">standardized_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">standardized</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">standardized_list</span><span class="p">)</span>  <span class="c1"># [&#39;Pump_A&#39;, &#39;Pump_B&#39;, &#39;Pump_C&#39;, &#39;Pump_D&#39;, &#39;Pump_E&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Pump_A&#39;, &#39;Pump_B&#39;, &#39;Pump_C&#39;, &#39;Pump_D&#39;, &#39;Pump_E&#39;, &#39;Pump_F&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic String Methods ===&quot;</span><span class="p">)</span>
@@ -1469,6 +1533,24 @@ Temperature: 25.0°C (77.0°F)
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../chapter01/01_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 1: Basic Python Math</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lab01/01_lab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 01: Python Fundamentals for Chemical Engineering</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

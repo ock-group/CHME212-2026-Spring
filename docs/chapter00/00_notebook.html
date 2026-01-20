@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -185,6 +185,11 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -715,6 +720,30 @@ These contain Python code. When you run a code cell, the output (numbers, text, 
 <li><p><strong>Markdown cells:</strong><br />
 These contain explanations, notes, equations, and images. Markdown cells help you describe what your code is doing or present results clearly. They support Markdown formatting, HTML, and LaTeX for mathematical expressions.</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello world
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
 <section id="markdown">
 <span id="id8"></span><h3>0.4.1 Markdown<a class="headerlink" href="#markdown" title="Link to this heading">#</a></h3>
 <p><strong>Markdown</strong> is a simple way to format text in your notebook cells. It lets you make text <strong>bold</strong>, <em>italic</em>, add headers, create lists, and more—without needing to know complicated formatting codes.</p>
@@ -805,6 +834,7 @@ These contain explanations, notes, equations, and images. Markdown cells help yo
 </pre></div>
 </div>
 <p>You can also mention short code snippets like <code class="docutils literal notranslate"><span class="pre">print(&quot;Hello!&quot;)</span></code> or <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">5</span></code> within regular text.</p>
+<p>print(‘hello world’)</p>
 <p><strong>Your Turn: Practice Cell</strong></p>
 <p>Double-click this cell and try editing it! Add your name, make some text bold, create a list of your favorite foods, or write a short explanation of what you learned today.</p>
 <p>Remember: Press Shift+Enter when you’re done editing to see the formatted result.</p>
@@ -816,12 +846,25 @@ These contain explanations, notes, equations, and images. Markdown cells help yo
 <p>You can comment an entire line or add a comment at the end of a line of code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print Hello World</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">)</span> <span class="c1"># hello world comment</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello world
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># Reactor temperature data over time</span>
 <span class="n">initial_temp</span> <span class="o">=</span> <span class="mf">25.0</span>     <span class="c1"># initial temperature in Celsius</span>
-<span class="n">target_temp</span> <span class="o">=</span> <span class="mf">80.0</span>      <span class="c1"># target reaction temperature</span>
-<span class="n">time_hours</span> <span class="o">=</span> <span class="mi">24</span>         <span class="c1"># total time in hours</span>
+<span class="n">target_temp</span> <span class="o">=</span> <span class="mf">80.0</span>      <span class="c1"># target reaction temperature (Celsius)</span>
+<span class="n">time_hours</span> <span class="o">=</span> <span class="mi">24</span>         <span class="c1"># total time in hours </span>
 
 <span class="c1"># Create time array</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">time_hours</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># 100 time points</span>
@@ -1029,10 +1072,10 @@ A <strong>Jupyter kernel</strong> is the “engine” that runs your Python code
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Package Version Check:
 ========================================
-numpy           2.2.6 Installed!
-matplotlib      3.10.7 Installed!
+numpy           1.26.4 Installed!
+matplotlib      3.10.8 Installed!
 pandas          2.3.3 Installed!
-scipy           1.15.3 Installed!
+scipy           1.15.2 Installed!
 seaborn         0.13.2 Installed!
 scikit-learn    1.7.2 Installed!
 sympy           1.14.0 Installed!
@@ -1041,8 +1084,8 @@ sympy           1.14.0 Installed!
 ==================================================
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy:      2.2.6
-Matplotlib: 3.10.7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy:      1.26.4
+Matplotlib: 3.10.8
 Pandas:     2.3.3
 
  If any packages are missing, you can install them using:

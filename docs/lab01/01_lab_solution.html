@@ -59,10 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab01/01_lab';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab01/01_lab_solution';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Chapter 2: Working with Text (Strings)" href="../chapter02/02_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +123,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -187,8 +188,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -260,7 +261,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab01/01_lab.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab01/01_lab_solution.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +291,7 @@
       
       
       
-      <li><a href="../../_sources/docs/lab01/01_lab.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/lab01/01_lab_solution.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -432,6 +433,17 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify Python version and environment</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python executable: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ If you see your environment (&#39;chme212&#39;) in the path above, you&#39;re using the correct environment!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.10.18 | packaged by conda-forge | (main, Jun  4 2025, 14:46:00) [Clang 18.1.8 ]
+Python executable: /Users/hoon/miniconda3/envs/chemcomp/bin/python
+
+✅ If you see your environment (&#39;chme212&#39;) in the path above, you&#39;re using the correct environment!
 </pre></div>
 </div>
 </div>
@@ -442,6 +454,20 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy:      </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matplotlib: </span><span class="si">{</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pandas:     </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ All packages loaded successfully!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy:      1.26.4
+Matplotlib: 3.10.8
+Pandas:     2.3.3
+
+✅ All packages loaded successfully!
 </pre></div>
 </div>
 </div>
@@ -459,6 +485,34 @@ document.write(`
 <span class="n">avogadro</span> <span class="o">=</span> <span class="mf">6.022e23</span>  <span class="c1"># Avogadro&#39;s number</span>
 <span class="n">electron_mass</span> <span class="o">=</span> <span class="mf">9.109e-31</span>  <span class="c1"># kg</span>
 <span class="n">gas_constant</span> <span class="o">=</span> <span class="mf">8.314</span>  <span class="c1"># J/(mol·K)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scientific Notation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Avogadro&#39;s number: </span><span class="si">{</span><span class="n">avogadro</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Electron mass: </span><span class="si">{</span><span class="n">electron_mass</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calculations with scientific notation</span>
+<span class="n">moles</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">molecules</span> <span class="o">=</span> <span class="n">moles</span> <span class="o">*</span> <span class="n">avogadro</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">moles</span><span class="si">}</span><span class="s2"> moles = </span><span class="si">{</span><span class="n">molecules</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> molecules&quot;</span><span class="p">)</span>
+
+<span class="c1"># Engineering example: Pressure in a large reactor</span>
+<span class="n">force</span> <span class="o">=</span> <span class="mf">1.5e6</span>  <span class="c1"># N (Newtons)</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># m²</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="n">force</span> <span class="o">/</span> <span class="n">area</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Pressure = Force/Area = </span><span class="si">{</span><span class="n">pressure</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pressure = </span><span class="si">{</span><span class="n">pressure</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> kPa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scientific Notation:
+Avogadro&#39;s number: 6.022e+23
+Electron mass: 9.109e-31 kg
+
+2.5 moles = 1.506e+24 molecules
+
+Pressure = Force/Area = 3.00e+05 Pa
+Pressure = 300.0 kPa
 </pre></div>
 </div>
 </div>
@@ -507,11 +561,23 @@ math.pow(2, 3) = 8.0
 <span class="c1"># For a sphere: V = (4/3)πr³, so r = (3V/4π)^(1/3)</span>
 
 <span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="n">r_cubed</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">volume_sphere</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">r_cubed</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># or r_cubed ** (1/3)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sphere volume: </span><span class="si">{</span><span class="n">volume_sphere</span><span class="si">}</span><span class="s2"> m³&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Radius: </span><span class="si">{</span><span class="n">radius</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
+
+<span class="c1"># Verify by calculating volume back</span>
+<span class="n">volume_check</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Verification: V = </span><span class="si">{</span><span class="n">volume_check</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> m³&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cube Root Example:
+Sphere volume: 113.1 m³
+Radius: 3.00 m
+Verification: V = 113.1 m³
 </pre></div>
 </div>
 </div>
@@ -537,6 +603,21 @@ PV = nRT
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Calculate pressure of gas in a reactor</span>
+<span class="c1"># n = 50.0        # moles</span>
+<span class="c1"># R = 8.314       # J/(mol·K)</span>
+<span class="c1"># T = 373.15      # K (100°C)</span>
+<span class="c1"># V = 0.5         # m³</span>
+
+<span class="c1"># # PV = nRT → P = nRT/V</span>
+<span class="c1"># P = (n * R * T) / V</span>
+
+<span class="c1"># print(&quot;Ideal Gas Law Calculation:&quot;)</span>
+<span class="c1"># print(f&quot;Number of moles: {n} mol&quot;)</span>
+<span class="c1"># print(f&quot;Temperature: {T} K ({T - 273.15}°C)&quot;)</span>
+<span class="c1"># print(f&quot;Volume: {V} m³&quot;)</span>
+<span class="c1"># print(f&quot;\nPressure: {P:.2f} Pa&quot;)</span>
+<span class="c1"># print(f&quot;Pressure: {P/1000:.2f} kPa&quot;)</span>
+<span class="c1"># print(f&quot;Pressure: {P/101325:.2f} atm&quot;)</span>
 </pre></div>
 </div>
 </div>
@@ -565,6 +646,30 @@ PV = nRT
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Reynolds number for water flowing in a pipe</span>
+<span class="c1"># rho = 1000      # kg/m³ (density of water)</span>
+<span class="c1"># v = 2.5         # m/s (velocity)</span>
+<span class="c1"># D = 0.1         # m (pipe diameter)</span>
+<span class="c1"># mu = 0.001      # Pa·s (dynamic viscosity)</span>
+
+<span class="c1"># # Calculate Reynolds number</span>
+<span class="c1"># Re = (rho * v * D) / mu</span>
+
+<span class="c1"># print(&quot;Reynolds Number Calculation:&quot;)</span>
+<span class="c1"># print(f&quot;Density: {rho} kg/m³&quot;)</span>
+<span class="c1"># print(f&quot;Velocity: {v} m/s&quot;)</span>
+<span class="c1"># print(f&quot;Diameter: {D} m&quot;)</span>
+<span class="c1"># print(f&quot;Viscosity: {mu} Pa·s&quot;)</span>
+<span class="c1"># print(f&quot;\nReynolds number: {Re:.0f}&quot;)</span>
+
+<span class="c1"># # Determine flow regime</span>
+<span class="c1"># if Re &lt; 2300:</span>
+<span class="c1">#     flow_type = &quot;Laminar&quot;</span>
+<span class="c1"># elif Re &gt; 4000:</span>
+<span class="c1">#     flow_type = &quot;Turbulent&quot;</span>
+<span class="c1"># else:</span>
+<span class="c1">#     flow_type = &quot;Transitional&quot;</span>
+    
+<span class="c1"># print(f&quot;Flow regime: {flow_type}&quot;)</span>
 </pre></div>
 </div>
 </div>
@@ -586,6 +691,21 @@ C_1 V_1 = C_2 V_2
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Dilute a concentrated solution</span>
+<span class="c1"># C1 = 12.0       # mol/L (initial concentration)</span>
+<span class="c1"># V1 = 0.250      # L (initial volume)</span>
+<span class="c1"># V2 = 1.000      # L (final volume after dilution)</span>
+
+<span class="c1"># # Calculate final concentration: C2 = C1×V1/V2</span>
+<span class="c1"># C2 = (C1 * V1) / V2</span>
+
+<span class="c1"># print(&quot;Dilution Calculation:&quot;)</span>
+<span class="c1"># print(f&quot;Initial: {C1} M, {V1} L&quot;)</span>
+<span class="c1"># print(f&quot;Final volume: {V2} L&quot;)</span>
+<span class="c1"># print(f&quot;\nFinal concentration: {C2:.2f} M&quot;)</span>
+
+<span class="c1"># # Calculate how much water to add</span>
+<span class="c1"># water_to_add = V2 - V1</span>
+<span class="c1"># print(f&quot;Water to add: {water_to_add:.3f} L&quot;)</span>
 </pre></div>
 </div>
 </div>
@@ -712,15 +832,6 @@ f = \frac{0.316}{\mathrm{Re}^{0.25}}
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter02/02_notebook.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 2: Working with Text (Strings)</p>
-      </div>
-    </a>
 </div>
                 </footer>
               

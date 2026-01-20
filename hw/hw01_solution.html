@@ -1,0 +1,957 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Homework 01: Initial Exposure to Pythom Programming &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'hw/hw01_solution';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../docs/introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../docs/introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fhw/hw01_solution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/hw/hw01_solution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 01: Initial Exposure to Pythom Programming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-temperature-conversion-program-10-pts-5-bonus">Problem 1: Temperature Conversion Program (10 pts + 5 bonus)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-version-10-pts">Basic Version (10 pts):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-version-5-pts">Bonus Version (+5 pts):</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-ideal-gas-law-rigid-vessel-analysis-15-pts">Problem 2: Ideal Gas Law - Rigid Vessel Analysis (15 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-5-pts-compute-the-initial-pressure">Task 1 (5 pts): Compute the initial pressure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-5-pts-calculate-the-final-pressure">Task 2 (5 pts): Calculate the final pressure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-5-pts-discussion">Task 3 (5 pts): Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-flow-rate-and-velocity-calculations-10-pts">Problem 3: Flow Rate and Velocity Calculations (10 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-5-pts-calculate-the-volumetric-flow-rate-q-in-m3-s-and-l-min">Task 1. <strong>(5 pts)</strong> Calculate the volumetric flow rate Q in m³/s and L/min</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-5-pts-calculate-the-velocity-in-section-b-using-the-continuity-equation">Task 2. <strong>(5 pts)</strong> Calculate the velocity in Section B using the continuity equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-hydrocarbon-classification-and-alkene-structure-15-pts">Problem 4: Hydrocarbon Classification and Alkene Structure (15 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-functional-group-identification-5-pts"><strong>Task 1: Functional Group Identification (5 pts)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tip">Tip</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-calculating-the-molecular-weight-of-a-compound-no-loops-or-conditionals-10-pts">Task 2: Calculating the Molecular Weight of a Compound (No Loops or Conditionals) (10 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-runs">Example Runs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-01-initial-exposure-to-pythom-programming">
+<h1>Homework 01: Initial Exposure to Pythom Programming<a class="headerlink" href="#homework-01-initial-exposure-to-pythom-programming" title="Link to this heading">#</a></h1>
+<p><strong>Release Date:</strong> Jan 16</p>
+<p><strong>Due Date:</strong> Jan 30 11:59 PM</p>
+<p><strong>Total Points:</strong> 50 pts (+ 5 bonus pts)</p>
+<p><strong>Instructions:</strong></p>
+<ul class="simple">
+<li><p>Complete all problems in this notebook</p></li>
+<li><p>Show all your work with clear comments</p></li>
+<li><p>Use appropriate variable names</p></li>
+<li><p>Format all outputs professionally with units</p></li>
+<li><p>Test your code to ensure it runs without errors</p></li>
+</ul>
+<p><strong>Submission:</strong></p>
+<ul class="simple">
+<li><p>Submit this completed Jupyter notebook to Gradescope</p></li>
+<li><p>Make sure all cells have been executed and outputs are visible</p></li>
+</ul>
+<hr class="docutils" />
+<section id="problem-1-temperature-conversion-program-10-pts-5-bonus">
+<h2>Problem 1: Temperature Conversion Program (10 pts + 5 bonus)<a class="headerlink" href="#problem-1-temperature-conversion-program-10-pts-5-bonus" title="Link to this heading">#</a></h2>
+<p>Write a Python script that converts temperature between scales given a user-specified numerical value and units (K, C, F).</p>
+<section id="basic-version-10-pts">
+<h3>Basic Version (10 pts):<a class="headerlink" href="#basic-version-10-pts" title="Link to this heading">#</a></h3>
+<p>The program should:</p>
+<ol class="arabic simple">
+<li><p>The user specifies a temperature value (e.g., 100.0) and its units (e.g., C for Celsius)</p></li>
+<li><p>Convert the input temperature to the two other temperature scales (e.g., <code class="docutils literal notranslate"><span class="pre">C</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">K</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code>)</p></li>
+<li><p>Print the results with clear descriptive text and units</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<ul>
+<li><p>Input: <code class="docutils literal notranslate"><span class="pre">100.0</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code></p></li>
+<li><p>Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">100.0</span> <span class="n">C</span> <span class="ow">is</span> <span class="n">equal</span> <span class="n">to</span><span class="p">:</span>
+<span class="mf">373.15</span> <span class="n">K</span>
+<span class="mf">212.0</span> <span class="n">F</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="bonus-version-5-pts">
+<h3>Bonus Version (+5 pts):<a class="headerlink" href="#bonus-version-5-pts" title="Link to this heading">#</a></h3>
+<p>Create a more robust version that can understand the temperature scale by the <strong>first letter only</strong> (case insensitive).</p>
+<p>Your program should correctly interpret all of these as Kelvin:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">K</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>, <code class="docutils literal notranslate"><span class="pre">Kelvin</span></code>, <code class="docutils literal notranslate"><span class="pre">KELVIN</span></code></p></li>
+</ul>
+<p><strong>Test your bonus version with these examples:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">300</span></code> with units <code class="docutils literal notranslate"><span class="pre">K</span></code> → should convert to C and F</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">300</span></code> with units <code class="docutils literal notranslate"><span class="pre">Kelvin</span></code> → should convert to C and F</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">300</span></code> with units <code class="docutils literal notranslate"><span class="pre">k</span></code> → should convert to C and F</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="n">input_temperature</span> <span class="o">=</span> <span class="mi">100</span> 
+<span class="n">input_unit</span> <span class="o">=</span> <span class="s1">&#39;C&#39;</span>
+
+<span class="k">if</span> <span class="n">input_unit</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span>
+    <span class="n">temperature_K</span> <span class="o">=</span> <span class="n">input_temperature</span> <span class="o">+</span> <span class="mf">273.15</span>
+    <span class="n">temperature_F</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_temperature</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature in Kelvin: </span><span class="si">{</span><span class="n">temperature_K</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature in Fahrenheit: </span><span class="si">{</span><span class="n">temperature_F</span><span class="si">}</span><span class="s2"> °F&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">input_unit</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+    <span class="n">temperature_K</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_temperature</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span> <span class="o">+</span> <span class="mf">273.15</span>
+    <span class="n">temperature_C</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_temperature</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature in Kelvin: </span><span class="si">{</span><span class="n">temperature_K</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature in Celsius: </span><span class="si">{</span><span class="n">temperature_C</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">input_unit</span> <span class="o">==</span> <span class="s1">&#39;K&#39;</span><span class="p">:</span>
+    <span class="n">temperature_C</span> <span class="o">=</span> <span class="n">input_temperature</span> <span class="o">-</span> <span class="mf">273.15</span>
+    <span class="n">temperature_F</span> <span class="o">=</span> <span class="p">(</span><span class="n">temperature_C</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature in Celsius: </span><span class="si">{</span><span class="n">temperature_C</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature in Fahrenheit: </span><span class="si">{</span><span class="n">temperature_F</span><span class="si">}</span><span class="s2"> °F&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported temperature unit&quot;</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperature in Kelvin: 373.15 K
+Temperature in Fahrenheit: 212.0 °F
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-2-ideal-gas-law-rigid-vessel-analysis-15-pts">
+<h2>Problem 2: Ideal Gas Law - Rigid Vessel Analysis (15 pts)<a class="headerlink" href="#problem-2-ideal-gas-law-rigid-vessel-analysis-15-pts" title="Link to this heading">#</a></h2>
+<p>A rigid vessel contains 50.0 mol of an ideal gas at an initial temperature of 300 K and a volume of 0.5 m³.</p>
+<p>Use the ideal gas law: <strong>PV = nRT</strong></p>
+<p>Where:</p>
+<ul class="simple">
+<li><p>P = pressure (Pa)</p></li>
+<li><p>V = volume (m³)</p></li>
+<li><p>n = number of moles (mol)</p></li>
+<li><p>R = 8.314 J/(mol·K) (universal gas constant)</p></li>
+<li><p>T = temperature (K)</p></li>
+</ul>
+<section id="task-1-5-pts-compute-the-initial-pressure">
+<h3>Task 1 (5 pts): Compute the initial pressure<a class="headerlink" href="#task-1-5-pts-compute-the-initial-pressure" title="Link to this heading">#</a></h3>
+<p>Calculate the initial pressure in these three units:</p>
+<ul class="simple">
+<li><p>Pascals (Pa)</p></li>
+<li><p>Kilopascals (kPa)</p></li>
+<li><p>Atmospheres (atm) [1 atm = 101,325 Pa]</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 1: Initial pressure calculation</span>
+
+<span class="n">V</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># volume in m^3</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mf">50.0</span> <span class="c1"># number of moles</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span> <span class="c1"># J/(mol·K)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">300.0</span> <span class="c1"># temperature in K</span>
+
+<span class="n">P_init</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
+<span class="c1"># P_init in Pascals</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial Pressure: </span><span class="si">{</span><span class="n">P_init</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+
+<span class="c1"># P_init in kPa</span>
+<span class="n">P_init_kPa</span> <span class="o">=</span> <span class="n">P_init</span> <span class="o">/</span> <span class="mi">1000</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial Pressure: </span><span class="si">{</span><span class="n">P_init_kPa</span><span class="si">}</span><span class="s2"> kPa&quot;</span><span class="p">)</span>
+
+<span class="c1"># P_init in atm</span>
+<span class="n">P_init_atm</span> <span class="o">=</span> <span class="n">P_init</span> <span class="o">/</span> <span class="mi">101325</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial Pressure: </span><span class="si">{</span><span class="n">P_init_atm</span><span class="si">}</span><span class="s2"> atm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial Pressure: 249420.0 Pa
+Initial Pressure: 249.42 kPa
+Initial Pressure: 2.461584011843079 atm
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-2-5-pts-calculate-the-final-pressure">
+<h3>Task 2 (5 pts): Calculate the final pressure<a class="headerlink" href="#task-2-5-pts-calculate-the-final-pressure" title="Link to this heading">#</a></h3>
+<p>The temperature is increased linearly to 600 K. Calculate the final pressure in the same three units.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 2: Final pressure calculation</span>
+
+<span class="n">T_final</span> <span class="o">=</span> <span class="mf">600.0</span> <span class="c1"># final temperature in K</span>
+<span class="n">P_final</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T_final</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
+<span class="c1"># P_final in Pascals</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final Pressure: </span><span class="si">{</span><span class="n">P_final</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+<span class="c1"># P_final in kPa</span>
+<span class="n">P_final_kPa</span> <span class="o">=</span> <span class="n">P_final</span> <span class="o">/</span> <span class="mi">1000</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final Pressure: </span><span class="si">{</span><span class="n">P_final_kPa</span><span class="si">}</span><span class="s2"> kPa&quot;</span><span class="p">)</span>
+<span class="c1"># P_final in atm</span>
+<span class="n">P_final_atm</span> <span class="o">=</span> <span class="n">P_final</span> <span class="o">/</span> <span class="mi">101325</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final Pressure: </span><span class="si">{</span><span class="n">P_final_atm</span><span class="si">}</span><span class="s2"> atm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final Pressure: 498840.0 Pa
+Final Pressure: 498.84 kPa
+Final Pressure: 4.923168023686158 atm
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3-5-pts-discussion">
+<h3>Task 3 (5 pts): Discussion<a class="headerlink" href="#task-3-5-pts-discussion" title="Link to this heading">#</a></h3>
+<p>In a text cell (markdown), discuss whether the ideal gas assumption remains valid at elevated temperatures. Consider:</p>
+<ul class="simple">
+<li><p>What conditions make the ideal gas law more accurate?</p></li>
+<li><p>At what conditions might it break down?</p></li>
+<li><p>Is 600 K at the calculated pressure reasonable for the ideal gas assumption?</p></li>
+</ul>
+<!-- ### Part 3: Discussion -->
+<p><em>Write your discussion here</em></p>
+<p>The ideal gas law becomes more accurate under conditions where intermolecular interactions are negligible and the finite volume of molecules is small compared to the total volume of the gas. This typically occurs at high temperatures and low to moderate pressures. At elevated temperatures, gas molecules have higher kinetic energy, which reduces the relative importance of attractive intermolecular forces, making the gas behavior closer to ideal.</p>
+<p>The ideal gas assumption may break down at high pressures and low temperatures. At high pressures, the volume occupied by gas molecules is no longer negligible, and repulsive interactions become important. At low temperatures, attractive forces between molecules can no longer be ignored, potentially leading to deviations from ideality or even phase transitions such as condensation. Gases with strong intermolecular forces (e.g., polar gases) tend to deviate from ideal behavior more significantly under these conditions.</p>
+<p>At 600 K, the temperature is relatively high for most common gases. If the calculated pressure is not excessively high (for example, well below the critical pressure of the gas), the ideal gas assumption is generally reasonable and defensible. At this temperature, thermal energy dominates intermolecular interactions, and deviations from ideal behavior are expected to be small. Therefore, for many engineering calculations, assuming ideal gas behavior at 600 K and moderate pressure is appropriate.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-3-flow-rate-and-velocity-calculations-10-pts">
+<h2>Problem 3: Flow Rate and Velocity Calculations (10 pts)<a class="headerlink" href="#problem-3-flow-rate-and-velocity-calculations-10-pts" title="Link to this heading">#</a></h2>
+<p>Water flows through a circular pipe system with varying diameters:</p>
+<ul class="simple">
+<li><p>Section A: diameter = 0.10 m, velocity = 4.0 m/s</p></li>
+<li><p>Section B: diameter = 0.15 m, velocity = ? (to be determined)</p></li>
+</ul>
+<p>For incompressible flow, the continuity equation states: <strong>A₁v₁ = A₂v₂</strong></p>
+<p>Where:</p>
+<ul class="simple">
+<li><p>A = cross-sectional area (m²) = π(D/2)²</p></li>
+<li><p>v = velocity (m/s)</p></li>
+<li><p>Use π = 3.14</p></li>
+</ul>
+<section id="task-1-5-pts-calculate-the-volumetric-flow-rate-q-in-m3-s-and-l-min">
+<h3>Task 1. <strong>(5 pts)</strong> Calculate the volumetric flow rate Q in m³/s and L/min<a class="headerlink" href="#task-1-5-pts-calculate-the-volumetric-flow-rate-q-in-m3-s-and-l-min" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># diameter in meters</span>
+<span class="n">A1</span> <span class="o">=</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="p">(</span><span class="n">d1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># cross-sectional area in m^2</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c1"># velocity in m/s</span>
+
+<span class="n">Q</span> <span class="o">=</span> <span class="n">A1</span> <span class="o">*</span> <span class="n">v1</span>  <span class="c1"># volumetric flow rate in m^3/s</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Volumetric Flow Rate: </span><span class="si">{</span><span class="n">Q</span><span class="si">}</span><span class="s2"> m^3/s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Volumetric Flow Rate: 0.031400000000000004 m^3/s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-2-5-pts-calculate-the-velocity-in-section-b-using-the-continuity-equation">
+<h3>Task 2. <strong>(5 pts)</strong> Calculate the velocity in Section B using the continuity equation<a class="headerlink" href="#task-2-5-pts-calculate-the-velocity-in-section-b-using-the-continuity-equation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="n">d1</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># diameter in meters</span>
+<span class="n">A1</span> <span class="o">=</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="p">(</span><span class="n">d1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># cross-sectional area in m^2</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c1"># velocity in m/s</span>
+
+<span class="n">d2</span> <span class="o">=</span> <span class="mf">0.15</span> <span class="c1"># diameter in meters</span>
+<span class="n">A2</span> <span class="o">=</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="p">(</span><span class="n">d2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># cross-sectional</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="p">(</span><span class="n">A1</span> <span class="o">*</span> <span class="n">v1</span><span class="p">)</span> <span class="o">/</span> <span class="n">A2</span>  <span class="c1"># velocity in m/s</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Velocity in second pipe: </span><span class="si">{</span><span class="n">v2</span><span class="si">}</span><span class="s2"> m/s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Velocity in second pipe: 1.777777777777778 m/s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-4-hydrocarbon-classification-and-alkene-structure-15-pts">
+<h2>Problem 4: Hydrocarbon Classification and Alkene Structure (15 pts)<a class="headerlink" href="#problem-4-hydrocarbon-classification-and-alkene-structure-15-pts" title="Link to this heading">#</a></h2>
+<p>This problem consists of <strong>two tasks</strong>.</p>
+<hr class="docutils" />
+<section id="task-1-functional-group-identification-5-pts">
+<h3><strong>Task 1: Functional Group Identification (5 pts)</strong><a class="headerlink" href="#task-1-functional-group-identification-5-pts" title="Link to this heading">#</a></h3>
+<p>Write a Python program that takes a molecular formula as input (e.g., <code class="docutils literal notranslate"><span class="pre">C5H12</span></code>, <code class="docutils literal notranslate"><span class="pre">C4H8</span></code>) and identifies whether it corresponds to:</p>
+<ul class="simple">
+<li><p><strong>Alkane</strong> (CₙH₂ₙ₊₂)</p></li>
+<li><p><strong>Alkene</strong> (CₙH₂ₙ)</p></li>
+<li><p><strong>Alkyne</strong> (CₙH₂ₙ₋₂)</p></li>
+</ul>
+<section id="requirements">
+<h4>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Prompt the user to input a molecular formula as a string.</p></li>
+<li><p>Extract and print the <strong>number of carbon atoms (C)</strong> and <strong>hydrogen atoms (H)</strong>.</p></li>
+<li><p>Use these values to identify the type of hydrocarbon.</p></li>
+</ol>
+</section>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h4>
+<p>Your script should correctly identify the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">C2H4</span></code> → <strong>Alkene</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C12H26</span></code> → <strong>Alkane</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C3H6</span></code> → <strong>Alkene</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C2H2</span></code> → <strong>Alkyne</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C5H12</span></code> → <strong>Alkane</strong></p></li>
+</ul>
+</section>
+<section id="tip">
+<h4>Tip<a class="headerlink" href="#tip" title="Link to this heading">#</a></h4>
+<p>You may find the string method <code class="docutils literal notranslate"><span class="pre">.find()</span></code> useful for locating characters in the formula.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+<span class="n">string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;C2H4&quot;</span>
+<span class="n">c_pos</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="n">h_pos</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Carbon atoms:&quot;</span><span class="p">,</span> <span class="n">formula</span><span class="p">[</span><span class="n">c_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">h_pos</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hydrogen atoms:&quot;</span><span class="p">,</span> <span class="n">formula</span><span class="p">[</span><span class="n">h_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Functional group: Alkene&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Carbon atoms: 2
+Hydrogen atoms: 4
+Functional group: Alkene
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="task-2-calculating-the-molecular-weight-of-a-compound-no-loops-or-conditionals-10-pts">
+<h3>Task 2: Calculating the Molecular Weight of a Compound (No Loops or Conditionals) (10 pts)<a class="headerlink" href="#task-2-calculating-the-molecular-weight-of-a-compound-no-loops-or-conditionals-10-pts" title="Link to this heading">#</a></h3>
+<p>Write a Python program that calculates the <strong>molecular weight</strong> of a compound containing only carbon (C), hydrogen (H), and oxygen (O), given its <strong>stoichiometric formula</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">C2H6O</span></code>, <code class="docutils literal notranslate"><span class="pre">CH4</span></code>, <code class="docutils literal notranslate"><span class="pre">C6H12O6</span></code>).</p>
+<p>Use the following atomic weights:</p>
+<ul class="simple">
+<li><p>Carbon (C) = 12 g/mol</p></li>
+<li><p>Hydrogen (H) = 1 g/mol</p></li>
+<li><p>Oxygen (O) = 16 g/mol</p></li>
+</ul>
+<section id="id1">
+<h4>Requirements<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Assume the formula always has <strong>C first, then H, then O</strong> (Oxygen may be missing).</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.find()</span></code>, slicing, and <code class="docutils literal notranslate"><span class="pre">int()</span></code> to extract the counts of each atom.</p></li>
+<li><p>If an element has no number written (e.g., <code class="docutils literal notranslate"><span class="pre">H</span></code> in <code class="docutils literal notranslate"><span class="pre">CH4</span></code>), assume the count is 1.</p></li>
+<li><p>Print the <strong>molecular weight</strong> as a number in grams per mole.</p></li>
+</ol>
+</section>
+<section id="example-runs">
+<h4>Example Runs<a class="headerlink" href="#example-runs" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">C2H4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C12H26</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C3H6</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C2H2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C5H12</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C2H6O</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C6H12O6</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="c1"># Input stoichiometric formula</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;C6H12O6&quot;</span> <span class="c1">#input(&quot;Enter a molecular formula (C, H, O only): &quot;).strip()</span>
+
+<span class="c1"># Find element positions</span>
+<span class="n">c_pos</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="n">h_pos</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">)</span>
+<span class="n">o_pos</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extract number of carbon atoms</span>
+<span class="n">C</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">c_pos</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">h_pos</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extract number of hydrogen atoms</span>
+<span class="c1"># If O is present, slice up to O; else slice to the end</span>
+<span class="n">H</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">h_pos</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">o_pos</span><span class="p">]</span> <span class="k">if</span> <span class="n">o_pos</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">formula</span><span class="p">[</span><span class="n">h_pos</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="ow">or</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extract number of oxygen atoms</span>
+<span class="c1"># If O is present, slice from O to end; else 0</span>
+<span class="n">O</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">o_pos</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="ow">or</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">o_pos</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="c1"># Atomic weights</span>
+<span class="n">C_weight</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">H_weight</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">O_weight</span> <span class="o">=</span> <span class="mi">16</span>
+
+<span class="c1"># Compute molecular weight</span>
+<span class="n">molecular_weight</span> <span class="o">=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">C_weight</span> <span class="o">+</span> <span class="n">H</span> <span class="o">*</span> <span class="n">H_weight</span> <span class="o">+</span> <span class="n">O</span> <span class="o">*</span> <span class="n">O_weight</span>
+
+<span class="c1"># Output</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Molecular weight:&quot;</span><span class="p">,</span> <span class="n">molecular_weight</span><span class="p">,</span> <span class="s2">&quot;g/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Molecular weight: 180 g/mol
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><strong>Point Distribution:</strong></p>
+<ul class="simple">
+<li><p>Problem 1: 10 pts (+ 5 bonus)</p></li>
+<li><p>Problem 2: 15 pts</p></li>
+<li><p>Problem 3: 10 pts</p></li>
+<li><p>Problem 4: 15 pts</p></li>
+<li><p><strong>Total: 50 pts (+ 5 bonus)</strong></p></li>
+</ul>
+<p>Good luck!</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./hw"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-temperature-conversion-program-10-pts-5-bonus">Problem 1: Temperature Conversion Program (10 pts + 5 bonus)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-version-10-pts">Basic Version (10 pts):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-version-5-pts">Bonus Version (+5 pts):</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-ideal-gas-law-rigid-vessel-analysis-15-pts">Problem 2: Ideal Gas Law - Rigid Vessel Analysis (15 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-5-pts-compute-the-initial-pressure">Task 1 (5 pts): Compute the initial pressure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-5-pts-calculate-the-final-pressure">Task 2 (5 pts): Calculate the final pressure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-5-pts-discussion">Task 3 (5 pts): Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-flow-rate-and-velocity-calculations-10-pts">Problem 3: Flow Rate and Velocity Calculations (10 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-5-pts-calculate-the-volumetric-flow-rate-q-in-m3-s-and-l-min">Task 1. <strong>(5 pts)</strong> Calculate the volumetric flow rate Q in m³/s and L/min</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-5-pts-calculate-the-velocity-in-section-b-using-the-continuity-equation">Task 2. <strong>(5 pts)</strong> Calculate the velocity in Section B using the continuity equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-hydrocarbon-classification-and-alkene-structure-15-pts">Problem 4: Hydrocarbon Classification and Alkene Structure (15 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-functional-group-identification-5-pts"><strong>Task 1: Functional Group Identification (5 pts)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tip">Tip</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-calculating-the-molecular-weight-of-a-compound-no-loops-or-conditionals-10-pts">Task 2: Calculating the Molecular Weight of a Compound (No Loops or Conditionals) (10 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-runs">Example Runs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

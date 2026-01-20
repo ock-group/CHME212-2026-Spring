@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Chapter 8: Programming Practices (commenting, testing, error handling, debugging) &#8212; Introduction to Chemical Engineering Computation</title>
+    <title>Chapter 8: Programming Practices &#8212; Introduction to Chemical Engineering Computation</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -183,6 +183,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -355,7 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -366,11 +373,43 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 8: Programming Practices (commenting, testing, error handling, debugging)</h1>
+    <h1>Chapter 8: Programming Practices</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-documentation-and-commenting">8.1 Code Documentation and Commenting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">8.1.1 Docstrings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-comments">8.1.2 Inline Comments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organization-best-practices">8.1.3 Code Organization Best Practices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">8.2 Testing and Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing-with-known-results">8.2.1 Unit Testing with Known Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-testing">8.2.2 Boundary Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-energy-balance-verification">8.2.3 Mass/Energy Balance Verification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">8.3 Error Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-blocks">8.3.1 Try-Except Blocks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-validation">8.3.2 Input Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graceful-degradation">8.3.3 Graceful Degradation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-techniques">8.4 Debugging Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-statement-debugging">8.4.1 Print Statement Debugging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assert-statements-for-assumptions">8.4.2 Assert Statements for Assumptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-of-breakpoint">8.4.3 Usage of breakpoint()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -380,8 +419,750 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-8-programming-practices-commenting-testing-error-handling-debugging">
-<h1>Chapter 8: Programming Practices (commenting, testing, error handling, debugging)<a class="headerlink" href="#chapter-8-programming-practices-commenting-testing-error-handling-debugging" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-8-programming-practices">
+<span id="id1"></span><h1>Chapter 8: Programming Practices<a class="headerlink" href="#chapter-8-programming-practices" title="Link to this heading">#</a></h1>
+<p><strong>Topics Covered:</strong></p>
+<ul class="simple">
+<li><p>Code documentation and commenting</p></li>
+<li><p>Testing and validation</p></li>
+<li><p>Error handling and exceptions</p></li>
+<li><p>Debugging techniques</p></li>
+</ul>
+<section id="code-documentation-and-commenting">
+<span id="id2"></span><h2>8.1 Code Documentation and Commenting<a class="headerlink" href="#code-documentation-and-commenting" title="Link to this heading">#</a></h2>
+<p>Good documentation makes code understandable, maintainable, and reusable. In chemical engineering, where calculations can be complex and involve many parameters, clear documentation is critical.</p>
+<section id="docstrings">
+<span id="id3"></span><h3>8.1.1 Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h3>
+<p>Docstrings are special comments that describe what a function does, its parameters, and return values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">reynolds_number</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Reynolds number for fluid flow in a pipe.</span>
+<span class="sd">    </span>
+<span class="sd">    The Reynolds number is a dimensionless quantity that predicts</span>
+<span class="sd">    flow patterns in different fluid flow situations.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rho : float</span>
+<span class="sd">        Fluid density (kg/m³)</span>
+<span class="sd">    v : float</span>
+<span class="sd">        Flow velocity (m/s)</span>
+<span class="sd">    D : float</span>
+<span class="sd">        Pipe diameter (m)</span>
+<span class="sd">    mu : float</span>
+<span class="sd">        Dynamic viscosity (Pa·s)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Reynolds number (dimensionless)</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; reynolds_number(1000, 2.0, 0.1, 0.001)</span>
+<span class="sd">    200000.0</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Flow regimes:</span>
+<span class="sd">    - Re &lt; 2300: Laminar flow</span>
+<span class="sd">    - 2300 ≤ Re ≤ 4000: Transitional flow</span>
+<span class="sd">    - Re &gt; 4000: Turbulent flow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Re</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="n">D</span><span class="p">)</span> <span class="o">/</span> <span class="n">mu</span>
+    <span class="k">return</span> <span class="n">Re</span>
+
+<span class="c1"># Test the function</span>
+<span class="n">Re</span> <span class="o">=</span> <span class="n">reynolds_number</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reynolds number: </span><span class="si">{</span><span class="n">Re</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Access the docstring</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Function documentation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reynolds_number</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reynolds number: 200000
+
+Function documentation:
+
+    Calculate the Reynolds number for fluid flow in a pipe.
+    
+    The Reynolds number is a dimensionless quantity that predicts
+    flow patterns in different fluid flow situations.
+    
+    Parameters
+    ----------
+    rho : float
+        Fluid density (kg/m³)
+    v : float
+        Flow velocity (m/s)
+    D : float
+        Pipe diameter (m)
+    mu : float
+        Dynamic viscosity (Pa·s)
+    
+    Returns
+    -------
+    float
+        Reynolds number (dimensionless)
+    
+    Examples
+    --------
+    &gt;&gt;&gt; reynolds_number(1000, 2.0, 0.1, 0.001)
+    200000.0
+    
+    Notes
+    -----
+    Flow regimes:
+    - Re &lt; 2300: Laminar flow
+    - 2300 ≤ Re ≤ 4000: Transitional flow
+    - Re &gt; 4000: Turbulent flow
+    
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inline-comments">
+<span id="id4"></span><h3>8.1.2 Inline Comments<a class="headerlink" href="#inline-comments" title="Link to this heading">#</a></h3>
+<p>Use comments to explain <strong>why</strong> you’re doing something, not <strong>what</strong> you’re doing (the code shows what).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">arrhenius_rate_constant</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Ea</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate reaction rate constant using Arrhenius equation.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : float</span>
+<span class="sd">        Pre-exponential factor (1/s)</span>
+<span class="sd">    Ea : float</span>
+<span class="sd">        Activation energy (J/mol)</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Temperature (K)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Rate constant k (1/s)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span>  <span class="c1"># J/(mol·K) - Universal gas constant</span>
+    
+    <span class="c1"># Negative sign because higher Ea means slower reaction</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="o">-</span><span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+    
+    <span class="n">k</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">k</span>
+
+<span class="c1"># Good comment: explains WHY we use these specific values</span>
+<span class="c1"># Using typical values for a first-order decomposition reaction</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">1.0e10</span>  <span class="c1"># s⁻¹</span>
+<span class="n">Ea</span> <span class="o">=</span> <span class="mi">50000</span>  <span class="c1"># J/mol</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">298.15</span>  <span class="c1"># K (25°C, standard conditions)</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="n">arrhenius_rate_constant</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Ea</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rate constant at </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> K: </span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2"> s⁻¹&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rate constant at 298.15 K: 1.7374e+01 s⁻¹
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="code-organization-best-practices">
+<span id="id5"></span><h3>8.1.3 Code Organization Best Practices<a class="headerlink" href="#code-organization-best-practices" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD: Unclear variable names, no documentation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">/</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># GOOD: Clear names, documentation, units specified</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gravitational_force</span><span class="p">(</span><span class="n">mass1_kg</span><span class="p">,</span> <span class="n">mass2_kg</span><span class="p">,</span> <span class="n">distance_m</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate gravitational force between two masses.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mass1_kg : float</span>
+<span class="sd">        Mass of first object (kg)</span>
+<span class="sd">    mass2_kg : float</span>
+<span class="sd">        Mass of second object (kg)</span>
+<span class="sd">    distance_m : float</span>
+<span class="sd">        Distance between centers (m)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Gravitational force (N)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="mf">6.674e-11</span>  <span class="c1"># N·m²/kg² - Gravitational constant</span>
+    
+    <span class="n">force_N</span> <span class="o">=</span> <span class="n">G</span> <span class="o">*</span> <span class="n">mass1_kg</span> <span class="o">*</span> <span class="n">mass2_kg</span> <span class="o">/</span> <span class="p">(</span><span class="n">distance_m</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">force_N</span>
+
+<span class="c1"># Test both versions</span>
+<span class="n">F1</span> <span class="o">=</span> <span class="n">calc</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">F2</span> <span class="o">=</span> <span class="n">gravitational_force</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Both give same result: </span><span class="si">{</span><span class="n">F1</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> N&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;But the second is much more readable!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Both give same result: 5.000000e+03 N
+But the second is much more readable!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="testing-and-validation">
+<span id="id6"></span><h2>8.2 Testing and Validation<a class="headerlink" href="#testing-and-validation" title="Link to this heading">#</a></h2>
+<p>Testing ensures your code produces correct results. For chemical engineering calculations, errors can have serious consequences.</p>
+<section id="unit-testing-with-known-results">
+<span id="id7"></span><h3>8.2.1 Unit Testing with Known Results<a class="headerlink" href="#unit-testing-with-known-results" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate pressure using ideal gas law: P = nRT/V</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n : float</span>
+<span class="sd">        Amount of gas (mol)</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Temperature (K)</span>
+<span class="sd">    V : float</span>
+<span class="sd">        Volume (m³)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Pressure (Pa)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span>  <span class="c1"># J/(mol·K)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
+    <span class="k">return</span> <span class="n">P</span>
+
+<span class="c1"># Test with known result: 1 mol at STP should give ~101325 Pa</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_ideal_gas_pressure</span><span class="p">():</span>
+    <span class="c1"># Test 1: Known textbook example</span>
+    <span class="n">P1</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">373.15</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated Pressure: </span><span class="si">{</span><span class="n">P1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">P1</span> <span class="o">-</span> <span class="mf">31097.41</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Test 1 failed&quot;</span>
+
+    <span class="c1"># Test 2: Room temperature gas</span>
+    <span class="n">P2</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.15</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated Pressure: </span><span class="si">{</span><span class="n">P2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">P2</span> <span class="o">-</span> <span class="mf">2478.9</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Test 2 failed&quot;</span>
+
+    <span class="c1"># Test 3: Scaling check (double moles → double pressure)</span>
+    <span class="n">P3</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">P4</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">P3</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">P4</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s2">&quot;Test 3 failed&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All ideal gas law tests passed!&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Run tests</span>
+<span class="n">test_ideal_gas_pressure</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculated Pressure: 310236.91 Pa
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">44</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All ideal gas law tests passed!&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="c1"># Run tests</span>
+<span class="ne">---&gt; </span><span class="mi">44</span> <span class="n">test_ideal_gas_pressure</span><span class="p">()</span>
+
+<span class="nn">Cell In[4], line 28,</span> in <span class="ni">test_ideal_gas_pressure</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">P1</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">373.15</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated Pressure: </span><span class="si">{</span><span class="n">P1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">28</span> <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">P1</span> <span class="o">-</span> <span class="mf">31097.41</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Test 1 failed&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="c1"># Test 2: Room temperature gas</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="n">P2</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.15</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="ne">AssertionError</span>: Test 1 failed
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="boundary-testing">
+<span id="id8"></span><h3>8.2.2 Boundary Testing<a class="headerlink" href="#boundary-testing" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_edge_cases</span><span class="p">():</span>
+    <span class="c1"># Very small volume → large pressure</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">P</span> <span class="o">&gt;</span> <span class="mf">1e6</span>
+
+    <span class="c1"># Zero moles → zero pressure</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">P</span> <span class="o">==</span> <span class="mf">0.0</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Edge case tests passed!&quot;</span><span class="p">)</span>
+
+<span class="c1"># Run edge case tests</span>
+<span class="n">test_edge_cases</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Edge case tests passed!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mass-energy-balance-verification">
+<span id="id9"></span><h3>8.2.3 Mass/Energy Balance Verification<a class="headerlink" href="#mass-energy-balance-verification" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mixing_tank</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">V1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">V2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate final concentration when mixing two solutions.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    C1, C2 : float</span>
+<span class="sd">        Concentrations (mol/L)</span>
+<span class="sd">    V1, V2 : float</span>
+<span class="sd">        Volumes (L)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        (final_concentration, final_volume)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Total moles (mass balance)</span>
+    <span class="n">n_total</span> <span class="o">=</span> <span class="n">C1</span> <span class="o">*</span> <span class="n">V1</span> <span class="o">+</span> <span class="n">C2</span> <span class="o">*</span> <span class="n">V2</span>
+    
+    <span class="c1"># Total volume</span>
+    <span class="n">V_total</span> <span class="o">=</span> <span class="n">V1</span> <span class="o">+</span> <span class="n">V2</span>
+    
+    <span class="c1"># Final concentration</span>
+    <span class="n">C_final</span> <span class="o">=</span> <span class="n">n_total</span> <span class="o">/</span> <span class="n">V_total</span>
+    
+    <span class="k">return</span> <span class="n">C_final</span><span class="p">,</span> <span class="n">V_total</span>
+
+<span class="c1"># Test with mass balance check</span>
+<span class="n">C1</span><span class="p">,</span> <span class="n">V1</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">100</span>  <span class="c1"># 2 M, 100 L</span>
+<span class="n">C2</span><span class="p">,</span> <span class="n">V2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">50</span>   <span class="c1"># 1 M, 50 L</span>
+
+<span class="n">C_final</span><span class="p">,</span> <span class="n">V_final</span> <span class="o">=</span> <span class="n">mixing_tank</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">V1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">V2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mixing Tank Calculation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Input:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Stream 1: </span><span class="si">{</span><span class="n">C1</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V1</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C1</span><span class="o">*</span><span class="n">V1</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Stream 2: </span><span class="si">{</span><span class="n">C2</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V2</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C2</span><span class="o">*</span><span class="n">V2</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total moles in: </span><span class="si">{</span><span class="n">C1</span><span class="o">*</span><span class="n">V1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C2</span><span class="o">*</span><span class="n">V2</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mixing Tank Calculation:
+
+Input:
+  Stream 1: 2.0 M × 100 L = 200.0 mol
+  Stream 2: 1.0 M × 50 L = 50.0 mol
+  Total moles in: 250.0 mol
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Output:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Final: </span><span class="si">{</span><span class="n">C_final</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C_final</span><span class="o">*</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total moles out: </span><span class="si">{</span><span class="n">C_final</span><span class="o">*</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Output:
+  Final: 1.6666666666666667 M × 150 L = 250.0 mol
+  Total moles out: 250.0 mol
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify mass balance</span>
+<span class="n">moles_in</span> <span class="o">=</span> <span class="n">C1</span><span class="o">*</span><span class="n">V1</span> <span class="o">+</span> <span class="n">C2</span><span class="o">*</span><span class="n">V2</span>
+<span class="n">moles_out</span> <span class="o">=</span> <span class="n">C_final</span> <span class="o">*</span> <span class="n">V_final</span>
+<span class="n">balance_error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">moles_in</span> <span class="o">-</span> <span class="n">moles_out</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mass Balance Check:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error: </span><span class="si">{</span><span class="n">balance_error</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">balance_error</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✓ Mass balance satisfied!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✗ Mass balance ERROR!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mass Balance Check:
+  Error: 0.0000000000 mol
+  ✓ Mass balance satisfied!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="error-handling">
+<span id="id10"></span><h2>8.3 Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h2>
+<p>Robust code anticipates and handles errors gracefully. This prevents crashes and provides useful feedback.</p>
+<section id="try-except-blocks">
+<span id="id11"></span><h3>8.3.1 Try-Except Blocks<a class="headerlink" href="#try-except-blocks" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_division</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Safely divide two numbers with error handling.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    numerator : float</span>
+<span class="sd">    denominator : float</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or None</span>
+<span class="sd">        Result of division, or None if error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Cannot divide </span><span class="si">{</span><span class="n">numerator</span><span class="si">}</span><span class="s2"> by zero!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Invalid input types: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">numerator</span><span class="p">)</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">denominator</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># Test error handling</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing error handling:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">result1</span> <span class="o">=</span> <span class="n">safe_division</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;10 / 2 = </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">result2</span> <span class="o">=</span> <span class="n">safe_division</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;10 / 0 = </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">result3</span> <span class="o">=</span> <span class="n">safe_division</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;10 / &#39;hello&#39; = </span><span class="si">{</span><span class="n">result3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Testing error handling:
+
+10 / 2 = 5.0
+Error: Cannot divide 10 by zero!
+10 / 0 = None
+Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;&gt;
+10 / &#39;hello&#39; = None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="input-validation">
+<h3>8.3.2 Input Validation<a class="headerlink" href="#input-validation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">heat_capacity_calculation</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">Cp</span><span class="p">,</span> <span class="n">delta_T</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate heat required: Q = m × Cp × ΔT</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mass : float</span>
+<span class="sd">        Mass (kg), must be positive</span>
+<span class="sd">    Cp : float</span>
+<span class="sd">        Specific heat capacity (J/kg·K), must be positive</span>
+<span class="sd">    delta_T : float</span>
+<span class="sd">        Temperature change (K), can be negative for cooling</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Heat energy (J)</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If mass or Cp is not positive</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Validate inputs</span>
+    <span class="k">if</span> <span class="n">mass</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mass must be positive, got </span><span class="si">{</span><span class="n">mass</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">Cp</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Heat capacity must be positive, got </span><span class="si">{</span><span class="n">Cp</span><span class="si">}</span><span class="s2"> J/kg·K&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate heat</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">*</span> <span class="n">Cp</span> <span class="o">*</span> <span class="n">delta_T</span>
+    
+    <span class="k">return</span> <span class="n">Q</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valid input</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">heat_capacity_calculation</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">4184</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Valid: Q = </span><span class="si">{</span><span class="n">Q</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> J&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Valid: Q = 523000.00 J
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid mass</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">heat_capacity_calculation</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">4184</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Should not reach here&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Caught error: Mass must be positive, got -2.5 kg
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="graceful-degradation">
+<span id="id12"></span><h3>8.3.3 Graceful Degradation<a class="headerlink" href="#graceful-degradation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average_temperature</span><span class="p">(</span><span class="n">temperatures</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the average temperature from a list.</span>
+<span class="sd">    Invalid entries are skipped.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    temperatures : list</span>
+<span class="sd">        List of temperature values (°C)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Average temperature of valid values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">temp_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">temp_value</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">273.15</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Below absolute zero&quot;</span><span class="p">)</span>
+
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">temp_value</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="k">continue</span>  <span class="c1"># Skip invalid values</span>
+
+    <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test data with valid and invalid values</span>
+<span class="n">temps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">22.5</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="s2">&quot;hot&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="mf">18.7</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mf">20.1</span><span class="p">]</span>
+
+<span class="n">avg</span> <span class="o">=</span> <span class="n">average_temperature</span><span class="p">(</span><span class="n">temps</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">avg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average temperature: </span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No valid temperature data found.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average temperature: 21.58 °C
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="debugging-techniques">
+<span id="id13"></span><h2>8.4 Debugging Techniques<a class="headerlink" href="#debugging-techniques" title="Link to this heading">#</a></h2>
+<p>Debugging is the process of finding and fixing errors in code. Systematic debugging saves time and frustration.</p>
+<section id="print-statement-debugging">
+<span id="id14"></span><h3>8.4.1 Print Statement Debugging<a class="headerlink" href="#print-statement-debugging" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_conversion</span><span class="p">(</span><span class="n">C_initial</span><span class="p">,</span> <span class="n">C_final</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate conversion: X = (C0 - C) / C0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: C_initial = </span><span class="si">{</span><span class="n">C_initial</span><span class="si">}</span><span class="s2">, C_final = </span><span class="si">{</span><span class="n">C_final</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug print</span>
+    
+    <span class="n">conversion</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_initial</span> <span class="o">-</span> <span class="n">C_final</span><span class="p">)</span> <span class="o">/</span> <span class="n">C_initial</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: conversion = </span><span class="si">{</span><span class="n">conversion</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug print</span>
+    
+    <span class="k">return</span> <span class="n">conversion</span>
+
+<span class="c1"># Test</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">calculate_conversion</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final conversion: </span><span class="si">{</span><span class="n">X</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="assert-statements-for-assumptions">
+<span id="id15"></span><h3>8.4.2 Assert Statements for Assumptions<a class="headerlink" href="#assert-statements-for-assumptions" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_residence_time</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">flow_rate</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate residence time: τ = V / Q</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    volume : float</span>
+<span class="sd">        Reactor volume (L)</span>
+<span class="sd">    flow_rate : float</span>
+<span class="sd">        Volumetric flow rate (L/min)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Residence time (min)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Assert our assumptions</span>
+    <span class="k">assert</span> <span class="n">volume</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Volume must be positive, got </span><span class="si">{</span><span class="n">volume</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="n">flow_rate</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Flow rate must be positive, got </span><span class="si">{</span><span class="n">flow_rate</span><span class="si">}</span><span class="s2">&quot;</span>
+    
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">/</span> <span class="n">flow_rate</span>
+    
+    <span class="c1"># Check the result makes sense</span>
+    <span class="k">assert</span> <span class="n">tau</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Residence time should be positive&quot;</span>
+    
+    <span class="k">return</span> <span class="n">tau</span>
+
+<span class="c1"># Valid case</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">calculate_residence_time</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Residence time: </span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Assertion failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Invalid case</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">calculate_residence_time</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Residence time: </span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Caught invalid input: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="usage-of-breakpoint">
+<span id="id16"></span><h3>8.4.3 Usage of breakpoint()<a class="headerlink" href="#usage-of-breakpoint" title="Link to this heading">#</a></h3>
+<p><strong>breakpoint()</strong> is a built-in Python function that pauses program execution at a specific line and enters interactive debugging mode. It allows you to inspect variable values, step through code line by line, and identify logic or runtime errors while the program is running. This is useful for understanding how a program behaves and for locating bugs without adding multiple print statements.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">kelvin.py</span></code>, and check how breakpoint() works.</p>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this chapter, you learned:</p>
+<ol class="arabic simple">
+<li><p><strong>Documentation</strong></p>
+<ul class="simple">
+<li><p>Writing comprehensive docstrings</p></li>
+<li><p>Using comments effectively</p></li>
+<li><p>Naming conventions and code organization</p></li>
+</ul>
+</li>
+<li><p><strong>Testing</strong></p>
+<ul class="simple">
+<li><p>Unit testing with known results</p></li>
+<li><p>Boundary condition testing</p></li>
+<li><p>Conservation law verification</p></li>
+</ul>
+</li>
+<li><p><strong>Error Handling</strong></p>
+<ul class="simple">
+<li><p>Try-except blocks</p></li>
+<li><p>Input validation</p></li>
+<li><p>Graceful degradation</p></li>
+</ul>
+</li>
+<li><p><strong>Debugging</strong></p>
+<ul class="simple">
+<li><p>Print statement debugging</p></li>
+<li><p>Assert statements</p></li>
+<li><p>Step-by-step verification</p></li>
+</ul>
+</li>
+<li><p><strong>Best Practices</strong></p>
+<ul class="simple">
+<li><p>Professional code style</p></li>
+<li><p>Comprehensive documentation</p></li>
+<li><p>Robust error handling</p></li>
+<li><p>Systematic testing</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Remember</strong>: Good programming practices prevent errors, save debugging time, and make your code understandable to others (including your future self!).</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -420,6 +1201,45 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-documentation-and-commenting">8.1 Code Documentation and Commenting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">8.1.1 Docstrings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-comments">8.1.2 Inline Comments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organization-best-practices">8.1.3 Code Organization Best Practices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">8.2 Testing and Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing-with-known-results">8.2.1 Unit Testing with Known Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-testing">8.2.2 Boundary Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-energy-balance-verification">8.2.3 Mass/Energy Balance Verification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">8.3 Error Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-blocks">8.3.1 Try-Except Blocks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-validation">8.3.2 Input Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graceful-degradation">8.3.3 Graceful Degradation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-techniques">8.4 Debugging Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-statement-debugging">8.4.1 Print Statement Debugging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assert-statements-for-assumptions">8.4.2 Assert Statements for Assumptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-of-breakpoint">8.4.3 Usage of breakpoint()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

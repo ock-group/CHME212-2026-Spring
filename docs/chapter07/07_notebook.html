@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Chapter 7. Functions/Modules &#8212; Introduction to Chemical Engineering Computation</title>
+    <title>Chapter 7. Functions/Modules/Packages &#8212; Introduction to Chemical Engineering Computation</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -183,6 +183,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -368,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 7. Functions/Modules</h1>
+    <h1>Chapter 7. Functions/Modules/Packages</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -378,58 +383,34 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. Functions/Modules</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-functions">7.1 Python Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-problem-too-many-functions">A Real Problem: Too Many Functions!</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-modules">7.2 What are Modules?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-modules">7.2.1 Built-in Modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-ways-to-import">7.2.2 Different Ways to Import</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-modules">7.2.3 Creating Your Own Modules</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-7-modules-and-packages">Chapter 7: Modules and Packages</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals">Goals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-modules">7.1 What are Modules?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-modules">7.2 Built-in Modules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#different-ways-to-import">7.3 Different Ways to Import</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-import">7.3.1 Basic Import</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-with-alias-nickname">7.3.2 Import with Alias (Nickname)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-specific-functions">7.3.3 Import Specific Functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-all-functions-use-carefully">7.3.4 Import All Functions (Use Carefully!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-libraries">7.3 What are Libraries?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#library-structure-example">Library Structure Example:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-python-libraries">Common Python Libraries:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-libraries">Installing Libraries:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-modules">7.4 Creating Your Own Modules</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-example">Step-by-Step Example:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-modules-and-packages">7.4 Best Practices for Modules and Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#organizing-your-code">7.4.1 Organizing Your Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-best-practices">7.4.2 Import Best Practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-template">7.4.3 Module Template</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-packages">7.5 What are Packages?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-structure-example">Package Structure Example:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-python-packages">Common Python Packages:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-packages">Installing Packages:</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-modules-and-packages">7.6 Best Practices for Modules and Packages</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#organizing-your-code">7.6.1 Organizing Your Code</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-best-practices">7.6.2 Import Best Practices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-template">7.6.3 Module Template</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-building-a-simple-project">7.7 Practical Example: Building a Simple Project</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">Project Structure:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-modules-work-together">How the modules work together:</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-next-steps">7.8 Summary and Next Steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-next-steps">7.5 Summary and Next Steps</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-ve-learned">What We’ve Learned</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-exercises">Practice Exercises</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-in-your-python-journey">Next Steps in Your Python Journey</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remember">Remember</a></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -441,8 +422,8 @@ document.write(`
                 <article class="bd-article">
                   
   <p>(7) =</p>
-<section class="tex2jax_ignore mathjax_ignore" id="chapter-7-functions-modules">
-<h1>Chapter 7. Functions/Modules<a class="headerlink" href="#chapter-7-functions-modules" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="chapter-7-functions-modules-packages">
+<h1>Chapter 7. Functions/Modules/Packages<a class="headerlink" href="#chapter-7-functions-modules-packages" title="Link to this heading">#</a></h1>
 <section id="python-functions">
 <span id="id1"></span><h2>7.1 Python Functions<a class="headerlink" href="#python-functions" title="Link to this heading">#</a></h2>
 <p><strong>Functions</strong> are the essential building blocks that make modules useful!</p>
@@ -612,24 +593,8 @@ Problems with this approach:
 </div>
 </div>
 </div>
-</section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="chapter-7-modules-and-packages">
-<span id="id2"></span><h1>Chapter 7: Modules and Packages<a class="headerlink" href="#chapter-7-modules-and-packages" title="Link to this heading">#</a></h1>
-<section id="goals">
-<h2>Goals<a class="headerlink" href="#goals" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Understand what modules and packages are</p></li>
-<li><p>Learn how to import and use existing modules</p></li>
-<li><p>Create your own custom modules</p></li>
-<li><p>Explore useful built-in and third-party packages</p></li>
-<li><p>Organize code effectively using modules</p></li>
-</ul>
-</section>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>As your Python programs get bigger, you’ll want to organize your code better. <strong>Modules</strong> and <strong>packages</strong> help you:</p>
+<p><strong>Modules and Libraries Overview</strong></p>
+<p>As your Python programs get bigger, you’ll want to organize your code better. <strong>Modules</strong> and <strong>libraries</strong> help you:</p>
 <ol class="arabic simple">
 <li><p><strong>Organize code</strong> - Split large programs into smaller, manageable files</p></li>
 <li><p><strong>Reuse code</strong> - Use the same functions in multiple programs</p></li>
@@ -637,9 +602,26 @@ Problems with this approach:
 <li><p><strong>Collaborate</strong> - Share code with others easily</p></li>
 </ol>
 <p>Think of modules like toolboxes - each one contains related tools (functions) for specific tasks.</p>
+<p>The Python programming language allows you to install add-on tools known as <em>libraries</em> or <em>packages</em> that provide additional features. Each library contains one or more <em>modules</em>, and each module contains useful <em>functions</em> (and sometimes datasets).</p>
+<p>Here’s how this hierarchy works:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>🐍 Python
+    └── 📚 Library (e.g., SciPy)
+        └── 📄 Module (e.g., integrate)
+            └── ⚙️ Function (e.g., quad, trapz)
+</pre></div>
+</div>
+<p><strong>Example:</strong></p>
+<ul class="simple">
+<li><p><strong>Python</strong> → <strong>SciPy Library</strong> → <strong>integrate module</strong> → <strong>quad() function</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.integrate.quad()</span></code> - integrates equations numerically</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 <section id="what-are-modules">
-<span id="id3"></span><h2>7.1 What are Modules?<a class="headerlink" href="#what-are-modules" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h2>7.2 What are Modules?<a class="headerlink" href="#what-are-modules" title="Link to this heading">#</a></h2>
 <p>A <strong>module</strong> is simply a Python file (<code class="docutils literal notranslate"><span class="pre">.py</span></code>) that contains functions, variables, and classes that you can use in other programs.</p>
 <p><strong>Why use modules?</strong></p>
 <ul class="simple">
@@ -662,9 +644,8 @@ Problems with this approach:
 <span class="n">result</span> <span class="o">=</span> <span class="n">math_tools</span><span class="o">.</span><span class="n">add_numbers</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Uses function from module</span>
 </pre></div>
 </div>
-</section>
 <section id="built-in-modules">
-<span id="id4"></span><h2>7.2 Built-in Modules<a class="headerlink" href="#built-in-modules" title="Link to this heading">#</a></h2>
+<span id="id3"></span><h3>7.2.1 Built-in Modules<a class="headerlink" href="#built-in-modules" title="Link to this heading">#</a></h3>
 <p>Python comes with many <strong>built-in modules</strong> ready to use. These are like pre-installed apps on your phone - they’re already there, you just need to import them.</p>
 <p><strong>Common Built-in Modules:</strong></p>
 <ul class="simple">
@@ -681,9 +662,7 @@ Problems with this approach:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examples of Built-in Modules</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Math Module ===&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Math Module ===&quot;</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
 <span class="c1"># Mathematical functions</span>
@@ -692,15 +671,42 @@ Problems with this approach:
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ceiling of 4.3: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">4.3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Floor of 4.7: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">4.7</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Random Module ===&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Math Module ===
+Square root of 16: 4.0
+2 to the power of 3: 8.0
+Pi: 3.141592653589793
+Ceiling of 4.3: 5
+Floor of 4.7: 4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Random Module ===&quot;</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
 <span class="c1"># Generate random numbers</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random number between 1-10: </span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random decimal between 0-1: </span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Random choice from a list</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Random Module ===
+Random number between 1-10: 5
+Random decimal between 0-1: 0.04594082254387577
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random choice from a list</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random color: </span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -708,8 +714,19 @@ Problems with this approach:
 <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shuffled numbers: </span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== DateTime Module ===&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random color: blue
+Shuffled numbers: [2, 1, 5, 3, 4]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== DateTime Module ===&quot;</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 
 <span class="c1"># Current date and time</span>
@@ -722,8 +739,23 @@ Problems with this approach:
 <span class="c1"># Create a specific date</span>
 <span class="n">birthday</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Birthday: </span><span class="si">{</span><span class="n">birthday</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== OS Module ===&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== DateTime Module ===
+Current date and time: 2026-01-19 19:59:34.724151
+Current year: 2026
+Current month: 1
+Current day: 19
+Birthday: 2000-05-15
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== OS Module ===&quot;</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="c1"># Get current working directory</span>
@@ -741,27 +773,7 @@ Problems with this approach:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Math Module ===
-Square root of 16: 4.0
-2 to the power of 3: 8.0
-Pi: 3.141592653589793
-Ceiling of 4.3: 5
-Floor of 4.7: 4
-
-=== Random Module ===
-Random number between 1-10: 7
-Random decimal between 0-1: 0.18895437409489835
-Random color: blue
-Shuffled numbers: [3, 1, 5, 4, 2]
-
-=== DateTime Module ===
-Current date and time: 2026-01-05 20:51:10.707599
-Current year: 2026
-Current month: 1
-Current day: 5
-Birthday: 2000-05-15
-
-=== OS Module ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== OS Module ===
 Current directory: /Users/hoon/CHME212/cheme_comp_book/docs/chapter07
 Home directory: /Users/hoon
 Does &#39;example.txt&#39; exist? False
@@ -771,32 +783,25 @@ Does &#39;example.txt&#39; exist? False
 </div>
 </section>
 <section id="different-ways-to-import">
-<span id="id5"></span><h2>7.3 Different Ways to Import<a class="headerlink" href="#different-ways-to-import" title="Link to this heading">#</a></h2>
+<span id="id4"></span><h3>7.2.2 Different Ways to Import<a class="headerlink" href="#different-ways-to-import" title="Link to this heading">#</a></h3>
 <p>There are several ways to import modules, each with its own advantages:</p>
-<section id="basic-import">
-<h3>7.3.1 Basic Import<a class="headerlink" href="#basic-import" title="Link to this heading">#</a></h3>
+<p><strong>Basic Import</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># Use module_name.function_name</span>
 </pre></div>
 </div>
-</section>
-<section id="import-with-alias-nickname">
-<h3>7.3.2 Import with Alias (Nickname)<a class="headerlink" href="#import-with-alias-nickname" title="Link to this heading">#</a></h3>
+<p><strong>Import with Alias (Nickname)</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">m</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># Shorter name</span>
 </pre></div>
 </div>
-</section>
-<section id="import-specific-functions">
-<h3>7.3.3 Import Specific Functions<a class="headerlink" href="#import-specific-functions" title="Link to this heading">#</a></h3>
+<p><strong>Import Specific Functions</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">pi</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># Use function directly, no module name needed</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="import-all-functions-use-carefully">
-<h3>7.3.4 Import All Functions (Use Carefully!)<a class="headerlink" href="#import-all-functions-use-carefully" title="Link to this heading">#</a></h3>
+<p><strong>Import All Functions (Use Carefully!)</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># Can use any function from math module</span>
 </pre></div>
@@ -854,11 +859,11 @@ Square root using math.sqrt: 7.0
 Pi using math.pi: 3.141592653589793
 
 === Method 2: Import with Alias ===
-Random number using rnd.randint: 89
+Random number using rnd.randint: 11
 
 === Method 3: Import Specific Functions ===
-Current time: 20:51:10
-Today&#39;s date: 2026-01-05
+Current time: 19:59:34
+Today&#39;s date: 2026-01-19
 
 === Method 4: Import Multiple Specific Functions ===
 Using sqrt directly: 8.0
@@ -880,12 +885,10 @@ Using full module names prevents confusion
 </div>
 </div>
 </section>
-</section>
 <section id="creating-your-own-modules">
-<span id="id6"></span><h2>7.4 Creating Your Own Modules<a class="headerlink" href="#creating-your-own-modules" title="Link to this heading">#</a></h2>
+<span id="id5"></span><h3>7.2.3 Creating Your Own Modules<a class="headerlink" href="#creating-your-own-modules" title="Link to this heading">#</a></h3>
 <p>Creating your own modules is easy! Just save functions in a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file and import them in other programs.</p>
-<section id="step-by-step-example">
-<h3>Step-by-Step Example:<a class="headerlink" href="#step-by-step-example" title="Link to this heading">#</a></h3>
+<p><strong>Step-by-Step Example:</strong></p>
 <p><strong>Step 1:</strong> Create a file called <code class="docutils literal notranslate"><span class="pre">my_functions.py</span></code> with some functions:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># my_functions.py (this would be a separate file)</span>
 
@@ -957,8 +960,19 @@ Using full module names prevents confusion
 <span class="n">PERFECT_SCORE</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Custom functions created!&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Using Custom Module Functions ===&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Creating Custom Module Functions ===
+Custom functions created!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Using Custom Module Functions ===&quot;</span><span class="p">)</span>
 <span class="c1"># Now let&#39;s use our &quot;module&quot; functions</span>
 
 <span class="c1"># Student data</span>
@@ -987,10 +1001,7 @@ Using full module names prevents confusion
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Creating Custom Module Functions ===
-Custom functions created!
-
-=== Using Custom Module Functions ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Using Custom Module Functions ===
 Student grades: [85, 92, 78, 88, 94]
 GPA: 87.40
 Test score: 87
@@ -1010,31 +1021,31 @@ Passing score is: 60
 </div>
 </section>
 </section>
-<section id="what-are-packages">
-<span id="id7"></span><h2>7.5 What are Packages?<a class="headerlink" href="#what-are-packages" title="Link to this heading">#</a></h2>
-<p>A <strong>package</strong> is a collection of related modules organized in folders. Think of it like a filing cabinet:</p>
+<section id="what-are-libraries">
+<span id="id6"></span><h2>7.3 What are Libraries?<a class="headerlink" href="#what-are-libraries" title="Link to this heading">#</a></h2>
+<p>A <strong>library</strong> is a collection of related modules organized in folders. Think of it like a filing cabinet:</p>
 <ul class="simple">
-<li><p><strong>Package</strong> = Filing cabinet (main folder)</p></li>
+<li><p><strong>Library</strong> = Filing cabinet (main folder)</p></li>
 <li><p><strong>Modules</strong> = Individual files in the cabinet</p></li>
 <li><p><strong>Functions</strong> = Specific documents in each file</p></li>
 </ul>
-<section id="package-structure-example">
-<h3>Package Structure Example:<a class="headerlink" href="#package-structure-example" title="Link to this heading">#</a></h3>
+<section id="library-structure-example">
+<h3>Library Structure Example:<a class="headerlink" href="#library-structure-example" title="Link to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_project</span><span class="o">/</span>
-    <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Makes it a package</span>
-    <span class="n">math_tools</span><span class="o">/</span>          <span class="c1"># Package folder</span>
-        <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Makes it a package</span>
+    <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Makes it a library</span>
+    <span class="n">math_tools</span><span class="o">/</span>          <span class="c1"># Library folder</span>
+        <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Makes it a library</span>
         <span class="n">basic_math</span><span class="o">.</span><span class="n">py</span>    <span class="c1"># Module</span>
         <span class="n">advanced_math</span><span class="o">.</span><span class="n">py</span> <span class="c1"># Module</span>
-    <span class="n">text_tools</span><span class="o">/</span>          <span class="c1"># Another package</span>
-        <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Makes it a package</span>
+    <span class="n">text_tools</span><span class="o">/</span>          <span class="c1"># Another library</span>
+        <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Makes it a library</span>
         <span class="n">formatting</span><span class="o">.</span><span class="n">py</span>    <span class="c1"># Module</span>
         <span class="n">analysis</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Module</span>
 </pre></div>
 </div>
 </section>
-<section id="common-python-packages">
-<h3>Common Python Packages:<a class="headerlink" href="#common-python-packages" title="Link to this heading">#</a></h3>
+<section id="common-python-libraries">
+<h3>Common Python Libraries:<a class="headerlink" href="#common-python-libraries" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>NumPy</strong> - Numerical computing</p></li>
 <li><p><strong>Pandas</strong> - Data analysis</p></li>
@@ -1043,8 +1054,8 @@ Passing score is: 60
 <li><p><strong>Flask</strong> - Building web applications</p></li>
 </ul>
 </section>
-<section id="installing-packages">
-<h3>Installing Packages:<a class="headerlink" href="#installing-packages" title="Link to this heading">#</a></h3>
+<section id="installing-libraries">
+<h3>Installing Libraries:<a class="headerlink" href="#installing-libraries" title="Link to this heading">#</a></h3>
 <p>Most packages need to be installed first:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>package_name
 </pre></div>
@@ -1060,7 +1071,7 @@ pip<span class="w"> </span>install<span class="w"> </span>matplotlib
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examples of Popular Packages</span>
 <span class="c1"># Note: Some packages might not be installed in this environment</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Exploring Package Usage ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Exploring Library Usage ===&quot;</span><span class="p">)</span>
 
 <span class="c1"># Check what packages are available</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
@@ -1075,87 +1086,16 @@ pip<span class="w"> </span>install<span class="w"> </span>matplotlib
 <span class="n">word_count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Word counts using Counter: </span><span class="si">{</span><span class="n">word_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Most common word: </span><span class="si">{</span><span class="n">word_count</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># JSON - working with JSON data</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="n">student_data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="s2">&quot;grades&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="c1"># Convert to JSON string</span>
-<span class="n">json_string</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">student_data</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">JSON string: </span><span class="si">{</span><span class="n">json_string</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Convert back to Python dictionary</span>
-<span class="n">parsed_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsed back: </span><span class="si">{</span><span class="n">parsed_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Third-Party Packages (if available) ===&quot;</span><span class="p">)</span>
-
-<span class="c1"># Try to use numpy (if installed)</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-    <span class="n">np_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original list: </span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy array: </span><span class="si">{</span><span class="n">np_array</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Square of each number: </span><span class="si">{</span><span class="n">np_array</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ NumPy is available!&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ NumPy is not installed&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;To install: pip install numpy&quot;</span><span class="p">)</span>
-
-<span class="c1"># Try to use requests (if installed)</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Requests package is available!&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This package is used for making web requests&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Requests is not installed&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;To install: pip install requests&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Package Import Variations ===&quot;</span><span class="p">)</span>
-<span class="c1"># You can import specific parts of packages</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span>
-
-<span class="c1"># defaultdict - dictionary with default values</span>
-<span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># default value is 0</span>
-<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">5</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Default dict: </span><span class="si">{</span><span class="nb">dict</span><span class="p">(</span><span class="n">dd</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># deque - double-ended queue (efficient for adding/removing from both ends)</span>
-<span class="n">dq</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="n">dq</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Add to left</span>
-<span class="n">dq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>      <span class="c1"># Add to right</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deque: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">dq</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Exploring Package Usage ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Exploring Library Usage ===
 Python version: 3.10.18 | packaged by conda-forge | (main, Jun  4 2025, 14:46:00) [Clang 18.1.8 ]
 
 === Standard Library Packages ===
 Word counts using Counter: Counter({&#39;apple&#39;: 3, &#39;banana&#39;: 2, &#39;cherry&#39;: 1})
 Most common word: [(&#39;apple&#39;, 3)]
-
-JSON string: {&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 20, &quot;grades&quot;: [85, 92, 78, 88]}
-Parsed back: {&#39;name&#39;: &#39;Alice&#39;, &#39;age&#39;: 20, &#39;grades&#39;: [85, 92, 78, 88]}
-
-=== Third-Party Packages (if available) ===
-Original list: [1, 2, 3, 4, 5]
-NumPy array: [1 2 3 4 5]
-Square of each number: [ 1  4  9 16 25]
-✅ NumPy is available!
-✅ Requests package is available!
-This package is used for making web requests
-
-=== Package Import Variations ===
-Default dict: {&#39;count&#39;: 1, &#39;total&#39;: 5}
-Deque: [0, 1, 2, 3, 4]
 </pre></div>
 </div>
 </div>
@@ -1163,9 +1103,9 @@ Deque: [0, 1, 2, 3, 4]
 </section>
 </section>
 <section id="best-practices-for-modules-and-packages">
-<span id="id8"></span><h2>7.6 Best Practices for Modules and Packages<a class="headerlink" href="#best-practices-for-modules-and-packages" title="Link to this heading">#</a></h2>
+<span id="id7"></span><h2>7.4 Best Practices for Modules and Packages<a class="headerlink" href="#best-practices-for-modules-and-packages" title="Link to this heading">#</a></h2>
 <section id="organizing-your-code">
-<h3>7.6.1 Organizing Your Code<a class="headerlink" href="#organizing-your-code" title="Link to this heading">#</a></h3>
+<h3>7.4.1 Organizing Your Code<a class="headerlink" href="#organizing-your-code" title="Link to this heading">#</a></h3>
 <p><strong>Good Module Design:</strong></p>
 <ul class="simple">
 <li><p><strong>One purpose per module</strong> - Keep related functions together</p></li>
@@ -1175,7 +1115,7 @@ Deque: [0, 1, 2, 3, 4]
 </ul>
 </section>
 <section id="import-best-practices">
-<h3>7.6.2 Import Best Practices<a class="headerlink" href="#import-best-practices" title="Link to this heading">#</a></h3>
+<h3>7.4.2 Import Best Practices<a class="headerlink" href="#import-best-practices" title="Link to this heading">#</a></h3>
 <p><strong>DO:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>                    <span class="c1"># Clear and explicit</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>  <span class="c1"># Import specific functions you use</span>
@@ -1189,7 +1129,7 @@ Deque: [0, 1, 2, 3, 4]
 </div>
 </section>
 <section id="module-template">
-<h3>7.6.3 Module Template<a class="headerlink" href="#module-template" title="Link to this heading">#</a></h3>
+<h3>7.4.3 Module Template<a class="headerlink" href="#module-template" title="Link to this heading">#</a></h3>
 <p>Here’s a good template for creating your own modules:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># my_module.py</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -1224,390 +1164,10 @@ Deque: [0, 1, 2, 3, 4]
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Best Practices Examples</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Example of Well-Organized Module ===&quot;</span><span class="p">)</span>
-
-<span class="c1"># This is how you might organize functions in a module called &#39;grade_calculator.py&#39;</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">calculate_letter_grade</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert a numeric score to a letter grade.</span>
-<span class="sd">    </span>
-<span class="sd">    Args:</span>
-<span class="sd">        score (float): Numeric score between 0-100</span>
-<span class="sd">        </span>
-<span class="sd">    Returns:</span>
-<span class="sd">        str: Letter grade (A, B, C, D, or F)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
-    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
-    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
-    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">calculate_gpa</span><span class="p">(</span><span class="n">grades</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate GPA from a list of numeric grades.</span>
-<span class="sd">    </span>
-<span class="sd">    Args:</span>
-<span class="sd">        grades (list): List of numeric grades</span>
-<span class="sd">        </span>
-<span class="sd">    Returns:</span>
-<span class="sd">        float: GPA value</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">grades</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mf">0.0</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">is_honors_student</span><span class="p">(</span><span class="n">gpa</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Check if student qualifies for honors based on GPA.</span>
-<span class="sd">    </span>
-<span class="sd">    Args:</span>
-<span class="sd">        gpa (float): Student&#39;s GPA</span>
-<span class="sd">        </span>
-<span class="sd">    Returns:</span>
-<span class="sd">        bool: True if honors student, False otherwise</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">HONORS_THRESHOLD</span> <span class="o">=</span> <span class="mf">3.5</span>  <span class="c1"># Local constant</span>
-    <span class="k">return</span> <span class="n">gpa</span> <span class="o">&gt;=</span> <span class="n">HONORS_THRESHOLD</span>
-
-<span class="c1"># Module constants</span>
-<span class="n">PASSING_GRADE</span> <span class="o">=</span> <span class="mi">60</span>
-<span class="n">PERFECT_SCORE</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">GPA_SCALE</span> <span class="o">=</span> <span class="mf">4.0</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grade calculator functions defined!&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Using the Well-Organized Functions ===&quot;</span><span class="p">)</span>
-<span class="c1"># Test the functions</span>
-<span class="n">student_scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">94</span><span class="p">]</span>
-<span class="n">student_gpa</span> <span class="o">=</span> <span class="n">calculate_gpa</span><span class="p">(</span><span class="n">student_scores</span><span class="p">)</span>
-<span class="n">first_score_letter</span> <span class="o">=</span> <span class="n">calculate_letter_grade</span><span class="p">(</span><span class="n">student_scores</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">honors_status</span> <span class="o">=</span> <span class="n">is_honors_student</span><span class="p">(</span><span class="n">student_gpa</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Student scores: </span><span class="si">{</span><span class="n">student_scores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GPA: </span><span class="si">{</span><span class="n">student_gpa</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First score letter grade: </span><span class="si">{</span><span class="n">first_score_letter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Honors student: </span><span class="si">{</span><span class="n">honors_status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Passing grade threshold: </span><span class="si">{</span><span class="n">PASSING_GRADE</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Good Import Examples ===&quot;</span><span class="p">)</span>
-<span class="c1"># Examples of clean, readable imports</span>
-
-<span class="c1"># Standard library imports (alphabetical order)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-
-<span class="c1"># Third-party imports with standard aliases</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ NumPy and Pandas available with standard aliases&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Some packages not available (that&#39;s okay for this demo)&quot;</span><span class="p">)</span>
-
-<span class="c1"># Specific function imports</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Clean imports completed&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Module Documentation Example ===&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">well_documented_function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Process data based on a threshold value.</span>
-<span class="sd">    </span>
-<span class="sd">    This function demonstrates good documentation practices.</span>
-<span class="sd">    </span>
-<span class="sd">    Args:</span>
-<span class="sd">        data (list): List of numeric values to process</span>
-<span class="sd">        threshold (float, optional): Cutoff value. Defaults to 0.5.</span>
-<span class="sd">        </span>
-<span class="sd">    Returns:</span>
-<span class="sd">        dict: Dictionary with &#39;above&#39; and &#39;below&#39; threshold values</span>
-<span class="sd">        </span>
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; result = well_documented_function([0.3, 0.7, 0.9, 0.2])</span>
-<span class="sd">        &gt;&gt;&gt; print(result)</span>
-<span class="sd">        {&#39;above&#39;: [0.7, 0.9], &#39;below&#39;: [0.3, 0.2]}</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">above</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span>
-    <span class="n">below</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;above&#39;</span><span class="p">:</span> <span class="n">above</span><span class="p">,</span> <span class="s1">&#39;below&#39;</span><span class="p">:</span> <span class="n">below</span><span class="p">}</span>
-
-<span class="c1"># Test the documented function</span>
-<span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">well_documented_function</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test data: </span><span class="si">{</span><span class="n">test_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Well-documented function works correctly!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Example of Well-Organized Module ===
-Grade calculator functions defined!
-
-=== Using the Well-Organized Functions ===
-Student scores: [85, 92, 78, 88, 94]
-GPA: 87.40
-First score letter grade: B
-Honors student: True
-Passing grade threshold: 60
-
-=== Good Import Examples ===
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ NumPy and Pandas available with standard aliases
-✅ Clean imports completed
-
-=== Module Documentation Example ===
-Test data: [0.3, 0.7, 0.9, 0.2, 0.8]
-Result: {&#39;above&#39;: [0.7, 0.9, 0.8], &#39;below&#39;: [0.3, 0.2]}
-✅ Well-documented function works correctly!
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="practical-example-building-a-simple-project">
-<span id="id9"></span><h2>7.7 Practical Example: Building a Simple Project<a class="headerlink" href="#practical-example-building-a-simple-project" title="Link to this heading">#</a></h2>
-<p>Let’s see how modules work in a real project. Imagine you’re building a grade management system:</p>
-<section id="project-structure">
-<h3>Project Structure:<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grade_manager</span><span class="o">/</span>
-    <span class="n">main</span><span class="o">.</span><span class="n">py</span>           <span class="c1"># Main program</span>
-    <span class="n">student_tools</span><span class="o">.</span><span class="n">py</span>  <span class="c1"># Student-related functions</span>
-    <span class="n">grade_tools</span><span class="o">.</span><span class="n">py</span>    <span class="c1"># Grade calculation functions</span>
-    <span class="n">file_tools</span><span class="o">.</span><span class="n">py</span>     <span class="c1"># File reading/writing functions</span>
-</pre></div>
-</div>
-</section>
-<section id="how-the-modules-work-together">
-<h3>How the modules work together:<a class="headerlink" href="#how-the-modules-work-together" title="Link to this heading">#</a></h3>
-<p><strong>student_tools.py:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_student</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">student_id</span><span class="p">,</span> <span class="s2">&quot;grades&quot;</span><span class="p">:</span> <span class="p">[]}</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="n">student</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
-    <span class="n">student</span><span class="p">[</span><span class="s2">&quot;grades&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>grade_tools.py:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_average</span><span class="p">(</span><span class="n">grades</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="k">if</span> <span class="n">grades</span> <span class="k">else</span> <span class="mi">0</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">get_letter_grade</span><span class="p">(</span><span class="n">average</span><span class="p">):</span>
-    <span class="c1"># Letter grade logic here</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-<p><strong><a class="reference external" href="http://main.py">main.py</a>:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">student_tools</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">grade_tools</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gt</span>
-
-<span class="c1"># Create student</span>
-<span class="n">alice</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">create_student</span><span class="p">(</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span> <span class="s2">&quot;12345&quot;</span><span class="p">)</span>
-
-<span class="c1"># Add grades</span>
-<span class="n">st</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="mi">92</span><span class="p">)</span>
-
-<span class="c1"># Calculate results</span>
-<span class="n">avg</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">calculate_average</span><span class="p">(</span><span class="n">alice</span><span class="p">[</span><span class="s2">&quot;grades&quot;</span><span class="p">])</span>
-<span class="n">letter</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">get_letter_grade</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alice</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>This modular approach makes the code:</p>
-<ul class="simple">
-<li><p><strong>Easier to maintain</strong> - Each file has a specific purpose</p></li>
-<li><p><strong>Easier to test</strong> - Test each module separately</p></li>
-<li><p><strong>Easier to collaborate</strong> - Different people can work on different modules</p></li>
-<li><p><strong>Reusable</strong> - Use the same modules in different projects</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Practical Project Example - Grade Management System</span>
-<span class="c1"># Simulating multiple modules in one notebook</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Simulating student_tools.py module ===&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">create_student</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a new student record&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">student_id</span><span class="p">,</span>
-        <span class="s2">&quot;grades&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2024&quot;</span>
-    <span class="p">}</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="n">student</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a grade to a student&#39;s record&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">grade</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
-        <span class="n">student</span><span class="p">[</span><span class="s2">&quot;grades&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid grade: </span><span class="si">{</span><span class="n">grade</span><span class="si">}</span><span class="s2">. Must be between 0-100&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">get_student_info</span><span class="p">(</span><span class="n">student</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get formatted student information&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Student: </span><span class="si">{</span><span class="n">student</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (ID: </span><span class="si">{</span><span class="n">student</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student tools module functions created!&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Simulating grade_tools.py module ===&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">calculate_average</span><span class="p">(</span><span class="n">grades</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate average of grades&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="k">if</span> <span class="n">grades</span> <span class="k">else</span> <span class="mi">0</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">get_letter_grade</span><span class="p">(</span><span class="n">average</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert average to letter grade&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
-    <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
-    <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
-    <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">get_grade_summary</span><span class="p">(</span><span class="n">student</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get complete grade summary for a student&quot;&quot;&quot;</span>
-    <span class="n">grades</span> <span class="o">=</span> <span class="n">student</span><span class="p">[</span><span class="s2">&quot;grades&quot;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">grades</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;No grades recorded&quot;</span>
-    
-    <span class="n">avg</span> <span class="o">=</span> <span class="n">calculate_average</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
-    <span class="n">letter</span> <span class="o">=</span> <span class="n">get_letter_grade</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="n">avg</span><span class="p">,</span>
-        <span class="s2">&quot;letter_grade&quot;</span><span class="p">:</span> <span class="n">letter</span><span class="p">,</span>
-        <span class="s2">&quot;total_grades&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span>
-        <span class="s2">&quot;highest&quot;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">grades</span><span class="p">),</span>
-        <span class="s2">&quot;lowest&quot;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
-    <span class="p">}</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grade tools module functions created!&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Simulating main.py - Using the modules together ===&quot;</span><span class="p">)</span>
-
-<span class="c1"># Create students (using student_tools functions)</span>
-<span class="n">alice</span> <span class="o">=</span> <span class="n">create_student</span><span class="p">(</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span> <span class="s2">&quot;A12345&quot;</span><span class="p">)</span>
-<span class="n">bob</span> <span class="o">=</span> <span class="n">create_student</span><span class="p">(</span><span class="s2">&quot;Bob Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;B67890&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created students:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">get_student_info</span><span class="p">(</span><span class="n">alice</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">get_student_info</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Add grades (using student_tools functions)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Adding grades...&quot;</span><span class="p">)</span>
-<span class="n">add_grade</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
-<span class="n">add_grade</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="mi">92</span><span class="p">)</span>
-<span class="n">add_grade</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="mi">78</span><span class="p">)</span>
-<span class="n">add_grade</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="mi">88</span><span class="p">)</span>
-
-<span class="n">add_grade</span><span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
-<span class="n">add_grade</span><span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">87</span><span class="p">)</span>
-<span class="n">add_grade</span><span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">94</span><span class="p">)</span>
-
-<span class="c1"># Try to add invalid grade</span>
-<span class="n">add_grade</span><span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>  <span class="c1"># This should show an error</span>
-
-<span class="c1"># Generate reports (using grade_tools functions)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Grade Reports ===&quot;</span><span class="p">)</span>
-
-<span class="n">alice_summary</span> <span class="o">=</span> <span class="n">get_grade_summary</span><span class="p">(</span><span class="n">alice</span><span class="p">)</span>
-<span class="n">bob_summary</span> <span class="o">=</span> <span class="n">get_grade_summary</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">get_student_info</span><span class="p">(</span><span class="n">alice</span><span class="p">)</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Grades: </span><span class="si">{</span><span class="n">alice</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Average: </span><span class="si">{</span><span class="n">alice_summary</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Letter Grade: </span><span class="si">{</span><span class="n">alice_summary</span><span class="p">[</span><span class="s1">&#39;letter_grade&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Highest: </span><span class="si">{</span><span class="n">alice_summary</span><span class="p">[</span><span class="s1">&#39;highest&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Lowest: </span><span class="si">{</span><span class="n">alice_summary</span><span class="p">[</span><span class="s1">&#39;lowest&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">get_student_info</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Grades: </span><span class="si">{</span><span class="n">bob</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Average: </span><span class="si">{</span><span class="n">bob_summary</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Letter Grade: </span><span class="si">{</span><span class="n">bob_summary</span><span class="p">[</span><span class="s1">&#39;letter_grade&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Highest: </span><span class="si">{</span><span class="n">bob_summary</span><span class="p">[</span><span class="s1">&#39;highest&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Lowest: </span><span class="si">{</span><span class="n">bob_summary</span><span class="p">[</span><span class="s1">&#39;lowest&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Benefits of This Modular Approach ===&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Separation of concerns - each module has a specific job&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Reusability - functions can be used in different parts of the program&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Maintainability - easy to find and fix issues&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Testability - each function can be tested independently&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Collaboration - team members can work on different modules&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Scalability - easy to add new features without breaking existing code&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Simulating student_tools.py module ===
-Student tools module functions created!
-
-=== Simulating grade_tools.py module ===
-Grade tools module functions created!
-
-=== Simulating main.py - Using the modules together ===
-Created students:
-  - Student: Alice Johnson (ID: A12345)
-  - Student: Bob Smith (ID: B67890)
-
-Adding grades...
-Invalid grade: 150. Must be between 0-100
-
-=== Grade Reports ===
-
-Student: Alice Johnson (ID: A12345):
-  Grades: [85, 92, 78, 88]
-  Average: 85.8
-  Letter Grade: B
-  Highest: 92
-  Lowest: 78
-
-Student: Bob Smith (ID: B67890):
-  Grades: [90, 87, 94]
-  Average: 90.3
-  Letter Grade: A
-  Highest: 94
-  Lowest: 87
-
-=== Benefits of This Modular Approach ===
-✅ Separation of concerns - each module has a specific job
-✅ Reusability - functions can be used in different parts of the program
-✅ Maintainability - easy to find and fix issues
-✅ Testability - each function can be tested independently
-✅ Collaboration - team members can work on different modules
-✅ Scalability - easy to add new features without breaking existing code
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 <section id="summary-and-next-steps">
-<h2>7.8 Summary and Next Steps<a class="headerlink" href="#summary-and-next-steps" title="Link to this heading">#</a></h2>
+<h2>7.5 Summary and Next Steps<a class="headerlink" href="#summary-and-next-steps" title="Link to this heading">#</a></h2>
 <section id="what-we-ve-learned">
 <h3>What We’ve Learned<a class="headerlink" href="#what-we-ve-learned" title="Link to this heading">#</a></h3>
 <p>In this chapter, we explored the powerful world of Python modules and packages:</p>
@@ -1621,44 +1181,14 @@ Student: Bob Smith (ID: B67890):
 </ul>
 </li>
 <li><p><strong>Custom Modules</strong>: How to create your own modules to organize code</p></li>
-<li><p><strong>Packages</strong>: Collections of modules that work together</p></li>
+<li><p><strong>Libraries</strong>: Collections of modules that work together</p></li>
 <li><p><strong>Best Practices</strong>: Writing clean, documented, and maintainable code</p></li>
-<li><p><strong>Real-world Application</strong>: How modules work together in actual projects</p></li>
 </ol>
-</section>
-<section id="key-takeaways">
-<h3>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Modules make code reusable</strong> - write once, use many times</p></li>
-<li><p><strong>Organization matters</strong> - well-structured code is easier to maintain</p></li>
-<li><p><strong>Documentation is crucial</strong> - help others (and future you) understand your code</p></li>
-<li><p><strong>Start simple</strong> - begin with basic modules and grow complexity gradually</p></li>
-</ul>
-</section>
-<section id="practice-exercises">
-<h3>Practice Exercises<a class="headerlink" href="#practice-exercises" title="Link to this heading">#</a></h3>
-<p>Try these exercises to reinforce your learning:</p>
-<ol class="arabic simple">
-<li><p><strong>Explore a built-in module</strong>: Pick one we didn’t cover (<code class="docutils literal notranslate"><span class="pre">sys</span></code>, <code class="docutils literal notranslate"><span class="pre">pathlib</span></code>, <code class="docutils literal notranslate"><span class="pre">csv</span></code>) and try 3 functions</p></li>
-<li><p><strong>Create your own module</strong>: Make a module with functions for basic math operations</p></li>
-<li><p><strong>Build a mini-package</strong>: Create a folder with multiple related modules</p></li>
-<li><p><strong>Document everything</strong>: Practice writing good docstrings and comments</p></li>
-</ol>
-</section>
-<section id="next-steps-in-your-python-journey">
-<h3>Next Steps in Your Python Journey<a class="headerlink" href="#next-steps-in-your-python-journey" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Learn about <strong>error handling</strong> to make your modules more robust</p></li>
-<li><p>Explore <strong>classes and objects</strong> for more advanced code organization</p></li>
-<li><p>Study <strong>testing</strong> to ensure your modules work correctly</p></li>
-<li><p>Investigate <strong>virtual environments</strong> for managing different project dependencies</p></li>
-</ul>
 </section>
 <section id="remember">
 <h3>Remember<a class="headerlink" href="#remember" title="Link to this heading">#</a></h3>
 <p>Programming is like building with LEGO blocks - modules are your reusable pieces that you can combine in endless ways to create amazing things! 🐍✨</p>
 <hr class="docutils" />
-<p><strong>Congratulations!</strong> You’ve completed Chapter 7 on Modules and Packages. You now have the tools to write organized, reusable Python code!</p>
 </section>
 </section>
 </section>
@@ -1709,58 +1239,34 @@ Student: Bob Smith (ID: B67890):
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. Functions/Modules</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-functions">7.1 Python Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-problem-too-many-functions">A Real Problem: Too Many Functions!</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-modules">7.2 What are Modules?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-modules">7.2.1 Built-in Modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-ways-to-import">7.2.2 Different Ways to Import</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-modules">7.2.3 Creating Your Own Modules</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-7-modules-and-packages">Chapter 7: Modules and Packages</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals">Goals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-modules">7.1 What are Modules?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-modules">7.2 Built-in Modules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#different-ways-to-import">7.3 Different Ways to Import</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-import">7.3.1 Basic Import</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-with-alias-nickname">7.3.2 Import with Alias (Nickname)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-specific-functions">7.3.3 Import Specific Functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-all-functions-use-carefully">7.3.4 Import All Functions (Use Carefully!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-libraries">7.3 What are Libraries?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#library-structure-example">Library Structure Example:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-python-libraries">Common Python Libraries:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-libraries">Installing Libraries:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-modules">7.4 Creating Your Own Modules</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-example">Step-by-Step Example:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-modules-and-packages">7.4 Best Practices for Modules and Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#organizing-your-code">7.4.1 Organizing Your Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-best-practices">7.4.2 Import Best Practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-template">7.4.3 Module Template</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-packages">7.5 What are Packages?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-structure-example">Package Structure Example:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-python-packages">Common Python Packages:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-packages">Installing Packages:</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-modules-and-packages">7.6 Best Practices for Modules and Packages</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#organizing-your-code">7.6.1 Organizing Your Code</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-best-practices">7.6.2 Import Best Practices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-template">7.6.3 Module Template</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-building-a-simple-project">7.7 Practical Example: Building a Simple Project</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">Project Structure:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-modules-work-together">How the modules work together:</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-next-steps">7.8 Summary and Next Steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-next-steps">7.5 Summary and Next Steps</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-ve-learned">What We’ve Learned</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-exercises">Practice Exercises</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-in-your-python-journey">Next Steps in Your Python Journey</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remember">Remember</a></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
