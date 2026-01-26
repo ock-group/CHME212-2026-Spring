@@ -57,11 +57,9 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter02/02_notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter02/02_notebook-in-class';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Chapter 3: Boolean Logic" href="../chapter03/03_notebook.html" />
-    <link rel="prev" title="Chapter 1: Basic Python Math" href="../chapter01/01_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,10 +180,10 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
 </ul>
@@ -261,7 +261,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter02/02_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter02/02_notebook-in-class.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -291,7 +291,7 @@
       
       
       
-      <li><a href="../../_sources/docs/chapter02/02_notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/chapter02/02_notebook-in-class.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -419,90 +419,6 @@ document.write(`
 <span id="id2"></span><h2>2.1 String<a class="headerlink" href="#string" title="Link to this heading">#</a></h2>
 <p>A <strong>string</strong> is Python’s way of storing and working with text. Think of it as a sequence of characters (letters, numbers, symbols, spaces) that represent words, names, labels, or any text information.</p>
 <p><strong>Simple Definition:</strong> A string is text data enclosed in quotes.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;hello world&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello world&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;hello world&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;hello world&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Mark says &quot;hello&quot;&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Mark says &quot;hello&quot;&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">+</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
-</pre></div>
-</div>
-</div>
-</div>
 <section id="creating-strings">
 <span id="id3"></span><h3>2.1.1 Creating Strings<a class="headerlink" href="#creating-strings" title="Link to this heading">#</a></h3>
 <p>You can create strings using either single quotes (<code class="docutils literal notranslate"><span class="pre">'</span></code>) or double quotes (<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>):</p>
@@ -514,14 +430,45 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span>
-
-<span class="n">string</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;string &quot;example&quot;&#39;</span>
+<span class="n">string2</span> <span class="o">=</span> <span class="s2">&quot;string &#39;example&#39;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>string &quot;example&quot;
+string &#39;example&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">even_number_as_string</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="n">even_number_as_string</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>
+
+<span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;12&#39;
 </pre></div>
 </div>
 </div>
@@ -555,29 +502,33 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;Python&#39;</span>
-          <span class="o">-</span><span class="mi">6</span> <span class="o">-</span><span class="mi">5</span> <span class="o">-</span><span class="mi">4</span> <span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span>
-<span class="n">string</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># Gets first character: &quot;P&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># Gets second character: &quot;y&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>    <span class="c1"># Gets last character: &quot;n&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-    <span class="o">-</span><span class="mi">6</span> <span class="o">-</span><span class="mi">5</span> <span class="o">-</span><span class="mi">4</span> <span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span>
-    <span class="o">^</span>
-<span class="ne">IndentationError</span>: unexpected indent
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P
+y
+n
 </pre></div>
 </div>
 </div>
 </div>
+<p>You can also count backwards from the end using negative numbers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># Last character: &quot;n&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>   <span class="c1"># Second to last: &quot;o&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n
+o
 </pre></div>
 </div>
 </div>
@@ -603,6 +554,21 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic String Indexing ===
+String: &#39;Python&#39;
+Length: 6 characters
+
+=== Positive Indexing (counting from start) ===
+word[0] = &#39;P&#39;  # First character
+word[1] = &#39;y&#39;  # Second character
+word[2] = &#39;t&#39;  # Third character
+word[3] = &#39;h&#39;  # Fourth character
+word[4] = &#39;o&#39;  # Fifth character
+word[5] = &#39;n&#39;  # Sixth character
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -616,6 +582,17 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Negative Indexing (counting from end) ===
+word[-1] = &#39;n&#39;  # Last character
+word[-2] = &#39;o&#39;  # Second to last
+word[-3] = &#39;h&#39;  # Third to last
+word[-4] = &#39;t&#39;  # Fourth to last
+word[-5] = &#39;y&#39;  # Fifth to last
+word[-6] = &#39;P&#39;  # Sixth to last (first)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -623,6 +600,14 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String:  P  y  t  h  o  n&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index:   0  1  2  3  4  5&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Negative:-6 -5 -4 -3 -2 -1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Index Diagram ===
+String:  P  y  t  h  o  n
+Index:   0  1  2  3  4  5
+Negative:-6 -5 -4 -3 -2 -1
 </pre></div>
 </div>
 </div>
@@ -639,38 +624,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic String Indexing ===
-String: &#39;Python&#39;
-Length: 6 characters
-
-=== Positive Indexing (counting from start) ===
-word[0] = &#39;P&#39;  # First character
-word[1] = &#39;y&#39;  # Second character
-word[2] = &#39;t&#39;  # Third character
-word[3] = &#39;h&#39;  # Fourth character
-word[4] = &#39;o&#39;  # Fifth character
-word[5] = &#39;n&#39;  # Sixth character
-
-=== Negative Indexing (counting from end) ===
-word[-1] = &#39;n&#39;  # Last character
-word[-2] = &#39;o&#39;  # Second to last
-word[-3] = &#39;h&#39;  # Third to last
-word[-4] = &#39;t&#39;  # Fourth to last
-word[-5] = &#39;y&#39;  # Fifth to last
-word[-6] = &#39;P&#39;  # Sixth to last (first)
-
-=== Index Diagram ===
-String:  P  y  t  h  o  n
-Index:   0  1  2  3  4  5
-Negative:-6 -5 -4 -3 -2 -1
-
-=== Practical Example ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Practical Example ===
 Message: &#39;Hello World&#39;
 First character: &#39;H&#39;
 Last character: &#39;d&#39;
 Middle character: &#39; &#39;
-
-💡 Remember: Python indexing starts at 0, not 1!
 </pre></div>
 </div>
 </div>
@@ -687,19 +645,47 @@ Middle character: &#39; &#39;
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
-
-
-<span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c1">#--&gt; 0, 1</span>
-
-<span class="c1"># print(text[1:4])    # Gets characters from index 1 to 3: &quot;yth&quot;</span>
-<span class="c1"># print(text[0:3])    # Gets characters from index 0 to 2: &quot;Pyt&quot;</span>
-<span class="c1"># print(text[2:])     # Gets from index 2 to end: &quot;thon&quot;</span>
-<span class="c1"># print(text[:4])     # Gets from start to index 3: &quot;Pyth&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>    <span class="c1"># Gets characters from index 1 to 3: &quot;yth&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>    <span class="c1"># Gets characters from index 0 to 2: &quot;Pyt&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>     <span class="c1"># Gets from index 2 to end: &quot;thon&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>     <span class="c1"># Gets from start to index 3: &quot;Pyth&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Py&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yth
+Pyt
+thon
+Pyth
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># text[start:end:step]    # Every &#39;step&#39; characters</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>               <span class="c1"># Every 2nd character</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>              <span class="c1"># Reverse the string!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pto
+nohtyP
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;access&#39;</span>
+<span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>    <span class="c1"># Returns index of first occurrence of &#39;t&#39;: 2</span>
+<span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>    <span class="c1"># Returns -1 if &#39;x&#39; not found</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
 </pre></div>
 </div>
 </div>
@@ -716,6 +702,13 @@ Middle character: &#39; &#39;
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== String Slicing ===
+Original string: &#39;Programming&#39;
+Length: 11 characters
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -723,6 +716,14 @@ Middle character: &#39; &#39;
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[0:4] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Characters 0,1,2,3&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[1:5] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Characters 1,2,3,4&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[3:7] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;  # Characters 3,4,5,6&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Basic Slicing [start:end] ===
+text[0:4] = &#39;Prog&#39;  # Characters 0,1,2,3
+text[1:5] = &#39;rogr&#39;  # Characters 1,2,3,4
+text[3:7] = &#39;gram&#39;  # Characters 3,4,5,6
 </pre></div>
 </div>
 </div>
@@ -736,6 +737,14 @@ Middle character: &#39; &#39;
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Slicing from Start or to End ===
+text[:5] = &#39;Progr&#39;    # From beginning to index 4
+text[5:] = &#39;amming&#39;    # From index 5 to end
+text[:] = &#39;Programming&#39;      # Entire string (copy)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -746,19 +755,11 @@ Middle character: &#39; &#39;
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Programming&quot;</span>
-               <span class="c1">#-4-3-2-1</span>
-
-
-<span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
-</pre></div>
-</div>
-</div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ming&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Negative Slicing ===
+text[-4:] = &#39;ming&#39;   # Last 4 characters
+text[:-3] = &#39;Programm&#39;   # All except last 3
+text[-7:-2] = &#39;rammi&#39; # From -7 to -3
 </pre></div>
 </div>
 </div>
@@ -772,11 +773,25 @@ Middle character: &#39; &#39;
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Slicing with Step ===
+text[::2] = &#39;Pormig&#39;   # Every 2nd character
+text[1::2] = &#39;rgamn&#39; # Every 2nd, starting from index 1
+text[::3] = &#39;Pgmn&#39;   # Every 3rd character
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Reverse String ===&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;text[::-1] = &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; # Reverse the entire string!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Reverse String ===
+text[::-1] = &#39;gnimmargorP&#39; # Reverse the entire string!
 </pre></div>
 </div>
 </div>
@@ -797,34 +812,7 @@ Middle character: &#39; &#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== String Slicing ===
-Original string: &#39;Programming&#39;
-Length: 11 characters
-
-=== Basic Slicing [start:end] ===
-text[0:4] = &#39;Prog&#39;  # Characters 0,1,2,3
-text[1:5] = &#39;rogr&#39;  # Characters 1,2,3,4
-text[3:7] = &#39;gram&#39;  # Characters 3,4,5,6
-
-=== Slicing from Start or to End ===
-text[:5] = &#39;Progr&#39;    # From beginning to index 4
-text[5:] = &#39;amming&#39;    # From index 5 to end
-text[:] = &#39;Programming&#39;      # Entire string (copy)
-
-=== Negative Slicing ===
-text[-4:] = &#39;ming&#39;   # Last 4 characters
-text[:-3] = &#39;Programm&#39;   # All except last 3
-text[-7:-2] = &#39;rammi&#39; # From -7 to -3
-
-=== Slicing with Step ===
-text[::2] = &#39;Pormig&#39;   # Every 2nd character
-text[1::2] = &#39;rgamn&#39; # Every 2nd, starting from index 1
-text[::3] = &#39;Pgmn&#39;   # Every 3rd character
-
-=== Reverse String ===
-text[::-1] = &#39;gnimmargorP&#39; # Reverse the entire string!
-
-=== Practical Examples ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Practical Examples ===
 Email: &#39;user@example.com&#39;
 Username: &#39;user&#39;
 Domain: &#39;example.com&#39;
@@ -890,22 +878,18 @@ Imagine you have equipment data from different sources with inconsistent naming:
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pump a&#39;</span><span class="p">,</span> <span class="s1">&#39;Pump B&#39;</span><span class="p">,</span> <span class="s1">&#39;pump c&#39;</span><span class="p">,</span> <span class="s1">&#39;Pump E &#39;</span><span class="p">,</span> <span class="s1">&#39;Pump f&#39;</span><span class="p">]</span>
-
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pump a&#39;</span><span class="p">,</span> <span class="s1">&#39;Pump B&#39;</span><span class="p">,</span> <span class="s1">&#39;pump c&#39;</span><span class="p">,</span> <span class="s1">&#39;pump D&#39;</span><span class="p">,</span> <span class="s1">&#39;pump E &#39;</span><span class="p">,</span> <span class="s1">&#39;Pump f&#39;</span><span class="p">]</span>
 <span class="n">standardized_list</span> <span class="o">=</span> <span class="p">[]</span>
-
 <span class="k">for</span> <span class="n">ex</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
     <span class="n">standardized</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
     <span class="n">standardized</span> <span class="o">=</span> <span class="n">standardized</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
     <span class="n">standardized_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">standardized</span><span class="p">)</span>
-
-<span class="n">standardized_list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">standardized_list</span><span class="p">)</span>  <span class="c1"># [&#39;Pump_A&#39;, &#39;Pump_B&#39;, &#39;Pump_C&#39;, &#39;Pump_D&#39;, &#39;Pump_E&#39;]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Pump_A&#39;, &#39;Pump_B&#39;, &#39;Pump_C&#39;, &#39;Pump_E&#39;, &#39;Pump_F&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Pump_A&#39;, &#39;Pump_B&#39;, &#39;Pump_C&#39;, &#39;Pump_D&#39;, &#39;Pump_E&#39;, &#39;Pump_F&#39;]
 </pre></div>
 </div>
 </div>
@@ -958,6 +942,13 @@ Title Case: &#39;Normal Operation&#39;
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chemical formula &#39;</span><span class="si">{</span><span class="n">formula</span><span class="si">}</span><span class="s2">&#39; has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Safety message has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">safety_message</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== String Length ===
+Chemical formula &#39;C6H12O6&#39; has 7 characters
+Safety message has 32 characters
 </pre></div>
 </div>
 </div>
@@ -1048,23 +1039,6 @@ Sensor data files often have messy formatting:</p>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">.format()</span></code> Method</strong> - Powerful and flexible</p></li>
 <li><p><strong>f-strings</strong> - Modern and most readable (Python 3.6+)</p></li>
 </ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># Celcius</span>
-<span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;K&#39;</span>
-
-<span class="c1"># print(f&#39;temperature is {temperature} {unit}&#39;)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;temperature is&#39;</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>temperature is 100 K
-</pre></div>
-</div>
-</div>
-</div>
 <section id="method-1-concatenation-operator">
 <h4>Method 1: Concatenation Operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>)<a class="headerlink" href="#method-1-concatenation-operator" title="Link to this heading">#</a></h4>
 <p>The basic method uses the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator to join strings together. <strong>Important:</strong> You must convert non-string values to strings using <code class="docutils literal notranslate"><span class="pre">str()</span></code> function first.</p>
@@ -1257,8 +1231,7 @@ Concatenation: Reactor R-102 is at 92.3°C, 2.5 bar
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic f-string Examples ===&quot;</span><span class="p">)</span>
 <span class="c1"># Same examples, now with f-strings (cleanest!)</span>
 <span class="n">MW</span> <span class="o">=</span> <span class="mf">63.21</span>
-<span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;g/mol&#39;</span>
-<span class="n">result3</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Molar mass = </span><span class="si">{</span><span class="n">MW</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">result3</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Molar mass = </span><span class="si">{</span><span class="n">MW</span><span class="si">}</span><span class="s2"> g/mol&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result3</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1591,24 +1564,6 @@ Temperature: 25.0°C (77.0°F)
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter01/01_notebook.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 1: Basic Python Math</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../chapter03/03_notebook.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 3: Boolean Logic</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

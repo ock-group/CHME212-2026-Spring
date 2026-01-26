@@ -57,11 +57,9 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter03/03_notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter03/03_notebook-in-class';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Chapter 4: Python Collections - Lists, Tuples, and Dictionaries" href="../chapter04/04_notebook.html" />
-    <link rel="prev" title="Chapter 2: Working with Text (Strings)" href="../chapter02/02_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,11 +180,11 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_notebook.html">Chapter 3: Boolean Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
@@ -261,7 +261,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter03/03_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter03/03_notebook-in-class.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -291,7 +291,7 @@
       
       
       
-      <li><a href="../../_sources/docs/chapter03/03_notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/chapter03/03_notebook-in-class.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -467,6 +467,24 @@ If you’re monitoring a reactor temperature and need to trigger a safety shutdo
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">105.2</span>
+
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ALARM: let&#39;s shut down the reactor&quot;</span><span class="p">)</span>    
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All is well.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ALARM: let&#39;s shut down the reactor
+</pre></div>
+</div>
+</div>
+</div>
 <section id="boolean-data-type">
 <span id="id2"></span><h2>3.1 Boolean Data Type<a class="headerlink" href="#boolean-data-type" title="Link to this heading">#</a></h2>
 <p>In Python, <strong>Boolean</strong> is a data type that can have only two values:</p>
@@ -637,6 +655,32 @@ True + False: 1
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># assignment</span>
+ 
+<span class="n">a</span> <span class="o">==</span> <span class="s1">&#39;hello&#39;</span> <span class="c1"># comparison</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic == Operator Examples ===&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1 == 2: </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>           <span class="c1"># False</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5 == 5: </span><span class="si">{</span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>           <span class="c1"># True</span>
@@ -725,6 +769,13 @@ Temperature &lt;= 85.0: False
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## alphabetical order</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Alphabetical Comparison (Strings) ===&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;Apple&#39; &lt; &#39;Banana&#39;: </span><span class="si">{</span><span class="s1">&#39;Apple&#39;</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;Banana&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Alphabetical order</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;apple&#39; &lt; &#39;Apple&#39;: </span><span class="si">{</span><span class="s1">&#39;apple&#39;</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;Apple&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>    <span class="c1"># Lowercase vs uppercase</span>
@@ -744,6 +795,11 @@ Temperature &lt;= 85.0: False
 <section id="logical-operators">
 <span id="id5"></span><h2>3.3 Logical Operators<a class="headerlink" href="#logical-operators" title="Link to this heading">#</a></h2>
 <p>Logical operators combine multiple Boolean expressions to create more complex conditions. There are three main logical operators in Python:</p>
+<hr class="docutils" />
+<p>In programming, we often need to make decisions based on more than one condition. A single condition might tell us something simple—like whether a number is positive—but real problems usually require multiple conditions to be evaluated together.</p>
+<p>This is where logical operators come in.</p>
+<p>Logical operators allow us to combine Boolean expressions (expressions that evaluate to True or False) into more complex logical conditions. The result of a logical operation is always a Boolean value - True or False.</p>
+<hr class="docutils" />
 <section id="the-and-operator">
 <span id="id6"></span><h3>3.3.1 The <code class="docutils literal notranslate"><span class="pre">and</span></code> Operator<a class="headerlink" href="#the-and-operator" title="Link to this heading">#</a></h3>
 <p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> only when <strong>both</strong> conditions are <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
@@ -834,6 +890,30 @@ Safe operation (both conditions): True
 <p><strong>Example:</strong> An alarm should sound when temperature &gt; 100°C <strong>OR</strong> pressure &gt; 5 bar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp_threshold</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="c1"># degrees Celsius</span>
+<span class="n">press_threshold</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="c1"># bar</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">B</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">C</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">A</span> <span class="o">==</span> <span class="n">B</span> <span class="o">==</span> <span class="n">C</span> <span class="c1"># A == B and B == C</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Different scenario</span>
 <span class="n">temperature2</span> <span class="o">=</span> <span class="mf">105.0</span>
 <span class="n">pressure2</span> <span class="o">=</span> <span class="mf">2.0</span>
@@ -889,6 +969,23 @@ Alarm needed (either condition): True
 <p><strong>Example:</strong> Equipment is offline when it’s <strong>NOT</strong> running.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="ow">not</span> <span class="n">A</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="p">(</span><span class="ow">not</span> <span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># No alarm case</span>
 <span class="n">temperature3</span> <span class="o">=</span> <span class="mf">80.0</span>
 <span class="n">pressure3</span> <span class="o">=</span> <span class="mf">2.0</span>
@@ -928,6 +1025,16 @@ NOT in maintenance: True
 <section id="truthiness-and-boolean-conversion">
 <span id="id8"></span><h2>3.4 Truthiness and Boolean Conversion<a class="headerlink" href="#truthiness-and-boolean-conversion" title="Link to this heading">#</a></h2>
 <p>In Python, <strong>every value has a “truthiness”</strong> - it can be evaluated as <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> in a Boolean context. This is very useful for checking if variables have values or are empty.</p>
+<hr class="docutils" />
+<p>In Python, every value has a “truthiness.”
+This means that any value—not just True or False—can be evaluated as either True or False when Python expects a Boolean value.</p>
+<p>This happens in what we call a Boolean context, such as</p>
+<ul class="simple">
+<li><p>if statements</p></li>
+<li><p>while loops</p></li>
+<li><p>logical expressions using and or not</p></li>
+</ul>
+<hr class="docutils" />
 <section id="falsy-values-evaluate-to-false">
 <span id="id9"></span><h3>3.4.1 “Falsy” Values (evaluate to <code class="docutils literal notranslate"><span class="pre">False</span></code>)<a class="headerlink" href="#falsy-values-evaluate-to-false" title="Link to this heading">#</a></h3>
 <p>These values are considered <code class="docutils literal notranslate"><span class="pre">False</span></code> in Boolean contexts:</p>
@@ -940,6 +1047,43 @@ NOT in maintenance: True
 <li><p><code class="docutils literal notranslate"><span class="pre">{}</span></code> (empty dictionary)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">set()</span></code> (empty set)</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing Falsy Values ===&quot;</span><span class="p">)</span>
+<span class="n">falsy_values</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">{}]</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">([]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">({}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Testing Falsy Values ===
+False
+False
+False
+False
+False
+False
+False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This will not run&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing Falsy Values ===&quot;</span><span class="p">)</span>
@@ -978,6 +1122,36 @@ bool({}) = False
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Testing Truthy Values ===&quot;</span><span class="p">)</span>  
 <span class="n">truthy_values</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}]</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="mf">3.14</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Testing Truthy Values ===
+True
+True
+True
+True
+True
+True
+True
+True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Testing Truthy Values ===&quot;</span><span class="p">)</span>  
+<span class="n">truthy_values</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}]</span>
+
 <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">truthy_values</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bool(</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1003,6 +1177,28 @@ bool({&#39;key&#39;: &#39;value&#39;}) = True
 <li><p>Check if a list has items: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">data_list:</span></code> instead of <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">len(data_list)</span> <span class="pre">&gt;</span> <span class="pre">0</span></code></p></li>
 <li><p>Check if a variable was assigned: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">value:</span></code> instead of <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">value</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code></p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if x == True:   # ❌ not recommended</span>
+<span class="c1"># if x:           # ✅ correct</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">if</span> <span class="n">x</span><span class="p">:</span> <span class="c1"># if x is truthy (non-zero, non-empty, etc.)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This runs&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># if x is exactly True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This may or may not run&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This runs
+This may or may not run
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="any-and-all">
@@ -1073,10 +1269,65 @@ bool({&#39;key&#39;: &#39;value&#39;}) = True
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature_ok</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">pressure_ok</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">cooling_on</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">reactor_safe</span> <span class="o">=</span> <span class="nb">all</span><span class="p">([</span><span class="n">temperature_ok</span><span class="p">,</span> <span class="n">pressure_ok</span><span class="p">,</span> <span class="n">cooling_on</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reactor_safe</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">105.2</span> <span class="c1">#degrees Celsius</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">30.0</span> <span class="c1">#bar</span>
+
+
+<span class="n">high_temp_threshold</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">high_press_threshold</span> <span class="o">=</span> <span class="mi">25</span>
+
+
+<span class="n">leak_detected</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">alarm</span> <span class="o">=</span> <span class="nb">any</span><span class="p">([</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="n">high_temp_threshold</span><span class="p">,</span> <span class="n">pressure</span> <span class="o">&gt;</span> <span class="n">high_press_threshold</span><span class="p">,</span> <span class="n">leak_detected</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;alarm on: </span><span class="si">{</span><span class="n">alarm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alarm on: True
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="text-inclusion">
 <span id="id11"></span><h2>3.6 Text inclusion<a class="headerlink" href="#text-inclusion" title="Link to this heading">#</a></h2>
 <p>Python provides the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator to check for inclusion. For example, if we want to determine whether a molecular formula contains nickel, we can simply test whether <code class="docutils literal notranslate"><span class="pre">&quot;Ni&quot;</span></code> is present in the formula.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;e&#39;</span> <span class="ow">in</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="ow">in</span> <span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+True
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;NiCl2&quot;</span>
@@ -1126,24 +1377,6 @@ Palladium is not present in the formula: True
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter02/02_notebook.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 2: Working with Text (Strings)</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../chapter04/04_notebook.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
