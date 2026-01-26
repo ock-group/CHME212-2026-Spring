@@ -10,8 +10,8 @@ parts:
       - file: docs/chapter00/00_notebook
       - file: docs/chapter01/01_notebook
       - file: docs/chapter02/02_notebook
-      # - file: docs/chapter03/03_notebook
-      # - file: docs/chapter04/04_notebook
+      - file: docs/chapter03/03_notebook
+      - file: docs/chapter04/04_notebook
       # - file: docs/chapter05/05_notebook
       # - file: docs/chapter06/06_notebook
       # - file: docs/chapter07/07_notebook
