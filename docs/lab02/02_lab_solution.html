@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 02: Booleans and Strings in Chemical Engineering &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab02/02_lab_solution';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_lab.html">Lab 02: Booleans and Strings in Chemical Engineering</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab02/02_lab_solution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lab02/02_lab_solution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 02: Booleans and Strings in Chemical Engineering</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">1. Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-values-and-logic">1.1 Boolean Values and Logic</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-1-1-logical-operators">Example 1.1.1: Logical Operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-1-2-booleans-and-numbers">Example 1.1.2: Booleans and Numbers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-text-data">1.2 Strings (Text Data)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-1-string-methods">Example 1.2.1: String Methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-2-searching-in-strings">Example 1.2.2: Searching in Strings</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-a-report-message">1.3 Format a report message</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-1-basic-f-string-usage">Example 1.3.1: Basic f-string Usage</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-2-number-formatting-in-f-strings">Example 1.3.2: Number Formatting in f-strings</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-engineering-applications">1.4 Chemical Engineering Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-1-safety-interlock-logic">Example 1.4.1: Safety Interlock Logic</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-2-material-classification">Example 1.4.2: Material Classification</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-3-product-specification-check">Example 1.4.3: Product Specification Check</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">2. Practice Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-flow-regime-classification">Problem 1: Flow Regime Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-chemical-formula-parser">Problem 2: Chemical Formula Parser</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-process-log-cleaner">Problem 3: Process Log Cleaner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-reaction-yield-analysis">Problem 4: Reaction Yield Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-equipment-tag-validator">Problem 5: Equipment Tag Validator</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-02-booleans-and-strings-in-chemical-engineering">
+<h1>Lab 02: Booleans and Strings in Chemical Engineering<a class="headerlink" href="#lab-02-booleans-and-strings-in-chemical-engineering" title="Link to this heading">#</a></h1>
+<p><strong>Topics Covered:</strong></p>
+<ul class="simple">
+<li><p>Boolean values and logical operations</p></li>
+<li><p>Comparison operators for process conditions</p></li>
+<li><p>String manipulation for chemical data</p></li>
+<li><p>Formatting output for engineering reports</p></li>
+</ul>
+<section id="demonstration">
+<h2>1. Demonstration<a class="headerlink" href="#demonstration" title="Link to this heading">#</a></h2>
+<section id="boolean-values-and-logic">
+<h3>1.1 Boolean Values and Logic<a class="headerlink" href="#boolean-values-and-logic" title="Link to this heading">#</a></h3>
+<p>Boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code>) are essential for decision-making in process control and safety systems. In chemical engineering, we constantly check conditions:</p>
+<ul class="simple">
+<li><p>Is the temperature above the flash point?</p></li>
+<li><p>Is the pressure within safe operating limits?</p></li>
+<li><p>Has the reaction reached equilibrium?</p></li>
+</ul>
+<section id="example-1-1-1-logical-operators">
+<h4>Example 1.1.1: Logical Operators<a class="headerlink" href="#example-1-1-1-logical-operators" title="Link to this heading">#</a></h4>
+<p>Combine boolean values using logical operators:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></td>
+<td><p>Both must be True</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T_ok</span> <span class="pre">and</span> <span class="pre">P_ok</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
+<td><p>At least one True</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alarm1</span> <span class="pre">or</span> <span class="pre">alarm2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">not</span></code></p></td>
+<td><p>Inverts the value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">emergency</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Safety interlock system for a distillation column</span>
+<span class="n">temperature_ok</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># Temperature within range</span>
+<span class="n">pressure_ok</span> <span class="o">=</span> <span class="kc">True</span>      <span class="c1"># Pressure within range</span>
+<span class="n">level_ok</span> <span class="o">=</span> <span class="kc">False</span>        <span class="c1"># Liquid level NOT within range (alarm!)</span>
+
+<span class="c1"># All conditions must be met for safe operation</span>
+<span class="n">safe_to_operate</span> <span class="o">=</span> <span class="n">temperature_ok</span> <span class="ow">and</span> <span class="n">pressure_ok</span> <span class="ow">and</span> <span class="n">level_ok</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Safe to operate: </span><span class="si">{</span><span class="n">safe_to_operate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Any alarm triggers a warning</span>
+<span class="n">any_alarm</span> <span class="o">=</span> <span class="p">(</span><span class="ow">not</span> <span class="n">temperature_ok</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">pressure_ok</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">level_ok</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Any alarm active: </span><span class="si">{</span><span class="n">any_alarm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Using &#39;not&#39; to check if we need to stop</span>
+<span class="n">needs_attention</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">safe_to_operate</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;System needs attention: </span><span class="si">{</span><span class="n">needs_attention</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Safe to operate: False
+Any alarm active: True
+System needs attention: True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-1-2-booleans-and-numbers">
+<h4>Example 1.1.2: Booleans and Numbers<a class="headerlink" href="#example-1-1-2-booleans-and-numbers" title="Link to this heading">#</a></h4>
+<p>In Python, <code class="docutils literal notranslate"><span class="pre">True</span></code> equals <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> equals <code class="docutils literal notranslate"><span class="pre">0</span></code>. This is useful for counting conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Count how many sensors are in alarm state</span>
+<span class="n">sensor1_alarm</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sensor2_alarm</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">sensor3_alarm</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sensor4_alarm</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Booleans can be added (True=1, False=0)</span>
+<span class="n">total_alarms</span> <span class="o">=</span> <span class="n">sensor1_alarm</span> <span class="o">+</span> <span class="n">sensor2_alarm</span> <span class="o">+</span> <span class="n">sensor3_alarm</span> <span class="o">+</span> <span class="n">sensor4_alarm</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total active alarms: </span><span class="si">{</span><span class="n">total_alarms</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Verify True equals 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True == 1: </span><span class="si">{</span><span class="kc">True</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;False == 0: </span><span class="si">{</span><span class="kc">False</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total active alarms: 2
+True == 1: True
+False == 0: True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="strings-text-data">
+<h3>1.2 Strings (Text Data)<a class="headerlink" href="#strings-text-data" title="Link to this heading">#</a></h3>
+<p>Strings are sequences of characters used for:</p>
+<ul class="simple">
+<li><p>Chemical formulas and compound names</p></li>
+<li><p>Equipment labels and tag numbers</p></li>
+<li><p>Process descriptions and log messages</p></li>
+<li><p>Data file handling and report generation</p></li>
+</ul>
+<section id="example-1-2-1-string-methods">
+<h4>Example 1.2.1: String Methods<a class="headerlink" href="#example-1-2-1-string-methods" title="Link to this heading">#</a></h4>
+<p>Strings have built-in methods for manipulation:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.upper()</span></code></p></td>
+<td><p>Convert to uppercase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;h2o&quot;.upper()</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;H2O&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.lower()</span></code></p></td>
+<td><p>Convert to lowercase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;NaCl&quot;.lower()</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;nacl&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.strip()</span></code></p></td>
+<td><p>Remove whitespace</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">H2O</span> <span class="pre">&quot;.strip()</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;H2O&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.replace()</span></code></p></td>
+<td><p>Replace substring</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;H2O&quot;.replace(&quot;2&quot;,</span> <span class="pre">&quot;₂&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.split()</span></code></p></td>
+<td><p>Split into list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;H-O-H&quot;.split(&quot;-&quot;)</span></code> → <code class="docutils literal notranslate"><span class="pre">[&quot;H&quot;,</span> <span class="pre">&quot;O&quot;,</span> <span class="pre">&quot;H&quot;]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Working with chemical data</span>
+<span class="n">raw_formula</span> <span class="o">=</span> <span class="s2">&quot;  ch4  &quot;</span>  <span class="c1"># Messy input data</span>
+
+<span class="c1"># Clean and standardize</span>
+<span class="n">clean_formula</span> <span class="o">=</span> <span class="n">raw_formula</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raw input: &#39;</span><span class="si">{</span><span class="n">raw_formula</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned: &#39;</span><span class="si">{</span><span class="n">clean_formula</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+
+
+<span class="c1"># Split a mixture composition string</span>
+<span class="n">mixture</span> <span class="o">=</span> <span class="s2">&quot;N2:78,O2:21,Ar:1&quot;</span>
+<span class="n">components</span> <span class="o">=</span> <span class="n">mixture</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Components: </span><span class="si">{</span><span class="n">components</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raw input: &#39;  ch4  &#39;
+Cleaned: &#39;CH4&#39;
+Components: [&#39;N2:78&#39;, &#39;O2:21&#39;, &#39;Ar:1&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-2-2-searching-in-strings">
+<h4>Example 1.2.2: Searching in Strings<a class="headerlink" href="#example-1-2-2-searching-in-strings" title="Link to this heading">#</a></h4>
+<p>Check if a substring exists or find its position.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process log message</span>
+<span class="n">log_message</span> <span class="o">=</span> <span class="s2">&quot;ALARM: Reactor temperature exceeded 250°C at 14:32:05&quot;</span>
+
+<span class="c1"># Check if substring exists (returns boolean)</span>
+<span class="n">has_alarm</span> <span class="o">=</span> <span class="s2">&quot;ALARM&quot;</span> <span class="ow">in</span> <span class="n">log_message</span>
+<span class="n">has_warning</span> <span class="o">=</span> <span class="s2">&quot;WARNING&quot;</span> <span class="ow">in</span> <span class="n">log_message</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Contains ALARM: </span><span class="si">{</span><span class="n">has_alarm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Contains WARNING: </span><span class="si">{</span><span class="n">has_warning</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Find position of substring</span>
+<span class="n">alarm_position</span> <span class="o">=</span> <span class="n">log_message</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;ALARM&quot;</span><span class="p">)</span>
+<span class="n">temp_position</span> <span class="o">=</span> <span class="n">log_message</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;ALARM&#39; found at position: </span><span class="si">{</span><span class="n">alarm_position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;temperature&#39; found at position: </span><span class="si">{</span><span class="n">temp_position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check how string starts or ends</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starts with &#39;ALARM&#39;: </span><span class="si">{</span><span class="n">log_message</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;ALARM&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ends with digit: </span><span class="si">{</span><span class="n">log_message</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contains ALARM: True
+Contains WARNING: False
+&#39;ALARM&#39; found at position: 0
+&#39;temperature&#39; found at position: 15
+Starts with &#39;ALARM&#39;: True
+Ends with digit: True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="format-a-report-message">
+<h3>1.3 Format a report message<a class="headerlink" href="#format-a-report-message" title="Link to this heading">#</a></h3>
+<section id="example-1-3-1-basic-f-string-usage">
+<h4>Example 1.3.1: Basic f-string Usage<a class="headerlink" href="#example-1-3-1-basic-f-string-usage" title="Link to this heading">#</a></h4>
+<p>Prefix string with <code class="docutils literal notranslate"><span class="pre">f</span></code> and use <code class="docutils literal notranslate"><span class="pre">{variable}</span></code> to insert values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reactor operating conditions</span>
+<span class="n">reactor_id</span> <span class="o">=</span> <span class="s2">&quot;R-101&quot;</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">185.7</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">3.45</span>
+<span class="n">conversion</span> <span class="o">=</span> <span class="mf">0.923</span>
+
+<span class="c1"># Basic f-string</span>
+<span class="n">status</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Reactor </span><span class="si">{</span><span class="n">reactor_id</span><span class="si">}</span><span class="s2">: T = </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2"> °C, P = </span><span class="si">{</span><span class="n">pressure</span><span class="si">}</span><span class="s2"> bar&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
+<span class="c1"># Expressions inside f-strings</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conversion: </span><span class="si">{</span><span class="n">conversion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reactor R-101: T = 185.7 °C, P = 3.45 bar
+Conversion: 92.30000000000001%
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-3-2-number-formatting-in-f-strings">
+<h4>Example 1.3.2: Number Formatting in f-strings<a class="headerlink" href="#example-1-3-2-number-formatting-in-f-strings" title="Link to this heading">#</a></h4>
+<p>Control decimal places and formatting using format specifiers:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Format</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{x:.2f}</span></code></p></td>
+<td><p>2 decimal places</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{3.14159:.2f}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3.14</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{x:.4f}</span></code></p></td>
+<td><p>4 decimal places</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{3.14159:.4f}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3.1416</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{x:.2e}</span></code></p></td>
+<td><p>Scientific notation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{1234:.2e}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.23e+03</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{x:.1%}</span></code></p></td>
+<td><p>Percentage</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{0.856:.1%}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">85.6%</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{x:,}</span></code></p></td>
+<td><p>Thousands separator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{1000000:,}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1,000,000</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heat exchanger calculations</span>
+<span class="n">heat_duty</span> <span class="o">=</span> <span class="mf">1256789.5</span>  <span class="c1"># Watts</span>
+<span class="n">efficiency</span> <span class="o">=</span> <span class="mf">0.8734</span>
+<span class="n">flow_rate</span> <span class="o">=</span> <span class="mf">0.0000523</span>  <span class="c1"># m³/s</span>
+
+<span class="c1"># Format with decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Heat duty: </span><span class="si">{</span><span class="n">heat_duty</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> W&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Heat duty: </span><span class="si">{</span><span class="n">heat_duty</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> W&quot;</span><span class="p">)</span>  <span class="c1"># With comma separator</span>
+
+<span class="c1"># Scientific notation for small numbers</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flow rate: </span><span class="si">{</span><span class="n">flow_rate</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> m³/s&quot;</span><span class="p">)</span>
+
+<span class="c1"># Percentage formatting</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Efficiency: </span><span class="si">{</span><span class="n">efficiency</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Efficiency: </span><span class="si">{</span><span class="n">efficiency</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heat duty: 1256789.50 W
+Heat duty: 1,256,790 W
+Flow rate: 5.230e-05 m³/s
+Efficiency: 87.3%
+Efficiency: 87.34%
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="chemical-engineering-applications">
+<h3>1.4 Chemical Engineering Applications<a class="headerlink" href="#chemical-engineering-applications" title="Link to this heading">#</a></h3>
+<section id="example-1-4-1-safety-interlock-logic">
+<h4>Example 1.4.1: Safety Interlock Logic<a class="headerlink" href="#example-1-4-1-safety-interlock-logic" title="Link to this heading">#</a></h4>
+<p>Design a safety system that checks multiple conditions before allowing operation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reactor safety interlock system</span>
+<span class="c1"># Operating limits</span>
+<span class="n">T_min</span><span class="p">,</span> <span class="n">T_max</span> <span class="o">=</span> <span class="mf">150.0</span><span class="p">,</span> <span class="mf">250.0</span>  <span class="c1"># °C</span>
+<span class="n">P_min</span><span class="p">,</span> <span class="n">P_max</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span>     <span class="c1"># bar</span>
+<span class="n">level_min</span><span class="p">,</span> <span class="n">level_max</span> <span class="o">=</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">80.0</span>  <span class="c1"># %</span>
+
+<span class="c1"># Current readings</span>
+<span class="n">T_current</span> <span class="o">=</span> <span class="mf">185.0</span>  <span class="c1"># °C</span>
+<span class="n">P_current</span> <span class="o">=</span> <span class="mf">5.5</span>    <span class="c1"># bar</span>
+<span class="n">level_current</span> <span class="o">=</span> <span class="mf">45.0</span>  <span class="c1"># %</span>
+
+<span class="c1"># Check each condition</span>
+<span class="n">T_ok</span> <span class="o">=</span> <span class="p">(</span><span class="n">T_current</span> <span class="o">&gt;=</span> <span class="n">T_min</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">T_current</span> <span class="o">&lt;=</span> <span class="n">T_max</span><span class="p">)</span>
+<span class="n">P_ok</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_current</span> <span class="o">&gt;=</span> <span class="n">P_min</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">P_current</span> <span class="o">&lt;=</span> <span class="n">P_max</span><span class="p">)</span>
+<span class="n">level_ok</span> <span class="o">=</span> <span class="p">(</span><span class="n">level_current</span> <span class="o">&gt;=</span> <span class="n">level_min</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">level_current</span> <span class="o">&lt;=</span> <span class="n">level_max</span><span class="p">)</span>
+
+<span class="c1"># Overall safety status</span>
+<span class="n">all_ok</span> <span class="o">=</span> <span class="n">T_ok</span> <span class="ow">and</span> <span class="n">P_ok</span> <span class="ow">and</span> <span class="n">level_ok</span>
+
+<span class="c1"># Generate status report</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SAFETY INTERLOCK STATUS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">T_current</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> °C [</span><span class="si">{</span><span class="n">T_min</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">T_max</span><span class="si">}</span><span class="s2">] -&gt; </span><span class="si">{</span><span class="n">T_ok</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pressure:    </span><span class="si">{</span><span class="n">P_current</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> bar [</span><span class="si">{</span><span class="n">P_min</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">P_max</span><span class="si">}</span><span class="s2">] -&gt; </span><span class="si">{</span><span class="n">P_ok</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Level:       </span><span class="si">{</span><span class="n">level_current</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> % [</span><span class="si">{</span><span class="n">level_min</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">level_max</span><span class="si">}</span><span class="s2">] -&gt; </span><span class="si">{</span><span class="n">level_ok</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SYSTEM STATUS: </span><span class="si">{</span><span class="s1">&#39;READY TO OPERATE&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">all_ok</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;NOT READY&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SAFETY INTERLOCK STATUS
+========================================
+Temperature: 185.0 °C [150.0-250.0] -&gt; True
+Pressure:    5.5 bar [1.0-10.0] -&gt; True
+Level:       45.0 % [20.0-80.0] -&gt; True
+========================================
+SYSTEM STATUS: READY TO OPERATE
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-4-2-material-classification">
+<h4>Example 1.4.2: Material Classification<a class="headerlink" href="#example-1-4-2-material-classification" title="Link to this heading">#</a></h4>
+<p>Use string operations to parse and classify chemical information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chemical compound database entry</span>
+<span class="n">compound_data</span> <span class="o">=</span> <span class="s2">&quot;Ethanol;C2H5OH;78.37;46.07;Flammable&quot;</span>
+
+<span class="c1"># Parse the data string</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="n">compound_data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="n">fields</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">boiling_point</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Convert to number</span>
+<span class="n">molar_mass</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">hazard_class</span> <span class="o">=</span> <span class="n">fields</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="c1"># Analyze the compound</span>
+<span class="n">is_flammable</span> <span class="o">=</span> <span class="s2">&quot;Flammable&quot;</span> <span class="ow">in</span> <span class="n">hazard_class</span>
+<span class="n">is_volatile</span> <span class="o">=</span> <span class="n">boiling_point</span> <span class="o">&lt;</span> <span class="mf">100.0</span>  <span class="c1"># Below water&#39;s boiling point</span>
+<span class="n">contains_oxygen</span> <span class="o">=</span> <span class="s2">&quot;O&quot;</span> <span class="ow">in</span> <span class="n">formula</span>
+
+<span class="c1"># Generate safety report</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compound: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">formula</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Molar Mass: </span><span class="si">{</span><span class="n">molar_mass</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> g/mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boiling Point: </span><span class="si">{</span><span class="n">boiling_point</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hazard Assessment:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Flammable: </span><span class="si">{</span><span class="n">is_flammable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Volatile (BP &lt; 100°C): </span><span class="si">{</span><span class="n">is_volatile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Contains Oxygen: </span><span class="si">{</span><span class="n">contains_oxygen</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compound: Ethanol (C2H5OH)
+Molar Mass: 46.07 g/mol
+Boiling Point: 78.37 °C
+
+Hazard Assessment:
+  - Flammable: True
+  - Volatile (BP &lt; 100°C): True
+  - Contains Oxygen: True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-4-3-product-specification-check">
+<h4>Example 1.4.3: Product Specification Check<a class="headerlink" href="#example-1-4-3-product-specification-check" title="Link to this heading">#</a></h4>
+<p>Verify if a product meets quality specifications.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Product quality specifications</span>
+<span class="n">product_name</span> <span class="o">=</span> <span class="s2">&quot;Industrial Grade Acetone&quot;</span>
+<span class="n">batch_number</span> <span class="o">=</span> <span class="s2">&quot;ACE-2024-0156&quot;</span>
+
+<span class="c1"># Specifications (min, max)</span>
+<span class="n">purity_spec</span> <span class="o">=</span> <span class="p">(</span><span class="mf">99.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span>  <span class="c1"># %</span>
+<span class="n">water_spec</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>      <span class="c1"># %</span>
+<span class="n">color_spec</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>         <span class="c1"># APHA units</span>
+
+<span class="c1"># Measured values</span>
+<span class="n">purity_measured</span> <span class="o">=</span> <span class="mf">99.5</span>
+<span class="n">water_measured</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">color_measured</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Check each specification</span>
+<span class="n">purity_pass</span> <span class="o">=</span> <span class="n">purity_measured</span> <span class="o">&gt;=</span> <span class="n">purity_spec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">purity_measured</span> <span class="o">&lt;=</span> <span class="n">purity_spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">water_pass</span> <span class="o">=</span> <span class="n">water_measured</span> <span class="o">&gt;=</span> <span class="n">water_spec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">water_measured</span> <span class="o">&lt;=</span> <span class="n">water_spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">color_pass</span> <span class="o">=</span> <span class="n">color_measured</span> <span class="o">&gt;=</span> <span class="n">color_spec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">color_measured</span> <span class="o">&lt;=</span> <span class="n">color_spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Overall pass/fail</span>
+<span class="n">batch_approved</span> <span class="o">=</span> <span class="n">purity_pass</span> <span class="ow">and</span> <span class="n">water_pass</span> <span class="ow">and</span> <span class="n">color_pass</span>
+
+<span class="c1"># Quality report</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;QUALITY CONTROL REPORT&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Product: </span><span class="si">{</span><span class="n">product_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Batch: </span><span class="si">{</span><span class="n">batch_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Parameter&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Spec&#39;</span><span class="si">:</span><span class="s2">^15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Measured&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Result&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Purity (%)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">purity_spec</span><span class="p">)</span><span class="si">:</span><span class="s2">^15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">purity_measured</span><span class="si">:</span><span class="s2">&gt;10.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">purity_pass</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Water (%)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">water_spec</span><span class="p">)</span><span class="si">:</span><span class="s2">^15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">water_measured</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">water_pass</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Color (APHA)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">color_spec</span><span class="p">)</span><span class="si">:</span><span class="s2">^15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">color_measured</span><span class="si">:</span><span class="s2">&gt;10d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;PASS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">color_pass</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BATCH STATUS: </span><span class="si">{</span><span class="s1">&#39;APPROVED&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">batch_approved</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;REJECTED&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>QUALITY CONTROL REPORT
+Product: Industrial Grade Acetone
+Batch: ACE-2024-0156
+==================================================
+Parameter            Spec         Measured   Result
+--------------------------------------------------
+Purity (%)       (99.0, 100.0)        99.5     PASS
+Water (%)         (0.0, 0.5)          0.30     PASS
+Color (APHA)        (0, 10)              5     PASS
+==================================================
+BATCH STATUS: APPROVED
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="practice-problems">
+<h2>2. Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<p>Now it’s your turn! Solve the following problems in the cells below. Make sure to:</p>
+<ul class="simple">
+<li><p>Use appropriate variable names</p></li>
+<li><p>Include comments explaining your logic</p></li>
+<li><p>Format output clearly with units</p></li>
+</ul>
+<section id="problem-1-flow-regime-classification">
+<h3>Problem 1: Flow Regime Classification<a class="headerlink" href="#problem-1-flow-regime-classification" title="Link to this heading">#</a></h3>
+<p>Based on the Reynolds number, classify the flow regime in a pipe:</p>
+<p><strong>Given:</strong></p>
+<ul class="simple">
+<li><p>Reynolds number (Re) = 3500</p></li>
+</ul>
+<p><strong>Classification criteria:</strong></p>
+<ul class="simple">
+<li><p>Re &lt; 2300 → Laminar flow</p></li>
+<li><p>2300 ≤ Re ≤ 4000 → Transitional flow</p></li>
+<li><p>Re &gt; 4000 → Turbulent flow</p></li>
+</ul>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Create boolean variables: <code class="docutils literal notranslate"><span class="pre">is_laminar</span></code>, <code class="docutils literal notranslate"><span class="pre">is_transitional</span></code>, <code class="docutils literal notranslate"><span class="pre">is_turbulent</span></code></p></li>
+<li><p>Print the Reynolds number and which booleans are True</p></li>
+<li><p>Create and print a status string that says “Flow regime: [regime type]”</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="c1"># Given</span>
+<span class="n">Re</span> <span class="o">=</span> <span class="mi">3500</span>
+
+<span class="c1"># Task 1: Create boolean variables for each flow regime</span>
+<span class="n">is_laminar</span> <span class="o">=</span> <span class="n">Re</span> <span class="o">&lt;</span> <span class="mi">2300</span>
+<span class="n">is_transitional</span> <span class="o">=</span> <span class="p">(</span><span class="n">Re</span> <span class="o">&gt;=</span> <span class="mi">2300</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Re</span> <span class="o">&lt;=</span> <span class="mi">4000</span><span class="p">)</span>
+<span class="n">is_turbulent</span> <span class="o">=</span> <span class="n">Re</span> <span class="o">&gt;</span> <span class="mi">4000</span>
+
+<span class="c1"># Task 2: Print Reynolds number and boolean values</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reynolds number: </span><span class="si">{</span><span class="n">Re</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is laminar: </span><span class="si">{</span><span class="n">is_laminar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is transitional: </span><span class="si">{</span><span class="n">is_transitional</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is turbulent: </span><span class="si">{</span><span class="n">is_turbulent</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 3: Create and print status string</span>
+<span class="k">if</span> <span class="n">is_laminar</span><span class="p">:</span>
+    <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;Laminar&quot;</span>
+<span class="k">elif</span> <span class="n">is_transitional</span><span class="p">:</span>
+    <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;Transitional&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;Turbulent&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flow regime: </span><span class="si">{</span><span class="n">regime</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reynolds number: 3500
+Is laminar: False
+Is transitional: True
+Is turbulent: False
+Flow regime: Transitional
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-2-chemical-formula-parser">
+<h3>Problem 2: Chemical Formula Parser<a class="headerlink" href="#problem-2-chemical-formula-parser" title="Link to this heading">#</a></h3>
+<p>Parse information from a chemical formula string.</p>
+<p><strong>Given:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;Ca(OH)2&quot;</span>
+</pre></div>
+</div>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Find the length of the formula string</p></li>
+<li><p>Check if the formula contains:</p>
+<ul class="simple">
+<li><p>Calcium (“Ca”) - store as <code class="docutils literal notranslate"><span class="pre">has_calcium</span></code></p></li>
+<li><p>Oxygen (“O”) - store as <code class="docutils literal notranslate"><span class="pre">has_oxygen</span></code></p></li>
+<li><p>Nitrogen (“N”) - store as <code class="docutils literal notranslate"><span class="pre">has_nitrogen</span></code></p></li>
+</ul>
+</li>
+<li><p>Extract the first 2 characters (the metal symbol)</p></li>
+<li><p>Check if the formula contains parentheses (indicating a polyatomic ion)</p></li>
+<li><p>Print all results with clear labels</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;Ca(OH)2&quot;</span>
+
+<span class="c1"># Task 1: Find the length of the formula string</span>
+<span class="n">formula_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+
+<span class="c1"># Task 2: Check if formula contains specific elements</span>
+<span class="n">has_calcium</span> <span class="o">=</span> <span class="s2">&quot;Ca&quot;</span> <span class="ow">in</span> <span class="n">formula</span>
+<span class="n">has_oxygen</span> <span class="o">=</span> <span class="s2">&quot;O&quot;</span> <span class="ow">in</span> <span class="n">formula</span>
+<span class="n">has_nitrogen</span> <span class="o">=</span> <span class="s2">&quot;N&quot;</span> <span class="ow">in</span> <span class="n">formula</span>
+
+<span class="c1"># Task 3: Extract the first 2 characters (metal symbol)</span>
+<span class="n">metal_symbol</span> <span class="o">=</span> <span class="n">formula</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Task 4: Check if formula contains parentheses (polyatomic ion)</span>
+<span class="n">has_parentheses</span> <span class="o">=</span> <span class="s2">&quot;(&quot;</span> <span class="ow">in</span> <span class="n">formula</span> <span class="ow">and</span> <span class="s2">&quot;)&quot;</span> <span class="ow">in</span> <span class="n">formula</span>
+
+<span class="c1"># Task 5: Print all results with clear labels</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Formula: </span><span class="si">{</span><span class="n">formula</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length: </span><span class="si">{</span><span class="n">formula_length</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element Check:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Contains Calcium (Ca): </span><span class="si">{</span><span class="n">has_calcium</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Contains Oxygen (O): </span><span class="si">{</span><span class="n">has_oxygen</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Contains Nitrogen (N): </span><span class="si">{</span><span class="n">has_nitrogen</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metal symbol (first 2 chars): </span><span class="si">{</span><span class="n">metal_symbol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Contains polyatomic ion (parentheses): </span><span class="si">{</span><span class="n">has_parentheses</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Formula: Ca(OH)2
+Length: 7 characters
+
+Element Check:
+  Contains Calcium (Ca): True
+  Contains Oxygen (O): True
+  Contains Nitrogen (N): False
+
+Metal symbol (first 2 chars): Ca
+Contains polyatomic ion (parentheses): True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-3-process-log-cleaner">
+<h3>Problem 3: Process Log Cleaner<a class="headerlink" href="#problem-3-process-log-cleaner" title="Link to this heading">#</a></h3>
+<p>Clean and standardize messy process log entries from a plant database.</p>
+<p><strong>Given:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_entry</span> <span class="o">=</span> <span class="s2">&quot;   WARNING: pump-101 flow rate LOW at 14:25   &quot;</span>
+</pre></div>
+</div>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Remove leading and trailing whitespace using <code class="docutils literal notranslate"><span class="pre">.strip()</span></code></p></li>
+<li><p>Convert the entire message to uppercase using <code class="docutils literal notranslate"><span class="pre">.upper()</span></code></p></li>
+<li><p>Replace “PUMP-101” with “PMP-101” (standardized equipment code) using <code class="docutils literal notranslate"><span class="pre">.replace()</span></code></p></li>
+<li><p>Replace “LOW” with “BELOW SETPOINT” for clarity</p></li>
+<li><p>Check if the cleaned message starts with “WARNING” using <code class="docutils literal notranslate"><span class="pre">.startswith()</span></code></p></li>
+<li><p>Check if the message contains a time (look for “:” character)</p></li>
+<li><p>Split the message by spaces and count how many words it contains</p></li>
+<li><p>Print each transformation step and the final results</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="c1"># Given</span>
+<span class="n">log_entry</span> <span class="o">=</span> <span class="s2">&quot;   WARNING: pump-101 flow rate LOW at 14:25   &quot;</span>
+
+<span class="c1"># Task 1: Remove leading and trailing whitespace</span>
+<span class="n">step1</span> <span class="o">=</span> <span class="n">log_entry</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original: &#39;</span><span class="si">{</span><span class="n">log_entry</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After strip(): &#39;</span><span class="si">{</span><span class="n">step1</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 2: Convert to uppercase</span>
+<span class="n">step2</span> <span class="o">=</span> <span class="n">step1</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After upper(): &#39;</span><span class="si">{</span><span class="n">step2</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 3: Replace &quot;PUMP-101&quot; with &quot;PMP-101&quot;</span>
+<span class="n">step3</span> <span class="o">=</span> <span class="n">step2</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;PUMP-101&quot;</span><span class="p">,</span> <span class="s2">&quot;PMP-101&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After replace PUMP-101: &#39;</span><span class="si">{</span><span class="n">step3</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 4: Replace &quot;LOW&quot; with &quot;BELOW SETPOINT&quot;</span>
+<span class="n">step4</span> <span class="o">=</span> <span class="n">step3</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;LOW&quot;</span><span class="p">,</span> <span class="s2">&quot;BELOW SETPOINT&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After replace LOW: &#39;</span><span class="si">{</span><span class="n">step4</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Final cleaned message</span>
+<span class="n">cleaned_message</span> <span class="o">=</span> <span class="n">step4</span>
+
+<span class="c1"># Task 5: Check if message starts with &quot;WARNING&quot;</span>
+<span class="n">starts_with_warning</span> <span class="o">=</span> <span class="n">cleaned_message</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 6: Check if message contains a time (look for &quot;:&quot;)</span>
+<span class="n">contains_time</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">cleaned_message</span>
+
+<span class="c1"># Task 7: Split by spaces and count words</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">cleaned_message</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">word_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+<span class="c1"># Task 8: Print final results</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL RESULTS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned message: &#39;</span><span class="si">{</span><span class="n">cleaned_message</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starts with WARNING: </span><span class="si">{</span><span class="n">starts_with_warning</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Contains time (has &#39;:&#39;): </span><span class="si">{</span><span class="n">contains_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Word count: </span><span class="si">{</span><span class="n">word_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Words: </span><span class="si">{</span><span class="n">words</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original: &#39;   WARNING: pump-101 flow rate LOW at 14:25   &#39;
+After strip(): &#39;WARNING: pump-101 flow rate LOW at 14:25&#39;
+After upper(): &#39;WARNING: PUMP-101 FLOW RATE LOW AT 14:25&#39;
+After replace PUMP-101: &#39;WARNING: PMP-101 FLOW RATE LOW AT 14:25&#39;
+After replace LOW: &#39;WARNING: PMP-101 FBELOW SETPOINT RATE BELOW SETPOINT AT 14:25&#39;
+
+==================================================
+FINAL RESULTS
+==================================================
+Cleaned message: &#39;WARNING: PMP-101 FBELOW SETPOINT RATE BELOW SETPOINT AT 14:25&#39;
+Starts with WARNING: True
+Contains time (has &#39;:&#39;): True
+Word count: 9
+Words: [&#39;WARNING:&#39;, &#39;PMP-101&#39;, &#39;FBELOW&#39;, &#39;SETPOINT&#39;, &#39;RATE&#39;, &#39;BELOW&#39;, &#39;SETPOINT&#39;, &#39;AT&#39;, &#39;14:25&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-4-reaction-yield-analysis">
+<h3>Problem 4: Reaction Yield Analysis<a class="headerlink" href="#problem-4-reaction-yield-analysis" title="Link to this heading">#</a></h3>
+<p>Analyze a batch reaction and determine if it meets production targets.</p>
+<p><strong>Given data:</strong></p>
+<ul class="simple">
+<li><p>Reaction: “Esterification of Acetic Acid”</p></li>
+<li><p>Reactor ID: “R-201”</p></li>
+<li><p>Theoretical yield: 500.0 kg</p></li>
+<li><p>Actual yield: 423.5 kg</p></li>
+<li><p>Target yield: 80%</p></li>
+</ul>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Calculate the percent yield: (actual/theoretical) × 100</p></li>
+<li><p>Determine if yield is acceptable (≥ 80%): store as boolean <code class="docutils literal notranslate"><span class="pre">yield_acceptable</span></code></p></li>
+<li><p>Create a result string that combines the reactor ID and reaction name</p></li>
+<li><p>Print the theoretical yield, actual yield, and percent yield (use 1 decimal place)</p></li>
+<li><p>Print whether the yield is acceptable and display “ACCEPTABLE” or “BELOW TARGET”</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="c1"># Given data</span>
+<span class="n">reaction</span> <span class="o">=</span> <span class="s2">&quot;Esterification of Acetic Acid&quot;</span>
+<span class="n">reactor_id</span> <span class="o">=</span> <span class="s2">&quot;R-201&quot;</span>
+<span class="n">theoretical_yield</span> <span class="o">=</span> <span class="mf">500.0</span>  <span class="c1"># kg</span>
+<span class="n">actual_yield</span> <span class="o">=</span> <span class="mf">423.5</span>       <span class="c1"># kg</span>
+
+<span class="c1"># Task 1: Calculate percent yield</span>
+<span class="n">percent_yield</span> <span class="o">=</span> <span class="p">(</span><span class="n">actual_yield</span> <span class="o">/</span> <span class="n">theoretical_yield</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># Task 2: Determine if yield is acceptable (≥ 80%)</span>
+<span class="n">yield_acceptable</span> <span class="o">=</span> <span class="n">percent_yield</span> <span class="o">&gt;=</span> <span class="mi">80</span>
+
+<span class="c1"># Task 3: Create result string combining reactor ID and reaction</span>
+<span class="n">result_string</span> <span class="o">=</span> <span class="n">reactor_id</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">reaction</span>
+
+<span class="c1"># Task 4: Print yields</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_string</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Theoretical yield: </span><span class="si">{</span><span class="n">theoretical_yield</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actual yield: </span><span class="si">{</span><span class="n">actual_yield</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Percent yield: </span><span class="si">{</span><span class="n">percent_yield</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 5: Print acceptability status</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Yield acceptable: </span><span class="si">{</span><span class="n">yield_acceptable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="s1">&#39;ACCEPTABLE&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">yield_acceptable</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;BELOW TARGET&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R-201: Esterification of Acetic Acid
+Theoretical yield: 500.0 kg
+Actual yield: 423.5 kg
+Percent yield: 84.7%
+Yield acceptable: True
+Status: ACCEPTABLE
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-5-equipment-tag-validator">
+<h3>Problem 5: Equipment Tag Validator<a class="headerlink" href="#problem-5-equipment-tag-validator" title="Link to this heading">#</a></h3>
+<p>Validate equipment tag numbers follow the correct format.</p>
+<p><strong>Standard format:</strong> <code class="docutils literal notranslate"><span class="pre">XXX-NNN-YY</span></code> where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">XXX</span></code> = 3-letter equipment type code (must be uppercase)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NNN</span></code> = 3-digit unit number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">YY</span></code> = 2-character identifier</p></li>
+</ul>
+<p><strong>Given tags to validate:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tag1</span> <span class="o">=</span> <span class="s2">&quot;PMP-101-AB&quot;</span>
+<span class="n">tag2</span> <span class="o">=</span> <span class="s2">&quot;pump-101-AB&quot;</span>
+<span class="n">tag3</span> <span class="o">=</span> <span class="s2">&quot;HX-42-C&quot;</span>
+</pre></div>
+</div>
+<p><strong>Tasks for each tag:</strong></p>
+<ol class="arabic simple">
+<li><p>Check if total length is exactly 10 characters</p></li>
+<li><p>Check if the first 3 characters are uppercase letters (use <code class="docutils literal notranslate"><span class="pre">.isupper()</span></code>)</p></li>
+<li><p>Check if position 4 and 8 are hyphens (index 3 and 7)</p></li>
+<li><p>Store overall validity as a boolean (all conditions must be True)</p></li>
+<li><p>Print validation results for each tag</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="c1"># Given tags to validate</span>
+<span class="n">tag1</span> <span class="o">=</span> <span class="s2">&quot;PMP-101-AB&quot;</span>
+<span class="n">tag2</span> <span class="o">=</span> <span class="s2">&quot;pump-101-AB&quot;</span>
+<span class="n">tag3</span> <span class="o">=</span> <span class="s2">&quot;HX-42-C&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EQUIPMENT TAG VALIDATION&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard format: XXX-NNN-YY (10 characters)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+
+<span class="c1"># Validate tag1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Validating: &#39;</span><span class="si">{</span><span class="n">tag1</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="n">length_ok_1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tag1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
+<span class="n">uppercase_ok_1</span> <span class="o">=</span> <span class="n">tag1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>
+<span class="n">hyphens_ok_1</span> <span class="o">=</span> <span class="n">tag1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span> <span class="ow">and</span> <span class="n">tag1</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span>
+<span class="n">valid_1</span> <span class="o">=</span> <span class="n">length_ok_1</span> <span class="ow">and</span> <span class="n">uppercase_ok_1</span> <span class="ow">and</span> <span class="n">hyphens_ok_1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Length = 10: </span><span class="si">{</span><span class="n">length_ok_1</span><span class="si">}</span><span class="s2"> (actual: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tag1</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  First 3 uppercase: </span><span class="si">{</span><span class="n">uppercase_ok_1</span><span class="si">}</span><span class="s2"> (&#39;</span><span class="si">{</span><span class="n">tag1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Hyphens at pos 4 &amp; 8: </span><span class="si">{</span><span class="n">hyphens_ok_1</span><span class="si">}</span><span class="s2"> (&#39;</span><span class="si">{</span><span class="n">tag1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; and &#39;</span><span class="si">{</span><span class="n">tag1</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  VALID: </span><span class="si">{</span><span class="n">valid_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Validate tag2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Validating: &#39;</span><span class="si">{</span><span class="n">tag2</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="n">length_ok_2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tag2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
+<span class="n">uppercase_ok_2</span> <span class="o">=</span> <span class="n">tag2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>
+<span class="n">hyphens_ok_2</span> <span class="o">=</span> <span class="n">tag2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span> <span class="ow">and</span> <span class="n">tag2</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span>
+<span class="n">valid_2</span> <span class="o">=</span> <span class="n">length_ok_2</span> <span class="ow">and</span> <span class="n">uppercase_ok_2</span> <span class="ow">and</span> <span class="n">hyphens_ok_2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Length = 10: </span><span class="si">{</span><span class="n">length_ok_2</span><span class="si">}</span><span class="s2"> (actual: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tag2</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  First 3 uppercase: </span><span class="si">{</span><span class="n">uppercase_ok_2</span><span class="si">}</span><span class="s2"> (&#39;</span><span class="si">{</span><span class="n">tag2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Hyphens at pos 4 &amp; 8: </span><span class="si">{</span><span class="n">hyphens_ok_2</span><span class="si">}</span><span class="s2"> (&#39;</span><span class="si">{</span><span class="n">tag2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; and &#39;</span><span class="si">{</span><span class="n">tag2</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  VALID: </span><span class="si">{</span><span class="n">valid_2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Validate tag3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Validating: &#39;</span><span class="si">{</span><span class="n">tag3</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="n">length_ok_3</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tag3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
+<span class="n">uppercase_ok_3</span> <span class="o">=</span> <span class="n">tag3</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>
+<span class="c1"># Check length first to avoid index error</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tag3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">:</span>
+    <span class="n">hyphens_ok_3</span> <span class="o">=</span> <span class="n">tag3</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span> <span class="ow">and</span> <span class="n">tag3</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">hyphens_ok_3</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">valid_3</span> <span class="o">=</span> <span class="n">length_ok_3</span> <span class="ow">and</span> <span class="n">uppercase_ok_3</span> <span class="ow">and</span> <span class="n">hyphens_ok_3</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Length = 10: </span><span class="si">{</span><span class="n">length_ok_3</span><span class="si">}</span><span class="s2"> (actual: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tag3</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  First 3 uppercase: </span><span class="si">{</span><span class="n">uppercase_ok_3</span><span class="si">}</span><span class="s2"> (&#39;</span><span class="si">{</span><span class="n">tag3</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Hyphens at pos 4 &amp; 8: </span><span class="si">{</span><span class="n">hyphens_ok_3</span><span class="si">}</span><span class="s2"> (tag too short to check)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  VALID: </span><span class="si">{</span><span class="n">valid_3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SUMMARY&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &#39;</span><span class="si">{</span><span class="n">tag1</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="s1">&#39;VALID&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">valid_1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;INVALID&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &#39;</span><span class="si">{</span><span class="n">tag2</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="s1">&#39;VALID&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">valid_2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;INVALID&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &#39;</span><span class="si">{</span><span class="n">tag3</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="s1">&#39;VALID&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">valid_3</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;INVALID&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EQUIPMENT TAG VALIDATION
+Standard format: XXX-NNN-YY (10 characters)
+=======================================================
+
+Validating: &#39;PMP-101-AB&#39;
+  Length = 10: True (actual: 10)
+  First 3 uppercase: True (&#39;PMP&#39;)
+  Hyphens at pos 4 &amp; 8: True (&#39;-&#39; and &#39;-&#39;)
+  VALID: True
+
+Validating: &#39;pump-101-AB&#39;
+  Length = 10: False (actual: 11)
+  First 3 uppercase: False (&#39;pum&#39;)
+  Hyphens at pos 4 &amp; 8: False (&#39;p&#39; and &#39;1&#39;)
+  VALID: False
+
+Validating: &#39;HX-42-C&#39;
+  Length = 10: False (actual: 7)
+  First 3 uppercase: True (&#39;HX-&#39;)
+  Hyphens at pos 4 &amp; 8: False (tag too short to check)
+  VALID: False
+
+=======================================================
+SUMMARY
+-------------------------------------------------------
+  &#39;PMP-101-AB&#39;: VALID
+  &#39;pump-101-AB&#39;: INVALID
+  &#39;HX-42-C&#39;: INVALID
+=======================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lab02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">1. Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-values-and-logic">1.1 Boolean Values and Logic</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-1-1-logical-operators">Example 1.1.1: Logical Operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-1-2-booleans-and-numbers">Example 1.1.2: Booleans and Numbers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-text-data">1.2 Strings (Text Data)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-1-string-methods">Example 1.2.1: String Methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-2-searching-in-strings">Example 1.2.2: Searching in Strings</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-a-report-message">1.3 Format a report message</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-1-basic-f-string-usage">Example 1.3.1: Basic f-string Usage</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-2-number-formatting-in-f-strings">Example 1.3.2: Number Formatting in f-strings</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-engineering-applications">1.4 Chemical Engineering Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-1-safety-interlock-logic">Example 1.4.1: Safety Interlock Logic</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-2-material-classification">Example 1.4.2: Material Classification</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-3-product-specification-check">Example 1.4.3: Product Specification Check</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">2. Practice Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-flow-regime-classification">Problem 1: Flow Regime Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-chemical-formula-parser">Problem 2: Chemical Formula Parser</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-process-log-cleaner">Problem 3: Process Log Cleaner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-reaction-yield-analysis">Problem 4: Reaction Yield Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-equipment-tag-validator">Problem 5: Equipment Tag Validator</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lab 02: Python Functions &#8212; Introduction to Chemical Engineering Computation</title>
+    <title>Lab 02: Booleans and Strings in Chemical Engineering &#8212; Introduction to Chemical Engineering Computation</title>
   
   
   
@@ -57,11 +57,10 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab02/02_lab';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Lab 01: Python Fundamentals for Chemical Engineering" href="../lab01/01_lab.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +123,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -186,10 +183,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 02: Booleans and Strings in Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -375,7 +375,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 02: Python Functions</h1>
+    <h1>Lab 02: Booleans and Strings in Chemical Engineering</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -386,13 +386,35 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">1. Demonstration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-quadratic-equation-solver">1.1 Example 1: Quadratic Equation Solver</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-gravitational-force-calculator-with-filtering">1.2 Example 2: Gravitational Force Calculator with Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-values-and-logic">1.1 Boolean Values and Logic</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-1-1-logical-operators">Example 1.1.1: Logical Operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-1-2-booleans-and-numbers">Example 1.1.2: Booleans and Numbers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-text-data">1.2 Strings (Text Data)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-1-string-methods">Example 1.2.1: String Methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-2-searching-in-strings">Example 1.2.2: Searching in Strings</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-a-report-message">1.3 Format a report message</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-1-basic-f-string-usage">Example 1.3.1: Basic f-string Usage</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-2-number-formatting-in-f-strings">Example 1.3.2: Number Formatting in f-strings</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-engineering-applications">1.4 Chemical Engineering Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-1-safety-interlock-logic">Example 1.4.1: Safety Interlock Logic</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-2-material-classification">Example 1.4.2: Material Classification</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-3-product-specification-check">Example 1.4.3: Product Specification Check</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">2. Practice Problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-electrostatic-force-calculator-with-filtering">Problem 1: Electrostatic Force Calculator with Filtering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-equations-of-state-comparing-gas-models">Problem 2: Equations of State - Comparing Gas Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-flow-regime-classification">Problem 1: Flow Regime Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-chemical-formula-parser">Problem 2: Chemical Formula Parser</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-process-log-cleaner">Problem 3: Process Log Cleaner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-reaction-yield-analysis">Problem 4: Reaction Yield Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-equipment-tag-validator">Problem 5: Equipment Tag Validator</a></li>
 </ul>
 </li>
 </ul>
@@ -406,300 +428,419 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-02-python-functions">
-<h1>Lab 02: Python Functions<a class="headerlink" href="#lab-02-python-functions" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-02-booleans-and-strings-in-chemical-engineering">
+<h1>Lab 02: Booleans and Strings in Chemical Engineering<a class="headerlink" href="#lab-02-booleans-and-strings-in-chemical-engineering" title="Link to this heading">#</a></h1>
+<p><strong>Topics Covered:</strong></p>
+<ul class="simple">
+<li><p>Boolean values and logical operations</p></li>
+<li><p>Comparison operators for process conditions</p></li>
+<li><p>String manipulation for chemical data</p></li>
+<li><p>Formatting output for engineering reports</p></li>
+</ul>
 <section id="demonstration">
 <h2>1. Demonstration<a class="headerlink" href="#demonstration" title="Link to this heading">#</a></h2>
-<section id="example-1-quadratic-equation-solver">
-<h3>1.1 Example 1: Quadratic Equation Solver<a class="headerlink" href="#example-1-quadratic-equation-solver" title="Link to this heading">#</a></h3>
-<p>Consider a function <code class="docutils literal notranslate"><span class="pre">roots(a,</span> <span class="pre">b,</span> <span class="pre">c)</span></code> that returns the roots of quadratic equation:</p>
-<div class="math notranslate nohighlight">
-\[
-ax^2 + bx + c = 0
-\]</div>
-<p>Using the quadratic formula:</p>
-<div class="math notranslate nohighlight">
-\[
-x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-\]</div>
-<p>We’ll assume the equation has two real roots (discriminant ≥ 0).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">roots</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate the roots of a quadratic equation ax^2 + bx + c = 0</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    a, b, c: coefficients of the quadratic equation</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    tuple: (root1, root2) - the two roots of the equation</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Calculate discriminant</span>
-    <span class="n">discriminant</span> <span class="o">=</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span>
-    
-    <span class="c1"># Calculate both roots</span>
-    <span class="n">root1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-    <span class="n">root2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">root1</span><span class="p">,</span> <span class="n">root2</span>
-</pre></div>
-</div>
-</div>
+<section id="boolean-values-and-logic">
+<h3>1.1 Boolean Values and Logic<a class="headerlink" href="#boolean-values-and-logic" title="Link to this heading">#</a></h3>
+<p>Boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code>) are essential for decision-making in process control and safety systems. In chemical engineering, we constantly check conditions:</p>
+<ul class="simple">
+<li><p>Is the temperature above the flash point?</p></li>
+<li><p>Is the pressure within safe operating limits?</p></li>
+<li><p>Has the reaction reached equilibrium?</p></li>
+</ul>
+<section id="example-1-1-1-logical-operators">
+<h4>Example 1.1.1: Logical Operators<a class="headerlink" href="#example-1-1-1-logical-operators" title="Link to this heading">#</a></h4>
+<p>Combine boolean values using logical operators:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></td>
+<td><p>Both must be True</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T_ok</span> <span class="pre">and</span> <span class="pre">P_ok</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
+<td><p>At least one True</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alarm1</span> <span class="pre">or</span> <span class="pre">alarm2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">not</span></code></p></td>
+<td><p>Inverts the value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">emergency</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: x^2 - 5x + 6 = 0 (roots: 3, 2)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 1: x² - 5x + 6 = 0&quot;</span><span class="p">)</span>
-<span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roots: x₁ = </span><span class="si">{</span><span class="n">r1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, x₂ = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Verification: (</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">)² - 5(</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">) + 6 = </span><span class="si">{</span><span class="n">r1</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="o">*</span><span class="n">r1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">6</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1: x² - 5x + 6 = 0
-Roots: x₁ = 3.00, x₂ = 2.00
-Verification: (3.0)² - 5(3.0) + 6 = 0.00
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: 2x^2 + 4x - 6 = 0 (roots: 1, -3)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 2: 2x² + 4x - 6 = 0&quot;</span><span class="p">)</span>
-<span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roots: x₁ = </span><span class="si">{</span><span class="n">r1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, x₂ = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Verification: 2(</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">)² + 4(</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">) - 6 = </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">r1</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="o">*</span><span class="n">r1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">6</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 2: 2x² + 4x - 6 = 0
-Roots: x₁ = 1.00, x₂ = -3.00
-Verification: 2(1.0)² + 4(1.0) - 6 = 0.00
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3: x^2 - 4 = 0 (roots: 2, -2)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 3: x² - 4 = 0&quot;</span><span class="p">)</span>
-<span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roots: x₁ = </span><span class="si">{</span><span class="n">r1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, x₂ = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Verification: (</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">)² - 4 = </span><span class="si">{</span><span class="n">r1</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 3: x² - 4 = 0
-Roots: x₁ = 2.00, x₂ = -2.00
-Verification: (2.0)² - 4 = 0.00
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Safety interlock system for a distillation column</span>
+<span class="n">temperature_ok</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># Temperature within range</span>
+<span class="n">pressure_ok</span> <span class="o">=</span> <span class="kc">True</span>      <span class="c1"># Pressure within range</span>
+<span class="n">level_ok</span> <span class="o">=</span> <span class="kc">False</span>        <span class="c1"># Liquid level NOT within range (alarm!)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="example-2-gravitational-force-calculator-with-filtering">
-<h3>1.2 Example 2: Gravitational Force Calculator with Filtering<a class="headerlink" href="#example-2-gravitational-force-calculator-with-filtering" title="Link to this heading">#</a></h3>
-<p>Define a function to compute the gravitational force:</p>
-<div class="math notranslate nohighlight">
-\[
-F = G\frac{m_1 m_2}{r^2}
-\]</div>
-<p>where:</p>
+<section id="example-1-1-2-booleans-and-numbers">
+<h4>Example 1.1.2: Booleans and Numbers<a class="headerlink" href="#example-1-1-2-booleans-and-numbers" title="Link to this heading">#</a></h4>
+<p>In Python, <code class="docutils literal notranslate"><span class="pre">True</span></code> equals <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> equals <code class="docutils literal notranslate"><span class="pre">0</span></code>. This is useful for counting conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Count how many sensors are in alarm state</span>
+<span class="n">sensor1_alarm</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sensor2_alarm</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">sensor3_alarm</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sensor4_alarm</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="strings-text-data">
+<h3>1.2 Strings (Text Data)<a class="headerlink" href="#strings-text-data" title="Link to this heading">#</a></h3>
+<p>Strings are sequences of characters used for:</p>
 <ul class="simple">
-<li><p>G = 6.674 × 10⁻¹¹ N·m²/kg² (gravitational constant)</p></li>
-<li><p>m₁, m₂ = masses in kg</p></li>
-<li><p>r = distance between centers in meters</p></li>
-<li><p>F = gravitational force in Newtons</p></li>
+<li><p>Chemical formulas and compound names</p></li>
+<li><p>Equipment labels and tag numbers</p></li>
+<li><p>Process descriptions and log messages</p></li>
+<li><p>Data file handling and report generation</p></li>
 </ul>
-<p>We’ll loop over several masses and <strong>print results only if F &lt; 1 N</strong>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gravitational_force</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate gravitational force between two masses.</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    m1: mass of first object (kg)</span>
-<span class="sd">    m2: mass of second object (kg)</span>
-<span class="sd">    r: distance between centers (m)</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    float: gravitational force in Newtons</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="mf">6.674e-11</span>  <span class="c1"># Gravitational constant (N·m²/kg²)</span>
-    <span class="n">F</span> <span class="o">=</span> <span class="n">G</span> <span class="o">*</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">F</span>
-
-<span class="c1"># Test with various mass combinations</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gravitational Force Calculator&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Showing only results where F &lt; 1 N</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;m₁ (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;m₂ (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;r (m)&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;F (N)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Status&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gravitational Force Calculator
-Showing only results where F &lt; 1 N
-
-m₁ (kg)      m₂ (kg)      r (m)      F (N)           Status
-======================================================================
-</pre></div>
-</div>
-</div>
+<section id="example-1-2-1-string-methods">
+<h4>Example 1.2.1: String Methods<a class="headerlink" href="#example-1-2-1-string-methods" title="Link to this heading">#</a></h4>
+<p>Strings have built-in methods for manipulation:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.upper()</span></code></p></td>
+<td><p>Convert to uppercase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;h2o&quot;.upper()</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;H2O&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.lower()</span></code></p></td>
+<td><p>Convert to lowercase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;NaCl&quot;.lower()</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;nacl&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.strip()</span></code></p></td>
+<td><p>Remove whitespace</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">H2O</span> <span class="pre">&quot;.strip()</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;H2O&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.replace()</span></code></p></td>
+<td><p>Replace substring</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;H2O&quot;.replace(&quot;2&quot;,</span> <span class="pre">&quot;₂&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.split()</span></code></p></td>
+<td><p>Split into list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;H-O-H&quot;.split(&quot;-&quot;)</span></code> → <code class="docutils literal notranslate"><span class="pre">[&quot;H&quot;,</span> <span class="pre">&quot;O&quot;,</span> <span class="pre">&quot;H&quot;]</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">10</span>  <span class="c1"># masses in kg, distance in m</span>
-<span class="n">F</span> <span class="o">=</span> <span class="n">gravitational_force</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Two masses: </span><span class="si">{</span><span class="n">m1</span><span class="si">}</span><span class="s2"> kg and </span><span class="si">{</span><span class="n">m2</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distance: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gravitational force: F = </span><span class="si">{</span><span class="n">F</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> N&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Working with chemical data</span>
+<span class="n">raw_formula</span> <span class="o">=</span> <span class="s2">&quot;  ch4  &quot;</span>  <span class="c1"># Messy input data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-2-2-searching-in-strings">
+<h4>Example 1.2.2: Searching in Strings<a class="headerlink" href="#example-1-2-2-searching-in-strings" title="Link to this heading">#</a></h4>
+<p>Check if a substring exists or find its position.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process log message</span>
+<span class="n">log_message</span> <span class="o">=</span> <span class="s2">&quot;ALARM: Reactor temperature exceeded 250°C at 14:32:05&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="format-a-report-message">
+<h3>1.3 Format a report message<a class="headerlink" href="#format-a-report-message" title="Link to this heading">#</a></h3>
+<section id="example-1-3-1-basic-f-string-usage">
+<h4>Example 1.3.1: Basic f-string Usage<a class="headerlink" href="#example-1-3-1-basic-f-string-usage" title="Link to this heading">#</a></h4>
+<p>Prefix string with <code class="docutils literal notranslate"><span class="pre">f</span></code> and use <code class="docutils literal notranslate"><span class="pre">{variable}</span></code> to insert values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reactor operating conditions</span>
+<span class="n">reactor_id</span> <span class="o">=</span> <span class="s2">&quot;R-101&quot;</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">185.7</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">3.45</span>
+<span class="n">conversion</span> <span class="o">=</span> <span class="mf">0.923</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-3-2-number-formatting-in-f-strings">
+<h4>Example 1.3.2: Number Formatting in f-strings<a class="headerlink" href="#example-1-3-2-number-formatting-in-f-strings" title="Link to this heading">#</a></h4>
+<p>Control decimal places and formatting using format specifiers:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Format</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{x:.2f}</span></code></p></td>
+<td><p>2 decimal places</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{3.14159:.2f}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3.14</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{x:.4f}</span></code></p></td>
+<td><p>4 decimal places</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{3.14159:.4f}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3.1416</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{x:.2e}</span></code></p></td>
+<td><p>Scientific notation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{1234:.2e}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.23e+03</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{x:.1%}</span></code></p></td>
+<td><p>Percentage</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{0.856:.1%}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">85.6%</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{x:,}</span></code></p></td>
+<td><p>Thousands separator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f&quot;{1000000:,}&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1,000,000</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heat exchanger calculations</span>
+<span class="n">heat_duty</span> <span class="o">=</span> <span class="mf">1256789.5</span>  <span class="c1"># Watts</span>
+<span class="n">efficiency</span> <span class="o">=</span> <span class="mf">0.8734</span>
+<span class="n">flow_rate</span> <span class="o">=</span> <span class="mf">0.0000523</span>  <span class="c1"># m³/s</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="chemical-engineering-applications">
+<h3>1.4 Chemical Engineering Applications<a class="headerlink" href="#chemical-engineering-applications" title="Link to this heading">#</a></h3>
+<section id="example-1-4-1-safety-interlock-logic">
+<h4>Example 1.4.1: Safety Interlock Logic<a class="headerlink" href="#example-1-4-1-safety-interlock-logic" title="Link to this heading">#</a></h4>
+<p>Design a safety system that checks multiple conditions before allowing operation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reactor safety interlock system</span>
+<span class="c1"># Operating limits</span>
+<span class="n">T_min</span><span class="p">,</span> <span class="n">T_max</span> <span class="o">=</span> <span class="mf">150.0</span><span class="p">,</span> <span class="mf">250.0</span>  <span class="c1"># °C</span>
+<span class="n">P_min</span><span class="p">,</span> <span class="n">P_max</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span>     <span class="c1"># bar</span>
+<span class="n">level_min</span><span class="p">,</span> <span class="n">level_max</span> <span class="o">=</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">80.0</span>  <span class="c1"># %</span>
 
-<span class="k">if</span> <span class="n">F</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: F &lt; 1 N (very weak force!)&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: F ≥ 1 N&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Two masses: 1000 kg and 500 kg
-Distance: 10 m
-Gravitational force: F = 3.337000e-07 N
-Result: F &lt; 1 N (very weak force!)
+<span class="c1"># Current readings</span>
+<span class="n">T_current</span> <span class="o">=</span> <span class="mf">185.0</span>  <span class="c1"># °C</span>
+<span class="n">P_current</span> <span class="o">=</span> <span class="mf">5.5</span>    <span class="c1"># bar</span>
+<span class="n">level_current</span> <span class="o">=</span> <span class="mf">45.0</span>  <span class="c1"># %</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="example-1-4-2-material-classification">
+<h4>Example 1.4.2: Material Classification<a class="headerlink" href="#example-1-4-2-material-classification" title="Link to this heading">#</a></h4>
+<p>Use string operations to parse and classify chemical information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chemical compound database entry</span>
+<span class="n">compound_data</span> <span class="o">=</span> <span class="s2">&quot;Ethanol;C2H5OH;78.37;46.07;Flammable&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1-4-3-product-specification-check">
+<h4>Example 1.4.3: Product Specification Check<a class="headerlink" href="#example-1-4-3-product-specification-check" title="Link to this heading">#</a></h4>
+<p>Verify if a product meets quality specifications.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Product quality specifications</span>
+<span class="n">product_name</span> <span class="o">=</span> <span class="s2">&quot;Industrial Grade Acetone&quot;</span>
+<span class="n">batch_number</span> <span class="o">=</span> <span class="s2">&quot;ACE-2024-0156&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 <hr class="docutils" />
 <section id="practice-problems">
 <h2>2. Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
-<p>Now it’s your turn! Complete the following problems using functions, loops, and conditional statements.</p>
-<section id="problem-1-electrostatic-force-calculator-with-filtering">
-<h3>Problem 1: Electrostatic Force Calculator with Filtering<a class="headerlink" href="#problem-1-electrostatic-force-calculator-with-filtering" title="Link to this heading">#</a></h3>
-<p>Create a function <code class="docutils literal notranslate"><span class="pre">electrostatic_force(q1,</span> <span class="pre">q2,</span> <span class="pre">r)</span></code> that calculates the electrostatic force between two charges using Coulomb’s Law:</p>
-<div class="math notranslate nohighlight">
-\[
-F = k_e \frac{|q_1 q_2|}{r^2}
-\]</div>
-<p>where:</p>
+<p>Now it’s your turn! Solve the following problems in the cells below. Make sure to:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(k_e\)</span> = 8.99 × 10⁹ N·m²/C² (Coulomb’s constant)</p></li>
-<li><p>q₁, q₂ = charges in Coulombs (C)</p></li>
-<li><p>r = distance between charges in meters</p></li>
-<li><p>F = electrostatic force in Newtons</p></li>
+<li><p>Use appropriate variable names</p></li>
+<li><p>Include comments explaining your logic</p></li>
+<li><p>Format output clearly with units</p></li>
+</ul>
+<section id="problem-1-flow-regime-classification">
+<h3>Problem 1: Flow Regime Classification<a class="headerlink" href="#problem-1-flow-regime-classification" title="Link to this heading">#</a></h3>
+<p>Based on the Reynolds number, classify the flow regime in a pipe:</p>
+<p><strong>Given:</strong></p>
+<ul class="simple">
+<li><p>Reynolds number (Re) = 3500</p></li>
+</ul>
+<p><strong>Classification criteria:</strong></p>
+<ul class="simple">
+<li><p>Re &lt; 2300 → Laminar flow</p></li>
+<li><p>2300 ≤ Re ≤ 4000 → Transitional flow</p></li>
+<li><p>Re &gt; 4000 → Turbulent flow</p></li>
 </ul>
 <p><strong>Tasks:</strong></p>
 <ol class="arabic simple">
-<li><p>Define the function to return the electrostatic force</p></li>
-<li><p>Test with the following charge pairs (all with q₁ = 1.0 × 10⁻⁶ C):</p>
-<ul class="simple">
-<li><p>q₂ values (C): [1.0e-6, 2.0e-6, 5.0e-6, 1.0e-5, 5.0e-5, 1.0e-4]</p></li>
-<li><p>r values (m): [0.01, 0.02, 0.05, 0.1, 0.2, 0.5]</p></li>
-</ul>
-</li>
-<li><p>Loop over all combinations (6 test cases total)</p></li>
-<li><p><strong>Print results ONLY if F &gt; 100 N</strong></p></li>
-<li><p>Count and report how many cases meet this criterion</p></li>
-<li><p>Create a formatted table showing q₁, q₂, r, and F for filtered results</p></li>
+<li><p>Create boolean variables: <code class="docutils literal notranslate"><span class="pre">is_laminar</span></code>, <code class="docutils literal notranslate"><span class="pre">is_transitional</span></code>, <code class="docutils literal notranslate"><span class="pre">is_turbulent</span></code></p></li>
+<li><p>Print the Reynolds number and which booleans are True</p></li>
+<li><p>Create and print a status string that says “Flow regime: [regime type]”</p></li>
 </ol>
-<p><strong>Format:</strong> Similar to the gravitational force example, show a status column indicating whether each case was printed or filtered.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="c1"># Given</span>
+<span class="n">Re</span> <span class="o">=</span> <span class="mi">3500</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="problem-2-equations-of-state-comparing-gas-models">
-<h3>Problem 2: Equations of State - Comparing Gas Models<a class="headerlink" href="#problem-2-equations-of-state-comparing-gas-models" title="Link to this heading">#</a></h3>
-<p>Using the following equations of state, define Python functions returning the pressure of a gas (p), given its volume (V), amount (n) and temperature (T). Use SI units.</p>
-<p><strong>Ideal Gas Equation:</strong></p>
-<div class="math notranslate nohighlight">
-\[
-p = \frac{nRT}{V}
-\]</div>
-<p><strong>Van der Waals Equation:</strong></p>
-<div class="math notranslate nohighlight">
-\[
-p = \frac{nRT}{V - nb} - \frac{n^2a}{V^2}
-\]</div>
-<p><strong>Dieterici Equation:</strong></p>
-<div class="math notranslate nohighlight">
-\[
-p = \frac{nRT \exp\left(-\frac{na}{RTV}\right)}{V - nb}
-\]</div>
-<p><strong>Tasks:</strong></p>
-<ol class="arabic simple">
-<li><p>Define three functions:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">p_ideal(n,</span> <span class="pre">V,</span> <span class="pre">T,</span> <span class="pre">R)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">p_vdw(n,</span> <span class="pre">V,</span> <span class="pre">T,</span> <span class="pre">R,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> (Van der Waals)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">p_dieterici(n,</span> <span class="pre">V,</span> <span class="pre">T,</span> <span class="pre">R,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> (Dieterici)</p></li>
-</ul>
-</li>
-<li><p>Compare the pressure for <strong>0.5 mol of CO₂</strong> at three temperatures confined to a volume of <strong>10 L</strong>:</p>
-<ul class="simple">
-<li><p>T = 273.15 K, 303.15 K, and 333.15 K (use a list)</p></li>
-</ul>
-</li>
-<li><p>Use the following constants:</p>
-<ul class="simple">
-<li><p>R = 8.3144626 J/(K·mol)</p></li>
-<li><p>Van der Waals parameters: a = 3.640 L²·bar/mol², b = 0.04267 L/mol</p></li>
-<li><p>Dieterici parameters: a = 4.692 L²·bar/mol², b = 0.04639 L/mol</p></li>
-</ul>
-</li>
-<li><p><strong>Important unit conversions:</strong></p>
-<ul class="simple">
-<li><p>Convert volume from L to m³: V_m3 = V_L / 1000</p></li>
-<li><p>Convert a from L²·bar/mol² to Pa·m⁶/mol²: multiply by 100</p></li>
-<li><p>Convert b from L/mol to m³/mol: divide by 1000</p></li>
-</ul>
-</li>
-<li><p>Use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to iterate over temperatures and print results for each T</p></li>
-<li><p>For each temperature, print:</p>
-<ul class="simple">
-<li><p>Temperature in K</p></li>
-<li><p>Ideal gas pressure in Pa</p></li>
-<li><p>Van der Waals pressure in Pa</p></li>
-<li><p>Dieterici pressure in Pa</p></li>
-</ul>
-</li>
-</ol>
-<p><strong>Bonus (+3 pts):</strong> Format the output to look like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">----------------------------------</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mf">273.15</span> <span class="n">K</span>
-<span class="n">P_ideal</span> <span class="o">=</span> <span class="mf">113.55477296</span> <span class="n">Pa</span>
-<span class="n">P_vdw</span> <span class="o">=</span> <span class="mf">113.78846005</span> <span class="n">Pa</span>
-<span class="n">P_diet</span> <span class="o">=</span> <span class="mf">113.80701895</span> <span class="n">Pa</span>
-<span class="o">----------------------------------</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mf">303.15</span> <span class="n">K</span>
-<span class="n">P_ideal</span> <span class="o">=</span> <span class="mf">126.02646686</span> <span class="n">Pa</span>
-<span class="n">P_vdw</span> <span class="o">=</span> <span class="mf">126.28681920</span> <span class="n">Pa</span>
-<span class="n">P_diet</span> <span class="o">=</span> <span class="mf">126.30770813</span> <span class="n">Pa</span>
-<span class="o">----------------------------------</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mf">333.15</span> <span class="n">K</span>
-<span class="n">P_ideal</span> <span class="o">=</span> <span class="mf">138.49816076</span> <span class="n">Pa</span>
-<span class="n">P_vdw</span> <span class="o">=</span> <span class="mf">138.78517835</span> <span class="n">Pa</span>
-<span class="n">P_diet</span> <span class="o">=</span> <span class="mf">138.80839733</span> <span class="n">Pa</span>
+<section id="problem-2-chemical-formula-parser">
+<h3>Problem 2: Chemical Formula Parser<a class="headerlink" href="#problem-2-chemical-formula-parser" title="Link to this heading">#</a></h3>
+<p>Parse information from a chemical formula string.</p>
+<p><strong>Given:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;Ca(OH)2&quot;</span>
 </pre></div>
 </div>
-<p><strong>Hint:</strong> Use <code class="docutils literal notranslate"><span class="pre">math.exp()</span></code> for the exponential function in Dieterici equation.</p>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Find the length of the formula string</p></li>
+<li><p>Check if the formula contains:</p>
+<ul class="simple">
+<li><p>Calcium (“Ca”) - store as <code class="docutils literal notranslate"><span class="pre">has_calcium</span></code></p></li>
+<li><p>Oxygen (“O”) - store as <code class="docutils literal notranslate"><span class="pre">has_oxygen</span></code></p></li>
+<li><p>Nitrogen (“N”) - store as <code class="docutils literal notranslate"><span class="pre">has_nitrogen</span></code></p></li>
+</ul>
+</li>
+<li><p>Extract the first 2 characters (the metal symbol)</p></li>
+<li><p>Check if the formula contains parentheses (indicating a polyatomic ion)</p></li>
+<li><p>Print all results with clear labels</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;Ca(OH)2&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-3-process-log-cleaner">
+<h3>Problem 3: Process Log Cleaner<a class="headerlink" href="#problem-3-process-log-cleaner" title="Link to this heading">#</a></h3>
+<p>Clean and standardize messy process log entries from a plant database.</p>
+<p><strong>Given:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_entry</span> <span class="o">=</span> <span class="s2">&quot;   WARNING: pump-101 flow rate LOW at 14:25   &quot;</span>
+</pre></div>
+</div>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Remove leading and trailing whitespace using <code class="docutils literal notranslate"><span class="pre">.strip()</span></code></p></li>
+<li><p>Convert the entire message to uppercase using <code class="docutils literal notranslate"><span class="pre">.upper()</span></code></p></li>
+<li><p>Replace “PUMP-101” with “PMP-101” (standardized equipment code) using <code class="docutils literal notranslate"><span class="pre">.replace()</span></code></p></li>
+<li><p>Replace “LOW” with “BELOW SETPOINT” for clarity</p></li>
+<li><p>Check if the cleaned message starts with “WARNING” using <code class="docutils literal notranslate"><span class="pre">.startswith()</span></code></p></li>
+<li><p>Check if the message contains a time (look for “:” character)</p></li>
+<li><p>Split the message by spaces and count how many words it contains</p></li>
+<li><p>Print each transformation step and the final results</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="c1"># Given</span>
+<span class="n">log_entry</span> <span class="o">=</span> <span class="s2">&quot;   WARNING: pump-101 flow rate LOW at 14:25   &quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-4-reaction-yield-analysis">
+<h3>Problem 4: Reaction Yield Analysis<a class="headerlink" href="#problem-4-reaction-yield-analysis" title="Link to this heading">#</a></h3>
+<p>Analyze a batch reaction and determine if it meets production targets.</p>
+<p><strong>Given data:</strong></p>
+<ul class="simple">
+<li><p>Reaction: “Esterification of Acetic Acid”</p></li>
+<li><p>Reactor ID: “R-201”</p></li>
+<li><p>Theoretical yield: 500.0 kg</p></li>
+<li><p>Actual yield: 423.5 kg</p></li>
+<li><p>Target yield: 80%</p></li>
+</ul>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Calculate the percent yield: (actual/theoretical) × 100</p></li>
+<li><p>Determine if yield is acceptable (≥ 80%): store as boolean <code class="docutils literal notranslate"><span class="pre">yield_acceptable</span></code></p></li>
+<li><p>Create a result string that combines the reactor ID and reaction name</p></li>
+<li><p>Print the theoretical yield, actual yield, and percent yield (use 1 decimal place)</p></li>
+<li><p>Print whether the yield is acceptable and display “ACCEPTABLE” or “BELOW TARGET”</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="c1"># Given data</span>
+<span class="n">reaction</span> <span class="o">=</span> <span class="s2">&quot;Esterification of Acetic Acid&quot;</span>
+<span class="n">reactor_id</span> <span class="o">=</span> <span class="s2">&quot;R-201&quot;</span>
+<span class="n">theoretical_yield</span> <span class="o">=</span> <span class="mf">500.0</span>  <span class="c1"># kg</span>
+<span class="n">actual_yield</span> <span class="o">=</span> <span class="mf">423.5</span>       <span class="c1"># kg</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-5-equipment-tag-validator">
+<h3>Problem 5: Equipment Tag Validator<a class="headerlink" href="#problem-5-equipment-tag-validator" title="Link to this heading">#</a></h3>
+<p>Validate equipment tag numbers follow the correct format.</p>
+<p><strong>Standard format:</strong> <code class="docutils literal notranslate"><span class="pre">XXX-NNN-YY</span></code> where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">XXX</span></code> = 3-letter equipment type code (must be uppercase)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NNN</span></code> = 3-digit unit number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">YY</span></code> = 2-character identifier</p></li>
+</ul>
+<p><strong>Given tags to validate:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tag1</span> <span class="o">=</span> <span class="s2">&quot;PMP-101-AB&quot;</span>
+<span class="n">tag2</span> <span class="o">=</span> <span class="s2">&quot;pump-101-AB&quot;</span>
+<span class="n">tag3</span> <span class="o">=</span> <span class="s2">&quot;HX-42-C&quot;</span>
+</pre></div>
+</div>
+<p><strong>Tasks for each tag:</strong></p>
+<ol class="arabic simple">
+<li><p>Check if total length is exactly 10 characters</p></li>
+<li><p>Check if the first 3 characters are uppercase letters (use <code class="docutils literal notranslate"><span class="pre">.isupper()</span></code>)</p></li>
+<li><p>Check if position 4 and 8 are hyphens (index 3 and 7)</p></li>
+<li><p>Store overall validity as a boolean (all conditions must be True)</p></li>
+<li><p>Print validation results for each tag</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="c1"># Given tags to validate</span>
+<span class="n">tag1</span> <span class="o">=</span> <span class="s2">&quot;PMP-101-AB&quot;</span>
+<span class="n">tag2</span> <span class="o">=</span> <span class="s2">&quot;pump-101-AB&quot;</span>
+<span class="n">tag3</span> <span class="o">=</span> <span class="s2">&quot;HX-42-C&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -738,6 +879,15 @@ p = \frac{nRT \exp\left(-\frac{na}{RTV}\right)}{V - nb}
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../lab01/01_lab.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lab 01: Python Fundamentals for Chemical Engineering</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -755,13 +905,35 @@ p = \frac{nRT \exp\left(-\frac{na}{RTV}\right)}{V - nb}
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">1. Demonstration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-quadratic-equation-solver">1.1 Example 1: Quadratic Equation Solver</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-gravitational-force-calculator-with-filtering">1.2 Example 2: Gravitational Force Calculator with Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-values-and-logic">1.1 Boolean Values and Logic</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-1-1-logical-operators">Example 1.1.1: Logical Operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-1-2-booleans-and-numbers">Example 1.1.2: Booleans and Numbers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-text-data">1.2 Strings (Text Data)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-1-string-methods">Example 1.2.1: String Methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-2-2-searching-in-strings">Example 1.2.2: Searching in Strings</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-a-report-message">1.3 Format a report message</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-1-basic-f-string-usage">Example 1.3.1: Basic f-string Usage</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-3-2-number-formatting-in-f-strings">Example 1.3.2: Number Formatting in f-strings</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-engineering-applications">1.4 Chemical Engineering Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-1-safety-interlock-logic">Example 1.4.1: Safety Interlock Logic</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-2-material-classification">Example 1.4.2: Material Classification</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-4-3-product-specification-check">Example 1.4.3: Product Specification Check</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">2. Practice Problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-electrostatic-force-calculator-with-filtering">Problem 1: Electrostatic Force Calculator with Filtering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-equations-of-state-comparing-gas-models">Problem 2: Equations of State - Comparing Gas Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-flow-regime-classification">Problem 1: Flow Regime Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-chemical-formula-parser">Problem 2: Chemical Formula Parser</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-process-log-cleaner">Problem 3: Process Log Cleaner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-reaction-yield-analysis">Problem 4: Reaction Yield Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-equipment-tag-validator">Problem 5: Equipment Tag Validator</a></li>
 </ul>
 </li>
 </ul>

@@ -190,6 +190,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings in Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -444,6 +445,32 @@ If you’re monitoring a reactor temperature and need to trigger a safety shutdo
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -637,6 +664,92 @@ True + False: 1
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span> <span class="c1">#&#39;hello world&#39; </span>
+<span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+False
+True
+True
+True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.0, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="mf">1.0</span> <span class="o">==</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="kc">False</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;hello&#39;</span> <span class="o">==</span> <span class="s1">&#39;Hello&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;abc&#39;</span> <span class="o">&lt;</span> <span class="s1">&#39;cde&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Basic == Operator Examples ===&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1 == 2: </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>           <span class="c1"># False</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5 == 5: </span><span class="si">{</span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>           <span class="c1"># True</span>
@@ -674,9 +787,9 @@ True + False: 1
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Number Comparisons ===&quot;</span><span class="p">)</span>
-<span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.5</span>
-<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.3</span>
-<span class="n">flow_rate</span> <span class="o">=</span> <span class="mf">125.0</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.5</span> <span class="c1"># C</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">2.3</span> <span class="c1">#bar</span>
+<span class="n">flow_rate</span> <span class="o">=</span> <span class="mf">125.0</span> <span class="c1"># m3/min</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature == 85.5: </span><span class="si">{</span><span class="n">temperature</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">85.5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -778,6 +891,50 @@ Temperature &lt;= 85.0: False
 <p><strong>Example:</strong> A reactor is safe to operate when temperature &lt; 100°C <strong>AND</strong> pressure &lt; 5 bar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">B</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">A</span> <span class="ow">and</span> <span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reactor</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># C</span>
+<span class="n">press</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># bar</span>
+
+
+<span class="n">temp_threshold</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">press_threshold</span> <span class="o">=</span> <span class="mi">10</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">temp</span> <span class="o">&gt;</span> <span class="n">temp_threshold</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">press</span> <span class="o">&gt;</span> <span class="n">press_threshold</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="n">temp_threshold</span> <span class="ow">and</span> <span class="n">press</span> <span class="o">&gt;</span> <span class="n">press_threshold</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ALARM: Shut down the reactor&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nothing&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+True
+ALARM: Shut down the reactor
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== AND Operator Examples ===&quot;</span><span class="p">)</span>
 <span class="n">temperature</span> <span class="o">=</span> <span class="mf">85.0</span>
 <span class="n">pressure</span> <span class="o">=</span> <span class="mf">3.2</span>
@@ -831,7 +988,36 @@ Safe operation (both conditions): True
 </tbody>
 </table>
 </div>
-<p><strong>Example:</strong> An alarm should sound when temperature &gt; 100°C <strong>OR</strong> pressure &gt; 5 bar.</p>
+<p><strong>Example:</strong> An alarm should sound when temperature &gt; 90°C <strong>OR</strong> pressure &gt; 10 bar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reactor</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># C</span>
+<span class="n">press</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># bar</span>
+
+
+<span class="n">temp_threshold</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">press_threshold</span> <span class="o">=</span> <span class="mi">10</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">temp</span> <span class="o">&gt;</span> <span class="n">temp_threshold</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">press</span> <span class="o">&gt;</span> <span class="n">press_threshold</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="n">temp_threshold</span> <span class="ow">or</span> <span class="n">press</span> <span class="o">&gt;</span> <span class="n">press_threshold</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ALARM: Shut down the reactor&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nothing&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+False
+ALARM: Shut down the reactor
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Different scenario</span>
@@ -889,6 +1075,32 @@ Alarm needed (either condition): True
 <p><strong>Example:</strong> Equipment is offline when it’s <strong>NOT</strong> running.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># C</span>
+<span class="n">press</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># bar</span>
+
+
+<span class="n">temp_threshold</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">press_threshold</span> <span class="o">=</span> <span class="mi">10</span>
+
+
+<span class="c1"># print(temp &gt; temp_threshold)</span>
+<span class="c1"># print(press &gt; press_threshold)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">temp</span> <span class="o">&lt;</span> <span class="n">temp_threshold</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="ow">not</span> <span class="n">temp</span> <span class="o">&lt;</span> <span class="n">temp_threshold</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># No alarm case</span>
 <span class="n">temperature3</span> <span class="o">=</span> <span class="mf">80.0</span>
 <span class="n">pressure3</span> <span class="o">=</span> <span class="mf">2.0</span>
@@ -928,6 +1140,66 @@ NOT in maintenance: True
 <section id="truthiness-and-boolean-conversion">
 <span id="id8"></span><h2>3.4 Truthiness and Boolean Conversion<a class="headerlink" href="#truthiness-and-boolean-conversion" title="Link to this heading">#</a></h2>
 <p>In Python, <strong>every value has a “truthiness”</strong> - it can be evaluated as <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> in a Boolean context. This is very useful for checking if variables have values or are empty.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
 <section id="falsy-values-evaluate-to-false">
 <span id="id9"></span><h3>3.4.1 “Falsy” Values (evaluate to <code class="docutils literal notranslate"><span class="pre">False</span></code>)<a class="headerlink" href="#falsy-values-evaluate-to-false" title="Link to this heading">#</a></h3>
 <p>These values are considered <code class="docutils literal notranslate"><span class="pre">False</span></code> in Boolean contexts:</p>
@@ -940,6 +1212,31 @@ NOT in maintenance: True
 <li><p><code class="docutils literal notranslate"><span class="pre">{}</span></code> (empty dictionary)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">set()</span></code> (empty set)</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing Falsy Values ===&quot;</span><span class="p">)</span>
+<span class="n">falsy_values</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">{}]</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">([]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Testing Falsy Values ===
+False
+False
+False
+False
+False
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing Falsy Values ===&quot;</span><span class="p">)</span>
@@ -975,6 +1272,23 @@ bool({}) = False
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+True
+False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Testing Truthy Values ===&quot;</span><span class="p">)</span>  
 <span class="n">truthy_values</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}]</span>
 
@@ -993,6 +1307,32 @@ bool(&#39;hello&#39;) = True
 bool(&#39; &#39;) = True
 bool([1, 2]) = True
 bool({&#39;key&#39;: &#39;value&#39;}) = True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dummy_function</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">10</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">dummy_function</span><span class="p">()</span> <span class="c1"># 10</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;do something - 1&#39;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">x</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;do something - 2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+do something - 2
 </pre></div>
 </div>
 </div>
@@ -1024,6 +1364,77 @@ bool({&#39;key&#39;: &#39;value&#39;}) = True
 <li><p>Both work with any iterable (lists, tuples, generators, etc.)</p></li>
 <li><p>Very useful with list comprehensions and generator expressions</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">any</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">flow_rate</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="n">pressure</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">,</span> <span class="n">flow_rate</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shut down the reactor&#39;</span><span class="p">)</span>
+
+<span class="c1"># if temperature &gt; 100 or pressure &gt; 20 or flow_rate &gt; 30:</span>
+<span class="c1">#     print(&#39;shut down the reactor&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shut down the reactor
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">flow_rate</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="n">pressure</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">,</span> <span class="n">flow_rate</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shut down the reactor&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">all</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">any</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+
+
+<span class="c1">#any([bool(0) , bool(0), bool(0.0)]) # any([True, True, True])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">any</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
@@ -1079,15 +1490,62 @@ bool({&#39;key&#39;: &#39;value&#39;}) = True
 <p>Python provides the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator to check for inclusion. For example, if we want to determine whether a molecular formula contains nickel, we can simply test whether <code class="docutils literal notranslate"><span class="pre">&quot;Ni&quot;</span></code> is present in the formula.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;NiCl2&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ow">in</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">47</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="ow">in</span>
+    <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;hello&#39;</span> <span class="ow">in</span> <span class="s1">&#39;hello world&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;h&#39;</span> <span class="ow">in</span> <span class="s1">&#39;yellow&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formulas</span>
 <span class="c1"># Check for presence of nickel</span>
+
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nickel is present in the formula:&quot;</span><span class="p">,</span> <span class="s2">&quot;Ni&quot;</span> <span class="ow">in</span> <span class="n">formula</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Palladium is present in the formula:&quot;</span><span class="p">,</span> <span class="s2">&quot;Pd&quot;</span> <span class="ow">in</span> <span class="n">formula</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nickel is not present in the formula? &quot;</span><span class="p">,</span> <span class="s2">&quot;Ni&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">formula</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Palladium is not present in the formula:&quot;</span><span class="p">,</span> <span class="s2">&quot;Pd&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">formula</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nickel is present in the formula: True
+Palladium is present in the formula: False
+Nickel is not present in the formula?  False
 Palladium is not present in the formula: True
 </pre></div>
 </div>

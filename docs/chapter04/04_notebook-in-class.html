@@ -190,6 +190,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings in Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -431,6 +432,15 @@ document.write(`
 <li><p><strong>Dictionaries</strong> <code class="docutils literal notranslate"><span class="pre">{}</span></code> - Collections of key-value pairs</p></li>
 </ol>
 <p>These core data structures form the backbone of Python programming and are essential for writing clear, efficient, and scalable code.</p>
+<hr class="docutils" />
+<p>In real problems—especially in science and engineering—we almost never work with just one value.</p>
+<p>Think about what we handle in practice</p>
+<ul class="simple">
+<li><p>Multiple temperature measurements along a reactor</p></li>
+<li><p>Parameters for many experiments</p></li>
+</ul>
+<p>Python provides several built-in data structures designed specifically to organize and store multiple pieces of information efficiently and clearly.</p>
+<hr class="docutils" />
 <section id="lists">
 <span id="id2"></span><h2>4.1 Lists<a class="headerlink" href="#lists" title="Link to this heading">#</a></h2>
 <p><strong>Lists</strong> are ordered collections of items that can be changed (mutable). They’re perfect for storing sequences of related data.</p>
@@ -641,6 +651,9 @@ Every other score: [85, 78, 81]
 <li><p><code class="docutils literal notranslate"><span class="pre">.insert(index,</span> <span class="pre">item)</span></code> - Insert item at specific position</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.extend(iterable)</span></code> - Add multiple items</p></li>
 </ul>
+<hr class="docutils" />
+<p>In Python, a method is a function that belongs to an object and operates on that object.
+That’s why you see them written with a dot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start with a simple list of numbers</span>

@@ -190,6 +190,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings in Chemical Engineering</a></li>
 </ul>
 
     </div>
@@ -423,6 +424,11 @@ If you’re monitoring a reactor temperature and need to trigger a safety shutdo
 <span class="n">shutdown_needed</span> <span class="o">=</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">100</span>  <span class="c1"># True or False</span>
 </pre></div>
 </div>
+<hr class="docutils" />
+<p>We’re learning this because many of the problems we work on involve decision points.</p>
+<p>For example, the ideal gas model is applicable when molecular interactions are minimal, which typically occurs at low pressure and sufficiently high temperature.</p>
+<p>Therefore, if the pressure is low and the temperature is within an appropriate range, we can reasonably decide to use the ideal gas assumption.</p>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">105.2</span>
@@ -431,13 +437,14 @@ If you’re monitoring a reactor temperature and need to trigger a safety shutdo
 
 <span class="nb">print</span><span class="p">(</span><span class="n">shutdown_needed</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">shutdown_needed</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">shutdown_needed</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ALARM: let&#39;s shut down the reactor&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+ALARM: let&#39;s shut down the reactor
 </pre></div>
 </div>
 </div>
@@ -855,6 +862,22 @@ Safe operation (both conditions): True
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">B</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">C</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">A</span> <span class="o">==</span> <span class="n">B</span> <span class="o">==</span> <span class="n">C</span> <span class="c1"># A == B and B == C</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="the-or-operator">
 <span id="id7"></span><h3>3.3.2 The <code class="docutils literal notranslate"><span class="pre">or</span></code> Operator<a class="headerlink" href="#the-or-operator" title="Link to this heading">#</a></h3>
@@ -892,22 +915,6 @@ Safe operation (both conditions): True
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp_threshold</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="c1"># degrees Celsius</span>
 <span class="n">press_threshold</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="c1"># bar</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">B</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">C</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="n">A</span> <span class="o">==</span> <span class="n">B</span> <span class="o">==</span> <span class="n">C</span> <span class="c1"># A == B and B == C</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
 </pre></div>
 </div>
 </div>
@@ -1035,6 +1042,42 @@ This means that any value—not just True or False—can be evaluated as either 
 <li><p>logical expressions using and or not</p></li>
 </ul>
 <hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
 <section id="falsy-values-evaluate-to-false">
 <span id="id9"></span><h3>3.4.1 “Falsy” Values (evaluate to <code class="docutils literal notranslate"><span class="pre">False</span></code>)<a class="headerlink" href="#falsy-values-evaluate-to-false" title="Link to this heading">#</a></h3>
 <p>These values are considered <code class="docutils literal notranslate"><span class="pre">False</span></code> in Boolean contexts:</p>
@@ -1078,8 +1121,32 @@ False
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dummy_function</span><span class="p">():</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">dummy_function</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Function returned: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">, Boolean value: </span><span class="si">{</span><span class="nb">bool</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Function returned: None, Boolean value: False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This will not run&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This will not run either&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
