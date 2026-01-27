@@ -36,3 +36,4 @@ parts:
   - caption: Lab Exercises
     chapters:
       - file: docs/lab01/01_lab
+      - file: docs/lab02/02_lab
