@@ -186,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -950,12 +951,16 @@ BATCH STATUS: APPROVED
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is turbulent: </span><span class="si">{</span><span class="n">is_turbulent</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Task 3: Create and print status string</span>
-<span class="k">if</span> <span class="n">is_laminar</span><span class="p">:</span>
-    <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;Laminar&quot;</span>
-<span class="k">elif</span> <span class="n">is_transitional</span><span class="p">:</span>
-    <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;Transitional&quot;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;Turbulent&quot;</span>
+<span class="c1"># if is_laminar:</span>
+<span class="c1">#     regime = &quot;Laminar&quot;</span>
+<span class="c1"># elif is_transitional:</span>
+<span class="c1">#     regime = &quot;Transitional&quot;</span>
+<span class="c1"># else:</span>
+<span class="c1">#     regime = &quot;Turbulent&quot;</span>
+
+<span class="c1"># print(f&quot;Flow regime: {regime}&quot;)</span>
+
+<span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;Laminar&quot;</span> <span class="o">*</span> <span class="n">is_laminar</span> <span class="o">+</span> <span class="s2">&quot;Transitional&quot;</span> <span class="o">*</span> <span class="n">is_transitional</span> <span class="o">+</span> <span class="s2">&quot;Turbulent&quot;</span> <span class="o">*</span> <span class="n">is_turbulent</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flow regime: </span><span class="si">{</span><span class="n">regime</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1060,74 +1065,6 @@ Contains polyatomic ion (parentheses): True
 <li><p>Split the message by spaces and count how many words it contains</p></li>
 <li><p>Print each transformation step and the final results</p></li>
 </ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
-<span class="c1"># Given</span>
-<span class="n">log_entry</span> <span class="o">=</span> <span class="s2">&quot;   WARNING: pump-101 flow rate LOW at 14:25   &quot;</span>
-
-<span class="c1"># Task 1: Remove leading and trailing whitespace</span>
-<span class="n">step1</span> <span class="o">=</span> <span class="n">log_entry</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original: &#39;</span><span class="si">{</span><span class="n">log_entry</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After strip(): &#39;</span><span class="si">{</span><span class="n">step1</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-
-<span class="c1"># Task 2: Convert to uppercase</span>
-<span class="n">step2</span> <span class="o">=</span> <span class="n">step1</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After upper(): &#39;</span><span class="si">{</span><span class="n">step2</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-
-<span class="c1"># Task 3: Replace &quot;PUMP-101&quot; with &quot;PMP-101&quot;</span>
-<span class="n">step3</span> <span class="o">=</span> <span class="n">step2</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;PUMP-101&quot;</span><span class="p">,</span> <span class="s2">&quot;PMP-101&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After replace PUMP-101: &#39;</span><span class="si">{</span><span class="n">step3</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-
-<span class="c1"># Task 4: Replace &quot;LOW&quot; with &quot;BELOW SETPOINT&quot;</span>
-<span class="n">step4</span> <span class="o">=</span> <span class="n">step3</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;LOW&quot;</span><span class="p">,</span> <span class="s2">&quot;BELOW SETPOINT&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After replace LOW: &#39;</span><span class="si">{</span><span class="n">step4</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-
-<span class="c1"># Final cleaned message</span>
-<span class="n">cleaned_message</span> <span class="o">=</span> <span class="n">step4</span>
-
-<span class="c1"># Task 5: Check if message starts with &quot;WARNING&quot;</span>
-<span class="n">starts_with_warning</span> <span class="o">=</span> <span class="n">cleaned_message</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
-
-<span class="c1"># Task 6: Check if message contains a time (look for &quot;:&quot;)</span>
-<span class="n">contains_time</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">cleaned_message</span>
-
-<span class="c1"># Task 7: Split by spaces and count words</span>
-<span class="n">words</span> <span class="o">=</span> <span class="n">cleaned_message</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="n">word_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-
-<span class="c1"># Task 8: Print final results</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL RESULTS&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned message: &#39;</span><span class="si">{</span><span class="n">cleaned_message</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starts with WARNING: </span><span class="si">{</span><span class="n">starts_with_warning</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Contains time (has &#39;:&#39;): </span><span class="si">{</span><span class="n">contains_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Word count: </span><span class="si">{</span><span class="n">word_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Words: </span><span class="si">{</span><span class="n">words</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original: &#39;   WARNING: pump-101 flow rate LOW at 14:25   &#39;
-After strip(): &#39;WARNING: pump-101 flow rate LOW at 14:25&#39;
-After upper(): &#39;WARNING: PUMP-101 FLOW RATE LOW AT 14:25&#39;
-After replace PUMP-101: &#39;WARNING: PMP-101 FLOW RATE LOW AT 14:25&#39;
-After replace LOW: &#39;WARNING: PMP-101 FBELOW SETPOINT RATE BELOW SETPOINT AT 14:25&#39;
-
-==================================================
-FINAL RESULTS
-==================================================
-Cleaned message: &#39;WARNING: PMP-101 FBELOW SETPOINT RATE BELOW SETPOINT AT 14:25&#39;
-Starts with WARNING: True
-Contains time (has &#39;:&#39;): True
-Word count: 9
-Words: [&#39;WARNING:&#39;, &#39;PMP-101&#39;, &#39;FBELOW&#39;, &#39;SETPOINT&#39;, &#39;RATE&#39;, &#39;BELOW&#39;, &#39;SETPOINT&#39;, &#39;AT&#39;, &#39;14:25&#39;]
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="problem-4-reaction-yield-analysis">
 <h3>Problem 4: Reaction Yield Analysis<a class="headerlink" href="#problem-4-reaction-yield-analysis" title="Link to this heading">#</a></h3>
@@ -1174,7 +1111,8 @@ Words: [&#39;WARNING:&#39;, &#39;PMP-101&#39;, &#39;FBELOW&#39;, &#39;SETPOINT&#
 
 <span class="c1"># Task 5: Print acceptability status</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Yield acceptable: </span><span class="si">{</span><span class="n">yield_acceptable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="s1">&#39;ACCEPTABLE&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">yield_acceptable</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;BELOW TARGET&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;ACCEPTABLE&quot;</span> <span class="o">*</span> <span class="n">yield_acceptable</span> <span class="o">+</span> <span class="s2">&quot;BELOW TARGET&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="ow">not</span> <span class="n">yield_acceptable</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Status: BELOW TARGET</span>
 </pre></div>
 </div>
 </div>

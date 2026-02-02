@@ -186,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -444,6 +445,19 @@ document.write(`
 <section id="lists">
 <span id="id2"></span><h2>4.1 Lists<a class="headerlink" href="#lists" title="Link to this heading">#</a></h2>
 <p><strong>Lists</strong> are ordered collections of items that can be changed (mutable). They’re perfect for storing sequences of related data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A list storing temperatures from an experiment</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mf">298.15</span><span class="p">,</span> <span class="mf">300.10</span><span class="p">,</span> <span class="mf">299.80</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">list_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
+<span class="n">list_3</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Aron&#39;</span><span class="p">,</span> <span class="s1">&#39;Beth&#39;</span><span class="p">,</span> <span class="s1">&#39;Cathy&#39;</span><span class="p">,</span> <span class="s1">&#39;Derek&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p><strong>Key Characteristics:</strong></p>
 <ul class="simple">
 <li><p><strong>Ordered</strong>: Items have a specific position (index)</p></li>
@@ -451,10 +465,6 @@ document.write(`
 <li><p><strong>Allow duplicates</strong>: Same value can appear multiple times</p></li>
 <li><p><strong>Mixed types</strong>: Can store different data types together</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A list storing temperatures from an experiment</span>
-<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mf">298.15</span><span class="p">,</span> <span class="mf">300.10</span><span class="p">,</span> <span class="mf">299.80</span><span class="p">]</span>
-</pre></div>
-</div>
 <p>A list is one of the most commonly used data structures in Python.</p>
 <p>At a high level, lists are ordered collections of items that can be changed, which means they are mutable.</p>
 <p>Let’s unpack what that means and why lists are so useful.</p>
@@ -792,6 +802,10 @@ After reversing: [5, 4, 3, 3, 1, 1, 1]
 <section id="tuples">
 <span id="id5"></span><h2>4.2 Tuples<a class="headerlink" href="#tuples" title="Link to this heading">#</a></h2>
 <p><strong>Tuples</strong> are ordered collections of items that cannot be changed (immutable). They’re perfect for storing fixed data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A tuple storing fixed simulation parameters</span>
+<span class="n">simulation_params</span> <span class="o">=</span> <span class="p">(</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;NVT&quot;</span><span class="p">)</span>  <span class="c1"># temperature (K), pressure (atm), ensemble</span>
+</pre></div>
+</div>
 <p><strong>Key Characteristics:</strong></p>
 <ul class="simple">
 <li><p><strong>Ordered</strong>: Items have a specific position (index)</p></li>
@@ -807,10 +821,6 @@ After reversing: [5, 4, 3, 3, 1, 1, 1]
 <li><p>Function return values (multiple values)</p></li>
 <li><p>Dictionary keys (since they’re immutable)</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A tuple storing fixed simulation parameters</span>
-<span class="n">simulation_params</span> <span class="o">=</span> <span class="p">(</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;NVT&quot;</span><span class="p">)</span>  <span class="c1"># temperature (K), pressure (atm), ensemble</span>
-</pre></div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulation_params</span> <span class="o">=</span> <span class="p">(</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;NVT&quot;</span><span class="p">)</span>
@@ -1438,6 +1448,99 @@ Salary: Not specified
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">student</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Janghoon&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="s2">&quot;Chemical Engineering&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;affiliation&quot;</span><span class="p">:</span> <span class="s2">&quot;UNL&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">student</span>
+
+<span class="n">student</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">student</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="n">student</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_items([(&#39;name&#39;, &#39;Janghoon&#39;), (&#39;age&#39;, 20), (&#39;major&#39;, &#39;Chemical Engineering&#39;), (&#39;affiliation&#39;, &#39;UNL&#39;)])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="p">[</span><span class="s2">&quot;gpa&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.8</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">21</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">additional_info</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;Junior&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">}</span>
+<span class="n">student</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">additional_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gpa</span> <span class="o">=</span> <span class="n">student</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;gpa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">student</span><span class="p">[</span><span class="s2">&quot;credits&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">products</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;laptop&quot;</span><span class="p">:</span> <span class="mi">999</span><span class="p">,</span>
+    <span class="s2">&quot;mouse&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;keyboard&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+    <span class="s2">&quot;monitor&quot;</span><span class="p">:</span> <span class="mi">300</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Checking for Keys ===&quot;</span><span class="p">)</span>
+<span class="n">items_to_check</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;laptop&quot;</span><span class="p">,</span> <span class="s2">&quot;tablet&quot;</span><span class="p">,</span> <span class="s2">&quot;mouse&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items_to_check</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">: $</span><span class="si">{</span><span class="n">products</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">: not available&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Checking for Keys ===
+laptop: $999
+tablet: not available
+mouse: $25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dictionary Methods Examples</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Adding and Modifying Items ===&quot;</span><span class="p">)</span>
@@ -1447,16 +1550,47 @@ Salary: Not specified
     <span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="s2">&quot;Computer Science&quot;</span>
 <span class="p">}</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial: </span><span class="si">{</span><span class="n">student</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Add new item</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Adding and Modifying Items ===
+Initial: {&#39;name&#39;: &#39;Bob&#39;, &#39;age&#39;: 20, &#39;major&#39;: &#39;Computer Science&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add new item</span>
 <span class="n">student</span><span class="p">[</span><span class="s2">&quot;gpa&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.8</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After adding GPA: </span><span class="si">{</span><span class="n">student</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Modify existing item</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After adding GPA: {&#39;name&#39;: &#39;Bob&#39;, &#39;age&#39;: 20, &#39;major&#39;: &#39;Computer Science&#39;, &#39;gpa&#39;: 3.8}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modify existing item</span>
 <span class="n">student</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">21</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After birthday: </span><span class="si">{</span><span class="n">student</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Add multiple items</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After birthday: {&#39;name&#39;: &#39;Bob&#39;, &#39;age&#39;: 21, &#39;major&#39;: &#39;Computer Science&#39;, &#39;gpa&#39;: 3.8}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add multiple items</span>
 <span class="n">additional_info</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;Junior&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">}</span>
 <span class="n">student</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">additional_info</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After update: </span><span class="si">{</span><span class="n">student</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1520,11 +1654,7 @@ Salary: Not specified
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Adding and Modifying Items ===
-Initial: {&#39;name&#39;: &#39;Bob&#39;, &#39;age&#39;: 20, &#39;major&#39;: &#39;Computer Science&#39;}
-After adding GPA: {&#39;name&#39;: &#39;Bob&#39;, &#39;age&#39;: 20, &#39;major&#39;: &#39;Computer Science&#39;, &#39;gpa&#39;: 3.8}
-After birthday: {&#39;name&#39;: &#39;Bob&#39;, &#39;age&#39;: 21, &#39;major&#39;: &#39;Computer Science&#39;, &#39;gpa&#39;: 3.8}
-After update: {&#39;name&#39;: &#39;Bob&#39;, &#39;age&#39;: 21, &#39;major&#39;: &#39;Computer Science&#39;, &#39;gpa&#39;: 3.8, &#39;year&#39;: &#39;Junior&#39;, &#39;credits&#39;: 75}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After update: {&#39;name&#39;: &#39;Bob&#39;, &#39;age&#39;: 21, &#39;major&#39;: &#39;Computer Science&#39;, &#39;gpa&#39;: 3.8, &#39;year&#39;: &#39;Junior&#39;, &#39;credits&#39;: 75}
 
 === Removing Items ===
 Removed GPA: 3.8
