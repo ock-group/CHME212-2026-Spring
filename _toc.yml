@@ -12,7 +12,7 @@ parts:
       - file: docs/chapter02/02_notebook
       - file: docs/chapter03/03_notebook
       - file: docs/chapter04/04_notebook
-      # - file: docs/chapter05/05_notebook
+      - file: docs/chapter05/05_notebook
       # - file: docs/chapter06/06_notebook
       # - file: docs/chapter07/07_notebook
       # - file: docs/chapter08/08_notebook
