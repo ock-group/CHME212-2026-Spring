@@ -59,10 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab03/03_lab';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab03/03_lab_solution';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Lab 02: Booleans and Strings" href="../lab02/02_lab.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +123,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -190,10 +191,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
 </ul>
 
     </div>
@@ -265,7 +266,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab03/03_lab.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab03/03_lab_solution.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -295,7 +296,7 @@
       
       
       
-      <li><a href="../../_sources/docs/lab03/03_lab.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/lab03/03_lab_solution.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -449,6 +450,21 @@ document.write(`
 
 <span class="n">T</span> <span class="o">=</span> <span class="mi">456</span>
 <span class="c1"># Check if temperature is in safe range</span>
+<span class="k">if</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">400</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Safe&quot;</span>
+<span class="c1"># Check if temperature is in warning range</span>
+<span class="k">elif</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Warning&quot;</span>
+<span class="c1"># Temperature must be in danger range</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Danger&quot;</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> K - Status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperature: 456 K - Status: Warning
 </pre></div>
 </div>
 </div>
@@ -460,12 +476,26 @@ document.write(`
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reactor Temperature Classification&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">400</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Safe&quot;</span>
+    <span class="k">elif</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Warning&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Danger&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T = </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> K  →  Status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reactor Temperature Classification
 ========================================
+T = 350 K  →  Status: Safe
+T = 450 K  →  Status: Warning
+T = 520 K  →  Status: Danger
+T = 298 K  →  Status: Safe
+T = 500 K  →  Status: Danger
 </pre></div>
 </div>
 </div>
@@ -502,6 +532,14 @@ X(t) = 1 - e^{-kt}
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Time (min)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Conversion&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># Loop through each time point</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+    <span class="c1"># Calculate conversion using first-order kinetics</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="mf">2.71828</span><span class="p">,</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="c1"># or use math.exp(-k * t)</span>
+    
+    <span class="c1"># Print formatted results</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">X</span><span class="si">:</span><span class="s2">&lt;15.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -510,6 +548,11 @@ X(t) = 1 - e^{-kt}
 ========================================
 Time (min)      Conversion     
 ----------------------------------------
+0               0.0000         
+5               0.2212         
+10              0.3935         
+15              0.5276         
+20              0.6321         
 </pre></div>
 </div>
 </div>
@@ -545,6 +588,19 @@ Time (min)      Conversion
 <span class="nb">print</span><span class="p">()</span>
 
 <span class="c1"># Continue looping while conversion is below target</span>
+<span class="k">while</span> <span class="n">X</span> <span class="o">&lt;</span> <span class="n">target_conversion</span><span class="p">:</span>
+    <span class="c1"># Increase conversion by 5% each iteration</span>
+    <span class="n">X</span> <span class="o">+=</span> <span class="mf">0.05</span>
+    
+    <span class="c1"># Count the iteration</span>
+    <span class="n">iterations</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="c1"># Display progress</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">iterations</span><span class="si">}</span><span class="s2">: X = </span><span class="si">{</span><span class="n">X</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Final summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target reached in </span><span class="si">{</span><span class="n">iterations</span><span class="si">}</span><span class="s2"> iterations&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -552,6 +608,28 @@ Time (min)      Conversion
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iterative Conversion Calculation
 ========================================
 Target conversion: 0.95
+
+Iteration 1: X = 0.05
+Iteration 2: X = 0.10
+Iteration 3: X = 0.15
+Iteration 4: X = 0.20
+Iteration 5: X = 0.25
+Iteration 6: X = 0.30
+Iteration 7: X = 0.35
+Iteration 8: X = 0.40
+Iteration 9: X = 0.45
+Iteration 10: X = 0.50
+Iteration 11: X = 0.55
+Iteration 12: X = 0.60
+Iteration 13: X = 0.65
+Iteration 14: X = 0.70
+Iteration 15: X = 0.75
+Iteration 16: X = 0.80
+Iteration 17: X = 0.85
+Iteration 18: X = 0.90
+Iteration 19: X = 0.95
+========================================
+Target reached in 19 iterations
 </pre></div>
 </div>
 </div>
@@ -588,6 +666,19 @@ Target conversion: 0.95
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Critical threshold: </span><span class="si">{</span><span class="n">critical_pressure</span><span class="si">}</span><span class="s2"> psi</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Monitor each pressure reading</span>
+<span class="k">for</span> <span class="n">reading</span> <span class="ow">in</span> <span class="n">pressure_readings</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Pressure reading: </span><span class="si">{</span><span class="n">reading</span><span class="si">}</span><span class="s2"> psi&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Check if pressure exceeds critical threshold</span>
+    <span class="k">if</span> <span class="n">reading</span> <span class="o">&gt;=</span> <span class="n">critical_pressure</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ← CRITICAL!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🚨 EMERGENCY: Pressure </span><span class="si">{</span><span class="n">reading</span><span class="si">}</span><span class="s2"> psi exceeds safe limit!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Initiating emergency shutdown...&quot;</span><span class="p">)</span>
+        <span class="k">break</span>  <span class="c1"># Exit the loop immediately</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✓ OK&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Monitoring stopped.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -595,6 +686,19 @@ Target conversion: 0.95
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reactor Pressure Monitoring System
 =============================================
 Critical threshold: 80 psi
+
+  Pressure reading: 45 psi  ✓ OK
+  Pressure reading: 52 psi  ✓ OK
+  Pressure reading: 58 psi  ✓ OK
+  Pressure reading: 63 psi  ✓ OK
+  Pressure reading: 71 psi  ✓ OK
+  Pressure reading: 78 psi  ✓ OK
+  Pressure reading: 85 psi  ← CRITICAL!
+
+🚨 EMERGENCY: Pressure 85 psi exceeds safe limit!
+   Initiating emergency shutdown...
+
+Monitoring stopped.
 </pre></div>
 </div>
 </div>
@@ -640,12 +744,37 @@ Critical threshold: 80 psi
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
 
 <span class="c1"># Search for temperature that meets criterion</span>
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+    <span class="c1"># Calculate rate using Arrhenius equation: k = A*exp(-Ea/RT)</span>
+    <span class="n">rate</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="mf">2.71828</span><span class="p">,</span> <span class="o">-</span><span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span> <span class="c1"># or use math.exp(-Ea / (R * T))</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T = </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> K  →  rate = </span><span class="si">{</span><span class="n">rate</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/(L·s)&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Check if this temperature meets our criterion</span>
+    <span class="k">if</span> <span class="n">rate</span> <span class="o">&gt;</span> <span class="n">target_rate</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Found valid temperature: </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+        <span class="n">operating_temp</span> <span class="o">=</span> <span class="n">T</span>
+        <span class="k">break</span>  <span class="c1"># Exit the loop early</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># This executes ONLY if loop completed without break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✗ No valid temperature found in range&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using default temperature: 500 K&quot;</span><span class="p">)</span>
+    <span class="n">operating_temp</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Selected operating temperature: </span><span class="si">{</span><span class="n">operating_temp</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Searching for Valid Operating Temperature
 ==================================================
+T = 300 K  →  rate = 0.20 mol/(L·s)
+T = 350 K  →  rate = 3.45 mol/(L·s)
+T = 400 K  →  rate = 29.54 mol/(L·s)
+
+✓ Found valid temperature: 400 K
+
+Selected operating temperature: 400 K
 </pre></div>
 </div>
 </div>
@@ -669,6 +798,23 @@ Critical threshold: 80 psi
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 1</span>
+
+<span class="c1"># PSEUDOCODE:</span>
+<span class="c1"># SET pH_values = [1.5, 4.2, 7.0, 9.8, 13.0]</span>
+<span class="c1"># FOR each pH in pH_values:</span>
+<span class="c1">#     IF pH &lt; 0 OR pH &gt; 14:</span>
+<span class="c1">#         OUTPUT &quot;Invalid pH&quot;</span>
+<span class="c1">#     ELSE IF pH &lt; 3:</span>
+<span class="c1">#         OUTPUT &quot;Strongly Acidic&quot;</span>
+<span class="c1">#     ELSE IF pH &lt; 7:</span>
+<span class="c1">#         OUTPUT &quot;Weakly Acidic&quot;</span>
+<span class="c1">#     ELSE IF pH == 7:</span>
+<span class="c1">#         OUTPUT &quot;Neutral&quot;</span>
+<span class="c1">#     ELSE IF pH &lt;= 11:</span>
+<span class="c1">#         OUTPUT &quot;Weakly Basic&quot;</span>
+<span class="c1">#     ELSE:</span>
+<span class="c1">#         OUTPUT &quot;Strongly Basic&quot;</span>
+<span class="c1"># END FOR</span>
 </pre></div>
 </div>
 </div>
@@ -684,6 +830,30 @@ Critical threshold: 80 psi
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;pH Value&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Classification&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># Loop through each pH value and classify</span>
+<span class="k">for</span> <span class="n">pH</span> <span class="ow">in</span> <span class="n">pH_values</span><span class="p">:</span>
+    <span class="c1"># Input validation (bonus)</span>
+    <span class="k">if</span> <span class="n">pH</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">pH</span> <span class="o">&gt;</span> <span class="mi">14</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;Invalid pH&quot;</span>
+    <span class="c1"># Strongly acidic range</span>
+    <span class="k">elif</span> <span class="n">pH</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;Strongly Acidic&quot;</span>
+    <span class="c1"># Weakly acidic range</span>
+    <span class="k">elif</span> <span class="n">pH</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;Weakly Acidic&quot;</span>
+    <span class="c1"># Neutral (exactly 7)</span>
+    <span class="k">elif</span> <span class="n">pH</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;Neutral&quot;</span>
+    <span class="c1"># Weakly basic range</span>
+    <span class="k">elif</span> <span class="n">pH</span> <span class="o">&lt;=</span> <span class="mi">11</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;Weakly Basic&quot;</span>
+    <span class="c1"># Strongly basic range</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;Strongly Basic&quot;</span>
+    
+    <span class="c1"># Print the result</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pH</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">classification</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -692,6 +862,11 @@ Critical threshold: 80 psi
 ========================================
 pH Value        Classification      
 ----------------------------------------
+1.5             Strongly Acidic     
+4.2             Weakly Acidic       
+7.0             Neutral             
+9.8             Weakly Basic        
+13.0            Strongly Basic      
 </pre></div>
 </div>
 </div>
@@ -737,6 +912,17 @@ pH Value        Classification
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem 2: Finding Optimal Catalyst</span>
 <span class="c1"># Task 1</span>
+<span class="c1"># PSEUDOCODE:</span>
+<span class="c1"># SET catalysts = dictionary with catalyst names and selectivities</span>
+<span class="c1"># SET target_selectivity = 0.85</span>
+<span class="c1"># FOR each catalyst_name, selectivity in catalysts:</span>
+<span class="c1">#     OUTPUT catalyst_name and selectivity</span>
+<span class="c1">#     IF selectivity &gt; target_selectivity:</span>
+<span class="c1">#         OUTPUT &quot;Found suitable catalyst!&quot;</span>
+<span class="c1">#         BREAK</span>
+<span class="c1"># ELSE (if loop completes without break):</span>
+<span class="c1">#     OUTPUT &quot;No suitable catalyst found&quot;</span>
+<span class="c1"># END FOR-ELSE</span>
 </pre></div>
 </div>
 </div>
@@ -760,12 +946,43 @@ pH Value        Classification
 <span class="c1"># Print header</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Catalyst Screening for Selectivity &gt; 0.85&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Search for a catalyst that meets the criterion</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">selectivity</span> <span class="ow">in</span> <span class="n">catalysts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># Print current catalyst being tested</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: selectivity = </span><span class="si">{</span><span class="n">selectivity</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Check if selectivity exceeds target</span>
+    <span class="k">if</span> <span class="n">selectivity</span> <span class="o">&gt;</span> <span class="n">target_selectivity</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Found suitable catalyst: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Selectivity: </span><span class="si">{</span><span class="n">selectivity</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">target_selectivity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">selected_catalyst</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">break</span>  <span class="c1"># Exit loop early - we found a good catalyst</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># This block executes ONLY if the loop finished without break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✗ No suitable catalyst found in the dataset&quot;</span><span class="p">)</span>
+    <span class="n">selected_catalyst</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Final summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">selected_catalyst</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended catalyst: </span><span class="si">{</span><span class="n">selected_catalyst</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recommendation: Test additional catalysts&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catalyst Screening for Selectivity &gt; 0.85
 ==================================================
+Testing Pt/Al2O3: selectivity = 0.72
+Testing Pd/C: selectivity = 0.81
+Testing Ni/SiO2: selectivity = 0.89
+
+✓ Found suitable catalyst: Ni/SiO2
+  Selectivity: 0.89 &gt; 0.85
+==================================================
+Recommended catalyst: Ni/SiO2
 </pre></div>
 </div>
 </div>
@@ -804,15 +1021,6 @@ pH Value        Classification
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../lab02/02_lab.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Lab 02: Booleans and Strings</p>
-      </div>
-    </a>
 </div>
                 </footer>
               

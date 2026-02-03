@@ -15,19 +15,13 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-print("=== Nested Loops ===")
-print("A loop inside another loop\n")
-
-print("Multiplication table (3x3):")
-for i in range(1, 4):
-    for j in range(1, 4):
-
+range(n) -> 0, 1, 2, ..., n-1
 ------------------
 
 
-[0;36m  Cell [0;32mIn[12], line 6[0;36m[0m
-[0;31m    for j in range(1, 4):[0m
-[0m                         ^[0m
-[0;31mSyntaxError[0m[0;31m:[0m incomplete input
+[0;36m  Cell [0;32mIn[7], line 1[0;36m[0m
+[0;31m    range(n) -> 0, 1, 2, ..., n-1[0m
+[0m             ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
 
 
