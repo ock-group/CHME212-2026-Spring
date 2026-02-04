@@ -1,0 +1,1477 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Homework 03 &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'hw/hw03_solution';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../docs/introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../docs/introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fhw/hw03_solution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/hw/hw03_solution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 03</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-10-points-straight-chain-alkene-structural-formula">Problem 1 (10 points) - Straight-Chain Alkene Structural Formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-10-points-heat-transfer-in-a-fin">Problem 2 (10 points) – Heat Transfer in a Fin</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks">Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-20-points-comparing-simplified-and-corrected-gas-models">Problem 3 (20 points) – Comparing Simplified and Corrected Gas Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-20-points-reaction-kinetics-in-a-closed-reactor">Problem 4 (20 points) – Reaction Kinetics in a Closed Reactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-1-linear-rate-law-first-order">Model 1: Linear Rate Law (First-order)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-2-nonlinear-rate-law-second-order">Model 2: Nonlinear Rate Law (Second-Order)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-10-points-phase-classification-of-chemical-species">Problem 5 (10 points) – Phase Classification of Chemical Species</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Tasks</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-03">
+<h1>Homework 03<a class="headerlink" href="#homework-03" title="Link to this heading">#</a></h1>
+<p><strong>Release Date:</strong> Feb 4</p>
+<p><strong>Due Date:</strong> Feb 18 11:59 PM</p>
+<p><strong>Total Points:</strong> 60 pts (+ 5 bonus pts)</p>
+<p><strong>Instructions:</strong></p>
+<ul class="simple">
+<li><p>Complete all problems in this notebook</p></li>
+<li><p>Show all your work with clear comments</p></li>
+<li><p>Use appropriate variable names</p></li>
+<li><p>Format all outputs professionally with units</p></li>
+<li><p>Test your code to ensure it runs without errors</p></li>
+</ul>
+<p><strong>Submission:</strong></p>
+<ul class="simple">
+<li><p>Submit this completed Jupyter notebook to Gradescope</p></li>
+<li><p>Make sure all cells have been executed and outputs are visible</p></li>
+</ul>
+<hr class="docutils" />
+<section id="problem-1-10-points-straight-chain-alkene-structural-formula">
+<h2>Problem 1 (10 points) - Straight-Chain Alkene Structural Formula<a class="headerlink" href="#problem-1-10-points-straight-chain-alkene-structural-formula" title="Link to this heading">#</a></h2>
+<p>For molecules identified as <strong>alkenes</strong> (CₙH₂ₙ), write a script that generates the <strong>straight-chain structural formula</strong> assuming the <strong>C=C double bond is at the first position</strong> (far left).</p>
+<p><strong>Examples:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">C2H4</span></code></p></td>
+<td><p>CH2=CH2</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">C3H6</span></code></p></td>
+<td><p>CH2=CH-CH3</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">C4H8</span></code></p></td>
+<td><p>CH2=CH-CH2-CH3</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">C5H10</span></code></p></td>
+<td><p>CH2=CH-CH2-CH2-CH3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Notes:</strong></p>
+<ul class="simple">
+<li><p>Only <strong>first-position double bond isomers</strong> need to be considered.</p></li>
+<li><p>No branching or internal double bonds are required.</p></li>
+<li><p>Your program should accept a <strong>stoichiometry string</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">C4H8</span></code>) and output the corresponding <strong>structural formula</strong>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;C4H8&quot;</span> <span class="c1">#input(&quot;Enter an alkene formula (e.g., C4H8): &quot;).strip()</span>
+
+<span class="c1"># Extract C and H counts using .find() and slicing</span>
+<span class="n">c_pos</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="n">h_pos</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">)</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">c_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">h_pos</span><span class="p">])</span> <span class="k">if</span> <span class="n">formula</span><span class="p">[</span><span class="n">c_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">h_pos</span><span class="p">]</span> <span class="k">else</span> <span class="mi">1</span>
+<span class="n">H</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">h_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span> <span class="k">if</span> <span class="n">formula</span><span class="p">[</span><span class="n">h_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="k">else</span> <span class="mi">1</span>
+
+<span class="c1"># # For C</span>
+<span class="c1"># if formula[c_pos + 1:h_pos]:</span>
+<span class="c1">#     C = int(formula[c_pos + 1:h_pos])</span>
+<span class="c1"># else:</span>
+<span class="c1">#     C = 1</span>
+
+<span class="c1"># # For H</span>
+<span class="c1"># if formula[h_pos + 1:]:</span>
+<span class="c1">#     H = int(formula[h_pos + 1:])</span>
+<span class="c1"># else:</span>
+<span class="c1">#     H = 1</span>
+
+<span class="c1"># Verify it matches CnH2n for an alkene</span>
+<span class="k">if</span> <span class="n">H</span> <span class="o">!=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">C</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: formula is not an alkene (CnH2n).&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Build the straight-chain structural formula</span>
+    <span class="c1"># First carbon in double bond</span>
+    <span class="n">formula_parts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CH2=CH&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Remaining carbons (if any)</span>
+    <span class="n">remaining_carbons</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="mi">2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">remaining_carbons</span><span class="p">):</span>
+        <span class="c1"># All internal carbons are CH2</span>
+        <span class="n">formula_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;CH2&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Add terminal CH3 if more than 1 carbon remains</span>
+    <span class="k">if</span> <span class="n">C</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">formula_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;CH3&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Join with &quot;-&quot; for single bonds</span>
+    <span class="n">structural_formula</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formula_parts</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">structural_formula</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CH2=CH-CH2-CH2-CH3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="problem-2-10-points-heat-transfer-in-a-fin">
+<h2>Problem 2 (10 points) – Heat Transfer in a Fin<a class="headerlink" href="#problem-2-10-points-heat-transfer-in-a-fin" title="Link to this heading">#</a></h2>
+<p>In heat transfer, engineers often use <strong>fins</strong> to increase the surface area of a component and improve heat dissipation. The <strong>temperature at the tip of a straight fin</strong> can be estimated using the <strong>fin efficiency formula</strong> for a one-dimensional, steady-state fin with uniform cross-section:</p>
+<div class="math notranslate nohighlight">
+\[
+\eta = \frac{\tanh(mL)}{mL}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>L = fin length [m]</p></li>
+<li><p>k = thermal conductivity of the fin material [W/m·K]</p></li>
+<li><p>A_c = cross-sectional area of the fin [m²]</p></li>
+<li><p>P = perimeter of the fin [m]</p></li>
+<li><p>h = convective heat transfer coefficient [W/m²·K]</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+m = \sqrt{\frac{h P}{k A_c}}
+\]</div>
+<p>The fin efficiency, <span class="math notranslate nohighlight">\(\eta\)</span>, is a <strong>dimensionless number</strong> between 0 and 1. High <span class="math notranslate nohighlight">\(\eta\)</span> (close to 1) indicates the fin is effective at transferring heat, while low <span class="math notranslate nohighlight">\(\eta\)</span> indicates the fin tip temperature is significantly lower than the base, reducing effectiveness.</p>
+<section id="tasks">
+<h3>Tasks<a class="headerlink" href="#tasks" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>(5 points) <strong>Write a Python function</strong> called <code class="docutils literal notranslate"><span class="pre">fin_efficiency()</span></code> that accepts a 5-element list (or tuple) <code class="docutils literal notranslate"><span class="pre">[L,</span> <span class="pre">k,</span> <span class="pre">A_c,</span> <span class="pre">P,</span> <span class="pre">h]</span></code> and returns the fin efficiency <span class="math notranslate nohighlight">\(\eta\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fin_efficiency</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+<span class="go">0.95</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fin_efficiency</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate fin efficiency for a straight fin.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    params: list or tuple [L, k, A_c, P, h]</span>
+<span class="sd">        L = fin length [m]</span>
+<span class="sd">        k = thermal conductivity [W/m·K]</span>
+<span class="sd">        A_c = cross-sectional area [m²]</span>
+<span class="sd">        P = perimeter [m]</span>
+<span class="sd">        h = convective heat transfer coefficient [W/m²·K]</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    eta: fin efficiency (dimensionless)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">A_c</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">params</span>
+    
+    <span class="c1"># Calculate m parameter</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">h</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">A_c</span><span class="p">))</span>
+    
+    <span class="c1"># Calculate fin efficiency</span>
+    <span class="n">mL</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">L</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">mL</span><span class="p">)</span> <span class="o">/</span> <span class="n">mL</span>
+    
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Test the function</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fin_efficiency</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">25</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.98
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>(5 points) Add a decision output that classifies the fin as:</p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;HIGHLY</span> <span class="pre">EFFICIENT&quot;</span></code> if <span class="math notranslate nohighlight">\(\eta\)</span> &gt; 0.9</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;MODERATELY</span> <span class="pre">EFFICIENT&quot;</span></code> if 0.7 &lt; <span class="math notranslate nohighlight">\(\eta\)</span> <span class="math notranslate nohighlight">\(\leq\)</span> 0.9</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;LOW</span> <span class="pre">EFFICIENCY&quot;</span></code> if <span class="math notranslate nohighlight">\(\eta\)</span> <span class="math notranslate nohighlight">\(\leq\)</span> 0.7</p></li>
+</ul>
+<p>Your function should return a tuple: (eta, classification)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fin_efficiency</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+<span class="go">(0.95, &quot;HIGHLY EFFICIENT&quot;)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fin_efficiency</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate fin efficiency and classify performance.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    params: list or tuple [L, k, A_c, P, h]</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    tuple: (eta, classification)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">A_c</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">params</span>
+    
+    <span class="c1"># Calculate m parameter</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">h</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">A_c</span><span class="p">))</span>
+    
+    <span class="c1"># Calculate fin efficiency</span>
+    <span class="n">mL</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">L</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">mL</span><span class="p">)</span> <span class="o">/</span> <span class="n">mL</span>
+    
+    <span class="c1"># Classify efficiency</span>
+    <span class="k">if</span> <span class="n">eta</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;HIGHLY EFFICIENT&quot;</span>
+    <span class="k">elif</span> <span class="n">eta</span> <span class="o">&gt;</span> <span class="mf">0.7</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;MODERATELY EFFICIENT&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;LOW EFFICIENCY&quot;</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">classification</span><span class="p">)</span>
+
+<span class="c1"># Test the function</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fin_efficiency</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">25</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.98, &#39;HIGHLY EFFICIENT&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Bonus (+5 points): Investigate the effect of fin length (L) on efficiency. Loop over 10 values of (L) from 0.01 m to 0.10 m, compute the corresponding efficiency, and print the results.</p></li>
+</ol>
+<p>Explore how the fin length, <span class="math notranslate nohighlight">\(L\)</span>, affects the fin efficiency.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here (Bonus)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fin_efficiency</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate fin efficiency and classify performance.&quot;&quot;&quot;</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">A_c</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">h</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">A_c</span><span class="p">))</span>
+    <span class="n">mL</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">L</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">mL</span><span class="p">)</span> <span class="o">/</span> <span class="n">mL</span>
+    
+    <span class="k">if</span> <span class="n">eta</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;HIGHLY EFFICIENT&quot;</span>
+    <span class="k">elif</span> <span class="n">eta</span> <span class="o">&gt;</span> <span class="mf">0.7</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;MODERATELY EFFICIENT&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">classification</span> <span class="o">=</span> <span class="s2">&quot;LOW EFFICIENCY&quot;</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">classification</span><span class="p">)</span>
+
+<span class="c1"># Fixed parameters (except L)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">200</span>       <span class="c1"># W/m·K</span>
+<span class="n">A_c</span> <span class="o">=</span> <span class="mf">1e-4</span>    <span class="c1"># m²</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mf">0.02</span>      <span class="c1"># m</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mi">25</span>        <span class="c1"># W/m²·K</span>
+
+<span class="c1"># Loop over 10 values of L from 0.01 to 0.10 m</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fin Length vs Efficiency:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mf">0.01</span>  <span class="c1"># 0.01, 0.02, ..., 0.10</span>
+    <span class="n">eta</span><span class="p">,</span> <span class="n">classification</span> <span class="o">=</span> <span class="n">fin_efficiency</span><span class="p">([</span><span class="n">L</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">A_c</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">h</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L = </span><span class="si">{</span><span class="n">L</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m, eta = </span><span class="si">{</span><span class="n">eta</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">classification</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;As fin length increases, efficiency decreases because the fin tip&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;temperature drops further from the base temperature, reducing&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the average temperature difference for heat transfer.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fin Length vs Efficiency:
+
+L = 0.01 m, eta = 0.9992, HIGHLY EFFICIENT
+L = 0.02 m, eta = 0.9967, HIGHLY EFFICIENT
+L = 0.03 m, eta = 0.9926, HIGHLY EFFICIENT
+L = 0.04 m, eta = 0.9869, HIGHLY EFFICIENT
+L = 0.05 m, eta = 0.9797, HIGHLY EFFICIENT
+L = 0.06 m, eta = 0.9710, HIGHLY EFFICIENT
+L = 0.07 m, eta = 0.9611, HIGHLY EFFICIENT
+L = 0.08 m, eta = 0.9499, HIGHLY EFFICIENT
+L = 0.09 m, eta = 0.9376, HIGHLY EFFICIENT
+L = 0.10 m, eta = 0.9242, HIGHLY EFFICIENT
+
+As fin length increases, efficiency decreases because the fin tip
+temperature drops further from the base temperature, reducing
+the average temperature difference for heat transfer.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-3-20-points-comparing-simplified-and-corrected-gas-models">
+<h2>Problem 3 (20 points) – Comparing Simplified and Corrected Gas Models<a class="headerlink" href="#problem-3-20-points-comparing-simplified-and-corrected-gas-models" title="Link to this heading">#</a></h2>
+<p>In scientific computing, simplified models are often used to describe physical systems. While these models are convenient, they may lose accuracy under extreme conditions. In this problem, you will compare a <strong>basic gas model</strong> with a <strong>corrected real-gas model</strong> and quantify when the simpler model is sufficiently accurate.</p>
+<p>The <strong>ideal gas law</strong> relates pressure, volume, temperature, and amount of gas as:</p>
+<div class="math notranslate nohighlight">
+\[
+PV = nRT
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P\)</span> = pressure</p></li>
+<li><p><span class="math notranslate nohighlight">\(V\)</span> = volume</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> = number of moles</p></li>
+<li><p><span class="math notranslate nohighlight">\(R\)</span> = universal gas constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> = absolute temperature (K)</p></li>
+</ul>
+<p>A more realistic description of gas behavior accounts for:</p>
+<ul class="simple">
+<li><p>The finite size of gas molecules</p></li>
+<li><p>Weak intermolecular forces</p></li>
+</ul>
+<p>One commonly used corrected model is:</p>
+<div class="math notranslate nohighlight">
+\[
+\left(P + \frac{a n^2}{V^2}\right)(V - n b) = nRT
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are substance-specific constants.</p>
+<p>You are given the following system:</p>
+<ul class="simple">
+<li><p>Gas: <strong>Neon</strong></p></li>
+<li><p>Amount of gas: <span class="math notranslate nohighlight">\(n = 15\)</span> mol</p></li>
+<li><p>Container volume: <span class="math notranslate nohighlight">\(V = 8.0\)</span> L</p></li>
+<li><p>Pressure: <span class="math notranslate nohighlight">\(P = 100\)</span> atm</p></li>
+<li><p>Universal gas constant:<br />
+<span class="math notranslate nohighlight">\(R = 0.082057\)</span> L·atm/(mol·K)</p></li>
+</ul>
+<p>Corrected-model constants for neon:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a = 0.211\)</span> L²·atm/mol²</p></li>
+<li><p><span class="math notranslate nohighlight">\(b = 0.0171\)</span> L/mol</p></li>
+</ul>
+<section id="id1">
+<h3>Tasks<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>(5 points) Write a Python function called <code class="docutils literal notranslate"><span class="pre">ideal_gas_temperature(P,</span> <span class="pre">V,</span> <span class="pre">n)</span></code> that computes the temperature using the ideal gas law.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="c1"># Universal gas constant</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate temperature using the ideal gas law: PV = nRT</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    P: pressure [atm]</span>
+<span class="sd">    V: volume [L]</span>
+<span class="sd">    n: number of moles [mol]</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    T: temperature [K]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="n">P</span> <span class="o">*</span> <span class="n">V</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">T</span>
+
+<span class="c1"># Test with given values</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># atm</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">8.0</span>  <span class="c1"># L</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>   <span class="c1"># mol</span>
+
+<span class="n">T_ideal</span> <span class="o">=</span> <span class="n">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ideal gas temperature: </span><span class="si">{</span><span class="n">T_ideal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ideal gas temperature: 649.95 K
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>(5 points) Write a second function called <code class="docutils literal notranslate"><span class="pre">corrected_gas_temperature(P,</span> <span class="pre">V,</span> <span class="pre">n,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> that computes the temperature using the corrected gas equation.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate temperature using the corrected (van der Waals-like) gas equation:</span>
+<span class="sd">    (P + a*n²/V²)(V - n*b) = nRT</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    P: pressure [atm]</span>
+<span class="sd">    V: volume [L]</span>
+<span class="sd">    n: number of moles [mol]</span>
+<span class="sd">    a: attraction parameter [L²·atm/mol²]</span>
+<span class="sd">    b: volume parameter [L/mol]</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    T: temperature [K]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Rearranging: T = (P + a*n²/V²)(V - n*b) / (n*R)</span>
+    <span class="n">P_corrected</span> <span class="o">=</span> <span class="n">P</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">V_corrected</span> <span class="o">=</span> <span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_corrected</span> <span class="o">*</span> <span class="n">V_corrected</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">T</span>
+
+<span class="c1"># Test with given values for Neon</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mi">100</span>       <span class="c1"># atm</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">8.0</span>       <span class="c1"># L</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>        <span class="c1"># mol</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.211</span>     <span class="c1"># L²·atm/mol²</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0171</span>    <span class="c1"># L/mol</span>
+
+<span class="n">T_corrected</span> <span class="o">=</span> <span class="n">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Corrected gas temperature: </span><span class="si">{</span><span class="n">T_corrected</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Corrected gas temperature: 633.78 K
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>(5 points) Compute the temperature predicted by both models, and then calculate the <strong>percent difference</strong> between the two temperatures:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\%\text{ difference} =
+\frac{|T_{\text{ideal}} - T_{\text{corrected}}|}
+     {T_{\text{corrected}}} \times 100
+\]</div>
+<p>Briefly comment on whether the ideal gas approximation is reasonable under these conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">P</span> <span class="o">*</span> <span class="n">V</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">P_corrected</span> <span class="o">=</span> <span class="n">P</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">V_corrected</span> <span class="o">=</span> <span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">P_corrected</span> <span class="o">*</span> <span class="n">V_corrected</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
+
+<span class="c1"># Given values for Neon</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mi">100</span>       <span class="c1"># atm</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">8.0</span>       <span class="c1"># L</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>        <span class="c1"># mol</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.211</span>     <span class="c1"># L²·atm/mol²</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0171</span>    <span class="c1"># L/mol</span>
+
+<span class="c1"># Calculate temperatures</span>
+<span class="n">T_ideal</span> <span class="o">=</span> <span class="n">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">T_corrected</span> <span class="o">=</span> <span class="n">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Calculate percent difference</span>
+<span class="n">percent_diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">T_ideal</span> <span class="o">-</span> <span class="n">T_corrected</span><span class="p">)</span> <span class="o">/</span> <span class="n">T_corrected</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ideal gas temperature:     </span><span class="si">{</span><span class="n">T_ideal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Corrected gas temperature: </span><span class="si">{</span><span class="n">T_corrected</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Percent difference:        </span><span class="si">{</span><span class="n">percent_diff</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ideal gas temperature:     649.95 K
+Corrected gas temperature: 633.78 K
+Percent difference:        2.55 %
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Comment on the ideal gas approximation:</strong></p>
+<p>At 100 atm pressure, the percent difference between the ideal and corrected gas models is relatively small (around 2-3%). This suggests the ideal gas approximation is still reasonable for neon under these conditions. Neon is a noble gas with very weak intermolecular forces and small molecular size, which is why the corrections (parameters a and b) are small. However, at higher pressures or lower temperatures, the deviation would become more significant and the corrected model would be necessary for accurate predictions.</p>
+<ol class="arabic simple" start="4">
+<li><p>(5 points) Modify your code to loop over pressures from <strong>10 atm to 200 atm</strong> in increments of <strong>10 atm</strong>.</p></li>
+</ol>
+<p>For each pressure:</p>
+<ul class="simple">
+<li><p>Compute temperatures using both models</p></li>
+<li><p>Calculate the percent difference</p></li>
+<li><p>Identify the approximate pressure at which the difference drops below <strong>1%</strong></p></li>
+</ul>
+<p>Print the results for each pressure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">P</span> <span class="o">*</span> <span class="n">V</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">P_corrected</span> <span class="o">=</span> <span class="n">P</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">V_corrected</span> <span class="o">=</span> <span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">P_corrected</span> <span class="o">*</span> <span class="n">V_corrected</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
+
+<span class="c1"># Fixed parameters</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">8.0</span>       <span class="c1"># L</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>        <span class="c1"># mol</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.211</span>     <span class="c1"># L²·atm/mol²</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0171</span>    <span class="c1"># L/mol</span>
+
+<span class="c1"># Track when difference drops below 1%</span>
+<span class="n">threshold_pressure</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Loop over pressures from 10 to 200 atm</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pressure vs Temperature Comparison:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">T_ideal</span> <span class="o">=</span> <span class="n">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">T_corrected</span> <span class="o">=</span> <span class="n">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">percent_diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">T_ideal</span> <span class="o">-</span> <span class="n">T_corrected</span><span class="p">)</span> <span class="o">/</span> <span class="n">T_corrected</span> <span class="o">*</span> <span class="mi">100</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P = </span><span class="si">{</span><span class="n">P</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2"> atm: T_ideal = </span><span class="si">{</span><span class="n">T_ideal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K, T_corrected = </span><span class="si">{</span><span class="n">T_corrected</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K, diff = </span><span class="si">{</span><span class="n">percent_diff</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Check for threshold crossing</span>
+    <span class="k">if</span> <span class="n">percent_diff</span> <span class="o">&lt;</span> <span class="mf">1.0</span> <span class="ow">and</span> <span class="n">threshold_pressure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">threshold_pressure</span> <span class="o">=</span> <span class="n">P</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">threshold_pressure</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The percent difference drops below 1% at approximately P = </span><span class="si">{</span><span class="n">threshold_pressure</span><span class="si">}</span><span class="s2"> atm.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The percent difference does not drop below 1</span><span class="si">% i</span><span class="s2">n the tested range.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pressure vs Temperature Comparison:
+
+P =  10 atm: T_ideal = 65.00 K, T_corrected = 67.58 K, diff = 3.82%
+P =  20 atm: T_ideal = 129.99 K, T_corrected = 130.49 K, diff = 0.38%
+P =  30 atm: T_ideal = 194.99 K, T_corrected = 193.40 K, diff = 0.82%
+P =  40 atm: T_ideal = 259.98 K, T_corrected = 256.31 K, diff = 1.43%
+P =  50 atm: T_ideal = 324.98 K, T_corrected = 319.22 K, diff = 1.80%
+P =  60 atm: T_ideal = 389.97 K, T_corrected = 382.14 K, diff = 2.05%
+P =  70 atm: T_ideal = 454.97 K, T_corrected = 445.05 K, diff = 2.23%
+P =  80 atm: T_ideal = 519.96 K, T_corrected = 507.96 K, diff = 2.36%
+P =  90 atm: T_ideal = 584.96 K, T_corrected = 570.87 K, diff = 2.47%
+P = 100 atm: T_ideal = 649.95 K, T_corrected = 633.78 K, diff = 2.55%
+P = 110 atm: T_ideal = 714.95 K, T_corrected = 696.69 K, diff = 2.62%
+P = 120 atm: T_ideal = 779.95 K, T_corrected = 759.61 K, diff = 2.68%
+P = 130 atm: T_ideal = 844.94 K, T_corrected = 822.52 K, diff = 2.73%
+P = 140 atm: T_ideal = 909.94 K, T_corrected = 885.43 K, diff = 2.77%
+P = 150 atm: T_ideal = 974.93 K, T_corrected = 948.34 K, diff = 2.80%
+P = 160 atm: T_ideal = 1039.93 K, T_corrected = 1011.25 K, diff = 2.84%
+P = 170 atm: T_ideal = 1104.92 K, T_corrected = 1074.16 K, diff = 2.86%
+P = 180 atm: T_ideal = 1169.92 K, T_corrected = 1137.07 K, diff = 2.89%
+P = 190 atm: T_ideal = 1234.91 K, T_corrected = 1199.99 K, diff = 2.91%
+P = 200 atm: T_ideal = 1299.91 K, T_corrected = 1262.90 K, diff = 2.93%
+
+The percent difference drops below 1% at approximately P = 20 atm.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-4-20-points-reaction-kinetics-in-a-closed-reactor">
+<h2>Problem 4 (20 points) – Reaction Kinetics in a Closed Reactor<a class="headerlink" href="#problem-4-20-points-reaction-kinetics-in-a-closed-reactor" title="Link to this heading">#</a></h2>
+<p>In chemical reaction engineering, predicting how reactant concentrations change with time is essential for reactor design and analysis. In this problem, you will compare two different <strong>rate laws</strong> describing the disappearance of a reactant in a closed (batch) reactor.</p>
+<p>Consider a single reactant <span class="math notranslate nohighlight">\(A\)</span> undergoing an irreversible reaction in a batch reactor. The concentration of <span class="math notranslate nohighlight">\(A\)</span>, denoted by <span class="math notranslate nohighlight">\(c_A(t)\)</span>, evolves according to the general rate equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dc_A}{dt} = -r(c_A)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(r(c_A)\)</span> is the rate of reaction per unit volume.</p>
+<p>You will analyze <strong>two different kinetic models</strong>:</p>
+<section id="model-1-linear-rate-law-first-order">
+<h3>Model 1: Linear Rate Law (First-order)<a class="headerlink" href="#model-1-linear-rate-law-first-order" title="Link to this heading">#</a></h3>
+<p>The reaction rate is proportional to the concentration:</p>
+<div class="math notranslate nohighlight">
+\[
+r(c_A) = k_1 c_A
+\]</div>
+<p>The analytical solution for this model is:</p>
+<div class="math notranslate nohighlight">
+\[
+c_A(t) = c_0 e^{-k_1 t}
+\]</div>
+</section>
+<section id="model-2-nonlinear-rate-law-second-order">
+<h3>Model 2: Nonlinear Rate Law (Second-Order)<a class="headerlink" href="#model-2-nonlinear-rate-law-second-order" title="Link to this heading">#</a></h3>
+<p>The reaction rate depends on the square of the concentration:</p>
+<div class="math notranslate nohighlight">
+\[
+r(c_A) = k_2 c_A^2
+\]</div>
+<p>The analytical solution for this model is:</p>
+<div class="math notranslate nohighlight">
+\[
+c_A(t) = \frac{c_0}{1 + c_0 k_2 t}
+\]</div>
+</section>
+<section id="id2">
+<h3>Tasks<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>(4 points) Write two Python functions: <code class="docutils literal notranslate"><span class="pre">first_order_concentration(t,</span> <span class="pre">k)</span></code> and <code class="docutils literal notranslate"><span class="pre">second_order_concentration(t,</span> <span class="pre">k)</span></code></p></li>
+</ol>
+<p>Each function should return the concentration <span class="math notranslate nohighlight">\(c_A(t)\)</span> using the appropriate analytical expression.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># Initial concentration</span>
+<span class="n">c0</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># mol/L</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">first_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate concentration using first-order kinetics.</span>
+<span class="sd">    c_A(t) = c0 * exp(-k1 * t)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    t: time [s]</span>
+<span class="sd">    k: rate constant [1/s]</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    c_A: concentration [mol/L]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">c0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">second_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate concentration using second-order kinetics.</span>
+<span class="sd">    c_A(t) = c0 / (1 + c0 * k2 * t)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    t: time [s]</span>
+<span class="sd">    k: rate constant [L/(mol·s)]</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    c_A: concentration [mol/L]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">c0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">c0</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Test the functions</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First-order at t=2s:  </span><span class="si">{</span><span class="n">first_order_concentration</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Second-order at t=2s: </span><span class="si">{</span><span class="n">second_order_concentration</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First-order at t=2s:  0.3679 mol/L
+Second-order at t=2s: 0.5000 mol/L
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>(6 points) Generate concentration profiles for both kinetic models, using the following parameters:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Initial concentration: <span class="math notranslate nohighlight">\(c_0 = 1.0\)</span> mol/L</p></li>
+<li><p>Rate constants: <span class="math notranslate nohighlight">\(k_1 = k_2 = 0.5\)</span> (appropriate units)</p></li>
+<li><p>Time range: <span class="math notranslate nohighlight">\(t = 0\)</span> to <span class="math notranslate nohighlight">\(t = 10\)</span></p></li>
+<li><p>Number of time points: 100</p></li>
+</ul>
+<p>Print the first 10 values to verify your results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">c0</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># mol/L</span>
+<span class="n">k1</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># 1/s</span>
+<span class="n">k2</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># L/(mol·s)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">first_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">c0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">second_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">c0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">c0</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Generate 100 time points from 0 to 10 s</span>
+<span class="n">n_points</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">t_values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">c_first_order</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">c_second_order</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_points</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Linear spacing from 0 to 10</span>
+    <span class="n">t_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">c_first_order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">first_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k1</span><span class="p">))</span>
+    <span class="n">c_second_order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">second_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k2</span><span class="p">))</span>
+
+<span class="c1"># Display first 10 values</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 10 data points:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t = </span><span class="si">{</span><span class="n">t_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> s: 1st order = </span><span class="si">{</span><span class="n">c_first_order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L, 2nd order = </span><span class="si">{</span><span class="n">c_second_order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First 10 data points:
+
+t = 0.00 s: 1st order = 1.0000 mol/L, 2nd order = 1.0000 mol/L
+t = 0.10 s: 1st order = 0.9507 mol/L, 2nd order = 0.9519 mol/L
+t = 0.20 s: 1st order = 0.9039 mol/L, 2nd order = 0.9083 mol/L
+t = 0.30 s: 1st order = 0.8594 mol/L, 2nd order = 0.8684 mol/L
+t = 0.40 s: 1st order = 0.8171 mol/L, 2nd order = 0.8319 mol/L
+t = 0.51 s: 1st order = 0.7768 mol/L, 2nd order = 0.7984 mol/L
+t = 0.61 s: 1st order = 0.7386 mol/L, 2nd order = 0.7674 mol/L
+t = 0.71 s: 1st order = 0.7022 mol/L, 2nd order = 0.7388 mol/L
+t = 0.81 s: 1st order = 0.6676 mol/L, 2nd order = 0.7122 mol/L
+t = 0.91 s: 1st order = 0.6347 mol/L, 2nd order = 0.6875 mol/L
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-5-10-points-phase-classification-of-chemical-species">
+<h2>Problem 5 (10 points) – Phase Classification of Chemical Species<a class="headerlink" href="#problem-5-10-points-phase-classification-of-chemical-species" title="Link to this heading">#</a></h2>
+<p>In chemical engineering, understanding the phase behavior of substances at different temperatures and pressures is critical for process design. In this problem, you will use <strong>for loops</strong> and <strong>if statements</strong> to classify the phase state of water at various conditions.</p>
+<section id="background">
+<h3>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h3>
+<p>For pure water at standard atmospheric pressure (1 atm):</p>
+<ul class="simple">
+<li><p><strong>Solid (Ice):</strong> T &lt; 0°C</p></li>
+<li><p><strong>Liquid (Water):</strong> 0°C ≤ T &lt; 100°C</p></li>
+<li><p><strong>Gas (Steam):</strong> T ≥ 100°C</p></li>
+</ul>
+<p>You are given temperature readings from 10 different locations in a chemical plant, and you need to classify the phase of water at each location.</p>
+</section>
+<section id="id3">
+<h3>Tasks<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>(5 points) Given the following list of temperatures (in °C), write a Python program using a <strong>for loop</strong> and <strong>if-elif-else</strong> statements to:</p>
+<ul class="simple">
+<li><p>Classify each temperature as “SOLID”, “LIQUID”, or “GAS”</p></li>
+<li><p>Print the location number, temperature, and phase for each reading</p></li>
+</ul>
+</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Expected output format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Location</span> <span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">15</span> <span class="n">C</span> <span class="o">-&gt;</span> <span class="n">SOLID</span>
+<span class="n">Location</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">25</span> <span class="n">C</span> <span class="o">-&gt;</span> <span class="n">LIQUID</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+
+<span class="c1"># Loop through each temperature and classify</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">temperatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># Location numbers start at 1</span>
+    
+    <span class="c1"># Classify phase based on temperature</span>
+    <span class="k">if</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="s2">&quot;SOLID&quot;</span>
+    <span class="k">elif</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="s2">&quot;LIQUID&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="s2">&quot;GAS&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Location </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> C -&gt; </span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Location 1: -15 C -&gt; SOLID
+Location 2: 25 C -&gt; LIQUID
+Location 3: 100 C -&gt; GAS
+Location 4: 0 C -&gt; LIQUID
+Location 5: 150 C -&gt; GAS
+Location 6: 37 C -&gt; LIQUID
+Location 7: -40 C -&gt; SOLID
+Location 8: 85 C -&gt; LIQUID
+Location 9: 105 C -&gt; GAS
+Location 10: 50 C -&gt; LIQUID
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>(5 points) Extend your code to also count and report:</p>
+<ul class="simple">
+<li><p>The total number of locations in each phase</p></li>
+<li><p>The average temperature of each phase</p></li>
+<li><p>Identify any locations that are at a <strong>phase transition point</strong> (exactly 0°C or 100°C)</p></li>
+</ul>
+</li>
+</ol>
+<p>Print a summary report after the table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+
+<span class="c1"># Initialize counters and accumulators for each phase</span>
+<span class="n">solid_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">liquid_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">gas_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">solid_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">liquid_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">gas_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">transition_locations</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop through each temperature</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">temperatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="c1"># Classify phase and update counters</span>
+    <span class="k">if</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="s2">&quot;SOLID&quot;</span>
+        <span class="n">solid_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">solid_sum</span> <span class="o">+=</span> <span class="n">T</span>
+    <span class="k">elif</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="s2">&quot;LIQUID&quot;</span>
+        <span class="n">liquid_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">liquid_sum</span> <span class="o">+=</span> <span class="n">T</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="s2">&quot;GAS&quot;</span>
+        <span class="n">gas_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">gas_sum</span> <span class="o">+=</span> <span class="n">T</span>
+    
+    <span class="c1"># Check for phase transition points</span>
+    <span class="k">if</span> <span class="n">T</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">T</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">transition_locations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Location </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> C -&gt; </span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Print summary report</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SUMMARY REPORT&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phase Counts:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  SOLID:  </span><span class="si">{</span><span class="n">solid_count</span><span class="si">}</span><span class="s2"> locations&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  LIQUID: </span><span class="si">{</span><span class="n">liquid_count</span><span class="si">}</span><span class="s2"> locations&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  GAS:    </span><span class="si">{</span><span class="n">gas_count</span><span class="si">}</span><span class="s2"> locations&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average Temperatures:&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">solid_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  SOLID:  </span><span class="si">{</span><span class="n">solid_sum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">solid_count</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> C&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">liquid_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  LIQUID: </span><span class="si">{</span><span class="n">liquid_sum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">liquid_count</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> C&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">gas_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  GAS:    </span><span class="si">{</span><span class="n">gas_sum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">gas_count</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> C&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phase Transition Points:&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">transition_locations</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Locations at transition: </span><span class="si">{</span><span class="n">transition_locations</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  No locations at phase transition points.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Location 1: -15 C -&gt; SOLID
+Location 2: 25 C -&gt; LIQUID
+Location 3: 100 C -&gt; GAS
+Location 4: 0 C -&gt; LIQUID
+Location 5: 150 C -&gt; GAS
+Location 6: 37 C -&gt; LIQUID
+Location 7: -40 C -&gt; SOLID
+Location 8: 85 C -&gt; LIQUID
+Location 9: 105 C -&gt; GAS
+Location 10: 50 C -&gt; LIQUID
+
+========================================
+SUMMARY REPORT
+========================================
+
+Phase Counts:
+  SOLID:  2 locations
+  LIQUID: 5 locations
+  GAS:    3 locations
+
+Average Temperatures:
+  SOLID:  -27.5 C
+  LIQUID: 39.4 C
+  GAS:    118.3 C
+
+Phase Transition Points:
+  Locations at transition: [3, 4]
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><strong>Point Distribution:</strong></p>
+<ul class="simple">
+<li><p>Problem 1: 10 pts (+ 5 bonus)</p></li>
+<li><p>Problem 2: 10 pts</p></li>
+<li><p>Problem 3: 20 pts</p></li>
+<li><p>Problem 4: 10 pts</p></li>
+<li><p>Problem 5: 10 pts</p></li>
+<li><p><strong>Total: 60 pts (+ 5 bonus)</strong></p></li>
+</ul>
+<p>Good luck!</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./hw"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-10-points-straight-chain-alkene-structural-formula">Problem 1 (10 points) - Straight-Chain Alkene Structural Formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-10-points-heat-transfer-in-a-fin">Problem 2 (10 points) – Heat Transfer in a Fin</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks">Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-20-points-comparing-simplified-and-corrected-gas-models">Problem 3 (20 points) – Comparing Simplified and Corrected Gas Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-20-points-reaction-kinetics-in-a-closed-reactor">Problem 4 (20 points) – Reaction Kinetics in a Closed Reactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-1-linear-rate-law-first-order">Model 1: Linear Rate Law (First-order)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-2-nonlinear-rate-law-second-order">Model 2: Nonlinear Rate Law (Second-Order)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-10-points-phase-classification-of-chemical-species">Problem 5 (10 points) – Phase Classification of Chemical Species</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Tasks</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Homework 03: NumPy Arrays and Linear Algebra &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'hw/hw06';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../docs/introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../docs/introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fhw/hw06.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/hw/hw06.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 03: NumPy Arrays and Linear Algebra</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-15-points-temperature-profile-in-a-reactor">Problem 1 (15 points) – Temperature Profile in a Reactor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-15-points-concentration-matrix-operations">Problem 2 (15 points) – Concentration Matrix Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-12-points-material-balance-using-linear-algebra">Problem 3 (12 points) – Material Balance using Linear Algebra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-12-points-melting-and-boiling-points-of-elements">Problem 4 (12 points) – Melting and Boiling Points of Elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-16-points-eigenvalues-and-eigenvectors">Problem 5 (16 points) – Eigenvalues and Eigenvectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bouns-15-points-vector-operations-and-chemical-engineering-applications">Bouns (15 points) – Vector Operations and Chemical Engineering Applications</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-03-numpy-arrays-and-linear-algebra">
+<h1>Homework 03: NumPy Arrays and Linear Algebra<a class="headerlink" href="#homework-03-numpy-arrays-and-linear-algebra" title="Link to this heading">#</a></h1>
+<p><strong>Release Date:</strong> Feb 6</p>
+<p><strong>Due Date:</strong> Feb 9 11:59 PM</p>
+<p><strong>Total Points:</strong> 60 pts (+ 5 bonus pts)</p>
+<p><strong>Instructions:</strong></p>
+<ul class="simple">
+<li><p>Complete all problems in this notebook</p></li>
+<li><p>Show all your work with clear comments</p></li>
+<li><p>Use NumPy arrays for all calculations</p></li>
+<li><p>Format all outputs professionally with units</p></li>
+<li><p>Test your code to ensure it runs without errors</p></li>
+</ul>
+<p><strong>Submission:</strong></p>
+<ul class="simple">
+<li><p>Submit this completed Jupyter notebook to Gradescope</p></li>
+<li><p>Make sure all cells have been executed and outputs are visible</p></li>
+</ul>
+<hr class="docutils" />
+<section id="problem-1-15-points-temperature-profile-in-a-reactor">
+<h2>Problem 1 (15 points) – Temperature Profile in a Reactor<a class="headerlink" href="#problem-1-15-points-temperature-profile-in-a-reactor" title="Link to this heading">#</a></h2>
+<p>A tubular reactor has temperature measurements at 8 equally-spaced positions along its length (<span class="math notranslate nohighlight">\(L\)</span> = 10 m). The temperatures (in K) are stored in a NumPy array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">450</span><span class="p">,</span> <span class="mi">475</span><span class="p">,</span> <span class="mi">490</span><span class="p">,</span> <span class="mi">510</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">515</span><span class="p">,</span> <span class="mi">495</span><span class="p">,</span> <span class="mi">470</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Tasks:</strong></p>
+<p>a) <strong>(3 pts)</strong> Calculate and print:</p>
+<ul class="simple">
+<li><p>Mean temperature</p></li>
+<li><p>Maximum temperature and its position (index)</p></li>
+<li><p>Minimum temperature and its position (index)</p></li>
+<li><p>Temperature range (max - min)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) <strong>(3 pts)</strong> Find all positions where the temperature exceeds 500 K using NumPy boolean indexing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>c) <strong>(4 pts)</strong> Calculate the temperature gradient (temperature difference between consecutive positions):</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{dT}{dx} \approx \frac{T_{i+1} - T_i}{\Delta x}
+   \]</div>
+<p>Print the gradient array and identify where the largest temperature drop occurs.</p>
+<p><strong>(Bous 5 pts)</strong> Use index slicing to compute the temperature gradient in a single line of code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">450</span><span class="p">,</span> <span class="mi">475</span><span class="p">,</span> <span class="mi">490</span><span class="p">,</span> <span class="mi">510</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">515</span><span class="p">,</span> <span class="mi">495</span><span class="p">,</span> <span class="mi">470</span><span class="p">])</span>
+<span class="n">gradient</span> <span class="o">=</span> <span class="n">temperatures</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">temperatures</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gradient</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 25  15  20  15 -10 -20 -25]
+</pre></div>
+</div>
+</div>
+</div>
+<p>d) <strong>(5 pts)</strong> Normalize the temperature array to a 0-1 scale using:
+$<span class="math notranslate nohighlight">\(T_{norm} = \frac{T - T_{min}}{T_{max} - T_{min}}\)</span>$</p>
+<p>Print the normalized array and verify that the minimum value is 0 and maximum is 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="problem-2-15-points-concentration-matrix-operations">
+<h2>Problem 2 (15 points) – Concentration Matrix Operations<a class="headerlink" href="#problem-2-15-points-concentration-matrix-operations" title="Link to this heading">#</a></h2>
+<p>A 3×4 matrix contains concentration data (mol/L) from 3 experiments (rows) measured at 4 different times (columns):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">concentrations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+                          <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span>
+                          <span class="p">[</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p><strong>Tasks:</strong></p>
+<p>a) <strong>(3 pts)</strong> Use array slicing to extract:</p>
+<ul class="simple">
+<li><p>The concentration data from experiment 2 (second row)</p></li>
+<li><p>The concentration data at time point 3 (third column) for all experiments</p></li>
+<li><p>The 2×2 submatrix of experiments 1-2 at times 2-3</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) <strong>(4 pts)</strong> Calculate and print:</p>
+<ul class="simple">
+<li><p>Mean concentration for each experiment (row-wise mean)</p></li>
+<li><p>Mean concentration at each time point (column-wise mean)</p></li>
+<li><p>Overall mean concentration</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>c) <strong>(4 pts)</strong> Compute the percent decay from the first to last time point for each experiment:
+$<span class="math notranslate nohighlight">\(\text{Decay} = \frac{C_0 - C_f}{C_0} \times 100\%\)</span><span class="math notranslate nohighlight">\(
+   where \)</span>C_0<span class="math notranslate nohighlight">\( is the concentration at time 0 (first column) and \)</span>C_f$ is at the final time (last column).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>d) <strong>(4 pts)</strong> Create a new matrix where all values are normalized by dividing each experiment’s row by its initial concentration (first column value). This shows the fractional remaining concentration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="problem-3-12-points-material-balance-using-linear-algebra">
+<h2>Problem 3 (12 points) – Material Balance using Linear Algebra<a class="headerlink" href="#problem-3-12-points-material-balance-using-linear-algebra" title="Link to this heading">#</a></h2>
+<p>A mixing unit receives three feed streams and produces one outlet stream. The mass flow rates and compositions must satisfy material balances.</p>
+<p><strong>Given:</strong></p>
+<ul class="simple">
+<li><p>Stream 1: Flow rate F₁ (kg/h), composition: 50% A, 30% B, 20% C</p></li>
+<li><p>Stream 2: Flow rate F₂ (kg/h), composition: 20% A, 50% B, 30% C</p></li>
+<li><p>Stream 3: Flow rate F₃ (kg/h), composition: 30% A, 20% B, 50% C</p></li>
+</ul>
+<p><strong>Outlet specifications:</strong></p>
+<ul class="simple">
+<li><p>Total flow rate: 800 kg/h</p></li>
+<li><p>Component A: 320 kg/h</p></li>
+<li><p>Component B: 280 kg/h</p></li>
+</ul>
+<p><strong>Tasks:</strong></p>
+<p>a) <strong>(2 pts)</strong> Set up the system of linear equations in matrix form Ax = b where:</p>
+<ul class="simple">
+<li><p>x = [F₁, F₂, F₃]</p></li>
+<li><p>The equations represent: total mass balance, component A balance, component B balance</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) <strong>(5 pts)</strong> Solve for F₁, F₂, F₃ using <code class="docutils literal notranslate"><span class="pre">np.linalg.solve()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>c) <strong>(5 pts)</strong> Verify that component C balance is satisfied (should equal 200 kg/h) and check that all flow rates are positive and physically meaningful</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="problem-4-12-points-melting-and-boiling-points-of-elements">
+<h2>Problem 4 (12 points) – Melting and Boiling Points of Elements<a class="headerlink" href="#problem-4-12-points-melting-and-boiling-points-of-elements" title="Link to this heading">#</a></h2>
+<p>The file “data_TmTb.csv” (where .csv stands for comma separated values) contains the values of the melting points (T_m) and boiling points (T_b) of the elements. Read these data using NumPy tools and create a scatter plot of these data (i.e., T_b vs T_m) coloring the markers differently for metals and non-metals (use two distinguishable colors).</p>
+<p>For this exercise, the nonmetallic elements may be taken from this list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nonmetals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;Ne&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;Ar&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Se&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;Kr&#39;</span><span class="p">,</span> <span class="s1">&#39;Br&#39;</span><span class="p">,</span> <span class="s1">&#39;Xe&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;Rn&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Also, annotate the plot to indicate the position of the elements ‘C’ and ‘Br’, as well as the elements with greatest and smallest difference between their melting point and boiling point.</p>
+<p><strong>Tasks:</strong></p>
+<p>a) <strong>(2 pts)</strong> First, create the data file “data_TmTb.csv” with the following content (use the code cell below to create it):</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>Element,Tm,Tb
+H,14.01,20.28
+He,0.95,4.22
+C,3823,4098
+N,63.15,77.36
+O,54.36,90.20
+F,53.53,85.03
+Ne,24.56,27.07
+P,317.3,553
+S,388.36,717.8
+Cl,171.6,239.11
+Ar,83.80,87.30
+Br,265.8,332.0
+Kr,115.79,119.93
+Xe,161.4,165.1
+I,386.85,457.4
+Rn,202,211.3
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) <strong>(4 pts)</strong> Read the CSV file using <code class="docutils literal notranslate"><span class="pre">np.genfromtxt()</span></code> with appropriate parameters:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">delimiter=','</span></code></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">skip_header=1</span></code> to skip the header row</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">dtype=None</span></code> and <code class="docutils literal notranslate"><span class="pre">encoding='utf-8'</span></code> to read mixed data types</p></li>
+<li><p>Extract element names, melting points, and boiling points into separate arrays</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>c) <strong>(6 pts)</strong> Create a scatter plot with T_m on x-axis (K) and T_b on y-axis (K). Please follow this:</p>
+<ul>
+<li><p>Metals in one color (e.g., blue) with label “Metals”</p></li>
+<li><p>Non-metals in another color (e.g., red) with label “Non-metals”</p></li>
+<li><p>Appropriate axis labels with units</p></li>
+<li><p>Title: “Melting vs. Boiling Points of Elements”</p></li>
+<li><p>Legend</p></li>
+<li><p>Grid for readability</p></li>
+<li><p>Add annotations to the plot for</p>
+<ul class="simple">
+<li><p>Element ‘C’ (Carbon)</p></li>
+<li><p>Element ‘Br’ (Bromine)</p></li>
+<li><p>Element with the greatest difference (T_b - T_m)</p></li>
+<li><p>Element with the smallest difference (T_b - T_m)</p></li>
+</ul>
+<p>Use <code class="docutils literal notranslate"><span class="pre">plt.annotate()</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.text()</span></code> to label these points.</p>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="problem-5-16-points-eigenvalues-and-eigenvectors">
+<h2>Problem 5 (16 points) – Eigenvalues and Eigenvectors<a class="headerlink" href="#problem-5-16-points-eigenvalues-and-eigenvectors" title="Link to this heading">#</a></h2>
+<p>Compute the eigenvalues and eigenvectors analytically for the following matrix A and then check the results using NumPy in Python:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix}
+3 &amp; 1 &amp; 2 \\
+2 &amp; 4 &amp; 3 \\
+1 &amp; 2 &amp; 5
+\end{bmatrix}
+\end{split}\]</div>
+<p><strong>Tasks:</strong></p>
+<p>a) <strong>(8 pts)</strong> <strong>Analytical Solution:</strong> Compute the eigenvalues and eigenvectors by hand:</p>
+<ul class="simple">
+<li><p>Include your solution in a Markdown cell (you may insert an image or write the solution using Markdown).</p></li>
+<li><p><em>[Insert photo/scan of your analytical work here using markdown image syntax: <code class="docutils literal notranslate"><span class="pre">![Analytical</span> <span class="pre">Solution](path/to/image.jpg)</span></code> or attach separately to your submission]</em></p></li>
+</ul>
+<!-- Your solution here --><p>b) <strong>(8 pts)</strong> <strong>NumPy Verification:</strong> Use NumPy to compute the eigenvalues and eigenvectors:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">np.linalg.eig()</span></code> to get eigenvalues and eigenvectors</p></li>
+<li><p>Print the eigenvalues</p></li>
+<li><p>Print the eigenvectors (each column is an eigenvector)</p></li>
+<li><p>Compare with your analytical solution</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="bouns-15-points-vector-operations-and-chemical-engineering-applications">
+<h2>Bouns (15 points) – Vector Operations and Chemical Engineering Applications<a class="headerlink" href="#bouns-15-points-vector-operations-and-chemical-engineering-applications" title="Link to this heading">#</a></h2>
+<p><strong>Part A: Velocity Vectors (7 pts)</strong></p>
+<p>Two fluid streams merge at a junction. Their velocity vectors are:</p>
+<ul class="simple">
+<li><p>Stream 1: v₁ = [3.0, 4.0, 2.0] m/s</p></li>
+<li><p>Stream 2: v₂ = [2.0, -1.0, 5.0] m/s</p></li>
+</ul>
+<p>a) <strong>(2 pts)</strong> Calculate the dot product v₁ · v₂. What does this tell you about the angle between the vectors?</p>
+<p>b) <strong>(2 pts)</strong> Calculate the cross product v₁ × v₂.</p>
+<p>c) <strong>(3 pts)</strong> Calculate the magnitude (Euclidean norm) of each velocity vector using:
+$<span class="math notranslate nohighlight">\(|\mathbf{v}| = \sqrt{v_x^2 + v_y^2 + v_z^2}\)</span>$
+Use <code class="docutils literal notranslate"><span class="pre">np.linalg.norm()</span></code> and verify by manual calculation.</p>
+<p><strong>Part B: Force Balance (8 pts)</strong></p>
+<p>Three forces act on a mixing impeller:</p>
+<ul class="simple">
+<li><p>F₁ = [150, 200, 100] N</p></li>
+<li><p>F₂ = [-80, 150, -50] N</p></li>
+<li><p>F₃ = [-70, -350, -50] N</p></li>
+</ul>
+<p>d) <strong>(4 pts)</strong> Calculate the resultant force F_total = F₁ + F₂ + F₃. Is the system in equilibrium (F_total ≈ 0)?</p>
+<p>e) <strong>(4 pts)</strong> Calculate the unit vector in the direction of F₁:
+$<span class="math notranslate nohighlight">\(\hat{\mathbf{F}}_1 = \frac{\mathbf{F}_1}{|\mathbf{F}_1|}\)</span>$
+Verify that its magnitude is 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><strong>Point Distribution:</strong></p>
+<ul class="simple">
+<li><p>Problem 1: 15 pts</p></li>
+<li><p>Problem 2: 15 pts</p></li>
+<li><p>Problem 3: 12 pts</p></li>
+<li><p>Problem 4: 12 pts</p></li>
+<li><p>Problem 5: 16 pts</p></li>
+<li><p>Bonus: 15 pts</p></li>
+<li><p><strong>Total: 60 pts (+ 5 bonus)</strong></p></li>
+</ul>
+<p>Good luck!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./hw"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-15-points-temperature-profile-in-a-reactor">Problem 1 (15 points) – Temperature Profile in a Reactor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-15-points-concentration-matrix-operations">Problem 2 (15 points) – Concentration Matrix Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-12-points-material-balance-using-linear-algebra">Problem 3 (12 points) – Material Balance using Linear Algebra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-12-points-melting-and-boiling-points-of-elements">Problem 4 (12 points) – Melting and Boiling Points of Elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-16-points-eigenvalues-and-eigenvectors">Problem 5 (16 points) – Eigenvalues and Eigenvectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bouns-15-points-vector-operations-and-chemical-engineering-applications">Bouns (15 points) – Vector Operations and Chemical Engineering Applications</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

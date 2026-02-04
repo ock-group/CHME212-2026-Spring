@@ -190,8 +190,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings in Chemical Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
 </ul>
 
     </div>
@@ -438,6 +439,12 @@ document.write(`
 <li><p>Writing files</p></li>
 <li><p>File paths and directories</p></li>
 </ol>
+<hr class="docutils" />
+<p>So far, we’ve mostly worked with data that’s already inside our Python scripts.</p>
+<p>Or, we input the data in Python script by ourselves.</p>
+<p>But in real applications, data usually lives outside the program — in files.</p>
+<p>Also, in many cases, we should store our output outside the program as a separate file.</p>
+<hr class="docutils" />
 <section id="reading-text-files">
 <span id="id2"></span><h2>6.1 Reading Text Files<a class="headerlink" href="#reading-text-files" title="Link to this heading">#</a></h2>
 <p>Python provides built-in functions to read text files. The basic process is:</p>
@@ -473,15 +480,15 @@ document.write(`
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="c1"># Write this to a file</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample data file created: temperature_data.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample data file created: 06_temperature_data.txt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample data file created: temperature_data.txt
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample data file created: 06_temperature_data.txt
 </pre></div>
 </div>
 </div>
@@ -493,7 +500,7 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Reading Entire File ===&quot;</span><span class="p">)</span>
 
 <span class="c1"># Open file in read mode</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 
 <span class="c1"># Read entire contents</span>
 <span class="n">content</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -529,7 +536,7 @@ Length: 52 characters
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Reading Line by Line ===&quot;</span><span class="p">)</span>
 
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 
 <span class="c1"># Read lines into a list</span>
 <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
@@ -563,6 +570,12 @@ Line 5: &#39;4,35.1\n&#39;
 </div>
 <section id="using-context-managers-best-practice">
 <span id="id3"></span><h3>6.1.1 Using Context Managers (Best Practice)<a class="headerlink" href="#using-context-managers-best-practice" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p>So far, we’ve seen how to open and close files manually. But Python gives us a safer and cleaner way to do this.”</p>
+<p>This approach uses something called a context manager.
+Context managers automatically take care of closing the file for us, even if something goes wrong.</p>
+<p>Because of that, this is the recommended way to work with files in Python.</p>
+<hr class="docutils" />
 <p><strong>Context managers</strong> automatically close files, even if errors occur. This is the recommended way to work with files!</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filename.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
@@ -584,10 +597,10 @@ Line 5: &#39;4,35.1\n&#39;
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Reading with Context Manager ===&quot;</span><span class="p">)</span>
 
 <span class="c1"># File opens and automatically closes</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 <span class="c1"># File is already closed here</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File has been automatically closed&quot;</span><span class="p">)</span>
 </pre></div>
@@ -595,6 +608,13 @@ Line 5: &#39;4,35.1\n&#39;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Reading with Context Manager ===
+Time,Temperature
+0,25.0
+1,27.5
+2,30.2
+3,32.8
+4,35.1
+
 Time,Temperature
 0,25.0
 1,27.5
@@ -614,7 +634,7 @@ File has been automatically closed
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Processing Data Line by Line ===&quot;</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="c1"># Skip header line</span>
     <span class="n">header</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Header: </span><span class="si">{</span><span class="n">header</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> 
@@ -675,7 +695,7 @@ Data:
 <span class="p">]</span>
 
 <span class="c1"># Write to file</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;reactor_report.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_reactor_report.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="c1"># Write header</span>
     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Reactor Status Report</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -685,18 +705,18 @@ Data:
         <span class="n">line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reactor_id</span><span class="si">}</span><span class="s2">: Temp=</span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">°C, Pressure=</span><span class="si">{</span><span class="n">pressure</span><span class="si">}</span><span class="s2"> bar</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Report written to reactor_report.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Report written to 06_reactor_report.txt&quot;</span><span class="p">)</span>
 
 <span class="c1"># Read it back to verify</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File contents:&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;reactor_report.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_reactor_report.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Writing Data to File ===
-Report written to reactor_report.txt
+Report written to 06_reactor_report.txt
 
 File contents:
 Reactor Status Report
@@ -718,23 +738,23 @@ R-103: Temp=78.5°C, Pressure=2.3 bar
 <span class="c1"># Add more data</span>
 <span class="n">new_data</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;R-104&quot;</span><span class="p">,</span> <span class="mf">88.5</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;reactor_report.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_reactor_report.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">reactor_id</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span> <span class="o">=</span> <span class="n">new_data</span>
     <span class="n">line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reactor_id</span><span class="si">}</span><span class="s2">: Temp=</span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">°C, Pressure=</span><span class="si">{</span><span class="n">pressure</span><span class="si">}</span><span class="s2"> bar</span><span class="se">\n</span><span class="s2">&quot;</span>
     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data appended to reactor_report.txt&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data appended to 06_reactor_report.txt&quot;</span><span class="p">)</span>
 
 <span class="c1"># Read updated file</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Updated file contents:&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;reactor_report.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_reactor_report.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Appending to Existing File ===
-Data appended to reactor_report.txt
+Data appended to 06_reactor_report.txt
 
 Updated file contents:
 Reactor Status Report
@@ -787,22 +807,21 @@ For more complex data processing and analysis, <strong><code class="docutils lit
 <span class="p">]</span>
 
 <span class="c1"># Write to CSV</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;experiment_data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_experiment_data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">experimental_data</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data written to experiment_data.csv&quot;</span><span class="p">)</span>
-
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data written to 06_experiment_data.csv&quot;</span><span class="p">)</span>
 <span class="c1"># Display what we wrote</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CSV contents:&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;experiment_data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_experiment_data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Writing CSV File ===
-Data written to experiment_data.csv
+Data written to 06_experiment_data.csv
 
 CSV contents:
 Time (min),Temperature (C),Pressure (bar),Flow Rate (L/min)
@@ -821,7 +840,7 @@ Time (min),Temperature (C),Pressure (bar),Flow Rate (L/min)
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Reading CSV File ===&quot;</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;experiment_data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_experiment_data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     
     <span class="c1"># Read header</span>
@@ -855,7 +874,7 @@ Data:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read csv with pandas</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;experiment_data.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;06_experiment_data.csv&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data read with pandas:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>   
 </pre></div>
@@ -877,6 +896,12 @@ Data:
 <section id="file-paths-and-directories">
 <span id="id6"></span><h2>6.4 File Paths and Directories<a class="headerlink" href="#file-paths-and-directories" title="Link to this heading">#</a></h2>
 <p>Understanding file paths is crucial for working with files in different locations.</p>
+<hr class="docutils" />
+<p>So far, we’ve assumed that our files live in the same folder as our Python script. But in real projects, files are often stored in different locations.”</p>
+<p>This is where file paths become important.</p>
+<p>A file path tells Python exactly where a file is located on your computer.
+If Python can’t find the file, it doesn’t matter how correct your code is — it will fail.</p>
+<hr class="docutils" />
 <p><strong>Path types:</strong></p>
 <ul class="simple">
 <li><p><strong>Absolute path</strong>: Full path from root directory</p>
@@ -892,6 +917,9 @@ Data:
 </ul>
 </li>
 </ul>
+<hr class="docutils" />
+<p>A relative path describes the file location relative to the current working directory.</p>
+<hr class="docutils" />
 <p>Assume your current working directory is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>project/
 ├── main.py
@@ -935,7 +963,7 @@ Current directory: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Path object</span>
-<span class="n">data_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;experiment_data.csv&#39;</span><span class="p">)</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;06_experiment_data.csv&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File path: </span><span class="si">{</span><span class="n">data_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute path: </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File exists: </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -944,8 +972,8 @@ Current directory: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File path: experiment_data.csv
-Absolute path: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06/experiment_data.csv
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File path: 06_experiment_data.csv
+Absolute path: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06/06_experiment_data.csv
 File exists: True
 Is file: True
 </pre></div>
@@ -964,8 +992,8 @@ Is file: True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File name: experiment_data.csv
-File stem (no extension): experiment_data
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File name: 06_experiment_data.csv
+File stem (no extension): 06_experiment_data
 File extension: .csv
 File size: 149 bytes
 </pre></div>
