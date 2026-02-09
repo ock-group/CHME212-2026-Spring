@@ -187,6 +187,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -1424,6 +1426,9 @@ Roll: 6
 <section id="try-except-handling-errors-gracefully">
 <span id="id7"></span><h2>5.4 Try-Except - Handling Errors Gracefully<a class="headerlink" href="#try-except-handling-errors-gracefully" title="Link to this heading">#</a></h2>
 <p><strong>Try-except blocks</strong> let your program handle errors without crashing. Instead of stopping completely when something goes wrong, you can catch the error and decide what to do.</p>
+<hr class="docutils" />
+<p>Sometimes we want to try a risky operation, and even if it raises an error, we don’t want the entire program to stop running.</p>
+<hr class="docutils" />
 <p><strong>Basic syntax:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="c1"># Code that might cause an error</span>
@@ -1443,14 +1448,16 @@ Roll: 6
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;code termination&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;code termination&quot;</span><span class="p">)</span>
 
 <span class="ne">ZeroDivisionError</span>: division by zero
 </pre></div>
@@ -1735,6 +1742,52 @@ Trying: [1,2,3][10]
 <li><p>In short, break exits a loop early, while continue skips to the next iteration without exiting.</p></li>
 </ul>
 <hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reached 4, breaking the loop.&quot;</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loop ended&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+Reached 4, breaking the loop.
+Loop ended
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span><span class="k">2</span> == 0:
+        <span class="c1">#print(&quot;Even number, skipping the next print.&quot;)</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="c1"># Instead of executing the next line, it goes back to the for loop.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loop ended&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+3
+5
+Loop ended
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Example 1: Using break to Exit Early ===&quot;</span><span class="p">)</span>

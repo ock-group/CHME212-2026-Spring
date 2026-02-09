@@ -60,6 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter07/07_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="prev" title="Chapter 6: File Input/Output" href="../chapter06/06_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,14 +180,21 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 7. Functions/Modules/Packages</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals for Chemical Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
 </ul>
 
     </div>
@@ -447,70 +454,12 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Simple function with no parameters</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A function that says hello&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;Hello, World!&quot;</span>
-
-<span class="c1"># Call the function</span>
-<span class="n">message</span> <span class="o">=</span> <span class="n">greet</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
 
 <span class="c1"># Example 2: Function with parameters</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">greet_person</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A function that greets a specific person&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span>
-
-<span class="c1"># Call with different names</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">greet_person</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">greet_person</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
 
 <span class="c1"># Example 3: Function with multiple parameters</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">add_numbers</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add two numbers together&quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="c1"># Use the function</span>
-<span class="n">sum1</span> <span class="o">=</span> <span class="n">add_numbers</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">sum2</span> <span class="o">=</span> <span class="n">add_numbers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5 + 3 = </span><span class="si">{</span><span class="n">sum1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;10 + 25 = </span><span class="si">{</span><span class="n">sum2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
 
 <span class="c1"># Example 4: Function with default parameters</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">create_greeting</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">greeting</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a greeting with optional greeting word&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">greeting</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span>
-
-<span class="c1"># Using default greeting</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">create_greeting</span><span class="p">(</span><span class="s2">&quot;Charlie&quot;</span><span class="p">))</span>
-
-<span class="c1"># Using custom greeting  </span>
-<span class="nb">print</span><span class="p">(</span><span class="n">create_greeting</span><span class="p">(</span><span class="s2">&quot;Diana&quot;</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">create_greeting</span><span class="p">(</span><span class="s2">&quot;Eve&quot;</span><span class="p">,</span> <span class="s2">&quot;Good morning&quot;</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
-
-========================================
-Hello, Alice!
-Hello, Bob!
-
-========================================
-5 + 3 = 8
-10 + 25 = 35
-
-========================================
-Hello, Charlie!
-Hi, Diana!
-Good morning, Eve!
 </pre></div>
 </div>
 </div>
@@ -664,23 +613,11 @@ Problems with this approach:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Math Module ===&quot;</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-
-<span class="c1"># Mathematical functions</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Square root of 16: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2 to the power of 3: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ceiling of 4.3: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">4.3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Floor of 4.7: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">4.7</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Math Module ===
-Square root of 16: 4.0
-2 to the power of 3: 8.0
-Pi: 3.141592653589793
-Ceiling of 4.3: 5
-Floor of 4.7: 4
 </pre></div>
 </div>
 </div>
@@ -689,17 +626,11 @@ Floor of 4.7: 4
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Random Module ===&quot;</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-
-<span class="c1"># Generate random numbers</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random number between 1-10: </span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random decimal between 0-1: </span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Random Module ===
-Random number between 1-10: 5
-Random decimal between 0-1: 0.04594082254387577
 </pre></div>
 </div>
 </div>
@@ -708,18 +639,9 @@ Random decimal between 0-1: 0.04594082254387577
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random choice from a list</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random color: </span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Shuffle a list</span>
 <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shuffled numbers: </span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random color: blue
-Shuffled numbers: [2, 1, 5, 3, 4]
 </pre></div>
 </div>
 </div>
@@ -730,25 +652,11 @@ Shuffled numbers: [2, 1, 5, 3, 4]
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 
 <span class="c1"># Current date and time</span>
-<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current date and time: </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current year: </span><span class="si">{</span><span class="n">now</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current month: </span><span class="si">{</span><span class="n">now</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current day: </span><span class="si">{</span><span class="n">now</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Create a specific date</span>
-<span class="n">birthday</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Birthday: </span><span class="si">{</span><span class="n">birthday</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== DateTime Module ===
-Current date and time: 2026-01-19 19:59:34.724151
-Current year: 2026
-Current month: 1
-Current day: 19
-Birthday: 2000-05-15
 </pre></div>
 </div>
 </div>
@@ -757,26 +665,11 @@ Birthday: 2000-05-15
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== OS Module ===&quot;</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-
-<span class="c1"># Get current working directory</span>
-<span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current directory: </span><span class="si">{</span><span class="n">current_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Get user&#39;s home directory</span>
-<span class="n">home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Home directory: </span><span class="si">{</span><span class="n">home_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Check if a file exists (example)</span>
-<span class="n">file_exists</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;example.txt&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Does &#39;example.txt&#39; exist? </span><span class="si">{</span><span class="n">file_exists</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== OS Module ===
-Current directory: /Users/hoon/CHME212/cheme_comp_book/docs/chapter07
-Home directory: /Users/hoon
-Does &#39;example.txt&#39; exist? False
 </pre></div>
 </div>
 </div>
@@ -810,76 +703,6 @@ Does &#39;example.txt&#39; exist? False
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Different Ways to Import - Examples</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Method 1: Basic Import ===&quot;</span><span class="p">)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Square root using math.sqrt: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pi using math.pi: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Method 2: Import with Alias ===&quot;</span><span class="p">)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rnd</span>  <span class="c1"># Give it a shorter nickname</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random number using rnd.randint: </span><span class="si">{</span><span class="n">rnd</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Method 3: Import Specific Functions ===&quot;</span><span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span>
-<span class="c1"># Now we can use datetime and date directly</span>
-<span class="n">current_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-<span class="n">today</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current time: </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Today&#39;s date: </span><span class="si">{</span><span class="n">today</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Method 4: Import Multiple Specific Functions ===&quot;</span><span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">ceil</span><span class="p">,</span> <span class="n">floor</span><span class="p">,</span> <span class="n">pi</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using sqrt directly: </span><span class="si">{</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using ceil directly: </span><span class="si">{</span><span class="n">ceil</span><span class="p">(</span><span class="mf">4.2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using floor directly: </span><span class="si">{</span><span class="n">floor</span><span class="p">(</span><span class="mf">4.8</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using pi directly: </span><span class="si">{</span><span class="n">pi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Comparison: When to Use Each Method ===&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Use &#39;import module&#39; when you use many functions from the module&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Use &#39;import module as alias&#39; for modules with long names&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Use &#39;from module import function&#39; for specific functions you use often&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️  Avoid &#39;from module import *&#39; - it can cause naming conflicts&quot;</span><span class="p">)</span>
-
-<span class="c1"># Example of naming conflict</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Example: Avoiding Naming Conflicts ===&quot;</span><span class="p">)</span>
-<span class="c1"># Both modules have a &#39;log&#39; function</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Math log: </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Mathematical logarithm</span>
-<span class="c1"># logging.log would be for logging messages - different purpose!</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using full module names prevents confusion&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Method 1: Basic Import ===
-Square root using math.sqrt: 7.0
-Pi using math.pi: 3.141592653589793
-
-=== Method 2: Import with Alias ===
-Random number using rnd.randint: 11
-
-=== Method 3: Import Specific Functions ===
-Current time: 19:59:34
-Today&#39;s date: 2026-01-19
-
-=== Method 4: Import Multiple Specific Functions ===
-Using sqrt directly: 8.0
-Using ceil directly: 5
-Using floor directly: 4
-Using pi directly: 3.141592653589793
-
-=== Comparison: When to Use Each Method ===
-✅ Use &#39;import module&#39; when you use many functions from the module
-✅ Use &#39;import module as alias&#39; for modules with long names
-✅ Use &#39;from module import function&#39; for specific functions you use often
-⚠️  Avoid &#39;from module import *&#39; - it can cause naming conflicts
-
-=== Example: Avoiding Naming Conflicts ===
-Math log: 2.302585092994046
-Using full module names prevents confusion
 </pre></div>
 </div>
 </div>
@@ -923,101 +746,6 @@ Using full module names prevents confusion
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is 4 even? </span><span class="si">{</span><span class="n">check</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Favorite color: </span><span class="si">{</span><span class="n">my_functions</span><span class="o">.</span><span class="n">FAVORITE_COLOR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulating Custom Modules</span>
-<span class="c1"># (In real life, these would be separate .py files)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Creating Custom Module Functions ===&quot;</span><span class="p">)</span>
-
-<span class="c1"># These functions would normally be in a separate file like &#39;student_tools.py&#39;</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">calculate_gpa</span><span class="p">(</span><span class="n">grades</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate GPA from a list of grades&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">grades</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">letter_grade</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert numeric score to letter grade&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
-    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
-    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
-    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">is_passing</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a score is passing (&gt;= 60)&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span>
-
-<span class="c1"># Module constants</span>
-<span class="n">PASSING_SCORE</span> <span class="o">=</span> <span class="mi">60</span>
-<span class="n">PERFECT_SCORE</span> <span class="o">=</span> <span class="mi">100</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Custom functions created!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Creating Custom Module Functions ===
-Custom functions created!
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Using Custom Module Functions ===&quot;</span><span class="p">)</span>
-<span class="c1"># Now let&#39;s use our &quot;module&quot; functions</span>
-
-<span class="c1"># Student data</span>
-<span class="n">student_grades</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">94</span><span class="p">]</span>
-<span class="n">test_score</span> <span class="o">=</span> <span class="mi">87</span>
-
-<span class="c1"># Use our functions</span>
-<span class="n">gpa</span> <span class="o">=</span> <span class="n">calculate_gpa</span><span class="p">(</span><span class="n">student_grades</span><span class="p">)</span>
-<span class="n">grade</span> <span class="o">=</span> <span class="n">letter_grade</span><span class="p">(</span><span class="n">test_score</span><span class="p">)</span>
-<span class="n">passing</span> <span class="o">=</span> <span class="n">is_passing</span><span class="p">(</span><span class="n">test_score</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Student grades: </span><span class="si">{</span><span class="n">student_grades</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GPA: </span><span class="si">{</span><span class="n">gpa</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test score: </span><span class="si">{</span><span class="n">test_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Letter grade: </span><span class="si">{</span><span class="n">grade</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is passing? </span><span class="si">{</span><span class="n">passing</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Passing score is: </span><span class="si">{</span><span class="n">PASSING_SCORE</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Benefits of Using Modules ===&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Code reusability - Use the same functions in multiple programs&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Organization - Keep related functions together&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Easier maintenance - Fix bugs in one place&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Collaboration - Share useful functions with teammates&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Testing - Test functions independently&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Using Custom Module Functions ===
-Student grades: [85, 92, 78, 88, 94]
-GPA: 87.40
-Test score: 87
-Letter grade: B
-Is passing? True
-Passing score is: 60
-
-=== Benefits of Using Modules ===
-✅ Code reusability - Use the same functions in multiple programs
-✅ Organization - Keep related functions together
-✅ Easier maintenance - Fix bugs in one place
-✅ Collaboration - Share useful functions with teammates
-✅ Testing - Test functions independently
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 </section>
@@ -1223,6 +951,24 @@ Most common word: [(&#39;apple&#39;, 3)]
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../chapter06/06_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 6: File Input/Output</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lab01/01_lab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

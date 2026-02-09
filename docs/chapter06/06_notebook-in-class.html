@@ -187,6 +187,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -441,7 +443,6 @@ document.write(`
 </ol>
 <hr class="docutils" />
 <p>So far, we’ve mostly worked with data that’s already inside our Python scripts.</p>
-<p>Or, we input the data in Python script by ourselves.</p>
 <p>But in real applications, data usually lives outside the program — in files.</p>
 <p>Also, in many cases, we should store our output outside the program as a separate file.</p>
 <hr class="docutils" />
@@ -532,6 +533,30 @@ Length: 52 characters
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;_io.TextIOWrapper name=&#39;06_temperature_data.txt&#39; mode=&#39;r&#39; encoding=&#39;UTF-8&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">content</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Time,Temperature\n0,25.0\n1,27.5\n2,30.2\n3,32.8\n4,35.1\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic File Reading - Method 2: Read line by line</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Reading Line by Line ===&quot;</span><span class="p">)</span>
@@ -564,6 +589,35 @@ Line 2: &#39;1,27.5\n&#39;
 Line 3: &#39;2,30.2\n&#39;
 Line 4: &#39;3,32.8\n&#39;
 Line 5: &#39;4,35.1\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="c1"># That output is Python showing you a file object, not the file’s contents.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;_io.TextIOWrapper name=&#39;06_temperature_data.txt&#39; mode=&#39;r&#39; encoding=&#39;UTF-8&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lines</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Time,Temperature\n&#39;,
+ &#39;0,25.0\n&#39;,
+ &#39;1,27.5\n&#39;,
+ &#39;2,30.2\n&#39;,
+ &#39;3,32.8\n&#39;,
+ &#39;4,35.1\n&#39;]
 </pre></div>
 </div>
 </div>
@@ -882,7 +936,9 @@ Data:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data read with pandas:
-   Time (min)  Temperature (C)  Pressure (bar)  Flow Rate (L/min)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Time (min)  Temperature (C)  Pressure (bar)  Flow Rate (L/min)
 0           0             25.0             1.0               50.0
 1           5             45.2             1.5               55.3
 2          10             65.8             2.0               60.1

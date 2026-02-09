@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter06/06_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="next" title="Chapter 7. Functions/Modules/Packages" href="../chapter07/07_notebook.html" />
     <link rel="prev" title="Chapter 5: Control Flow - Making Decisions in Code" href="../chapter05/05_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -476,24 +477,20 @@ document.write(`
 <span class="c1"># Close the file (important!)</span>
 <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+
+<span class="n">content</span>
+
+<span class="c1"># print(content)</span>
+<span class="c1"># print(f&quot;\nType: {type(content)}&quot;)</span>
+<span class="c1"># print(f&quot;Length: {len(content)} characters&quot;)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Reading Entire File ===
-Time,Temperature
-0,25.0
-1,27.5
-2,30.2
-3,32.8
-4,35.1
-
-
-Type: &lt;class &#39;str&#39;&gt;
-Length: 52 characters
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Time,Temperature\n0,25.0\n1,27.5\n2,30.2\n3,32.8\n4,35.1\n&#39;
 </pre></div>
 </div>
 </div>
@@ -511,9 +508,11 @@ Length: 52 characters
 
 <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results: </span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1">#print(lines)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of lines: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># print(f&quot;results: {lines}\n&quot;)</span>
+
+<span class="c1"># print(f&quot;Number of lines: {len(lines)}\n&quot;)</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Line </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -522,10 +521,6 @@ Length: 52 characters
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Reading Line by Line ===
-results: [&#39;Time,Temperature\n&#39;, &#39;0,25.0\n&#39;, &#39;1,27.5\n&#39;, &#39;2,30.2\n&#39;, &#39;3,32.8\n&#39;, &#39;4,35.1\n&#39;]
-
-Number of lines: 6
-
 Line 0: &#39;Time,Temperature\n&#39;
 Line 1: &#39;0,25.0\n&#39;
 Line 2: &#39;1,27.5\n&#39;
@@ -559,8 +554,8 @@ Line 5: &#39;4,35.1\n&#39;
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Reading with Context Manager ===&quot;</span><span class="p">)</span>
 
 <span class="c1"># File opens and automatically closes</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;06_temperature_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
 <span class="c1"># File is already closed here</span>
@@ -909,7 +904,10 @@ Current directory: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Path object</span>
-<span class="n">data_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;06_experiment_data.csv&#39;</span><span class="p">)</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;batch_data&#39;</span><span class="p">)</span><span class="c1">#06_temperature_data.txt&#39;)</span>
+
+
+
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File path: </span><span class="si">{</span><span class="n">data_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute path: </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File exists: </span><span class="si">{</span><span class="n">data_file</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -918,10 +916,10 @@ Current directory: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File path: 06_experiment_data.csv
-Absolute path: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06/06_experiment_data.csv
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File path: batch_data
+Absolute path: /Users/hoon/CHME212/cheme_comp_book/docs/chapter06/batch_data
 File exists: True
-Is file: True
+Is file: False
 </pre></div>
 </div>
 </div>
@@ -938,10 +936,10 @@ Is file: True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File name: 06_experiment_data.csv
-File stem (no extension): 06_experiment_data
-File extension: .csv
-File size: 149 bytes
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File name: batch_data
+File stem (no extension): batch_data
+File extension: 
+File size: 192 bytes
 </pre></div>
 </div>
 </div>
@@ -1466,11 +1464,11 @@ Pass rate: 66.7%
       </div>
     </a>
     <a class="right-next"
-       href="../lab01/01_lab.html"
+       href="../chapter07/07_notebook.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+        <p class="prev-next-title">Chapter 7. Functions/Modules/Packages</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
