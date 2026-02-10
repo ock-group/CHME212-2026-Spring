@@ -1,0 +1,1083 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 04: NumPy Arrays and Linear Algebra &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab04__/04_lab';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab04__/04_lab.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lab04__/04_lab.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 04: NumPy Arrays and Linear Algebra</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-by-instructor">Examples (by instructor)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-creating-and-manipulating-numpy-arrays">Example 1: Creating and Manipulating NumPy Arrays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-array-indexing-and-slicing">Example 2: Array Indexing and Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-vector-operations-dot-and-cross-products">Example 3: Vector Operations (Dot and Cross Products)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-matrix-operations">Example 4: Matrix Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems-by-students">Practice Problems (by students)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-dot-and-cross-products">Problem 1: Dot and Cross Products</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-array-indexing-and-slicing">Problem 2: Array Indexing and Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-matrix-slicing">Problem 3: Matrix Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-matrix-multiplication">Problem 4: Matrix Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-matrix-inverse">Problem 5: Matrix Inverse</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-determinant-calculation">Problem 6: Determinant Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-7-solving-system-of-linear-equations">Problem 7: Solving System of Linear Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-8-balancing-chemical-equations-using-linear-algebra">Problem 8: Balancing Chemical Equations using Linear Algebra</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-9-material-balance-on-a-mixing-tank">Problem 9: Material Balance on a Mixing Tank</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-04-numpy-arrays-and-linear-algebra">
+<h1>Lab 04: NumPy Arrays and Linear Algebra<a class="headerlink" href="#lab-04-numpy-arrays-and-linear-algebra" title="Link to this heading">#</a></h1>
+<section id="examples-by-instructor">
+<h2>Examples (by instructor)<a class="headerlink" href="#examples-by-instructor" title="Link to this heading">#</a></h2>
+<p>In this lab, you’ll learn to work with NumPy arrays and perform linear algebra operations essential for chemical engineering calculations.</p>
+<section id="example-1-creating-and-manipulating-numpy-arrays">
+<h3>Example 1: Creating and Manipulating NumPy Arrays<a class="headerlink" href="#example-1-creating-and-manipulating-numpy-arrays" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Create a 1D array of concentrations (mol/L)</span>
+<span class="n">concentrations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Concentrations:&quot;</span><span class="p">,</span> <span class="n">concentrations</span><span class="p">)</span>
+
+<span class="c1"># Create a 2D array (matrix) of rate constants at different temperatures</span>
+<span class="c1"># Rows: different reactions, Columns: different temperatures</span>
+<span class="n">rate_constants</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">],</span> 
+                           <span class="p">[</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">],</span>
+                           <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.32</span><span class="p">,</span> <span class="mf">0.62</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Rate constants (s^-1):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rate_constants</span><span class="p">)</span>
+
+<span class="c1"># Array operations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Array shape:&quot;</span><span class="p">,</span> <span class="n">concentrations</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix shape:&quot;</span><span class="p">,</span> <span class="n">rate_constants</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of concentrations:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">concentrations</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average rate constant:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rate_constants</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Concentrations: [0.5 1.  1.5 2.  2.5]
+
+Rate constants (s^-1):
+[[0.12 0.25 0.48]
+ [0.08 0.18 0.35]
+ [0.15 0.32 0.62]]
+
+Array shape: (5,)
+Matrix shape: (3, 3)
+Sum of concentrations: 7.5
+Average rate constant: 0.2833333333333333
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-array-indexing-and-slicing">
+<h3>Example 2: Array Indexing and Slicing<a class="headerlink" href="#example-2-array-indexing-and-slicing" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an array of temperatures</span>
+<span class="n">temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">340</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">380</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">440</span><span class="p">])</span>
+
+<span class="c1"># Indexing examples</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First temperature:&quot;</span><span class="p">,</span> <span class="n">temps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last temperature:&quot;</span><span class="p">,</span> <span class="n">temps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First three temperatures:&quot;</span><span class="p">,</span> <span class="n">temps</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Every other temperature:&quot;</span><span class="p">,</span> <span class="n">temps</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># 2D array slicing</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Original matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">First two rows:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last two columns:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First temperature: 300
+Last temperature: 440
+First three temperatures: [300 320 340]
+Every other temperature: [300 340 380 420]
+
+Original matrix:
+[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+
+First two rows: [[1 2 3 4]
+ [5 6 7 8]]
+Last two columns: [[ 3  4]
+ [ 7  8]
+ [11 12]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3-vector-operations-dot-and-cross-products">
+<h3>Example 3: Vector Operations (Dot and Cross Products)<a class="headerlink" href="#example-3-vector-operations-dot-and-cross-products" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define two velocity vectors (m/s)</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+
+<span class="c1"># Dot product: v1 · v2</span>
+<span class="n">dot_product</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1 = </span><span class="si">{</span><span class="n">v1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v2 = </span><span class="si">{</span><span class="n">v2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Dot product (v1 · v2) = </span><span class="si">{</span><span class="n">dot_product</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cross product: v1 × v2</span>
+<span class="n">cross_product</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cross product (v1 × v2) = </span><span class="si">{</span><span class="n">cross_product</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Verify dot product manually</span>
+<span class="n">manual_dot</span> <span class="o">=</span> <span class="n">v1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">v2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">v1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">v2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">v1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">v2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Manual dot product calculation: </span><span class="si">{</span><span class="n">manual_dot</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>v1 = [3 6 9]
+v2 = [2 4 8]
+
+Dot product (v1 · v2) = 102
+Cross product (v1 × v2) = [12 -6  0]
+
+Manual dot product calculation: 102
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-4-matrix-operations">
+<h3>Example 4: Matrix Operations<a class="headerlink" href="#example-4-matrix-operations" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define two matrices</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix A:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Matrix B:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+<span class="c1"># Matrix multiplication: AB</span>
+<span class="n">AB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">A × B =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">AB</span><span class="p">)</span>
+
+<span class="c1"># Matrix multiplication: BA</span>
+<span class="n">BA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">B × A =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">BA</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Are AB and BA equal?&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">AB</span><span class="p">,</span> <span class="n">BA</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix A:
+[[2 3]
+ [4 1]]
+
+Matrix B:
+[[1 5]
+ [3 2]]
+
+A × B =
+[[11 16]
+ [ 7 22]]
+
+B × A =
+[[22  8]
+ [14 11]]
+
+Are AB and BA equal? False
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="practice-problems-by-students">
+<h2>Practice Problems (by students)<a class="headerlink" href="#practice-problems-by-students" title="Link to this heading">#</a></h2>
+<section id="problem-1-dot-and-cross-products">
+<h3>Problem 1: Dot and Cross Products<a class="headerlink" href="#problem-1-dot-and-cross-products" title="Link to this heading">#</a></h3>
+<p>Compute analytically the dot and cross products for the two vectors: <strong>a</strong> = (3, 5, 7) and <strong>b</strong> = (4, 6, 3). Use the following definitions:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{a} \cdot \mathbf{b} = a_1b_1 + a_2b_2 + a_3b_3
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{a} \times \mathbf{b} = \det\begin{pmatrix}
+\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+a_1 &amp; a_2 &amp; a_3 \\
+b_1 &amp; b_2 &amp; b_3
+\end{pmatrix}
+\end{split}\]</div>
+<p>Check the results in Python. Use <code class="docutils literal notranslate"><span class="pre">np.dot()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.cross()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-2-array-indexing-and-slicing">
+<h3>Problem 2: Array Indexing and Slicing<a class="headerlink" href="#problem-2-array-indexing-and-slicing" title="Link to this heading">#</a></h3>
+<p>Having <code class="docutils literal notranslate"><span class="pre">arr</span> <span class="pre">=</span> <span class="pre">np.array([6,</span> <span class="pre">12,</span> <span class="pre">18,</span> <span class="pre">24,</span> <span class="pre">30,</span> <span class="pre">36,</span> <span class="pre">42,</span> <span class="pre">48])</span></code>, print the following results using indexing/slicing operations:</p>
+<p>a) <code class="docutils literal notranslate"><span class="pre">[6</span> <span class="pre">12</span> <span class="pre">18]</span></code></p>
+<p>b) <code class="docutils literal notranslate"><span class="pre">[36</span> <span class="pre">42</span> <span class="pre">48]</span></code></p>
+<p>c) <code class="docutils literal notranslate"><span class="pre">[6</span> <span class="pre">18</span> <span class="pre">30</span> <span class="pre">42]</span></code></p>
+<p>d) <code class="docutils literal notranslate"><span class="pre">[12</span> <span class="pre">24</span> <span class="pre">36</span> <span class="pre">48]</span></code></p>
+<p>e) <code class="docutils literal notranslate"><span class="pre">[6</span> <span class="pre">24</span> <span class="pre">42]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-3-matrix-slicing">
+<h3>Problem 3: Matrix Slicing<a class="headerlink" href="#problem-3-matrix-slicing" title="Link to this heading">#</a></h3>
+<p>Having matrix <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">np.array([[2,</span> <span class="pre">3,</span> <span class="pre">4],</span> <span class="pre">[12,</span> <span class="pre">24,</span> <span class="pre">36],</span> <span class="pre">[120,</span> <span class="pre">240,</span> <span class="pre">360]])</span></code>, print the following results:</p>
+<p>a)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span>  <span class="mi">2</span>   <span class="mi">4</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">120</span> <span class="mi">360</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>b)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="mi">2</span>  <span class="mi">3</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">12</span> <span class="mi">24</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>c)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="mi">3</span>  <span class="mi">4</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">24</span> <span class="mi">36</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>d)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span>  <span class="mi">3</span>   <span class="mi">4</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mi">24</span>  <span class="mi">36</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">240</span> <span class="mi">360</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-4-matrix-multiplication">
+<h3>Problem 4: Matrix Multiplication<a class="headerlink" href="#problem-4-matrix-multiplication" title="Link to this heading">#</a></h3>
+<p>Define two matrices and multiply them in two ways: AB and BA. Are the results the same or different? Check in Python.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix} 2 &amp; 3 \\ 4 &amp; 5 \end{bmatrix}, \quad
+B = \begin{bmatrix} 3 &amp; 0 \\ 2 &amp; 4 \end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-5-matrix-inverse">
+<h3>Problem 5: Matrix Inverse<a class="headerlink" href="#problem-5-matrix-inverse" title="Link to this heading">#</a></h3>
+<p>Define matrix <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">np.array([[2,</span> <span class="pre">3],</span> <span class="pre">[4,</span> <span class="pre">5]])</span></code>. Find its inverse M⁻¹ and check that MM⁻¹ = M⁻¹M = I (identity matrix). Check this in Python.</p>
+<p><strong>Hint:</strong> Use <code class="docutils literal notranslate"><span class="pre">np.linalg.inv()</span></code> to find the inverse matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-6-determinant-calculation">
+<h3>Problem 6: Determinant Calculation<a class="headerlink" href="#problem-6-determinant-calculation" title="Link to this heading">#</a></h3>
+<p>Compute the determinant of the following matrix both analytically and in Python:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+3 &amp; -2 &amp; 1 \\
+4 &amp; 0 &amp; -2 \\
+2 &amp; 5 &amp; 6
+\end{bmatrix}
+\end{split}\]</div>
+<p><strong>Hint:</strong> Use <code class="docutils literal notranslate"><span class="pre">np.linalg.det()</span></code> to compute the determinant in Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-7-solving-system-of-linear-equations">
+<h3>Problem 7: Solving System of Linear Equations<a class="headerlink" href="#problem-7-solving-system-of-linear-equations" title="Link to this heading">#</a></h3>
+<p>Solve the following system of linear equations using Cramer’s rule, and then check the result in Python (using <code class="docutils literal notranslate"><span class="pre">np.linalg.solve(A,</span> <span class="pre">b)</span></code>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+2x + 3y + 4z &amp;= 6 \\
+4x + 2y - 3z &amp;= 8 \\
+-2x + 5y + 8z &amp;= -4
+\end{align}
+\end{split}\]</div>
+<p><strong>Note:</strong> For <code class="docutils literal notranslate"><span class="pre">np.linalg.solve()</span></code>, the coefficient matrix A should contain the coefficients of x, y, z, and the vector b should contain the right-hand side values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-8-balancing-chemical-equations-using-linear-algebra">
+<h3>Problem 8: Balancing Chemical Equations using Linear Algebra<a class="headerlink" href="#problem-8-balancing-chemical-equations-using-linear-algebra" title="Link to this heading">#</a></h3>
+<p>Use the linear algebra approach to balance the following redox reaction in aqueous solution. To this end, write the problem in matrix form and employ <code class="docutils literal notranslate"><span class="pre">np.linalg.solve(A,</span> <span class="pre">b)</span></code> method in Python. Print the found coefficients as integers.</p>
+<div class="math notranslate nohighlight">
+\[
+HNO_2 + H^+ + Cr_2O_7^{2-} \rightarrow NO_3^- + Cr^{3+} + H_2O
+\]</div>
+<p><strong>Approach:</strong></p>
+<ol class="arabic simple">
+<li><p>Assign coefficients: a·HNO₂ + b·H⁺ + c·Cr₂O₇²⁻ → d·NO₃⁻ + e·Cr³⁺ + f·H₂O</p></li>
+<li><p>Write balance equations for each element (H, N, O, Cr) and charge</p></li>
+<li><p>Set one coefficient (e.g., a=1) to make the system solvable</p></li>
+<li><p>Solve for the remaining coefficients</p></li>
+<li><p>Scale to get integer coefficients</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-9-material-balance-on-a-mixing-tank">
+<h3>Problem 9: Material Balance on a Mixing Tank<a class="headerlink" href="#problem-9-material-balance-on-a-mixing-tank" title="Link to this heading">#</a></h3>
+<p>A mixing tank receives three inlet streams with the following compositions and flow rates:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stream</p></th>
+<th class="head"><p>Flow Rate (kg/h)</p></th>
+<th class="head"><p>Water (wt%)</p></th>
+<th class="head"><p>Ethanol (wt%)</p></th>
+<th class="head"><p>Acetone (wt%)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>F₁</p></td>
+<td><p>60</p></td>
+<td><p>30</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>F₂</p></td>
+<td><p>40</p></td>
+<td><p>20</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>F₃</p></td>
+<td><p>30</p></td>
+<td><p>50</p></td>
+<td><p>20</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The outlet stream has the following specifications:</p>
+<ul class="simple">
+<li><p>Total flow rate: 1000 kg/h</p></li>
+<li><p>Water content: 45 wt%</p></li>
+<li><p>Ethanol content: 35 wt%</p></li>
+</ul>
+<p><strong>Tasks:</strong></p>
+<p>a) Set up the material balance equations:</p>
+<ul class="simple">
+<li><p>Total mass balance: F₁ + F₂ + F₃ = 1000</p></li>
+<li><p>Water balance: 0.60·F₁ + 0.40·F₂ + 0.30·F₃ = 0.45·1000</p></li>
+<li><p>Ethanol balance: 0.30·F₁ + 0.20·F₂ + 0.50·F₃ = 0.35·1000</p></li>
+</ul>
+<p>b) Express this as a matrix equation Ax = b</p>
+<p>c) Solve for F₁, F₂, and F₃ using <code class="docutils literal notranslate"><span class="pre">np.linalg.solve()</span></code></p>
+<p>d) Verify that the acetone balance is satisfied</p>
+<p>e) Check that all flow rates are positive (physically meaningful)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Problem 9: Material Balance on a Mixing Tank</span>
+
+<span class="c1"># Step a) &amp; b) Set up the coefficient matrix A and constant vector b</span>
+<span class="c1"># Equations:</span>
+<span class="c1"># F1 + F2 + F3 = 1000              (total mass balance)</span>
+<span class="c1"># 0.60*F1 + 0.40*F2 + 0.30*F3 = 450  (water balance)</span>
+<span class="c1"># 0.30*F1 + 0.20*F2 + 0.50*F3 = 350  (ethanol balance)</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">],</span>    <span class="c1"># Total mass balance coefficients</span>
+              <span class="p">[</span><span class="mf">0.60</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>    <span class="c1"># Water balance coefficients</span>
+              <span class="p">[</span><span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">]])</span>   <span class="c1"># Ethanol balance coefficients</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">350</span><span class="p">])</span>      <span class="c1"># Right-hand side values</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficient matrix A:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Constant vector b:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Step c) Solve for F1, F2, F3 using np.linalg.solve()</span>
+<span class="n">flow_rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">,</span> <span class="n">F3</span> <span class="o">=</span> <span class="n">flow_rates</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SOLUTION:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1 (Stream 1) = </span><span class="si">{</span><span class="n">F1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F2 (Stream 2) = </span><span class="si">{</span><span class="n">F2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F3 (Stream 3) = </span><span class="si">{</span><span class="n">F3</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step d) Verify that the acetone balance is satisfied</span>
+<span class="c1"># Acetone balance: 0.10*F1 + 0.40*F2 + 0.20*F3 = acetone_out</span>
+<span class="n">acetone_in</span> <span class="o">=</span> <span class="mf">0.10</span><span class="o">*</span><span class="n">F1</span> <span class="o">+</span> <span class="mf">0.40</span><span class="o">*</span><span class="n">F2</span> <span class="o">+</span> <span class="mf">0.20</span><span class="o">*</span><span class="n">F3</span>
+<span class="n">acetone_out_expected</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mf">0.45</span> <span class="o">-</span> <span class="mf">0.35</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1"># Remaining wt% = 20%</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VERIFICATION:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Acetone in inlet streams: </span><span class="si">{</span><span class="n">acetone_in</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Acetone in outlet (expected): </span><span class="si">{</span><span class="n">acetone_out_expected</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Acetone balance satisfied: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">acetone_in</span><span class="p">,</span><span class="w"> </span><span class="n">acetone_out_expected</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Additional verification: check all material balances</span>
+<span class="n">total_mass</span> <span class="o">=</span> <span class="n">F1</span> <span class="o">+</span> <span class="n">F2</span> <span class="o">+</span> <span class="n">F3</span>
+<span class="n">water_in</span> <span class="o">=</span> <span class="mf">0.60</span><span class="o">*</span><span class="n">F1</span> <span class="o">+</span> <span class="mf">0.40</span><span class="o">*</span><span class="n">F2</span> <span class="o">+</span> <span class="mf">0.30</span><span class="o">*</span><span class="n">F3</span>
+<span class="n">ethanol_in</span> <span class="o">=</span> <span class="mf">0.30</span><span class="o">*</span><span class="n">F1</span> <span class="o">+</span> <span class="mf">0.20</span><span class="o">*</span><span class="n">F2</span> <span class="o">+</span> <span class="mf">0.50</span><span class="o">*</span><span class="n">F3</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total mass balance: </span><span class="si">{</span><span class="n">total_mass</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h (target: 1000)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Water balance: </span><span class="si">{</span><span class="n">water_in</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h (target: 450)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ethanol balance: </span><span class="si">{</span><span class="n">ethanol_in</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h (target: 350)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step e) Check that all flow rates are positive (physically meaningful)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PHYSICAL FEASIBILITY CHECK:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">flow_rates</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ All flow rates are positive - solution is physically meaningful&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  F1 &gt; 0: </span><span class="si">{</span><span class="n">F1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  F2 &gt; 0: </span><span class="si">{</span><span class="n">F2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  F3 &gt; 0: </span><span class="si">{</span><span class="n">F3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✗ Warning: Some flow rates are negative - solution may not be physical&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">F</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">flow_rates</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">F</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  F</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">F</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h (NEGATIVE!)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Summary table</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;COMPOSITION VERIFICATION:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Component&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Inlet (kg/h)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Outlet (kg/h)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Match?&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Water&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">water_in</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="mf">450.0</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">water_in</span><span class="p">,</span><span class="w"> </span><span class="mi">450</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Ethanol&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">ethanol_in</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="mf">350.0</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">ethanol_in</span><span class="p">,</span><span class="w"> </span><span class="mi">350</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Acetone&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">acetone_in</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">acetone_out_expected</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">acetone_in</span><span class="p">,</span><span class="w"> </span><span class="n">acetone_out_expected</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;TOTAL&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">total_mass</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="mf">1000.0</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">total_mass</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient matrix A:
+[[1.  1.  1. ]
+ [0.6 0.4 0.3]
+ [0.3 0.2 0.5]]
+
+Constant vector b:
+[1000  450  350]
+
+==================================================
+SOLUTION:
+==================================================
+F1 (Stream 1) = 428.57 kg/h
+F2 (Stream 2) = 214.29 kg/h
+F3 (Stream 3) = 357.14 kg/h
+
+==================================================
+VERIFICATION:
+==================================================
+Acetone in inlet streams: 200.00 kg/h
+Acetone in outlet (expected): 200.00 kg/h
+Acetone balance satisfied: True
+
+Total mass balance: 1000.00 kg/h (target: 1000)
+Water balance: 450.00 kg/h (target: 450)
+Ethanol balance: 350.00 kg/h (target: 350)
+
+==================================================
+PHYSICAL FEASIBILITY CHECK:
+==================================================
+✓ All flow rates are positive - solution is physically meaningful
+  F1 &gt; 0: True
+  F2 &gt; 0: True
+  F3 &gt; 0: True
+
+==================================================
+COMPOSITION VERIFICATION:
+==================================================
+Component    Inlet (kg/h)    Outlet (kg/h)   Match?    
+--------------------------------------------------
+Water        450.00          450.00          True
+Ethanol      350.00          350.00          True
+Acetone      200.00          200.00          True
+TOTAL        1000.00         1000.00         True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lab04__"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-by-instructor">Examples (by instructor)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-creating-and-manipulating-numpy-arrays">Example 1: Creating and Manipulating NumPy Arrays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-array-indexing-and-slicing">Example 2: Array Indexing and Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-vector-operations-dot-and-cross-products">Example 3: Vector Operations (Dot and Cross Products)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-matrix-operations">Example 4: Matrix Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems-by-students">Practice Problems (by students)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-dot-and-cross-products">Problem 1: Dot and Cross Products</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-array-indexing-and-slicing">Problem 2: Array Indexing and Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-matrix-slicing">Problem 3: Matrix Slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-matrix-multiplication">Problem 4: Matrix Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-matrix-inverse">Problem 5: Matrix Inverse</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-determinant-calculation">Problem 6: Determinant Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-7-solving-system-of-linear-equations">Problem 7: Solving System of Linear Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-8-balancing-chemical-equations-using-linear-algebra">Problem 8: Balancing Chemical Equations using Linear Algebra</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-9-material-balance-on-a-mixing-tank">Problem 9: Material Balance on a Mixing Tank</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

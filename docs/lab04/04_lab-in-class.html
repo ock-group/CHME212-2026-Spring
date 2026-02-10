@@ -1,0 +1,1118 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 04: File I/O and Python Functions &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab04/04_lab-in-class';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab04/04_lab-in-class.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lab04/04_lab-in-class.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 04: File I/O and Python Functions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">1. Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-quadratic-equation-solver">1.1 Example 1: Quadratic Equation Solver</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-gravitational-force-calculator-with-filtering">1.2 Example 2: Gravitational Force Calculator with Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-force-calculation-with-file-i-o">1.3 Example 3: Force Calculation with File I/O</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">2. Practice Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-electrostatic-force-calculator-with-filtering">Problem 1: Electrostatic Force Calculator with Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-equations-of-state-comparing-gas-models">Problem 2: Equations of State - Comparing Gas Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-van-der-waals-equation-with-file-input">Problem 3: Van der Waals Equation with File Input</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-04-file-i-o-and-python-functions">
+<h1>Lab 04: File I/O and Python Functions<a class="headerlink" href="#lab-04-file-i-o-and-python-functions" title="Link to this heading">#</a></h1>
+<section id="demonstration">
+<h2>1. Demonstration<a class="headerlink" href="#demonstration" title="Link to this heading">#</a></h2>
+<section id="example-1-quadratic-equation-solver">
+<h3>1.1 Example 1: Quadratic Equation Solver<a class="headerlink" href="#example-1-quadratic-equation-solver" title="Link to this heading">#</a></h3>
+<p>Consider a function <code class="docutils literal notranslate"><span class="pre">roots(a,</span> <span class="pre">b,</span> <span class="pre">c)</span></code> that returns the roots of quadratic equation:</p>
+<div class="math notranslate nohighlight">
+\[
+ax^2 + bx + c = 0
+\]</div>
+<p>Using the quadratic formula:</p>
+<div class="math notranslate nohighlight">
+\[
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]</div>
+<p>We’ll assume the equation has two real roots (discriminant ≥ 0).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">roots</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the roots of a quadratic equation ax^2 + bx + c = 0</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    a, b, c: coefficients of the quadratic equation</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    tuple: (root1, root2) - the two roots of the equation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate discriminant</span>
+    <span class="n">discriminant</span> <span class="o">=</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span>
+    
+    <span class="c1"># Calculate both roots</span>
+    <span class="n">root1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">root2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">root1</span><span class="p">,</span> <span class="n">root2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: x^2 - 5x + 6 = 0 (roots: 3, 2)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 1: x² - 5x + 6 = 0&quot;</span><span class="p">)</span>
+<span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roots: x₁ = </span><span class="si">{</span><span class="n">r1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, x₂ = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Verification: (</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">)² - 5(</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">) + 6 = </span><span class="si">{</span><span class="n">r1</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="o">*</span><span class="n">r1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">6</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1: x² - 5x + 6 = 0
+Roots: x₁ = 3.00, x₂ = 2.00
+Verification: (3.0)² - 5(3.0) + 6 = 0.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: 2x^2 + 4x - 6 = 0 (roots: 1, -3)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 2: 2x² + 4x - 6 = 0&quot;</span><span class="p">)</span>
+<span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roots: x₁ = </span><span class="si">{</span><span class="n">r1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, x₂ = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Verification: 2(</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">)² + 4(</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">) - 6 = </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">r1</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="o">*</span><span class="n">r1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">6</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 2: 2x² + 4x - 6 = 0
+Roots: x₁ = 1.00, x₂ = -3.00
+Verification: 2(1.0)² + 4(1.0) - 6 = 0.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3: x^2 - 4 = 0 (roots: 2, -2)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 3: x² - 4 = 0&quot;</span><span class="p">)</span>
+<span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roots: x₁ = </span><span class="si">{</span><span class="n">r1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, x₂ = </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Verification: (</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">)² - 4 = </span><span class="si">{</span><span class="n">r1</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 3: x² - 4 = 0
+Roots: x₁ = 2.00, x₂ = -2.00
+Verification: (2.0)² - 4 = 0.00
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-gravitational-force-calculator-with-filtering">
+<h3>1.2 Example 2: Gravitational Force Calculator with Filtering<a class="headerlink" href="#example-2-gravitational-force-calculator-with-filtering" title="Link to this heading">#</a></h3>
+<p>Define a function to compute the gravitational force:</p>
+<div class="math notranslate nohighlight">
+\[
+F = G\frac{m_1 m_2}{r^2}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>G = 6.674 × 10⁻¹¹ N·m²/kg² (gravitational constant)</p></li>
+<li><p>m₁, m₂ = masses in kg</p></li>
+<li><p>r = distance between centers in meters</p></li>
+<li><p>F = gravitational force in Newtons</p></li>
+</ul>
+<p>We’ll loop over several masses and <strong>print results only if F &lt; 1 N</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gravitational_force</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate gravitational force between two masses.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    m1: mass of first object (kg)</span>
+<span class="sd">    m2: mass of second object (kg)</span>
+<span class="sd">    r: distance between centers (m)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    float: gravitational force in Newtons</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="mf">6.674e-11</span>  <span class="c1"># Gravitational constant (N·m²/kg²)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">G</span> <span class="o">*</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">F</span>
+
+<span class="c1"># Test with various mass combinations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gravitational Force Calculator&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Showing only results where F &lt; 1 N</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;m₁ (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;m₂ (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;r (m)&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;F (N)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Status&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gravitational Force Calculator
+Showing only results where F &lt; 1 N
+
+m₁ (kg)      m₂ (kg)      r (m)      F (N)           Status
+======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">10</span>  <span class="c1"># masses in kg, distance in m</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">gravitational_force</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Two masses: </span><span class="si">{</span><span class="n">m1</span><span class="si">}</span><span class="s2"> kg and </span><span class="si">{</span><span class="n">m2</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distance: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gravitational force: F = </span><span class="si">{</span><span class="n">F</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> N&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">F</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: F &lt; 1 N (very weak force!)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: F ≥ 1 N&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Two masses: 1000 kg and 500 kg
+Distance: 10 m
+Gravitational force: F = 3.337000e-07 N
+Result: F &lt; 1 N (very weak force!)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3-force-calculation-with-file-i-o">
+<h3>1.3 Example 3: Force Calculation with File I/O<a class="headerlink" href="#example-3-force-calculation-with-file-i-o" title="Link to this heading">#</a></h3>
+<p>Define a function to compute the force F = ma that takes two arguments (m and a) and return the value of F in Newtons. Loop over several masses from a list. Print the results on the screen and save them into the file “masses_file.dat”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">force</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate force using Newton&#39;s second law: F = ma</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    m: mass in kg</span>
+<span class="sd">    a: acceleration in m/s^2</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    float: force in Newtons</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">a</span>
+    <span class="k">return</span> <span class="n">F</span>
+
+<span class="c1"># List of masses (kg)</span>
+<span class="n">masses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">]</span>
+
+<span class="c1"># Constant acceleration (m/s^2)</span>
+<span class="n">acceleration</span> <span class="o">=</span> <span class="mf">9.8</span>
+
+<span class="c1"># Print results to screen</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Force Calculation: F = ma&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Acceleration: </span><span class="si">{</span><span class="n">acceleration</span><span class="si">}</span><span class="s2"> m/s^2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Mass (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Force (N)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># Open file for writing</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;masses_file.dat&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># Write header to file</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Force calculation results</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# Acceleration = </span><span class="si">{</span><span class="n">acceleration</span><span class="si">}</span><span class="s2"> m/s^2</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Mass (kg), Force (N)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Loop over masses</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">masses</span><span class="p">:</span>
+        <span class="c1"># Calculate force</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">force</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">acceleration</span><span class="p">)</span>
+        
+        <span class="c1"># Print to screen</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">F</span><span class="si">:</span><span class="s2">&lt;15.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Write to file</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">F</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Results saved to &#39;masses_file.dat&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Force Calculation: F = ma
+========================================
+Acceleration: 9.8 m/s^2
+
+Mass (kg)       Force (N)      
+----------------------------------------
+1.0             9.80           
+2.5             24.50          
+5.0             49.00          
+10.0            98.00          
+15.0            147.00         
+
+Results saved to &#39;masses_file.dat&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="practice-problems">
+<h2>2. Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<p>Now it’s your turn! Complete the following problems using functions, loops, and conditional statements.</p>
+<section id="problem-1-electrostatic-force-calculator-with-filtering">
+<h3>Problem 1: Electrostatic Force Calculator with Filtering<a class="headerlink" href="#problem-1-electrostatic-force-calculator-with-filtering" title="Link to this heading">#</a></h3>
+<p>Create a function <code class="docutils literal notranslate"><span class="pre">electrostatic_force(q1,</span> <span class="pre">q2,</span> <span class="pre">r)</span></code> that calculates the electrostatic force between two charges using Coulomb’s Law:</p>
+<div class="math notranslate nohighlight">
+\[
+F = k_e \frac{|q_1 q_2|}{r^2}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(k_e\)</span> = 8.99 × 10⁹ N·m²/C² (Coulomb’s constant)</p></li>
+<li><p>q₁, q₂ = charges in Coulombs (C)</p></li>
+<li><p>r = distance between charges in meters</p></li>
+<li><p>F = electrostatic force in Newtons</p></li>
+</ul>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Define the function to return the electrostatic force</p></li>
+<li><p>Test with the following charge pairs (all with q₁ = 1.0 × 10⁻⁶ C):</p>
+<ul class="simple">
+<li><p>q₂ values (C): [1.0e-6, 2.0e-6, 5.0e-6, 1.0e-5, 5.0e-5, 1.0e-4]</p></li>
+<li><p>r values (m): [0.01, 0.02, 0.05, 0.1, 0.2, 0.5]</p></li>
+</ul>
+</li>
+<li><p>Loop over all combinations (6 test cases total)</p></li>
+<li><p><strong>Print results ONLY if F &gt; 100 N</strong></p></li>
+<li><p>Count and report how many cases meet this criterion</p></li>
+<li><p>Create a formatted table showing q₁, q₂, r, and F for filtered results</p></li>
+</ol>
+<p><strong>Format:</strong> Similar to the gravitational force example, show a status column indicating whether each case was printed or filtered.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">electrostatic_force</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate electrostatic force using Coulomb&#39;s Law: F = ke * |q1*q2| / r^2</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    q1: charge 1 in Coulombs</span>
+<span class="sd">    q2: charge 2 in Coulombs</span>
+<span class="sd">    r: distance between charges in meters</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    float: electrostatic force in Newtons</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ke</span> <span class="o">=</span> <span class="mf">8.99e9</span>  <span class="c1"># Coulomb&#39;s constant (N·m²/C²)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">ke</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">q1</span> <span class="o">*</span> <span class="n">q2</span><span class="p">)</span> <span class="o">/</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">F</span>
+
+<span class="c1"># Test parameters</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="mf">1.0e-6</span>  <span class="c1"># C</span>
+<span class="n">q2_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="mf">2.0e-6</span><span class="p">,</span> <span class="mf">5.0e-6</span><span class="p">,</span> <span class="mf">1.0e-5</span><span class="p">,</span> <span class="mf">5.0e-5</span><span class="p">,</span> <span class="mf">1.0e-4</span><span class="p">]</span>
+<span class="n">r_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Electrostatic Force Calculator (Coulomb&#39;s Law)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Showing only results where F &gt; 100 N</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;q₁ (C)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;q₂ (C)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;r (m)&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;F (N)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Status&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q2_values</span><span class="p">)):</span>
+    <span class="n">q2</span> <span class="o">=</span> <span class="n">q2_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">r_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">electrostatic_force</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">F</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">q1</span><span class="si">:</span><span class="s2">&lt;12.1e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">q2</span><span class="si">:</span><span class="s2">&lt;12.1e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">&lt;10.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">F</span><span class="si">:</span><span class="s2">&lt;15.4f</span><span class="si">}</span><span class="s2"> Printed&quot;</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">q1</span><span class="si">:</span><span class="s2">&lt;12.1e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">q2</span><span class="si">:</span><span class="s2">&lt;12.1e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">&lt;10.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">F</span><span class="si">:</span><span class="s2">&lt;15.4f</span><span class="si">}</span><span class="s2"> Filtered&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> out of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">q2_values</span><span class="p">)</span><span class="si">}</span><span class="s2"> cases meet the criterion (F &gt; 100 N)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Electrostatic Force Calculator (Coulomb&#39;s Law)
+Showing only results where F &gt; 100 N
+
+q₁ (C)       q₂ (C)       r (m)      F (N)           Status
+======================================================================
+1.0e-06      1.0e-06      0.01       89.9000         Filtered
+1.0e-06      2.0e-06      0.02       44.9500         Filtered
+1.0e-06      5.0e-06      0.05       17.9800         Filtered
+1.0e-06      1.0e-05      0.10       8.9900          Filtered
+1.0e-06      5.0e-05      0.20       11.2375         Filtered
+1.0e-06      1.0e-04      0.50       3.5960          Filtered
+
+0 out of 6 cases meet the criterion (F &gt; 100 N)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-2-equations-of-state-comparing-gas-models">
+<h3>Problem 2: Equations of State - Comparing Gas Models<a class="headerlink" href="#problem-2-equations-of-state-comparing-gas-models" title="Link to this heading">#</a></h3>
+<p>Using the following equations of state, define Python functions returning the pressure of a gas (p), given its volume (V), amount (n) and temperature (T). Use SI units.</p>
+<p><strong>Ideal Gas Equation:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+p = \frac{nRT}{V}
+\]</div>
+<p><strong>Van der Waals Equation:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+p = \frac{nRT}{V - nb} - \frac{n^2a}{V^2}
+\]</div>
+<p><strong>Dieterici Equation:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+p = \frac{nRT \exp\left(-\frac{na}{RTV}\right)}{V - nb}
+\]</div>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Define three functions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">p_ideal(n,</span> <span class="pre">V,</span> <span class="pre">T,</span> <span class="pre">R)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p_vdw(n,</span> <span class="pre">V,</span> <span class="pre">T,</span> <span class="pre">R,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> (Van der Waals)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p_dieterici(n,</span> <span class="pre">V,</span> <span class="pre">T,</span> <span class="pre">R,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> (Dieterici)</p></li>
+</ul>
+</li>
+<li><p>Compare the pressure for <strong>0.5 mol of CO₂</strong> at three temperatures confined to a volume of <strong>10 L</strong>:</p>
+<ul class="simple">
+<li><p>T = 273.15 K, 303.15 K, and 333.15 K (use a list)</p></li>
+</ul>
+</li>
+<li><p>Use the following constants:</p>
+<ul class="simple">
+<li><p>R = 8.3144626 J/(K·mol)</p></li>
+<li><p>Van der Waals parameters: a = 3.640 L²·bar/mol², b = 0.04267 L/mol</p></li>
+<li><p>Dieterici parameters: a = 4.692 L²·bar/mol², b = 0.04639 L/mol</p></li>
+</ul>
+</li>
+<li><p><strong>Important unit conversions:</strong></p>
+<ul class="simple">
+<li><p>Convert volume from L to m³: V_m3 = V_L / 1000</p></li>
+<li><p>Convert a from L²·bar/mol² to Pa·m⁶/mol²: multiply by 100</p></li>
+<li><p>Convert b from L/mol to m³/mol: divide by 1000</p></li>
+</ul>
+</li>
+<li><p>Use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to iterate over temperatures and print results for each T</p></li>
+<li><p>For each temperature, print:</p>
+<ul class="simple">
+<li><p>Temperature in K</p></li>
+<li><p>Ideal gas pressure in Pa</p></li>
+<li><p>Van der Waals pressure in Pa</p></li>
+<li><p>Dieterici pressure in Pa</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Hint:</strong> Use <code class="docutils literal notranslate"><span class="pre">math.exp()</span></code> for the exponential function in Dieterici equation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">p_ideal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate pressure using Ideal Gas Law: p = nRT/V&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">V</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate pressure using Van der Waals equation: p = nRT/(V-nb) - n^2*a/V^2&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">p_dieterici</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate pressure using Dieterici equation: p = nRT*exp(-na/(RTV)) / (V-nb)&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">n</span> <span class="o">*</span> <span class="n">a</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="n">V</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Constants</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.3144626</span>  <span class="c1"># J/(K·mol)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mf">0.5</span>        <span class="c1"># mol CO2</span>
+<span class="n">V_L</span> <span class="o">=</span> <span class="mi">10</span>       <span class="c1"># Volume in L</span>
+
+<span class="c1"># Unit conversions</span>
+<span class="n">V_m3</span> <span class="o">=</span> <span class="n">V_L</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># L to m³</span>
+
+<span class="c1"># Van der Waals parameters for CO2 (converted to SI)</span>
+<span class="n">a_vdw</span> <span class="o">=</span> <span class="mf">3.640</span> <span class="o">/</span> <span class="mi">1000</span>     <span class="c1"># L²·bar/mol² to Pa·m⁶/mol²</span>
+<span class="n">b_vdw</span> <span class="o">=</span> <span class="mf">0.04267</span> <span class="o">/</span> <span class="mi">1000</span>   <span class="c1"># L/mol to m³/mol</span>
+
+<span class="c1"># Dieterici parameters for CO2 (converted to SI)</span>
+<span class="n">a_diet</span> <span class="o">=</span> <span class="mf">4.692</span> <span class="o">/</span> <span class="mi">1000</span>    <span class="c1"># L²·bar/mol² to Pa·m⁶/mol²</span>
+<span class="n">b_diet</span> <span class="o">=</span> <span class="mf">0.04639</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># L/mol to m³/mol</span>
+
+<span class="c1"># Temperatures to test</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mf">273.15</span><span class="p">,</span> <span class="mf">303.15</span><span class="p">,</span> <span class="mf">333.15</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+    <span class="n">P_ideal</span> <span class="o">=</span> <span class="n">p_ideal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V_m3</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+    <span class="n">P_vdw</span> <span class="o">=</span> <span class="n">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V_m3</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a_vdw</span><span class="p">,</span> <span class="n">b_vdw</span><span class="p">)</span>
+    <span class="n">P_diet</span> <span class="o">=</span> <span class="n">p_dieterici</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V_m3</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a_diet</span><span class="p">,</span> <span class="n">b_diet</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;----------------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T = </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P_ideal = </span><span class="si">{</span><span class="n">P_ideal</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P_vdw = </span><span class="si">{</span><span class="n">P_vdw</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P_diet = </span><span class="si">{</span><span class="n">P_diet</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+T = 273.15 K
+P_ideal = 113.55477296 Pa
+P_vdw = 113.78846005 Pa
+P_diet = 113.80701895 Pa
+----------------------------------
+T = 303.15 K
+P_ideal = 126.02646686 Pa
+P_vdw = 126.28681920 Pa
+P_diet = 126.30770813 Pa
+----------------------------------
+T = 333.15 K
+P_ideal = 138.49816076 Pa
+P_vdw = 138.78517835 Pa
+P_diet = 138.80839733 Pa
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-3-van-der-waals-equation-with-file-input">
+<h3>Problem 3: Van der Waals Equation with File Input<a class="headerlink" href="#problem-3-van-der-waals-equation-with-file-input" title="Link to this heading">#</a></h3>
+<p>This part was done in the previous lab. Using the following van der Waals equation of states, define the Python function returning the pressure of a gas (p), given its volume (V), amount (n) and temperature (T). Use 1.0 mol of CO₂ at different temperatures from the file (“temperatures.dat”) confined to a volume of 0.5 L. Use R = 0.082057 [L atm K⁻¹ mol⁻¹]. Take the van der Waals parameters a = 3.640 L² bar/mol² and b = 0.04267 L/mol.</p>
+<p><strong>Van der Waals equation:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+p = \frac{nRT}{V - nb} - \frac{n^2a}{V^2}
+\]</div>
+<p><strong>First, create the file “temperatures.dat” containing the following:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Temperature, K</span>
+<span class="mi">50</span>
+<span class="mi">70</span>
+<span class="mi">120</span>
+<span class="mi">150</span>
+<span class="mi">200</span>
+<span class="mi">250</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the temperatures.dat file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temperatures.dat&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Temperature, K</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;50</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;70</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;120</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;150</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;200</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;250</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File &#39;temperatures.dat&#39; created successfully&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File &#39;temperatures.dat&#39; created successfully
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">p_vdw_atm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate pressure using Van der Waals equation: p = nRT/(V-nb) - n^2*a/V^2</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    n: amount of gas (mol)</span>
+<span class="sd">    V: volume (L)</span>
+<span class="sd">    T: temperature (K)</span>
+<span class="sd">    R: gas constant (L·atm/(K·mol))</span>
+<span class="sd">    a: Van der Waals parameter (L²·bar/mol²)</span>
+<span class="sd">    b: Van der Waals parameter (L/mol)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    float: pressure in atm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Constants</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>   <span class="c1"># L·atm/(K·mol)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mf">1.0</span>        <span class="c1"># mol CO2</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">0.5</span>        <span class="c1"># L</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span>      <span class="c1"># L²·bar/mol²</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.04267</span>    <span class="c1"># L/mol</span>
+
+<span class="c1"># Read temperatures from file</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temperatures.dat&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="c1"># Skip comments and empty lines</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">temperatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Van der Waals Equation: Pressure of CO₂&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> mol, V = </span><span class="si">{</span><span class="n">V</span><span class="si">}</span><span class="s2"> L&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> L²·bar/mol², b = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> L/mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R = </span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s2"> L·atm/(K·mol)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;T (K)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;P (atm)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">p_vdw_atm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">T</span><span class="si">:</span><span class="s2">&lt;12.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">P</span><span class="si">:</span><span class="s2">&lt;15.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Van der Waals Equation: Pressure of CO₂
+=============================================
+n = 1.0 mol, V = 0.5 L
+a = 3.64 L²·bar/mol², b = 0.04267 L/mol
+R = 0.082057 L·atm/(K·mol)
+
+T (K)        P (atm)        
+------------------------------
+50.0         -5.5887        
+70.0         -2.0002        
+120.0        6.9711         
+150.0        12.3539        
+200.0        21.3252        
+250.0        30.2966        
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lab04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">1. Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-quadratic-equation-solver">1.1 Example 1: Quadratic Equation Solver</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-gravitational-force-calculator-with-filtering">1.2 Example 2: Gravitational Force Calculator with Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-force-calculation-with-file-i-o">1.3 Example 3: Force Calculation with File I/O</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">2. Practice Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-electrostatic-force-calculator-with-filtering">Problem 1: Electrostatic Force Calculator with Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-equations-of-state-comparing-gas-models">Problem 2: Equations of State - Comparing Gas Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-van-der-waals-equation-with-file-input">Problem 3: Van der Waals Equation with File Input</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
