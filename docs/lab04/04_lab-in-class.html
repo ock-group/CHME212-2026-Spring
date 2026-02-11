@@ -191,6 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -449,7 +450,10 @@ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Calculate discriminant</span>
     <span class="n">discriminant</span> <span class="o">=</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span>
-    
+    <span class="k">if</span> <span class="n">discriminant</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1">#raise ValueError(&quot;The equation has no real roots.&quot;)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The equation has no real roots.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>  <span class="c1"># Return None for both roots if no real roots exist</span>
     <span class="c1"># Calculate both roots</span>
     <span class="n">root1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
     <span class="n">root2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
@@ -473,6 +477,23 @@ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1: x² - 5x + 6 = 0
 Roots: x₁ = 3.00, x₂ = 2.00
 Verification: (3.0)² - 5(3.0) + 6 = 0.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1-2: x^2 - 5x + 6 = 0 (roots: 3, 2)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 1: x² - 5x + 10 = 0&quot;</span><span class="p">)</span>
+<span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roots: x₁ = </span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">, x₂ = </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1: x² - 5x + 10 = 0
+The equation has no real roots.
+Roots: x₁ = None, x₂ = None
 </pre></div>
 </div>
 </div>
@@ -546,28 +567,19 @@ F = G\frac{m_1 m_2}{r^2}
     <span class="n">G</span> <span class="o">=</span> <span class="mf">6.674e-11</span>  <span class="c1"># Gravitational constant (N·m²/kg²)</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">G</span> <span class="o">*</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">F</span>
-
-<span class="c1"># Test with various mass combinations</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gravitational Force Calculator&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Showing only results where F &lt; 1 N</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;m₁ (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;m₂ (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;r (m)&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;F (N)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Status&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gravitational Force Calculator
-Showing only results where F &lt; 1 N
-
-m₁ (kg)      m₂ (kg)      r (m)      F (N)           Status
-======================================================================
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">10</span>  <span class="c1"># masses in kg, distance in m</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test with various mass combinations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gravitational Force Calculator&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Showing only results where F &lt; 1 N</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;m₁ (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;m₂ (kg)&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;r (m)&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;F (N)&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Status&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+
+<span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">10</span>  <span class="c1"># masses in kg, distance in m</span>
 <span class="n">F</span> <span class="o">=</span> <span class="n">gravitational_force</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Two masses: </span><span class="si">{</span><span class="n">m1</span><span class="si">}</span><span class="s2"> kg and </span><span class="si">{</span><span class="n">m2</span><span class="si">}</span><span class="s2"> kg&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distance: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
@@ -581,7 +593,12 @@ m₁ (kg)      m₂ (kg)      r (m)      F (N)           Status
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Two masses: 1000 kg and 500 kg
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gravitational Force Calculator
+Showing only results where F &lt; 1 N
+
+m₁ (kg)      m₂ (kg)      r (m)      F (N)           Status
+======================================================================
+Two masses: 1000 kg and 500 kg
 Distance: 10 m
 Gravitational force: F = 3.337000e-07 N
 Result: F &lt; 1 N (very weak force!)

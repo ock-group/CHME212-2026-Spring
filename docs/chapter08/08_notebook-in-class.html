@@ -189,12 +189,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_notebook.html">Chapter 8: Programming Practices</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
 </ul>
 
     </div>
@@ -390,8 +392,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 8: Programming Practices</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Chapter 8: Programming Practices</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-documentation-and-commenting">8.1 Code Documentation and Commenting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">8.1.1 Docstrings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-comments">8.1.2 Inline Comments</a></li>
@@ -401,7 +401,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">8.2 Testing and Validation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing-with-known-results">8.2.1 Unit Testing with Known Results</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-testing">8.2.2 Boundary Testing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-energy-balance-verification">8.2.3 Mass/Energy Balance Verification</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">8.3 Error Handling</a><ul class="nav section-nav flex-column">
@@ -418,9 +417,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -440,22 +436,26 @@ document.write(`
 <li><p>Error handling and exceptions</p></li>
 <li><p>Debugging techniques</p></li>
 </ul>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id2">
-<span id="id3"></span><h1>Chapter 8: Programming Practices<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
-<p><strong>Topics Covered:</strong></p>
-<ul class="simple">
-<li><p>Code documentation and commenting</p></li>
-<li><p>Testing and validation</p></li>
-<li><p>Error handling and exceptions</p></li>
-<li><p>Debugging techniques</p></li>
-</ul>
+<hr class="docutils" />
+<p>Opening
+Alright everyone, welcome to Chapter 8. Today we’re talking about programming practices — documentation, testing, error handling, and debugging. This might sound like housekeeping compared to writing actual calculations, but honestly, this is what separates code that works from code you can trust. In chemical engineering, if your reactor sizing calculation is wrong and nobody catches it, that’s not just a bad grade — in industry, that’s a safety incident.</p>
+<hr class="docutils" />
 <section id="code-documentation-and-commenting">
-<span id="id4"></span><h2>8.1 Code Documentation and Commenting<a class="headerlink" href="#code-documentation-and-commenting" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h2>8.1 Code Documentation and Commenting<a class="headerlink" href="#code-documentation-and-commenting" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Let’s start with documentation. You’ve all written code that you look at a week later and think “what was I doing here?” That’s what documentation prevents.</p>
+<hr class="docutils" />
 <p>Good documentation makes code understandable, maintainable, and reusable. In chemical engineering, where calculations can be complex and involve many parameters, clear documentation is critical.</p>
 <section id="docstrings">
-<span id="id5"></span><h3>8.1.1 Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h3>
+<span id="id3"></span><h3>8.1.1 Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h3>
 <p>Docstrings are special comments that describe what a function does, its parameters, and return values.</p>
+<hr class="docutils" />
+<p>Python has a built-in convention for documenting functions called docstrings. It’s a string that goes right at the top of your function, inside triple quotes.</p>
+<p>Let me show you an example — here we have a function that calculates the Reynolds number. Look at the docstring. It tells you what the function does, what each parameter means with units, what it returns, and even gives you an example. There’s also a Notes section explaining the flow regime thresholds.</p>
+<p>[Run the reynolds_number cell]</p>
+<p>Notice I can actually access this docstring programmatically with reynolds_number.<strong>doc</strong>. This is what Python reads when you call help() on a function. So if someone imports your code into their project, they can see exactly how to use it without reading your source code.</p>
+<p>The format I’m using here is called NumPy-style docstrings — it’s the standard in scientific Python. Parameters, Returns, Examples, Notes — those are all standard sections.</p>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
@@ -550,9 +550,45 @@ Function documentation:
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Convert a string or number to a floating point number, if possible.
+Return the square root of x.
+Return the sine of x (measured in radians).
+Return the cosine of x (measured in radians).
+Common operations on Posix pathnames.
+
+Instead of importing this module directly, import os and refer to
+this module as os.path.  The &quot;os.path&quot; name is an alias for this
+module on Posix systems; on other systems (e.g. Windows),
+os.path provides the same operations in a manner specific to that
+platform, and is an alias to another module (e.g. ntpath).
+
+Some of this can actually be useful on non-Posix systems too, e.g.
+for manipulation of the pathname component of URLs.
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="inline-comments">
-<span id="id6"></span><h3>8.1.2 Inline Comments<a class="headerlink" href="#inline-comments" title="Link to this heading">#</a></h3>
+<span id="id4"></span><h3>8.1.2 Inline Comments<a class="headerlink" href="#inline-comments" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Now, docstrings describe the function as a whole. Inline comments explain specific lines. But here’s the key rule: comment the why, not the what.</p>
+<p>Look at this Arrhenius rate constant function. I don’t need a comment that says # multiply A by exponential — you can see that from the code. But the comment # Negative sign because higher Ea means slower reaction — that explains the physics behind the math. That’s useful.</p>
+<p>Same with the test values below: # Using typical values for a first-order decomposition reaction. That tells the reader why we picked these numbers, not just what they are.</p>
+<hr class="docutils" />
 <p>Use comments to explain <strong>why</strong> you’re doing something, not <strong>what</strong> you’re doing (the code shows what).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -602,7 +638,13 @@ Function documentation:
 </div>
 </section>
 <section id="code-organization-best-practices">
-<span id="id7"></span><h3>8.1.3 Code Organization Best Practices<a class="headerlink" href="#code-organization-best-practices" title="Link to this heading">#</a></h3>
+<span id="id5"></span><h3>8.1.3 Code Organization Best Practices<a class="headerlink" href="#code-organization-best-practices" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Here’s a side-by-side comparison. Look at the first function: calc(x, y, z). What does that compute? You have no idea. Could be anything.</p>
+<p>Now look at gravitational_force(mass1_kg, mass2_kg, distance_m). Immediately clear. The variable names include units. There’s a docstring. Someone reading this six months from now — including future you — knows exactly what’s going on.</p>
+<p>[Run the cell]</p>
+<p>They give the same numerical answer, but one is maintainable code and the other is a time bomb waiting for someone to pass arguments in the wrong order.</p>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD: Unclear variable names, no documentation</span>
@@ -653,10 +695,20 @@ But the second is much more readable!
 </section>
 </section>
 <section id="testing-and-validation">
-<span id="id8"></span><h2>8.2 Testing and Validation<a class="headerlink" href="#testing-and-validation" title="Link to this heading">#</a></h2>
+<span id="id6"></span><h2>8.2 Testing and Validation<a class="headerlink" href="#testing-and-validation" title="Link to this heading">#</a></h2>
 <p>Testing ensures your code produces correct results. For chemical engineering calculations, errors can have serious consequences.</p>
+<hr class="docutils" />
+<p>Alright, so your code is well-documented. How do you know it’s correct?</p>
+<hr class="docutils" />
 <section id="unit-testing-with-known-results">
-<span id="id9"></span><h3>8.2.1 Unit Testing with Known Results<a class="headerlink" href="#unit-testing-with-known-results" title="Link to this heading">#</a></h3>
+<span id="id7"></span><h3>8.2.1 Unit Testing with Known Results<a class="headerlink" href="#unit-testing-with-known-results" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The idea is simple: you know the answer to certain cases, so test against them. Here we have the ideal gas law: P = nRT/V.</p>
+<p>Look at test_ideal_gas_pressure. I have three tests:</p>
+<p>Test 1: A specific numerical case — 50 moles at 373.15 K in 0.5 m³. I calculated what P should be ahead of time and I check that my function matches.</p>
+<p>Test 2: Another known case at different conditions.</p>
+<p>Test 3: A scaling check — if I double the moles, pressure should double. This tests the physics, not just one number.</p>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span>
@@ -712,12 +764,12 @@ But the second is much more readable!
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">44</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">44</span>
 <span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All ideal gas law tests passed!&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="c1"># Run tests</span>
 <span class="ne">---&gt; </span><span class="mi">44</span> <span class="n">test_ideal_gas_pressure</span><span class="p">()</span>
 
-<span class="nn">Cell In[4], line 28,</span> in <span class="ni">test_ideal_gas_pressure</span><span class="nt">()</span>
+<span class="nn">Cell In[5], line 28,</span> in <span class="ni">test_ideal_gas_pressure</span><span class="nt">()</span>
 <span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">P1</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">373.15</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated Pressure: </span><span class="si">{</span><span class="n">P1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">28</span> <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">P1</span> <span class="o">-</span> <span class="mf">31097.41</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Test 1 failed&quot;</span>
@@ -731,7 +783,10 @@ But the second is much more readable!
 </div>
 </section>
 <section id="boundary-testing">
-<span id="id10"></span><h3>8.2.2 Boundary Testing<a class="headerlink" href="#boundary-testing" title="Link to this heading">#</a></h3>
+<span id="id8"></span><h3>8.2.2 Boundary Testing<a class="headerlink" href="#boundary-testing" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Beyond normal cases, test the edges. What happens with a very small volume? Pressure should be huge. What about zero moles? Pressure should be zero.</p>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_edge_cases</span><span class="p">():</span>
@@ -757,114 +812,15 @@ But the second is much more readable!
 </div>
 </div>
 </section>
-<section id="mass-energy-balance-verification">
-<span id="id11"></span><h3>8.2.3 Mass/Energy Balance Verification<a class="headerlink" href="#mass-energy-balance-verification" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mixing_tank</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">V1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">V2</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate final concentration when mixing two solutions.</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    C1, C2 : float</span>
-<span class="sd">        Concentrations (mol/L)</span>
-<span class="sd">    V1, V2 : float</span>
-<span class="sd">        Volumes (L)</span>
-<span class="sd">    </span>
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    tuple</span>
-<span class="sd">        (final_concentration, final_volume)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Total moles (mass balance)</span>
-    <span class="n">n_total</span> <span class="o">=</span> <span class="n">C1</span> <span class="o">*</span> <span class="n">V1</span> <span class="o">+</span> <span class="n">C2</span> <span class="o">*</span> <span class="n">V2</span>
-    
-    <span class="c1"># Total volume</span>
-    <span class="n">V_total</span> <span class="o">=</span> <span class="n">V1</span> <span class="o">+</span> <span class="n">V2</span>
-    
-    <span class="c1"># Final concentration</span>
-    <span class="n">C_final</span> <span class="o">=</span> <span class="n">n_total</span> <span class="o">/</span> <span class="n">V_total</span>
-    
-    <span class="k">return</span> <span class="n">C_final</span><span class="p">,</span> <span class="n">V_total</span>
-
-<span class="c1"># Test with mass balance check</span>
-<span class="n">C1</span><span class="p">,</span> <span class="n">V1</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">100</span>  <span class="c1"># 2 M, 100 L</span>
-<span class="n">C2</span><span class="p">,</span> <span class="n">V2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">50</span>   <span class="c1"># 1 M, 50 L</span>
-
-<span class="n">C_final</span><span class="p">,</span> <span class="n">V_final</span> <span class="o">=</span> <span class="n">mixing_tank</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">V1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">V2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mixing Tank Calculation:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Input:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Stream 1: </span><span class="si">{</span><span class="n">C1</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V1</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C1</span><span class="o">*</span><span class="n">V1</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Stream 2: </span><span class="si">{</span><span class="n">C2</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V2</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C2</span><span class="o">*</span><span class="n">V2</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total moles in: </span><span class="si">{</span><span class="n">C1</span><span class="o">*</span><span class="n">V1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C2</span><span class="o">*</span><span class="n">V2</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mixing Tank Calculation:
-
-Input:
-  Stream 1: 2.0 M × 100 L = 200.0 mol
-  Stream 2: 1.0 M × 50 L = 50.0 mol
-  Total moles in: 250.0 mol
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Output:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Final: </span><span class="si">{</span><span class="n">C_final</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C_final</span><span class="o">*</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total moles out: </span><span class="si">{</span><span class="n">C_final</span><span class="o">*</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Output:
-  Final: 1.6666666666666667 M × 150 L = 250.0 mol
-  Total moles out: 250.0 mol
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify mass balance</span>
-<span class="n">moles_in</span> <span class="o">=</span> <span class="n">C1</span><span class="o">*</span><span class="n">V1</span> <span class="o">+</span> <span class="n">C2</span><span class="o">*</span><span class="n">V2</span>
-<span class="n">moles_out</span> <span class="o">=</span> <span class="n">C_final</span> <span class="o">*</span> <span class="n">V_final</span>
-<span class="n">balance_error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">moles_in</span> <span class="o">-</span> <span class="n">moles_out</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mass Balance Check:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error: </span><span class="si">{</span><span class="n">balance_error</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">balance_error</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✓ Mass balance satisfied!&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✗ Mass balance ERROR!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mass Balance Check:
-  Error: 0.0000000000 mol
-  ✓ Mass balance satisfied!
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="error-handling">
-<span id="id12"></span><h2>8.3 Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h2>
+<span id="id9"></span><h2>8.3 Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h2>
 <p>Robust code anticipates and handles errors gracefully. This prevents crashes and provides useful feedback.</p>
+<hr class="docutils" />
+<p>Now, what happens when things go wrong? Your code will eventually get bad inputs — a user types a string instead of a number, a sensor returns zero, a file is missing. You need to handle that gracefully, not with a cryptic crash.</p>
+<hr class="docutils" />
 <section id="try-except-blocks">
-<span id="id13"></span><h3>8.3.1 Try-Except Blocks<a class="headerlink" href="#try-except-blocks" title="Link to this heading">#</a></h3>
+<span id="id10"></span><h3>8.3.1 Try-Except Blocks<a class="headerlink" href="#try-except-blocks" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_division</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">):</span>
@@ -996,7 +952,7 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </div>
 </section>
 <section id="graceful-degradation">
-<span id="id14"></span><h3>8.3.3 Graceful Degradation<a class="headerlink" href="#graceful-degradation" title="Link to this heading">#</a></h3>
+<span id="id11"></span><h3>8.3.3 Graceful Degradation<a class="headerlink" href="#graceful-degradation" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average_temperature</span><span class="p">(</span><span class="n">temperatures</span><span class="p">):</span>
@@ -1061,10 +1017,18 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </section>
 </section>
 <section id="debugging-techniques">
-<span id="id15"></span><h2>8.4 Debugging Techniques<a class="headerlink" href="#debugging-techniques" title="Link to this heading">#</a></h2>
+<span id="id12"></span><h2>8.4 Debugging Techniques<a class="headerlink" href="#debugging-techniques" title="Link to this heading">#</a></h2>
 <p>Debugging is the process of finding and fixing errors in code. Systematic debugging saves time and frustration.</p>
+<hr class="docutils" />
+<p>Alright, you’ve written tests and they’re failing. Now what? Time to debug.</p>
+<hr class="docutils" />
 <section id="print-statement-debugging">
-<span id="id16"></span><h3>8.4.1 Print Statement Debugging<a class="headerlink" href="#print-statement-debugging" title="Link to this heading">#</a></h3>
+<span id="id13"></span><h3>8.4.1 Print Statement Debugging<a class="headerlink" href="#print-statement-debugging" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The simplest technique: add print statements to see what’s happening inside your function.</p>
+<p>[Run the cell]</p>
+<p>See the DEBUG: lines? They show you the values of C_initial, C_final, and the computed conversion at each step. This is quick and dirty, but it works. Just remember to remove your debug prints before sharing your code.</p>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_conversion</span><span class="p">(</span><span class="n">C_initial</span><span class="p">,</span> <span class="n">C_final</span><span class="p">):</span>
@@ -1088,7 +1052,18 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </div>
 </section>
 <section id="assert-statements-for-assumptions">
-<span id="id17"></span><h3>8.4.2 Assert Statements for Assumptions<a class="headerlink" href="#assert-statements-for-assumptions" title="Link to this heading">#</a></h3>
+<span id="id14"></span><h3>8.4.2 Assert Statements for Assumptions<a class="headerlink" href="#assert-statements-for-assumptions" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p>We saw assert in testing, but you can also use it inside functions to check your assumptions as the code runs.</p>
+<p>In Python, assert is a debugging statement used to check that a condition is true during program execution.</p>
+<ul class="simple">
+<li><p>If the condition is True → nothing happens.</p></li>
+<li><p>If the condition is False → Python raises an</p></li>
+</ul>
+<p>In calculate_residence_time, the asserts say: volume must be positive, flow rate must be positive, and the result should be positive. If any of these fail, the code stops immediately and tells you which assumption was violated.</p>
+<p>[Run the cell]</p>
+<p>Valid inputs: residence time is 20 minutes. Negative volume: the assert fires and says “Volume must be positive, got -100.” This catches bugs early, right at the source, instead of letting bad values propagate through your calculation.</p>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_residence_time</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">flow_rate</span><span class="p">):</span>
@@ -1137,11 +1112,17 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </div>
 </section>
 <section id="usage-of-breakpoint">
-<span id="id18"></span><h3>8.4.3 Usage of breakpoint()<a class="headerlink" href="#usage-of-breakpoint" title="Link to this heading">#</a></h3>
+<span id="id15"></span><h3>8.4.3 Usage of breakpoint()<a class="headerlink" href="#usage-of-breakpoint" title="Link to this heading">#</a></h3>
 <p><strong>breakpoint()</strong> is a built-in Python function that pauses program execution at a specific line and enters interactive debugging mode. It allows you to inspect variable values, step through code line by line, and identify logic or runtime errors while the program is running. This is useful for understanding how a program behaves and for locating bugs without adding multiple print statements.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">kelvin.py</span></code>, and check how breakpoint() works.</p>
+<hr class="docutils" />
+<p>Now for the most powerful debugging tool. breakpoint() pauses your program and drops you into an interactive debugger where you can inspect every variable, step line by line, and figure out exactly what’s going wrong.</p>
+<p>Let me show you <a class="reference external" href="http://kelvin.py">kelvin.py</a>. This is a simple function that converts Celsius to Kelvin, but it has a bug — it subtracts 273.15 instead of adding it. There’s a breakpoint() right after the conversion line.</p>
+<p>When you run this script from the terminal with python <a class="reference external" href="http://kelvin.py">kelvin.py</a>, it will pause at the breakpoint. You can type temp to see the current Celsius value, type kelvin to see the (wrong) converted value, and immediately spot that 20°C became -253.15 K instead of 293.15 K. You type c to continue or q to quit.</p>
+<p>This is much faster than adding a dozen print statements. For anything more than a trivial bug, breakpoint() is the way to go.</p>
 </section>
 </section>
+<hr class="docutils" />
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <p>In this chapter, you learned:</p>
@@ -1233,8 +1214,6 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 8: Programming Practices</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Chapter 8: Programming Practices</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-documentation-and-commenting">8.1 Code Documentation and Commenting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">8.1.1 Docstrings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-comments">8.1.2 Inline Comments</a></li>
@@ -1244,7 +1223,6 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">8.2 Testing and Validation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing-with-known-results">8.2.1 Unit Testing with Known Results</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-testing">8.2.2 Boundary Testing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-energy-balance-verification">8.2.3 Mass/Energy Balance Verification</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">8.3 Error Handling</a><ul class="nav section-nav flex-column">
@@ -1261,9 +1239,6 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

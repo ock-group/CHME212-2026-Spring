@@ -60,6 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter08/08_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="prev" title="Chapter 7. Functions/Modules/Packages" href="../chapter07/07_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,7 +180,7 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
@@ -189,12 +189,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 8: Programming Practices</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
 </ul>
 
     </div>
@@ -390,21 +392,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 8: Programming Practices</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Chapter 8: Programming Practices</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-documentation-and-commenting">8.1 Code Documentation and Commenting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">8.1.1 Docstrings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-comments">8.1.2 Inline Comments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organization-best-practices">8.1.3 Code Organization Best Practices</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">8.2 Testing and Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-testing-and-validation">8.2 (Optional) Testing and Validation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing-with-known-results">8.2.1 Unit Testing with Known Results</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-testing">8.2.2 Boundary Testing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-energy-balance-verification">8.2.3 Mass/Energy Balance Verification</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">8.3 Error Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-8-3-error-handling">(Optional) 8.3 Error Handling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-blocks">8.3.1 Try-Except Blocks</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-validation">8.3.2 Input Validation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graceful-degradation">8.3.3 Graceful Degradation</a></li>
@@ -418,9 +417,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -440,21 +436,11 @@ document.write(`
 <li><p>Error handling and exceptions</p></li>
 <li><p>Debugging techniques</p></li>
 </ul>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id2">
-<span id="id3"></span><h1>Chapter 8: Programming Practices<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
-<p><strong>Topics Covered:</strong></p>
-<ul class="simple">
-<li><p>Code documentation and commenting</p></li>
-<li><p>Testing and validation</p></li>
-<li><p>Error handling and exceptions</p></li>
-<li><p>Debugging techniques</p></li>
-</ul>
 <section id="code-documentation-and-commenting">
-<span id="id4"></span><h2>8.1 Code Documentation and Commenting<a class="headerlink" href="#code-documentation-and-commenting" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h2>8.1 Code Documentation and Commenting<a class="headerlink" href="#code-documentation-and-commenting" title="Link to this heading">#</a></h2>
 <p>Good documentation makes code understandable, maintainable, and reusable. In chemical engineering, where calculations can be complex and involve many parameters, clear documentation is critical.</p>
 <section id="docstrings">
-<span id="id5"></span><h3>8.1.1 Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h3>
+<span id="id3"></span><h3>8.1.1 Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h3>
 <p>Docstrings are special comments that describe what a function does, its parameters, and return values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -552,7 +538,7 @@ Function documentation:
 </div>
 </section>
 <section id="inline-comments">
-<span id="id6"></span><h3>8.1.2 Inline Comments<a class="headerlink" href="#inline-comments" title="Link to this heading">#</a></h3>
+<span id="id4"></span><h3>8.1.2 Inline Comments<a class="headerlink" href="#inline-comments" title="Link to this heading">#</a></h3>
 <p>Use comments to explain <strong>why</strong> you’re doing something, not <strong>what</strong> you’re doing (the code shows what).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -602,7 +588,7 @@ Function documentation:
 </div>
 </section>
 <section id="code-organization-best-practices">
-<span id="id7"></span><h3>8.1.3 Code Organization Best Practices<a class="headerlink" href="#code-organization-best-practices" title="Link to this heading">#</a></h3>
+<span id="id5"></span><h3>8.1.3 Code Organization Best Practices<a class="headerlink" href="#code-organization-best-practices" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD: Unclear variable names, no documentation</span>
@@ -652,11 +638,11 @@ But the second is much more readable!
 </div>
 </section>
 </section>
-<section id="testing-and-validation">
-<span id="id8"></span><h2>8.2 Testing and Validation<a class="headerlink" href="#testing-and-validation" title="Link to this heading">#</a></h2>
+<section id="optional-testing-and-validation">
+<span id="id6"></span><h2>8.2 (Optional) Testing and Validation<a class="headerlink" href="#optional-testing-and-validation" title="Link to this heading">#</a></h2>
 <p>Testing ensures your code produces correct results. For chemical engineering calculations, errors can have serious consequences.</p>
 <section id="unit-testing-with-known-results">
-<span id="id9"></span><h3>8.2.1 Unit Testing with Known Results<a class="headerlink" href="#unit-testing-with-known-results" title="Link to this heading">#</a></h3>
+<span id="id7"></span><h3>8.2.1 Unit Testing with Known Results<a class="headerlink" href="#unit-testing-with-known-results" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span>
@@ -731,7 +717,7 @@ But the second is much more readable!
 </div>
 </section>
 <section id="boundary-testing">
-<span id="id10"></span><h3>8.2.2 Boundary Testing<a class="headerlink" href="#boundary-testing" title="Link to this heading">#</a></h3>
+<span id="id8"></span><h3>8.2.2 Boundary Testing<a class="headerlink" href="#boundary-testing" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_edge_cases</span><span class="p">():</span>
@@ -757,114 +743,12 @@ But the second is much more readable!
 </div>
 </div>
 </section>
-<section id="mass-energy-balance-verification">
-<span id="id11"></span><h3>8.2.3 Mass/Energy Balance Verification<a class="headerlink" href="#mass-energy-balance-verification" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mixing_tank</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">V1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">V2</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate final concentration when mixing two solutions.</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    C1, C2 : float</span>
-<span class="sd">        Concentrations (mol/L)</span>
-<span class="sd">    V1, V2 : float</span>
-<span class="sd">        Volumes (L)</span>
-<span class="sd">    </span>
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    tuple</span>
-<span class="sd">        (final_concentration, final_volume)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Total moles (mass balance)</span>
-    <span class="n">n_total</span> <span class="o">=</span> <span class="n">C1</span> <span class="o">*</span> <span class="n">V1</span> <span class="o">+</span> <span class="n">C2</span> <span class="o">*</span> <span class="n">V2</span>
-    
-    <span class="c1"># Total volume</span>
-    <span class="n">V_total</span> <span class="o">=</span> <span class="n">V1</span> <span class="o">+</span> <span class="n">V2</span>
-    
-    <span class="c1"># Final concentration</span>
-    <span class="n">C_final</span> <span class="o">=</span> <span class="n">n_total</span> <span class="o">/</span> <span class="n">V_total</span>
-    
-    <span class="k">return</span> <span class="n">C_final</span><span class="p">,</span> <span class="n">V_total</span>
-
-<span class="c1"># Test with mass balance check</span>
-<span class="n">C1</span><span class="p">,</span> <span class="n">V1</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">100</span>  <span class="c1"># 2 M, 100 L</span>
-<span class="n">C2</span><span class="p">,</span> <span class="n">V2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">50</span>   <span class="c1"># 1 M, 50 L</span>
-
-<span class="n">C_final</span><span class="p">,</span> <span class="n">V_final</span> <span class="o">=</span> <span class="n">mixing_tank</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">V1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">V2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mixing Tank Calculation:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Input:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Stream 1: </span><span class="si">{</span><span class="n">C1</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V1</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C1</span><span class="o">*</span><span class="n">V1</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Stream 2: </span><span class="si">{</span><span class="n">C2</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V2</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C2</span><span class="o">*</span><span class="n">V2</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total moles in: </span><span class="si">{</span><span class="n">C1</span><span class="o">*</span><span class="n">V1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C2</span><span class="o">*</span><span class="n">V2</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mixing Tank Calculation:
-
-Input:
-  Stream 1: 2.0 M × 100 L = 200.0 mol
-  Stream 2: 1.0 M × 50 L = 50.0 mol
-  Total moles in: 250.0 mol
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Output:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Final: </span><span class="si">{</span><span class="n">C_final</span><span class="si">}</span><span class="s2"> M × </span><span class="si">{</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> L = </span><span class="si">{</span><span class="n">C_final</span><span class="o">*</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total moles out: </span><span class="si">{</span><span class="n">C_final</span><span class="o">*</span><span class="n">V_final</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Output:
-  Final: 1.6666666666666667 M × 150 L = 250.0 mol
-  Total moles out: 250.0 mol
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify mass balance</span>
-<span class="n">moles_in</span> <span class="o">=</span> <span class="n">C1</span><span class="o">*</span><span class="n">V1</span> <span class="o">+</span> <span class="n">C2</span><span class="o">*</span><span class="n">V2</span>
-<span class="n">moles_out</span> <span class="o">=</span> <span class="n">C_final</span> <span class="o">*</span> <span class="n">V_final</span>
-<span class="n">balance_error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">moles_in</span> <span class="o">-</span> <span class="n">moles_out</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mass Balance Check:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error: </span><span class="si">{</span><span class="n">balance_error</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2"> mol&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">balance_error</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✓ Mass balance satisfied!&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✗ Mass balance ERROR!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mass Balance Check:
-  Error: 0.0000000000 mol
-  ✓ Mass balance satisfied!
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-</section>
-<section id="error-handling">
-<span id="id12"></span><h2>8.3 Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h2>
+<section id="optional-8-3-error-handling">
+<span id="id9"></span><h2>(Optional) 8.3 Error Handling<a class="headerlink" href="#optional-8-3-error-handling" title="Link to this heading">#</a></h2>
 <p>Robust code anticipates and handles errors gracefully. This prevents crashes and provides useful feedback.</p>
 <section id="try-except-blocks">
-<span id="id13"></span><h3>8.3.1 Try-Except Blocks<a class="headerlink" href="#try-except-blocks" title="Link to this heading">#</a></h3>
+<span id="id10"></span><h3>8.3.1 Try-Except Blocks<a class="headerlink" href="#try-except-blocks" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_division</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">):</span>
@@ -996,7 +880,7 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </div>
 </section>
 <section id="graceful-degradation">
-<span id="id14"></span><h3>8.3.3 Graceful Degradation<a class="headerlink" href="#graceful-degradation" title="Link to this heading">#</a></h3>
+<span id="id11"></span><h3>8.3.3 Graceful Degradation<a class="headerlink" href="#graceful-degradation" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average_temperature</span><span class="p">(</span><span class="n">temperatures</span><span class="p">):</span>
@@ -1061,10 +945,10 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </section>
 </section>
 <section id="debugging-techniques">
-<span id="id15"></span><h2>8.4 Debugging Techniques<a class="headerlink" href="#debugging-techniques" title="Link to this heading">#</a></h2>
+<span id="id12"></span><h2>8.4 Debugging Techniques<a class="headerlink" href="#debugging-techniques" title="Link to this heading">#</a></h2>
 <p>Debugging is the process of finding and fixing errors in code. Systematic debugging saves time and frustration.</p>
 <section id="print-statement-debugging">
-<span id="id16"></span><h3>8.4.1 Print Statement Debugging<a class="headerlink" href="#print-statement-debugging" title="Link to this heading">#</a></h3>
+<span id="id13"></span><h3>8.4.1 Print Statement Debugging<a class="headerlink" href="#print-statement-debugging" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_conversion</span><span class="p">(</span><span class="n">C_initial</span><span class="p">,</span> <span class="n">C_final</span><span class="p">):</span>
@@ -1088,7 +972,7 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </div>
 </section>
 <section id="assert-statements-for-assumptions">
-<span id="id17"></span><h3>8.4.2 Assert Statements for Assumptions<a class="headerlink" href="#assert-statements-for-assumptions" title="Link to this heading">#</a></h3>
+<span id="id14"></span><h3>8.4.2 Assert Statements for Assumptions<a class="headerlink" href="#assert-statements-for-assumptions" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_residence_time</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">flow_rate</span><span class="p">):</span>
@@ -1137,7 +1021,7 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </div>
 </section>
 <section id="usage-of-breakpoint">
-<span id="id18"></span><h3>8.4.3 Usage of breakpoint()<a class="headerlink" href="#usage-of-breakpoint" title="Link to this heading">#</a></h3>
+<span id="id15"></span><h3>8.4.3 Usage of breakpoint()<a class="headerlink" href="#usage-of-breakpoint" title="Link to this heading">#</a></h3>
 <p><strong>breakpoint()</strong> is a built-in Python function that pauses program execution at a specific line and enters interactive debugging mode. It allows you to inspect variable values, step through code line by line, and identify logic or runtime errors while the program is running. This is useful for understanding how a program behaves and for locating bugs without adding multiple print statements.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">kelvin.py</span></code>, and check how breakpoint() works.</p>
 </section>
@@ -1217,6 +1101,24 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../chapter07/07_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 7. Functions/Modules/Packages</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lab01/01_lab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1233,21 +1135,18 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 8: Programming Practices</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Chapter 8: Programming Practices</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-documentation-and-commenting">8.1 Code Documentation and Commenting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">8.1.1 Docstrings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-comments">8.1.2 Inline Comments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organization-best-practices">8.1.3 Code Organization Best Practices</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">8.2 Testing and Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-testing-and-validation">8.2 (Optional) Testing and Validation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing-with-known-results">8.2.1 Unit Testing with Known Results</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-testing">8.2.2 Boundary Testing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-energy-balance-verification">8.2.3 Mass/Energy Balance Verification</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">8.3 Error Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-8-3-error-handling">(Optional) 8.3 Error Handling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-blocks">8.3.1 Try-Except Blocks</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-validation">8.3.2 Input Validation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graceful-degradation">8.3.3 Graceful Degradation</a></li>
@@ -1261,9 +1160,6 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
