@@ -49,10 +49,10 @@ def test_ideal_gas_pressure():
     print(f"Calculated Pressure: {P2:.2f} Pa")
     assert abs(P2 - 2478.9) < 1.0, "Test 2 failed"
 
-    # Test 3: Scaling check (double moles → double pressure)
-    P3 = ideal_gas_pressure(n=2.0, T=300.0, V=1.0)
-    P4 = ideal_gas_pressure(n=1.0, T=300.0, V=1.0)
-    assert abs(P3 - 2 * P4) < 1e-6, "Test 3 failed"
+    # # Test 3: Scaling check (double moles → double pressure)
+    # P3 = ideal_gas_pressure(n=2.0, T=300.0, V=1.0)
+    # P4 = ideal_gas_pressure(n=1.0, T=300.0, V=1.0)
+    # assert abs(P3 - 2 * P4) < 1e-6, "Test 3 failed"
 
     print("All ideal gas law tests passed!")
 
@@ -67,12 +67,12 @@ Calculated Pressure: 310236.91 Pa
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAssertionError[0m                            Traceback (most recent call last)
-Cell [0;32mIn[4], line 44[0m
+Cell [0;32mIn[6], line 44[0m
 [1;32m     40[0m     [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mAll ideal gas law tests passed![39m[38;5;124m"[39m)
 [1;32m     43[0m [38;5;66;03m# Run tests[39;00m
 [0;32m---> 44[0m [43mtest_ideal_gas_pressure[49m[43m([49m[43m)[49m
 
-Cell [0;32mIn[4], line 28[0m, in [0;36mtest_ideal_gas_pressure[0;34m()[0m
+Cell [0;32mIn[6], line 28[0m, in [0;36mtest_ideal_gas_pressure[0;34m()[0m
 [1;32m     26[0m P1 [38;5;241m=[39m ideal_gas_pressure(n[38;5;241m=[39m[38;5;241m50.0[39m, T[38;5;241m=[39m[38;5;241m373.15[39m, V[38;5;241m=[39m[38;5;241m0.5[39m)
 [1;32m     27[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mCalculated Pressure: [39m[38;5;132;01m{[39;00mP1[38;5;132;01m:[39;00m[38;5;124m.2f[39m[38;5;132;01m}[39;00m[38;5;124m Pa[39m[38;5;124m"[39m)
 [0;32m---> 28[0m [38;5;28;01massert[39;00m [38;5;28mabs[39m(P1 [38;5;241m-[39m [38;5;241m31097.41[39m) [38;5;241m<[39m [38;5;241m1.0[39m, [38;5;124m"[39m[38;5;124mTest 1 failed[39m[38;5;124m"[39m

@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter08/08_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="next" title="Chapter 9: Plotting &amp; Visualization" href="../chapter09/09_notebook.html" />
     <link rel="prev" title="Chapter 7. Functions/Modules/Packages" href="../chapter07/07_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -190,6 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -488,18 +489,26 @@ document.write(`
 <span class="n">Re</span> <span class="o">=</span> <span class="n">reynolds_number</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reynolds number: </span><span class="si">{</span><span class="n">Re</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Access the docstring</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Function documentation:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">reynolds_number</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="c1"># # Access the docstring</span>
+<span class="c1"># print(&quot;\nFunction documentation:&quot;)</span>
+<span class="c1"># print(reynolds_number.__doc__)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reynolds number: 200000
-
-Function documentation:
-
-    Calculate the Reynolds number for fluid flow in a pipe.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">reynolds_number</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Calculate the Reynolds number for fluid flow in a pipe.
     
     The Reynolds number is a dimensionless quantity that predicts
     flow patterns in different fluid flow situations.
@@ -532,6 +541,35 @@ Function documentation:
     - 2300 ≤ Re ≤ 4000: Transitional flow
     - Re &gt; 4000: Turbulent flow
     
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Return the square root of x.
+Return the sine of x (measured in radians).
+Common operations on Posix pathnames.
+
+Instead of importing this module directly, import os and refer to
+this module as os.path.  The &quot;os.path&quot; name is an alias for this
+module on Posix systems; on other systems (e.g. Windows),
+os.path provides the same operations in a manner specific to that
+platform, and is an alias to another module (e.g. ntpath).
+
+Some of this can actually be useful on non-Posix systems too, e.g.
+for manipulation of the pathname component of URLs.
 </pre></div>
 </div>
 </div>
@@ -626,12 +664,16 @@ Function documentation:
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Both give same result: </span><span class="si">{</span><span class="n">F1</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> N&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;But the second is much more readable!&quot;</span><span class="p">)</span>
+<span class="n">gravitational_force</span><span class="o">.</span><span class="vm">__doc__</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Both give same result: 5.000000e+03 N
 But the second is much more readable!
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n    Calculate gravitational force between two masses.\n    \n    Parameters\n    ----------\n    mass1_kg : float\n        Mass of first object (kg)\n    mass2_kg : float\n        Mass of second object (kg)\n    distance_m : float\n        Distance between centers (m)\n    \n    Returns\n    -------\n    float\n        Gravitational force (N)\n    &#39;
 </pre></div>
 </div>
 </div>
@@ -679,10 +721,10 @@ But the second is much more readable!
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated Pressure: </span><span class="si">{</span><span class="n">P2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">P2</span> <span class="o">-</span> <span class="mf">2478.9</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Test 2 failed&quot;</span>
 
-    <span class="c1"># Test 3: Scaling check (double moles → double pressure)</span>
-    <span class="n">P3</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-    <span class="n">P4</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">P3</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">P4</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s2">&quot;Test 3 failed&quot;</span>
+    <span class="c1"># # Test 3: Scaling check (double moles → double pressure)</span>
+    <span class="c1"># P3 = ideal_gas_pressure(n=2.0, T=300.0, V=1.0)</span>
+    <span class="c1"># P4 = ideal_gas_pressure(n=1.0, T=300.0, V=1.0)</span>
+    <span class="c1"># assert abs(P3 - 2 * P4) &lt; 1e-6, &quot;Test 3 failed&quot;</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All ideal gas law tests passed!&quot;</span><span class="p">)</span>
 
@@ -698,12 +740,12 @@ But the second is much more readable!
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">44</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">44</span>
 <span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All ideal gas law tests passed!&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="c1"># Run tests</span>
 <span class="ne">---&gt; </span><span class="mi">44</span> <span class="n">test_ideal_gas_pressure</span><span class="p">()</span>
 
-<span class="nn">Cell In[4], line 28,</span> in <span class="ni">test_ideal_gas_pressure</span><span class="nt">()</span>
+<span class="nn">Cell In[6], line 28,</span> in <span class="ni">test_ideal_gas_pressure</span><span class="nt">()</span>
 <span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">P1</span> <span class="o">=</span> <span class="n">ideal_gas_pressure</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">373.15</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated Pressure: </span><span class="si">{</span><span class="n">P1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">28</span> <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">P1</span> <span class="o">-</span> <span class="mf">31097.41</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Test 1 failed&quot;</span>
@@ -958,14 +1000,23 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: C_initial = </span><span class="si">{</span><span class="n">C_initial</span><span class="si">}</span><span class="s2">, C_final = </span><span class="si">{</span><span class="n">C_final</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug print</span>
     
     <span class="n">conversion</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_initial</span> <span class="o">-</span> <span class="n">C_final</span><span class="p">)</span> <span class="o">/</span> <span class="n">C_initial</span>
-    
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: conversion = </span><span class="si">{</span><span class="n">conversion</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug print</span>
+    <span class="n">conversion_in_percentage</span> <span class="o">=</span> <span class="n">conversion</span><span class="o">*</span><span class="mi">100</span>
     
-    <span class="k">return</span> <span class="n">conversion</span>
+    
+    <span class="k">return</span> <span class="n">conversion_in_percentage</span>
 
 <span class="c1"># Test</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">calculate_conversion</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final conversion: </span><span class="si">{</span><span class="n">X</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="c1"># print(f&quot;\nFinal conversion: {X:.2%}&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DEBUG: C_initial = 5.0, C_final = 2.0
+DEBUG: conversion = 0.6
+60.0
 </pre></div>
 </div>
 </div>
@@ -973,6 +1024,13 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
 </section>
 <section id="assert-statements-for-assumptions">
 <span id="id14"></span><h3>8.4.2 Assert Statements for Assumptions<a class="headerlink" href="#assert-statements-for-assumptions" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">condition</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_residence_time</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">flow_rate</span><span class="p">):</span>
@@ -1003,18 +1061,31 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
     <span class="k">return</span> <span class="n">tau</span>
 
 <span class="c1"># Valid case</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">tau</span> <span class="o">=</span> <span class="n">calculate_residence_time</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Residence time: </span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Assertion failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># try:</span>
+<span class="c1">#     tau = calculate_residence_time(100, 5)</span>
+<span class="c1">#     print(f&quot;✓ Residence time: {tau} min&quot;)</span>
+<span class="c1"># except AssertionError as e:</span>
+<span class="c1">#     print(f&quot;✗ Assertion failed: {e}&quot;)</span>
 
-<span class="c1"># Invalid case</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">tau</span> <span class="o">=</span> <span class="n">calculate_residence_time</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Residence time: </span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Caught invalid input: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># # Invalid case</span>
+<span class="c1"># try:</span>
+<span class="c1">#     tau = calculate_residence_time(-100, 5)</span>
+<span class="c1">#     print(f&quot;✓ Residence time: {tau} min&quot;)</span>
+<span class="c1"># except AssertionError as e:</span>
+<span class="c1">#     print(f&quot;✓ Caught invalid input: {e}&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tau</span> <span class="o">=</span> <span class="n">calculate_residence_time</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Residence time: </span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Residence time: 20.0 min
 </pre></div>
 </div>
 </div>
@@ -1111,11 +1182,11 @@ Error: Invalid input types: &lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;
       </div>
     </a>
     <a class="right-next"
-       href="../lab01/01_lab.html"
+       href="../chapter09/09_notebook.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+        <p class="prev-next-title">Chapter 9: Plotting &amp; Visualization</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

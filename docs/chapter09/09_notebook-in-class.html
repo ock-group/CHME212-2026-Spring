@@ -57,11 +57,9 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter09/09_notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter09/09_notebook-in-class';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
-    <link rel="prev" title="Chapter 8: Programming Practices" href="../chapter08/08_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,7 +180,7 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
@@ -190,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 9: Plotting &amp; Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -269,7 +269,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter09/09_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter09/09_notebook-in-class.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -299,7 +299,7 @@
       
       
       
-      <li><a href="../../_sources/docs/chapter09/09_notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/chapter09/09_notebook-in-class.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -440,6 +440,9 @@ document.write(`
 <li><p>Advanced plotting techniques for chemical engineering data</p></li>
 <li><p>Molecular visualization with RDKit and Py3Dmol</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Start by asking students: “How many of you have ever looked at a figure in a paper or textbook and had no idea what it was showing?” This gets them thinking about why plotting well matters. Mention that this chapter is practical — by the end, they should be able to make publication-quality figures for their lab reports.</p>
+</div></blockquote>
 <section id="what-makes-a-good-scientific-figure">
 <h2>What Makes a Good Scientific Figure?<a class="headerlink" href="#what-makes-a-good-scientific-figure" title="Link to this heading">#</a></h2>
 <p>In science and engineering, figures are often the <strong>first thing readers look at</strong> — before even reading the text. A well-designed figure communicates your results clearly, while a poorly designed one can confuse, mislead, or undermine your credibility.</p>
@@ -448,6 +451,9 @@ document.write(`
 <li><p><strong>Stand on its own</strong> — a reader should understand it without reading the surrounding text</p></li>
 <li><p><strong>Communicate one clear message</strong> — avoid cramming too many ideas into a single plot</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Emphasize the “stand on its own” point. Tell students: “Imagine someone pulls your figure out of context and shows it at a conference. Could the audience understand what they’re looking at without your paper?” This is the standard they should aim for.</p>
+</div></blockquote>
 <section id="key-principles">
 <h3>Key Principles<a class="headerlink" href="#key-principles" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -482,7 +488,13 @@ document.write(`
 </table>
 </div>
 <p>Let’s look at a concrete example. Below, we plot the <strong>same dataset</strong> — concentration of a reactant over time during a first-order reaction — two ways: poorly and properly.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Walk through the table row by row. For “appropriate plot type,” ask: “When would a bar chart be wrong?” (answer: for continuous data like temperature vs. time). For “no chartjunk,” you can mention Edward Tufte’s concept of data-ink ratio — every drop of ink should convey information. Don’t spend too long here; the bad vs. good example coming next will drive the points home visually.</p>
+</div></blockquote>
 <p><strong>Bad Figure</strong> — What NOT to do:</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Run the cell and let the figure appear. Then pause and ask students: “What’s wrong with this plot? Can you list the problems?” Give them 30 seconds to think. Collect answers from the class before revealing the bullet list below. This gets them actively evaluating figures rather than passively reading.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -525,6 +537,9 @@ document.write(`
 </ul>
 <hr class="docutils" />
 <p><strong>Good Figure</strong> — The same data, plotted properly:</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> After reviewing the problems, run the good figure cell. Point out each improvement one by one: “Notice the axis labels now say ‘Time (min)’ and ‘Concentration (mol/L)’ — immediately you know what you’re looking at.” Highlight the LaTeX equation in the legend as a nice touch they can use in their lab reports. Mention <code class="docutils literal notranslate"><span class="pre">plt.tight_layout()</span></code> as the easy fix for labels getting cut off.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- GOOD FIGURE ---</span>
@@ -589,6 +604,9 @@ document.write(`
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Is the <strong>axis range reasonable</strong> (not misleading)?</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Could someone understand this figure without reading the text</strong>?</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Tell students to bookmark this checklist — or better yet, print it out and tape it next to their monitor. Say: “For every lab report in this course, I will check your figures against this list. If your axes say ‘x’ and ‘y’, you will lose points.” This sets the expectation early.</p>
+</div></blockquote>
 <hr class="docutils" />
 </section>
 </section>
@@ -598,6 +616,19 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Transition: “Now that we know what a good figure looks like, let’s learn the tool. Matplotlib is the most widely used plotting library in Python — every other plotting library (seaborn, plotly, etc.) is built on top of it.” Mention that <code class="docutils literal notranslate"><span class="pre">plt</span></code> is the universal shorthand, just like <code class="docutils literal notranslate"><span class="pre">np</span></code> for numpy.</p>
+</div></blockquote>
+<hr class="docutils" />
+<p>plt.figure() creates a new figure object — essentially a blank canvas where plots will be drawn.</p>
+<p>Think of it as:</p>
+<p>figure = page
+axes = plot area on that page
+plot() = drawing on that page</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Draw this analogy on the board if possible. Run the next cell to show an empty plot with just axis labels — emphasize that <code class="docutils literal notranslate"><span class="pre">plt.figure()</span></code> + <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> gives you a blank canvas, and everything else (plot, scatter, bar, etc.) draws on it. Ask: “What do you notice? It made axes for us automatically even though we have no data.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -630,6 +661,9 @@ document.write(`
 </div>
 <section id="first-plot-line-graph">
 <h3>9.1.1 First Plot - Line Graph<a class="headerlink" href="#first-plot-line-graph" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Explain that the data cell above creates the <code class="docutils literal notranslate"><span class="pre">time</span></code> array manually (the raw output of <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code>) to show students what it actually contains. In practice we’d just write <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">=</span> <span class="pre">np.linspace(0,</span> <span class="pre">10,</span> <span class="pre">100)</span></code>. Run the plot cell and walk through each line: <code class="docutils literal notranslate"><span class="pre">plt.figure(figsize=...)</span></code> sets the size, <code class="docutils literal notranslate"><span class="pre">plt.plot(x,</span> <span class="pre">y)</span></code> draws the line, then labels/title/grid/show. Emphasize: <strong>always label your axes</strong>.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -682,6 +716,14 @@ document.write(`
 </section>
 <section id="customizing-line-styles-and-colors">
 <h3>9.1.2 Customizing Line Styles and Colors<a class="headerlink" href="#customizing-line-styles-and-colors" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is where students learn the format strings like <code class="docutils literal notranslate"><span class="pre">'b-'</span></code>, <code class="docutils literal notranslate"><span class="pre">'r--'</span></code>, <code class="docutils literal notranslate"><span class="pre">'g-.'</span></code>. Write on the board:</p>
+<ul class="simple">
+<li><p>First character = color: <code class="docutils literal notranslate"><span class="pre">b</span></code>lue, <code class="docutils literal notranslate"><span class="pre">r</span></code>ed, <code class="docutils literal notranslate"><span class="pre">g</span></code>reen, <code class="docutils literal notranslate"><span class="pre">m</span></code>agenta, <code class="docutils literal notranslate"><span class="pre">k</span></code>=black</p></li>
+<li><p>Remaining = style: <code class="docutils literal notranslate"><span class="pre">-</span></code> solid, <code class="docutils literal notranslate"><span class="pre">--</span></code> dashed, <code class="docutils literal notranslate"><span class="pre">-.</span></code> dash-dot, <code class="docutils literal notranslate"><span class="pre">:</span></code> dotted</p></li>
+</ul>
+<p>Run the cell and point out the legend — “without <code class="docutils literal notranslate"><span class="pre">label=</span></code> and <code class="docutils literal notranslate"><span class="pre">plt.legend()</span></code>, nobody would know which line is which.” Ask students: “Which reaction order depletes the reactant fastest?” (zero order — it runs out entirely). This connects the plot to chemical engineering understanding.</p>
+</div></blockquote>
 <p><strong>Colors</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -820,6 +862,9 @@ document.write(`
 </section>
 <section id="scatter-plots">
 <h3>9.1.3 Scatter Plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Explain the key difference: <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code> connects points with lines (good for models/continuous data), while <code class="docutils literal notranslate"><span class="pre">plt.scatter()</span></code> shows individual points (good for experimental data). This is a critical distinction for lab reports — experimental data should be scatter points, model predictions should be lines. Point out the <code class="docutils literal notranslate"><span class="pre">zorder</span></code> parameter: higher values draw on top. Ask: “Why do we want the scatter points on top of the line?” (so data points aren’t hidden behind the model curve).</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Experimental data with noise</span>
@@ -856,6 +901,17 @@ document.write(`
 </section>
 <section id="subplots">
 <h3>9.1.4 Subplots<a class="headerlink" href="#subplots" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is usually the trickiest part for students. Emphasize the mental model: <code class="docutils literal notranslate"><span class="pre">plt.subplots(rows,</span> <span class="pre">cols)</span></code> returns a figure and a 2D array of axes. Each <code class="docutils literal notranslate"><span class="pre">axes[i,</span> <span class="pre">j]</span></code> is its own independent plot. The key syntax change: instead of <code class="docutils literal notranslate"><span class="pre">plt.xlabel()</span></code>, you use <code class="docutils literal notranslate"><span class="pre">axes[i,j].set_xlabel()</span></code>. Run the empty 2x2 subplot first (next cell) to show the blank grid, then show the <code class="docutils literal notranslate"><span class="pre">axes</span></code> object to demonstrate it’s just an array.</p>
+</div></blockquote>
+<hr class="docutils" />
+<p>plt.subplots(rows, cols) creates a figure and one or more subplots (axes) at the same time.</p>
+<p>fig → the Figure object</p>
+<p>axes → array of Axes objects (axes[row, col])</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Run the next two cells in sequence. First, the empty <code class="docutils literal notranslate"><span class="pre">plt.subplots(2,</span> <span class="pre">2)</span></code> to show the blank grid. Then <code class="docutils literal notranslate"><span class="pre">axes</span></code> alone to show that it’s a 2x2 numpy array of Axes objects. Say: “See? It’s just an array — you access each subplot with <code class="docutils literal notranslate"><span class="pre">axes[row,</span> <span class="pre">col]</span></code>, exactly like a numpy 2D array from Chapter 10.” Then run the full subplot example.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -864,6 +920,19 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../_images/c7b4df9d51832f617272734b15fd4e9079c7fe61f063f463cd251ac1316565ea.png" src="../../_images/c7b4df9d51832f617272734b15fd4e9079c7fe61f063f463cd251ac1316565ea.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&lt;Axes: &gt;, &lt;Axes: &gt;],
+       [&lt;Axes: &gt;, &lt;Axes: &gt;]], dtype=object)
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -916,6 +985,14 @@ document.write(`
 </section>
 <section id="bar-charts-and-histograms">
 <h3>9.1.5 Bar Charts and Histograms<a class="headerlink" href="#bar-charts-and-histograms" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Explain the fundamental difference before running the cells:</p>
+<ul class="simple">
+<li><p><strong>Bar chart</strong> = comparing discrete categories (catalysts, materials, reactors). Each bar is a named item.</p></li>
+<li><p><strong>Histogram</strong> = showing the distribution of continuous data (particle sizes, temperatures). Bars represent bins/ranges.</p></li>
+</ul>
+<p>Run the individual bar chart first, then the individual histogram, then the combined subplot version. Point out the <code class="docutils literal notranslate"><span class="pre">axhline</span></code>/<code class="docutils literal notranslate"><span class="pre">axvline</span></code> for reference lines — very useful for showing thresholds or target values in engineering contexts. The value labels on bars (<code class="docutils literal notranslate"><span class="pre">plt.text()</span></code>) are a nice professional touch for presentations.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1091,6 +1168,9 @@ document.write(`
 <li><p>Reproduce and verify the results if needed</p></li>
 </ul>
 <p>Poor plotting choices can mislead readers, obscure important trends, or reduce the credibility of your work.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Transition: “We’ve learned the mechanics of matplotlib — how to make plots. Now let’s talk about the thought process that should happen <em>before</em> you write any code.” This section is about asking the right question before choosing the plot type. Spend more time on the thinking, less on the code (they already know the syntax from 9.1).</p>
+</div></blockquote>
 <section id="define-the-scientific-question-first">
 <span id="id4"></span><h3>9.2.1 Define the Scientific Question First<a class="headerlink" href="#define-the-scientific-question-first" title="Link to this heading">#</a></h3>
 <p>Before making any plot, ask yourself:</p>
@@ -1105,6 +1185,9 @@ document.write(`
 <li><p>The variables shown</p></li>
 <li><p>The level of detail required</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Give a real-world analogy: “You wouldn’t start building a reactor without knowing what reaction you’re running. Same with plots — don’t open Python until you know what question you’re answering.” Walk through the two examples below. For Example 1, the process is straightforward. Example 2 introduces 2D/3D plotting which is more advanced — emphasize that the <em>question</em> (how does temperature vary spatially?) naturally leads to a contour/surface plot.</p>
+</div></blockquote>
 <p><strong>Example 1</strong></p>
 <p>Suppose you performed an experiment measuring how <strong>temperature affects the solubility of salt in water</strong>.</p>
 <ul class="simple">
@@ -1163,6 +1246,9 @@ document.write(`
 <li><p>Contour lines → Optional, for precise values</p></li>
 <li><p>3D surface plot → Optional, to visualize the shape of the temperature field</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Before running the code, explain <code class="docutils literal notranslate"><span class="pre">np.meshgrid</span></code> — it takes two 1D arrays (x and y) and creates a 2D grid of all (x, y) combinations. This is needed because <code class="docutils literal notranslate"><span class="pre">contourf</span></code> and <code class="docutils literal notranslate"><span class="pre">plot_surface</span></code> expect 2D arrays. Walk through the code: <code class="docutils literal notranslate"><span class="pre">contourf</span></code> fills regions of similar value with color, <code class="docutils literal notranslate"><span class="pre">contour</span></code> adds labeled lines, and <code class="docutils literal notranslate"><span class="pre">colorbar</span></code> provides the scale. Point out that the 3D plot uses <code class="docutils literal notranslate"><span class="pre">fig.add_subplot(122,</span> <span class="pre">projection='3d')</span></code> — this is a special syntax. Mention that 3D plots look cool but are harder to read precisely; contour plots are often better for quantitative analysis.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2D temperature distribution in a heated plate</span>
@@ -1248,6 +1334,9 @@ document.write(`
 <p><strong>Example: Temperature vs Pressure</strong></p>
 <p>Suppose we measure the pressure of an ideal gas at different temperatures in a <strong>constant volume container</strong>.</p>
 <p>Pressure (Pa) = n R T / V</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This reinforces what they’ve seen before, but explicitly focuses on the format convention: “Variable Name (Unit)”. Point out the commented-out <code class="docutils literal notranslate"><span class="pre">plt.yscale('log')</span></code> line — uncomment it live to show what happens. Ask: “Does a log scale make sense here?” (No — the data is linear with a small range. Log scales are for data spanning orders of magnitude, like bacterial growth or reaction rate constants across temperatures.)</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python Example: Proper Labels, Units, Scaling</span>
@@ -1299,6 +1388,9 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">OD_mean</span></code>: [0.05, 0.12, 0.30, 0.55, 0.80, 1.05]</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">OD_std</span></code>: [0.01, 0.02, 0.03, 0.04, 0.05, 0.05]  # standard deviation</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is often a new concept for students. Explain: “If you measure something 3 times and get 4.8, 5.0, and 5.2, the error bar shows that range. It tells the reader ‘the true value is somewhere in this interval.’” Walk through <code class="docutils literal notranslate"><span class="pre">plt.errorbar()</span></code> — the key parameters are <code class="docutils literal notranslate"><span class="pre">yerr</span></code> (the error values), <code class="docutils literal notranslate"><span class="pre">fmt</span></code> (format string), and <code class="docutils literal notranslate"><span class="pre">capsize</span></code> (the little horizontal caps on the error bars). Stress: “In your lab reports, if you have replicate measurements, you <strong>must</strong> show error bars. No exceptions.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -1332,8 +1424,14 @@ document.write(`
 <section id="molecular-visualization">
 <span id="id7"></span><h2>9.3 Molecular Visualization<a class="headerlink" href="#molecular-visualization" title="Link to this heading">#</a></h2>
 <p>Visualization of molecular structures is essential for understanding chemical properties and reactions.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Transition: “So far we’ve plotted numbers — x-y data, contours, distributions. But in chemical engineering, sometimes we want to look at the molecules themselves.” This section is meant to be fun and visual. Students in ChemE may have seen molecular structures in Organic Chemistry but never generated them programmatically. Keep this section lighter and more demo-oriented.</p>
+</div></blockquote>
 <section id="d-molecular-structures-with-rdkit">
 <span id="id8"></span><h3>9.3.1 2D Molecular Structures with RDKit<a class="headerlink" href="#d-molecular-structures-with-rdkit" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Briefly explain what SMILES notation is: “It’s a way to write a molecule as a text string. Benzene is <code class="docutils literal notranslate"><span class="pre">c1ccccc1</span></code> — lowercase <code class="docutils literal notranslate"><span class="pre">c</span></code> means aromatic carbon, and the <code class="docutils literal notranslate"><span class="pre">1...1</span></code> closes the ring.” You don’t need to teach SMILES in depth — just enough for them to understand the examples. Run the benzene cell first, then ethene (<code class="docutils literal notranslate"><span class="pre">C=C</span></code>), then acetic acid. Ask: “Can anyone guess what <code class="docutils literal notranslate"><span class="pre">CCO</span></code> would be?” (ethanol). Then show the grid image with multiple molecules. If students want to try their own molecules, they can look up SMILES strings online.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>rdkit
@@ -1422,6 +1520,9 @@ Requirement already satisfied: Pillow in /Users/hoon/miniconda3/envs/chemcomp/li
 </section>
 <section id="d-molecular-visualization-with-py3dmol">
 <span id="id9"></span><h3>9.3.2 3D Molecular Visualization with Py3Dmol<a class="headerlink" href="#d-molecular-visualization-with-py3dmol" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is the “wow factor” section. Py3Dmol creates interactive 3D models right in the notebook — students can rotate, zoom, and explore. Explain the workflow: SMILES → RDKit molecule → add hydrogens → generate 3D coordinates → optimize geometry (MMFF force field) → visualize. Run ethanol first, then benzene. Let students interact with the 3D viewer for a minute. Mention that this kind of visualization is used in drug design and materials science. If time is short, this section can be demoed quickly without deep explanation of the code.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>py3Dmol
@@ -1465,8 +1566,8 @@ Requirement already satisfied: Pillow in /Users/hoon/miniconda3/envs/chemcomp/li
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="3dmolviewer_1771260846991152"  style="position: relative; width: 600px; height: 400px;">
-        <p id="3dmolwarning_1771260846991152" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+<div class="output text_html"><div id="3dmolviewer_1771260851159863"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_1771260851159863" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
         </div>
 <script>
 
@@ -1497,20 +1598,20 @@ $3Dmolpromise = null;
   $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
 }
 
-var viewer_1771260846991152 = null;
-var warn = document.getElementById("3dmolwarning_1771260846991152");
+var viewer_1771260851159863 = null;
+var warn = document.getElementById("3dmolwarning_1771260851159863");
 if(warn) {
     warn.parentNode.removeChild(warn);
 }
 $3Dmolpromise.then(function() {
-viewer_1771260846991152 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771260846991152"),{backgroundColor:"white"});
-viewer_1771260846991152.zoomTo();
-	viewer_1771260846991152.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.8883    0.1670   -0.0273 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4658   -0.5116   -0.0368 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4311    0.3229    0.5867 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8487    1.1175   -0.5695 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6471   -0.4704   -0.4896 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1964    0.3978    0.9977 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7920   -0.7224   -1.0597 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4246   -1.4559    0.5138 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4671    1.1550    0.0848 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
-	viewer_1771260846991152.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
-	viewer_1771260846991152.zoomTo();
-viewer_1771260846991152.render();
+viewer_1771260851159863 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771260851159863"),{backgroundColor:"white"});
+viewer_1771260851159863.zoomTo();
+	viewer_1771260851159863.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.8883    0.1670   -0.0273 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4658   -0.5116   -0.0368 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4311    0.3229    0.5867 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8487    1.1175   -0.5695 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6471   -0.4704   -0.4896 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1964    0.3978    0.9977 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7920   -0.7224   -1.0597 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4246   -1.4559    0.5138 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4671    1.1550    0.0848 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
+	viewer_1771260851159863.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_1771260851159863.zoomTo();
+viewer_1771260851159863.render();
 });
-</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11f1b3c10&gt;
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11fbd5030&gt;
 </pre></div>
 </div>
 </div>
@@ -1542,8 +1643,8 @@ viewer_1771260846991152.render();
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="3dmolviewer_1771260846996831"  style="position: relative; width: 600px; height: 400px;">
-        <p id="3dmolwarning_1771260846996831" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+<div class="output text_html"><div id="3dmolviewer_1771260851165605"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_1771260851165605" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
         </div>
 <script>
 
@@ -1574,20 +1675,20 @@ $3Dmolpromise = null;
   $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
 }
 
-var viewer_1771260846996831 = null;
-var warn = document.getElementById("3dmolwarning_1771260846996831");
+var viewer_1771260851165605 = null;
+var warn = document.getElementById("3dmolwarning_1771260851165605");
 if(warn) {
     warn.parentNode.removeChild(warn);
 }
 $3Dmolpromise.then(function() {
-viewer_1771260846996831 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771260846996831"),{backgroundColor:"white"});
-viewer_1771260846996831.zoomTo();
-	viewer_1771260846996831.addModel("\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.8035   -1.1401   -0.0082 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3889    0.1258   -0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5853    1.2659   -0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8035    1.1401    0.0083 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3889   -0.1258    0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5853   -1.2659    0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4295   -2.0284   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4709    0.2238   -0.0501 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0414    2.2522   -0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4295    2.0284    0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4709   -0.2238    0.0500 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0414   -2.2522    0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n","mol");
-	viewer_1771260846996831.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
-	viewer_1771260846996831.zoomTo();
-viewer_1771260846996831.render();
+viewer_1771260851165605 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771260851165605"),{backgroundColor:"white"});
+viewer_1771260851165605.zoomTo();
+	viewer_1771260851165605.addModel("\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.8035   -1.1401   -0.0082 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3889    0.1258   -0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5853    1.2659   -0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8035    1.1401    0.0083 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3889   -0.1258    0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5853   -1.2659    0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4295   -2.0284   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4709    0.2238   -0.0501 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0414    2.2522   -0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4295    2.0284    0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4709   -0.2238    0.0500 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0414   -2.2522    0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n","mol");
+	viewer_1771260851165605.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_1771260851165605.zoomTo();
+viewer_1771260851165605.render();
 });
-</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11ee13700&gt;
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x10d23dc90&gt;
 </pre></div>
 </div>
 </div>
@@ -1600,6 +1701,9 @@ viewer_1771260846996831.render();
 <li><p>Use color and style strategically</p></li>
 <li><p>Make plots publication-ready with proper formatting</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Wrap up by summarizing the three big ideas: (1) Think before you plot — what’s the question? (2) Follow the checklist — labels, units, legend, error bars. (3) matplotlib gives you full control — there’s no excuse for a bad figure. Remind students that the upcoming lab will require them to produce publication-quality figures, and they’ll be graded on figure quality.</p>
+</div></blockquote>
 </section>
 </section>
 </section>
@@ -1634,24 +1738,6 @@ viewer_1771260846996831.render();
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter08/08_notebook.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 8: Programming Practices</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../lab01/01_lab.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

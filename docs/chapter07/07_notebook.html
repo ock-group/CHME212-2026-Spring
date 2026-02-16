@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter07/07_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="next" title="Chapter 8: Programming Practices" href="../chapter08/08_notebook.html" />
     <link rel="prev" title="Chapter 6: File Input/Output" href="../chapter06/06_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -189,6 +189,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -1044,6 +1046,67 @@ Problems with this approach:
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Favorite color: </span><span class="si">{</span><span class="n">my_functions</span><span class="o">.</span><span class="n">FAVORITE_COLOR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">my_functions</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">my_functions</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Juan&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_functions</span><span class="o">.</span><span class="n">is_even</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_functions</span><span class="o">.</span><span class="n">LUCKY_NUMBER</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Juan! Nice to meet you.
+True
+7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">my_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_area</span>
+
+<span class="c1"># my_functions.calculate_area</span>
+
+<span class="n">calculate_area</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">functions.chme212_functions</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">chme212_functions</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chme212_functions</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="s1">&#39;Danielle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Hello, Danielle! Nice to meet you.&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="what-are-libraries">
@@ -1248,11 +1311,11 @@ pip<span class="w"> </span>install<span class="w"> </span>matplotlib
       </div>
     </a>
     <a class="right-next"
-       href="../lab01/01_lab.html"
+       href="../chapter08/08_notebook.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+        <p class="prev-next-title">Chapter 8: Programming Practices</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
