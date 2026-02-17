@@ -17,9 +17,9 @@ parts:
       - file: docs/chapter07/07_notebook
       - file: docs/chapter08/08_notebook
       - file: docs/chapter09/09_notebook
-  # - caption: Numerical Computation
-  #   chapters:
-  #     - file: docs/chapter10/10_notebook
+  - caption: Numerical Computation
+    chapters:
+      - file: docs/chapter10/10_notebook
   #     - file: docs/chapter11/11_notebook
   #     - file: docs/chapter12/12_notebook
   #     - file: docs/chapter13/13_notebook
