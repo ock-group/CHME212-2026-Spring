@@ -39,3 +39,4 @@ parts:
       - file: docs/lab02/02_lab
       - file: docs/lab03/03_lab
       - file: docs/lab04/04_lab
+      - file: docs/lab05/05_lab
