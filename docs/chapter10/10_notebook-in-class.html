@@ -192,12 +192,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 </ul>
 
     </div>
@@ -444,6 +449,9 @@ document.write(`
 <li><p>Reshaping and combining arrays</p></li>
 <li><p>Practical chemical engineering examples</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Open by asking: “In the last few chapters, we’ve been using <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code> and <code class="docutils literal notranslate"><span class="pre">np.exp</span></code> in our plotting code — but what actually <em>are</em> those things?” This chapter formally teaches the tool they’ve been using informally. Emphasize that NumPy is not optional — it’s the foundation for everything coming next (linear algebra in Ch 11, curve fitting in Ch 13, ODEs later). Budget: ~15 min for 10.1, ~15 min for 10.2, ~15 min for 10.3, ~10 min for 10.4, ~10 min for 10.5.</p>
+</div></blockquote>
 <section id="introduction-to-numpy-arrays">
 <span id="id2"></span><h2>10.1 Introduction to NumPy Arrays<a class="headerlink" href="#introduction-to-numpy-arrays" title="Link to this heading">#</a></h2>
 <p><strong>NumPy</strong> (Numerical Python) is the core library for scientific computing in Python. At its heart is the <strong>ndarray</strong> — a fast, memory-efficient array that supports vectorized operations.</p>
@@ -464,11 +472,7 @@ document.write(`
 <td><p>Element-by-element with loops</p></td>
 <td><p>Vectorized — operates on entire arrays at once</p></td>
 </tr>
-<tr class="row-even"><td><p>Memory</p></td>
-<td><p>Each element is a full Python object</p></td>
-<td><p>Compact, contiguous block of memory</p></td>
-</tr>
-<tr class="row-odd"><td><p>Math support</p></td>
+<tr class="row-even"><td><p>Math support</p></td>
 <td><p>Manual implementation</p></td>
 <td><p>Built-in: <code class="docutils literal notranslate"><span class="pre">sin</span></code>, <code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">dot</span></code>, etc.</p></td>
 </tr>
@@ -476,8 +480,58 @@ document.write(`
 </table>
 </div>
 <p>In chemical engineering, we constantly work with large datasets — temperature profiles, concentration measurements, pressure readings — and NumPy makes processing them efficient.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Walk through the comparison table. The speed point is the most important — say: “A for-loop over a million data points might take seconds with a list. NumPy does it in milliseconds because the heavy lifting runs in compiled C, not interpreted Python.” Don’t dwell on memory — just mention it. The key takeaway for students: “If you’re doing math on collections of numbers, use arrays, not lists.”</p>
+</div></blockquote>
 <section id="creating-arrays">
 <span id="id3"></span><h3>10.1.1 Creating Arrays<a class="headerlink" href="#creating-arrays" title="Link to this heading">#</a></h3>
+<p>NumPy provides several built-in functions to create arrays:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.array(list)</span></code></p></td>
+<td><p>Create from a Python list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.array([1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.zeros(n)</span></code></p></td>
+<td><p>Array of <code class="docutils literal notranslate"><span class="pre">n</span></code> zeros</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.zeros(5)</span></code> → <code class="docutils literal notranslate"><span class="pre">[0.</span> <span class="pre">0.</span> <span class="pre">0.</span> <span class="pre">0.</span> <span class="pre">0.]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.ones(n)</span></code></p></td>
+<td><p>Array of <code class="docutils literal notranslate"><span class="pre">n</span></code> ones</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.ones(4)</span></code> → <code class="docutils literal notranslate"><span class="pre">[1.</span> <span class="pre">1.</span> <span class="pre">1.</span> <span class="pre">1.]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.linspace(a,</span> <span class="pre">b,</span> <span class="pre">n)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span></code> evenly spaced points from <code class="docutils literal notranslate"><span class="pre">a</span></code> to <code class="docutils literal notranslate"><span class="pre">b</span></code> (inclusive)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.linspace(0,</span> <span class="pre">1,</span> <span class="pre">5)</span></code> → <code class="docutils literal notranslate"><span class="pre">[0.</span> <span class="pre">0.25</span> <span class="pre">0.5</span> <span class="pre">0.75</span> <span class="pre">1.]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.arange(a,</span> <span class="pre">b,</span> <span class="pre">step)</span></code></p></td>
+<td><p>Values from <code class="docutils literal notranslate"><span class="pre">a</span></code> to <code class="docutils literal notranslate"><span class="pre">b</span></code> (exclusive) with <code class="docutils literal notranslate"><span class="pre">step</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.arange(0,</span> <span class="pre">5,</span> <span class="pre">0.5)</span></code> → <code class="docutils literal notranslate"><span class="pre">[0.</span> <span class="pre">0.5</span> <span class="pre">1.</span> <span class="pre">...</span> <span class="pre">4.5]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.eye(n)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n×n</span></code> identity matrix</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.eye(3)</span></code> → 3×3 with 1s on diagonal</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.random.rand(n)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span></code> random values in [0, 1)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.random.rand(4)</span></code> → <code class="docutils literal notranslate"><span class="pre">[0.23</span> <span class="pre">0.71</span> <span class="pre">...]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.full(n,</span> <span class="pre">val)</span></code></p></td>
+<td><p>Array of <code class="docutils literal notranslate"><span class="pre">n</span></code> copies of <code class="docutils literal notranslate"><span class="pre">val</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.full(3,</span> <span class="pre">7.5)</span></code> → <code class="docutils literal notranslate"><span class="pre">[7.5</span> <span class="pre">7.5</span> <span class="pre">7.5]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Don’t try to cover all 8 at equal depth. Focus on the top 4 they’ll use daily: <code class="docutils literal notranslate"><span class="pre">np.array</span></code>, <code class="docutils literal notranslate"><span class="pre">np.zeros</span></code>, <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code>, <code class="docutils literal notranslate"><span class="pre">np.arange</span></code>. Run each cell one by one. For <code class="docutils literal notranslate"><span class="pre">linspace</span></code> vs <code class="docutils literal notranslate"><span class="pre">arange</span></code>, highlight the key difference: “linspace you specify <em>how many points</em>, arange you specify the <em>step size</em>. linspace includes the endpoint, arange does not.” Ask: “If I want 100 points between 0 and 10 for a smooth plot, which one?” (linspace). “If I want every 0.1 seconds?” (arange). Briefly demo <code class="docutils literal notranslate"><span class="pre">np.full</span></code>, <code class="docutils literal notranslate"><span class="pre">np.eye</span></code>, and <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> in the last cell — mention <code class="docutils literal notranslate"><span class="pre">np.eye</span></code> will come back in Chapter 11 for identity matrices.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -550,10 +604,40 @@ document.write(`
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Array filled with a specific value</span>
+<span class="n">initial_conc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>  <span class="c1"># 6 reactors all starting at 2.5 mol/L</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Full:&quot;</span><span class="p">,</span> <span class="n">initial_conc</span><span class="p">)</span>
+
+<span class="c1"># Identity matrix (1s on diagonal, 0s elsewhere)</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Identity:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+
+<span class="c1"># Random values between 0 and 1</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random:&quot;</span><span class="p">,</span> <span class="n">noise</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Full: [2.5 2.5 2.5 2.5 2.5 2.5]
+Identity:
+ [[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+Random: [0.55093284 0.24753493 0.02146006 0.85252295 0.5920621 ]
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="arrays-vs-lists">
 <span id="id4"></span><h3>10.1.2 Arrays vs. Lists<a class="headerlink" href="#arrays-vs-lists" title="Link to this heading">#</a></h3>
 <p>A common mistake is to assume NumPy arrays behave like Python lists. They don’t — and the difference matters.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is one of the most important cells in the chapter. Run the list cell first, then the array cell, and let students see the difference side by side. Say: “With lists, <code class="docutils literal notranslate"><span class="pre">+</span></code> glues them together. With arrays, <code class="docutils literal notranslate"><span class="pre">+</span></code> does math.” Then run the two demo cells below — the first shows that <code class="docutils literal notranslate"><span class="pre">np.exp(-0.3</span> <span class="pre">*</span> <span class="pre">time)</span></code> works perfectly on an array, and the second shows that the same operation on a list crashes with <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. Let the error appear. Ask: “Why does this fail?” (because Python doesn’t know how to multiply a list by a float — that’s a NumPy operation). This is the single best demonstration of why arrays exist.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List: + concatenates</span>
@@ -588,26 +672,7 @@ Array * 2:    [2 4 6]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.1010101</span> <span class="p">,</span> <span class="mf">0.2020202</span> <span class="p">,</span>  <span class="mf">0.3030303</span> <span class="p">,</span>  <span class="mf">0.4040404</span> <span class="p">,</span>
-        <span class="mf">0.50505051</span><span class="p">,</span>  <span class="mf">0.60606061</span><span class="p">,</span>  <span class="mf">0.70707071</span><span class="p">,</span>  <span class="mf">0.80808081</span><span class="p">,</span>  <span class="mf">0.90909091</span><span class="p">,</span>
-        <span class="mf">1.01010101</span><span class="p">,</span>  <span class="mf">1.11111111</span><span class="p">,</span>  <span class="mf">1.21212121</span><span class="p">,</span>  <span class="mf">1.31313131</span><span class="p">,</span>  <span class="mf">1.41414141</span><span class="p">,</span>
-        <span class="mf">1.51515152</span><span class="p">,</span>  <span class="mf">1.61616162</span><span class="p">,</span>  <span class="mf">1.71717172</span><span class="p">,</span>  <span class="mf">1.81818182</span><span class="p">,</span>  <span class="mf">1.91919192</span><span class="p">,</span>
-        <span class="mf">2.02020202</span><span class="p">,</span>  <span class="mf">2.12121212</span><span class="p">,</span>  <span class="mf">2.22222222</span><span class="p">,</span>  <span class="mf">2.32323232</span><span class="p">,</span>  <span class="mf">2.42424242</span><span class="p">,</span>
-        <span class="mf">2.52525253</span><span class="p">,</span>  <span class="mf">2.62626263</span><span class="p">,</span>  <span class="mf">2.72727273</span><span class="p">,</span>  <span class="mf">2.82828283</span><span class="p">,</span>  <span class="mf">2.92929293</span><span class="p">,</span>
-        <span class="mf">3.03030303</span><span class="p">,</span>  <span class="mf">3.13131313</span><span class="p">,</span>  <span class="mf">3.23232323</span><span class="p">,</span>  <span class="mf">3.33333333</span><span class="p">,</span>  <span class="mf">3.43434343</span><span class="p">,</span>
-        <span class="mf">3.53535354</span><span class="p">,</span>  <span class="mf">3.63636364</span><span class="p">,</span>  <span class="mf">3.73737374</span><span class="p">,</span>  <span class="mf">3.83838384</span><span class="p">,</span>  <span class="mf">3.93939394</span><span class="p">,</span>
-        <span class="mf">4.04040404</span><span class="p">,</span>  <span class="mf">4.14141414</span><span class="p">,</span>  <span class="mf">4.24242424</span><span class="p">,</span>  <span class="mf">4.34343434</span><span class="p">,</span>  <span class="mf">4.44444444</span><span class="p">,</span>
-        <span class="mf">4.54545455</span><span class="p">,</span>  <span class="mf">4.64646465</span><span class="p">,</span>  <span class="mf">4.74747475</span><span class="p">,</span>  <span class="mf">4.84848485</span><span class="p">,</span>  <span class="mf">4.94949495</span><span class="p">,</span>
-        <span class="mf">5.05050505</span><span class="p">,</span>  <span class="mf">5.15151515</span><span class="p">,</span>  <span class="mf">5.25252525</span><span class="p">,</span>  <span class="mf">5.35353535</span><span class="p">,</span>  <span class="mf">5.45454545</span><span class="p">,</span>
-        <span class="mf">5.55555556</span><span class="p">,</span>  <span class="mf">5.65656566</span><span class="p">,</span>  <span class="mf">5.75757576</span><span class="p">,</span>  <span class="mf">5.85858586</span><span class="p">,</span>  <span class="mf">5.95959596</span><span class="p">,</span>
-        <span class="mf">6.06060606</span><span class="p">,</span>  <span class="mf">6.16161616</span><span class="p">,</span>  <span class="mf">6.26262626</span><span class="p">,</span>  <span class="mf">6.36363636</span><span class="p">,</span>  <span class="mf">6.46464646</span><span class="p">,</span>
-        <span class="mf">6.56565657</span><span class="p">,</span>  <span class="mf">6.66666667</span><span class="p">,</span>  <span class="mf">6.76767677</span><span class="p">,</span>  <span class="mf">6.86868687</span><span class="p">,</span>  <span class="mf">6.96969697</span><span class="p">,</span>
-        <span class="mf">7.07070707</span><span class="p">,</span>  <span class="mf">7.17171717</span><span class="p">,</span>  <span class="mf">7.27272727</span><span class="p">,</span>  <span class="mf">7.37373737</span><span class="p">,</span>  <span class="mf">7.47474747</span><span class="p">,</span>
-        <span class="mf">7.57575758</span><span class="p">,</span>  <span class="mf">7.67676768</span><span class="p">,</span>  <span class="mf">7.77777778</span><span class="p">,</span>  <span class="mf">7.87878788</span><span class="p">,</span>  <span class="mf">7.97979798</span><span class="p">,</span>
-        <span class="mf">8.08080808</span><span class="p">,</span>  <span class="mf">8.18181818</span><span class="p">,</span>  <span class="mf">8.28282828</span><span class="p">,</span>  <span class="mf">8.38383838</span><span class="p">,</span>  <span class="mf">8.48484848</span><span class="p">,</span>
-        <span class="mf">8.58585859</span><span class="p">,</span>  <span class="mf">8.68686869</span><span class="p">,</span>  <span class="mf">8.78787879</span><span class="p">,</span>  <span class="mf">8.88888889</span><span class="p">,</span>  <span class="mf">8.98989899</span><span class="p">,</span>
-        <span class="mf">9.09090909</span><span class="p">,</span>  <span class="mf">9.19191919</span><span class="p">,</span>  <span class="mf">9.29292929</span><span class="p">,</span>  <span class="mf">9.39393939</span><span class="p">,</span>  <span class="mf">9.49494949</span><span class="p">,</span>
-        <span class="mf">9.5959596</span> <span class="p">,</span>  <span class="mf">9.6969697</span> <span class="p">,</span>  <span class="mf">9.7979798</span> <span class="p">,</span>  <span class="mf">9.8989899</span> <span class="p">,</span> <span class="mf">10.</span>        <span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># 100 points from 0 to 10</span>
 
 <span class="n">concentration</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>  <span class="c1"># First-order decay</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Concentration as array:&quot;</span><span class="p">,</span> <span class="n">concentration</span><span class="p">)</span>
@@ -615,15 +680,15 @@ Array * 2:    [2 4 6]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Concentration as array: [5.         4.85075752 4.7059697  4.56550359 4.42923017 4.2970243
- 4.16876459 4.04433323 3.92361597 3.80650193 3.69288357 3.58265655
- 3.47571964 3.37197464 3.27132627 3.17368209 3.07895245 2.98705035
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Concentration as array: [5.         4.85075752 4.7059697  4.56550358 4.42923016 4.2970243
+ 4.16876459 4.04433324 3.92361597 3.80650193 3.69288357 3.58265655
+ 3.47571964 3.37197464 3.27132626 3.17368209 3.07895246 2.98705036
  2.89789139 2.81139369 2.72747782 2.64606671 2.5670856  2.49046195
- 2.41612541 2.34400769 2.27404259 2.20616584 2.1403151  2.07642992
+ 2.41612541 2.3440077  2.27404259 2.20616584 2.14031511 2.07642992
  2.01445161 1.95432326 1.89598965 1.83939721 1.78449397 1.7312295
- 1.6795549  1.62942272 1.5807869  1.53360279 1.48782705 1.44341765
- 1.40033381 1.35853595 1.31798569 1.2786458  1.24048014 1.20345368
- 1.16753239 1.13268331 1.09887442 1.06607467 1.03425394 1.00338302
+ 1.67955491 1.62942272 1.5807869  1.53360279 1.48782705 1.44341765
+ 1.4003338  1.35853595 1.31798569 1.2786458  1.24048015 1.20345368
+ 1.1675324  1.13268331 1.09887442 1.06607467 1.03425394 1.00338302
  0.97343354 0.94437801 0.91618975 0.88884286 0.86231224 0.83657352
  0.81160306 0.78737793 0.76387588 0.74107533 0.71895535 0.69749561
  0.67667642 0.65647864 0.63688374 0.61787372 0.59943112 0.581539
@@ -645,12 +710,12 @@ Array * 2:    [2 4 6]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time as list: [0.0, 0.1010101, 0.2020202, 0.3030303, 0.4040404, 0.50505051, 0.60606061, 0.70707071, 0.80808081, 0.90909091, 1.01010101, 1.11111111, 1.21212121, 1.31313131, 1.41414141, 1.51515152, 1.61616162, 1.71717172, 1.81818182, 1.91919192, 2.02020202, 2.12121212, 2.22222222, 2.32323232, 2.42424242, 2.52525253, 2.62626263, 2.72727273, 2.82828283, 2.92929293, 3.03030303, 3.13131313, 3.23232323, 3.33333333, 3.43434343, 3.53535354, 3.63636364, 3.73737374, 3.83838384, 3.93939394, 4.04040404, 4.14141414, 4.24242424, 4.34343434, 4.44444444, 4.54545455, 4.64646465, 4.74747475, 4.84848485, 4.94949495, 5.05050505, 5.15151515, 5.25252525, 5.35353535, 5.45454545, 5.55555556, 5.65656566, 5.75757576, 5.85858586, 5.95959596, 6.06060606, 6.16161616, 6.26262626, 6.36363636, 6.46464646, 6.56565657, 6.66666667, 6.76767677, 6.86868687, 6.96969697, 7.07070707, 7.17171717, 7.27272727, 7.37373737, 7.47474747, 7.57575758, 7.67676768, 7.77777778, 7.87878788, 7.97979798, 8.08080808, 8.18181818, 8.28282828, 8.38383838, 8.48484848, 8.58585859, 8.68686869, 8.78787879, 8.88888889, 8.98989899, 9.09090909, 9.19191919, 9.29292929, 9.39393939, 9.49494949, 9.5959596, 9.6969697, 9.7979798, 9.8989899, 10.0]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time as list: [0.0, 0.10101010101010101, 0.20202020202020202, 0.30303030303030304, 0.40404040404040403, 0.5050505050505051, 0.6060606060606061, 0.7070707070707071, 0.8080808080808081, 0.9090909090909091, 1.0101010101010102, 1.1111111111111112, 1.2121212121212122, 1.3131313131313131, 1.4141414141414141, 1.5151515151515151, 1.6161616161616161, 1.7171717171717171, 1.8181818181818181, 1.9191919191919191, 2.0202020202020203, 2.121212121212121, 2.2222222222222223, 2.323232323232323, 2.4242424242424243, 2.525252525252525, 2.6262626262626263, 2.727272727272727, 2.8282828282828283, 2.929292929292929, 3.0303030303030303, 3.131313131313131, 3.2323232323232323, 3.3333333333333335, 3.4343434343434343, 3.5353535353535355, 3.6363636363636362, 3.7373737373737375, 3.8383838383838382, 3.9393939393939394, 4.040404040404041, 4.141414141414141, 4.242424242424242, 4.343434343434343, 4.444444444444445, 4.545454545454545, 4.646464646464646, 4.747474747474747, 4.848484848484849, 4.94949494949495, 5.05050505050505, 5.151515151515151, 5.252525252525253, 5.353535353535354, 5.454545454545454, 5.555555555555555, 5.656565656565657, 5.757575757575758, 5.858585858585858, 5.959595959595959, 6.0606060606060606, 6.161616161616162, 6.262626262626262, 6.363636363636363, 6.4646464646464645, 6.565656565656566, 6.666666666666667, 6.767676767676767, 6.8686868686868685, 6.96969696969697, 7.070707070707071, 7.171717171717171, 7.2727272727272725, 7.373737373737374, 7.474747474747475, 7.575757575757575, 7.6767676767676765, 7.777777777777778, 7.878787878787879, 7.979797979797979, 8.080808080808081, 8.181818181818182, 8.282828282828282, 8.383838383838384, 8.484848484848484, 8.585858585858587, 8.686868686868687, 8.787878787878787, 8.88888888888889, 8.98989898989899, 9.09090909090909, 9.191919191919192, 9.292929292929292, 9.393939393939394, 9.494949494949495, 9.595959595959595, 9.696969696969697, 9.797979797979798, 9.8989898989899, 10.0]
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">time_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time as list:&quot;</span><span class="p">,</span> <span class="n">time_list</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">concentration_list</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">time_list</span><span class="p">)</span> 
@@ -664,9 +729,15 @@ Array * 2:    [2 4 6]
 </section>
 <section id="array-properties-indexing">
 <span id="id5"></span><h2>10.2 Array Properties &amp; Indexing<a class="headerlink" href="#array-properties-indexing" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Transition: “Now that we can create arrays, let’s learn how to inspect them and pull out specific values.” This section connects directly to what they already know about list indexing — but extends it to 2D. If students look comfortable with 1D indexing, move quickly to 2D since that’s the new material.</p>
+</div></blockquote>
 <section id="array-properties">
 <span id="id6"></span><h3>10.2.1 Array Properties<a class="headerlink" href="#array-properties" title="Link to this heading">#</a></h3>
 <p>Every NumPy array has attributes that describe its structure:</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Run the 1D cell first. Point out that <code class="docutils literal notranslate"><span class="pre">.shape</span></code> returns a tuple — <code class="docutils literal notranslate"><span class="pre">(5,)</span></code> means “5 elements, 1 dimension.” The trailing comma matters; it’s Python’s way of saying “this is a 1-element tuple.” Then run the 2D cell. Emphasize <code class="docutils literal notranslate"><span class="pre">.shape</span></code> → <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">3)</span></code> means “4 rows, 3 columns” — this is the convention throughout: <strong>(rows, columns)</strong>. Ask: “What would <code class="docutils literal notranslate"><span class="pre">.shape</span></code> be for a 3×5 matrix?” Make sure students understand <code class="docutils literal notranslate"><span class="pre">.dtype</span></code> — <code class="docutils literal notranslate"><span class="pre">float64</span></code> is the default for decimals, <code class="docutils literal notranslate"><span class="pre">int64</span></code> for integers. They don’t need to memorize dtypes, just know they exist.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1D array</span>
@@ -724,6 +795,9 @@ Dimensions: 2
 <section id="indexing-and-slicing-1d-arrays">
 <span id="id7"></span><h3>10.2.2 Indexing and Slicing — 1D Arrays<a class="headerlink" href="#indexing-and-slicing-1d-arrays" title="Link to this heading">#</a></h3>
 <p>NumPy indexing works like Python list indexing (0-based), but with additional power for multi-dimensional arrays.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This should be quick review — they learned list indexing in Chapter 1. Run the cell and briefly confirm they remember: <code class="docutils literal notranslate"><span class="pre">[0]</span></code> is first, <code class="docutils literal notranslate"><span class="pre">[-1]</span></code> is last, <code class="docutils literal notranslate"><span class="pre">[1:3]</span></code> is elements 1 and 2 (stop is exclusive), <code class="docutils literal notranslate"><span class="pre">[::2]</span></code> is every other. If they’re comfortable, spend less than 2 minutes here and move to 2D.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">500</span><span class="p">])</span>
@@ -750,6 +824,15 @@ Reversed:        [500 450 400 350 300]
 <section id="indexing-and-slicing-2d-arrays">
 <span id="id8"></span><h3>10.2.3 Indexing and Slicing — 2D Arrays<a class="headerlink" href="#indexing-and-slicing-2d-arrays" title="Link to this heading">#</a></h3>
 <p>For 2D arrays, use <code class="docutils literal notranslate"><span class="pre">[row,</span> <span class="pre">column]</span></code> syntax. This is different from nested list indexing (<code class="docutils literal notranslate"><span class="pre">list[row][col]</span></code>).</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is the key new concept. Draw a small grid on the board with row/column labels to visualize the data. Walk through each line in the code cell:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data[1,</span> <span class="pre">2]</span></code> → “row 1, column 2 — that’s 0.85, the conversion from the second experiment”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data[0,</span> <span class="pre">:]</span></code> → “row 0, all columns — the colon means ‘everything’”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">1]</span></code> → “all rows, column 1 — this pulls out the entire pressure column”</p></li>
+</ul>
+<p>The colon <code class="docutils literal notranslate"><span class="pre">:</span></code> is the critical piece. Say: “Think of <code class="docutils literal notranslate"><span class="pre">:</span></code> as meaning ‘all’. <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">1]</span></code> = all rows, column 1.” Then refer to the summary table below. This syntax will come back constantly in Chapter 11 for matrix operations.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Experiment data: rows = trials, columns = [Temp(K), Pressure(atm), Conversion]</span>
@@ -758,8 +841,12 @@ Reversed:        [500 450 400 350 300]
     <span class="p">[</span><span class="mi">350</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">],</span>
     <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">],</span>
     <span class="p">[</span><span class="mi">450</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">0.70</span><span class="p">]</span>
-<span class="p">])</span>
-
+ <span class="p">])</span>
+<span class="c1">#        0.   1.    2</span>
+<span class="c1">#  0   [300, 1.5, 0.92],</span>
+<span class="c1">#  1   [350, 2.1, 0.85],</span>
+<span class="c1">#  2   [400, 3.0, 0.78],</span>
+<span class="c1">#  3   [450, 4.2, 0.70]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Single element [1, 2]:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>    <span class="c1"># Row 1, Col 2 → 0.85</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entire row 0:        &quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>     <span class="c1"># [300, 1.5, 0.92]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entire column 1:     &quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>     <span class="c1"># [1.5, 2.1, 3.0, 4.2]</span>
@@ -805,9 +892,15 @@ Sub-array [0:2, 1:]:
 </section>
 <section id="array-operations">
 <span id="id9"></span><h2>10.3 Array Operations<a class="headerlink" href="#array-operations" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Transition: “We can create arrays and pull values out of them. Now let’s do math.” This section is where students see the real power of NumPy. The word “vectorization” will be new to most — define it simply: “applying an operation to every element at once, without writing a loop.”</p>
+</div></blockquote>
 <section id="element-wise-arithmetic">
 <span id="id10"></span><h3>10.3.1 Element-wise Arithmetic<a class="headerlink" href="#element-wise-arithmetic" title="Link to this heading">#</a></h3>
 <p>Arithmetic operators work <strong>element-by-element</strong> on NumPy arrays. This is called <strong>vectorization</strong> — no loops needed.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Run the code cell. Emphasize: <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span></code> is NOT matrix multiplication — it’s element-wise. “Element 0 of <code class="docutils literal notranslate"><span class="pre">a</span></code> times element 0 of <code class="docutils literal notranslate"><span class="pre">b</span></code>, element 1 times element 1, and so on.” This distinction will matter in Chapter 11 when they learn <code class="docutils literal notranslate"><span class="pre">np.dot</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> for actual matrix multiplication. Then show the comparison markdown below — the 4-line loop vs the 1-line NumPy. Ask: “Which would you rather write? Which is easier to read? Which is faster?”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
@@ -845,6 +938,9 @@ a ** 2 = [ 1  4  9 16]
 <section id="broadcasting">
 <span id="id11"></span><h3>10.3.2 Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h3>
 <p><strong>Broadcasting</strong> is NumPy’s way of handling operations between arrays of different shapes. The most common case: an operation between an array and a scalar.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Students will use broadcasting constantly without realizing it has a name. The two examples here are perfect — unit conversion is something every engineer does. Run the cell and say: “When you write <code class="docutils literal notranslate"><span class="pre">temps_C</span> <span class="pre">+</span> <span class="pre">273.15</span></code>, NumPy ‘broadcasts’ the scalar 273.15 to match the shape of the array, then adds element-wise. You don’t need a loop.” Keep it to scalar-array broadcasting only — more complex broadcasting rules (2D shape matching) are beyond scope here.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scalar + Array: the scalar is &quot;broadcast&quot; to every element</span>
@@ -875,6 +971,9 @@ Pressures (Pa):  [ 101325.   253312.5  506625.  1013250. ]
 <section id="useful-array-functions">
 <span id="id12"></span><h3>10.3.3 Useful Array Functions<a class="headerlink" href="#useful-array-functions" title="Link to this heading">#</a></h3>
 <p>NumPy provides built-in functions for common calculations. These are faster than writing your own loops.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Run the cell. The key ones to highlight: <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> and <code class="docutils literal notranslate"><span class="pre">np.std</span></code> (they’ll need these for lab reports with error bars), and <code class="docutils literal notranslate"><span class="pre">np.argmin</span></code>/<code class="docutils literal notranslate"><span class="pre">np.argmax</span></code> (returns the <em>index</em>, not the value — a common confusion). Ask: “What’s the difference between <code class="docutils literal notranslate"><span class="pre">np.max(measurements)</span></code> and <code class="docutils literal notranslate"><span class="pre">np.argmax(measurements)</span></code>?” (4.6 vs 3). Mention that you can also call these as methods: <code class="docutils literal notranslate"><span class="pre">measurements.mean()</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">np.mean(measurements)</span></code>.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measurements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.52</span><span class="p">,</span> <span class="mf">4.48</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">,</span> <span class="mf">4.60</span><span class="p">,</span> <span class="mf">4.50</span><span class="p">,</span> <span class="mf">4.53</span><span class="p">])</span>
@@ -910,6 +1009,9 @@ Argmax (index of max): 3
 <li><p><code class="docutils literal notranslate"><span class="pre">axis=1</span></code> → operate <strong>across each row</strong> (across columns)</p></li>
 </ul>
 <p>Think of it as: the axis you specify is the one that <strong>collapses</strong>.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is the trickiest concept in the chapter — spend extra time here. Draw the 3×4 grid on the board. Then physically gesture: “axis=0 collapses the rows — we squish the 3 rows into 1 row, giving us 4 column averages. axis=1 collapses the columns — we squish the 4 columns into 1 column, giving us 3 row averages.” The mnemonic “the axis you specify is the one that disappears” helps. Run the cell and verify the output matches the board drawing. Ask: “If <code class="docutils literal notranslate"><span class="pre">data.shape</span></code> is <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4)</span></code>, what shape is <code class="docutils literal notranslate"><span class="pre">np.mean(data,</span> <span class="pre">axis=0)</span></code>?” → <code class="docutils literal notranslate"><span class="pre">(4,)</span></code>. “And <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>?” → <code class="docutils literal notranslate"><span class="pre">(3,)</span></code>. If students are still confused, give the physical analogy: “axis=0 is like averaging across all experiments at each time point; axis=1 is like averaging across all time points for each experiment.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3 experiments, each measuring 4 temperatures (K)</span>
@@ -938,6 +1040,9 @@ Argmax (index of max): 3
 <section id="mathematical-functions">
 <span id="id14"></span><h3>10.3.5 Mathematical Functions<a class="headerlink" href="#mathematical-functions" title="Link to this heading">#</a></h3>
 <p>NumPy includes all common math functions that work element-wise on arrays:</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Quick demo — run the cell and move on. The main point: “Use <code class="docutils literal notranslate"><span class="pre">np.sin</span></code>, <code class="docutils literal notranslate"><span class="pre">np.exp</span></code>, <code class="docutils literal notranslate"><span class="pre">np.log</span></code>, etc. instead of <code class="docutils literal notranslate"><span class="pre">math.sin</span></code>, <code class="docutils literal notranslate"><span class="pre">math.exp</span></code>. The <code class="docutils literal notranslate"><span class="pre">math</span></code> module only works on single numbers; NumPy functions work on entire arrays at once.” Point out <code class="docutils literal notranslate"><span class="pre">np.log</span></code> is the natural log (ln), not log base 10 — use <code class="docutils literal notranslate"><span class="pre">np.log10</span></code> for that.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
@@ -966,8 +1071,14 @@ sqrt(x): [2. 3. 4. 5.]
 <section id="reshaping-combining-arrays">
 <span id="id15"></span><h2>10.4 Reshaping &amp; Combining Arrays<a class="headerlink" href="#reshaping-combining-arrays" title="Link to this heading">#</a></h2>
 <p>When preparing data for linear algebra or organizing experimental results, you often need to change the shape of an array or combine multiple arrays together.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This section is important for Chapter 11 but less intuitive for beginners. Keep it brisk. The three things they need to remember: <code class="docutils literal notranslate"><span class="pre">reshape</span></code> changes dimensions, <code class="docutils literal notranslate"><span class="pre">.T</span></code> transposes, and <code class="docutils literal notranslate"><span class="pre">vstack</span></code>/<code class="docutils literal notranslate"><span class="pre">hstack</span></code> combine arrays. If running low on time, demonstrate reshape and transpose, then mention vstack/hstack briefly and point them to the textbook cell.</p>
+</div></blockquote>
 <section id="reshaping">
 <span id="id16"></span><h3>10.4.1 Reshaping<a class="headerlink" href="#reshaping" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Run the cell. The key insight: “reshape doesn’t change the data — it rearranges how the same 6 numbers are organized into rows and columns.” Point out that the total number of elements must stay the same: you can reshape <code class="docutils literal notranslate"><span class="pre">(6,)</span></code> into <code class="docutils literal notranslate"><span class="pre">(2,3)</span></code> or <code class="docutils literal notranslate"><span class="pre">(3,2)</span></code> or <code class="docutils literal notranslate"><span class="pre">(6,1)</span></code> but NOT <code class="docutils literal notranslate"><span class="pre">(2,4)</span></code> — that would need 8 elements. Try it live if helpful: <code class="docutils literal notranslate"><span class="pre">a.reshape(2,</span> <span class="pre">4)</span></code> will throw a ValueError. Also show <code class="docutils literal notranslate"><span class="pre">.flatten()</span></code> as the inverse — “it unrolls any multi-dimensional array back into 1D.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reshape: change dimensions without changing data</span>
@@ -1005,6 +1116,9 @@ Flattened: [1 2 3 4 5 6]
 <section id="transpose">
 <span id="id17"></span><h3>10.4.2 Transpose<a class="headerlink" href="#transpose" title="Link to this heading">#</a></h3>
 <p>The transpose swaps rows and columns. This is essential for linear algebra (Chapter 11).</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Run the cell. Say: “Transpose flips the matrix — rows become columns and columns become rows. A 2×3 becomes a 3×2.” The shorthand <code class="docutils literal notranslate"><span class="pre">.T</span></code> is the one they’ll use. If any students have taken linear algebra, they’ll recognize this. For others, just show that row <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> becomes column <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>. This will click more in Chapter 11 when they use it for real.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
@@ -1032,6 +1146,9 @@ Transposed (3x2):
 </section>
 <section id="combining-arrays">
 <span id="id18"></span><h3>10.4.3 Combining Arrays<a class="headerlink" href="#combining-arrays" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Three functions, one sentence each: “<code class="docutils literal notranslate"><span class="pre">concatenate</span></code> joins 1D arrays end-to-end. <code class="docutils literal notranslate"><span class="pre">vstack</span></code> stacks arrays as new rows (vertical). <code class="docutils literal notranslate"><span class="pre">hstack</span></code> stacks arrays as new columns (horizontal).” Run the cell and point at the outputs. The most practical one is <code class="docutils literal notranslate"><span class="pre">vstack</span></code> — they’ll use it when adding new experiment data as a row to an existing table. Don’t overexplain — this is reference material they can look up later.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Concatenate: join arrays along an existing axis</span>
@@ -1071,9 +1188,22 @@ hstack:
 </section>
 <section id="practical-examples">
 <span id="id19"></span><h2>10.5 Practical Examples<a class="headerlink" href="#practical-examples" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Transition: “Let’s put it all together with two real chemical engineering examples.” These examples combine everything from the chapter — array creation, 2D indexing, axis operations, and vectorization. Walk through them more slowly and connect each line back to the concept it uses.</p>
+</div></blockquote>
 <section id="tabulating-experimental-data">
 <span id="id20"></span><h3>10.5.1 Tabulating Experimental Data<a class="headerlink" href="#tabulating-experimental-data" title="Link to this heading">#</a></h3>
 <p>Suppose you ran 4 experiments measuring reactor temperature at 5 time points each. You can store all the data in a single 2D array and quickly compute statistics.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is the payoff example. Walk through the code line by line:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.mean(reactor_temps,</span> <span class="pre">axis=0)</span></code> — “average <em>across experiments</em> at each time point” → connects back to 10.3.4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.mean(reactor_temps,</span> <span class="pre">axis=1)</span></code> — “average <em>across time</em> for each experiment”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reactor_temps[:,</span> <span class="pre">-1]</span></code> — “extract the last column (final temperatures)” → connects back to 10.2.3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.argmax(final_temps)</span></code> — “which experiment index had the highest?” → connects back to 10.3.3</p></li>
+</ul>
+<p>Ask: “If you had 100 experiments with 50 time points each, would this code change at all?” (No — just the data changes, the operations are the same.) That’s the power of NumPy.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rows = experiments, Columns = time points (0, 5, 10, 15, 20 min)</span>
@@ -1132,6 +1262,9 @@ Highest final temp: Experiment 3 (375 K)
 <section id="vectorized-ideal-gas-law">
 <span id="id21"></span><h3>10.5.2 Vectorized Ideal Gas Law<a class="headerlink" href="#vectorized-ideal-gas-law" title="Link to this heading">#</a></h3>
 <p>Instead of computing PV = nRT one condition at a time with a loop, we can compute pressure for many temperatures at once using vectorized operations.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This connects directly to the ideal gas example from Lab 5. Say: “In the lab, you used a for-loop over temperatures. Watch this — one line of NumPy replaces the entire loop.” Point to <code class="docutils literal notranslate"><span class="pre">pressures</span> <span class="pre">=</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">R</span> <span class="pre">*</span> <span class="pre">temperatures</span> <span class="pre">/</span> <span class="pre">V</span></code> and explain: <code class="docutils literal notranslate"><span class="pre">temperatures</span></code> is an array of 7 values, so <code class="docutils literal notranslate"><span class="pre">pressures</span></code> automatically becomes an array of 7 results. The for-loop in the print section is only for display — the actual computation is a single vectorized line. This is how professional scientific code looks.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ideal gas law: P = nRT/V</span>
@@ -1174,6 +1307,9 @@ Highest final temp: Experiment 3 (375 K)
 <li><p><code class="docutils literal notranslate"><span class="pre">.reshape()</span></code>, <code class="docutils literal notranslate"><span class="pre">.T</span></code>, <code class="docutils literal notranslate"><span class="pre">np.vstack()</span></code>, <code class="docutils literal notranslate"><span class="pre">np.hstack()</span></code> let you restructure arrays</p></li>
 </ul>
 <p><strong>Coming up in Chapter 11:</strong> These 2D arrays are matrices — and NumPy provides tools for matrix multiplication, solving systems of linear equations, and other linear algebra operations essential for chemical engineering.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> Wrap up with: “Three things to remember from today: (1) arrays do math, lists don’t; (2) <code class="docutils literal notranslate"><span class="pre">[row,</span> <span class="pre">col]</span></code> with <code class="docutils literal notranslate"><span class="pre">:</span></code> for slicing; (3) <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> collapses rows, <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> collapses columns.” Preview Chapter 11: “Next time, we’ll use these arrays as matrices and solve systems of equations — like material balances on a reactor network — in one line of code.”</p>
+</div></blockquote>
 </section>
 </section>
 </section>

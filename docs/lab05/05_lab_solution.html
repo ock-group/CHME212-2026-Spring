@@ -194,6 +194,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
@@ -712,6 +716,9 @@ T (K)      P (atm)
 <p>Use the format keyword to create such filenames.</p>
 <p><strong>Hint 1:</strong> It is recommended to implement two for-loops here, one for the temperature range and one for volume.</p>
 <p><strong>Hint 2:</strong> It is better to create a list of lists for pressures (i.e., creating a two-dimensional matrix). This way you can access elements with two indices as P[i][j].</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is the hardest problem in the lab — nested loops, plotting, and file output all at once. If students are struggling, suggest they break it into pieces: (1) first just get one P-V curve working for a single temperature, (2) then wrap it in the outer temperature loop, (3) add plotting, (4) add file saving last. Common mistakes: forgetting to re-initialize <code class="docutils literal notranslate"><span class="pre">P_temp</span> <span class="pre">=</span> <span class="pre">[]</span></code> inside the outer loop (results in one giant list), using <code class="docutils literal notranslate"><span class="pre">plt.savefig</span></code> instead of <code class="docutils literal notranslate"><span class="pre">plt.savefig</span></code> (capitalization), and placing <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> before <code class="docutils literal notranslate"><span class="pre">plt.savefig()</span></code>. For step (d), the f-string filename <code class="docutils literal notranslate"><span class="pre">f'vdW_PV_{temp}K.dat'</span></code> is the cleanest approach — some students may try string concatenation which also works but is messier.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem 2: P-V Diagrams for Van der Waals Gas</span>
@@ -719,6 +726,13 @@ T (K)      P (atm)
 <span class="c1"># Step a) Import libraries</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate pressure using the van der Waals equation.</span>
+<span class="sd">    p = nRT/(V - nb) - n²a/V²</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Step b) Read temperature data from file</span>
 <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;temperatures.dat&#39;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
@@ -808,6 +822,77 @@ Saved vdW_PV_250.0K.dat
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1"># def VdW_p(n,T,V):</span>
+<span class="c1">#     R = 0.082057</span>
+<span class="c1">#     a = 3.640/1.01325</span>
+<span class="c1">#     b = 0.04267</span>
+<span class="c1">#     P = (n*R*T) / (V-n*b) - (n**2 * a) / (V**2)#((n*R*T)/(V-n*b))-(((n**2)*a)/(V**2))</span>
+<span class="c1">#     return P</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate pressure using the van der Waals equation.</span>
+<span class="sd">    p = nRT/(V - nb) - n²a/V²</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Constants (same as Problem 1)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span> <span class="o">/</span> <span class="mf">1.01325</span> <span class="c1"># L²·bar/mol² → L²·atm/mol²</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.04267</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate pressure using the van der Waals equation.</span>
+<span class="sd">    p = nRT/(V - nb) - n²a/V²</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">n</span><span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># (n * R * T) / (V - n * b) - (n**2 * a) / (V**2)</span>
+
+
+<span class="c1"># Step b) Read temperature data from file</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;temperatures.dat&#39;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Step c) Create volume array</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">pressures</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">temp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">P_temp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">V</span> <span class="ow">in</span> <span class="n">volume</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">P_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">pressures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P_temp</span><span class="p">)</span>
+        
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span><span class="n">P_temp</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T=</span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">k&quot;</span><span class="p">)</span>
+
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Volume (L)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Pressure (atm)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+
+
+
+    
+
+<span class="c1"># plt.savefig(&#39;vdW_PV_diagram_low.png&#39;, dpi=50)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Pressure (atm)&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/c6418b29a67f8a175baa337e067b77cfb9820a77b52c99fde3819654f497977c.png" src="../../_images/c6418b29a67f8a175baa337e067b77cfb9820a77b52c99fde3819654f497977c.png" />
+</div>
+</div>
 </section>
 <section id="problem-3-reading-and-plotting-p-v-data">
 <h3>Problem 3: Reading and Plotting P-V Data<a class="headerlink" href="#problem-3-reading-and-plotting-p-v-data" title="Link to this heading">#</a></h3>
@@ -815,6 +900,9 @@ Saved vdW_PV_250.0K.dat
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">P</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;vdW_PV_150.0K.dat&#39;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This is intentionally short — it tests whether students can read back the data they just wrote. The main teaching point is <code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code> with <code class="docutils literal notranslate"><span class="pre">unpack=True</span></code> (splits columns into separate arrays) and <code class="docutils literal notranslate"><span class="pre">delimiter=','</span></code> (since Problem 2 wrote CSV format). If students get an error, it’s usually because they forgot <code class="docutils literal notranslate"><span class="pre">delimiter=','</span></code> — <code class="docutils literal notranslate"><span class="pre">loadtxt</span></code> defaults to whitespace. This is also a good moment to reinforce: “You wrote data to a file in Problem 2, and now you’re reading it back. This is a real workflow — save results from a simulation, then load and plot them later.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem 3: Reading and Plotting P-V Data for 150 K</span>
@@ -856,6 +944,9 @@ V(r) = 4\varepsilon\left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma
 \]</div>
 <p>where r is the interatomic distance, ε = 3.4 kJ/mol is the depth of the potential well and σ = 3.4 Angstroms is the separation distance at which the potential is zero.</p>
 <p>Plot V(r) at a grid of r values, e.g., using <code class="docutils literal notranslate"><span class="pre">np.linspace(3.5,</span> <span class="pre">10,</span> <span class="pre">1000)</span></code> similar to Problem 2c). Add the titles for the figure and the axes. Set appropriate plot limits. Save V-r values into the external file like Problem 2d).</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong> This problem is a bonus/stretch goal. If most students are still on Problems 1-2, don’t walk through this — let advanced students try it independently. Key points if discussing: the LJ potential is fundamental in molecular simulations (molecular dynamics, Monte Carlo). The plot should show the characteristic well shape — repulsive at short distances (r¹² term), attractive at intermediate distances (r⁶ term), and approaching zero at large r. The <code class="docutils literal notranslate"><span class="pre">plt.axhline(y=0)</span></code> helps visualize where the potential crosses zero. Setting <code class="docutils literal notranslate"><span class="pre">ylim</span></code> is important here — without it, the steep repulsive wall at small r will compress the interesting part of the curve.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem 4 (Bonus): Lennard-Jones Potential for Argon</span>
