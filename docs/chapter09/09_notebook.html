@@ -198,6 +198,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 </ul>
 
     </div>
@@ -601,6 +602,13 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 </pre></div>
@@ -617,9 +625,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -768,6 +774,28 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple reaction orders</span>
+<span class="c1"># time = np.linspace(0, 10, 100)</span>
+<span class="n">C0</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># Initial concentration</span>
+
+<span class="c1"># Different reaction orders</span>
+<span class="n">C_zero_order</span> <span class="o">=</span> <span class="n">C0</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">time</span>
+
+<span class="c1"># Create plot with different line styles</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">C_zero_order</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Zero Order&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x120beb9d0&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/1d064953d0fbee3205b1363312fc8e9a76493c823aaadc2d02d54c36be554873.png" src="../../_images/1d064953d0fbee3205b1363312fc8e9a76493c823aaadc2d02d54c36be554873.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mcolors</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">mcolors</span><span class="o">.</span><span class="n">CSS4_COLORS</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">mcolors</span><span class="o">.</span><span class="n">CSS4_COLORS</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
@@ -777,6 +805,37 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;aliceblue&#39;: &#39;#F0F8FF&#39;, &#39;antiquewhite&#39;: &#39;#FAEBD7&#39;, &#39;aqua&#39;: &#39;#00FFFF&#39;, &#39;aquamarine&#39;: &#39;#7FFFD4&#39;, &#39;azure&#39;: &#39;#F0FFFF&#39;, &#39;beige&#39;: &#39;#F5F5DC&#39;, &#39;bisque&#39;: &#39;#FFE4C4&#39;, &#39;black&#39;: &#39;#000000&#39;, &#39;blanchedalmond&#39;: &#39;#FFEBCD&#39;, &#39;blue&#39;: &#39;#0000FF&#39;, &#39;blueviolet&#39;: &#39;#8A2BE2&#39;, &#39;brown&#39;: &#39;#A52A2A&#39;, &#39;burlywood&#39;: &#39;#DEB887&#39;, &#39;cadetblue&#39;: &#39;#5F9EA0&#39;, &#39;chartreuse&#39;: &#39;#7FFF00&#39;, &#39;chocolate&#39;: &#39;#D2691E&#39;, &#39;coral&#39;: &#39;#FF7F50&#39;, &#39;cornflowerblue&#39;: &#39;#6495ED&#39;, &#39;cornsilk&#39;: &#39;#FFF8DC&#39;, &#39;crimson&#39;: &#39;#DC143C&#39;, &#39;cyan&#39;: &#39;#00FFFF&#39;, &#39;darkblue&#39;: &#39;#00008B&#39;, &#39;darkcyan&#39;: &#39;#008B8B&#39;, &#39;darkgoldenrod&#39;: &#39;#B8860B&#39;, &#39;darkgray&#39;: &#39;#A9A9A9&#39;, &#39;darkgreen&#39;: &#39;#006400&#39;, &#39;darkgrey&#39;: &#39;#A9A9A9&#39;, &#39;darkkhaki&#39;: &#39;#BDB76B&#39;, &#39;darkmagenta&#39;: &#39;#8B008B&#39;, &#39;darkolivegreen&#39;: &#39;#556B2F&#39;, &#39;darkorange&#39;: &#39;#FF8C00&#39;, &#39;darkorchid&#39;: &#39;#9932CC&#39;, &#39;darkred&#39;: &#39;#8B0000&#39;, &#39;darksalmon&#39;: &#39;#E9967A&#39;, &#39;darkseagreen&#39;: &#39;#8FBC8F&#39;, &#39;darkslateblue&#39;: &#39;#483D8B&#39;, &#39;darkslategray&#39;: &#39;#2F4F4F&#39;, &#39;darkslategrey&#39;: &#39;#2F4F4F&#39;, &#39;darkturquoise&#39;: &#39;#00CED1&#39;, &#39;darkviolet&#39;: &#39;#9400D3&#39;, &#39;deeppink&#39;: &#39;#FF1493&#39;, &#39;deepskyblue&#39;: &#39;#00BFFF&#39;, &#39;dimgray&#39;: &#39;#696969&#39;, &#39;dimgrey&#39;: &#39;#696969&#39;, &#39;dodgerblue&#39;: &#39;#1E90FF&#39;, &#39;firebrick&#39;: &#39;#B22222&#39;, &#39;floralwhite&#39;: &#39;#FFFAF0&#39;, &#39;forestgreen&#39;: &#39;#228B22&#39;, &#39;fuchsia&#39;: &#39;#FF00FF&#39;, &#39;gainsboro&#39;: &#39;#DCDCDC&#39;, &#39;ghostwhite&#39;: &#39;#F8F8FF&#39;, &#39;gold&#39;: &#39;#FFD700&#39;, &#39;goldenrod&#39;: &#39;#DAA520&#39;, &#39;gray&#39;: &#39;#808080&#39;, &#39;green&#39;: &#39;#008000&#39;, &#39;greenyellow&#39;: &#39;#ADFF2F&#39;, &#39;grey&#39;: &#39;#808080&#39;, &#39;honeydew&#39;: &#39;#F0FFF0&#39;, &#39;hotpink&#39;: &#39;#FF69B4&#39;, &#39;indianred&#39;: &#39;#CD5C5C&#39;, &#39;indigo&#39;: &#39;#4B0082&#39;, &#39;ivory&#39;: &#39;#FFFFF0&#39;, &#39;khaki&#39;: &#39;#F0E68C&#39;, &#39;lavender&#39;: &#39;#E6E6FA&#39;, &#39;lavenderblush&#39;: &#39;#FFF0F5&#39;, &#39;lawngreen&#39;: &#39;#7CFC00&#39;, &#39;lemonchiffon&#39;: &#39;#FFFACD&#39;, &#39;lightblue&#39;: &#39;#ADD8E6&#39;, &#39;lightcoral&#39;: &#39;#F08080&#39;, &#39;lightcyan&#39;: &#39;#E0FFFF&#39;, &#39;lightgoldenrodyellow&#39;: &#39;#FAFAD2&#39;, &#39;lightgray&#39;: &#39;#D3D3D3&#39;, &#39;lightgreen&#39;: &#39;#90EE90&#39;, &#39;lightgrey&#39;: &#39;#D3D3D3&#39;, &#39;lightpink&#39;: &#39;#FFB6C1&#39;, &#39;lightsalmon&#39;: &#39;#FFA07A&#39;, &#39;lightseagreen&#39;: &#39;#20B2AA&#39;, &#39;lightskyblue&#39;: &#39;#87CEFA&#39;, &#39;lightslategray&#39;: &#39;#778899&#39;, &#39;lightslategrey&#39;: &#39;#778899&#39;, &#39;lightsteelblue&#39;: &#39;#B0C4DE&#39;, &#39;lightyellow&#39;: &#39;#FFFFE0&#39;, &#39;lime&#39;: &#39;#00FF00&#39;, &#39;limegreen&#39;: &#39;#32CD32&#39;, &#39;linen&#39;: &#39;#FAF0E6&#39;, &#39;magenta&#39;: &#39;#FF00FF&#39;, &#39;maroon&#39;: &#39;#800000&#39;, &#39;mediumaquamarine&#39;: &#39;#66CDAA&#39;, &#39;mediumblue&#39;: &#39;#0000CD&#39;, &#39;mediumorchid&#39;: &#39;#BA55D3&#39;, &#39;mediumpurple&#39;: &#39;#9370DB&#39;, &#39;mediumseagreen&#39;: &#39;#3CB371&#39;, &#39;mediumslateblue&#39;: &#39;#7B68EE&#39;, &#39;mediumspringgreen&#39;: &#39;#00FA9A&#39;, &#39;mediumturquoise&#39;: &#39;#48D1CC&#39;, &#39;mediumvioletred&#39;: &#39;#C71585&#39;, &#39;midnightblue&#39;: &#39;#191970&#39;, &#39;mintcream&#39;: &#39;#F5FFFA&#39;, &#39;mistyrose&#39;: &#39;#FFE4E1&#39;, &#39;moccasin&#39;: &#39;#FFE4B5&#39;, &#39;navajowhite&#39;: &#39;#FFDEAD&#39;, &#39;navy&#39;: &#39;#000080&#39;, &#39;oldlace&#39;: &#39;#FDF5E6&#39;, &#39;olive&#39;: &#39;#808000&#39;, &#39;olivedrab&#39;: &#39;#6B8E23&#39;, &#39;orange&#39;: &#39;#FFA500&#39;, &#39;orangered&#39;: &#39;#FF4500&#39;, &#39;orchid&#39;: &#39;#DA70D6&#39;, &#39;palegoldenrod&#39;: &#39;#EEE8AA&#39;, &#39;palegreen&#39;: &#39;#98FB98&#39;, &#39;paleturquoise&#39;: &#39;#AFEEEE&#39;, &#39;palevioletred&#39;: &#39;#DB7093&#39;, &#39;papayawhip&#39;: &#39;#FFEFD5&#39;, &#39;peachpuff&#39;: &#39;#FFDAB9&#39;, &#39;peru&#39;: &#39;#CD853F&#39;, &#39;pink&#39;: &#39;#FFC0CB&#39;, &#39;plum&#39;: &#39;#DDA0DD&#39;, &#39;powderblue&#39;: &#39;#B0E0E6&#39;, &#39;purple&#39;: &#39;#800080&#39;, &#39;rebeccapurple&#39;: &#39;#663399&#39;, &#39;red&#39;: &#39;#FF0000&#39;, &#39;rosybrown&#39;: &#39;#BC8F8F&#39;, &#39;royalblue&#39;: &#39;#4169E1&#39;, &#39;saddlebrown&#39;: &#39;#8B4513&#39;, &#39;salmon&#39;: &#39;#FA8072&#39;, &#39;sandybrown&#39;: &#39;#F4A460&#39;, &#39;seagreen&#39;: &#39;#2E8B57&#39;, &#39;seashell&#39;: &#39;#FFF5EE&#39;, &#39;sienna&#39;: &#39;#A0522D&#39;, &#39;silver&#39;: &#39;#C0C0C0&#39;, &#39;skyblue&#39;: &#39;#87CEEB&#39;, &#39;slateblue&#39;: &#39;#6A5ACD&#39;, &#39;slategray&#39;: &#39;#708090&#39;, &#39;slategrey&#39;: &#39;#708090&#39;, &#39;snow&#39;: &#39;#FFFAFA&#39;, &#39;springgreen&#39;: &#39;#00FF7F&#39;, &#39;steelblue&#39;: &#39;#4682B4&#39;, &#39;tan&#39;: &#39;#D2B48C&#39;, &#39;teal&#39;: &#39;#008080&#39;, &#39;thistle&#39;: &#39;#D8BFD8&#39;, &#39;tomato&#39;: &#39;#FF6347&#39;, &#39;turquoise&#39;: &#39;#40E0D0&#39;, &#39;violet&#39;: &#39;#EE82EE&#39;, &#39;wheat&#39;: &#39;#F5DEB3&#39;, &#39;white&#39;: &#39;#FFFFFF&#39;, &#39;whitesmoke&#39;: &#39;#F5F5F5&#39;, &#39;yellow&#39;: &#39;#FFFF00&#39;, &#39;yellowgreen&#39;: &#39;#9ACD32&#39;}
 [&#39;aliceblue&#39;, &#39;antiquewhite&#39;, &#39;aqua&#39;, &#39;aquamarine&#39;, &#39;azure&#39;, &#39;beige&#39;, &#39;bisque&#39;, &#39;black&#39;, &#39;blanchedalmond&#39;, &#39;blue&#39;, &#39;blueviolet&#39;, &#39;brown&#39;, &#39;burlywood&#39;, &#39;cadetblue&#39;, &#39;chartreuse&#39;, &#39;chocolate&#39;, &#39;coral&#39;, &#39;cornflowerblue&#39;, &#39;cornsilk&#39;, &#39;crimson&#39;, &#39;cyan&#39;, &#39;darkblue&#39;, &#39;darkcyan&#39;, &#39;darkgoldenrod&#39;, &#39;darkgray&#39;, &#39;darkgreen&#39;, &#39;darkgrey&#39;, &#39;darkkhaki&#39;, &#39;darkmagenta&#39;, &#39;darkolivegreen&#39;, &#39;darkorange&#39;, &#39;darkorchid&#39;, &#39;darkred&#39;, &#39;darksalmon&#39;, &#39;darkseagreen&#39;, &#39;darkslateblue&#39;, &#39;darkslategray&#39;, &#39;darkslategrey&#39;, &#39;darkturquoise&#39;, &#39;darkviolet&#39;, &#39;deeppink&#39;, &#39;deepskyblue&#39;, &#39;dimgray&#39;, &#39;dimgrey&#39;, &#39;dodgerblue&#39;, &#39;firebrick&#39;, &#39;floralwhite&#39;, &#39;forestgreen&#39;, &#39;fuchsia&#39;, &#39;gainsboro&#39;, &#39;ghostwhite&#39;, &#39;gold&#39;, &#39;goldenrod&#39;, &#39;gray&#39;, &#39;green&#39;, &#39;greenyellow&#39;, &#39;grey&#39;, &#39;honeydew&#39;, &#39;hotpink&#39;, &#39;indianred&#39;, &#39;indigo&#39;, &#39;ivory&#39;, &#39;khaki&#39;, &#39;lavender&#39;, &#39;lavenderblush&#39;, &#39;lawngreen&#39;, &#39;lemonchiffon&#39;, &#39;lightblue&#39;, &#39;lightcoral&#39;, &#39;lightcyan&#39;, &#39;lightgoldenrodyellow&#39;, &#39;lightgray&#39;, &#39;lightgreen&#39;, &#39;lightgrey&#39;, &#39;lightpink&#39;, &#39;lightsalmon&#39;, &#39;lightseagreen&#39;, &#39;lightskyblue&#39;, &#39;lightslategray&#39;, &#39;lightslategrey&#39;, &#39;lightsteelblue&#39;, &#39;lightyellow&#39;, &#39;lime&#39;, &#39;limegreen&#39;, &#39;linen&#39;, &#39;magenta&#39;, &#39;maroon&#39;, &#39;mediumaquamarine&#39;, &#39;mediumblue&#39;, &#39;mediumorchid&#39;, &#39;mediumpurple&#39;, &#39;mediumseagreen&#39;, &#39;mediumslateblue&#39;, &#39;mediumspringgreen&#39;, &#39;mediumturquoise&#39;, &#39;mediumvioletred&#39;, &#39;midnightblue&#39;, &#39;mintcream&#39;, &#39;mistyrose&#39;, &#39;moccasin&#39;, &#39;navajowhite&#39;, &#39;navy&#39;, &#39;oldlace&#39;, &#39;olive&#39;, &#39;olivedrab&#39;, &#39;orange&#39;, &#39;orangered&#39;, &#39;orchid&#39;, &#39;palegoldenrod&#39;, &#39;palegreen&#39;, &#39;paleturquoise&#39;, &#39;palevioletred&#39;, &#39;papayawhip&#39;, &#39;peachpuff&#39;, &#39;peru&#39;, &#39;pink&#39;, &#39;plum&#39;, &#39;powderblue&#39;, &#39;purple&#39;, &#39;rebeccapurple&#39;, &#39;red&#39;, &#39;rosybrown&#39;, &#39;royalblue&#39;, &#39;saddlebrown&#39;, &#39;salmon&#39;, &#39;sandybrown&#39;, &#39;seagreen&#39;, &#39;seashell&#39;, &#39;sienna&#39;, &#39;silver&#39;, &#39;skyblue&#39;, &#39;slateblue&#39;, &#39;slategray&#39;, &#39;slategrey&#39;, &#39;snow&#39;, &#39;springgreen&#39;, &#39;steelblue&#39;, &#39;tan&#39;, &#39;teal&#39;, &#39;thistle&#39;, &#39;tomato&#39;, &#39;turquoise&#39;, &#39;violet&#39;, &#39;wheat&#39;, &#39;white&#39;, &#39;whitesmoke&#39;, &#39;yellow&#39;, &#39;yellowgreen&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.        ,  0.1010101 ,  0.2020202 ,  0.3030303 ,  0.4040404 ,
+        0.50505051,  0.60606061,  0.70707071,  0.80808081,  0.90909091,
+        1.01010101,  1.11111111,  1.21212121,  1.31313131,  1.41414141,
+        1.51515152,  1.61616162,  1.71717172,  1.81818182,  1.91919192,
+        2.02020202,  2.12121212,  2.22222222,  2.32323232,  2.42424242,
+        2.52525253,  2.62626263,  2.72727273,  2.82828283,  2.92929293,
+        3.03030303,  3.13131313,  3.23232323,  3.33333333,  3.43434343,
+        3.53535354,  3.63636364,  3.73737374,  3.83838384,  3.93939394,
+        4.04040404,  4.14141414,  4.24242424,  4.34343434,  4.44444444,
+        4.54545455,  4.64646465,  4.74747475,  4.84848485,  4.94949495,
+        5.05050505,  5.15151515,  5.25252525,  5.35353535,  5.45454545,
+        5.55555556,  5.65656566,  5.75757576,  5.85858586,  5.95959596,
+        6.06060606,  6.16161616,  6.26262626,  6.36363636,  6.46464646,
+        6.56565657,  6.66666667,  6.76767677,  6.86868687,  6.96969697,
+        7.07070707,  7.17171717,  7.27272727,  7.37373737,  7.47474747,
+        7.57575758,  7.67676768,  7.77777778,  7.87878788,  7.97979798,
+        8.08080808,  8.18181818,  8.28282828,  8.38383838,  8.48484848,
+        8.58585859,  8.68686869,  8.78787879,  8.88888889,  8.98989899,
+        9.09090909,  9.19191919,  9.29292929,  9.39393939,  9.49494949,
+        9.5959596 ,  9.6969697 ,  9.7979798 ,  9.8989899 , 10.        ])
 </pre></div>
 </div>
 </div>
@@ -822,6 +881,21 @@ document.write(`
 <h3>9.1.3 Scatter Plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">linestyling</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">linestyling</span><span class="o">...</span><span class="p">)</span>
+                                <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax. Perhaps you forgot a comma?
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Experimental data with noise</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">time_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.</span>        <span class="p">,</span>  <span class="mf">0.52631579</span><span class="p">,</span>  <span class="mf">1.05263158</span><span class="p">,</span>  <span class="mf">1.57894737</span><span class="p">,</span>  <span class="mf">2.10526316</span><span class="p">,</span>
@@ -830,19 +904,50 @@ document.write(`
         <span class="mf">7.89473684</span><span class="p">,</span>  <span class="mf">8.42105263</span><span class="p">,</span>  <span class="mf">8.94736842</span><span class="p">,</span>  <span class="mf">9.47368421</span><span class="p">,</span> <span class="mf">10.</span>        <span class="p">])</span>
 <span class="n">C_exp</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">time_exp</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
-<span class="c1"># Theoretical model</span>
+
 <span class="n">time_model</span> <span class="o">=</span> <span class="n">time</span> <span class="c1">#np.linspace(0, 10, 100)</span>
 <span class="n">C_model</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">time_model</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time_exp</span><span class="p">,</span> <span class="n">C_exp</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> 
-            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Experimental Data&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_model</span><span class="p">,</span> <span class="n">C_model</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
-         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Model Fit&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Experimental Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_model</span><span class="p">,</span> <span class="n">C_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Model Data&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Model Fitting to Experimental Data&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6dcb19953c3195d780b51fe20c1ff967f92683e79778dab28368dda3f24b9441.png" src="../../_images/6dcb19953c3195d780b51fe20c1ff967f92683e79778dab28368dda3f24b9441.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Experimental data with noise</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">time_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.</span>        <span class="p">,</span>  <span class="mf">0.52631579</span><span class="p">,</span>  <span class="mf">1.05263158</span><span class="p">,</span>  <span class="mf">1.57894737</span><span class="p">,</span>  <span class="mf">2.10526316</span><span class="p">,</span>
+        <span class="mf">2.63157895</span><span class="p">,</span>  <span class="mf">3.15789474</span><span class="p">,</span>  <span class="mf">3.68421053</span><span class="p">,</span>  <span class="mf">4.21052632</span><span class="p">,</span>  <span class="mf">4.73684211</span><span class="p">,</span>
+        <span class="mf">5.26315789</span><span class="p">,</span>  <span class="mf">5.78947368</span><span class="p">,</span>  <span class="mf">6.31578947</span><span class="p">,</span>  <span class="mf">6.84210526</span><span class="p">,</span>  <span class="mf">7.36842105</span><span class="p">,</span>
+        <span class="mf">7.89473684</span><span class="p">,</span>  <span class="mf">8.42105263</span><span class="p">,</span>  <span class="mf">8.94736842</span><span class="p">,</span>  <span class="mf">9.47368421</span><span class="p">,</span> <span class="mf">10.</span>        <span class="p">])</span>
+<span class="n">C_exp</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">time_exp</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># # Theoretical model</span>
+<span class="c1"># time_model = time #np.linspace(0, 10, 100)</span>
+<span class="c1"># C_model = 5.0 * np.exp(-0.3 * time_model)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time_exp</span><span class="p">,</span> <span class="n">C_exp</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> 
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Experimental Data&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># plt.plot(time_model, C_model, &#39;b-&#39;, linewidth=2, </span>
+<span class="c1">#          label=&#39;Model Fit&#39;, zorder=2)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># plt.title(&#39;Model Fitting to Experimental Data&#39;, fontsize=14)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -868,10 +973,24 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&lt;Axes: &gt;, &lt;Axes: &gt;],
+       [&lt;Axes: &gt;, &lt;Axes: &gt;],
+       [&lt;Axes: &gt;, &lt;Axes: &gt;]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create 2x2 subplot layout</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
-<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">time</span> <span class="c1">#np.linspace(0, 10, 100)</span>
 
 <span class="c1"># Subplot 1: Concentration vs Time</span>
 <span class="n">C</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
@@ -910,7 +1029,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4fd787a80dd5df8dbf3814923750d883b2be16fcc7956f85513c5f4a19103133.png" src="../../_images/4fd787a80dd5df8dbf3814923750d883b2be16fcc7956f85513c5f4a19103133.png" />
+<img alt="../../_images/1d4cc46e86ab30ce8f78482473312488b58a26bee1df31f3071d04f3cccaa116.png" src="../../_images/1d4cc46e86ab30ce8f78482473312488b58a26bee1df31f3071d04f3cccaa116.png" />
 </div>
 </div>
 </section>
@@ -928,13 +1047,14 @@ document.write(`
 <span class="c1"># -------- FIGURE 1: BAR CHART --------</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">catalysts</span><span class="p">,</span> <span class="n">yields</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span>
-               <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">catalysts</span><span class="p">,</span> <span class="n">yields</span><span class="p">)</span>
+               <span class="c1">#color=colors,</span>
+               <span class="c1">#edgecolor=&#39;black&#39;, linewidth=1.5)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dbd5800cea487068cb690668da782dd3d5c17bbeb241563c40b6ca83155f5ad7.png" src="../../_images/dbd5800cea487068cb690668da782dd3d5c17bbeb241563c40b6ca83155f5ad7.png" />
+<img alt="../../_images/96dedcc59ff62adec03afdc75452b63a634e1a7002d96c090477fb64132483ff.png" src="../../_images/96dedcc59ff62adec03afdc75452b63a634e1a7002d96c090477fb64132483ff.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -986,16 +1106,16 @@ document.write(`
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">particle_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>
-         <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
-         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">particle_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="c1"># color=&#39;steelblue&#39;,</span>
+         <span class="c1"># edgecolor=&#39;black&#39;,</span>
+         <span class="c1"># alpha=0.7)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b3b8ba3fc617c60b3ff82ca7b0a1ccded42eea17364707c233afe7771142fe2f.png" src="../../_images/b3b8ba3fc617c60b3ff82ca7b0a1ccded42eea17364707c233afe7771142fe2f.png" />
+<img alt="../../_images/5ff2c46572d0c3ce733f2292e8fbea61dec77a142648ffecfc500024ed23c3fb.png" src="../../_images/5ff2c46572d0c3ce733f2292e8fbea61dec77a142648ffecfc500024ed23c3fb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1261,10 +1381,10 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
 
 <span class="c1"># Proper axis labels with units</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Pressure (Pa)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Pressure of Ideal Gas vs Temperature at Constant Volume&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Pressure (Pa)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Pressure of Ideal Gas vs Temperature at Constant Volume&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
 <span class="c1"># Linear scale by default; log scale example</span>
 <span class="c1"># plt.yscale(&#39;log&#39;)  # Uncomment to show log scaling</span>
@@ -1274,7 +1394,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b899d9691fd048de9f980703ae86d76d7b9cf2245bd2da6abcbf242280a2de42.png" src="../../_images/b899d9691fd048de9f980703ae86d76d7b9cf2245bd2da6abcbf242280a2de42.png" />
+<img alt="../../_images/e301c958f5823d330fa5ae8002d372e88503f64ce208863075fa63cd922e0082.png" src="../../_images/e301c958f5823d330fa5ae8002d372e88503f64ce208863075fa63cd922e0082.png" />
 </div>
 </div>
 </section>
@@ -1310,7 +1430,7 @@ document.write(`
 
 <span class="c1"># Create plot with error bars</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">OD_mean</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">OD_std</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;OD600 ± SD&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">OD_mean</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">OD_std</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#, color=&#39;g&#39;, label=&#39;OD600 ± SD&#39;)</span>
 
 <span class="c1"># Labels and title</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (hours)&#39;</span><span class="p">)</span>
@@ -1324,7 +1444,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4572030aa26bc992ccb391a44168ac24ceb5ce00d009e2149f1fe538f2e91d63.png" src="../../_images/4572030aa26bc992ccb391a44168ac24ceb5ce00d009e2149f1fe538f2e91d63.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/0w/xt4lf1l923l353q32j8pqq000000gn/T/ipykernel_96445/214675294.py:17: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  plt.legend()
+</pre></div>
+</div>
+<img alt="../../_images/ade49d4f78581256f651791e21bd47353ea7ca14691d0105d539fe0e7ef9e0cb.png" src="../../_images/ade49d4f78581256f651791e21bd47353ea7ca14691d0105d539fe0e7ef9e0cb.png" />
 </div>
 </div>
 </section>
@@ -1341,9 +1465,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: rdkit in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (2025.9.3)
-Requirement already satisfied: numpy in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (from rdkit) (1.26.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting rdkit
+  Downloading rdkit-2025.9.3-cp310-cp310-macosx_11_0_arm64.whl.metadata (4.2 kB)
+Requirement already satisfied: numpy in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (from rdkit) (2.2.6)
 Requirement already satisfied: Pillow in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (from rdkit) (12.0.0)
+Downloading rdkit-2025.9.3-cp310-cp310-macosx_11_0_arm64.whl (29.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">29.3/29.3 MB</span> <span class=" -Color -Color-Red">40.2 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+?25hInstalling collected packages: rdkit
+Successfully installed rdkit-2025.9.3
 </pre></div>
 </div>
 </div>
@@ -1429,7 +1558,11 @@ Requirement already satisfied: Pillow in /Users/hoon/miniconda3/envs/chemcomp/li
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: py3Dmol in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (2.5.3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting py3Dmol
+  Downloading py3dmol-2.5.3-py2.py3-none-any.whl.metadata (2.1 kB)
+Downloading py3dmol-2.5.3-py2.py3-none-any.whl (7.2 kB)
+Installing collected packages: py3Dmol
+Successfully installed py3Dmol-2.5.3
 </pre></div>
 </div>
 </div>
@@ -1465,8 +1598,8 @@ Requirement already satisfied: Pillow in /Users/hoon/miniconda3/envs/chemcomp/li
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="3dmolviewer_1771260846991152"  style="position: relative; width: 600px; height: 400px;">
-        <p id="3dmolwarning_1771260846991152" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+<div class="output text_html"><div id="3dmolviewer_177125954663788"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_177125954663788" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
         </div>
 <script>
 
@@ -1497,20 +1630,20 @@ $3Dmolpromise = null;
   $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
 }
 
-var viewer_1771260846991152 = null;
-var warn = document.getElementById("3dmolwarning_1771260846991152");
+var viewer_177125954663788 = null;
+var warn = document.getElementById("3dmolwarning_177125954663788");
 if(warn) {
     warn.parentNode.removeChild(warn);
 }
 $3Dmolpromise.then(function() {
-viewer_1771260846991152 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771260846991152"),{backgroundColor:"white"});
-viewer_1771260846991152.zoomTo();
-	viewer_1771260846991152.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.8883    0.1670   -0.0273 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4658   -0.5116   -0.0368 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4311    0.3229    0.5867 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8487    1.1175   -0.5695 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6471   -0.4704   -0.4896 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1964    0.3978    0.9977 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7920   -0.7224   -1.0597 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4246   -1.4559    0.5138 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4671    1.1550    0.0848 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
-	viewer_1771260846991152.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
-	viewer_1771260846991152.zoomTo();
-viewer_1771260846991152.render();
+viewer_177125954663788 = $3Dmol.createViewer(document.getElementById("3dmolviewer_177125954663788"),{backgroundColor:"white"});
+viewer_177125954663788.zoomTo();
+	viewer_177125954663788.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.8883    0.1670   -0.0273 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4658   -0.5116   -0.0368 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4311    0.3229    0.5867 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8487    1.1175   -0.5695 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6471   -0.4704   -0.4896 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1964    0.3978    0.9977 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7920   -0.7224   -1.0597 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4246   -1.4559    0.5138 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4671    1.1550    0.0848 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
+	viewer_177125954663788.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_177125954663788.zoomTo();
+viewer_177125954663788.render();
 });
-</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11f1b3c10&gt;
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11f11d180&gt;
 </pre></div>
 </div>
 </div>
@@ -1542,8 +1675,8 @@ viewer_1771260846991152.render();
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="3dmolviewer_1771260846996831"  style="position: relative; width: 600px; height: 400px;">
-        <p id="3dmolwarning_1771260846996831" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+<div class="output text_html"><div id="3dmolviewer_17712595806362371"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_17712595806362371" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
         </div>
 <script>
 
@@ -1574,20 +1707,20 @@ $3Dmolpromise = null;
   $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
 }
 
-var viewer_1771260846996831 = null;
-var warn = document.getElementById("3dmolwarning_1771260846996831");
+var viewer_17712595806362371 = null;
+var warn = document.getElementById("3dmolwarning_17712595806362371");
 if(warn) {
     warn.parentNode.removeChild(warn);
 }
 $3Dmolpromise.then(function() {
-viewer_1771260846996831 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771260846996831"),{backgroundColor:"white"});
-viewer_1771260846996831.zoomTo();
-	viewer_1771260846996831.addModel("\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.8035   -1.1401   -0.0082 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3889    0.1258   -0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5853    1.2659   -0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8035    1.1401    0.0083 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3889   -0.1258    0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5853   -1.2659    0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4295   -2.0284   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4709    0.2238   -0.0501 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0414    2.2522   -0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4295    2.0284    0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4709   -0.2238    0.0500 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0414   -2.2522    0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n","mol");
-	viewer_1771260846996831.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
-	viewer_1771260846996831.zoomTo();
-viewer_1771260846996831.render();
+viewer_17712595806362371 = $3Dmol.createViewer(document.getElementById("3dmolviewer_17712595806362371"),{backgroundColor:"white"});
+viewer_17712595806362371.zoomTo();
+	viewer_17712595806362371.addModel("\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.8035   -1.1401   -0.0082 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3889    0.1258   -0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5853    1.2659   -0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8035    1.1401    0.0083 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3889   -0.1258    0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5853   -1.2659    0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4295   -2.0284   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4709    0.2238   -0.0501 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0414    2.2522   -0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4295    2.0284    0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4709   -0.2238    0.0500 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0414   -2.2522    0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n","mol");
+	viewer_17712595806362371.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_17712595806362371.zoomTo();
+viewer_17712595806362371.render();
 });
-</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11ee13700&gt;
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11f247880&gt;
 </pre></div>
 </div>
 </div>
