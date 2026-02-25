@@ -20,7 +20,8 @@ parts:
   - caption: Numerical Computation
     chapters:
       - file: docs/chapter10/10_notebook
-  #     - file: docs/chapter11/11_notebook
+      - file: docs/chapter11/11_notebook
+      - file: docs/chapter11/11_rank_supplement
   #     - file: docs/chapter12/12_notebook
   #     - file: docs/chapter13/13_notebook
   #     - file: docs/chapter14/14_notebook
