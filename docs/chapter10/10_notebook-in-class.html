@@ -195,6 +195,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -483,6 +485,26 @@ document.write(`
 <blockquote>
 <div><p><strong>Instructor Note:</strong> Walk through the comparison table. The speed point is the most important — say: “A for-loop over a million data points might take seconds with a list. NumPy does it in milliseconds because the heavy lifting runs in compiled C, not interpreted Python.” Don’t dwell on memory — just mention it. The key takeaway for students: “If you’re doing math on collections of numbers, use arrays, not lists.”</p>
 </div></blockquote>
+<blockquote>
+<div><p><strong>Lecture Script:</strong> why do we use NumPy instead of plain Python lists?</p>
+<p>Python lists are great for general storage — they’re flexible and easy to use. But when you start doing numerical computing — like data analysis, simulation, optimization, or anything with lots of math — lists become slow and clunky.</p>
+<p>Here’s the key idea: NumPy is built for numbers. A NumPy array stores data in a compact, consistent format, and most operations run in compiled C code under the hood. That means you avoid slow Python loops and get a big speed-up automatically.</p>
+<p>With a Python list, if you want to add two vectors, you usually write a loop and add elements one by one. With NumPy, you can just do a + b, and it applies to the whole array at once — that’s called vectorization.</p>
+<p>And NumPy also comes with a huge set of built-in math tools: things like sin, exp, mean, dot, and tons more. With lists, you’d have to implement most of that manually or loop through values yourself.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span> 
+<span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1771998402.8381991
+</pre></div>
+</div>
+</div>
+</div>
 <section id="creating-arrays">
 <span id="id3"></span><h3>10.1.1 Creating Arrays<a class="headerlink" href="#creating-arrays" title="Link to this heading">#</a></h3>
 <p>NumPy provides several built-in functions to create arrays:</p>
@@ -626,7 +648,7 @@ Identity:
  [[1. 0. 0.]
  [0. 1. 0.]
  [0. 0. 1.]]
-Random: [0.55093284 0.24753493 0.02146006 0.85252295 0.5920621 ]
+Random: [0.47395452 0.16987717 0.93217085 0.14002993 0.67013675]
 </pre></div>
 </div>
 </div>
@@ -715,7 +737,7 @@ Array * 2:    [2 4 6]
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">time_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time as list:&quot;</span><span class="p">,</span> <span class="n">time_list</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">concentration_list</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">time_list</span><span class="p">)</span> 
@@ -976,26 +998,98 @@ Pressures (Pa):  [ 101325.   253312.5  506625.  1013250. ]
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measurements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.52</span><span class="p">,</span> <span class="mf">4.48</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">,</span> <span class="mf">4.60</span><span class="p">,</span> <span class="mf">4.50</span><span class="p">,</span> <span class="mf">4.53</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">measurements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.52</span><span class="p">,</span> <span class="mf">4.48</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">,</span> <span class="mf">4.60</span><span class="p">,</span> <span class="mf">4.50</span><span class="p">,</span> <span class="mf">4.53</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum:  &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Std:  &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Min:  &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max:  &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Argmin (index of min):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Argmax (index of max):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
+
+
+<span class="n">manual_sum</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">:</span>
+    <span class="n">manual_sum</span> <span class="o">+=</span> <span class="n">value</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manual Sum:&quot;</span><span class="p">,</span> <span class="n">manual_sum</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sum:   27.18
-Mean:  4.53
+Manual Sum: 27.18
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Std:  &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
+
+<span class="c1"># solve the above operation with for loop without using np built in functions</span>
+<span class="n">manual_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">:</span>
+    <span class="n">manual_sum</span> <span class="o">+=</span> <span class="n">value</span>
+
+<span class="n">manual_mean</span> <span class="o">=</span> <span class="n">manual_sum</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manual Mean:&quot;</span><span class="p">,</span> <span class="n">manual_mean</span><span class="p">)</span>
+
+<span class="n">manual_variance_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">measurements</span><span class="p">:</span>
+    <span class="n">manual_variance_sum</span> <span class="o">+=</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">manual_mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">manual_variance</span> <span class="o">=</span> <span class="n">manual_variance_sum</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span>
+<span class="n">manual_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">manual_variance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manual Std:&quot;</span><span class="p">,</span> <span class="n">manual_std</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean:  4.53
 Std:   0.03829708431025333
-Min:   4.48
+Manual Mean: 4.53
+Manual Std: 0.03829708431025333
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Min:  &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max:  &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Argmin (index of min):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Argmax (index of max):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">measurements</span><span class="p">))</span>
+
+
+<span class="c1"># solve the above operation with for loop without using np built in functions</span>
+
+<span class="n">min_value</span> <span class="o">=</span> <span class="n">measurements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">max_value</span> <span class="o">=</span> <span class="n">measurements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">min_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">max_index</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">min_value</span><span class="p">:</span>
+        <span class="n">min_value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">min_index</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">max_value</span><span class="p">:</span>
+        <span class="n">max_value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">max_index</span> <span class="o">=</span> <span class="n">i</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manual Min:&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manual Max:&quot;</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manual Argmin (index of min):&quot;</span><span class="p">,</span> <span class="n">min_index</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manual Argmax (index of max):&quot;</span><span class="p">,</span> <span class="n">max_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Min:   4.48
 Max:   4.6
 Argmin (index of min): 1
 Argmax (index of max): 3
+Manual Min: 4.48
+Manual Max: 4.6
+Manual Argmin (index of min): 1
+Manual Argmax (index of max): 3
 </pre></div>
 </div>
 </div>
@@ -1012,26 +1106,50 @@ Argmax (index of max): 3
 <blockquote>
 <div><p><strong>Instructor Note:</strong> This is the trickiest concept in the chapter — spend extra time here. Draw the 3×4 grid on the board. Then physically gesture: “axis=0 collapses the rows — we squish the 3 rows into 1 row, giving us 4 column averages. axis=1 collapses the columns — we squish the 4 columns into 1 column, giving us 3 row averages.” The mnemonic “the axis you specify is the one that disappears” helps. Run the cell and verify the output matches the board drawing. Ask: “If <code class="docutils literal notranslate"><span class="pre">data.shape</span></code> is <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4)</span></code>, what shape is <code class="docutils literal notranslate"><span class="pre">np.mean(data,</span> <span class="pre">axis=0)</span></code>?” → <code class="docutils literal notranslate"><span class="pre">(4,)</span></code>. “And <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>?” → <code class="docutils literal notranslate"><span class="pre">(3,)</span></code>. If students are still confused, give the physical analogy: “axis=0 is like averaging across all experiments at each time point; axis=1 is like averaging across all time points for each experiment.”</p>
 </div></blockquote>
+<blockquote>
+<div><p>Let’s talk about what the axis argument means when we apply functions to 2D arrays. This is one of those concepts that feels confusing at first, but once you visualize it, it becomes very intuitive.</p>
+<p>Imagine a 2D array as a table, like a spreadsheet. Rows go left to right, and columns go top to bottom.</p>
+<p>When we apply a function such as sum(), mean(), or max(), Python needs to know which direction we want to perform that operation.</p>
+<p>That’s where the axis parameter comes in.</p>
+<p>If we set axis=0, the function operates down the rows, meaning it processes each column. In other words, it collapses the rows and returns one result per column. So you can think of axis=0 as saying: “Work vertically.”</p>
+<p>If we set axis=1, the function operates across the columns, meaning it processes each row. It collapses the columns and returns one result per row. So axis=1 is basically saying: “Work horizontally.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>You may want to apply this mean operation either column-wise or row-wise.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3 experiments, each measuring 4 temperatures (K)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span><span class="mi">305</span><span class="p">,</span> <span class="mi">310</span><span class="p">,</span> <span class="mi">315</span><span class="p">,</span> <span class="mi">320</span><span class="p">],</span>  <span class="c1"># Experiment 1</span>
-    <span class="p">[</span><span class="mi">302</span><span class="p">,</span> <span class="mi">308</span><span class="p">,</span> <span class="mi">312</span><span class="p">,</span> <span class="mi">318</span><span class="p">],</span>  <span class="c1"># Experiment 2</span>
-    <span class="p">[</span><span class="mi">307</span><span class="p">,</span> <span class="mi">311</span><span class="p">,</span> <span class="mi">316</span><span class="p">,</span> <span class="mi">322</span><span class="p">],</span>  <span class="c1"># Experiment 3</span>
+    <span class="p">[</span><span class="mi">270</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="mi">315</span><span class="p">,</span> <span class="mi">324</span><span class="p">],</span>  <span class="c1"># Experiment 1</span>
+    <span class="p">[</span><span class="mi">265</span><span class="p">,</span> <span class="mi">308</span><span class="p">,</span> <span class="mi">312</span><span class="p">,</span> <span class="mi">318</span><span class="p">],</span>  <span class="c1"># Experiment 2</span>
+    <span class="p">[</span><span class="mi">273</span><span class="p">,</span> <span class="mi">298</span><span class="p">,</span> <span class="mi">316</span><span class="p">,</span> <span class="mi">322</span><span class="p">],</span>  <span class="c1"># Experiment 3</span>
 <span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data shape:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3, 4)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Overall mean</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall mean:                    &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
 
 <span class="c1"># Mean across experiments (down columns) — average temp at each time point</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mean along axis=0 (column means):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 
 <span class="c1"># Mean across time points (across rows) — average temp per experiment</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean along axis=1 (row means):   &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data shape: (3, 4)
+Data:
+ [[270 302 315 324]
+ [265 308 312 318]
+ [273 298 316 322]]
+Overall mean:                     301.9166666666667
 
-<span class="c1"># Overall mean</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall mean:                    &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+Mean along axis=0 (column means): [269.33333333 302.66666667 314.33333333 321.33333333]
+Mean along axis=1 (row means):    [302.75 300.75 302.25]
 </pre></div>
 </div>
 </div>
@@ -1128,6 +1246,7 @@ Flattened: [1 2 3 4 5 6]
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original (2x3):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Transposed (3x2):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Transposed (3x2) using np.transpose:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1136,6 +1255,10 @@ Flattened: [1 2 3 4 5 6]
  [[1 2 3]
  [4 5 6]]
 Transposed (3x2):
+ [[1 4]
+ [2 5]
+ [3 6]]
+Transposed (3x2) using np.transpose:
  [[1 4]
  [2 5]
  [3 6]]

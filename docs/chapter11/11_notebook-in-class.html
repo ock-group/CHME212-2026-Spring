@@ -59,11 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter11/11_notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter11/11_notebook-in-class';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Supplementary Note: Matrix Rank" href="11_rank_supplement.html" />
-    <link rel="prev" title="Chapter 10: Basic Array Methods" href="../chapter10/10_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,6 +123,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -195,9 +195,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
@@ -278,7 +278,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter11/11_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter11/11_notebook-in-class.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -308,7 +308,7 @@
       
       
       
-      <li><a href="../../_sources/docs/chapter11/11_notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/chapter11/11_notebook-in-class.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -437,6 +437,13 @@ document.write(`
 <li><p>Determinant, inverse, and rank</p></li>
 <li><p>Chemical engineering application: material balances</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Opening (2 min):</em> Start by writing <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code> on the board — nothing else yet. Ask: “Has anyone seen this before? What do you think it means?” Let a few students answer, then say: “Today we’re going to give this enormous power. A can be a 2×2 matrix or a 200×200 matrix. b can have 2 unknowns or 200. The code to solve it is exactly the same either way.”</p>
+<p><em>Motivation story:</em> “In your ChE courses you’ll spend a lot of time writing material and energy balances. Every time you have a set of linear equations — which is most of the time at steady state — you’re staring at <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code>. Right now you might solve those by hand or by substitution. By the end of this class, you’ll solve them in one line of Python.”</p>
+<p><em>Connecting to Chapter 10:</em> “In Chapter 10 you learned that 2D NumPy arrays are tables of numbers. Today we look at those same arrays through a different lens — as <em>matrices</em> — and learn the rules that govern how they multiply and transform.”</p>
+<p><em>Time budget (write on board):</em> 11.1 ~10 min · 11.2 ~15 min · 11.3 ~20 min · 11.4 ~10 min · 11.5 ~15 min</p>
+</div></blockquote>
 <section id="motivation-why-do-we-need-matrices">
 <h2>Motivation: Why Do We Need Matrices?<a class="headerlink" href="#motivation-why-do-we-need-matrices" title="Link to this heading">#</a></h2>
 <p>Consider this simple <strong>two-stream mixing problem</strong> from your material-balance course:</p>
@@ -474,6 +481,14 @@ I\, \mathbf{x} = A^{-1} \mathbf{b}
 \]</div>
 <p>This is the matrix equivalent of dividing both sides of a scalar equation by <span class="math notranslate nohighlight">\(a\)</span>: <span class="math notranslate nohighlight">\(ax = b \Rightarrow x = b/a\)</span>.<br />
 In Python, <code class="docutils literal notranslate"><span class="pre">np.linalg.solve(A,</span> <span class="pre">b)</span></code> computes <span class="math notranslate nohighlight">\(A^{-1}\mathbf{b}\)</span> for us — efficiently and accurately — in one call.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Say:</em> “Before we learn the mechanics, I want you to see exactly why we’re here today. You’ve solved material balances by hand — substitution, elimination — it works for 2 unknowns. But real processes have dozens of streams and components. The matrix formulation is how engineers actually solve those problems.”</p>
+<p><em>Draw the mixer on the board.</em> Write out both balance equations. Then say: “I’m going to rewrite these exact same two equations in a completely different notation — as a matrix times a vector. Watch.” Fill in A and b on the board term by term.</p>
+<p><em>On the <span class="math notranslate nohighlight">\(\mathbf{x} = A^{-1}\mathbf{b}\)</span> step:</em> “Think of it like dividing by A. In scalar algebra, <span class="math notranslate nohighlight">\(ax = b\)</span> gives <span class="math notranslate nohighlight">\(x = b/a\)</span>. Matrix algebra works the same way — except instead of dividing, we multiply by the inverse <span class="math notranslate nohighlight">\(A^{-1}\)</span>. And just like <span class="math notranslate nohighlight">\(1/a\)</span> doesn’t exist when <span class="math notranslate nohighlight">\(a = 0\)</span>, <span class="math notranslate nohighlight">\(A^{-1}\)</span> doesn’t exist when <span class="math notranslate nohighlight">\(\det(A) = 0\)</span>. We’ll come back to that in section 11.4.”</p>
+<p><em>Key point:</em> “Nothing mathematically changed. The equations are identical. All we did is rearrange them into a structured form that a computer can handle systematically — regardless of whether there are 2 unknowns or 2,000.”</p>
+<p><em>Run the code cell below.</em> “In Chapter 11 you’ll understand every line of this. For now, just observe: we write down A and b, call one function, and have the answer instantly.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -543,6 +558,14 @@ A = \begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 
 </div>
 <blockquote>
 <div><p><strong>Note:</strong> A plain 1D array like <code class="docutils literal notranslate"><span class="pre">np.array([1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(3,)</span></code> — it is <strong>not</strong> a row or column vector. It has no orientation. Use double brackets <code class="docutils literal notranslate"><span class="pre">[[...]]</span></code> to make a true 2D row vector.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Say:</em> “Good news — you already know everything you need to create a matrix. It’s just a 2D NumPy array. The only new thing today is <em>how we think about it</em> and <em>what rules it follows</em>.”</p>
+<p><em>On the shape table:</em> Walk through each row. Point to the matrix equation on the board and say: “Notice shape is always <code class="docutils literal notranslate"><span class="pre">(rows,</span> <span class="pre">columns)</span></code> — rows first. That convention matters when we multiply.”</p>
+<p><em>On the 1D vs 2D distinction:</em> “This trips people up every single time. <code class="docutils literal notranslate"><span class="pre">np.array([1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code> gives you shape <code class="docutils literal notranslate"><span class="pre">(3,)</span></code> — that’s a 1D array with no orientation, not a row vector. If you need a true row vector that participates in matrix operations as a row, you need double brackets: <code class="docutils literal notranslate"><span class="pre">np.array([[1,</span> <span class="pre">2,</span> <span class="pre">3]])</span></code> gives shape <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">3)</span></code>.” Run both cells and have students read out the shapes.</p>
+<p><em>On <code class="docutils literal notranslate"><span class="pre">np.eye</span></code>:</em> “The identity matrix is the number 1 of matrix arithmetic. Anything multiplied by it is unchanged: <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">I</span> <span class="pre">=</span> <span class="pre">A</span></code> (Matrix A multiplied by the identity matrix equals A.). We’ll use this as a sanity check when we compute inverses in section 11.4.”</p>
+<p><em>Transition:</em> “Now that we can create matrices, let’s talk about what we can do with them — starting with multiplication, which is where matrices get interesting.”</p>
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -671,6 +694,20 @@ Shape: (3, 3)
 </tbody>
 </table>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Before running code — write on board:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*  →  element-wise   (each position × each position)
+@  →  matrix multiply (rows × columns, summed)
+</pre></div>
+</div>
+<p>Say: “This is the single most common mistake I see. When you write <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> you are NOT doing matrix multiplication. You are multiplying each element of A by the corresponding element of B. That is almost never what you want in linear algebra.”</p>
+<p><em>Running the <code class="docutils literal notranslate"><span class="pre">*</span></code> vs <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> cell:</em> “Look at <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> — the top-left entry is <code class="docutils literal notranslate"><span class="pre">1×5</span> <span class="pre">=</span> <span class="pre">5</span></code>. Now look at <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">B</span></code> — the top-left entry is <code class="docutils literal notranslate"><span class="pre">1×5</span> <span class="pre">+</span> <span class="pre">2×7</span> <span class="pre">=</span> <span class="pre">19</span></code>. That’s the dot product of the first row of A with the first column of B. That’s what matrix multiplication means.”</p>
+<p><em>On the formula:</em> Point to <span class="math notranslate nohighlight">\((AB)_{ij} = \sum_k A_{ik} B_{kj}\)</span> and say: “Don’t memorize this formula — just remember: row of A dotted with column of B. The <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator handles the calculation.”</p>
+<p><em>On transpose:</em> “Transposing flips the matrix — rows become columns, columns become rows. Shape <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">n)</span></code> becomes <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">m)</span></code>. You’ll use this constantly when setting up systems of equations.”</p>
+<p><em>Quick check:</em> Ask students: “If A has shape <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">2)</span></code> and B has shape <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">4)</span></code>, what shape is <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">B</span></code>?” Answer: <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4)</span></code>. “What about <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">&#64;</span> <span class="pre">A</span></code>?” Answer: error — inner dimensions don’t match.</p>
+<p><em>Transition:</em> “Now that we know how to multiply matrices, let’s use that to solve equations.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
@@ -775,6 +812,20 @@ C @ I =
 </pre></div>
 </div>
 <p><strong>Shape convention for <code class="docutils literal notranslate"><span class="pre">b</span></code>:</strong> Even though <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is mathematically a column vector, <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code> expects it as a <strong>1D array</strong> with shape <code class="docutils literal notranslate"><span class="pre">(n,)</span></code> — not shape <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">1)</span></code>. The solution <code class="docutils literal notranslate"><span class="pre">x</span></code> it returns is also 1D.</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Say:</em> “This is the moment the whole chapter has been building toward. <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code> does everything — Gaussian elimination, back-substitution, the works — in a single function call. Your job is just to correctly set up A and b.”</p>
+<p><em>Walk through the conversion from equations to matrix form step by step on the board:</em></p>
+<ol class="arabic simple">
+<li><p>“What are the unknowns?” → x and y → these become the entries of the solution vector <strong>x</strong></p></li>
+<li><p>“What are the coefficients of each unknown in each equation?” → fill in A row by row</p></li>
+<li><p>“What are the right-hand sides?” → fill in b</p></li>
+</ol>
+<p><em>Emphasize the workflow:</em> “One unknown per column of A. One equation per row of A. Right-hand side goes in b. That’s the entire translation process.”</p>
+<p><em>On the shape of b:</em> “Common mistake — students pass <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">np.array([[5],</span> <span class="pre">[13]])</span></code>, a column vector of shape <code class="docutils literal notranslate"><span class="pre">(2,1)</span></code>. NumPy will actually handle it, but you get a 2D solution back which confuses indexing. Always use <code class="docutils literal notranslate"><span class="pre">np.array([5,</span> <span class="pre">13])</span></code>, shape <code class="docutils literal notranslate"><span class="pre">(2,)</span></code>. Run the cell and point out the <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">shape:</span> <span class="pre">(2,)</span></code> line.”</p>
+<p><em>On verification:</em> “Never trust a solution you haven’t verified. After solving, always compute <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span></code> and check it equals <code class="docutils literal notranslate"><span class="pre">b</span></code>. If they match, you’re done. If not, you made an error setting up the matrix.” Run the verification line and confirm the numbers match.</p>
+<p><em>Key insight to emphasize:</em> “The code is identical whether you have 2 equations or 200. Only A and b change in size.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve the system:  2x + y = 5</span>
@@ -825,6 +876,12 @@ x_1 + 4x_2 + x_3 = 12 \\
 2x_1 - x_2 + 5x_3 = 10
 \end{cases}
 \end{split}\]</div>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Before revealing the code, ask a student:</em> “Can someone read out what goes in row 1 of A?” (Answer: 3, 1, -1.) “Row 2?” (1, 4, 1.) “Row 3?” (2, -1, 5.) Have them build the matrix verbally before you show it.</p>
+<p><em>Say:</em> “Notice the code is completely identical to the 2×2 case — we just changed the numbers in A and b. <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code> doesn’t care whether it’s a 2×2 or a 3×3 or a 100×100 system. This is the power of the matrix formulation.”</p>
+<p><em>After running:</em> “The verification step — <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span></code> equals <code class="docutils literal notranslate"><span class="pre">b</span></code> — is your proof that the answer is correct. Get in the habit of always including it.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3×3 system</span>
@@ -887,6 +944,15 @@ b                   = [ 2 12 10]
 </table>
 </div>
 <p><strong>Key rule:</strong> A system <span class="math notranslate nohighlight">\(A\mathbf{x} = \mathbf{b}\)</span> has a unique solution <strong>if and only if</strong> <span class="math notranslate nohighlight">\(\det(A) \neq 0\)</span> (equivalently, A has full rank).</p>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Say:</em> “Before you ever call <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>, ask yourself: does this system actually have a solution? The determinant answers that question instantly.”</p>
+<p><em>On the determinant:</em> “If <code class="docutils literal notranslate"><span class="pre">det(A)</span> <span class="pre">=</span> <span class="pre">0</span></code>, the matrix is called <em>singular</em> — it has no inverse, and your system either has no solution or infinitely many solutions. Either way, <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code> will raise an error. We’ll see that in the next code cell.”</p>
+<p><em>On the inverse:</em> “You might think: I’ll just solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code> by computing <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">inv(A)</span> <span class="pre">&#64;</span> <span class="pre">b</span></code>. Mathematically correct. But numerically, <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code> is more accurate and faster — it uses a smarter algorithm internally. Always prefer <code class="docutils literal notranslate"><span class="pre">solve</span></code> over <code class="docutils literal notranslate"><span class="pre">inv</span></code>.”</p>
+<p><em>Verifying the inverse:</em> “The definition of an inverse is <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">A_inv</span> <span class="pre">=</span> <span class="pre">I</span></code>. Run the cell and look at the result — it should be the identity matrix. Small floating point errors like <code class="docutils literal notranslate"><span class="pre">1e-16</span></code> are normal and mean zero.”</p>
+<p><em>On rank:</em> “Rank counts how many rows of your matrix are truly independent — not just a copy or rescaled version of another row. Full rank means all rows are independent, which means a unique solution exists. For an n×n matrix, full rank means <code class="docutils literal notranslate"><span class="pre">rank</span> <span class="pre">=</span> <span class="pre">n</span></code>.”</p>
+<p><em>Transition to singular demo:</em> “Let me show you what happens when the determinant is zero — and why it’s a modeling problem, not a coding problem.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
@@ -1023,6 +1089,19 @@ F_1 + F_2 = 100 \\
 0.4 F_1 + 0.8 F_2 = 60
 \end{cases}
 \end{split}\]</div>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Before any code — draw the flowsheet on the board.</em> Label every stream. Then ask: “What do we know? What don’t we know?” Students should identify F1 and F2 as unknowns, F3 = 100 as derived from the splitter balance.</p>
+<p><em>Walk through the balance equations verbally:</em></p>
+<ul class="simple">
+<li><p>“Overall balance on the mixer: everything that flows in must flow out. F1 + F2 = F3.”</p></li>
+<li><p>“Component A balance: the moles of A entering equal the moles of A leaving. 40% of F1 plus 80% of F2 equals 60% of F3.”</p></li>
+<li><p>“We already solved for F3 = 100 from the splitter. So substitute that in.”</p></li>
+</ul>
+<p><em>Converting to matrix form — do this on the board:</em> “Row 1 of A comes from equation 1: coefficients of F1 and F2 are 1 and 1. Row 2 comes from equation 2: coefficients are 0.4 and 0.8. Right-hand sides go in b: 100 and 60.”</p>
+<p><em>After running:</em> “F1 = F2 = 50 mol/s. Does that make physical sense? The outlet composition is 60% A, exactly between the two feeds of 40% and 80%. So equal flow rates mixing 40% and 80% gives 60%. Yes — that checks out intuitively.”</p>
+<p><em>Key message:</em> “This is the workflow you’ll use in your ChE courses. Write the balances, identify unknowns, build A and b, call <code class="docutils literal notranslate"><span class="pre">solve</span></code>, verify.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Material balance on mixer</span>
@@ -1147,6 +1226,15 @@ $<span class="math notranslate nohighlight">\(6(150 - T_3) + 1(T_2 - T_3) = 0 \q
 =
 \underbrace{\begin{pmatrix} 500 \\ -240 \\ -900 \end{pmatrix}}_{\mathbf{b}}
 \end{split}\]</div>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Say:</em> “Material balances aren’t the only linear systems in ChE. Energy balances at steady state are also linear when heat capacities are constant — and they show up everywhere in heat exchanger design.”</p>
+<p><em>Draw the flowsheet on the board first.</em> Label each stream with its <span class="math notranslate nohighlight">\(\dot{m}C_p\)</span> and inlet temperature. Draw arrows for the two heat exchangers between streams 1↔2 and 2↔3.</p>
+<p><em>Walk through Stream 1’s energy balance step by step:</em> “At steady state, the energy lost by Stream 1 equals the heat transferred to Stream 2 via HX-12. Left side: <span class="math notranslate nohighlight">\(\dot{m}C_p \times (T_{in} - T_{out}) = 5(100 - T_1)\)</span>. Right side: <span class="math notranslate nohighlight">\(UA \times \Delta T = 2(T_1 - T_2)\)</span>.” Expand and rearrange on the board to get <span class="math notranslate nohighlight">\(7T_1 - 2T_2 = 500\)</span>.</p>
+<p><em>Point out the zero entry in the matrix:</em> “Notice <span class="math notranslate nohighlight">\(A_{13} = 0\)</span>. That’s not an accident — it means Stream 1 and Stream 3 don’t exchange heat directly. The matrix structure reflects the physical network topology. This is called a <em>tridiagonal</em> matrix — common in any problem where things only interact with their neighbors.”</p>
+<p><em>After running:</em> “T1 ≈ 94.7°C, T2 ≈ 81.4°C, T3 ≈ 140.2°C. Do these make sense? Stream 1 started at 100°C and cooled slightly — it gave heat to Stream 2. Stream 2 started at 60°C and warmed up significantly — it received heat from both Stream 1 and Stream 3. Stream 3 started at 150°C and cooled down. All physically consistent.”</p>
+<p><em>Transition:</em> “Same workflow, more physical content. As your systems get more complex in later courses, the matrix just gets bigger — the code stays exactly the same.”</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heat exchange network energy balance</span>
@@ -1245,6 +1333,20 @@ b               = [ 500. -240. -900.]
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">np.linalg.solve(A,</span> <span class="pre">b)</span></code></p></li>
 <li><p><strong>Always verify:</strong> check <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span> <span class="pre">≈</span> <span class="pre">b</span></code></p></li>
 </ol>
+<blockquote>
+<div><p><strong>Instructor Note:</strong></p>
+<p><em>Closing remarks (3 min):</em> “Let’s pull back and look at what we covered today. You can now take any system of linear equations — no matter how many unknowns — build A and b, and solve it in one line. That’s not a small thing. In your process design and simulation courses, every steady-state flowsheet produces a linear system. You now have the tool to solve all of them.”</p>
+<p><em>Point to the summary table:</em> “The two things to internalize from this table: <code class="docutils literal notranslate"><span class="pre">*</span></code> is NOT matrix multiplication — use <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>. And <code class="docutils literal notranslate"><span class="pre">solve</span></code> is your go-to, not <code class="docutils literal notranslate"><span class="pre">inv</span></code>.”</p>
+<p><em>Common mistakes to avoid (write on board):</em></p>
+<ul class="simple">
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">*</span></code> instead of <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> for matrix multiplication</p></li>
+<li><p>Passing a column vector <code class="docutils literal notranslate"><span class="pre">[[...]]</span></code> as b instead of a 1D array <code class="docutils literal notranslate"><span class="pre">[...]</span></code></p></li>
+<li><p>Forgetting to verify with <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span> <span class="pre">≈</span> <span class="pre">b</span></code></p></li>
+<li><p>Not checking <code class="docutils literal notranslate"><span class="pre">det(A)</span> <span class="pre">≠</span> <span class="pre">0</span></code> before solving</p></li>
+</ul>
+<p><em>Looking ahead:</em> “Next chapter we go further — what about nonlinear systems? The same Ax = b setup won’t work anymore. We’ll use <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code> to handle equations like <span class="math notranslate nohighlight">\(e^x = 3x\)</span> that no matrix method can touch.”</p>
+<p><em>Optional challenge question:</em> “If <code class="docutils literal notranslate"><span class="pre">det(A)</span> <span class="pre">=</span> <span class="pre">0</span></code>, what does that tell you physically about your set of equations?” (Answer: at least two equations are redundant — they describe the same constraint — so you don’t have enough independent information to uniquely determine all unknowns.)</p>
+</div></blockquote>
 </section>
 </section>
 
@@ -1278,24 +1380,6 @@ b               = [ 500. -240. -900.]
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter10/10_notebook.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 10: Basic Array Methods</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="11_rank_supplement.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Supplementary Note: Matrix Rank</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

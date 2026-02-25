@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Supplementary Note: Matrix Rank &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter11/11_rank_supplement';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="prev" title="Chapter 11: Linear Algebra &amp; Matrices" href="11_notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Supplementary Note: Matrix Rank</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter11/11_rank_supplement.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter11/11_rank_supplement.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Supplementary Note: Matrix Rank</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-what-does-rank-mean">1. Motivation — What Does “Rank” Mean?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-definition">2. Formal Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-works-for-any-matrix-shape">3. Rank Works for Any Matrix Shape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">4. Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-full-rank-square-matrix">Example 1 — Full Rank Square Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-dependent-rows-rank-deficient">Example 2 — Dependent Rows (Rank-Deficient)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-rectangular-tall-matrix">Example 3 — Rectangular (Tall) Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-partially-dependent-rows-in-a-33-matrix">Example 4 — Partially Dependent Rows in a 3×3 Matrix</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-interpretation">5. Geometric Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-rank-matters-in-chemical-engineering">6. Why Rank Matters in Chemical Engineering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#material-balances">6.1 Material Balances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-analysis">6.2 Degrees of Freedom Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-your-balance-before-solving">6.3 Checking Your Balance Before Solving</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">7. Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="supplementary-note-matrix-rank">
+<h1>Supplementary Note: Matrix Rank<a class="headerlink" href="#supplementary-note-matrix-rank" title="Link to this heading">#</a></h1>
+<p><strong>Companion to Chapter 11: Linear Algebra &amp; Matrices</strong></p>
+<hr class="docutils" />
+<p>This note takes a deeper look at <strong>rank</strong> — one of the most important properties of a matrix. Understanding rank helps you answer three practical questions:</p>
+<ul class="simple">
+<li><p>Does my system of equations have a unique solution?</p></li>
+<li><p>Is this matrix invertible?</p></li>
+<li><p>How much independent information does this dataset contain?</p></li>
+</ul>
+<section id="motivation-what-does-rank-mean">
+<h2>1. Motivation — What Does “Rank” Mean?<a class="headerlink" href="#motivation-what-does-rank-mean" title="Link to this heading">#</a></h2>
+<p>The <strong>rank</strong> of a matrix tells us how much <em>independent</em> information it contains.</p>
+<blockquote>
+<div><p><strong>Rank = the number of linearly independent rows (or columns) in a matrix.</strong></p>
+</div></blockquote>
+<p>Two rows are <strong>linearly dependent</strong> if one is just a scalar multiple (or linear combination) of the other — they carry no new information.</p>
+<p>Think of it this way: if you have 3 balance equations but one is just “2 × equation 1”, you really only have 2 independent constraints. That’s a rank-2 system masquerading as a 3×3 system.</p>
+</section>
+<section id="formal-definition">
+<h2>2. Formal Definition<a class="headerlink" href="#formal-definition" title="Link to this heading">#</a></h2>
+<p>For a matrix <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{m \times n}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{rank}(A) = \text{number of linearly independent rows} = \text{number of linearly independent columns}
+\]</div>
+<p>A fundamental theorem of linear algebra guarantees these two counts are <strong>always equal</strong> — a remarkable fact.</p>
+<p>The rank is bounded by the smaller dimension:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{rank}(A) \leq \min(m, n)
+\]</div>
+<p>We say <span class="math notranslate nohighlight">\(A\)</span> has <strong>full rank</strong> when <span class="math notranslate nohighlight">\(\text{rank}(A) = \min(m, n)\)</span>.</p>
+</section>
+<section id="rank-works-for-any-matrix-shape">
+<h2>3. Rank Works for Any Matrix Shape<a class="headerlink" href="#rank-works-for-any-matrix-shape" title="Link to this heading">#</a></h2>
+<p>Rank is not limited to square matrices:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Matrix shape</p></th>
+<th class="head"><p>Max possible rank</p></th>
+<th class="head"><p>Limited by</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(3 \times 3\)</span> (square)</p></td>
+<td><p>3</p></td>
+<td><p>either</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(5 \times 2\)</span> (tall)</p></td>
+<td><p>2</p></td>
+<td><p>columns</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(2 \times 5\)</span> (wide)</p></td>
+<td><p>2</p></td>
+<td><p>rows</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For a system <span class="math notranslate nohighlight">\(A\mathbf{x} = \mathbf{b}\)</span> to have a <strong>unique solution</strong>, we need <span class="math notranslate nohighlight">\(A\)</span> to be square <em>and</em> have full rank.</p>
+</section>
+<section id="examples">
+<h2>4. Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<p>Let’s compute rank for several matrices and connect each result to a geometric and algebraic interpretation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-1-full-rank-square-matrix">
+<h3>Example 1 — Full Rank Square Matrix<a class="headerlink" href="#example-1-full-rank-square-matrix" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_1 = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}
+\end{split}\]</div>
+<p>Row 1 = <span class="math notranslate nohighlight">\([1, 0]\)</span> and Row 2 = <span class="math notranslate nohighlight">\([0, 1]\)</span> point in completely different directions — they are independent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A1 =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank(A1) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;det(A1)  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">A1</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (non-zero → invertible)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A1 =
+ [[1 0]
+ [0 1]]
+rank(A1) = 2
+det(A1)  = 1.0  (non-zero → invertible)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-dependent-rows-rank-deficient">
+<h3>Example 2 — Dependent Rows (Rank-Deficient)<a class="headerlink" href="#example-2-dependent-rows-rank-deficient" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_2 = \begin{bmatrix} 1 &amp; 2 \\ 2 &amp; 4 \end{bmatrix}
+\end{split}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\text{Row}_2 = 2 \times \text{Row}_1\)</span>. The second row adds no new information.
+This matrix is <strong>singular</strong> — it cannot be inverted, and <span class="math notranslate nohighlight">\(A_2\mathbf{x} = \mathbf{b}\)</span> has either no solution or infinitely many.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A2 =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank(A2) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A2</span><span class="p">)</span><span class="si">}</span><span class="s2">  ← only 1 independent row&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;det(A2)  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">A2</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (zero → singular, NOT invertible)&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">np.linalg.solve error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A2 =
+ [[1 2]
+ [2 4]]
+rank(A2) = 1  ← only 1 independent row
+det(A2)  = 0.0  (zero → singular, NOT invertible)
+
+np.linalg.solve error: Singular matrix
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3-rectangular-tall-matrix">
+<h3>Example 3 — Rectangular (Tall) Matrix<a class="headerlink" href="#example-3-rectangular-tall-matrix" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_3 = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6 \end{bmatrix} \quad (3 \times 2)
+\end{split}\]</div>
+<p>Maximum possible rank = <span class="math notranslate nohighlight">\(\min(3, 2) = 2\)</span>. There cannot be more independent directions than columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A3 =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape: </span><span class="si">{</span><span class="n">A3</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">  →  max rank = min(3, 2) = 2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank(A3) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A3</span><span class="p">)</span><span class="si">}</span><span class="s2">  (full rank for this shape)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A3 =
+ [[1 2]
+ [3 4]
+ [5 6]]
+Shape: (3, 2)  →  max rank = min(3, 2) = 2
+rank(A3) = 2  (full rank for this shape)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-4-partially-dependent-rows-in-a-33-matrix">
+<h3>Example 4 — Partially Dependent Rows in a 3×3 Matrix<a class="headerlink" href="#example-4-partially-dependent-rows-in-a-33-matrix" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_4 = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 5 &amp; 7 &amp; 9 \end{bmatrix}
+\end{split}\]</div>
+<p>Notice that <span class="math notranslate nohighlight">\(\text{Row}_3 = \text{Row}_1 + \text{Row}_2\)</span>. So despite being 3×3, this matrix only has rank 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>   <span class="c1"># row3 = row1 + row2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A4 =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Row1 + Row2 = </span><span class="si">{</span><span class="n">A4</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">A4</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">  ==  Row3 </span><span class="si">{</span><span class="n">A4</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">  →  dependent!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank(A4) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A4</span><span class="p">)</span><span class="si">}</span><span class="s2">  (rank-deficient 3×3)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;det(A4)  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">A4</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  (≈ 0 → singular)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A4 =
+ [[1 2 3]
+ [4 5 6]
+ [5 7 9]]
+Row1 + Row2 = [5 7 9]  ==  Row3 [5 7 9]  →  dependent!
+rank(A4) = 2  (rank-deficient 3×3)
+det(A4)  = 0.000000  (≈ 0 → singular)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="geometric-interpretation">
+<h2>5. Geometric Interpretation<a class="headerlink" href="#geometric-interpretation" title="Link to this heading">#</a></h2>
+<p>Rank tells you the <strong>dimension of the output space</strong> (column space) of a linear transformation <span class="math notranslate nohighlight">\(\mathbf{y} = A\mathbf{x}\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rank</p></th>
+<th class="head"><p>What the transformation does to 2D space</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Maps the plane to the full plane (invertible)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Collapses the plane onto a <strong>line</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Collapses everything to a <strong>point</strong> (zero matrix)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The plot below shows this visually: a unit square transformed by a full-rank vs rank-1 matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">square</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unit square corners</span>
+<span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">A_full</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>   <span class="c1"># rank 2</span>
+
+<span class="n">A_rank1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>  <span class="c1"># rank 1: row2 = row1</span>
+
+<span class="n">A_rank0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># rank 0: all rows are zero</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_transform</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">transformed</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">square</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">square</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">square</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">square</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">square</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">transformed</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.35</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;transformed&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">transformed</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Original (identity)</span>
+<span class="n">plot_transform</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;Identity (rank 2)</span><span class="se">\n</span><span class="s1">Unit square → itself&#39;</span><span class="p">)</span>
+<span class="n">plot_transform</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A_full</span><span class="p">,</span>  <span class="sa">f</span><span class="s1">&#39;Full rank matrix (rank </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A_full</span><span class="p">)</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">Square → parallelogram&#39;</span><span class="p">)</span>
+<span class="n">plot_transform</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">A_rank1</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Rank-1 matrix (rank </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A_rank1</span><span class="p">)</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">Square → line segment&#39;</span><span class="p">)</span>
+<span class="n">plot_transform</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">A_rank0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Rank-0 matrix (rank </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A_rank0</span><span class="p">)</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">Square → single point&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank(A_full)  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A_full</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank(A_rank1) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A_rank1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank(A_rank0) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A_rank0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f5f6d8fa767dfa2037255d71a3cf629ac01ed6d46e4a0e5d4cc311c47abe90f5.png" src="../../_images/f5f6d8fa767dfa2037255d71a3cf629ac01ed6d46e4a0e5d4cc311c47abe90f5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rank(A_full)  = 2
+rank(A_rank1) = 1
+rank(A_rank0) = 0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-rank-matters-in-chemical-engineering">
+<h2>6. Why Rank Matters in Chemical Engineering<a class="headerlink" href="#why-rank-matters-in-chemical-engineering" title="Link to this heading">#</a></h2>
+<section id="material-balances">
+<h3>6.1 Material Balances<a class="headerlink" href="#material-balances" title="Link to this heading">#</a></h3>
+<p>When setting up a system of balance equations, the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> may be rank-deficient if:</p>
+<ul class="simple">
+<li><p>You wrote the same balance twice (e.g., an overall balance that is just the sum of two component balances)</p></li>
+<li><p>Two streams have identical compositions (no independent information)</p></li>
+</ul>
+<p>If <span class="math notranslate nohighlight">\(\text{rank}(A) &lt; n\)</span> (number of unknowns), the system is <strong>underdetermined</strong> — you need more independent measurements.</p>
+</section>
+<section id="degrees-of-freedom-analysis">
+<h3>6.2 Degrees of Freedom Analysis<a class="headerlink" href="#degrees-of-freedom-analysis" title="Link to this heading">#</a></h3>
+<p>The <strong>degrees of freedom</strong> (DOF) of a system is:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{DOF} = n_{\text{unknowns}} - \text{rank}(A)
+\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>DOF</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Exactly determined — unique solution</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt; 0</p></td>
+<td><p>Underdetermined — need more equations or measurements</p></td>
+</tr>
+<tr class="row-even"><td><p>&lt; 0</p></td>
+<td><p>Overdetermined — conflicting equations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="checking-your-balance-before-solving">
+<h3>6.3 Checking Your Balance Before Solving<a class="headerlink" href="#checking-your-balance-before-solving" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">check_system</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">unknowns</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Diagnose an Ax=b system before attempting to solve.&quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">dof</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">r</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matrix size : </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> equations × </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> unknowns&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknowns    : </span><span class="si">{</span><span class="n">unknowns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank(A)     = </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DOF         = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">dof</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dof</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">m</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;→ System is exactly determined. Proceed with np.linalg.solve.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dof</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;→ Underdetermined: </span><span class="si">{</span><span class="n">dof</span><span class="si">}</span><span class="s2"> free variable(s). Need more independent equations.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;→ Overdetermined or inconsistent. Check for redundant equations.&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># --- Well-posed system ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Well-posed mixer balance ===&quot;</span><span class="p">)</span>
+<span class="n">A_ok</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]])</span>
+<span class="n">b_ok</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">])</span>
+<span class="n">check_system</span><span class="p">(</span><span class="n">A_ok</span><span class="p">,</span> <span class="n">b_ok</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;F1&#39;</span><span class="p">,</span> <span class="s1">&#39;F2&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># --- Rank-deficient system (redundant balance) ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Rank-deficient system (row2 = 2×row1) ===&quot;</span><span class="p">)</span>
+<span class="n">A_bad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]])</span>
+<span class="n">b_bad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">])</span>
+<span class="n">check_system</span><span class="p">(</span><span class="n">A_bad</span><span class="p">,</span> <span class="n">b_bad</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;F1&#39;</span><span class="p">,</span> <span class="s1">&#39;F2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Well-posed mixer balance ===
+Matrix size : 2 equations × 2 unknowns
+Unknowns    : [&#39;F1&#39;, &#39;F2&#39;]
+rank(A)     = 2
+DOF         = 2 - 2 = 0
+→ System is exactly determined. Proceed with np.linalg.solve.
+
+=== Rank-deficient system (row2 = 2×row1) ===
+Matrix size : 2 equations × 2 unknowns
+Unknowns    : [&#39;F1&#39;, &#39;F2&#39;]
+rank(A)     = 1
+DOF         = 2 - 1 = 1
+→ Underdetermined: 1 free variable(s). Need more independent equations.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>7. Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Key point</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Rank</strong></p></td>
+<td><p>Number of linearly independent rows = columns</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Full rank</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{rank}(A) = \min(m, n)\)</span> — maximum possible</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Rank-deficient</strong></p></td>
+<td><p>At least one row/column is a combination of others</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Unique solution</strong></p></td>
+<td><p>Requires square <span class="math notranslate nohighlight">\(A\)</span> with full rank (det ≠ 0)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DOF = 0</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{rank}(A) = n_{\text{unknowns}}\)</span> — exactly solvable</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NumPy function</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.linalg.matrix_rank(A)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Rule of thumb before calling <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>:</strong></p>
+<ol class="arabic simple">
+<li><p>Check that <span class="math notranslate nohighlight">\(A\)</span> is square: <code class="docutils literal notranslate"><span class="pre">A.shape[0]</span> <span class="pre">==</span> <span class="pre">A.shape[1]</span></code></p></li>
+<li><p>Check full rank: <code class="docutils literal notranslate"><span class="pre">np.linalg.matrix_rank(A)</span> <span class="pre">==</span> <span class="pre">A.shape[0]</span></code></p></li>
+<li><p>Or equivalently: <code class="docutils literal notranslate"><span class="pre">np.linalg.det(A)</span> <span class="pre">!=</span> <span class="pre">0</span></code></p></li>
+</ol>
+<p>If either check fails, you have a modeling problem — not a coding problem.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter11"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="11_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 11: Linear Algebra &amp; Matrices</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lab01/01_lab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-what-does-rank-mean">1. Motivation — What Does “Rank” Mean?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-definition">2. Formal Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-works-for-any-matrix-shape">3. Rank Works for Any Matrix Shape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">4. Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-full-rank-square-matrix">Example 1 — Full Rank Square Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-dependent-rows-rank-deficient">Example 2 — Dependent Rows (Rank-Deficient)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-rectangular-tall-matrix">Example 3 — Rectangular (Tall) Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-partially-dependent-rows-in-a-33-matrix">Example 4 — Partially Dependent Rows in a 3×3 Matrix</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-interpretation">5. Geometric Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-rank-matters-in-chemical-engineering">6. Why Rank Matters in Chemical Engineering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#material-balances">6.1 Material Balances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-analysis">6.2 Degrees of Freedom Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-your-balance-before-solving">6.3 Checking Your Balance Before Solving</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">7. Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

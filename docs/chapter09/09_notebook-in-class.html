@@ -192,6 +192,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
@@ -1433,6 +1439,15 @@ plot() = drawing on that page</p>
 <blockquote>
 <div><p><strong>Instructor Note:</strong> Briefly explain what SMILES notation is: “It’s a way to write a molecule as a text string. Benzene is <code class="docutils literal notranslate"><span class="pre">c1ccccc1</span></code> — lowercase <code class="docutils literal notranslate"><span class="pre">c</span></code> means aromatic carbon, and the <code class="docutils literal notranslate"><span class="pre">1...1</span></code> closes the ring.” You don’t need to teach SMILES in depth — just enough for them to understand the examples. Run the benzene cell first, then ethene (<code class="docutils literal notranslate"><span class="pre">C=C</span></code>), then acetic acid. Ask: “Can anyone guess what <code class="docutils literal notranslate"><span class="pre">CCO</span></code> would be?” (ethanol). Then show the grid image with multiple molecules. If students want to try their own molecules, they can look up SMILES strings online.</p>
 </div></blockquote>
+<blockquote>
+<div><p>So far we’ve plotted numbers — x-y data, contours, distributions. But in chemical engineering, sometimes we want to look at the molecules themselves.</p>
+</div></blockquote>
+<blockquote>
+<div><p>This next section is meant to be fun and visual. You’ve probably seen molecular structures before — maybe in Organic Chemistry — but many of you have never generated them programmatically. Today, we’re going to do exactly that: we’ll make molecules appear on your screen using code.</p>
+</div></blockquote>
+<blockquote>
+<div><p>Just to be clear, this is purely for demonstration purposes. We’re not aiming for a deep computational chemistry analysis here — the goal is simply to show how easily molecular structures can be generated and visualized. Think of it as a quick preview of what’s possible when chemistry meets programming.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>rdkit
@@ -1447,6 +1462,29 @@ Requirement already satisfied: Pillow in /Users/hoon/miniconda3/envs/chemcomp/li
 </div>
 </div>
 </div>
+<blockquote>
+<div><p>SMILES stands for Simplified Molecular Input Line Entry System. It’s a way to represent a molecular structure as a simple line of text instead of a drawing.</p>
+</div></blockquote>
+<blockquote>
+<div><p>In SMILES:</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Atoms are written by their chemical symbols (C, O, N)</p></li>
+<li><p>Bonds are implied or shown with symbols (=, #)</p></li>
+<li><p>Branches use parentheses</p></li>
+<li><p>Rings use numbers</p></li>
+</ul>
+<blockquote>
+<div><p>For example:</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>O → water oxygen atom (simple example)</p></li>
+<li><p>CCO → ethanol</p></li>
+<li><p>C=O → carbonyl group</p></li>
+</ul>
+<blockquote>
+<div><p>So instead of storing or drawing a molecule visually, we can store it as a string of characters that computers can easily read, generate, and manipulate.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
@@ -1567,8 +1605,8 @@ Requirement already satisfied: Pillow in /Users/hoon/miniconda3/envs/chemcomp/li
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="3dmolviewer_17713410358259919"  style="position: relative; width: 600px; height: 400px;">
-        <p id="3dmolwarning_17713410358259919" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+<div class="output text_html"><div id="3dmolviewer_1771998366726114"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_1771998366726114" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
         </div>
 <script>
 
@@ -1599,20 +1637,20 @@ $3Dmolpromise = null;
   $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
 }
 
-var viewer_17713410358259919 = null;
-var warn = document.getElementById("3dmolwarning_17713410358259919");
+var viewer_1771998366726114 = null;
+var warn = document.getElementById("3dmolwarning_1771998366726114");
 if(warn) {
     warn.parentNode.removeChild(warn);
 }
 $3Dmolpromise.then(function() {
-viewer_17713410358259919 = $3Dmol.createViewer(document.getElementById("3dmolviewer_17713410358259919"),{backgroundColor:"white"});
-viewer_17713410358259919.zoomTo();
-	viewer_17713410358259919.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.8883    0.1670   -0.0273 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4658   -0.5116   -0.0368 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4311    0.3229    0.5867 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8487    1.1175   -0.5695 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6471   -0.4704   -0.4896 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1964    0.3978    0.9977 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7920   -0.7224   -1.0597 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4246   -1.4559    0.5138 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4671    1.1550    0.0848 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
-	viewer_17713410358259919.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
-	viewer_17713410358259919.zoomTo();
-viewer_17713410358259919.render();
+viewer_1771998366726114 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771998366726114"),{backgroundColor:"white"});
+viewer_1771998366726114.zoomTo();
+	viewer_1771998366726114.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.8883    0.1670   -0.0273 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4658   -0.5116   -0.0368 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4311    0.3229    0.5867 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8487    1.1175   -0.5695 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6471   -0.4704   -0.4896 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1964    0.3978    0.9977 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7920   -0.7224   -1.0597 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4246   -1.4559    0.5138 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4671    1.1550    0.0848 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
+	viewer_1771998366726114.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_1771998366726114.zoomTo();
+viewer_1771998366726114.render();
 });
-</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x1158d66b0&gt;
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x110baa920&gt;
 </pre></div>
 </div>
 </div>
@@ -1644,8 +1682,8 @@ viewer_17713410358259919.render();
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="3dmolviewer_1771341035832059"  style="position: relative; width: 600px; height: 400px;">
-        <p id="3dmolwarning_1771341035832059" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+<div class="output text_html"><div id="3dmolviewer_1771998366734456"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_1771998366734456" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
         </div>
 <script>
 
@@ -1676,20 +1714,20 @@ $3Dmolpromise = null;
   $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
 }
 
-var viewer_1771341035832059 = null;
-var warn = document.getElementById("3dmolwarning_1771341035832059");
+var viewer_1771998366734456 = null;
+var warn = document.getElementById("3dmolwarning_1771998366734456");
 if(warn) {
     warn.parentNode.removeChild(warn);
 }
 $3Dmolpromise.then(function() {
-viewer_1771341035832059 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771341035832059"),{backgroundColor:"white"});
-viewer_1771341035832059.zoomTo();
-	viewer_1771341035832059.addModel("\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.8035   -1.1401   -0.0082 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3889    0.1258   -0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5853    1.2659   -0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8035    1.1401    0.0083 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3889   -0.1258    0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5853   -1.2659    0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4295   -2.0284   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4709    0.2238   -0.0501 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0414    2.2522   -0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4295    2.0284    0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4709   -0.2238    0.0500 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0414   -2.2522    0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n","mol");
-	viewer_1771341035832059.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
-	viewer_1771341035832059.zoomTo();
-viewer_1771341035832059.render();
+viewer_1771998366734456 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771998366734456"),{backgroundColor:"white"});
+viewer_1771998366734456.zoomTo();
+	viewer_1771998366734456.addModel("\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.8035   -1.1401   -0.0082 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3889    0.1258   -0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5853    1.2659   -0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8035    1.1401    0.0083 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3889   -0.1258    0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5853   -1.2659    0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4295   -2.0284   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4709    0.2238   -0.0501 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0414    2.2522   -0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4295    2.0284    0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4709   -0.2238    0.0500 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0414   -2.2522    0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n","mol");
+	viewer_1771998366734456.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_1771998366734456.zoomTo();
+viewer_1771998366734456.render();
 });
-</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x1159766e0&gt;
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x111763e80&gt;
 </pre></div>
 </div>
 </div>

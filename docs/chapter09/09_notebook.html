@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter09/09_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="next" title="Chapter 10: Basic Array Methods" href="../chapter10/10_notebook.html" />
     <link rel="prev" title="Chapter 8: Programming Practices" href="../chapter08/08_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -191,6 +191,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -788,7 +794,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x120beb9d0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x12e516c20&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/1d064953d0fbee3205b1363312fc8e9a76493c823aaadc2d02d54c36be554873.png" src="../../_images/1d064953d0fbee3205b1363312fc8e9a76493c823aaadc2d02d54c36be554873.png" />
@@ -1465,14 +1471,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting rdkit
-  Downloading rdkit-2025.9.3-cp310-cp310-macosx_11_0_arm64.whl.metadata (4.2 kB)
-Requirement already satisfied: numpy in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (from rdkit) (2.2.6)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: rdkit in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (2025.9.3)
+Requirement already satisfied: numpy in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (from rdkit) (1.26.4)
 Requirement already satisfied: Pillow in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (from rdkit) (12.0.0)
-Downloading rdkit-2025.9.3-cp310-cp310-macosx_11_0_arm64.whl (29.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">29.3/29.3 MB</span> <span class=" -Color -Color-Red">40.2 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-?25hInstalling collected packages: rdkit
-Successfully installed rdkit-2025.9.3
 </pre></div>
 </div>
 </div>
@@ -1558,11 +1559,7 @@ Successfully installed rdkit-2025.9.3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting py3Dmol
-  Downloading py3dmol-2.5.3-py2.py3-none-any.whl.metadata (2.1 kB)
-Downloading py3dmol-2.5.3-py2.py3-none-any.whl (7.2 kB)
-Installing collected packages: py3Dmol
-Successfully installed py3Dmol-2.5.3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: py3Dmol in /Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages (2.5.3)
 </pre></div>
 </div>
 </div>
@@ -1598,8 +1595,8 @@ Successfully installed py3Dmol-2.5.3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="3dmolviewer_177125954663788"  style="position: relative; width: 600px; height: 400px;">
-        <p id="3dmolwarning_177125954663788" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+<div class="output text_html"><div id="3dmolviewer_1771443452109511"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_1771443452109511" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
         </div>
 <script>
 
@@ -1630,20 +1627,101 @@ $3Dmolpromise = null;
   $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
 }
 
-var viewer_177125954663788 = null;
-var warn = document.getElementById("3dmolwarning_177125954663788");
+var viewer_1771443452109511 = null;
+var warn = document.getElementById("3dmolwarning_1771443452109511");
 if(warn) {
     warn.parentNode.removeChild(warn);
 }
 $3Dmolpromise.then(function() {
-viewer_177125954663788 = $3Dmol.createViewer(document.getElementById("3dmolviewer_177125954663788"),{backgroundColor:"white"});
-viewer_177125954663788.zoomTo();
-	viewer_177125954663788.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.8883    0.1670   -0.0273 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4658   -0.5116   -0.0368 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4311    0.3229    0.5867 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8487    1.1175   -0.5695 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6471   -0.4704   -0.4896 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1964    0.3978    0.9977 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7920   -0.7224   -1.0597 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4246   -1.4559    0.5138 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4671    1.1550    0.0848 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
-	viewer_177125954663788.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
-	viewer_177125954663788.zoomTo();
-viewer_177125954663788.render();
+viewer_1771443452109511 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771443452109511"),{backgroundColor:"white"});
+viewer_1771443452109511.zoomTo();
+	viewer_1771443452109511.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.9535    0.0478    0.0425 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4879   -0.3215   -0.1890 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2770    0.3248    0.7377 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3570    0.7340   -0.7332 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5933   -0.8626    0.0218 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0710    0.5964    1.0112 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7874   -0.1406   -1.2358 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5900   -1.4261   -0.0440 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8325    1.0478    0.3890 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
+	viewer_1771443452109511.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_1771443452109511.zoomTo();
+viewer_1771443452109511.render();
 });
-</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11f11d180&gt;
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x106edf940&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">py3Dmol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">AllChem</span>
+
+<span class="c1"># Create a 3D molecule (ethanol)</span>
+<span class="n">smiles</span> <span class="o">=</span> <span class="s1">&#39;CCO&#39;</span>  <span class="c1"># Ethanol</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+<span class="c1"># Generate 3D coordinates</span>
+<span class="n">AllChem</span><span class="o">.</span><span class="n">EmbedMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">randomSeed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">AllChem</span><span class="o">.</span><span class="n">MMFFOptimizeMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+<span class="c1"># Convert to mol block format</span>
+<span class="n">mol_block</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToMolBlock</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+<span class="c1"># Create 3D viewer</span>
+<span class="n">viewer</span> <span class="o">=</span> <span class="n">py3Dmol</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">addModel</span><span class="p">(</span><span class="n">mol_block</span><span class="p">,</span> <span class="s1">&#39;mol&#39;</span><span class="p">)</span>
+
+<span class="c1"># # Set style</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">setStyle</span><span class="p">({</span><span class="s1">&#39;stick&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">},</span> 
+                <span class="s1">&#39;sphere&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">}})</span>
+<span class="c1"># viewer.setBackgroundColor(&#39;white&#39;)</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">zoomTo</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="3dmolviewer_1771443470415638"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_1771443470415638" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+        </div>
+<script>
+
+var loadScriptAsync = function(uri){
+  return new Promise((resolve, reject) => {
+    //this is to ignore the existence of requirejs amd
+    var savedexports, savedmodule;
+    if (typeof exports !== 'undefined') savedexports = exports;
+    else exports = {}
+    if (typeof module !== 'undefined') savedmodule = module;
+    else module = {}
+
+    var tag = document.createElement('script');
+    tag.src = uri;
+    tag.async = true;
+    tag.onload = () => {
+        exports = savedexports;
+        module = savedmodule;
+        resolve();
+    };
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+});
+};
+
+if(typeof $3Dmolpromise === 'undefined') {
+$3Dmolpromise = null;
+  $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
+}
+
+var viewer_1771443470415638 = null;
+var warn = document.getElementById("3dmolwarning_1771443470415638");
+if(warn) {
+    warn.parentNode.removeChild(warn);
+}
+$3Dmolpromise.then(function() {
+viewer_1771443470415638 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771443470415638"),{backgroundColor:"white"});
+viewer_1771443470415638.zoomTo();
+	viewer_1771443470415638.addModel("\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -0.8883    0.1670   -0.0273 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4658   -0.5116   -0.0368 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4311    0.3229    0.5867 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8487    1.1175   -0.5695 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6471   -0.4704   -0.4896 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1964    0.3978    0.9977 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7920   -0.7224   -1.0597 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4246   -1.4559    0.5138 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4671    1.1550    0.0848 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n","mol");
+	viewer_1771443470415638.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_1771443470415638.zoomTo();
+viewer_1771443470415638.render();
+});
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x10e8dbd60&gt;
 </pre></div>
 </div>
 </div>
@@ -1675,8 +1753,8 @@ viewer_177125954663788.render();
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="3dmolviewer_17712595806362371"  style="position: relative; width: 600px; height: 400px;">
-        <p id="3dmolwarning_17712595806362371" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+<div class="output text_html"><div id="3dmolviewer_1771443553919616"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_1771443553919616" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
         </div>
 <script>
 
@@ -1707,20 +1785,20 @@ $3Dmolpromise = null;
   $3Dmolpromise = loadScriptAsync('https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js');
 }
 
-var viewer_17712595806362371 = null;
-var warn = document.getElementById("3dmolwarning_17712595806362371");
+var viewer_1771443553919616 = null;
+var warn = document.getElementById("3dmolwarning_1771443553919616");
 if(warn) {
     warn.parentNode.removeChild(warn);
 }
 $3Dmolpromise.then(function() {
-viewer_17712595806362371 = $3Dmol.createViewer(document.getElementById("3dmolviewer_17712595806362371"),{backgroundColor:"white"});
-viewer_17712595806362371.zoomTo();
-	viewer_17712595806362371.addModel("\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.8035   -1.1401   -0.0082 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3889    0.1258   -0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5853    1.2659   -0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8035    1.1401    0.0083 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3889   -0.1258    0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5853   -1.2659    0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4295   -2.0284   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4709    0.2238   -0.0501 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0414    2.2522   -0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4295    2.0284    0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4709   -0.2238    0.0500 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0414   -2.2522    0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n","mol");
-	viewer_17712595806362371.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
-	viewer_17712595806362371.zoomTo();
-viewer_17712595806362371.render();
+viewer_1771443553919616 = $3Dmol.createViewer(document.getElementById("3dmolviewer_1771443553919616"),{backgroundColor:"white"});
+viewer_1771443553919616.zoomTo();
+	viewer_1771443553919616.addModel("\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.8035   -1.1401   -0.0082 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3889    0.1258   -0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5853    1.2659   -0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8035    1.1401    0.0083 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3889   -0.1258    0.0281 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5853   -1.2659    0.0199 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4295   -2.0284   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4709    0.2238   -0.0501 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0414    2.2522   -0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4295    2.0284    0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4709   -0.2238    0.0500 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0414   -2.2522    0.0354 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n","mol");
+	viewer_1771443553919616.setStyle({"stick": {"radius": 0.15}, "sphere": {"radius": 0.4}});
+	viewer_1771443553919616.zoomTo();
+viewer_1771443553919616.render();
 });
-</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x11f247880&gt;
+</script></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;py3Dmol.view at 0x10e88fc70&gt;
 </pre></div>
 </div>
 </div>
@@ -1777,11 +1855,11 @@ viewer_17712595806362371.render();
       </div>
     </a>
     <a class="right-next"
-       href="../lab01/01_lab.html"
+       href="../chapter10/10_notebook.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+        <p class="prev-next-title">Chapter 10: Basic Array Methods</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

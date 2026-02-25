@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to CHME 212 Course &#8212; Introduction to Chemical Engineering Computation</title>
+    <title>CHME 212 — Midterm Exam 1 &#8212; Introduction to Chemical Engineering Computation</title>
   
   
   
@@ -57,12 +57,9 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/introduction/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/midterm1/submission_form';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Chapter 0: Introduction to Python &amp; Jupyter Notebooks" href="../chapter00/00_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -145,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="../introduction/intro.html">
   
   
   
@@ -176,8 +173,8 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
                     Welcome to CHME 212 Course
                 </a>
             </li>
@@ -279,7 +276,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/introduction/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/midterm1/submission_form.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -309,7 +306,7 @@
       
       
       
-      <li><a href="../../_sources/docs/introduction/intro.md" target="_blank"
+      <li><a href="../../_sources/docs/midterm1/submission_form.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +316,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -380,7 +377,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -391,11 +390,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to CHME 212 Course</h1>
+    <h1>CHME 212 — Midterm Exam 1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-information">Student Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-multiple-choice">Part A — Multiple Choice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-coding-problem">Part B — Coding Problem</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -405,59 +415,103 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-chme-212-course">
-<h1>Welcome to CHME 212 Course<a class="headerlink" href="#welcome-to-chme-212-course" title="Link to this heading">#</a></h1>
-<p>Scientific computing leverages computers to support tasks such as <strong>data processing, simulations, and modeling</strong>. In <strong>chemical engineering</strong>, it plays a central role in:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="chme-212-midterm-exam-1">
+<h1>CHME 212 — Midterm Exam 1<a class="headerlink" href="#chme-212-midterm-exam-1" title="Link to this heading">#</a></h1>
+<p><strong>Time allowed: 30 minutes</strong><br />
+<strong>Open notes, closed internet.</strong></p>
+<hr class="docutils" />
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Process modeling and simulation:</strong> Predicting reactor performance, separation processes, and heat and mass transfer</p></li>
-<li><p><strong>Process optimization:</strong> Maximizing yield, efficiency, or energy savings</p></li>
-<li><p><strong>Control and monitoring:</strong> Analyzing sensor data for real-time process control</p></li>
-<li><p><strong>Material and property prediction:</strong> Estimating thermodynamic, transport, or kinetic properties</p></li>
-<li><p><strong>Safety analysis:</strong> Simulating worst-case scenarios to design safer processes</p></li>
+<li><p>Fill in your information in the cell below.</p></li>
+<li><p>For <strong>Part A</strong>, enter your answer (<code class="docutils literal notranslate"><span class="pre">'a'</span></code>, <code class="docutils literal notranslate"><span class="pre">'b'</span></code>, <code class="docutils literal notranslate"><span class="pre">'c'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'d'</span></code>) in each variable.</p></li>
+<li><p>For <strong>Part B</strong>, write your code in the provided code cells.</p></li>
+<li><p>When finished, <strong>restart the kernel and run all cells</strong> to make sure there are no errors.</p></li>
+<li><p>Submit this <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file through <strong>Gradescope</strong>.</p></li>
 </ul>
-<p>Learning programming allows students to implement these models, analyze results, and extend their work to emerging areas such as <strong>machine learning, data-driven process optimization, and predictive modeling</strong>. No prior programming experience beyond first-year chemical engineering knowledge—including heat and mass balances, basic mathematics, and chemistry—is assumed. Python is particularly effective because it is:</p>
-<ul class="simple">
-<li><p><strong>Easy to learn and use</strong>, even for beginners</p></li>
-<li><p><strong>Versatile</strong>, supporting numerical computing, data analysis, visualization, and modeling</p></li>
-<li><p><strong>Extensible through libraries</strong>, such as NumPy, SciPy, matplotlib, pandas, and scikit-learn</p></li>
-<li><p><strong>Free and open-source</strong>, running on Windows, macOS, and Linux</p></li>
-<li><p><strong>Widely adopted in industry and research</strong>, making skills directly transferable, especially for <strong>machine learning applications</strong></p></li>
-</ul>
-<p>Learning Python equips students to perform traditional modeling tasks <strong>and extend their work to machine learning, predictive modeling, process optimization, and advanced data analysis</strong>, preparing them to tackle modern challenges in chemical engineering.</p>
-<p><img alt="alt text" src="../../_images/image.png" /></p>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
-</ul>
+</section>
+<section id="student-information">
+<h2>Student Information<a class="headerlink" href="#student-information" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>   <span class="c1"># Your full name</span>
+<span class="n">nuid</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>   <span class="c1"># Your NUID</span>
+<span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>   <span class="c1"># Your UNL email</span>
+</pre></div>
 </div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-</ul>
 </div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
-</ul>
 </div>
+</section>
+<hr class="docutils" />
+<section id="part-a-multiple-choice">
+<h2>Part A — Multiple Choice<a class="headerlink" href="#part-a-multiple-choice" title="Link to this heading">#</a></h2>
+<p>Enter your answer as a lowercase letter string: <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, <code class="docutils literal notranslate"><span class="pre">'b'</span></code>, <code class="docutils literal notranslate"><span class="pre">'c'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'d'</span></code>. Adjust the format as needed to match the number of questions on the exam.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Qn</span>  <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1"># n represents the number</span>
+<span class="n">Q1</span>  <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Question 1 example </span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q1</span>  <span class="o">=</span> <span class="s1">&#39;&#39;</span>   <span class="c1"># Question 1</span>
+<span class="n">Q2</span>  <span class="o">=</span> <span class="s1">&#39;&#39;</span>   <span class="c1"># Question 2</span>
+<span class="n">Q3</span>  <span class="o">=</span> <span class="s1">&#39;&#39;</span>   <span class="c1"># Question 3</span>
+<span class="c1"># ...</span>
+<span class="c1"># Add more questions as needed</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="part-b-coding-problem">
+<h2>Part B — Coding Problem<a class="headerlink" href="#part-b-coding-problem" title="Link to this heading">#</a></h2>
+<p>Read the problem statement from the exam sheet and write your solution in the cells below. Five cells are provided for the tasks. You may rearrange them or solve multiple tasks in a single cell. Just indicate which task(s) the cell addresses in the first line as a comment (e.g., # Task 1, 2).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 1</span>
+
+<span class="c1"># Your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 2 </span>
+
+<span class="c1"># Your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 3 </span>
+
+<span class="c1"># Your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 4 </span>
+
+<span class="c1"># Your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 5</span>
+
+<span class="c1"># Your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -473,7 +527,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./docs/introduction"
+            path: "./docs/midterm1"
         },
         predefinedOutput: true
     }
@@ -490,21 +544,30 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
-       href="../chapter00/00_notebook.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-information">Student Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-multiple-choice">Part A — Multiple Choice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-coding-problem">Part B — Coding Problem</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
