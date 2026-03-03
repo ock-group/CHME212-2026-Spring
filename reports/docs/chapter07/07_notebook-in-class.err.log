@@ -15,14 +15,19 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import util_functions
+import math_tools
+
+result = math_tools.add_numbers(10, 20)
+print(f"10 + 20 = {result}")
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[25], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mutil_functions[39;00m
+Cell [0;32mIn[8], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmath_tools[39;00m
+[1;32m      3[0m result [38;5;241m=[39m math_tools[38;5;241m.[39madd_numbers([38;5;241m10[39m, [38;5;241m20[39m)
+[1;32m      4[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124m10 + 20 = [39m[38;5;132;01m{[39;00mresult[38;5;132;01m}[39;00m[38;5;124m"[39m)
 
-[0;31mModuleNotFoundError[0m: No module named 'util_functions'
+[0;31mModuleNotFoundError[0m: No module named 'math_tools'
 
