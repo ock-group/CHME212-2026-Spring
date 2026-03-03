@@ -413,9 +413,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-polynomial-fitting">12.3 Least-Squares Polynomial Fitting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-and-the-coefficient-of-determination-r-2">12.3.2 Residuals and the Coefficient of Determination <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.3 Overfitting: When Higher Degree Hurts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.4 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.4 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taylor-series">12.4 Taylor Series</a><ul class="nav section-nav flex-column">
@@ -461,8 +462,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── All imports ─────────────────────────────────────────────────────────────</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">lagrange</span><span class="p">,</span> <span class="n">CubicSpline</span><span class="p">,</span> <span class="n">interp1d</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">factorial</span>
 </pre></div>
 </div>
 </div>
@@ -755,49 +754,12 @@ Manual check          : 1.0000
 <img alt="../../_images/763563129095e3e3714517e9182b5016ca6d176ac233d477b98e531710b57330.png" src="../../_images/763563129095e3e3714517e9182b5016ca6d176ac233d477b98e531710b57330.png" />
 </div>
 </div>
-</section>
-<section id="residuals-and-the-coefficient-of-determination-r-2">
-<span id="id6"></span><h3>12.3.2 Residuals and the Coefficient of Determination <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#residuals-and-the-coefficient-of-determination-r-2" title="Link to this heading">#</a></h3>
-<p>The <strong>residual</strong> at each data point is:</p>
+<p>The residual <span class="math notranslate nohighlight">\(e_i\)</span> is the vertical distance between a measured data point and the model’s prediction at that same <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 e_i = y_i - p(x_i)
 \]</div>
-<p>The <strong>coefficient of determination</strong> <span class="math notranslate nohighlight">\(R^2\)</span> measures how much variance the model explains:</p>
-<div class="math notranslate nohighlight">
-\[
-R^2 = 1 - \frac{\text{SS}_{\rm res}}{\text{SS}_{\rm tot}}, \qquad
-\text{SS}_{\rm res} = \sum_i e_i^2, \qquad
-\text{SS}_{\rm tot} = \sum_i (y_i - \bar{y})^2
-\]</div>
-<p><span class="math notranslate nohighlight">\(R^2 = 1\)</span> is a perfect fit; <span class="math notranslate nohighlight">\(R^2\)</span> near 0 means the model explains almost nothing.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── R² and RMSE for each degree ──────────────────────────────────────────────</span>
-<span class="n">SS_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">Cp_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Cp_data</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Degree&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;RMSE (J/mol/K)&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;R²&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">36</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
-    <span class="n">Cp_pred</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">],</span> <span class="n">T_data</span><span class="p">)</span>
-    <span class="n">residuals</span> <span class="o">=</span> <span class="n">Cp_data</span> <span class="o">-</span> <span class="n">Cp_pred</span>
-    <span class="n">SS_res</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">R2</span>        <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">SS_res</span> <span class="o">/</span> <span class="n">SS_tot</span>
-    <span class="n">RMSE</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">residuals</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">deg</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">RMSE</span><span class="si">:</span><span class="s2">&gt;16.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">R2</span><span class="si">:</span><span class="s2">&gt;8.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree    RMSE (J/mol/K)        R²
-------------------------------------
-     1          1.454003  0.942543
-     2          0.208613  0.998817
-     3          0.069648  0.999868
-</pre></div>
-</div>
-</div>
-</div>
+<p>A positive residual means the model underpredicts; negative means it overpredicts. A good fit has residuals that are small and scattered randomly around zero.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Residual stem plots for each degree ──────────────────────────────────────</span>
@@ -822,10 +784,288 @@ R^2 = 1 - \frac{\text{SS}_{\rm res}}{\text{SS}_{\rm tot}}, \qquad
 </div>
 </div>
 </section>
+<section id="fit-quality-metrics-mae-mse-and-r-2">
+<span id="id6"></span><h3>12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#fit-quality-metrics-mae-mse-and-r-2" title="Link to this heading">#</a></h3>
+<p>Given residuals <span class="math notranslate nohighlight">\(e_i = y_i - p(x_i)\)</span>, where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span> — observed (measured) value at point <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p(x_i)\)</span> — model-predicted value at the same point <span class="math notranslate nohighlight">\(x_i\)</span></p></li>
+</ul>
+<p>three standard metrics quantify how well the model fits the data:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MAE} = \frac{1}{N}\sum_{i=1}^{N} |e_i|
+\qquad
+\text{MSE} = \frac{1}{N}\sum_{i=1}^{N} e_i^2
+\qquad
+R^2 = 1 - \frac{\sum_i e_i^2}{\sum_i (y_i - \bar{y})^2}
+\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Full name</p></th>
+<th class="head"><p>Units</p></th>
+<th class="head"><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>MAE</strong></p></td>
+<td><p>Mean Absolute Error</p></td>
+<td><p>same as <span class="math notranslate nohighlight">\(y\)</span></p></td>
+<td><p>Average magnitude of error; easy to interpret</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MSE</strong></p></td>
+<td><p>Mean Squared Error</p></td>
+<td><p><span class="math notranslate nohighlight">\(y^2\)</span></p></td>
+<td><p>Penalizes large errors more heavily; used by least-squares optimization</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><span class="math notranslate nohighlight">\(R^2\)</span></strong></p></td>
+<td><p>Coefficient of Determination</p></td>
+<td><p>dimensionless</p></td>
+<td><p>Fraction of variance explained by the model; 1 = perfect</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Why square in MSE (and not just use MAE)?</strong></p>
+<ul class="simple">
+<li><p><strong>Penalize large errors more heavily</strong> — an error of 2 contributes 4× more than an error of 1; the fit is driven by the worst offenders</p></li>
+<li><p><strong>Smooth, differentiable objective</strong> — <span class="math notranslate nohighlight">\(e_i^2\)</span> has a clean derivative everywhere, which is what allows least-squares to be solved analytically; <span class="math notranslate nohighlight">\(|e_i|\)</span> is not differentiable at zero</p></li>
+</ul>
+<p><strong>Interpreting <span class="math notranslate nohighlight">\(R^2\)</span>:</strong> The denominator <span class="math notranslate nohighlight">\(\sum_i(y_i - \bar{y})^2\)</span> is the total variance in the data (how spread out the measurements are). The numerator <span class="math notranslate nohighlight">\(\sum_i e_i^2\)</span> is the variance the model <em>failed</em> to explain. Subtracting their ratio from 1 gives the fraction the model <em>does</em> explain.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R^2 = 1\)</span> — perfect fit; every residual is zero</p></li>
+<li><p><span class="math notranslate nohighlight">\(R^2 = 0\)</span> — the model does no better than just predicting <span class="math notranslate nohighlight">\(\bar{y}\)</span> for every point</p></li>
+<li><p><span class="math notranslate nohighlight">\(R^2 &lt; 0\)</span> — the model is worse than the mean (a sign something is seriously wrong)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="c1"># ── MAE, MSE, R² for each polynomial degree ──────────────────────────────────</span>
+<span class="n">SS_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">Cp_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Cp_data</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Degree&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MAE&#39;</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MSE&#39;</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;R²&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;(J/mol/K)&#39;</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;(J/mol/K)²&#39;</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
+    <span class="n">Cp_pred</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">],</span> <span class="n">T_data</span><span class="p">)</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">Cp_data</span> <span class="o">-</span> <span class="n">Cp_pred</span>
+    <span class="n">MAE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residuals</span><span class="p">))</span>
+    <span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">residuals</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">R2</span>  <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">SS_tot</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">deg</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">MAE</span><span class="si">:</span><span class="s2">&gt;18.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">MSE</span><span class="si">:</span><span class="s2">&gt;18.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">R2</span><span class="si">:</span><span class="s2">&gt;10.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree                 MAE                 MSE          R²
+                 (J/mol/K)          (J/mol/K)²            
+------------------------------------------------------------
+     1            1.256000            2.114124    0.942543
+     2            0.179212            0.043519    0.998817
+     3            0.052923            0.004851    0.999868
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mae-vs-r-2-they-can-disagree">
+<span id="id7"></span><h3>12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree<a class="headerlink" href="#mae-vs-r-2-they-can-disagree" title="Link to this heading">#</a></h3>
+<p>MAE and <span class="math notranslate nohighlight">\(R^2\)</span> measure different things, so a model can score well on one and poorly on the other.</p>
+<p><strong>Case A — Low MAE, low <span class="math notranslate nohighlight">\(R^2\)</span>:</strong>
+All errors are small in absolute magnitude, but the data has almost no variance. The model barely outperforms the flat mean, so <span class="math notranslate nohighlight">\(R^2\)</span> stays near zero even though MAE looks fine.</p>
+<p><strong>Case B — High MAE, high <span class="math notranslate nohighlight">\(R^2\)</span>:</strong>
+The data has a huge range (high variance). Errors are large in absolute units, giving a high MAE — but the model tracks the trend so well that <span class="math notranslate nohighlight">\(R^2\)</span> is still close to 1.</p>
+<p>The takeaway: <strong>always report both</strong>. MAE tells you the error in physical units (is it acceptable for your application?); <span class="math notranslate nohighlight">\(R^2\)</span> tells you whether the model captures the structure of the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">metrics</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">e</span>    <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_pred</span>
+    <span class="n">mae</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="n">mse</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ss_res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ss_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">r2</span>   <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ss_res</span> <span class="o">/</span> <span class="n">ss_tot</span>
+    <span class="k">return</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">r2</span>
+
+<span class="c1"># ── Case A: Low MAE, Low R² ───────────────────────────────────────────────────</span>
+<span class="c1"># Data clusters tightly around 10.0 (very low variance).</span>
+<span class="c1"># The model predicts a constant 10.1 — errors are tiny, but so is the spread,</span>
+<span class="c1"># so R² is low because the model barely beats the mean.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x_A</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">y_A</span>  <span class="o">=</span> <span class="mf">10.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>   <span class="c1"># near-flat data, range ≈ 0.1</span>
+<span class="n">yp_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">y_A</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">)</span>                     <span class="c1"># constant prediction slightly off</span>
+
+<span class="n">mae_A</span><span class="p">,</span> <span class="n">mse_A</span><span class="p">,</span> <span class="n">r2_A</span> <span class="o">=</span> <span class="n">metrics</span><span class="p">(</span><span class="n">y_A</span><span class="p">,</span> <span class="n">yp_A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Case A — Low MAE, Low R²&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Data range : </span><span class="si">{</span><span class="n">y_A</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="n">y_A</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  (spread ≈ </span><span class="si">{</span><span class="n">y_A</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">y_A</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  MAE = </span><span class="si">{</span><span class="n">mae_A</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">    MSE = </span><span class="si">{</span><span class="n">mse_A</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">    R² = </span><span class="si">{</span><span class="n">r2_A</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── Case B: High MAE, High R² ─────────────────────────────────────────────────</span>
+<span class="c1"># Data spans 0–10 000 (huge variance) with a clean linear trend.</span>
+<span class="c1"># A linear fit tracks it perfectly (R² ≈ 1), but residuals are ~50 units → high MAE.</span>
+<span class="n">x_B</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">y_B</span>  <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">x_B</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>   <span class="c1"># large range, noisy</span>
+<span class="n">coeffs_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_B</span><span class="p">,</span> <span class="n">y_B</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">yp_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_B</span><span class="p">,</span> <span class="n">x_B</span><span class="p">)</span>
+
+<span class="n">mae_B</span><span class="p">,</span> <span class="n">mse_B</span><span class="p">,</span> <span class="n">r2_B</span> <span class="o">=</span> <span class="n">metrics</span><span class="p">(</span><span class="n">y_B</span><span class="p">,</span> <span class="n">yp_B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Case B — High MAE, High R²&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Data range : </span><span class="si">{</span><span class="n">y_B</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="n">y_B</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (spread ≈ </span><span class="si">{</span><span class="n">y_B</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">y_B</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  MAE = </span><span class="si">{</span><span class="n">mae_B</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">    MSE = </span><span class="si">{</span><span class="n">mse_B</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">    R² = </span><span class="si">{</span><span class="n">r2_B</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── Plot ──────────────────────────────────────────────────────────────────────</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">y_A</span><span class="p">,</span>  <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">yp_A</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prediction (constant 10.1)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Case A: Low MAE, Low $R^2$</span><span class="se">\n</span><span class="s1">MAE=</span><span class="si">{</span><span class="n">mae_A</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">,  $R^2$=</span><span class="si">{</span><span class="n">r2_A</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_B</span><span class="p">,</span> <span class="n">y_B</span><span class="p">,</span>  <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_B</span><span class="p">,</span> <span class="n">yp_B</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;linear fit&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Case B: High MAE, High $R^2$</span><span class="se">\n</span><span class="s1">MAE=</span><span class="si">{</span><span class="n">mae_B</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">,  $R^2$=</span><span class="si">{</span><span class="n">r2_B</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Case A — Low MAE, Low R²
+  Data range : 9.952 – 10.046  (spread ≈ 0.094)
+  MAE = 0.0918    MSE = 0.009197    R² = -11.0804
+
+Case B — High MAE, High R²
+  Data range : 47.9 – 10018.2  (spread ≈ 9970.3)
+  MAE = 21.6016    MSE = 721.01    R² = 0.9999
+</pre></div>
+</div>
+<img alt="../../_images/a1c2816e2b215f95fa9e81325a9c6b981bfddda8bfa5ab8d79b10d33cce13985.png" src="../../_images/a1c2816e2b215f95fa9e81325a9c6b981bfddda8bfa5ab8d79b10d33cce13985.png" />
+</div>
+</div>
+</section>
 <section id="overfitting-when-higher-degree-hurts">
-<span id="id7"></span><h3>12.3.3 Overfitting: When Higher Degree Hurts<a class="headerlink" href="#overfitting-when-higher-degree-hurts" title="Link to this heading">#</a></h3>
+<span id="id8"></span><h3>12.3.4 Overfitting: When Higher Degree Hurts<a class="headerlink" href="#overfitting-when-higher-degree-hurts" title="Link to this heading">#</a></h3>
 <p>Adding more polynomial terms always reduces training error, but can create <strong>overfitting</strong>: the polynomial wiggles between data points and performs poorly outside the training range.</p>
+<p><strong>Why does adding terms always reduce training error?</strong>
+With <span class="math notranslate nohighlight">\(N\)</span> data points and a degree-<span class="math notranslate nohighlight">\((N-1)\)</span> polynomial, you have exactly enough free coefficients to pass through every point perfectly — residuals become zero by construction. But this is not a good model; it has memorized the noise in the data rather than learned the underlying trend.</p>
+<p><strong>Degrees of freedom</strong> = number of adjustable parameters (coefficients) available to fit the data. A degree-<span class="math notranslate nohighlight">\(n\)</span> polynomial has <span class="math notranslate nohighlight">\(n+1\)</span> coefficients, so <span class="math notranslate nohighlight">\(n+1\)</span> degrees of freedom.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Degree</p></th>
+<th class="head"><p>Degrees of freedom</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>High (<span class="math notranslate nohighlight">\(N-1\)</span>)</p></td>
+<td><p><span class="math notranslate nohighlight">\(N\)</span> — one per data point</p></td>
+<td><p>Zero training error · High variance · Overfitting risk</p></td>
+</tr>
+<tr class="row-odd"><td><p>Low–moderate</p></td>
+<td><p><span class="math notranslate nohighlight">\(\ll N\)</span></p></td>
+<td><p>Nonzero residual · Better generalization · Controlled flexibility</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>The bias-variance tradeoff:</strong></p>
+<ul class="simple">
+<li><p>A low-degree polynomial is <em>too rigid</em> — it misses real structure in the data</p></li>
+<li><p>A high-degree polynomial is <em>too flexible</em> — it chases every fluctuation and noise spike</p></li>
+</ul>
+<p>The right degree sits in between: flexible enough to capture the physical trend, not so flexible that it fits the noise. A practical warning sign: if the polynomial behaves wildly <em>between</em> data points or shoots off just outside the data range, the degree is too high.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{If } \deg(p) = N - 1 \text{ and you have } N \text{ points} \implies \text{SS}_{\text{res}} = 0,\quad R^2 = 1 \quad \text{(but the model is useless)}
+\]</div>
 <p>Here we deliberately use degree 9 (with only 10 data points) to illustrate the problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># ── Wiggly dataset: a signal with genuine oscillations + small noise ──────────</span>
+<span class="c1"># Imagine a periodic reaction yield measured across 12 experimental conditions.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">x_wig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">y_wig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_wig</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x_wig</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span> <span class="c1"># np.sin(x_wig) + 0.5 * np.sin(2 * x_wig) + </span>
+
+
+<span class="n">x_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># Fit with degree 2, 5, and 9</span>
+<span class="n">degs</span>   <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">]</span>
+<span class="n">fits_w</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_wig</span><span class="p">,</span> <span class="n">y_wig</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">degs</span><span class="p">}</span>
+
+<span class="c1"># ── Metrics ───────────────────────────────────────────────────────────────────</span>
+<span class="n">SS_tot_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_wig</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_wig</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Degree&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MAE&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;R²&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Note&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">48</span><span class="p">)</span>
+<span class="n">notes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;underfit — misses oscillations&#39;</span><span class="p">,</span>
+         <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;good fit — captures structure&#39;</span><span class="p">,</span>
+         <span class="mi">9</span><span class="p">:</span> <span class="s1">&#39;starts to overfit noise&#39;</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">degs</span><span class="p">:</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits_w</span><span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="n">x_wig</span><span class="p">)</span>
+    <span class="n">res</span>  <span class="o">=</span> <span class="n">y_wig</span> <span class="o">-</span> <span class="n">pred</span>
+    <span class="n">mae</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+    <span class="n">r2</span>   <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">res</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">SS_tot_w</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s2">&gt;10.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">&gt;8.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">notes</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── Plot: fits ────────────────────────────────────────────────────────────────</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">degs</span><span class="p">,</span> <span class="n">colors</span><span class="p">)):</span>
+    <span class="n">y_pred_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits_w</span><span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="n">x_fine</span><span class="p">)</span>
+    <span class="n">y_pred_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits_w</span><span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="n">x_wig</span><span class="p">)</span>
+    <span class="n">residuals</span>   <span class="o">=</span> <span class="n">y_wig</span> <span class="o">-</span> <span class="n">y_pred_data</span>
+    <span class="n">mae</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residuals</span><span class="p">))</span>
+    <span class="n">r2</span>   <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">SS_tot_w</span>
+
+    <span class="c1"># Top row: fit vs data</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">y_pred_fine</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_wig</span><span class="p">,</span> <span class="n">y_wig</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="se">\n</span><span class="s1">MAE=</span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">,  $R^2$=</span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+    <span class="c1"># Bottom row: residuals</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">x_wig</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">linefmt</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">basefmt</span><span class="o">=</span><span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s1"> residuals&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;residual&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Wiggly data: degree 2 underfits, degree 5 is appropriate, degree 9 starts overfitting&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree         MAE        R²  Note
+------------------------------------------------
+     2      0.6030    0.1219  underfit — misses oscillations
+     5      0.2763    0.7914  good fit — captures structure
+     9      0.1583    0.9236  starts to overfit noise
+</pre></div>
+</div>
+<img alt="../../_images/c30a5a769f855065d4fbcb55b83ded6f621722493a70d3cc4a6a60afab35cb82.png" src="../../_images/c30a5a769f855065d4fbcb55b83ded6f621722493a70d3cc4a6a60afab35cb82.png" />
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Overfitting demonstration ─────────────────────────────────────────────────</span>
@@ -863,7 +1103,7 @@ Use R² and visual inspection — not just training error — to choose degree.
 </div>
 </section>
 <section id="using-the-fit-integrating-c-p-analytically">
-<span id="id8"></span><h3>12.3.4 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically<a class="headerlink" href="#using-the-fit-integrating-c-p-analytically" title="Link to this heading">#</a></h3>
+<span id="id9"></span><h3>12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically<a class="headerlink" href="#using-the-fit-integrating-c-p-analytically" title="Link to this heading">#</a></h3>
 <p>With the degree-3 fit in hand, we integrate <span class="math notranslate nohighlight">\(C_p(T)\)</span> to compute the enthalpy change:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -900,14 +1140,32 @@ Integral of Cp from 400 K to 900 K:
 </section>
 </section>
 <section id="taylor-series">
-<span id="id9"></span><h2>12.4 Taylor Series<a class="headerlink" href="#taylor-series" title="Link to this heading">#</a></h2>
+<span id="id10"></span><h2>12.4 Taylor Series<a class="headerlink" href="#taylor-series" title="Link to this heading">#</a></h2>
+<p><strong>Core idea:</strong> Any smooth function can be exactly represented as an infinite polynomial, as long as you know all of its derivatives at a single point. The Taylor series is that polynomial.</p>
+<p><strong>Why does this work?</strong> A polynomial is fully described by its coefficients. A smooth function is fully described by its derivatives. The Taylor series connects the two: each coefficient <span class="math notranslate nohighlight">\(\frac{f^{(n)}(a)}{n!}\)</span> is chosen so that the polynomial’s <span class="math notranslate nohighlight">\(n\)</span>-th derivative at <span class="math notranslate nohighlight">\(x = a\)</span> exactly matches the function’s <span class="math notranslate nohighlight">\(n\)</span>-th derivative at <span class="math notranslate nohighlight">\(x = a\)</span>. Match all derivatives → match the function.</p>
+<p><strong>Why is this useful in engineering?</strong></p>
+<ul class="simple">
+<li><p>Nonlinear functions (<span class="math notranslate nohighlight">\(e^x\)</span>, <span class="math notranslate nohighlight">\(\sin x\)</span>, <span class="math notranslate nohighlight">\(\ln x\)</span>) are hard to integrate, differentiate, or solve algebraically. Their polynomial approximations are easy.</p></li>
+<li><p>Truncating after a few terms gives a simple formula accurate enough for a limited range — this is the basis of <strong>linearization</strong>, which appears everywhere in reactor design, control theory, and thermodynamics.</p></li>
+</ul>
 <p>A <strong>Taylor series</strong> expresses a smooth function as an infinite polynomial centered at a point <span class="math notranslate nohighlight">\(a\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}\,(x - a)^n
 = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f'''(a)}{3!}(x-a)^3 + \cdots
 \]</div>
-<p>Truncating after <span class="math notranslate nohighlight">\(N\)</span> terms gives an <strong><span class="math notranslate nohighlight">\(N\)</span>-th order approximation</strong>. The key Maclaurin series (centered at <span class="math notranslate nohighlight">\(a = 0\)</span>) are:</p>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f^{(n)}(a)\)</span> — the <span class="math notranslate nohighlight">\(n\)</span>-th derivative of <span class="math notranslate nohighlight">\(f\)</span> evaluated at the center point <span class="math notranslate nohighlight">\(a\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n!\)</span> — factorial, which prevents terms from growing too fast and ensures convergence</p></li>
+<li><p><span class="math notranslate nohighlight">\((x - a)^n\)</span> — measures how far <span class="math notranslate nohighlight">\(x\)</span> is from the center; terms get smaller as <span class="math notranslate nohighlight">\(n\)</span> increases (for <span class="math notranslate nohighlight">\(x\)</span> near <span class="math notranslate nohighlight">\(a\)</span>)</p></li>
+</ul>
+<p><strong>Truncation:</strong> In practice we stop after <span class="math notranslate nohighlight">\(N\)</span> terms, giving an <span class="math notranslate nohighlight">\(N\)</span>-th order approximation. The error from truncation is called the <strong>truncation error</strong>, and it shrinks as either <span class="math notranslate nohighlight">\(N\)</span> increases or <span class="math notranslate nohighlight">\(x\)</span> moves closer to <span class="math notranslate nohighlight">\(a\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) \approx \underbrace{f(a)}_{\text{0th: value}} + \underbrace{f'(a)(x-a)}_{\text{1st: slope}} + \underbrace{\frac{f''(a)}{2!}(x-a)^2}_{\text{2nd: curvature}} + \cdots
+\]</div>
+<p>A <strong>Maclaurin series</strong> is simply a Taylor series centered at <span class="math notranslate nohighlight">\(a = 0\)</span>. The two key series every engineer should know:</p>
 <div class="math notranslate nohighlight">
 \[
 e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
@@ -915,11 +1173,12 @@ e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-\sin x = \sum_{k=0}^{\infty} \frac{(-1)^k x^{2k+1}}{(2k+1)!} = x - \frac{x^3}{6} + \frac{x^5}{120} - \cdots
+\sin x = \sum_{k=0}^{\infty} \frac{(-1)^k\, x^{2k+1}}{(2k+1)!} = x - \frac{x^3}{6} + \frac{x^5}{120} - \cdots
 \qquad (\text{converges for all } x)
 \]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\sin x\)</span> only contains odd powers — this reflects the fact that <span class="math notranslate nohighlight">\(\sin x\)</span> is an odd function (<span class="math notranslate nohighlight">\(\sin(-x) = -\sin x\)</span>). The alternating signs (<span class="math notranslate nohighlight">\(+, -, +, -\ldots\)</span>) are what keep the series from diverging.</p>
 <section id="convergence-of-partial-sums">
-<span id="id10"></span><h3>12.4.1 Convergence of Partial Sums<a class="headerlink" href="#convergence-of-partial-sums" title="Link to this heading">#</a></h3>
+<span id="id11"></span><h3>12.4.1 Convergence of Partial Sums<a class="headerlink" href="#convergence-of-partial-sums" title="Link to this heading">#</a></h3>
 <p>We build the partial sums term by term and watch the approximation converge to the exact function as more terms are included.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -964,7 +1223,19 @@ e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/25756b66b7a8c680cbf8621d6fcb5c81733de4e74356cff6834e51644e910912.png" src="../../_images/25756b66b7a8c680cbf8621d6fcb5c81733de4e74356cff6834e51644e910912.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">approx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">11</span>     <span class="n">approx</span> <span class="o">=</span> <span class="n">approx</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="n">n</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">approx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> terms&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;factorial&#39; is not defined
+</pre></div>
+</div>
+<img alt="../../_images/6937f3003832ce0e56a6b2c0bd875f624b6898743c0c02e8daf8548f76290f06.png" src="../../_images/6937f3003832ce0e56a6b2c0bd875f624b6898743c0c02e8daf8548f76290f06.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1003,7 +1274,7 @@ e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3
 </div>
 </section>
 <section id="che-application-linearizing-the-arrhenius-equation">
-<span id="id11"></span><h3>12.4.2 ChE Application: Linearizing the Arrhenius Equation<a class="headerlink" href="#che-application-linearizing-the-arrhenius-equation" title="Link to this heading">#</a></h3>
+<span id="id12"></span><h3>12.4.2 ChE Application: Linearizing the Arrhenius Equation<a class="headerlink" href="#che-application-linearizing-the-arrhenius-equation" title="Link to this heading">#</a></h3>
 <p>The Arrhenius rate constant is nonlinear in temperature:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1072,7 +1343,7 @@ k(T) \approx k(T_0) + k'(T_0)\,(T - T_0),
 </section>
 </section>
 <section id="polynomial-interpolation">
-<span id="id12"></span><h2>12.5 Polynomial Interpolation<a class="headerlink" href="#polynomial-interpolation" title="Link to this heading">#</a></h2>
+<span id="id13"></span><h2>12.5 Polynomial Interpolation<a class="headerlink" href="#polynomial-interpolation" title="Link to this heading">#</a></h2>
 <p><strong>Interpolation</strong> constructs a curve that passes <em>exactly</em> through all given data points. With <span class="math notranslate nohighlight">\(n+1\)</span> distinct points, there is a unique polynomial of degree <span class="math notranslate nohighlight">\(\leq n\)</span> that interpolates them.</p>
 <p>The <strong>Lagrange form</strong> writes this polynomial explicitly:</p>
 <div class="math notranslate nohighlight">
@@ -1083,7 +1354,7 @@ L_i(x) = \prod_{\substack{j=0 \\ j \neq i}}^{n} \frac{x - x_j}{x_i - x_j}
 \end{split}\]</div>
 <p>Each basis polynomial <span class="math notranslate nohighlight">\(L_i\)</span> equals 1 at <span class="math notranslate nohighlight">\(x_i\)</span> and 0 at every other node.</p>
 <section id="lagrange-interpolation-from-scratch">
-<span id="id13"></span><h3>12.5.1 Lagrange Interpolation from Scratch<a class="headerlink" href="#lagrange-interpolation-from-scratch" title="Link to this heading">#</a></h3>
+<span id="id14"></span><h3>12.5.1 Lagrange Interpolation from Scratch<a class="headerlink" href="#lagrange-interpolation-from-scratch" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lagrange_interp</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">x_eval</span><span class="p">):</span>
@@ -1136,7 +1407,7 @@ L_i(x) = \prod_{\substack{j=0 \\ j \neq i}}^{n} \frac{x - x_j}{x_i - x_j}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/70fe900271bbf21ba70f30b0880be966d958452c0c20bf31c9a9450f44358880.png" src="../../_images/70fe900271bbf21ba70f30b0880be966d958452c0c20bf31c9a9450f44358880.png" />
+<img alt="../../_images/fd021776defc0dd147c4974be3fbd3a3d19988d282031feae0fb3e635c906dd6.png" src="../../_images/fd021776defc0dd147c4974be3fbd3a3d19988d282031feae0fb3e635c906dd6.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max interpolation error: 1.81e-03
 </pre></div>
 </div>
@@ -1171,7 +1442,7 @@ Error     = 7.77e-16
 </div>
 </section>
 <section id="runge-s-phenomenon">
-<span id="id14"></span><h3>12.5.2 Runge’s Phenomenon<a class="headerlink" href="#runge-s-phenomenon" title="Link to this heading">#</a></h3>
+<span id="id15"></span><h3>12.5.2 Runge’s Phenomenon<a class="headerlink" href="#runge-s-phenomenon" title="Link to this heading">#</a></h3>
 <p>High-degree polynomial interpolation on <strong>equally spaced nodes</strong> can produce wild oscillations near the edges of the interval — even though the interpolated function itself is smooth. This is called <strong>Runge’s phenomenon</strong>.</p>
 <p>The classic example is:</p>
 <div class="math notranslate nohighlight">
@@ -1211,7 +1482,7 @@ f(x) = \frac{1}{1 + 25x^2}, \qquad x \in [-1, 1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b07809a38630dbe53ae674f2fdf0cac363b3df98dcf47ce75f7b6028dabefa1e.png" src="../../_images/b07809a38630dbe53ae674f2fdf0cac363b3df98dcf47ce75f7b6028dabefa1e.png" />
+<img alt="../../_images/b8bd4da22735581022c6414988d3f7ac281db5d927e7d2b1aee4b87654b16148.png" src="../../_images/b8bd4da22735581022c6414988d3f7ac281db5d927e7d2b1aee4b87654b16148.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oscillations grow as n increases — this is Runge&#39;s phenomenon.
 Fix: use piecewise splines instead of a single high-degree polynomial.
 </pre></div>
@@ -1221,7 +1492,7 @@ Fix: use piecewise splines instead of a single high-degree polynomial.
 </section>
 </section>
 <section id="spline-interpolation">
-<span id="id15"></span><h2>12.6 Spline Interpolation<a class="headerlink" href="#spline-interpolation" title="Link to this heading">#</a></h2>
+<span id="id16"></span><h2>12.6 Spline Interpolation<a class="headerlink" href="#spline-interpolation" title="Link to this heading">#</a></h2>
 <p>A <strong>spline</strong> divides the data into intervals and fits a low-degree polynomial on each sub-interval, joining them smoothly at the <strong>knots</strong> (the data points).</p>
 <p>A <strong>cubic spline</strong> uses degree-3 polynomials on each interval and enforces:</p>
 <ul class="simple">
@@ -1249,7 +1520,7 @@ Fix: use piecewise splines instead of a single high-degree polynomial.
 </table>
 </div>
 <section id="spline-vs-polynomial-on-the-runge-example">
-<span id="id16"></span><h3>12.6.1 Spline vs Polynomial on the Runge Example<a class="headerlink" href="#spline-vs-polynomial-on-the-runge-example" title="Link to this heading">#</a></h3>
+<span id="id17"></span><h3>12.6.1 Spline vs Polynomial on the Runge Example<a class="headerlink" href="#spline-vs-polynomial-on-the-runge-example" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Cubic spline vs high-degree polynomial on Runge&#39;s function ────────────────</span>
@@ -1287,7 +1558,7 @@ Fix: use piecewise splines instead of a single high-degree polynomial.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/418399cb79f71db42e79e6c732186c5a9446c3ae5ab695e9b3adcb5e604c3bef.png" src="../../_images/418399cb79f71db42e79e6c732186c5a9446c3ae5ab695e9b3adcb5e604c3bef.png" />
+<img alt="../../_images/3a18db93d0a035e49ae746d569dd455a2192aea665db77a819b58ec8c938d1e7.png" src="../../_images/3a18db93d0a035e49ae746d569dd455a2192aea665db77a819b58ec8c938d1e7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max error — polynomial : 1.0701
 Max error — spline     : 0.0504
 </pre></div>
@@ -1296,7 +1567,7 @@ Max error — spline     : 0.0504
 </div>
 </section>
 <section id="interp1d-linear-and-cubic-interpolation">
-<span id="id17"></span><h3>12.6.2 <code class="docutils literal notranslate"><span class="pre">interp1d</span></code>: Linear and Cubic Interpolation<a class="headerlink" href="#interp1d-linear-and-cubic-interpolation" title="Link to this heading">#</a></h3>
+<span id="id18"></span><h3>12.6.2 <code class="docutils literal notranslate"><span class="pre">interp1d</span></code>: Linear and Cubic Interpolation<a class="headerlink" href="#interp1d-linear-and-cubic-interpolation" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">scipy.interpolate.interp1d</span></code> is a convenient general-purpose wrapper. The <code class="docutils literal notranslate"><span class="pre">kind</span></code> argument selects the order: <code class="docutils literal notranslate"><span class="pre">'linear'</span></code>, <code class="docutils literal notranslate"><span class="pre">'quadratic'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'cubic'</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1323,12 +1594,12 @@ Max error — spline     : 0.0504
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bf747941f58e777d8f028a13370914ee842ada743052c773d4e4902bd2e5fe9a.png" src="../../_images/bf747941f58e777d8f028a13370914ee842ada743052c773d4e4902bd2e5fe9a.png" />
+<img alt="../../_images/49b46bc1c54c14ed1f30e0f9b66f36eecaa9651a84e2d9dc7ad4bd7e4f2ee980.png" src="../../_images/49b46bc1c54c14ed1f30e0f9b66f36eecaa9651a84e2d9dc7ad4bd7e4f2ee980.png" />
 </div>
 </div>
 </section>
 <section id="che-application-interpolating-steam-table-data">
-<span id="id18"></span><h3>12.6.3 ChE Application: Interpolating Steam Table Data<a class="headerlink" href="#che-application-interpolating-steam-table-data" title="Link to this heading">#</a></h3>
+<span id="id19"></span><h3>12.6.3 ChE Application: Interpolating Steam Table Data<a class="headerlink" href="#che-application-interpolating-steam-table-data" title="Link to this heading">#</a></h3>
 <p>Steam tables give the enthalpy of vaporization <span class="math notranslate nohighlight">\(H_{\rm vap}\)</span> at discrete temperatures. For heat exchanger design we need <span class="math notranslate nohighlight">\(H_{\rm vap}\)</span> at arbitrary intermediate conditions.</p>
 <p>Below is a hardcoded excerpt from saturated-water steam tables (Smith, Van Ness &amp; Abbott):</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -1427,7 +1698,7 @@ Max error — spline     : 0.0504
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d7e93d9d8548ff8d9ba3037f950e29597fe1b779e830ccdd25e8526e80bafc63.png" src="../../_images/d7e93d9d8548ff8d9ba3037f950e29597fe1b779e830ccdd25e8526e80bafc63.png" />
+<img alt="../../_images/ea0bd9afaf7ba2c3a7a3471e306b8c6c54f70a9b7d122d4df1bf6c48b9004696.png" src="../../_images/ea0bd9afaf7ba2c3a7a3471e306b8c6c54f70a9b7d122d4df1bf6c48b9004696.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interpolated H_vap at T = 160 °C : 2081.66 kJ/kg
 Interpolated H_vap at P = 620 kPa : 2082.03 kJ/kg
 </pre></div>
@@ -1470,7 +1741,7 @@ Cubic interpolation follows the curvature better — preferred for accurate engi
 </section>
 </section>
 <section id="summary">
-<span id="id19"></span><h2>12.7 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<span id="id20"></span><h2>12.7 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concept</p></th>
@@ -1493,10 +1764,18 @@ Cubic interpolation follows the curvature better — preferred for accurate engi
 </tr>
 <tr class="row-odd"><td><p><strong>Residuals</strong></p></td>
 <td><p><span class="math notranslate nohighlight">\(e_i = y_i - p(x_i)\)</span></p></td>
-<td><p>Check fit quality; plot against <span class="math notranslate nohighlight">\(x\)</span></p></td>
+<td><p>Signed error at each data point</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MAE</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{N}\sum|e_i|\)</span></p></td>
+<td><p>Average error in original units; easy to interpret</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MSE</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{N}\sum e_i^2\)</span></p></td>
+<td><p>Penalizes large errors; units are <span class="math notranslate nohighlight">\(y^2\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><strong><span class="math notranslate nohighlight">\(R^2\)</span></strong></p></td>
-<td><p><span class="math notranslate nohighlight">\(1 - \text{SS}_{\rm res}/\text{SS}_{\rm tot}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1 - \sum e_i^2 / \sum(y_i-\bar{y})^2\)</span></p></td>
 <td><p>Fraction of variance explained; 1 = perfect</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Taylor series</strong></p></td>
@@ -1531,7 +1810,7 @@ Cubic interpolation follows the curvature better — preferred for accurate engi
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code> with degree 2–4 for smooth physical properties (<span class="math notranslate nohighlight">\(C_p\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(k\)</span>)</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">CubicSpline</span></code> when you need to interpolate a table and preserve curvature</p></li>
 <li><p>Never use a single high-degree polynomial for interpolation — use splines instead</p></li>
-<li><p>Always plot the fit against the original data and examine residuals before trusting any model</p></li>
+<li><p>Always plot the fit and report MAE/<span class="math notranslate nohighlight">\(R^2\)</span> before trusting any model</p></li>
 </ul>
 </section>
 </section>
@@ -1592,9 +1871,10 @@ Cubic interpolation follows the curvature better — preferred for accurate engi
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-polynomial-fitting">12.3 Least-Squares Polynomial Fitting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-and-the-coefficient-of-determination-r-2">12.3.2 Residuals and the Coefficient of Determination <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.3 Overfitting: When Higher Degree Hurts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.4 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.4 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taylor-series">12.4 Taylor Series</a><ul class="nav section-nav flex-column">

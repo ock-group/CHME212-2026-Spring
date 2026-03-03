@@ -412,7 +412,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-matrix-inverse">Problem 1: Matrix Inverse</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-solving-system-of-linear-equations">Problem 2: Solving System of Linear Equations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-balancing-a-combustion-reaction-using-linear-algebra">Problem 3: Balancing a Combustion Reaction using Linear Algebra</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-four-component-separation-train-55-system">Problem 4: Four-Component Separation Train: 5×5 System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-separation-train-with-recycle-55-system">Problem 4: Separation Train with Recycle: 5×5 System</a></li>
 </ul>
 </li>
 </ul>
@@ -637,6 +637,22 @@ M⁻¹M = I? True
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">0.5</span> <span class="o">==</span><span class="p">(</span><span class="mf">0.2</span><span class="o">+</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.50000000000001</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">==</span> <span class="mf">0.50000000000001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+False
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="problem-2-solving-system-of-linear-equations">
 <h3>Problem 2: Solving System of Linear Equations<a class="headerlink" href="#problem-2-solving-system-of-linear-equations" title="Link to this heading">#</a></h3>
@@ -772,91 +788,115 @@ Verification:
 </div>
 </div>
 </section>
-<section id="problem-4-four-component-separation-train-55-system">
-<h3>Problem 4: Four-Component Separation Train: 5×5 System<a class="headerlink" href="#problem-4-four-component-separation-train-55-system" title="Link to this heading">#</a></h3>
+<section id="problem-4-separation-train-with-recycle-55-system">
+<h3>Problem 4: Separation Train with Recycle: 5×5 System<a class="headerlink" href="#problem-4-separation-train-with-recycle-55-system" title="Link to this heading">#</a></h3>
 <blockquote>
 <div><p><strong>Instructor note:</strong> This is the capstone problem — a real process flowsheet with five unknown flow rates. The reaction-balancing problems had all the structure handed to you (atoms are conserved → one equation per element). Here you have to read a process description and decide <strong>which</strong> mass balances to write. The key principle is the same: for every unit operation (splitter, mixer), write a total mass balance. For each split ratio given, write a specification equation. Together those give you 5 equations in 5 unknowns, which is a 5×5 linear system. Take your time mapping out the flowsheet before writing a single number down.</p>
 </div></blockquote>
-<p>A process separates a feed stream into four product streams using a series of splitters. We have <strong>5 unknown flow rates</strong> and can write 5 independent mass balance equations.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                          ┌──────────┐
-                     ┌───►│ Split-1  ├──► F2 (product A, 30% of S1)
-Feed F1 (100 mol/s) ─┤    └──────────┘
-   xA=0.50           │         │ S1
-   xB=0.30           │         ▼
-   xC=0.20           │   ┌──────────┐
-                     │   │ Split-2  ├──► F3 (product B)
-                     │   └──────────┘
-                     │         │ S2
-                     │         ▼
-                     │   ┌──────────┐
-                     └──►│  Mixer   ├──► F5 (recycle, known: 10 mol/s, xA=0.6)
-                         └──────────┘
-                              │
-                              ▼ F4 (bottoms)
+<p>A feed stream passes through two splitters in series before entering a mixer that combines it with a known recycle stream. We have <strong>5 unknown flow rates</strong> and can write 5 independent mass balance equations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                    ┌──────────┐           ┌──────────┐           ┌──────────┐
+F1 (100 mol/s) ───► │ Split-1  ├──► S1 ──► │ Split-2  ├──► S2 ──► │  Mixer   ├──► F4 (bottoms)
+                    └────┬─────┘           └────┬─────┘           └──────────┘
+                         │                      │                       ▲
+                         ▼                      ▼                       │
+                    F2 (product A)         F3 (product B)          F5 = 10 mol/s
+                    (40% of F1)            (50% of S1)              (known recycle)
 </pre></div>
 </div>
 <p><strong>Unknowns:</strong> <span class="math notranslate nohighlight">\(F_2, F_3, F_4, S_1, S_2\)</span> (mol/s)</p>
-<p><strong>Known:</strong> <span class="math notranslate nohighlight">\(F_1 = 100\)</span> mol/s with <span class="math notranslate nohighlight">\(x_A = 0.50\)</span>, <span class="math notranslate nohighlight">\(x_B = 0.30\)</span>, <span class="math notranslate nohighlight">\(x_C = 0.20\)</span>; <span class="math notranslate nohighlight">\(F_5 = 10\)</span> mol/s with <span class="math notranslate nohighlight">\(x_A = 0.60\)</span>; Split-1 sends 40% to <span class="math notranslate nohighlight">\(F_2\)</span>; Split-2 sends 50% of its inlet to <span class="math notranslate nohighlight">\(F_3\)</span>.</p>
+<p><strong>Known:</strong> <span class="math notranslate nohighlight">\(F_1 = 100\)</span> mol/s; <span class="math notranslate nohighlight">\(F_5 = 10\)</span> mol/s (recycle); Split-1 sends 40% to <span class="math notranslate nohighlight">\(F_2\)</span> (so 60% continues as <span class="math notranslate nohighlight">\(S_1\)</span>); Split-2 sends 50% of its inlet to <span class="math notranslate nohighlight">\(F_3\)</span> (so 50% continues as <span class="math notranslate nohighlight">\(S_2\)</span>).</p>
 <p><strong>5 equations:</strong></p>
 <ol class="arabic simple">
-<li><p>Overall balance on Split-1: <span class="math notranslate nohighlight">\(S_1 = F_1 - F_2\)</span></p></li>
-<li><p>Split-1 specification: <span class="math notranslate nohighlight">\(F_2 = 0.40\, F_1\)</span> → rearranged: <span class="math notranslate nohighlight">\(F_2 - 0.40\,F_1 = 0\)</span>, but <span class="math notranslate nohighlight">\(F_1\)</span> is known, so: <span class="math notranslate nohighlight">\(F_2 = 40\)</span>; embed as <span class="math notranslate nohighlight">\(F_2 = 0.40 \times 100\)</span></p></li>
-<li><p>Overall balance on Split-2: <span class="math notranslate nohighlight">\(F_3 + S_2 = S_1\)</span></p></li>
-<li><p>Split-2 specification: <span class="math notranslate nohighlight">\(F_3 = 0.50\, S_1\)</span></p></li>
-<li><p>Overall balance on Mixer: <span class="math notranslate nohighlight">\(S_2 + F_5 = F_4 + F_5\)</span> → <span class="math notranslate nohighlight">\(F_4 = S_2\)</span></p></li>
+<li><p>Split-1 specification: <span class="math notranslate nohighlight">\(F_2 = 0.40 \cdot F_1 = 40\)</span></p></li>
+<li><p>Split-1 overall balance: <span class="math notranslate nohighlight">\(F_1 = F_2 + S_1\)</span> → <span class="math notranslate nohighlight">\(F_2 + S_1 = 100\)</span></p></li>
+<li><p>Split-2 specification: <span class="math notranslate nohighlight">\(F_3 = 0.50 \cdot S_1\)</span> → <span class="math notranslate nohighlight">\(F_3 - 0.5\,S_1 = 0\)</span></p></li>
+<li><p>Split-2 overall balance: <span class="math notranslate nohighlight">\(S_1 = F_3 + S_2\)</span> → <span class="math notranslate nohighlight">\(F_3 - S_1 + S_2 = 0\)</span></p></li>
+<li><p>Mixer overall balance: <span class="math notranslate nohighlight">\(S_2 + F_5 = F_4\)</span> → <span class="math notranslate nohighlight">\(-F_4 + S_2 = -10\)</span> (since <span class="math notranslate nohighlight">\(F_5 = 10\)</span> is known)</p></li>
 </ol>
 <p>Rewriting as <span class="math notranslate nohighlight">\(A\mathbf{x} = \mathbf{b}\)</span> with <span class="math notranslate nohighlight">\(\mathbf{x} = [F_2, F_3, F_4, S_1, S_2]^T\)</span>:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Eq.</p></th>
 <th class="head"><p>Equation</p></th>
-<th class="head"><p>Variables involved</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F_2\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F_3\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F_4\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(S_1\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(S_2\)</span></p></th>
+<th class="head text-center"><p>RHS</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1</p></td>
-<td><p><span class="math notranslate nohighlight">\(F_2 = 40\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(F_2\)</span></p></td>
+<td><p>Split-1 spec: <span class="math notranslate nohighlight">\(F_2 = 40\)</span></p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>40</p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
-<td><p><span class="math notranslate nohighlight">\(-F_2 + S_1 = 60\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(F_2, S_1\)</span></p></td>
+<td><p>Split-1 balance: <span class="math notranslate nohighlight">\(F_2 + S_1 = 100\)</span></p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>100</p></td>
 </tr>
 <tr class="row-even"><td><p>3</p></td>
-<td><p><span class="math notranslate nohighlight">\(F_3 + S_2 = S_1\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(F_3, S_1, S_2\)</span></p></td>
+<td><p>Split-2 spec: <span class="math notranslate nohighlight">\(F_3 - 0.5\,S_1 = 0\)</span></p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>-0.5</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
 </tr>
 <tr class="row-odd"><td><p>4</p></td>
-<td><p><span class="math notranslate nohighlight">\(F_3 = 0.50\,S_1\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(F_3, S_1\)</span></p></td>
+<td><p>Split-2 balance: <span class="math notranslate nohighlight">\(F_3 - S_1 + S_2 = 0\)</span></p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>-1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
 </tr>
 <tr class="row-even"><td><p>5</p></td>
-<td><p><span class="math notranslate nohighlight">\(F_4 = S_2\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(F_4, S_2\)</span></p></td>
+<td><p>Mixer balance: <span class="math notranslate nohighlight">\(-F_4 + S_2 = -10\)</span></p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>-1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>-10</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unknowns: x = [F2, F3, F4, S1, S2]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Unknowns: x = [F2, F3, F4, S1, S2]</span>
 <span class="c1">#</span>
-<span class="c1"># Eq 1:  F2                    = 40          (split-1 spec: 40% of 100)</span>
-<span class="c1"># Eq 2: -F2        +  S1       = 60          (split-1 overall: S1 = 100 - F2)</span>
-<span class="c1"># Eq 3:      F3         - S1 + S2 = 0    wait — rearranged: F3 + S2 - S1 = 0</span>
-<span class="c1"># Eq 4:      F3    - 0.5*S1       = 0        (split-2 spec: F3 = 0.5*S1)</span>
-<span class="c1"># Eq 5:          F4          - S2 = 0        (mixer overall: F4 = S2)</span>
+<span class="c1"># Eq 1:  F2                         =  40   (split-1 spec: 40% of 100)</span>
+<span class="c1"># Eq 2:  F2              + S1       = 100   (split-1 balance: F1 = F2 + S1)</span>
+<span class="c1"># Eq 3:       F3         - 0.5*S1   =   0   (split-2 spec: F3 = 0.5*S1)</span>
+<span class="c1"># Eq 4:       F3         - S1  + S2 =   0   (split-2 balance: S1 = F3 + S2)</span>
+<span class="c1"># Eq 5:            -F4         + S2 = -10   (mixer balance: S2 + F5 = F4, F5=10)</span>
 <span class="c1">#</span>
-<span class="c1">#        F2   F3   F4   S1   S2    rhs</span>
+<span class="c1">#        F2   F3    F4    S1    S2    rhs</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span>   <span class="c1"># Eq 1</span>
-    <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span>   <span class="c1"># Eq 2</span>
-    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">,</span>   <span class="mi">1</span><span class="p">],</span>   <span class="c1"># Eq 3</span>
-    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>   <span class="c1"># Eq 4</span>
-    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">],</span>   <span class="c1"># Eq 5</span>
+    <span class="p">[</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>   <span class="c1"># Eq 1</span>
+    <span class="p">[</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>   <span class="c1"># Eq 2</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>   <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>   <span class="c1"># Eq 3</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>   <span class="o">-</span><span class="mi">1</span><span class="p">,</span>    <span class="mi">1</span><span class="p">],</span>   <span class="c1"># Eq 4</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="o">-</span><span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">1</span><span class="p">],</span>   <span class="c1"># Eq 5</span>
 <span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
-<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficient matrix A (5×5):&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -872,37 +912,42 @@ Feed F1 (100 mol/s) ─┤    └──────────┘
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  S1 (internal)  = </span><span class="si">{</span><span class="n">S1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/s&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  S2 (internal)  = </span><span class="si">{</span><span class="n">S2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/s&quot;</span><span class="p">)</span>
 
+<span class="n">F1</span><span class="p">,</span> <span class="n">F5</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">10.0</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">── Verification ──&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Overall: F2+F3+F4 = </span><span class="si">{</span><span class="n">F2</span><span class="o">+</span><span class="n">F3</span><span class="o">+</span><span class="n">F4</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  (expected </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">, net of recycle F5=10)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Split-1: F2/F1    = </span><span class="si">{</span><span class="n">F2</span><span class="o">/</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">      (expected 0.40)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Split-2: F3/S1    = </span><span class="si">{</span><span class="n">F3</span><span class="o">/</span><span class="n">S1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">      (expected 0.50)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Overall: F1 + F5           = </span><span class="si">{</span><span class="n">F1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">F5</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/s  (total in)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;           F2 + F3 + F4      = </span><span class="si">{</span><span class="n">F2</span><span class="o">+</span><span class="n">F3</span><span class="o">+</span><span class="n">F4</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/s  (total out)  → </span><span class="si">{</span><span class="s1">&#39;OK&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">F1</span><span class="o">+</span><span class="n">F5</span><span class="p">,</span><span class="w"> </span><span class="n">F2</span><span class="o">+</span><span class="n">F3</span><span class="o">+</span><span class="n">F4</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Split-1: F2 / F1           = </span><span class="si">{</span><span class="n">F2</span><span class="o">/</span><span class="n">F1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">       (expected 0.40)  → </span><span class="si">{</span><span class="s1">&#39;OK&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">F2</span><span class="o">/</span><span class="n">F1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.40</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Split-2: F3 / S1           = </span><span class="si">{</span><span class="n">F3</span><span class="o">/</span><span class="n">S1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">       (expected 0.50)  → </span><span class="si">{</span><span class="s1">&#39;OK&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">F3</span><span class="o">/</span><span class="n">S1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.50</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mixer:   S2 + F5           = </span><span class="si">{</span><span class="n">S2</span><span class="o">+</span><span class="n">F5</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/s  (= F4 = </span><span class="si">{</span><span class="n">F4</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)  → </span><span class="si">{</span><span class="s1">&#39;OK&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">S2</span><span class="o">+</span><span class="n">F5</span><span class="p">,</span><span class="w"> </span><span class="n">F4</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">residual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  max|A·x - b|     = </span><span class="si">{</span><span class="n">residual</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">  ✓&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  max|A·x - b|               = </span><span class="si">{</span><span class="n">residual</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">  ✓&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient matrix A (5×5):
 [[ 1.   0.   0.   0.   0. ]
- [-1.   0.   0.   1.   0. ]
- [ 0.   1.   0.  -1.   1. ]
+ [ 1.   0.   0.   1.   0. ]
  [ 0.   1.   0.  -0.5  0. ]
- [ 0.   0.   1.   0.  -1. ]]
+ [ 0.   1.   0.  -1.   1. ]
+ [ 0.   0.  -1.   0.   1. ]]
 
 det(A) = 1.0000  → unique solution exists
 
 ── Solution ──
   F2 (product A) = 40.00 mol/s
-  F3 (product B) = 50.00 mol/s
-  F4 (bottoms)   = 50.00 mol/s
-  S1 (internal)  = 100.00 mol/s
-  S2 (internal)  = 50.00 mol/s
+  F3 (product B) = 30.00 mol/s
+  F4 (bottoms)   = 40.00 mol/s
+  S1 (internal)  = 60.00 mol/s
+  S2 (internal)  = 30.00 mol/s
 
 ── Verification ──
-  Overall: F2+F3+F4 = 140.00  (expected 90, net of recycle F5=10)
-  Split-1: F2/F1    = 0.40      (expected 0.40)
-  Split-2: F3/S1    = 0.50      (expected 0.50)
-  max|A·x - b|     = 0.00e+00  ✓
+  Overall: F1 + F5           = 110.00 mol/s  (total in)
+           F2 + F3 + F4      = 110.00 mol/s  (total out)  → OK
+  Split-1: F2 / F1           = 0.40       (expected 0.40)  → OK
+  Split-2: F3 / S1           = 0.50       (expected 0.50)  → OK
+  Mixer:   S2 + F5           = 40.00 mol/s  (= F4 = 40.00)  → OK
+  max|A·x - b|               = 0.00e+00  ✓
 </pre></div>
 </div>
 </div>
@@ -966,7 +1011,7 @@ det(A) = 1.0000  → unique solution exists
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-matrix-inverse">Problem 1: Matrix Inverse</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-solving-system-of-linear-equations">Problem 2: Solving System of Linear Equations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-balancing-a-combustion-reaction-using-linear-algebra">Problem 3: Balancing a Combustion Reaction using Linear Algebra</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-four-component-separation-train-55-system">Problem 4: Four-Component Separation Train: 5×5 System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-separation-train-with-recycle-55-system">Problem 4: Separation Train with Recycle: 5×5 System</a></li>
 </ul>
 </li>
 </ul>
