@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Chapter 12: Symbolic Mathematics with SymPy &#8212; Introduction to Chemical Engineering Computation</title>
+    <title>Chapter 12: Polynomial Fitting &amp; Interpolation &#8212; Introduction to Chemical Engineering Computation</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,6 +57,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter12/12_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -183,6 +185,29 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 04: NumPy Arrays and Linear Algebra</a></li>
 </ul>
 
     </div>
@@ -355,7 +380,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -366,11 +393,50 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 12: Symbolic Mathematics with SymPy</h1>
+    <h1>Chapter 12: Polynomial Fitting & Interpolation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-heat-capacity-of-co-2">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-basics">12.2 Polynomial Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coefficient-array">The coefficient array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-poly1d-coeffs-callable-polynomial-object"><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly"><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyfit-x-y-deg-find-best-fit-coefficients"><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-polynomial-fitting">12.3 Least-Squares Polynomial Fitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-and-the-coefficient-of-determination-r-2">12.3.2 Residuals and the Coefficient of Determination <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.3 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.4 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taylor-series">12.4 Taylor Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-partial-sums">12.4.1 Convergence of Partial Sums</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-application-linearizing-the-arrhenius-equation">12.4.2 ChE Application: Linearizing the Arrhenius Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-interpolation">12.5 Polynomial Interpolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-interpolation-from-scratch">12.5.1 Lagrange Interpolation from Scratch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-s-phenomenon">12.5.2 Runge’s Phenomenon</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-interpolation">12.6 Spline Interpolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-vs-polynomial-on-the-runge-example">12.6.1 Spline vs Polynomial on the Runge Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interp1d-linear-and-cubic-interpolation">12.6.2 <code class="docutils literal notranslate"><span class="pre">interp1d</span></code>: Linear and Cubic Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-application-interpolating-steam-table-data">12.6.3 ChE Application: Interpolating Steam Table Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.7 Summary</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -380,8 +446,1094 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-12-symbolic-mathematics-with-sympy">
-<span id="id1"></span><h1>Chapter 12: Symbolic Mathematics with SymPy<a class="headerlink" href="#chapter-12-symbolic-mathematics-with-sympy" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-12-polynomial-fitting-interpolation">
+<span id="id1"></span><h1>Chapter 12: Polynomial Fitting &amp; Interpolation<a class="headerlink" href="#chapter-12-polynomial-fitting-interpolation" title="Link to this heading">#</a></h1>
+<p><strong>Topics Covered:</strong></p>
+<ul class="simple">
+<li><p>Polynomial basics: <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code></p></li>
+<li><p>Least-squares polynomial fitting: choosing the right degree, residuals, <span class="math notranslate nohighlight">\(R^2\)</span></p></li>
+<li><p>Taylor series: definition, convergence, and ChE linearization</p></li>
+<li><p>Polynomial interpolation: Lagrange method and Runge’s phenomenon</p></li>
+<li><p>Spline interpolation: <code class="docutils literal notranslate"><span class="pre">CubicSpline</span></code>, <code class="docutils literal notranslate"><span class="pre">interp1d</span></code>, and steam table application</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── All imports ─────────────────────────────────────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">lagrange</span><span class="p">,</span> <span class="n">CubicSpline</span><span class="p">,</span> <span class="n">interp1d</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">factorial</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="motivation-heat-capacity-of-co-2">
+<span id="id2"></span><h2>12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span><a class="headerlink" href="#motivation-heat-capacity-of-co-2" title="Link to this heading">#</a></h2>
+<p>In chemical engineering, we frequently need <span class="math notranslate nohighlight">\(C_p(T)\)</span> — the molar heat capacity as a function of temperature — to compute:</p>
+<div class="math notranslate nohighlight">
+\[
+Q = n \int_{T_1}^{T_2} C_p(T)\, dT
+\]</div>
+<p>NIST publishes <span class="math notranslate nohighlight">\(C_p\)</span> in tabulated form at discrete temperatures. Before we can integrate, we need a <strong>continuous mathematical model</strong> — a polynomial — that passes smoothly through the data.</p>
+<p>Below is a subset of NIST data for CO<span class="math notranslate nohighlight">\(_2\)</span> (ideal gas, J mol<span class="math notranslate nohighlight">\(^{-1}\)</span> K<span class="math notranslate nohighlight">\(^{-1}\)</span>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(T\)</span> (K)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(C_p\)</span> (J mol<span class="math notranslate nohighlight">\(^{-1}\)</span> K<span class="math notranslate nohighlight">\(^{-1}\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>300</p></td>
+<td><p>37.13</p></td>
+</tr>
+<tr class="row-odd"><td><p>400</p></td>
+<td><p>41.33</p></td>
+</tr>
+<tr class="row-even"><td><p>500</p></td>
+<td><p>44.60</p></td>
+</tr>
+<tr class="row-odd"><td><p>600</p></td>
+<td><p>47.33</p></td>
+</tr>
+<tr class="row-even"><td><p>700</p></td>
+<td><p>49.65</p></td>
+</tr>
+<tr class="row-odd"><td><p>800</p></td>
+<td><p>51.61</p></td>
+</tr>
+<tr class="row-even"><td><p>900</p></td>
+<td><p>53.26</p></td>
+</tr>
+<tr class="row-odd"><td><p>1000</p></td>
+<td><p>54.31</p></td>
+</tr>
+<tr class="row-even"><td><p>1100</p></td>
+<td><p>55.37</p></td>
+</tr>
+<tr class="row-odd"><td><p>1200</p></td>
+<td><p>56.21</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We want to fit <span class="math notranslate nohighlight">\(C_p(T) \approx a_0 + a_1 T + a_2 T^2 + \cdots\)</span> so we can evaluate it at any temperature and integrate it analytically.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NIST tabulated Cp data for CO2 (ideal gas)</span>
+<span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1200</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># K</span>
+<span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">37.13</span><span class="p">,</span> <span class="mf">41.33</span><span class="p">,</span> <span class="mf">44.60</span><span class="p">,</span> <span class="mf">47.33</span><span class="p">,</span> <span class="mf">49.65</span><span class="p">,</span>
+                    <span class="mf">51.61</span><span class="p">,</span> <span class="mf">53.26</span><span class="p">,</span> <span class="mf">54.31</span><span class="p">,</span> <span class="mf">55.37</span><span class="p">,</span> <span class="mf">56.21</span><span class="p">])</span>  <span class="c1"># J/(mol K)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;NIST data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$C_p$ (J mol$^{-1}$ K$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Heat Capacity of CO$_2$ — NIST tabulated data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/eb3ed8c7689b622ce1522ce778ddd42ad415579a48af6462bbfe2928f0d9ba30.png" src="../../_images/eb3ed8c7689b622ce1522ce778ddd42ad415579a48af6462bbfe2928f0d9ba30.png" />
+</div>
+</div>
+</section>
+<section id="polynomial-basics">
+<span id="id3"></span><h2>12.2 Polynomial Basics<a class="headerlink" href="#polynomial-basics" title="Link to this heading">#</a></h2>
+<p>A degree-<span class="math notranslate nohighlight">\(n\)</span> polynomial is:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0
+\]</div>
+<p>NumPy stores polynomial coefficients in <strong>descending order</strong> (highest power first). Three key tools:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code></p></td>
+<td><p>Create a callable polynomial object</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code></p></td>
+<td><p>Evaluate polynomial at <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code></p></td>
+<td><p>Least-squares fit: returns coefficients</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Convention:</strong> <code class="docutils literal notranslate"><span class="pre">coeffs</span> <span class="pre">=</span> <span class="pre">[a_n,</span> <span class="pre">a_{n-1},</span> <span class="pre">...,</span> <span class="pre">a_1,</span> <span class="pre">a_0]</span></code> — highest power first.</p>
+<hr class="docutils" />
+<section id="the-coefficient-array">
+<h3>The coefficient array<a class="headerlink" href="#the-coefficient-array" title="Link to this heading">#</a></h3>
+<p>Say you have <span class="math notranslate nohighlight">\(p(x) = 3x^2 + 5x - 2\)</span>. NumPy represents this as <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">5,</span> <span class="pre">-2]</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>index:  0    1    2
+value: [3,   5,  -2]
+         ↑    ↑    ↑
+        x²   x¹   x⁰
+</pre></div>
+</div>
+</section>
+<section id="np-poly1d-coeffs-callable-polynomial-object">
+<h3><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object<a class="headerlink" href="#np-poly1d-coeffs-callable-polynomial-object" title="Link to this heading">#</a></h3>
+<p>Wraps the coefficient list into an object you can call like a function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">p</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># → 3(1)² + 5(1) - 2 = 6</span>
+<span class="n">p</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># → -2</span>
+</pre></div>
+</div>
+<p>Bonus methods: <code class="docutils literal notranslate"><span class="pre">p.deriv()</span></code> (derivative), <code class="docutils literal notranslate"><span class="pre">p.integ()</span></code> (integral), <code class="docutils literal notranslate"><span class="pre">p.roots</span></code> (zeros).</p>
+</section>
+<section id="np-polyval-coeffs-x-evaluate-from-the-list-directly">
+<h3><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly<a class="headerlink" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly" title="Link to this heading">#</a></h3>
+<p>Same result, no object needed. Works on scalars or arrays:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>           <span class="c1"># → 6</span>
+<span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>   <span class="c1"># → [-2, 6, 20]</span>
+</pre></div>
+</div>
+<p>Use this when you only need values and don’t need derivatives/integrals.</p>
+</section>
+<section id="np-polyfit-x-y-deg-find-best-fit-coefficients">
+<h3><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients<a class="headerlink" href="#np-polyfit-x-y-deg-find-best-fit-coefficients" title="Link to this heading">#</a></h3>
+<p>Given data points, returns a coefficient array in the same descending convention:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># fit  → coeffs</span>
+<span class="n">p</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>                  <span class="c1"># wrap → callable</span>
+<span class="n">y_fit</span>  <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">x_fine</span><span class="p">)</span>                          <span class="c1"># evaluate on dense grid</span>
+<span class="c1"># or equivalently:</span>
+<span class="n">y_fit</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">x_fine</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">poly1d</span></code> when you also need <code class="docutils literal notranslate"><span class="pre">.deriv()</span></code> / <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> / <code class="docutils literal notranslate"><span class="pre">.roots</span></code>; use <code class="docutils literal notranslate"><span class="pre">polyval</span></code> when you just need numbers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Coefficient convention demo ───────────────────────────────────────────</span>
+<span class="c1"># p(x) = 3x² + 5x - 2   →   coeffs = [3, 5, -2]  (descending order)</span>
+<span class="n">coeffs_demo</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">p_demo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs_demo</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;poly1d pretty-print:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p_demo</span><span class="p">)</span>
+
+<span class="c1"># Evaluate at a few points</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">x   poly1d   polyval   manual&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+    <span class="n">manual</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">p_demo</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_demo</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">manual</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># polyval works on arrays too</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">polyval on array [0,1,2]:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_demo</span><span class="p">,</span> <span class="n">xs</span><span class="p">))</span>
+
+<span class="c1"># Derivative and integral via poly1d</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Derivative p&#39;(x):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p_demo</span><span class="o">.</span><span class="n">deriv</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Indefinite integral ∫p dx (+ C):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p_demo</span><span class="o">.</span><span class="n">integ</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots (p(x)=0):&quot;</span><span class="p">,</span> <span class="n">p_demo</span><span class="o">.</span><span class="n">roots</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>poly1d pretty-print:
+   2
+3 x + 5 x - 2
+
+x   poly1d   polyval   manual
+0     -2.0     -2.0     -2.0
+1      6.0      6.0      6.0
+2     20.0     20.0     20.0
+
+polyval on array [0,1,2]: [-2  6 20]
+
+Derivative p&#39;(x):
+ 
+6 x + 5
+Indefinite integral ∫p dx (+ C):
+   3       2
+1 x + 2.5 x - 2 x
+Roots (p(x)=0): [-2.      0.3333]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define p(x) = 2x^3 - 3x^2 + x - 5  (coefficients in descending order)</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Polynomial p(x):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Evaluate at x = 2</span>
+<span class="n">x_val</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">p(</span><span class="si">{</span><span class="n">x_val</span><span class="si">}</span><span class="s2">) using poly1d  : </span><span class="si">{</span><span class="n">p</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p(</span><span class="si">{</span><span class="n">x_val</span><span class="si">}</span><span class="s2">) using polyval : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span><span class="w"> </span><span class="n">x_val</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Manual: 2(8) - 3(4) + 1(2) - 5 = 16 - 12 + 2 - 5 = 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Manual check          : </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">x_val</span><span class="o">**</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="o">*</span><span class="n">x_val</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">*</span><span class="n">x_val</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Polynomial p(x):
+   3     2
+2 x - 3 x + 1 x - 5
+
+p(2.0) using poly1d  : 1.0000
+p(2.0) using polyval : 1.0000
+Manual check          : 1.0000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the polynomial over [-1, 3]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$p(x) = 2x^3 - 3x^2 + x - 5$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Example cubic polynomial&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/aac4638d19e34432d0d78f99b90f6400d6932486fd02390c9b90b426649c4d88.png" src="../../_images/aac4638d19e34432d0d78f99b90f6400d6932486fd02390c9b90b426649c4d88.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="least-squares-polynomial-fitting">
+<span id="id4"></span><h2>12.3 Least-Squares Polynomial Fitting<a class="headerlink" href="#least-squares-polynomial-fitting" title="Link to this heading">#</a></h2>
+<p><strong><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code></strong> finds the degree-<code class="docutils literal notranslate"><span class="pre">deg</span></code> polynomial coefficients that minimize the sum of squared residuals:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{a_0, \ldots, a_n} \sum_{i=1}^{N} \left[ y_i - p(x_i) \right]^2
+\]</div>
+<p>This is ordinary least squares applied to a polynomial basis. The function returns coefficients in descending order (highest power first), just like <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> expects.</p>
+<section id="fitting-cp-t-with-different-degrees">
+<span id="id5"></span><h3>12.3.1 Fitting Cp(T) with Different Degrees<a class="headerlink" href="#fitting-cp-t-with-different-degrees" title="Link to this heading">#</a></h3>
+<p>We fit the CO<span class="math notranslate nohighlight">\(_2\)</span> data with degree 1, 2, and 3 polynomials and compare the results visually.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Fit Cp(T) with degree 1, 2, 3 polynomials ────────────────────────────────</span>
+<span class="n">T_fine</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">280</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">colors</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">]</span>
+<span class="n">fits</span>    <span class="o">=</span> <span class="p">{}</span>    <span class="c1"># store coefficient arrays keyed by degree</span>
+
+<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
+    <span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;NIST data&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">deg</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_fine</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">],</span> <span class="n">T_fine</span><span class="p">),</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">deg</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$C_p$ (J mol$^{-1}$ K$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Polynomial fits to CO$_2$ $C_p$ data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/763563129095e3e3714517e9182b5016ca6d176ac233d477b98e531710b57330.png" src="../../_images/763563129095e3e3714517e9182b5016ca6d176ac233d477b98e531710b57330.png" />
+</div>
+</div>
+</section>
+<section id="residuals-and-the-coefficient-of-determination-r-2">
+<span id="id6"></span><h3>12.3.2 Residuals and the Coefficient of Determination <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#residuals-and-the-coefficient-of-determination-r-2" title="Link to this heading">#</a></h3>
+<p>The <strong>residual</strong> at each data point is:</p>
+<div class="math notranslate nohighlight">
+\[
+e_i = y_i - p(x_i)
+\]</div>
+<p>The <strong>coefficient of determination</strong> <span class="math notranslate nohighlight">\(R^2\)</span> measures how much variance the model explains:</p>
+<div class="math notranslate nohighlight">
+\[
+R^2 = 1 - \frac{\text{SS}_{\rm res}}{\text{SS}_{\rm tot}}, \qquad
+\text{SS}_{\rm res} = \sum_i e_i^2, \qquad
+\text{SS}_{\rm tot} = \sum_i (y_i - \bar{y})^2
+\]</div>
+<p><span class="math notranslate nohighlight">\(R^2 = 1\)</span> is a perfect fit; <span class="math notranslate nohighlight">\(R^2\)</span> near 0 means the model explains almost nothing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── R² and RMSE for each degree ──────────────────────────────────────────────</span>
+<span class="n">SS_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">Cp_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Cp_data</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Degree&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;RMSE (J/mol/K)&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;R²&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">36</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
+    <span class="n">Cp_pred</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">],</span> <span class="n">T_data</span><span class="p">)</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">Cp_data</span> <span class="o">-</span> <span class="n">Cp_pred</span>
+    <span class="n">SS_res</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">R2</span>        <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">SS_res</span> <span class="o">/</span> <span class="n">SS_tot</span>
+    <span class="n">RMSE</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">residuals</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">deg</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">RMSE</span><span class="si">:</span><span class="s2">&gt;16.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">R2</span><span class="si">:</span><span class="s2">&gt;8.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree    RMSE (J/mol/K)        R²
+------------------------------------
+     1          1.454003  0.942543
+     2          0.208613  0.998817
+     3          0.069648  0.999868
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Residual stem plots for each degree ──────────────────────────────────────</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">Cp_pred</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">],</span> <span class="n">T_data</span><span class="p">)</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">Cp_data</span> <span class="o">-</span> <span class="n">Cp_pred</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">linefmt</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">basefmt</span><span class="o">=</span><span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">deg</span><span class="si">}</span><span class="s1"> residuals&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$C_p$ residual (J mol$^{-1}$ K$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/53b2b7dc7377bdab23709593d2f6b6b70264c61692ea77b3d8d6e9c118b8ce56.png" src="../../_images/53b2b7dc7377bdab23709593d2f6b6b70264c61692ea77b3d8d6e9c118b8ce56.png" />
+</div>
+</div>
+</section>
+<section id="overfitting-when-higher-degree-hurts">
+<span id="id7"></span><h3>12.3.3 Overfitting: When Higher Degree Hurts<a class="headerlink" href="#overfitting-when-higher-degree-hurts" title="Link to this heading">#</a></h3>
+<p>Adding more polynomial terms always reduces training error, but can create <strong>overfitting</strong>: the polynomial wiggles between data points and performs poorly outside the training range.</p>
+<p>Here we deliberately use degree 9 (with only 10 data points) to illustrate the problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Overfitting demonstration ─────────────────────────────────────────────────</span>
+<span class="n">coeffs_deg3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">coeffs_deg9</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<span class="n">T_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1300</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>   <span class="c1"># extend beyond the data range</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;NIST data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ext</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_deg3</span><span class="p">,</span> <span class="n">T_ext</span><span class="p">),</span>
+        <span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Degree 3 (good fit)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ext</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_deg9</span><span class="p">,</span> <span class="n">T_ext</span><span class="p">),</span>
+        <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Degree 9 (overfit)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$C_p$ (J mol$^{-1}$ K$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overfitting: degree-9 polynomial fits training data perfectly but extrapolates badly&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lesson: For smooth physical data, a low-degree polynomial (2-4) is usually best.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Use R² and visual inspection — not just training error — to choose degree.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5ae146671d09683e77f41acc5ac3b98b6add6287879214c5e1b49aeacdb034f8.png" src="../../_images/5ae146671d09683e77f41acc5ac3b98b6add6287879214c5e1b49aeacdb034f8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lesson: For smooth physical data, a low-degree polynomial (2-4) is usually best.
+Use R² and visual inspection — not just training error — to choose degree.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-fit-integrating-c-p-analytically">
+<span id="id8"></span><h3>12.3.4 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically<a class="headerlink" href="#using-the-fit-integrating-c-p-analytically" title="Link to this heading">#</a></h3>
+<p>With the degree-3 fit in hand, we integrate <span class="math notranslate nohighlight">\(C_p(T)\)</span> to compute the enthalpy change:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta H = n \int_{T_1}^{T_2} C_p(T)\, dT
+\]</div>
+<p><code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> exposes a <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> method that returns the antiderivative polynomial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Integrate Cp from T1 to T2 using the degree-3 fit ────────────────────────</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">P3</span> <span class="o">=</span> <span class="n">p3</span><span class="o">.</span><span class="n">integ</span><span class="p">()</span>            <span class="c1"># antiderivative (integration constant = 0)</span>
+
+<span class="n">T1</span><span class="p">,</span> <span class="n">T2</span> <span class="o">=</span> <span class="mf">400.0</span><span class="p">,</span> <span class="mf">900.0</span>      <span class="c1"># K</span>
+<span class="n">dH</span> <span class="o">=</span> <span class="n">P3</span><span class="p">(</span><span class="n">T2</span><span class="p">)</span> <span class="o">-</span> <span class="n">P3</span><span class="p">(</span><span class="n">T1</span><span class="p">)</span>       <span class="c1"># J/mol</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree-3 Cp polynomial fit:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Integral of Cp from </span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> K to </span><span class="si">{</span><span class="n">T2</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> K:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Delta_H = </span><span class="si">{</span><span class="n">dH</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> J/mol  =  </span><span class="si">{</span><span class="n">dH</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> kJ/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree-3 Cp polynomial fit:
+           3             2
+1.119e-08 x - 4.498e-05 x + 0.06745 x + 20.71
+
+Integral of Cp from 400 K to 900 K:
+  Delta_H = 24067.83 J/mol  =  24.0678 kJ/mol
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="taylor-series">
+<span id="id9"></span><h2>12.4 Taylor Series<a class="headerlink" href="#taylor-series" title="Link to this heading">#</a></h2>
+<p>A <strong>Taylor series</strong> expresses a smooth function as an infinite polynomial centered at a point <span class="math notranslate nohighlight">\(a\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}\,(x - a)^n
+= f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f'''(a)}{3!}(x-a)^3 + \cdots
+\]</div>
+<p>Truncating after <span class="math notranslate nohighlight">\(N\)</span> terms gives an <strong><span class="math notranslate nohighlight">\(N\)</span>-th order approximation</strong>. The key Maclaurin series (centered at <span class="math notranslate nohighlight">\(a = 0\)</span>) are:</p>
+<div class="math notranslate nohighlight">
+\[
+e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
+\qquad (\text{converges for all } x)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sin x = \sum_{k=0}^{\infty} \frac{(-1)^k x^{2k+1}}{(2k+1)!} = x - \frac{x^3}{6} + \frac{x^5}{120} - \cdots
+\qquad (\text{converges for all } x)
+\]</div>
+<section id="convergence-of-partial-sums">
+<span id="id10"></span><h3>12.4.1 Convergence of Partial Sums<a class="headerlink" href="#convergence-of-partial-sums" title="Link to this heading">#</a></h3>
+<p>We build the partial sums term by term and watch the approximation converge to the exact function as more terms are included.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Taylor partial sums: exp(x) and sin(x) ──────────────────────────────────</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># -- exp(x) --</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact $e^x$&#39;</span><span class="p">)</span>
+<span class="n">approx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">approx</span> <span class="o">=</span> <span class="n">approx</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="n">n</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">approx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> terms&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$e^x$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Taylor series: $e^x$ around $x=0$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># -- sin(x) --</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;exact $\sin x$&#39;</span><span class="p">)</span>
+<span class="n">approx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">n</span>      <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">sign</span>   <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">k</span>
+    <span class="n">approx</span> <span class="o">=</span> <span class="n">approx</span> <span class="o">+</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">n</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">approx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> term(s)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\sin x$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Taylor series: $\sin x$ around $x=0$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/25756b66b7a8c680cbf8621d6fcb5c81733de4e74356cff6834e51644e910912.png" src="../../_images/25756b66b7a8c680cbf8621d6fcb5c81733de4e74356cff6834e51644e910912.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Numerical convergence: error vs number of terms for exp(1) ───────────────</span>
+<span class="n">exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exact e = </span><span class="si">{</span><span class="n">exact</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;N terms&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Approximation&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Abs Error&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">42</span><span class="p">)</span>
+
+<span class="n">approx</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">approx</span> <span class="o">+=</span> <span class="mf">1.0</span><span class="o">**</span><span class="n">n</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">approx</span><span class="si">:</span><span class="s2">&gt;16.10f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">approx</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;12.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exact e = 2.7182818285
+
+ N terms     Approximation     Abs Error
+------------------------------------------
+       1      1.0000000000      1.72e+00
+       2      2.0000000000      7.18e-01
+       3      2.5000000000      2.18e-01
+       4      2.6666666667      5.16e-02
+       5      2.7083333333      9.95e-03
+       6      2.7166666667      1.62e-03
+       7      2.7180555556      2.26e-04
+       8      2.7182539683      2.79e-05
+       9      2.7182787698      3.06e-06
+      10      2.7182815256      3.03e-07
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="che-application-linearizing-the-arrhenius-equation">
+<span id="id11"></span><h3>12.4.2 ChE Application: Linearizing the Arrhenius Equation<a class="headerlink" href="#che-application-linearizing-the-arrhenius-equation" title="Link to this heading">#</a></h3>
+<p>The Arrhenius rate constant is nonlinear in temperature:</p>
+<div class="math notranslate nohighlight">
+\[
+k(T) = A \exp\!\left(-\frac{E_a}{RT}\right)
+\]</div>
+<p>Applying a first-order Taylor expansion around a reference temperature <span class="math notranslate nohighlight">\(T_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+k(T) \approx k(T_0) + k'(T_0)\,(T - T_0),
+\qquad k'(T_0) = k(T_0) \cdot \frac{E_a}{R T_0^2}
+\]</div>
+<p>This <strong>linearization</strong> is widely used in reactor stability analysis and temperature control design. It is accurate for small deviations <span class="math notranslate nohighlight">\(|T - T_0|\)</span> but degrades further from <span class="math notranslate nohighlight">\(T_0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Arrhenius linearization around T0 ────────────────────────────────────────</span>
+<span class="n">R</span>   <span class="o">=</span> <span class="mf">8.314</span>         <span class="c1"># J/(mol K)</span>
+<span class="n">Ea</span>  <span class="o">=</span> <span class="mf">75_000.0</span>      <span class="c1"># J/mol  (activation energy)</span>
+<span class="n">A_f</span> <span class="o">=</span> <span class="mf">1e8</span>           <span class="c1"># pre-exponential factor (s^-1)</span>
+<span class="n">T0</span>  <span class="o">=</span> <span class="mf">500.0</span>         <span class="c1"># K  (linearization reference)</span>
+
+<span class="n">k_exact</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">T</span><span class="p">:</span> <span class="n">A_f</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
+
+<span class="n">k0</span>     <span class="o">=</span> <span class="n">k_exact</span><span class="p">(</span><span class="n">T0</span><span class="p">)</span>
+<span class="n">dk_dT0</span> <span class="o">=</span> <span class="n">k0</span> <span class="o">*</span> <span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>           <span class="c1"># dk/dT evaluated at T0</span>
+<span class="n">k_lin</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">T</span><span class="p">:</span> <span class="n">k0</span> <span class="o">+</span> <span class="n">dk_dT0</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">T0</span><span class="p">)</span>
+
+<span class="n">T_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">590</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_arr</span><span class="p">,</span> <span class="n">k_exact</span><span class="p">(</span><span class="n">T_arr</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact Arrhenius&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_arr</span><span class="p">,</span> <span class="n">k_lin</span><span class="p">(</span><span class="n">T_arr</span><span class="p">),</span>   <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Linearized at $T_0 = </span><span class="si">{</span><span class="n">T0</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">$ K&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$k(T)$ (s$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Arrhenius linearization via first-order Taylor expansion&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Quantify error at several deviations from T0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Delta_T (K)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Exact k&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Linear k&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Error %&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">52</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">dT</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">]:</span>
+    <span class="n">T_val</span> <span class="o">=</span> <span class="n">T0</span> <span class="o">+</span> <span class="n">dT</span>
+    <span class="n">err</span>   <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">k_exact</span><span class="p">(</span><span class="n">T_val</span><span class="p">)</span> <span class="o">-</span> <span class="n">k_lin</span><span class="p">(</span><span class="n">T_val</span><span class="p">))</span> <span class="o">/</span> <span class="n">k_exact</span><span class="p">(</span><span class="n">T_val</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dT</span><span class="si">:</span><span class="s2">&gt;+12.0f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">k_exact</span><span class="p">(</span><span class="n">T_val</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;12.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">k_lin</span><span class="p">(</span><span class="n">T_val</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;12.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">err</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/743d0108e868086c3f65a025362261f825fa36e6e21d941d283841a1ea893b46.png" src="../../_images/743d0108e868086c3f65a025362261f825fa36e6e21d941d283841a1ea893b46.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Delta_T (K)       Exact k      Linear k     Error %
+----------------------------------------------------
+         -50        0.1967       -1.1746      696.99
+         -20        0.6887        0.4065       40.98
+         -10        1.0107        0.9335        7.63
+          +0        1.4606        1.4606        0.00
+         +10        2.0805        1.9876        4.46
+         +20        2.9234        2.5146       13.98
+         +50        7.5307        4.0957       45.61
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="polynomial-interpolation">
+<span id="id12"></span><h2>12.5 Polynomial Interpolation<a class="headerlink" href="#polynomial-interpolation" title="Link to this heading">#</a></h2>
+<p><strong>Interpolation</strong> constructs a curve that passes <em>exactly</em> through all given data points. With <span class="math notranslate nohighlight">\(n+1\)</span> distinct points, there is a unique polynomial of degree <span class="math notranslate nohighlight">\(\leq n\)</span> that interpolates them.</p>
+<p>The <strong>Lagrange form</strong> writes this polynomial explicitly:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+p(x) = \sum_{i=0}^{n} y_i \, L_i(x),
+\qquad
+L_i(x) = \prod_{\substack{j=0 \\ j \neq i}}^{n} \frac{x - x_j}{x_i - x_j}
+\end{split}\]</div>
+<p>Each basis polynomial <span class="math notranslate nohighlight">\(L_i\)</span> equals 1 at <span class="math notranslate nohighlight">\(x_i\)</span> and 0 at every other node.</p>
+<section id="lagrange-interpolation-from-scratch">
+<span id="id13"></span><h3>12.5.1 Lagrange Interpolation from Scratch<a class="headerlink" href="#lagrange-interpolation-from-scratch" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lagrange_interp</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">x_eval</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate the Lagrange interpolating polynomial at x_eval.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x_nodes : array-like  interpolation nodes</span>
+<span class="sd">    y_nodes : array-like  function values at nodes</span>
+<span class="sd">    x_eval  : array-like  points at which to evaluate</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    p : ndarray   polynomial values at x_eval</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">y_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">x_eval</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span>  <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x_eval</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">L_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x_eval</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+                <span class="n">L_i</span> <span class="o">*=</span> <span class="p">(</span><span class="n">x_eval</span> <span class="o">-</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">p</span> <span class="o">+=</span> <span class="n">y_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">L_i</span>
+    <span class="k">return</span> <span class="n">p</span>
+
+
+<span class="c1"># Test: interpolate sin(x) at 5 equally spaced nodes on [0, pi]</span>
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">y_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)</span>
+<span class="n">x_fine</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">y_lag</span>   <span class="o">=</span> <span class="n">lagrange_interp</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">x_fine</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact sin(x)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">y_lag</span><span class="p">,</span>          <span class="s1">&#39;b--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Lagrange (5 nodes)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Lagrange interpolation of sin(x)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">max_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_fine</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_lag</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max interpolation error: </span><span class="si">{</span><span class="n">max_err</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/70fe900271bbf21ba70f30b0880be966d958452c0c20bf31c9a9450f44358880.png" src="../../_images/70fe900271bbf21ba70f30b0880be966d958452c0c20bf31c9a9450f44358880.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max interpolation error: 1.81e-03
+</pre></div>
+</div>
+</div>
+</div>
+<p>SciPy also provides <code class="docutils literal notranslate"><span class="pre">scipy.interpolate.lagrange</span></code>, which constructs a <code class="docutils literal notranslate"><span class="pre">poly1d</span></code> object directly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── scipy.interpolate.lagrange ────────────────────────────────────────────────</span>
+<span class="n">p_lag</span> <span class="o">=</span> <span class="n">lagrange</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">)</span>   <span class="c1"># returns a poly1d object</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lagrange polynomial (scipy):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p_lag</span><span class="p">)</span>
+
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">p(pi/4)   = </span><span class="si">{</span><span class="n">p_lag</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sin(pi/4) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error     = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">p_lag</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lagrange polynomial (scipy):
+         4          3           2
+0.03758 x - 0.2361 x + 0.05829 x + 0.982 x
+
+p(pi/4)   = 0.70710678
+sin(pi/4) = 0.70710678
+Error     = 7.77e-16
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="runge-s-phenomenon">
+<span id="id14"></span><h3>12.5.2 Runge’s Phenomenon<a class="headerlink" href="#runge-s-phenomenon" title="Link to this heading">#</a></h3>
+<p>High-degree polynomial interpolation on <strong>equally spaced nodes</strong> can produce wild oscillations near the edges of the interval — even though the interpolated function itself is smooth. This is called <strong>Runge’s phenomenon</strong>.</p>
+<p>The classic example is:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{1 + 25x^2}, \qquad x \in [-1, 1]
+\]</div>
+<p>As the number of equally spaced nodes increases, the interpolating polynomial diverges at the edges of the interval.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Runge&#39;s phenomenon ────────────────────────────────────────────────────────</span>
+<span class="n">runge</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">25.0</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">x_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">n_nodes</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">14</span><span class="p">]):</span>
+    <span class="n">x_nodes</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_nodes</span><span class="p">)</span>
+    <span class="n">y_nodes</span>  <span class="o">=</span> <span class="n">runge</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)</span>
+    <span class="n">y_interp</span> <span class="o">=</span> <span class="n">lagrange_interp</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">x_fine</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">runge</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact $f(x)$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">y_interp</span><span class="p">,</span>      <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Polynomial (</span><span class="si">{</span><span class="n">n_nodes</span><span class="si">}</span><span class="s1"> nodes, deg </span><span class="si">{</span><span class="n">n_nodes</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Runge&#39;s phenomenon: </span><span class="si">{</span><span class="n">n_nodes</span><span class="si">}</span><span class="s2"> equally spaced nodes&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Oscillations grow as n increases — this is Runge&#39;s phenomenon.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fix: use piecewise splines instead of a single high-degree polynomial.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b07809a38630dbe53ae674f2fdf0cac363b3df98dcf47ce75f7b6028dabefa1e.png" src="../../_images/b07809a38630dbe53ae674f2fdf0cac363b3df98dcf47ce75f7b6028dabefa1e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oscillations grow as n increases — this is Runge&#39;s phenomenon.
+Fix: use piecewise splines instead of a single high-degree polynomial.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="spline-interpolation">
+<span id="id15"></span><h2>12.6 Spline Interpolation<a class="headerlink" href="#spline-interpolation" title="Link to this heading">#</a></h2>
+<p>A <strong>spline</strong> divides the data into intervals and fits a low-degree polynomial on each sub-interval, joining them smoothly at the <strong>knots</strong> (the data points).</p>
+<p>A <strong>cubic spline</strong> uses degree-3 polynomials on each interval and enforces:</p>
+<ul class="simple">
+<li><p>The curve passes exactly through every data point</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(p'\)</span>, and <span class="math notranslate nohighlight">\(p''\)</span> are continuous at every interior knot</p></li>
+</ul>
+<p>This avoids Runge’s phenomenon and produces physically smooth, accurate curves.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tool</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CubicSpline(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Natural/not-a-knot cubic spline; supports derivative evaluation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">interp1d(x,</span> <span class="pre">y,</span> <span class="pre">kind='linear')</span></code></p></td>
+<td><p>Piecewise linear</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">interp1d(x,</span> <span class="pre">y,</span> <span class="pre">kind='cubic')</span></code></p></td>
+<td><p>Piecewise cubic (convenient but less flexible than CubicSpline)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="spline-vs-polynomial-on-the-runge-example">
+<span id="id16"></span><h3>12.6.1 Spline vs Polynomial on the Runge Example<a class="headerlink" href="#spline-vs-polynomial-on-the-runge-example" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Cubic spline vs high-degree polynomial on Runge&#39;s function ────────────────</span>
+<span class="n">n_nodes</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_nodes</span><span class="p">)</span>
+<span class="n">y_nodes</span> <span class="o">=</span> <span class="n">runge</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)</span>
+<span class="n">x_fine</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># High-degree polynomial</span>
+<span class="n">y_poly</span>   <span class="o">=</span> <span class="n">lagrange_interp</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">x_fine</span><span class="p">)</span>
+
+<span class="c1"># Cubic spline</span>
+<span class="n">cs</span>       <span class="o">=</span> <span class="n">CubicSpline</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">)</span>
+<span class="n">y_spline</span> <span class="o">=</span> <span class="n">cs</span><span class="p">(</span><span class="n">x_fine</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">runge</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact $f(x)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">y_poly</span><span class="p">,</span>        <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Polynomial (deg </span><span class="si">{</span><span class="n">n_nodes</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">, Runge oscillation)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">y_spline</span><span class="p">,</span>      <span class="s1">&#39;b-&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>   <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cubic spline&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Spline vs polynomial interpolation on Runge&#39;s function&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">err_poly</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">runge</span><span class="p">(</span><span class="n">x_fine</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_poly</span><span class="p">))</span>
+<span class="n">err_spline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">runge</span><span class="p">(</span><span class="n">x_fine</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_spline</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max error — polynomial : </span><span class="si">{</span><span class="n">err_poly</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max error — spline     : </span><span class="si">{</span><span class="n">err_spline</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/418399cb79f71db42e79e6c732186c5a9446c3ae5ab695e9b3adcb5e604c3bef.png" src="../../_images/418399cb79f71db42e79e6c732186c5a9446c3ae5ab695e9b3adcb5e604c3bef.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max error — polynomial : 1.0701
+Max error — spline     : 0.0504
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="interp1d-linear-and-cubic-interpolation">
+<span id="id17"></span><h3>12.6.2 <code class="docutils literal notranslate"><span class="pre">interp1d</span></code>: Linear and Cubic Interpolation<a class="headerlink" href="#interp1d-linear-and-cubic-interpolation" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">scipy.interpolate.interp1d</span></code> is a convenient general-purpose wrapper. The <code class="docutils literal notranslate"><span class="pre">kind</span></code> argument selects the order: <code class="docutils literal notranslate"><span class="pre">'linear'</span></code>, <code class="docutils literal notranslate"><span class="pre">'quadratic'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'cubic'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── interp1d: linear vs cubic on a small synthetic dataset ───────────────────</span>
+<span class="n">x_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+<span class="n">y_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span>
+
+<span class="n">x_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="n">f_lin</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="n">f_cub</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span>  <span class="n">y_pts</span><span class="p">,</span>          <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data points&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">f_lin</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span>  <span class="s1">&#39;g--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;linear interp&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">f_cub</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span>  <span class="s1">&#39;b-&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cubic interp&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;`interp1d`: linear vs cubic interpolation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bf747941f58e777d8f028a13370914ee842ada743052c773d4e4902bd2e5fe9a.png" src="../../_images/bf747941f58e777d8f028a13370914ee842ada743052c773d4e4902bd2e5fe9a.png" />
+</div>
+</div>
+</section>
+<section id="che-application-interpolating-steam-table-data">
+<span id="id18"></span><h3>12.6.3 ChE Application: Interpolating Steam Table Data<a class="headerlink" href="#che-application-interpolating-steam-table-data" title="Link to this heading">#</a></h3>
+<p>Steam tables give the enthalpy of vaporization <span class="math notranslate nohighlight">\(H_{\rm vap}\)</span> at discrete temperatures. For heat exchanger design we need <span class="math notranslate nohighlight">\(H_{\rm vap}\)</span> at arbitrary intermediate conditions.</p>
+<p>Below is a hardcoded excerpt from saturated-water steam tables (Smith, Van Ness &amp; Abbott):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(T\)</span> (°C)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(P_{\rm sat}\)</span> (kPa)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(H_{\rm vap}\)</span> (kJ/kg)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>12.35</p></td>
+<td><p>2382.7</p></td>
+</tr>
+<tr class="row-odd"><td><p>75</p></td>
+<td><p>38.58</p></td>
+<td><p>2321.4</p></td>
+</tr>
+<tr class="row-even"><td><p>100</p></td>
+<td><p>101.3</p></td>
+<td><p>2256.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>125</p></td>
+<td><p>232.1</p></td>
+<td><p>2188.5</p></td>
+</tr>
+<tr class="row-even"><td><p>150</p></td>
+<td><p>476.2</p></td>
+<td><p>2113.7</p></td>
+</tr>
+<tr class="row-odd"><td><p>175</p></td>
+<td><p>892.5</p></td>
+<td><p>2031.1</p></td>
+</tr>
+<tr class="row-even"><td><p>200</p></td>
+<td><p>1554.0</p></td>
+<td><p>1939.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>225</p></td>
+<td><p>2550.0</p></td>
+<td><p>1837.8</p></td>
+</tr>
+<tr class="row-even"><td><p>250</p></td>
+<td><p>3976.0</p></td>
+<td><p>1715.7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Steam table data ─────────────────────────────────────────────────────────</span>
+<span class="n">T_steam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mi">50</span><span class="p">,</span>   <span class="mi">75</span><span class="p">,</span>   <span class="mi">100</span><span class="p">,</span>   <span class="mi">125</span><span class="p">,</span>   <span class="mi">150</span><span class="p">,</span>
+                    <span class="mi">175</span><span class="p">,</span>  <span class="mi">200</span><span class="p">,</span>   <span class="mi">225</span><span class="p">,</span>   <span class="mi">250</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>         <span class="c1"># °C</span>
+<span class="n">P_sat</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">12.35</span><span class="p">,</span> <span class="mf">38.58</span><span class="p">,</span> <span class="mf">101.3</span><span class="p">,</span> <span class="mf">232.1</span><span class="p">,</span> <span class="mf">476.2</span><span class="p">,</span>
+                    <span class="mf">892.5</span><span class="p">,</span> <span class="mf">1554.0</span><span class="p">,</span> <span class="mf">2550.0</span><span class="p">,</span> <span class="mf">3976.0</span><span class="p">])</span>                 <span class="c1"># kPa</span>
+<span class="n">Hvap</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2382.7</span><span class="p">,</span> <span class="mf">2321.4</span><span class="p">,</span> <span class="mf">2256.9</span><span class="p">,</span> <span class="mf">2188.5</span><span class="p">,</span> <span class="mf">2113.7</span><span class="p">,</span>
+                    <span class="mf">2031.1</span><span class="p">,</span> <span class="mf">1939.8</span><span class="p">,</span> <span class="mf">1837.8</span><span class="p">,</span> <span class="mf">1715.7</span><span class="p">])</span>                <span class="c1"># kJ/kg</span>
+
+<span class="c1"># ── Build cubic splines ───────────────────────────────────────────────────────</span>
+<span class="n">cs_T</span> <span class="o">=</span> <span class="n">CubicSpline</span><span class="p">(</span><span class="n">T_steam</span><span class="p">,</span> <span class="n">Hvap</span><span class="p">)</span>   <span class="c1"># Hvap(T)</span>
+<span class="n">cs_P</span> <span class="o">=</span> <span class="n">CubicSpline</span><span class="p">(</span><span class="n">P_sat</span><span class="p">,</span>   <span class="n">Hvap</span><span class="p">)</span>   <span class="c1"># Hvap(P)</span>
+
+<span class="n">T_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">P_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3976</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Hvap vs T</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_steam</span><span class="p">,</span> <span class="n">Hvap</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;steam table data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_fine</span><span class="p">,</span> <span class="n">cs_T</span><span class="p">(</span><span class="n">T_fine</span><span class="p">),</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cubic spline&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$H_{\rm vap}$ (kJ/kg)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$H_{\rm vap}$ vs Temperature&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Hvap vs P (log scale)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">P_sat</span><span class="p">,</span>   <span class="n">Hvap</span><span class="p">,</span>          <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;steam table data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">P_fine</span><span class="p">,</span>  <span class="n">cs_P</span><span class="p">(</span><span class="n">P_fine</span><span class="p">),</span>  <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cubic spline&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pressure (kPa, log scale)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$H_{\rm vap}$ (kJ/kg)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$H_{\rm vap}$ vs Pressure&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Spot-check: interpolate at intermediate conditions</span>
+<span class="n">T_q</span> <span class="o">=</span> <span class="mf">160.0</span>    <span class="c1"># °C</span>
+<span class="n">P_q</span> <span class="o">=</span> <span class="mf">620.0</span>    <span class="c1"># kPa</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interpolated H_vap at T = </span><span class="si">{</span><span class="n">T_q</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> °C : </span><span class="si">{</span><span class="n">cs_T</span><span class="p">(</span><span class="n">T_q</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kJ/kg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interpolated H_vap at P = </span><span class="si">{</span><span class="n">P_q</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> kPa : </span><span class="si">{</span><span class="n">cs_P</span><span class="p">(</span><span class="n">P_q</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kJ/kg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d7e93d9d8548ff8d9ba3037f950e29597fe1b779e830ccdd25e8526e80bafc63.png" src="../../_images/d7e93d9d8548ff8d9ba3037f950e29597fe1b779e830ccdd25e8526e80bafc63.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interpolated H_vap at T = 160 °C : 2081.66 kJ/kg
+Interpolated H_vap at P = 620 kPa : 2082.03 kJ/kg
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Compare linear vs cubic interpolation on steam table ─────────────────────</span>
+<span class="n">f_lin_steam</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">T_steam</span><span class="p">,</span> <span class="n">Hvap</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="n">f_cub_steam</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">T_steam</span><span class="p">,</span> <span class="n">Hvap</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+
+<span class="n">T_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">85.0</span><span class="p">,</span> <span class="mf">110.0</span><span class="p">,</span> <span class="mf">140.0</span><span class="p">,</span> <span class="mf">190.0</span><span class="p">,</span> <span class="mf">230.0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;T (C)&#39;</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Linear (kJ/kg)&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Cubic (kJ/kg)&#39;</span><span class="si">:</span><span class="s2">&gt;15</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Diff (kJ/kg)&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">T_val</span> <span class="ow">in</span> <span class="n">T_test</span><span class="p">:</span>
+    <span class="n">h_lin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f_lin_steam</span><span class="p">(</span><span class="n">T_val</span><span class="p">))</span>
+    <span class="n">h_cub</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f_cub_steam</span><span class="p">(</span><span class="n">T_val</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">T_val</span><span class="si">:</span><span class="s2">&gt;7.0f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">h_lin</span><span class="si">:</span><span class="s2">&gt;16.2f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">h_cub</span><span class="si">:</span><span class="s2">&gt;15.2f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">h_cub</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">h_lin</span><span class="si">:</span><span class="s2">&gt;14.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cubic interpolation follows the curvature better — preferred for accurate engineering work.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  T (C)    Linear (kJ/kg)    Cubic (kJ/kg)    Diff (kJ/kg)
+------------------------------------------------------------
+     85           2295.60          2295.99           0.392
+    110           2229.54          2230.14           0.596
+    140           2143.62          2144.50           0.879
+    190           1976.32          1977.38           1.062
+    230           1813.38          1815.35           1.970
+
+Cubic interpolation follows the curvature better — preferred for accurate engineering work.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary">
+<span id="id19"></span><h2>12.7 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Tool / Formula</p></th>
+<th class="head"><p>When to use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Polynomial evaluation</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code></p></td>
+<td><p>Evaluate a stored coefficient array at <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Polynomial object</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code></p></td>
+<td><p>Callable; <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> returns antiderivative</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Least-squares fit</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code></p></td>
+<td><p>Fit noisy or tabulated data; keep degree small</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Residuals</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(e_i = y_i - p(x_i)\)</span></p></td>
+<td><p>Check fit quality; plot against <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong><span class="math notranslate nohighlight">\(R^2\)</span></strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(1 - \text{SS}_{\rm res}/\text{SS}_{\rm tot}\)</span></p></td>
+<td><p>Fraction of variance explained; 1 = perfect</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Taylor series</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum f^{(n)}(a)/n! \cdot (x-a)^n\)</span></p></td>
+<td><p>Approximate nonlinear functions locally</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Linearization</strong></p></td>
+<td><p>First-order Taylor around <span class="math notranslate nohighlight">\(T_0\)</span></p></td>
+<td><p>Reactor stability, control design</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Lagrange interp</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scipy.interpolate.lagrange</span></code></p></td>
+<td><p>Exact through data; avoid for large <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Runge’s phenomenon</strong></p></td>
+<td><p>Oscillation with high-degree, equally spaced nodes</p></td>
+<td><p>Signal to switch to splines</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cubic spline</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CubicSpline(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Smooth interpolation of tables; preferred</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Piecewise interp</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">interp1d(x,</span> <span class="pre">y,</span> <span class="pre">kind=...)</span></code></p></td>
+<td><p>Quick linear or cubic; good for data look-ups</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Rule of thumb for ChE data:</strong></p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code> with degree 2–4 for smooth physical properties (<span class="math notranslate nohighlight">\(C_p\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(k\)</span>)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">CubicSpline</span></code> when you need to interpolate a table and preserve curvature</p></li>
+<li><p>Never use a single high-degree polynomial for interpolation — use splines instead</p></li>
+<li><p>Always plot the fit against the original data and examine residuals before trusting any model</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -420,6 +1572,52 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-heat-capacity-of-co-2">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-basics">12.2 Polynomial Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coefficient-array">The coefficient array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-poly1d-coeffs-callable-polynomial-object"><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly"><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyfit-x-y-deg-find-best-fit-coefficients"><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-polynomial-fitting">12.3 Least-Squares Polynomial Fitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-and-the-coefficient-of-determination-r-2">12.3.2 Residuals and the Coefficient of Determination <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.3 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.4 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taylor-series">12.4 Taylor Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-partial-sums">12.4.1 Convergence of Partial Sums</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-application-linearizing-the-arrhenius-equation">12.4.2 ChE Application: Linearizing the Arrhenius Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-interpolation">12.5 Polynomial Interpolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-interpolation-from-scratch">12.5.1 Lagrange Interpolation from Scratch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-s-phenomenon">12.5.2 Runge’s Phenomenon</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-interpolation">12.6 Spline Interpolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-vs-polynomial-on-the-runge-example">12.6.1 Spline vs Polynomial on the Runge Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interp1d-linear-and-cubic-interpolation">12.6.2 <code class="docutils literal notranslate"><span class="pre">interp1d</span></code>: Linear and Cubic Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-application-interpolating-steam-table-data">12.6.3 ChE Application: Interpolating Steam Table Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.7 Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

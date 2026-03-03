@@ -1,0 +1,1875 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Midterm 1 Grade Analysis &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/midterm1/analysis';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 04: NumPy Arrays and Linear Algebra</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/midterm1/analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/midterm1/analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Midterm 1 Grade Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-score-distribution">Raw Score Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-1-raw-score">Scenario 1 – Raw Score</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-2-raw-score-base-score-80">Scenario 2 – Raw Score + Base Score 80</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-3-b-2-as-bonus">Scenario 3 – B-2 as Bonus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-4-square-root-curve">Scenario 4 – Square Root Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table-all-entries">Summary Table (all entries)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grade-distribution-comparison">Grade Distribution Comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-histograms-per-scenario">Score Histograms (per scenario)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-grade-counts-summary">Statistics &amp; Grade Counts Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="midterm-1-grade-analysis">
+<h1>Midterm 1 Grade Analysis<a class="headerlink" href="#midterm-1-grade-analysis" title="Link to this heading">#</a></h1>
+<p><strong>Problem structure:</strong></p>
+<ul class="simple">
+<li><p>A-1: 5 pts, A-2: 5 pts, A-3: 5 pts, A-4: 5 pts</p></li>
+<li><p>B-1: 40 pts, B-2: 20 pts</p></li>
+<li><p><strong>Total: 80 pts</strong></p></li>
+</ul>
+<p><strong>Three Scenarios:</strong></p>
+<ol class="arabic simple">
+<li><p>Raw score (out of 80)</p></li>
+<li><p>Raw score + base score 80  →  percentage = (raw + 80) / 160 × 100</p></li>
+<li><p>Exclude B-2 from exam, add base score 60, use B-2 as bonus</p></li>
+</ol>
+<p><strong>Grade Scale:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Grade</p></th>
+<th class="head"><p>Threshold</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A+</p></td>
+<td><p>&gt; 97%</p></td>
+</tr>
+<tr class="row-odd"><td><p>A</p></td>
+<td><p>&gt; 93%</p></td>
+</tr>
+<tr class="row-even"><td><p>A-</p></td>
+<td><p>&gt; 90%</p></td>
+</tr>
+<tr class="row-odd"><td><p>B+</p></td>
+<td><p>&gt; 87%</p></td>
+</tr>
+<tr class="row-even"><td><p>B</p></td>
+<td><p>&gt; 83%</p></td>
+</tr>
+<tr class="row-odd"><td><p>B-</p></td>
+<td><p>&gt; 80%</p></td>
+</tr>
+<tr class="row-even"><td><p>C+</p></td>
+<td><p>&gt; 77%</p></td>
+</tr>
+<tr class="row-odd"><td><p>C</p></td>
+<td><p>&gt; 73%</p></td>
+</tr>
+<tr class="row-even"><td><p>C-</p></td>
+<td><p>&gt; 70%</p></td>
+</tr>
+<tr class="row-odd"><td><p>D+</p></td>
+<td><p>&gt; 67%</p></td>
+</tr>
+<tr class="row-even"><td><p>D</p></td>
+<td><p>&gt; 63%</p></td>
+</tr>
+<tr class="row-odd"><td><p>D-</p></td>
+<td><p>&gt; 60%</p></td>
+</tr>
+<tr class="row-even"><td><p>F</p></td>
+<td><p>≤ 60%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mticker</span>
+
+<span class="c1"># ── Load data ──────────────────────────────────────────────────────────────</span>
+<span class="n">df_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;/Users/hoon/Downloads/Midterm1-score.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span>
+
+<span class="n">df_raw</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;Score&#39;</span><span class="p">:</span>              <span class="s1">&#39;raw&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;2: A-1 (5.0 pts)&#39;</span><span class="p">:</span>  <span class="s1">&#39;A1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;3: A-2 (5.0 pts)&#39;</span><span class="p">:</span>  <span class="s1">&#39;A2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;4: A-3 (5.0 pts)&#39;</span><span class="p">:</span>  <span class="s1">&#39;A3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;5: A-4 (5.0 pts)&#39;</span><span class="p">:</span>  <span class="s1">&#39;A4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;6: B-1 (40.0 pts)&#39;</span><span class="p">:</span> <span class="s1">&#39;B1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;7: B-2 (20.0 pts)&#39;</span><span class="p">:</span> <span class="s1">&#39;B2&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="c1"># Keep only score columns; use entry number as index (no names)</span>
+<span class="c1"># Exclude entries with a total raw score of 0 (absent / no submission)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[[</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span><span class="s1">&#39;A2&#39;</span><span class="p">,</span><span class="s1">&#39;A3&#39;</span><span class="p">,</span><span class="s1">&#39;A4&#39;</span><span class="p">,</span><span class="s1">&#39;B1&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># data = data[data[&#39;raw&#39;] &gt; 0]</span>
+<span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">RangeIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Entry&#39;</span>
+
+<span class="n">MAX_SCORE</span> <span class="o">=</span> <span class="mi">80</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Students: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Raw score summary (out of 80):&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Students: 33
+
+Raw score summary (out of 80):
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    33.00
+mean     46.56
+std      23.48
+min       0.00
+25%      31.00
+50%      48.00
+75%      65.00
+max      80.00
+Name: raw, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>raw</th>
+      <th>A1</th>
+      <th>A2</th>
+      <th>A3</th>
+      <th>A4</th>
+      <th>B1</th>
+      <th>B2</th>
+    </tr>
+    <tr>
+      <th>Entry</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>80.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>40.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>80.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>40.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>47.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>29.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>31.0</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8.0</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>37.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>26.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>60.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>40.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>51.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>32.0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>67.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>1</td>
+      <td>5</td>
+      <td>33.0</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>77.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>40.0</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>76.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>4</td>
+      <td>40.0</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>52.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>5</td>
+      <td>5</td>
+      <td>26.0</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>44.0</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>31.0</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>53.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>33.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>44.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5</td>
+      <td>24.0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>58.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>33.0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>14.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>18.0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>3.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>58.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>22.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>40.0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>29.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>71.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5</td>
+      <td>40.0</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>32.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>13.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>48.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>29.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>22.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+      <td>10.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>79.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>4</td>
+      <td>5</td>
+      <td>40.0</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>65.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>40.0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>16.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+      <td>4.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>22.5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5</td>
+      <td>4.5</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>71.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>40.0</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>61.0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>31.0</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>46.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5</td>
+      <td>18.0</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>16.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3.0</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of students: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean score: </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Median score: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Standard deviation: </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>  
+
+<span class="c1"># print(f&quot;Minimum score: {scores.min()}&quot;)</span>
+<span class="c1"># print(f&quot;Maximum score: {scores.max()}&quot;)</span>
+<span class="c1"># print(f&quot;25th percentile: {np.percentile(scores, 25):.2f}&quot;)</span>
+<span class="c1"># print(f&quot;75th percentile: {np.percentile(scores, 75):.2f}&quot;)  </span>
+<span class="c1"># print(f&quot;Number of students scoring above 70: {(scores &gt; 70).sum()}&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of students: 33
+Mean score: 46.56
+Median score: 48.00
+Standard deviation: 23.48
+</pre></div>
+</div>
+</div>
+</div>
+<section id="raw-score-distribution">
+<h2>Raw Score Distribution<a class="headerlink" href="#raw-score-distribution" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([2., 0., 1., 3., 2., 0., 2., 1., 3., 3., 3., 2., 2., 2., 2., 5.]),
+ array([ 0.,  5., 10., 15., 20., 25., 30., 35., 40., 45., 50., 55., 60.,
+        65., 70., 75., 80.]),
+ &lt;BarContainer object of 16 artists&gt;)
+</pre></div>
+</div>
+<img alt="../../_images/9f21795f6bfa5e5504eb49a14bf024dbaba7c386d5b035071dbc8396519fd0eb.png" src="../../_images/9f21795f6bfa5e5504eb49a14bf024dbaba7c386d5b035071dbc8396519fd0eb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pct_data = [data[col] / mx * 100 for col, mx in zip(problem_cols, problem_max)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pct_data</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#pct_data = [data[col] / mx * 100 for col, mx in zip(problem_cols, problem_max)]</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pct_data</span><span class="p">)))</span>
+
+<span class="ne">NameError</span>: name &#39;pct_data&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pct_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Entry
+ 1     100.0
+ 2     100.0
+ 3     100.0
+ 4      80.0
+ 5      80.0
+ 6     100.0
+ 7       0.0
+ 8     100.0
+ 9     100.0
+ 10    100.0
+ 11    100.0
+ 12     80.0
+ 13     80.0
+ 14    100.0
+ 15    100.0
+ 16    100.0
+ 17    100.0
+ 18      0.0
+ 19     80.0
+ 20     80.0
+ 21    100.0
+ 22     80.0
+ 23     80.0
+ 24     80.0
+ 25      0.0
+ 26    100.0
+ 27    100.0
+ 28     80.0
+ 29    100.0
+ 30     80.0
+ 31     80.0
+ 32    100.0
+ 33    100.0
+ Name: A1, dtype: float64,
+ Entry
+ 1     100.0
+ 2     100.0
+ 3     100.0
+ 4      60.0
+ 5      80.0
+ 6     100.0
+ 7       0.0
+ 8     100.0
+ 9     100.0
+ 10    100.0
+ 11    100.0
+ 12     80.0
+ 13     40.0
+ 14    100.0
+ 15    100.0
+ 16    100.0
+ 17    100.0
+ 18    100.0
+ 19     80.0
+ 20      0.0
+ 21    100.0
+ 22     80.0
+ 23     80.0
+ 24     80.0
+ 25      0.0
+ 26    100.0
+ 27    100.0
+ 28     80.0
+ 29    100.0
+ 30     80.0
+ 31     80.0
+ 32    100.0
+ 33    100.0
+ Name: A2, dtype: float64,
+ Entry
+ 1     100.0
+ 2     100.0
+ 3     100.0
+ 4       0.0
+ 5       0.0
+ 6     100.0
+ 7       0.0
+ 8       0.0
+ 9      20.0
+ 10    100.0
+ 11    100.0
+ 12    100.0
+ 13      0.0
+ 14    100.0
+ 15      0.0
+ 16    100.0
+ 17      0.0
+ 18    100.0
+ 19     80.0
+ 20      0.0
+ 21      0.0
+ 22     80.0
+ 23     80.0
+ 24      0.0
+ 25      0.0
+ 26     80.0
+ 27    100.0
+ 28      0.0
+ 29      0.0
+ 30     80.0
+ 31     80.0
+ 32      0.0
+ 33      0.0
+ Name: A3, dtype: float64,
+ Entry
+ 1     100.0
+ 2     100.0
+ 3       0.0
+ 4       0.0
+ 5       0.0
+ 6     100.0
+ 7       0.0
+ 8       0.0
+ 9     100.0
+ 10    100.0
+ 11     80.0
+ 12    100.0
+ 13      0.0
+ 14    100.0
+ 15    100.0
+ 16    100.0
+ 17     20.0
+ 18    100.0
+ 19     80.0
+ 20     80.0
+ 21    100.0
+ 22     80.0
+ 23     80.0
+ 24     80.0
+ 25      0.0
+ 26    100.0
+ 27    100.0
+ 28     80.0
+ 29    100.0
+ 30     80.0
+ 31     80.0
+ 32    100.0
+ 33      0.0
+ Name: A4, dtype: float64,
+ Entry
+ 1     100.00
+ 2     100.00
+ 3      72.50
+ 4      20.00
+ 5      65.00
+ 6     100.00
+ 7       0.00
+ 8      80.00
+ 9      82.50
+ 10    100.00
+ 11    100.00
+ 12     65.00
+ 13     77.50
+ 14     82.50
+ 15     60.00
+ 16     82.50
+ 17      7.50
+ 18      7.50
+ 19     55.00
+ 20     72.50
+ 21    100.00
+ 22     32.50
+ 23     72.50
+ 24     25.00
+ 25      0.00
+ 26    100.00
+ 27    100.00
+ 28     10.00
+ 29     11.25
+ 30    100.00
+ 31     77.50
+ 32     45.00
+ 33      7.50
+ Name: B1, dtype: float64,
+ Entry
+ 1     100.0
+ 2     100.0
+ 3      15.0
+ 4      80.0
+ 5      15.0
+ 6       0.0
+ 7       0.0
+ 8      45.0
+ 9      90.0
+ 10     85.0
+ 11     85.0
+ 12     40.0
+ 13     35.0
+ 14      0.0
+ 15     25.0
+ 16     25.0
+ 17      0.0
+ 18      0.0
+ 19    100.0
+ 20     15.0
+ 21     80.0
+ 22     15.0
+ 23     15.0
+ 24      0.0
+ 25      0.0
+ 26    100.0
+ 27     25.0
+ 28      0.0
+ 29     15.0
+ 30     75.0
+ 31     70.0
+ 32     65.0
+ 33     15.0
+ Name: B2, dtype: float64]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># ── Left: histogram ───────────────────────────────────────────────────────</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#37474F&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">mean_v</span>   <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">median_v</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_v</span><span class="p">,</span>   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#B71C1C&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean = </span><span class="si">{</span><span class="n">mean_v</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">median_v</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1A237E&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Median = </span><span class="si">{</span><span class="n">median_v</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Raw Score (pts)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;# Students&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">82</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Raw Score Histogram&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+
+<span class="c1"># ── Right: per-problem violin ──────────────────────────────────────────────</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">problem_cols</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">,</span> <span class="s1">&#39;A4&#39;</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">]</span>
+<span class="n">problem_max</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span>    <span class="mi">5</span><span class="p">,</span>    <span class="mi">5</span><span class="p">,</span>    <span class="mi">5</span><span class="p">,</span>    <span class="mi">40</span><span class="p">,</span>   <span class="mi">20</span>  <span class="p">]</span>
+<span class="n">problem_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A-1</span><span class="se">\n</span><span class="s1">(/5)&#39;</span><span class="p">,</span> <span class="s1">&#39;A-2</span><span class="se">\n</span><span class="s1">(/5)&#39;</span><span class="p">,</span> <span class="s1">&#39;A-3</span><span class="se">\n</span><span class="s1">(/5)&#39;</span><span class="p">,</span> <span class="s1">&#39;A-4</span><span class="se">\n</span><span class="s1">(/5)&#39;</span><span class="p">,</span> <span class="s1">&#39;B-1</span><span class="se">\n</span><span class="s1">(/40)&#39;</span><span class="p">,</span> <span class="s1">&#39;B-2</span><span class="se">\n</span><span class="s1">(/20)&#39;</span><span class="p">]</span>
+<span class="n">pct_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">/</span> <span class="n">mx</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">mx</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">problem_cols</span><span class="p">,</span> <span class="n">problem_max</span><span class="p">)]</span>
+<span class="n">colors</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#42A5F5&#39;</span><span class="p">,</span><span class="s1">&#39;#42A5F5&#39;</span><span class="p">,</span><span class="s1">&#39;#42A5F5&#39;</span><span class="p">,</span><span class="s1">&#39;#42A5F5&#39;</span><span class="p">,</span><span class="s1">&#39;#EF5350&#39;</span><span class="p">,</span><span class="s1">&#39;#FF8A65&#39;</span><span class="p">]</span>
+
+<span class="n">vp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">pct_data</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pct_data</span><span class="p">)),</span> <span class="n">showmedians</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showextrema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">body</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vp</span><span class="p">[</span><span class="s1">&#39;bodies&#39;</span><span class="p">],</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">body</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">body</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.65</span><span class="p">)</span>
+<span class="n">vp</span><span class="p">[</span><span class="s1">&#39;cmedians&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">vp</span><span class="p">[</span><span class="s1">&#39;cmedians&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cmins&#39;</span><span class="p">,</span><span class="s1">&#39;cmaxes&#39;</span><span class="p">,</span><span class="s1">&#39;cbars&#39;</span><span class="p">]:</span>
+    <span class="n">vp</span><span class="p">[</span><span class="n">part</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;#455A64&#39;</span><span class="p">)</span>
+
+<span class="c1"># Overlay jittered data points</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col_data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pct_data</span><span class="p">):</span>
+    <span class="n">jitter</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">col_data</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">jitter</span><span class="p">,</span> <span class="n">col_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#37474F&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">problem_cols</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">problem_labels</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Score (%)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">112</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Per-Problem Score Distribution</span><span class="se">\n</span><span class="s1">(violin + data points)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Midterm 1 – Raw Score Overview&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/849efa5a78223361699f66d969681d163c84bf5edf3126abb260edd722df824a.png" src="../../_images/849efa5a78223361699f66d969681d163c84bf5edf3126abb260edd722df824a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Grade helper ───────────────────────────────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">assign_grade</span><span class="p">(</span><span class="n">pct</span><span class="p">):</span>
+    <span class="k">if</span>   <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">97</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;A+&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">93</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;A&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">90</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;A-&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">87</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;B+&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">83</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;B&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;B-&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">77</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;C+&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">73</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;C&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;C-&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">67</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;D+&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">63</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;D&#39;</span>
+    <span class="k">elif</span> <span class="n">pct</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;D-&#39;</span>
+    <span class="k">else</span><span class="p">:</span>          <span class="k">return</span> <span class="s1">&#39;F&#39;</span>
+
+<span class="n">GRADE_ORDER</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A+&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;A-&#39;</span><span class="p">,</span><span class="s1">&#39;B+&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;B-&#39;</span><span class="p">,</span><span class="s1">&#39;C+&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;C-&#39;</span><span class="p">,</span><span class="s1">&#39;D+&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;D-&#39;</span><span class="p">,</span><span class="s1">&#39;F&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="scenario-1-raw-score">
+<h2>Scenario 1 – Raw Score<a class="headerlink" href="#scenario-1-raw-score" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">MAX_SCORE</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_grade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">assign_grade</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Scenario 1 – Raw Score&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean:   </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Median: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Std:    </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="n">s1_dist</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Grade distribution:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1_dist</span><span class="p">[</span><span class="n">s1_dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scenario 1 – Raw Score
+  Mean:   58.2%
+  Median: 60.0%
+  Std:    29.3%
+
+Grade distribution:
+S1_grade
+A+     3
+A      2
+B+     2
+B      1
+B-     1
+C      2
+C-     2
+D      3
+F     17
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="scenario-2-raw-score-base-score-80">
+<h2>Scenario 2 – Raw Score + Base Score 80<a class="headerlink" href="#scenario-2-raw-score-base-score-80" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BASE_S2</span> <span class="o">=</span> <span class="mi">80</span>
+
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">BASE_S2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">MAX_SCORE</span> <span class="o">+</span> <span class="n">BASE_S2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_grade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">assign_grade</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Scenario 2 – Raw + Base&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean:   </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Median: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Std:    </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="n">s2_dist</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Grade distribution:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2_dist</span><span class="p">[</span><span class="n">s2_dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scenario 2 – Raw + Base
+  Mean:   79.1%
+  Median: 80.0%
+  Std:    14.7%
+
+Grade distribution:
+S2_grade
+A+    5
+A     2
+A-    2
+B+    2
+B     3
+B-    2
+C+    5
+C     2
+D+    2
+D     2
+D-    1
+F     5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="scenario-3-b-2-as-bonus">
+<h2>Scenario 3 – B-2 as Bonus<a class="headerlink" href="#scenario-3-b-2-as-bonus" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Exam score (excl. B-2) out of 60</p></li>
+<li><p>B-2 (0–20 pts) added as bonus on top</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BASE_S3</span>   <span class="o">=</span> <span class="mi">0</span>
+<span class="n">MAX_NO_B2</span> <span class="o">=</span> <span class="n">MAX_SCORE</span> <span class="o">-</span> <span class="mi">20</span>   <span class="c1"># 60</span>
+<span class="n">DENOM_S3</span>  <span class="o">=</span> <span class="n">MAX_NO_B2</span> <span class="o">+</span> <span class="n">BASE_S3</span>  <span class="c1"># 120</span>
+
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_exam&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">]</span>           <span class="c1"># score excl. B-2</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_exam&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">BASE_S3</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">]</span>  <span class="c1"># = raw + 60</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">DENOM_S3</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_grade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">assign_grade</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Scenario 3 – B-2 Bonus&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean:   </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Median: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Std:    </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="n">s3_dist</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Grade distribution:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s3_dist</span><span class="p">[</span><span class="n">s3_dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scenario 3 – B-2 Bonus
+  Mean:   77.6%
+  Median: 80.0%
+  Std:    39.1%
+
+Grade distribution:
+S3_grade
+A+    11
+A      2
+B+     1
+B      2
+C+     2
+C      3
+D      1
+D-     1
+F     10
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="scenario-4-square-root-curve">
+<h2>Scenario 4 – Square Root Curve<a class="headerlink" href="#scenario-4-square-root-curve" title="Link to this heading">#</a></h2>
+<p>A standard non-linear curve: <code class="docutils literal notranslate"><span class="pre">adjusted</span> <span class="pre">(%)</span> <span class="pre">=</span> <span class="pre">sqrt(raw</span> <span class="pre">/</span> <span class="pre">80)</span> <span class="pre">×</span> <span class="pre">100</span></code></p>
+<ul class="simple">
+<li><p>Monotone: higher raw score always yields higher curved score</p></li>
+<li><p>Larger benefit for lower scores, diminishing benefit near the top</p></li>
+<li><p>Published, named technique widely accepted in academia</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">MAX_SCORE</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_grade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">assign_grade</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Scenario 4 – Square Root Curve&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean:   </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Median: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Std:    </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="n">s4_dist</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Grade distribution:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s4_dist</span><span class="p">[</span><span class="n">s4_dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scenario 4 – Square Root Curve
+  Mean:   72.1%
+  Median: 77.5%
+  Std:    25.5%
+
+Grade distribution:
+S4_grade
+A+    5
+A     2
+A-    2
+B+    1
+B     3
+B-    2
+C+    2
+C     4
+C-    1
+D+    1
+D     1
+D-    1
+F     8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare distribution of S1 and S4</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Scenario 1&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#42A5F5&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Scenario 4&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#EF5350&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Score (%)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;# Students&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Score Distribution: Scenario 1 vs Scenario 4&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9c17fe85ffbdc9ed9d3af780aaa8c77128564063eeb424ee27f4986691a8c330.png" src="../../_images/9c17fe85ffbdc9ed9d3af780aaa8c77128564063eeb424ee27f4986691a8c330.png" />
+</div>
+</div>
+</section>
+<section id="summary-table-all-entries">
+<h2>Summary Table (all entries)<a class="headerlink" href="#summary-table-all-entries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;S1_pct (%)&#39;</span><span class="p">:</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;S1_grade&#39;</span><span class="p">:</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_grade&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;S2_pct (%)&#39;</span><span class="p">:</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;S2_grade&#39;</span><span class="p">:</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_grade&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;S3_pct (%)&#39;</span><span class="p">:</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;S3_grade&#39;</span><span class="p">:</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_grade&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;S4_pct (%)&#39;</span><span class="p">:</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;S4_grade&#39;</span><span class="p">:</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_grade&#39;</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       S1_pct (%) S1_grade  S2_pct (%) S2_grade  S3_pct (%) S3_grade  S4_pct (%) S4_grade
+Entry                                                                                    
+1           100.0       A+       100.0       A+       133.3       A+       100.0       A+
+2           100.0       A+       100.0       A+       133.3       A+       100.0       A+
+3            58.8        F        79.4       C+        78.3       C+        76.6        C
+4            38.8        F        69.4       D+        51.7        F        62.2       D-
+5            46.2        F        73.1        C        61.7       D-        68.0       D+
+6            75.0        C        87.5       B+       100.0       A+        86.6        B
+7             0.0        F        50.0        F         0.0        F         0.0        F
+8            63.7        D        81.9       B-        85.0        B        79.8       C+
+9            83.8        B        91.9       A-       111.7       A+        91.5       A-
+10           96.2        A        98.1       A+       128.3       A+        98.1       A+
+11           95.0        A        97.5       A+       126.7       A+        97.5       A+
+12           65.0        D        82.5       B-        86.7        B        80.6       B-
+13           55.0        F        77.5       C+        73.3        C        74.2        C
+14           66.2        D        83.1        B        88.3       B+        81.4       B-
+15           55.0        F        77.5       C+        73.3        C        74.2        C
+16           72.5       C-        86.2        B        96.7        A        85.1        B
+17           17.5        F        58.8        F        23.3        F        41.8        F
+18           22.5        F        61.3       D-        30.0        F        47.4        F
+19           72.5       C-        86.2        B        96.7        A        85.1        B
+20           50.0        F        75.0        C        66.7        D        70.7       C-
+21           88.8       B+        94.4        A       118.3       A+        94.2        A
+22           40.0        F        70.0       D+        53.3        F        63.2        D
+23           60.0        F        80.0       C+        80.0       C+        77.5       C+
+24           27.5        F        63.7        D        36.7        F        52.4        F
+25            0.0        F        50.0        F         0.0        F         0.0        F
+26           98.8       A+        99.4       A+       131.7       A+        99.4       A+
+27           81.2       B-        90.6       A-       108.3       A+        90.1       A-
+28           20.0        F        60.0        F        26.7        F        44.7        F
+29           28.1        F        64.1        D        37.5        F        53.0        F
+30           88.8       B+        94.4        A       118.3       A+        94.2        A
+31           76.2        C        88.1       B+       101.7       A+        87.3       B+
+32           57.5        F        78.8       C+        76.7        C        75.8        C
+33           20.0        F        60.0        F        26.7        F        44.7        F
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="grade-distribution-comparison">
+<h2>Grade Distribution Comparison<a class="headerlink" href="#grade-distribution-comparison" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">scenarios</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_grade&#39;</span><span class="p">],</span> <span class="s1">&#39;S1: Raw Score&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_grade&#39;</span><span class="p">],</span> <span class="s1">&#39;S2: Raw + Base 80&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_grade&#39;</span><span class="p">],</span> <span class="s1">&#39;S3: B-2 Bonus&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_grade&#39;</span><span class="p">],</span> <span class="s1">&#39;S4: Square Root Curve&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">GRADE_COLORS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="s1">&#39;#1565C0&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;#2E7D32&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="s1">&#39;#E65100&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="s1">&#39;#B71C1C&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;#757575&#39;</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">pcts</span><span class="p">,</span> <span class="n">grades</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">scenarios</span><span class="p">):</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">grades</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">GRADE_COLORS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;#757575&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">GRADE_ORDER</span><span class="p">]</span>
+    <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Grade&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;# Students&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="se">\n</span><span class="s1">Mean = </span><span class="si">{</span><span class="n">pcts</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%,  Median = </span><span class="si">{</span><span class="n">pcts</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span>
+                 <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Midterm 1 – Grade Distribution by Scenario&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f57fa73f206d35a8717c1b15b22ab5eeb2a1136f291e1b63e04951216503048c.png" src="../../_images/f57fa73f206d35a8717c1b15b22ab5eeb2a1136f291e1b63e04951216503048c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">scenarios</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_grade&#39;</span><span class="p">],</span> <span class="s1">&#39;S1: Raw Score&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_grade&#39;</span><span class="p">],</span> <span class="s1">&#39;S2: Raw + Base 80&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_grade&#39;</span><span class="p">],</span> <span class="s1">&#39;S3: B-2 Bonus&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_grade&#39;</span><span class="p">],</span> <span class="s1">&#39;S4: Square Root Curve&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">GRADE_COLORS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="s1">&#39;#1565C0&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;#2E7D32&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="s1">&#39;#E65100&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="s1">&#39;#B71C1C&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;#757575&#39;</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">pcts</span><span class="p">,</span> <span class="n">grades</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">scenarios</span><span class="p">):</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">grades</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">GRADE_COLORS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;#757575&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">GRADE_ORDER</span><span class="p">]</span>
+    <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Grade&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;# Students&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="se">\n</span><span class="s1">Mean = </span><span class="si">{</span><span class="n">pcts</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%,  Median = </span><span class="si">{</span><span class="n">pcts</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span>
+                 <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Midterm 1 – Grade Distribution by Scenario&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f57fa73f206d35a8717c1b15b22ab5eeb2a1136f291e1b63e04951216503048c.png" src="../../_images/f57fa73f206d35a8717c1b15b22ab5eeb2a1136f291e1b63e04951216503048c.png" />
+</div>
+</div>
+</section>
+<section id="score-histograms-per-scenario">
+<h2>Score Histograms (per scenario)<a class="headerlink" href="#score-histograms-per-scenario" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">scenarios</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">],</span> <span class="s1">&#39;S1: Raw Score (out of 80)&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">],</span> <span class="s1">&#39;S2: Raw + Base 80 (out of 160)&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">],</span> <span class="s1">&#39;S3: B-2 Bonus + Base 60 (out of 120)&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">],</span> <span class="s1">&#39;S4: Square Root Curve&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">grade_zones</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">60</span><span class="p">,</span>  <span class="s1">&#39;#EF9A9A&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span>  <span class="s1">&#39;#FFCC80&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span>  <span class="s1">&#39;#FFF59D&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span>  <span class="s1">&#39;#A5D6A7&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;#90CAF9&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">bins</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">pcts</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">scenarios</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">grade_zones</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.35</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pcts</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#37474F&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pct</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">97</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">pct</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#455A64&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">mean_v</span>   <span class="o">=</span> <span class="n">pcts</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">median_v</span> <span class="o">=</span> <span class="n">pcts</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_v</span><span class="p">,</span>   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#B71C1C&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean=</span><span class="si">{</span><span class="n">mean_v</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">median_v</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1A237E&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Median=</span><span class="si">{</span><span class="n">median_v</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Score (%)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;# Students&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">105</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mf">7.5</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Midterm 1 – Score Distributions&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/72a096af47f39c5b52c391a41425adba5b8d15143e98633eec14987697515ec5.png" src="../../_images/72a096af47f39c5b52c391a41425adba5b8d15143e98633eec14987697515ec5.png" />
+</div>
+</div>
+</section>
+<section id="statistics-grade-counts-summary">
+<h2>Statistics &amp; Grade Counts Summary<a class="headerlink" href="#statistics-grade-counts-summary" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Scenario&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;S1: Raw&#39;</span><span class="p">,</span> <span class="s1">&#39;S2: Base 80&#39;</span><span class="p">,</span> <span class="s1">&#39;S3: B-2 Bonus&#39;</span><span class="p">,</span> <span class="s1">&#39;S4: Sqrt Curve&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Mean (%)&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>   <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>   <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>   <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()],</span>
+    <span class="s1">&#39;Median (%)&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()],</span>
+    <span class="s1">&#39;Std (%)&#39;</span><span class="p">:</span>     <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()],</span>
+    <span class="s1">&#39;Min (%)&#39;</span><span class="p">:</span>     <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()],</span>
+    <span class="s1">&#39;Max (%)&#39;</span><span class="p">:</span>     <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span>
+    <span class="s1">&#39;# A/A+/A-&#39;</span><span class="p">:</span>   <span class="p">[</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;A+&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;A-&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;A+&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;A-&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;A+&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;A-&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;A+&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;A-&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;# Pass (&gt;60%)&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_pct&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_pct&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_pct&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_pct&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;# F&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_grade&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_grade&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_grade&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_grade&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+    <span class="p">],</span>
+<span class="p">})</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Scenario&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Grade counts ──&#39;</span><span class="p">)</span>
+<span class="n">dist_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;S1: Raw&#39;</span><span class="p">:</span>        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S1_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span>
+    <span class="s1">&#39;S2: Base 80&#39;</span><span class="p">:</span>    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S2_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span>
+    <span class="s1">&#39;S3: B-2 Bonus&#39;</span><span class="p">:</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S3_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span>
+    <span class="s1">&#39;S4: Sqrt Curve&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;S4_grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">GRADE_ORDER</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">dist_table</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Grade&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dist_table</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                Mean (%)  Median (%)  Std (%)  Min (%)  Max (%)  # A/A+/A-  # Pass (&gt;60%)  # F
+Scenario                                                                                      
+S1: Raw             58.2        60.0     29.3      0.0    100.0          5             16   17
+S2: Base 80         79.1        80.0     14.7     50.0    100.0          9             28    5
+S3: B-2 Bonus       77.6        80.0     39.1      0.0    133.3         13             23   10
+S4: Sqrt Curve      72.1        77.5     25.5      0.0    100.0          9             25    8
+
+── Grade counts ──
+       S1: Raw  S2: Base 80  S3: B-2 Bonus  S4: Sqrt Curve
+Grade                                                     
+A+           3            5             11               5
+A            2            2              2               2
+A-           0            2              0               2
+B+           2            2              1               1
+B            1            3              2               3
+B-           1            2              0               2
+C+           0            5              2               2
+C            2            2              3               4
+C-           2            0              0               1
+D+           0            2              0               1
+D            3            2              1               1
+D-           0            1              1               1
+F           17            5             10               8
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "base"
+        },
+        kernelOptions: {
+            name: "base",
+            path: "./docs/midterm1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'base'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-score-distribution">Raw Score Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-1-raw-score">Scenario 1 – Raw Score</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-2-raw-score-base-score-80">Scenario 2 – Raw Score + Base Score 80</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-3-b-2-as-bonus">Scenario 3 – B-2 as Bonus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-4-square-root-curve">Scenario 4 – Square Root Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table-all-entries">Summary Table (all entries)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grade-distribution-comparison">Grade Distribution Comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-histograms-per-scenario">Score Histograms (per scenario)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-grade-counts-summary">Statistics &amp; Grade Counts Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

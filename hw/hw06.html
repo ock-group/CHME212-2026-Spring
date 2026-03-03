@@ -189,12 +189,25 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab06/06_lab.html">Lab 04: NumPy Arrays and Linear Algebra</a></li>
 </ul>
 
     </div>
@@ -390,6 +403,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-arrhenius-analysis-extracting-kinetic-parameters-from-data">Problem 1: Arrhenius Analysis — Extracting Kinetic Parameters from Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-15-points-temperature-profile-in-a-reactor">Problem 1 (15 points) – Temperature Profile in a Reactor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-15-points-concentration-matrix-operations">Problem 2 (15 points) – Concentration Matrix Operations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-12-points-material-balance-using-linear-algebra">Problem 3 (12 points) – Material Balance using Linear Algebra</a></li>
@@ -425,6 +439,120 @@ document.write(`
 <li><p>Submit this completed Jupyter notebook to Gradescope</p></li>
 <li><p>Make sure all cells have been executed and outputs are visible</p></li>
 </ul>
+<hr class="docutils" />
+<section id="problem-1-arrhenius-analysis-extracting-kinetic-parameters-from-data">
+<h2>Problem 1: Arrhenius Analysis — Extracting Kinetic Parameters from Data<a class="headerlink" href="#problem-1-arrhenius-analysis-extracting-kinetic-parameters-from-data" title="Link to this heading">#</a></h2>
+<p>The <strong>Arrhenius equation</strong> describes how reaction rate constants vary with temperature:</p>
+<div class="math notranslate nohighlight">
+\[
+k = A \, e^{-E_a / (RT)}
+\]</div>
+<p>Taking the natural log linearizes this:</p>
+<div class="math notranslate nohighlight">
+\[
+\ln k = \ln A - \frac{E_a}{R} \cdot \frac{1}{T}
+\]</div>
+<p>So a plot of <span class="math notranslate nohighlight">\(\ln k\)</span> vs <span class="math notranslate nohighlight">\(1/T\)</span> should be a straight line with <strong>slope</strong> <span class="math notranslate nohighlight">\(= -E_a/R\)</span> and <strong>intercept</strong> <span class="math notranslate nohighlight">\(= \ln A\)</span>.</p>
+<p>A laboratory measured the following rate constants for the decomposition of N₂O₅:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>T (K)</p></th>
+<th class="head"><p>k (s⁻¹)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>273</p></td>
+<td><p>7.87 × 10⁻⁷</p></td>
+</tr>
+<tr class="row-odd"><td><p>298</p></td>
+<td><p>3.46 × 10⁻⁵</p></td>
+</tr>
+<tr class="row-even"><td><p>318</p></td>
+<td><p>4.98 × 10⁻⁴</p></td>
+</tr>
+<tr class="row-odd"><td><p>338</p></td>
+<td><p>4.87 × 10⁻³</p></td>
+</tr>
+<tr class="row-even"><td><p>358</p></td>
+<td><p>3.50 × 10⁻²</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Store the data as numpy arrays <code class="docutils literal notranslate"><span class="pre">T_data</span></code> (K) and <code class="docutils literal notranslate"><span class="pre">k_data</span></code> (s⁻¹).</p></li>
+<li><p>Compute <code class="docutils literal notranslate"><span class="pre">inv_T</span> <span class="pre">=</span> <span class="pre">1/T_data</span></code> and <code class="docutils literal notranslate"><span class="pre">ln_k</span> <span class="pre">=</span> <span class="pre">np.log(k_data)</span></code>.</p></li>
+<li><p>Use <strong><code class="docutils literal notranslate"><span class="pre">np.polyfit(inv_T,</span> <span class="pre">ln_k,</span> <span class="pre">1)</span></code></strong> to fit a line to the Arrhenius plot. Extract:</p>
+<ul class="simple">
+<li><p><strong>Activation energy</strong> <span class="math notranslate nohighlight">\(E_a\)</span> (in kJ/mol) from the slope: <span class="math notranslate nohighlight">\(E_a = -\text{slope} \times R\)</span>, with <span class="math notranslate nohighlight">\(R = 8.314\)</span> J/(mol·K)</p></li>
+<li><p><strong>Pre-exponential factor</strong> <span class="math notranslate nohighlight">\(A\)</span> (in s⁻¹) from the intercept: <span class="math notranslate nohighlight">\(A = e^{\text{intercept}}\)</span></p></li>
+</ul>
+</li>
+<li><p>Create an <strong>Arrhenius plot</strong>: <span class="math notranslate nohighlight">\(\ln k\)</span> vs <span class="math notranslate nohighlight">\(1/T\)</span> (×10³ for readability on the x-axis).</p>
+<ul class="simple">
+<li><p>Plot the <strong>data points</strong> as markers (<code class="docutils literal notranslate"><span class="pre">'o'</span></code>, color <code class="docutils literal notranslate"><span class="pre">'steelblue'</span></code>, label <code class="docutils literal notranslate"><span class="pre">'Experimental</span> <span class="pre">data'</span></code>).</p></li>
+<li><p>Plot the <strong>fitted line</strong> (<code class="docutils literal notranslate"><span class="pre">'r--'</span></code>, label with fitted <span class="math notranslate nohighlight">\(E_a\)</span> value, e.g. <code class="docutils literal notranslate"><span class="pre">f'Fit:</span> <span class="pre">$E_a$</span> <span class="pre">=</span> <span class="pre">{Ea:.1f}</span> <span class="pre">kJ/mol'</span></code>).</p></li>
+<li><p>Label x-axis as <code class="docutils literal notranslate"><span class="pre">'1/T</span> <span class="pre">(×10⁻³</span> <span class="pre">K⁻¹)'</span></code>, y-axis as <code class="docutils literal notranslate"><span class="pre">'ln</span> <span class="pre">k'</span></code>, add title, legend, grid.</p></li>
+</ul>
+</li>
+<li><p>Print <span class="math notranslate nohighlight">\(E_a\)</span> (kJ/mol) and <span class="math notranslate nohighlight">\(A\)</span> (s⁻¹) clearly with units.</p></li>
+<li><p><strong>In a markdown cell below your code</strong>, write 2–3 sentences: <em>What does a higher <span class="math notranslate nohighlight">\(E_a\)</span> physically mean for a reaction? Based on your fitted <span class="math notranslate nohighlight">\(E_a\)</span>, is the N₂O₅ decomposition highly temperature-sensitive?</em></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span>   <span class="c1"># J/(mol·K)</span>
+
+<span class="c1"># Task 1: Data</span>
+<span class="n">T_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">273</span><span class="p">,</span> <span class="mi">298</span><span class="p">,</span> <span class="mi">318</span><span class="p">,</span> <span class="mi">338</span><span class="p">,</span> <span class="mi">358</span><span class="p">])</span>          <span class="c1"># K</span>
+<span class="n">k_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.87e-7</span><span class="p">,</span> <span class="mf">3.46e-5</span><span class="p">,</span> <span class="mf">4.98e-4</span><span class="p">,</span> <span class="mf">4.87e-3</span><span class="p">,</span> <span class="mf">3.50e-2</span><span class="p">])</span>  <span class="c1"># s^-1</span>
+
+<span class="c1"># Task 2: Linearize</span>
+<span class="n">inv_T</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">T_data</span>          <span class="c1"># K^-1</span>
+<span class="n">ln_k</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">k_data</span><span class="p">)</span>      <span class="c1"># dimensionless</span>
+
+<span class="c1"># Task 3: Arrhenius fit</span>
+<span class="n">coeffs</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">inv_T</span><span class="p">,</span> <span class="n">ln_k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">coeffs</span>
+
+<span class="n">Ea</span> <span class="o">=</span> <span class="o">-</span><span class="n">slope</span> <span class="o">*</span> <span class="n">R</span> <span class="o">/</span> <span class="mi">1000</span>      <span class="c1"># kJ/mol  (slope = -Ea/R)</span>
+<span class="n">A</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">intercept</span><span class="p">)</span>      <span class="c1"># s^-1</span>
+
+<span class="c1"># Task 5: Print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Activation energy:    Ea = </span><span class="si">{</span><span class="n">Ea</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kJ/mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pre-exponential factor: A = </span><span class="si">{</span><span class="n">A</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2"> s⁻¹&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 4: Arrhenius plot</span>
+<span class="n">inv_T_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">inv_T</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">inv_T</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">ln_k_fit</span>  <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">inv_T_fit</span> <span class="o">+</span> <span class="n">intercept</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">inv_T</span> <span class="o">*</span> <span class="mf">1e3</span><span class="p">,</span> <span class="n">ln_k</span><span class="p">,</span>
+         <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Experimental data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">inv_T_fit</span> <span class="o">*</span> <span class="mf">1e3</span><span class="p">,</span> <span class="n">ln_k_fit</span><span class="p">,</span>
+         <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Fit: $E_a$ = </span><span class="si">{</span><span class="n">Ea</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> kJ/mol&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;1/T (×10⁻³ K⁻¹)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;ln k&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Arrhenius Plot — N₂O₅ Decomposition&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Activation energy:    Ea = 102.60 kJ/mol
+Pre-exponential factor: A = 3.4111e+13 s⁻¹
+</pre></div>
+</div>
+<img alt="../_images/79f0780e20f5b73609fc3a77d7c105c5910c4845ab5ff5b04c361b4f1052017d.png" src="../_images/79f0780e20f5b73609fc3a77d7c105c5910c4845ab5ff5b04c361b4f1052017d.png" />
+</div>
+</div>
+</section>
 <hr class="docutils" />
 <section id="problem-1-15-points-temperature-profile-in-a-reactor">
 <h2>Problem 1 (15 points) – Temperature Profile in a Reactor<a class="headerlink" href="#problem-1-15-points-temperature-profile-in-a-reactor" title="Link to this heading">#</a></h2>
@@ -800,6 +928,7 @@ Verify that its magnitude is 1.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-arrhenius-analysis-extracting-kinetic-parameters-from-data">Problem 1: Arrhenius Analysis — Extracting Kinetic Parameters from Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-15-points-temperature-profile-in-a-reactor">Problem 1 (15 points) – Temperature Profile in a Reactor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-15-points-concentration-matrix-operations">Problem 2 (15 points) – Concentration Matrix Operations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-12-points-material-balance-using-linear-algebra">Problem 3 (12 points) – Material Balance using Linear Algebra</a></li>
