@@ -59,11 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter12/12_notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter12/12_notebook-in-class';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
-    <link rel="prev" title="Supplementary Note: Matrix Rank" href="../chapter11/11_rank_supplement.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,6 +123,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -195,11 +195,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -280,7 +280,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter12/12_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter12/12_notebook-in-class.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -310,7 +310,7 @@
       
       
       
-      <li><a href="../../_sources/docs/chapter12/12_notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/chapter12/12_notebook-in-class.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -417,6 +417,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.4 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.4 Summary</a></li>
@@ -438,6 +439,19 @@ document.write(`
 <li><p>Polynomial basics: <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code></p></li>
 <li><p>Least-squares polynomial fitting: choosing the right degree, residuals, <span class="math notranslate nohighlight">\(R^2\)</span></p></li>
 </ul>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-introduction">📋 Instructor Note — Introduction</h3>
+<p>Good [morning/afternoon] everyone. Today we’re in Chapter 12 — <strong>Polynomial Fitting and Interpolation</strong>. This is one of the most practically useful chapters in the course because these techniques come up constantly in real engineering work.</p>
+<p>A polynomial is one of the most fundamental objects in mathematics, especially in algebra, calculus, and engineering models. A polynomial is an expression made of variables (like x), coefficients (numbers), exponents that are non-negative integers, and addition, subtraction, and multiplication only.</p>
+<p>The big picture: experimental data and published tables always give you numbers at <em>specific</em> conditions. But in design calculations, you almost never need the function at <em>exactly</em> those conditions — you need it at some arbitrary intermediate point, or you need to integrate it, or differentiate it. Polynomials let you convert discrete data into a continuous mathematical model you can do calculus on.</p>
+<p>By the end of today you’ll know how to:</p>
+<ul class="simple">
+<li><p>Fit a polynomial to noisy data and evaluate it at any point</p></li>
+<li><p>Use Taylor series to linearize nonlinear functions like Arrhenius</p></li>
+<li><p>Interpolate through tabulated data without introducing artifacts</p></li>
+<li><p>Apply all of this to real ChE problems — heat capacity, steam tables, reaction kinetics</p></li>
+</ul>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── All imports ─────────────────────────────────────────────────────────────</span>
@@ -497,6 +511,16 @@ Q = n \int_{T_1}^{T_2} C_p(T)\, dT
 </table>
 </div>
 <p>We want to fit <span class="math notranslate nohighlight">\(C_p(T) \approx a_0 + a_1 T + a_2 T^2 + \cdots\)</span> so we can evaluate it at any temperature and integrate it analytically.</p>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-1">📋 Instructor Note — 12.1</h3>
+<p>Here’s the problem. NIST publishes molar heat capacity data for CO₂ at discrete temperatures — 300 K, 400 K, 500 K, up to 1200 K. Ten data points total.</p>
+<p>Now suppose you’re designing a heat exchanger and need:</p>
+<div class="math notranslate nohighlight">
+\[Q = n \int_{400}^{900} C_p(T)\, dT\]</div>
+<p>You <strong>cannot</strong> integrate a table of numbers directly — you need a <em>function</em>. That’s what polynomial fitting gives you.</p>
+<p><em>(Run the plot cell — show the data points)</em></p>
+<p>Notice the trend: <span class="math notranslate nohighlight">\(C_p\)</span> increases with temperature and starts leveling off. It’s clearly not linear, but it’s smooth and monotonic — a classic candidate for a low-degree polynomial fit.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NIST tabulated Cp data for CO2 (ideal gas)</span>
@@ -517,6 +541,29 @@ Q = n \int_{T_1}^{T_2} C_p(T)\, dT
 </div>
 <div class="cell_output docutils container">
 <img alt="../../_images/eb3ed8c7689b622ce1522ce778ddd42ad415579a48af6462bbfe2928f0d9ba30.png" src="../../_images/eb3ed8c7689b622ce1522ce778ddd42ad415579a48af6462bbfe2928f0d9ba30.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1200</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># K</span>
+<span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">37.13</span><span class="p">,</span> <span class="mf">41.33</span><span class="p">,</span> <span class="mf">44.60</span><span class="p">,</span> <span class="mf">47.33</span><span class="p">,</span> <span class="mf">49.65</span><span class="p">,</span>
+                    <span class="mf">51.61</span><span class="p">,</span> <span class="mf">53.26</span><span class="p">,</span> <span class="mf">54.31</span><span class="p">,</span> <span class="mf">55.37</span><span class="p">,</span> <span class="mf">56.21</span><span class="p">])</span>  <span class="c1"># J/(mol K)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;NIST data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1700</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$C_p$ (J mol$^{-1}$ K$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Heat Capacity of CO$_2$ — NIST tabulated data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4a1b5b9af749e085dcde9040b9460ce1635ea77bdf9db2dd23dd55ae6c94a001.png" src="../../_images/4a1b5b9af749e085dcde9040b9460ce1635ea77bdf9db2dd23dd55ae6c94a001.png" />
 </div>
 </div>
 </section>
@@ -589,6 +636,17 @@ value: [3,   5,  -2]
 </pre></div>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">poly1d</span></code> when you also need <code class="docutils literal notranslate"><span class="pre">.deriv()</span></code> / <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> / <code class="docutils literal notranslate"><span class="pre">.roots</span></code>; use <code class="docutils literal notranslate"><span class="pre">polyval</span></code> when you just need numbers.</p>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-2">📋 Instructor Note — 12.2</h3>
+<p>Before we fit anything, let’s nail down the three NumPy tools you’ll use for every polynomial calculation in this course.</p>
+<p><strong>The coefficient convention</strong> — this is where people get tripped up.</p>
+<p>NumPy stores coefficients in <em>descending</em> power order. For <span class="math notranslate nohighlight">\(p(x) = 3x^2 + 5x - 2\)</span>, NumPy wants <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">5,</span> <span class="pre">-2]</span></code>. Index 0 = highest power, last index = constant. <strong>Highest power first.</strong></p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code></strong> wraps a list into a callable object. Its bonus: <code class="docutils literal notranslate"><span class="pre">.deriv()</span></code>, <code class="docutils literal notranslate"><span class="pre">.integ()</span></code>, <code class="docutils literal notranslate"><span class="pre">.roots</span></code>. Use it when you need calculus operations.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code></strong> evaluates directly from a list — works on scalars or arrays. Use it when you just need numbers.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code></strong> — the workhorse. Give it data and a degree, it returns best-fit coefficients in that same descending convention.</p>
+<p><em>(Run the demo cell — point out the pretty-printed poly1d output, the evaluation table showing all three methods agree, then the derivative <code class="docutils literal notranslate"><span class="pre">6x</span> <span class="pre">+</span> <span class="pre">5</span></code>, the antiderivative, and the roots)</em></p>
+<p>The fact that all three methods — <code class="docutils literal notranslate"><span class="pre">poly1d</span></code>, <code class="docutils literal notranslate"><span class="pre">polyval</span></code>, and manual — give identical results is a good sanity check to run whenever you’re unsure.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Coefficient convention demo ───────────────────────────────────────────</span>
@@ -703,9 +761,22 @@ Manual check          : 1.0000
 \min_{a_0, \ldots, a_n} \sum_{i=1}^{N} \left[ y_i - p(x_i) \right]^2
 \]</div>
 <p>This is ordinary least squares applied to a polynomial basis. The function returns coefficients in descending order (highest power first), just like <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> expects.</p>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-3">📋 Instructor Note — 12.3</h3>
+<p><code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code> solves a least-squares problem:</p>
+<div class="math notranslate nohighlight">
+\[\min_{a_0,\ldots,a_n} \sum_{i=1}^{N} [y_i - p(x_i)]^2\]</div>
+<p>This is ordinary least squares applied to a polynomial basis. NumPy sets up the Vandermonde matrix and does the linear algebra internally — you just specify the degree.</p>
+</div></blockquote>
 <section id="fitting-cp-t-with-different-degrees">
 <span id="id5"></span><h3>12.3.1 Fitting Cp(T) with Different Degrees<a class="headerlink" href="#fitting-cp-t-with-different-degrees" title="Link to this heading">#</a></h3>
 <p>We fit the CO<span class="math notranslate nohighlight">\(_2\)</span> data with degree 1, 2, and 3 polynomials and compare the results visually.</p>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-3-1">📋 Instructor Note — 12.3.1</h3>
+<p><em>(Run the plot cell — three curves: linear (red), quadratic (orange), cubic (blue) over the NIST data)</em></p>
+<p>The <strong>linear fit</strong> clearly doesn’t capture the curvature — it underestimates in the middle and is off at both ends. The <strong>quadratic</strong> is much better. The <strong>cubic</strong> hugs the data very tightly.</p>
+<p>But ‘looks good visually’ isn’t enough — we need numbers.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Fit Cp(T) with degree 1, 2, 3 polynomials ────────────────────────────────</span>
@@ -819,6 +890,14 @@ R^2 = 1 - \frac{\sum_i e_i^2}{\sum_i (y_i - \bar{y})^2}
 <li><p><span class="math notranslate nohighlight">\(R^2 = 0\)</span> — the model does no better than just predicting <span class="math notranslate nohighlight">\(\bar{y}\)</span> for every point</p></li>
 <li><p><span class="math notranslate nohighlight">\(R^2 &lt; 0\)</span> — the model is worse than the mean (a sign something is seriously wrong)</p></li>
 </ul>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-3-2">📋 Instructor Note — 12.3.2</h3>
+<p><em>(Run the metrics table cell — show the printed table)</em></p>
+<p>Going from degree 1 to 2 cuts the MAE by a factor of 7. Degree 2 to 3 is another factor of 3. At degree 3 we’re down to 0.05 J/(mol·K) — excellent for engineering purposes.</p>
+<p>MAE gives you error in physical units — easy to interpret. MSE penalizes large errors more heavily (that’s why least-squares works the way it does). R² tells you what fraction of variance the model explains — 1 = perfect.</p>
+<p><em>(Run the residuals stem-plot cell — three panels)</em></p>
+<p>Now look at the residual <em>patterns</em>. The linear residuals curve systematically — the model structure is wrong. The quadratic residuals are smaller but still show a faint pattern. The cubic residuals look like <strong>random scatter around zero</strong> — no systematic trend. That’s the hallmark of a well-specified model: the residuals contain no remaining structure.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -858,6 +937,13 @@ All errors are small in absolute magnitude, but the data has almost no variance.
 <p><strong>Case B — High MAE, high <span class="math notranslate nohighlight">\(R^2\)</span>:</strong>
 The data has a huge range (high variance). Errors are large in absolute units, giving a high MAE — but the model tracks the trend so well that <span class="math notranslate nohighlight">\(R^2\)</span> is still close to 1.</p>
 <p>The takeaway: <strong>always report both</strong>. MAE tells you the error in physical units (is it acceptable for your application?); <span class="math notranslate nohighlight">\(R^2\)</span> tells you whether the model captures the structure of the data.</p>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-3-3-mae-vs-r2">📋 Instructor Note — 12.3.3 (MAE vs R²)</h3>
+<p><em>(Run the two-case plot cell)</em></p>
+<p>Case A: all the errors are tiny — MAE looks great. But the data barely varies (range ≈ 0.1), so even a model that predicts the wrong constant value gets an R² near zero. The model explains almost none of the (admittedly tiny) variance.</p>
+<p>Case B: the data spans 0–10,000. A linear fit tracks the trend beautifully (R² ≈ 1), but the scatter is ±50 units — so MAE is large in absolute terms.</p>
+<p><strong>Takeaway: always report both.</strong> MAE answers “is the error acceptable for my application?” R² answers “does the model capture the structure of the data?” They measure different things.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -971,6 +1057,16 @@ With <span class="math notranslate nohighlight">\(N\)</span> data points and a d
 \text{If } \deg(p) = N - 1 \text{ and you have } N \text{ points} \implies \text{SS}_{\text{res}} = 0,\quad R^2 = 1 \quad \text{(but the model is useless)}
 \]</div>
 <p>Here we deliberately use degree 9 (with only 10 data points) to illustrate the problem.</p>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-3-4-overfitting">📋 Instructor Note — 12.3.4 (Overfitting)</h3>
+<p>EXPLAIN THIS WITH DRAWING!! - 2 points, 3 points examples!</p>
+<p>Important warning before we move on. More polynomial terms <em>always</em> reduces training error. That does not mean the model is better.</p>
+<p><em>(Run the wiggly-data plot cell — degree 2, 5, 9)</em></p>
+<p>Degree 2 underfits — it misses the oscillations entirely. Degree 5 is appropriate — captures the structure, residuals look random. Degree 9 starts overfitting — chasing noise.</p>
+<p><em>(Run the Cp overfitting cell — degree 3 vs degree 9)</em></p>
+<p>With 10 data points and a degree-9 polynomial, R² = 1.000 — perfect fit. But look at what happens between the data points and especially outside the training range: <strong>wild oscillations</strong>. The model has memorized the data rather than learned the underlying trend.</p>
+<p>For smooth physical properties like <span class="math notranslate nohighlight">\(C_p\)</span>, degree 2–4 is almost always the right choice. Use MAE, R², and visual residual inspection to pick the degree — not just minimum training error.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1083,9 +1179,57 @@ Use R² and visual inspection — not just training error — to choose degree.
 </div>
 </div>
 </section>
+<section id="using-the-fit-integrating-c-p-analytically">
+<span id="id9"></span><h3>12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically<a class="headerlink" href="#using-the-fit-integrating-c-p-analytically" title="Link to this heading">#</a></h3>
+<p>With the degree-3 fit in hand, we integrate <span class="math notranslate nohighlight">\(C_p(T)\)</span> to compute the enthalpy change:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta H = n \int_{T_1}^{T_2} C_p(T)\, dT
+\]</div>
+<p><code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> exposes a <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> method that returns the antiderivative polynomial.</p>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-3-5">📋 Instructor Note — 12.3.5</h3>
+<p>Now back to the original problem. With the degree-3 fit in hand, <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> gives the antiderivative polynomial instantly:</p>
+<p><em>(Run the integration cell)</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Degree-3 Cp polynomial:
+1.119e-08 x³ - 4.498e-05 x² + 0.06745 x + 20.71
+
+ΔH = 24067.83 J/mol = 24.07 kJ/mol
+</pre></div>
+</div>
+<p>That’s the enthalpy required to heat 1 mole of CO₂ from 400 K to 900 K — a number you plug directly into an energy balance. The whole workflow: <code class="docutils literal notranslate"><span class="pre">polyfit</span></code> → <code class="docutils literal notranslate"><span class="pre">poly1d</span></code> → <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> → evaluate the definite integral.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Integrate Cp from T1 to T2 using the degree-3 fit ────────────────────────</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">P3</span> <span class="o">=</span> <span class="n">p3</span><span class="o">.</span><span class="n">integ</span><span class="p">()</span>            <span class="c1"># antiderivative (integration constant = 0)</span>
+
+<span class="n">T1</span><span class="p">,</span> <span class="n">T2</span> <span class="o">=</span> <span class="mf">400.0</span><span class="p">,</span> <span class="mf">900.0</span>      <span class="c1"># K</span>
+<span class="n">dH</span> <span class="o">=</span> <span class="n">P3</span><span class="p">(</span><span class="n">T2</span><span class="p">)</span> <span class="o">-</span> <span class="n">P3</span><span class="p">(</span><span class="n">T1</span><span class="p">)</span>       <span class="c1"># J/mol</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree-3 Cp polynomial fit:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Integral of Cp from </span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> K to </span><span class="si">{</span><span class="n">T2</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> K:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Delta_H = </span><span class="si">{</span><span class="n">dH</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> J/mol  =  </span><span class="si">{</span><span class="n">dH</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> kJ/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree-3 Cp polynomial fit:
+           3             2
+1.119e-08 x - 4.498e-05 x + 0.06745 x + 20.71
+
+Integral of Cp from 400 K to 900 K:
+  Delta_H = 24067.83 J/mol  =  24.0678 kJ/mol
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="summary">
-<span id="id9"></span><h2>12.4 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<span id="id10"></span><h2>12.4 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concept</p></th>
@@ -1158,24 +1302,6 @@ Use R² and visual inspection — not just training error — to choose degree.
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter11/11_rank_supplement.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Supplementary Note: Matrix Rank</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../lab01/01_lab.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1205,6 +1331,7 @@ Use R² and visual inspection — not just training error — to choose degree.
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.4 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.4 Summary</a></li>
