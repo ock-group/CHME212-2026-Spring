@@ -416,8 +416,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.4 Overfitting: When Higher Degree Hurts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-in-polynomial-fitting">12.3.4 Degrees of Freedom in Polynomial Fitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-fit-degree-1">1. Linear fit (degree 1)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-fit-degree-2">2. Quadratic fit (degree 2)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General rule</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.5 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.6 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.4 Summary</a></li>
@@ -1021,8 +1027,160 @@ Case B — High MAE, High R²
 </div>
 </div>
 </section>
+<section id="degrees-of-freedom-in-polynomial-fitting">
+<span id="id8"></span><h3>12.3.4 Degrees of Freedom in Polynomial Fitting<a class="headerlink" href="#degrees-of-freedom-in-polynomial-fitting" title="Link to this heading">#</a></h3>
+<p><strong>Degrees of freedom (DOF)</strong> quantify how much “slack” a model has after satisfying all data constraints:</p>
+<div class="math notranslate nohighlight">
+\[\text{DOF} = N - p\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> = number of data points and <span class="math notranslate nohighlight">\(p\)</span> = number of model parameters (coefficients).</p>
+<hr class="docutils" />
+<section id="linear-fit-degree-1">
+<h4>1. Linear fit (degree 1)<a class="headerlink" href="#linear-fit-degree-1" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[y = ax + b \qquad (p = 2 \text{ parameters})\]</div>
+<p>With <span class="math notranslate nohighlight">\(N = 2\)</span> data points:</p>
+<div class="math notranslate nohighlight">
+\[\text{DOF} = 2 - 2 = 0\]</div>
+<p><strong>DOF = 0</strong> means the system is <em>exactly determined</em> — one unique line passes through both points, with zero residuals by construction.</p>
+</section>
+<hr class="docutils" />
+<section id="quadratic-fit-degree-2">
+<h4>2. Quadratic fit (degree 2)<a class="headerlink" href="#quadratic-fit-degree-2" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[y = ax^2 + bx + c \qquad (p = 3 \text{ parameters})\]</div>
+<p>With <span class="math notranslate nohighlight">\(N = 2\)</span> data points:</p>
+<div class="math notranslate nohighlight">
+\[\text{DOF} = 2 - 3 = -1\]</div>
+<p><strong>DOF &lt; 0</strong> means the system is <em>underdetermined</em> — more parameters than constraints, so infinitely many quadratic curves pass through those two points. The fit is not unique.</p>
+</section>
+<hr class="docutils" />
+<section id="general-rule">
+<h4>General rule<a class="headerlink" href="#general-rule" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>DOF</p></th>
+<th class="head"><p>Condition</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(&gt; 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(N &gt; p\)</span></p></td>
+<td><p>Overdetermined — least-squares finds the best compromise</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(= 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(N = p\)</span></p></td>
+<td><p>Exactly determined — perfect interpolation, unique solution</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(&lt; 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(N &lt; p\)</span></p></td>
+<td><p>Underdetermined — infinitely many solutions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For polynomial fitting of physical data, you almost always want <strong>DOF <span class="math notranslate nohighlight">\(\gg 0\)</span></strong>: many more data points than coefficients. This is what makes the fit statistically meaningful — the polynomial is constrained by real data, not just solving a system of equations.</p>
+<blockquote>
+<div><h3 class="rubric" id="instructor-note-12-3-4">📋 Instructor Note — 12.3.4</h3>
+<p>Let’s make DOF concrete before we get into overfitting.</p>
+<p>The formula is simple: <strong>DOF = N − p</strong>, where N is your number of data points and p is the number of coefficients in your model.</p>
+<p><strong>Degree 1 — two data points:</strong>
+You have 2 unknowns (slope and intercept) and 2 equations. DOF = 0. One unique line. This is just like solving two equations with two unknowns from algebra — there’s exactly one answer.</p>
+<p><strong>Degree 2 — two data points:</strong>
+Now you have 3 unknowns but still only 2 equations. DOF = −1. You’re underdetermined — infinitely many parabolas can pass through those same two points. The parameter <code class="docutils literal notranslate"><span class="pre">a</span></code> (the <span class="math notranslate nohighlight">\(x^2\)</span> coefficient) is completely free; once you pick it, the other two are forced.</p>
+<p><em>(Run the example cell — show both plots)</em></p>
+<p>Left plot: one unique line. Right plot: four different parabolas, all passing through the same two black dots — just with different values of <code class="docutils literal notranslate"><span class="pre">a</span></code>. Every single one is a valid “fit.”</p>
+<p><strong>The practical takeaway:</strong> for fitting to be meaningful, you need DOF <span class="math notranslate nohighlight">\(\gg\)</span> 0 — far more data points than parameters. With 10 CO₂ data points and a degree-3 polynomial (4 parameters), DOF = 6. That’s a well-constrained fit. The polynomial can’t just pass through every point; it has to find the best compromise, which is what gives least-squares its statistical meaning.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Two data points</span>
+<span class="n">x_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">y_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>
+
+<span class="n">x_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># ── Degree 1: DOF = 2 - 2 = 0  (unique solution) ─────────────────────────────</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>       <span class="c1"># one unique line</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">x_fine</span><span class="p">)</span>
+
+<span class="c1"># ── Degree 2: DOF = 2 - 3 = -1 (underdetermined — infinitely many solutions) ─</span>
+<span class="c1"># np.polyfit returns ONE solution (minimum-norm), but infinitely many exist.</span>
+<span class="c1"># We generate three more by varying the free parameter &#39;a&#39; manually.</span>
+<span class="c1">#   y = a*x^2 + bx + c  — with 2 equations and 3 unknowns,</span>
+<span class="c1">#   &#39;a&#39; is free. Fix a, then solve for b and c.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">quadratic_through_two_points</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given &#39;a&#39;, find b,c so that ax^2 + bx + c passes through both points.&quot;&quot;&quot;</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">x_pts</span>
+    <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">y_pts</span>
+    <span class="c1"># y1 = a*x1^2 + b*x1 + c  →  b*x1 + c = y1 - a*x1^2</span>
+    <span class="c1"># y2 = a*x2^2 + b*x2 + c  →  b*x2 + c = y2 - a*x2^2</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">x2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y1</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">x2</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
+
+<span class="n">a_values</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>   <span class="c1"># four choices of the free parameter</span>
+<span class="n">colors_q</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:purple&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Left: degree 1 (unique)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Degree 1 (unique)</span><span class="se">\n</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data points&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Degree 1 — DOF = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">x_pts</span><span class="p">)</span><span class="si">}</span><span class="s1"> − 2 = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">x_pts</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="si">}</span><span class="se">\n</span><span class="s1">Exactly determined: one unique fit&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Right: degree 2 (infinitely many)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">a_val</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a_values</span><span class="p">,</span> <span class="n">colors_q</span><span class="p">):</span>
+    <span class="n">coeffs_q</span> <span class="o">=</span> <span class="n">quadratic_through_two_points</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="n">a_val</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_q</span><span class="p">,</span> <span class="n">x_fine</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;a = </span><span class="si">{</span><span class="n">a_val</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data points&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Degree 2 — DOF = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">x_pts</span><span class="p">)</span><span class="si">}</span><span class="s1"> − 3 = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">x_pts</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="si">}</span><span class="se">\n</span><span class="s1">Underdetermined: infinitely many fits&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Degrees of Freedom: 2 data points, degree-1 vs degree-2 polynomial&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree 1 (DOF = 0):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Unique coefficients: </span><span class="si">{</span><span class="n">c1</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree 2 (DOF = -1) — all four pass exactly through the same two points:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a_val</span> <span class="ow">in</span> <span class="n">a_values</span><span class="p">:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">quadratic_through_two_points</span><span class="p">(</span><span class="n">x_pts</span><span class="p">,</span> <span class="n">y_pts</span><span class="p">,</span> <span class="n">a_val</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  a=</span><span class="si">{</span><span class="n">a_val</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2"> → coeffs = </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">  | check: p(</span><span class="si">{</span><span class="n">x_pts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">x_pts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, p(</span><span class="si">{</span><span class="n">x_pts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">x_pts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/be3eb0851a302425536fc293f27074216f74f7ad2f40a25df7f648005d19799d.png" src="../../_images/be3eb0851a302425536fc293f27074216f74f7ad2f40a25df7f648005d19799d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree 1 (DOF = 0):
+  Unique coefficients: [ 3. -1.]
+
+Degree 2 (DOF = -1) — all four pass exactly through the same two points:
+  a=-1.5 → coeffs = [-1.5  9.  -5.5]  | check: p(1.0)=2.0, p(3.0)=8.0
+  a=+0.0 → coeffs = [ 0.  3. -1.]  | check: p(1.0)=2.0, p(3.0)=8.0
+  a=+1.0 → coeffs = [ 1. -1.  2.]  | check: p(1.0)=2.0, p(3.0)=8.0
+  a=+2.5 → coeffs = [ 2.5 -7.   6.5]  | check: p(1.0)=2.0, p(3.0)=8.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="overfitting-when-higher-degree-hurts">
-<span id="id8"></span><h3>12.3.4 Overfitting: When Higher Degree Hurts<a class="headerlink" href="#overfitting-when-higher-degree-hurts" title="Link to this heading">#</a></h3>
+<span id="id9"></span><h3>12.3.5 Overfitting: When Higher Degree Hurts<a class="headerlink" href="#overfitting-when-higher-degree-hurts" title="Link to this heading">#</a></h3>
 <p>Adding more polynomial terms always reduces training error, but can create <strong>overfitting</strong>: the polynomial wiggles between data points and performs poorly outside the training range.</p>
 <p><strong>Why does adding terms always reduce training error?</strong>
 With <span class="math notranslate nohighlight">\(N\)</span> data points and a degree-<span class="math notranslate nohighlight">\((N-1)\)</span> polynomial, you have exactly enough free coefficients to pass through every point perfectly — residuals become zero by construction. But this is not a good model; it has memorized the noise in the data rather than learned the underlying trend.</p>
@@ -1058,7 +1216,7 @@ With <span class="math notranslate nohighlight">\(N\)</span> data points and a d
 \]</div>
 <p>Here we deliberately use degree 9 (with only 10 data points) to illustrate the problem.</p>
 <blockquote>
-<div><h3 class="rubric" id="instructor-note-12-3-4-overfitting">📋 Instructor Note — 12.3.4 (Overfitting)</h3>
+<div><h3 class="rubric" id="instructor-note-12-3-5-overfitting">📋 Instructor Note — 12.3.5 (Overfitting)</h3>
 <p>EXPLAIN THIS WITH DRAWING!! - 2 points, 3 points examples!</p>
 <p>Important warning before we move on. More polynomial terms <em>always</em> reduces training error. That does not mean the model is better.</p>
 <p><em>(Run the wiggly-data plot cell — degree 2, 5, 9)</em></p>
@@ -1180,7 +1338,7 @@ Use R² and visual inspection — not just training error — to choose degree.
 </div>
 </section>
 <section id="using-the-fit-integrating-c-p-analytically">
-<span id="id9"></span><h3>12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically<a class="headerlink" href="#using-the-fit-integrating-c-p-analytically" title="Link to this heading">#</a></h3>
+<span id="id10"></span><h3>12.3.6 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically<a class="headerlink" href="#using-the-fit-integrating-c-p-analytically" title="Link to this heading">#</a></h3>
 <p>With the degree-3 fit in hand, we integrate <span class="math notranslate nohighlight">\(C_p(T)\)</span> to compute the enthalpy change:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1188,7 +1346,7 @@ Use R² and visual inspection — not just training error — to choose degree.
 \]</div>
 <p><code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> exposes a <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> method that returns the antiderivative polynomial.</p>
 <blockquote>
-<div><h3 class="rubric" id="instructor-note-12-3-5">📋 Instructor Note — 12.3.5</h3>
+<div><h3 class="rubric" id="instructor-note-12-3-6">📋 Instructor Note — 12.3.6</h3>
 <p>Now back to the original problem. With the degree-3 fit in hand, <code class="docutils literal notranslate"><span class="pre">.integ()</span></code> gives the antiderivative polynomial instantly:</p>
 <p><em>(Run the integration cell)</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Degree-3 Cp polynomial:
@@ -1229,7 +1387,7 @@ Integral of Cp from 400 K to 900 K:
 </section>
 </section>
 <section id="summary">
-<span id="id10"></span><h2>12.4 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<span id="id11"></span><h2>12.4 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concept</p></th>
@@ -1330,8 +1488,14 @@ Integral of Cp from 400 K to 900 K:
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.4 Overfitting: When Higher Degree Hurts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.5 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-in-polynomial-fitting">12.3.4 Degrees of Freedom in Polynomial Fitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-fit-degree-1">1. Linear fit (degree 1)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-fit-degree-2">2. Quadratic fit (degree 2)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General rule</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.5 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fit-integrating-c-p-analytically">12.3.6 Using the Fit: Integrating <span class="math notranslate nohighlight">\(C_p\)</span> Analytically</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.4 Summary</a></li>
