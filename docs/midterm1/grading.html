@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -197,6 +197,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -206,6 +207,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
 </ul>
 
     </div>
@@ -440,6 +442,212 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 1 </span>
+<span class="c1"># Your code here</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.64</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.04267</span>
+<span class="n">V</span><span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">R</span><span class="o">=</span> <span class="mf">0.08206</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">350</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">500</span><span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">vdw</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="p">((</span><span class="n">n</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">n</span><span class="o">*</span><span class="n">b</span><span class="p">))</span> <span class="o">-</span> <span class="p">(((</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">P</span>
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+    <span class="n">P</span><span class="o">=</span> <span class="n">vdw</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T=</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s1"> K, P=</span><span class="si">{</span><span class="n">vdw</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1"> atm, Low&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">T</span> <span class="o">&gt;</span><span class="mi">20</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T=</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s1"> K, P=</span><span class="si">{</span><span class="n">vdw</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1"> atm, Medium&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T=</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s1"> K, P=</span><span class="si">{</span><span class="n">vdw</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1"> atm, High&#39;</span><span class="p">)</span>
+<span class="c1"># with open(&#39;vdw_results.txt&#39;,&#39;w&#39;) as f:</span>
+<span class="c1">#     print({</span>
+<span class="c1">#         T=250 K, P=12.459335847825205 atm, Medium</span>
+<span class="c1"># T=300 K, P=15.274758572945803 atm, Medium</span>
+<span class="c1"># T=350 K, P=18.0901812980664 atm, Medium</span>
+<span class="c1"># T=400 K, P=20.905604023187 atm, Medium</span>
+<span class="c1"># T=500 K, P=26.53644947342819 atm, Medium</span>
+<span class="c1">#     })</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T=250 K, P=12.459335847825205 atm, Medium
+T=300 K, P=15.274758572945803 atm, Medium
+T=350 K, P=18.0901812980664 atm, Medium
+T=400 K, P=20.905604023187 atm, Medium
+T=500 K, P=26.53644947342819 atm, Medium
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 1 </span>
+
+<span class="c1"># Your code here</span>
+<span class="n">vdw</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;medium&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;high&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">.08206</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="mf">.04267</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">1.5</span> 
+<span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">nb</span><span class="p">)</span> <span class="o">-</span> <span class="p">((</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)(</span><span class="n">a</span><span class="p">))</span><span class="o">/</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">P</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">vdw</span> <span class="o">=</span> <span class="n">low</span>
+<span class="k">elif</span> <span class="n">P</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="n">vdw</span> <span class="o">=</span> <span class="n">medium</span>
+<span class="k">if</span> <span class="n">P</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="n">vdw</span> <span class="o">=</span> <span class="n">high</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">.04267</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">V</span> <span class="o">=</span> <span class="mf">1.5</span> 
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">nb</span><span class="p">)</span> <span class="o">-</span> <span class="p">((</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)(</span><span class="n">a</span><span class="p">))</span><span class="o">/</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">if</span> <span class="n">P</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+
+<span class="ne">NameError</span>: name &#39;t&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code here</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span>  <span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">((</span><span class="n">V</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)))</span> <span class="o">-</span><span class="p">(</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+     
+<span class="c1">#Constants             </span>
+<span class="n">n</span> <span class="o">=</span> <span class="mf">1.0</span>             
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.08206</span> 
+<span class="n">V</span> <span class="o">=</span> <span class="mf">1.5</span> 
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">.04267</span> 
+<span class="n">T</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T</span><span class="p">:</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">P</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;low&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="mi">10</span> <span class="o">&lt;</span> <span class="n">P</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;high&quot;</span><span class="p">)</span>
+
+
+             
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">38</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">T</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">P</span> <span class="o">=</span> <span class="n">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="k">if</span> <span class="n">P</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;low&quot;</span><span class="p">)</span>
+
+<span class="nn">Cell In[38], line 3,</span> in <span class="ni">p_vdw</span><span class="nt">(n, V, R, a, b)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">def</span><span class="w"> </span><span class="nf">p_vdw</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">return</span>  <span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">((</span><span class="n">V</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)))</span> <span class="o">-</span><span class="p">(</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: can&#39;t multiply sequence by non-int of type &#39;float&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 1 </span>
+
+<span class="c1"># Your code here</span>
+<span class="n">vdw_results</span><span class="o">.</span><span class="n">txt</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.08206</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.04267</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">((</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">P</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">vdw_results</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;T= &quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s2">&quot; K,&quot;</span><span class="p">,</span> <span class="s2">&quot; P= &quot;</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="s2">&quot;atm, &quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="mi">10</span><span class="o">&lt;=</span><span class="n">P</span><span class="o">&lt;=</span><span class="mi">20</span><span class="p">:</span>
+        <span class="n">vdw_results</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;T= &quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s2">&quot; K,&quot;</span><span class="p">,</span> <span class="s2">&quot; P= &quot;</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="s2">&quot;atm, &quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">P</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">vdw_results</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;T= &quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s2">&quot; K,&quot;</span><span class="p">,</span> <span class="s2">&quot; P= &quot;</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="s2">&quot;atm, &quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="k">if</span> <span class="n">P</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;P=</span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s1"> atm, Low&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="mi">10</span><span class="o">&lt;=</span> <span class="n">P</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;P=</span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s1"> atm, Medium&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;P=</span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s1"> atm, High&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P=15 atm, Medium
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.08206</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.04267</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;results.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+        <span class="n">p_ideal</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
+        
+        <span class="n">p_vdw</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p_ideal</span> <span class="o">-</span> <span class="n">p_vdw</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_vdw</span> <span class="o">*</span> <span class="mi">100</span>
+        
+        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;T = </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> K, P_ideal = </span><span class="si">{</span><span class="n">p_ideal</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> atm, P_vdW = </span><span class="si">{</span><span class="n">p_vdw</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> atm, diff = </span><span class="si">{</span><span class="n">diff</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T = 250 K, P_ideal = 13.6767 atm, P_vdW = 12.4593 atm, diff = 9.77%
+T = 300 K, P_ideal = 16.4120 atm, P_vdW = 15.2748 atm, diff = 7.45%
+T = 350 K, P_ideal = 19.1473 atm, P_vdW = 18.0902 atm, diff = 5.84%
+T = 400 K, P_ideal = 21.8827 atm, P_vdW = 20.9056 atm, diff = 4.67%
+T = 500 K, P_ideal = 27.3533 atm, P_vdW = 26.5364 atm, diff = 3.08%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span> <span class="c1">#K</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mf">0.08206</span>
@@ -468,6 +676,62 @@ T = 300K, P_ideal = 16.4120 atm, P_vdw = 15.2748, diff = 7.45%
 T = 350K, P_ideal = 19.1473 atm, P_vdw = 18.0902, diff = 5.84%
 T = 400K, P_ideal = 21.8827 atm, P_vdw = 20.9056, diff = 4.67%
 T = 500K, P_ideal = 27.3533 atm, P_vdw = 26.5364, diff = 3.08%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 1 </span>
+
+<span class="c1"># Your code here</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#mol</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">.08206</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">.04267</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1">#L</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span> <span class="c1">#K</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">T</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="p">((</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)))</span> <span class="o">-</span> <span class="p">((</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">pressure</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">press_result</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Low&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;Medium&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;High&#39;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pressure</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">press</span> <span class="o">=</span> <span class="s1">&#39;Low&#39;</span>
+    <span class="k">if</span> <span class="mi">10</span> <span class="o">&lt;=</span> <span class="n">p</span> <span class="ow">or</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="n">press</span> <span class="o">=</span> <span class="s1">&#39;Medium&#39;</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="n">press</span> <span class="o">=</span> <span class="s1">&#39;High&#39;</span>
+    <span class="n">press_result</span><span class="p">[</span><span class="n">press</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="n">press_result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Low&#39;: [],
+ &#39;Medium&#39;: [12.459335847825205, 15.274758572945803, 12.459335847825205],
+ &#39;High&#39;: [20.905604023187, 26.53644947342819]}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Question 1 </span>
+<span class="n">number</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number is smaller than 20&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number is smaller than 20
 </pre></div>
 </div>
 </div>
@@ -829,7 +1093,7 @@ T=500 K, P=26.5364 atm, High
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
     <span class="n">P</span><span class="o">=</span><span class="p">((</span><span class="n">n</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">b</span><span class="p">))</span><span class="o">-</span><span class="p">((</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span>
       <span class="o">^</span>
 <span class="ne">SyntaxError</span>: &#39;(&#39; was never closed

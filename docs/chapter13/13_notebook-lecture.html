@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter13/13_notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter13/13_notebook-lecture';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -281,7 +281,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter13/13_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter13/13_notebook-lecture.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +311,7 @@
       
       
       
-      <li><a href="../../_sources/docs/chapter13/13_notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/chapter13/13_notebook-lecture.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -471,6 +471,13 @@ document.write(`
 <li><p>Monte Carlo simulation: error propagation and process reliability</p></li>
 <li><p>Confidence intervals and hypothesis testing basics</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note — Chapter Opening</strong></p>
+<p>Welcome students and give a brief roadmap for the chapter. Say something like:</p>
+<p><em>“Today we start Chapter 13 on statistics. This is one of the most practically useful chapters in the course — every single one of you will use these tools in industry. Statistics is how engineers communicate uncertainty and make decisions with imperfect data.”</em></p>
+<p>Mention the six topics on the slide and explain the arc: we start with summarizing real data, build up to understanding distributions, then apply everything in Monte Carlo simulation — a tool used heavily in process design, risk assessment, and pharmaceutical manufacturing.</p>
+<p><strong>Ask the class:</strong> <em>“How many of you have taken a probability/statistics course?”</em> Use the show of hands to calibrate how much time to spend on fundamentals vs. applications.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── All imports ─────────────────────────────────────────────────────────────</span>
@@ -505,6 +512,19 @@ document.write(`
 <li><p>How many measurements do you need to estimate the mean within ±0.5%?</p></li>
 </ul>
 <p>All of these require statistics.</p>
+<blockquote>
+<div><p><strong>Instructor Note — Motivation</strong></p>
+<p>Read through the four bullet points slowly. For each one, give a brief real-world hook:</p>
+<ol class="arabic simple">
+<li><p><em>“Summarize”</em> — <em>“If I hand you 200 temperature measurements from a reactor, the first thing you do is compute the mean and standard deviation. That’s statistics.”</em></p></li>
+<li><p><em>“Quantify uncertainty”</em> — <em>“Every number in your lab report has uncertainty. If you don’t report it, you’re hiding information from whoever reads your report.”</em></p></li>
+<li><p><em>“Make decisions”</em> — <em>“Your process runs at 88% yield on average, but the target is 90%. Is it actually underperforming, or is that difference just noise from 10 batches of data? This is hypothesis testing.”</em></p></li>
+<li><p><em>“Propagate uncertainty”</em> — <em>“You measure activation energy from an Arrhenius plot with some fitting error. How does that error affect your predicted rate at 600 K? Monte Carlo answers that.”</em></p></li>
+</ol>
+<p>Then transition to the batch reactor example: <em>“Let me make this concrete. Imagine you’re a process engineer at a pharma plant…”</em></p>
+<p>Walk through the four questions. Emphasize that these are <strong>not hypothetical</strong> — this exact scenario plays out in pharmaceutical process validation (21 CFR Part 211). The FDA requires statistical justification for specifications.</p>
+<p><strong>Pause and ask students:</strong> <em>“Without doing any math, just looking at the 15 numbers — does this process look like it’s hitting the 88% target?”</em> Let them respond, then say you’ll answer rigorously in a moment.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Batch reactor yield data (% yield)</span>
@@ -553,6 +573,13 @@ Batches below 85%  : 1
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — Motivation Plot</strong></p>
+<p>Run the cell and let the plot render before talking. Give students a moment to look at both panels.</p>
+<p>Point to the <strong>left panel</strong> (dot plot): <em>“Each dot is one batch. The red dashed line is the sample mean — 87.7%. The green dotted line is our 88% target. The orange dash-dot is the lower limit of 85%. Visually, most batches are near the target, but the mean is slightly below it.”</em></p>
+<p>Point to the <strong>right panel</strong> (histogram): <em>“This is the distribution of yields. It looks roughly bell-shaped, which will be important shortly. Notice one batch fell below 85% — that’s a failed batch.”</em></p>
+<p>Read out the printed numbers: <em>“Mean is 87.71%, and 1 out of 15 batches failed the lower limit. Now — is this process actually below target, or is this just random variation? We need statistics to answer that. That’s exactly what confidence intervals do, and we’ll get there in Section 13.5.”</em></p>
+</div></blockquote>
 <section id="descriptive-statistics">
 <span id="id2"></span><h2>13.1 Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Link to this heading">#</a></h2>
 <p><strong>Descriptive statistics</strong> summarize the key properties of a dataset with a few numbers. Instead of reporting all 15 yield values, we report “mean 87.7%, std 1.8%” — much more useful.</p>
@@ -644,6 +671,19 @@ Batches below 85%  : 1
 </table>
 </div>
 <p><strong><code class="docutils literal notranslate"><span class="pre">ddof</span></code> (delta degrees of freedom):</strong> By default NumPy uses <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code> (divides by <span class="math notranslate nohighlight">\(N\)</span>), which gives the <strong>population</strong> variance. For a <strong>sample</strong> drawn from a larger population, always use <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> (divides by <span class="math notranslate nohighlight">\(N-1\)</span>) to get an unbiased estimate.</p>
+<blockquote>
+<div><p><strong>Instructor Note — 13.1 Descriptive Statistics</strong></p>
+<p>This section has a lot of content. Pace yourself — don’t rush through the formulas.</p>
+<p><strong>On mean vs. median:</strong> Draw two quick scenarios on the board (or describe them verbally):</p>
+<ul class="simple">
+<li><p>5 measurements: 87, 88, 89, 88, 87 → mean ≈ median (symmetric)</p></li>
+<li><p>5 measurements: 87, 88, 89, 88, 30 → mean drops dramatically, median barely moves</p></li>
+</ul>
+<p><em>“The outlier of 30% (a contaminated batch) pulls the mean down by 10 points but only shifts the median one position. In industry, you’d flag that batch as an outlier and report both the full-dataset mean and the outlier-excluded mean.”</em></p>
+<p><strong>On standard deviation:</strong> Write on the board: <em>“s = typical distance of a data point from the mean.”</em> This is the most intuitive interpretation — it’s not exact but it’s what students should carry in their heads.</p>
+<p><strong>On percentiles:</strong> Ask students: <em>“If I tell you the 10th percentile of batch yield is 85.4%, what does that mean in plain English?”</em> Wait for a response. Answer: <em>“10% of batches will fall below 85.4%. So if our lower spec is 85%, we expect roughly 10% of batches to fail.”</em> This framing — <strong>percentiles as a direct business/engineering decision tool</strong> — is what makes statistics useful.</p>
+<p><strong>On the <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> table:</strong> Point to it briefly and say you’ll explain this in detail in the next sub-section. Just flag it for now.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Descriptive statistics on the yield data ──────────────────────────────────</span>
@@ -697,6 +737,15 @@ Interpretation:
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — Descriptive Stats Code</strong></p>
+<p>Run the cell. Walk through the output line by line — don’t just scroll past it.</p>
+<p><em>“N = 15. Mean = 87.71%. Let’s think about what that tells us: on average, we’re slightly below the 88% target. But is 0.29% below target meaningful given our sample size? We’ll answer that with a confidence interval later.”</em></p>
+<p><em>“Std dev = 1.84%. Remember, this is the typical batch-to-batch variation. About 68% of batches should fall within 87.71 ± 1.84%, so between about 85.9% and 89.5%.”</em></p>
+<p><em>“The 10th percentile is 85.44%. That means roughly 1 in 10 batches will fall below 85.44% — close to our lower spec limit of 85%.”</em></p>
+<p>Point to the interpretation block at the bottom: <em>“Mean and median are nearly equal — 87.71 vs 87.90. That symmetry suggests there are no extreme outliers pulling the mean around. If they differed by several percent, we’d investigate.”</em></p>
+<p><strong>Common student error to flag:</strong> Many students will write <code class="docutils literal notranslate"><span class="pre">np.std(x)</span></code> without <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>. Emphasize: <em>“In this class, when you have experimental data, always write <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>. The default <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code> gives the wrong answer for samples.”</em></p>
+</div></blockquote>
 </section>
 <section id="why-ddof-1-bessel-s-correction">
 <h3>Why <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>? Bessel’s Correction<a class="headerlink" href="#why-ddof-1-bessel-s-correction" title="Link to this heading">#</a></h3>
@@ -716,6 +765,14 @@ s^2 = \frac{1}{N-1}\sum(x_i - \bar{x})^2
 <li><p><span class="math notranslate nohighlight">\(N = 100\)</span>: dividing by 99 vs 100 → <strong>1% difference</strong></p></li>
 </ul>
 <p><strong>Rule:</strong> Always use <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> when working with sample data from an experiment. Only use <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code> when you have the <em>entire</em> population (e.g., when you simulate all possible outcomes).</p>
+<blockquote>
+<div><p><strong>Instructor Note — Bessel’s Correction</strong></p>
+<p>This is a classic sticking point. Spend 2–3 minutes on it, but don’t get lost in the proof.</p>
+<p><strong>Intuition to emphasize:</strong> <em>“When you compute deviations from the sample mean, you’re measuring distances from a point that was chosen to minimize those very distances. So the deviations are artificially small — they underestimate the true spread. Dividing by N−1 corrects for that.”</em></p>
+<p>A useful analogy: <em>“It’s like measuring how far students scored from the class average — they’ll look closer to the average than if you measured from the true population mean, because the class average was computed from the same students.”</em></p>
+<p><strong>Stress the practical rule:</strong> Write on the board: <strong><code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> for experimental data, <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code> for simulated populations.</strong> Students should memorize this.</p>
+<p>Point to the table showing the magnitude of the effect: <em>“For N=5, the difference is 25%. For N=100, it’s only 1%. This is why small-sample statistics needs to be done carefully.”</em></p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Population vs sample variance ────────────────────────────────────────────</span>
@@ -746,6 +803,12 @@ Manual check:
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — ddof Demo</strong></p>
+<p>Run the cell. The output shows the manual calculation confirming the formula.</p>
+<p><em>“Look at the bottom: SS = 47.34. Divide by N=15 and you get 3.16 — that’s the biased (population) estimate. Divide by N−1=14 and you get 3.38 — that’s the correct sample variance. The difference is small here because N is 15, but with N=5 it would be substantial.”</em></p>
+<p><em>“<code class="docutils literal notranslate"><span class="pre">scipy.stats.describe</span></code> always uses <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> internally — it’s doing the right thing by default. But <code class="docutils literal notranslate"><span class="pre">np.var()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.std()</span></code> do NOT — they default to <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code>. This inconsistency between libraries trips people up constantly.”</em></p>
+</div></blockquote>
 </section>
 <section id="using-scipy-stats-describe">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">scipy.stats.describe</span></code><a class="headerlink" href="#using-scipy-stats-describe" title="Link to this heading">#</a></h3>
@@ -774,6 +837,27 @@ kurtosis : -0.7790   (0 = normal tail weight)
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">yields</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">yields</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1558222222222203
+3.381238095238093
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Instructor Note — scipy.stats.describe</strong></p>
+<p>Run the cell. This is a quick one — mainly introduce the <code class="docutils literal notranslate"><span class="pre">describe()</span></code> convenience function.</p>
+<p>Point to <strong>skewness</strong>: <em>“Skewness of −0.003 is essentially zero. A perfectly symmetric distribution has skewness = 0. Positive skewness means the right tail is longer (e.g., income distributions). Negative means the left tail is longer. Our yield data is very symmetric.”</em></p>
+<p>Point to <strong>kurtosis</strong>: <em>“Kurtosis measures the weight of the tails. Zero here means it matches the normal distribution’s tail weight (scipy uses excess kurtosis, where normal = 0). Negative kurtosis means lighter tails than normal — our data is slightly ‘flatter’ than a perfect bell curve, likely due to the small sample size.”</em></p>
+<p><em>“You won’t always need skewness and kurtosis, but they are useful diagnostics when checking whether data is approximately normal before applying statistical tests.”</em></p>
+</div></blockquote>
 </section>
 </section>
 <section id="random-number-generation">
@@ -837,6 +921,40 @@ kurtosis : -0.7790   (0 = normal tail weight)
 </table>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">size</span></code> parameter controls the shape of the output — pass a single integer for 1-D arrays, or a tuple <code class="docutils literal notranslate"><span class="pre">(rows,</span> <span class="pre">cols)</span></code> for 2-D arrays.</p>
+<blockquote>
+<div><p><strong>Instructor Note — 13.2 Random Number Generation</strong></p>
+<p>Transition: <em>“Great — we now know how to summarize data we already have. Next we need to know how to generate data. This is the foundation of simulation.”</em></p>
+<p><strong>On pseudo-random numbers:</strong> <em>“Your computer can’t flip a true coin — it’s a deterministic machine. Instead, it runs a mathematical algorithm that produces a sequence of numbers that looks random to any statistical test. For our purposes, this is perfectly fine.”</em></p>
+<p><strong>On seeds — spend a full minute here:</strong> <em>“This is one of the most important practical habits I want you to develop. Always set a seed in any notebook that uses random numbers. Here’s why: if you run a simulation, get a result, and email it to your supervisor — and they run the same code and get a different result because the random numbers differ — that’s a problem. Seeds make results reproducible.”</em></p>
+<p>Show the <code class="docutils literal notranslate"><span class="pre">np.random.default_rng(seed=42)</span></code> syntax. Mention that 42 is arbitrary — any integer works. The point is consistency, not the specific value.</p>
+<p><strong>Quick code walk:</strong> Point to the generation functions table. <em>“You’ll use <code class="docutils literal notranslate"><span class="pre">rng.normal()</span></code> most frequently — that’s your go-to for simulating measurement noise or process variability. <code class="docutils literal notranslate"><span class="pre">rng.uniform()</span></code> is for bounded uncertainty. <code class="docutils literal notranslate"><span class="pre">rng.exponential()</span></code> for time-to-failure problems. We’ll use all three today.”</em></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># np.random.seed(42)  # for reproducibility</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;H2O&#39;</span><span class="p">,</span> <span class="s1">&#39;CO2&#39;</span><span class="p">,</span> <span class="s1">&#39;CH4&#39;</span><span class="p">,</span> <span class="s1">&#39;N2&#39;</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">]</span>
+<span class="n">choice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.20340744 0.72346374 0.14260549 0.87435627 0.49867567 0.21039283
+ 0.69062928 0.31270534 0.19312568 0.29327415]
+[ 1.17294516 -0.18668794  1.24070906 -0.32840496  0.4211583  -1.12914654
+  1.37612981  0.45383958  0.97159856  0.9287327 ]
+[8 1 1 7 2 1 3 6 8 3]
+[&#39;CH4&#39; &#39;H2O&#39; &#39;N2&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Basic random number generation ───────────────────────────────────────────</span>
@@ -875,6 +993,15 @@ Random choice:   [&#39;O2&#39; &#39;H2O&#39; &#39;N2&#39;]
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — RNG Basic Code</strong></p>
+<p>Run the cell. Walk through each block.</p>
+<p><em>“Uniform [0,1): five numbers between 0 and 1. Notice they look random — no obvious pattern. These are the raw material for everything else.”</em></p>
+<p><em>“Uniform [20,30): we just rescaled. If your flow meter uncertainty is ±5 L/min around 25 L/min, this is what your simulated readings would look like.”</em></p>
+<p><em>“Normal with mean 0, std 1 — the standard normal. We’ll discuss this distribution in detail next.”</em></p>
+<p><em>“Dice rolls: integers from 1 to 6. Notice <code class="docutils literal notranslate"><span class="pre">rng.integers(1,</span> <span class="pre">7)</span></code> — the upper bound is exclusive, so you need 7 to get up to 6. This is a common gotcha.”</em></p>
+<p><em>“Random choice: we picked 3 molecules from a list without replacement. Useful for bootstrapping, random sampling of experimental conditions, etc.”</em></p>
+</div></blockquote>
 </section>
 <section id="reproducibility-with-seeds">
 <h3>Reproducibility with seeds<a class="headerlink" href="#reproducibility-with-seeds" title="Link to this heading">#</a></h3>
@@ -906,6 +1033,13 @@ seed=42: [ 0.3047 -1.04    0.7505  0.9406]
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — Seed Reproducibility Demo</strong></p>
+<p>Run the cell. This is a short demo but the point is important.</p>
+<p><em>“Trials 1, 2, and 3 all have <code class="docutils literal notranslate"><span class="pre">seed=42</span></code> — and look, all three produce identical numbers. The sequence is completely determined by the seed. This is reproducibility.”</em></p>
+<p><em>“Now look at the three different seeds — seeds 0, 1, and 42 each give a completely different sequence. The seed is like a starting point in an enormously long random-looking sequence.”</em></p>
+<p><strong>Ask:</strong> <em>“When should you NOT use a fixed seed?”</em> Answer: in production simulations where you genuinely want different outcomes each run (e.g., a live risk model). But for course work and published results — always fix the seed.</p>
+</div></blockquote>
 </section>
 </section>
 <section id="probability-distributions">
@@ -938,6 +1072,15 @@ F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t)\, dt
 <li><p><code class="docutils literal notranslate"><span class="pre">.ppf(p)</span></code> — inverse CDF: find <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(P(X \leq x) = p\)</span></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.rvs(size)</span></code> — draw random samples</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note — 13.3 Probability Distributions Intro</strong></p>
+<p>Transition: <em>“Now we move to probability distributions. A distribution is a mathematical model that describes how likely different values are. We use distributions to represent uncertainty — about measurements, process conditions, material properties.”</em></p>
+<p><strong>On the PDF:</strong> Emphasize the key conceptual point: <em>“The PDF f(x) is NOT a probability — it’s a density. Think of it like mass per unit length. To get a probability, you integrate — you find the area under the curve. The total area is always 1.”</em></p>
+<p>Draw a quick sketch on the board: a bell curve, shade a region between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, label it <span class="math notranslate nohighlight">\(P(a \leq X \leq b)\)</span>. This visual is worth 30 seconds.</p>
+<p><strong>On the CDF:</strong> <em>“The CDF F(x) IS a probability — it’s the probability that X is less than or equal to x. It starts at 0 and ends at 1. In scipy, <code class="docutils literal notranslate"><span class="pre">.cdf(x)</span></code> gives you this directly. This is what you’ll use to answer ‘what fraction of batches fail?’ type questions.”</em></p>
+<p><strong>On the scipy API:</strong> Write on the board the four methods: <code class="docutils literal notranslate"><span class="pre">.pdf()</span></code>, <code class="docutils literal notranslate"><span class="pre">.cdf()</span></code>, <code class="docutils literal notranslate"><span class="pre">.ppf()</span></code>, <code class="docutils literal notranslate"><span class="pre">.rvs()</span></code>. Tell students to memorize this pattern — it’s the same for every distribution in scipy.stats.</p>
+<p><strong>Preview:</strong> <em>“We’ll cover four distributions: uniform, normal, exponential, and Poisson. Each has a natural engineering use case.”</em></p>
+</div></blockquote>
 </section>
 <section id="uniform-distribution">
 <span id="id5"></span><h3>13.3.1 Uniform Distribution<a class="headerlink" href="#uniform-distribution" title="Link to this heading">#</a></h3>
@@ -1002,6 +1145,14 @@ Sample       mean = 4.9935,  std = 1.7449  (n=2000)
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — Uniform Distribution Plot</strong></p>
+<p>Run the cell. Point to the PDF plot first.</p>
+<p><em>“The PDF is completely flat between 2 and 8 — every value is equally likely. The height is 1/(8−2) = 1/6 ≈ 0.167. This ensures the area integrates to 1.”</em></p>
+<p><em>“The CDF is a straight line going from 0 to 1. That makes sense: it’s the area under a flat function, which is just proportional to width.”</em></p>
+<p>Point to the printed output: <em>“The theoretical mean is 5 — exactly in the middle between 2 and 8. The std dev is 1.732 = (8−2)/√12. With 2000 samples, we’re close to the theoretical values.”</em></p>
+<p><strong>scipy gotcha to flag:</strong> <em>“Notice <code class="docutils literal notranslate"><span class="pre">stats.uniform(loc=a,</span> <span class="pre">scale=b-a)</span></code>. The <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameter is the WIDTH of the interval, not the upper bound. If you pass <code class="docutils literal notranslate"><span class="pre">scale=8</span></code> instead of <code class="docutils literal notranslate"><span class="pre">scale=6</span></code>, you get [2, 10], not [2, 8]. This catches people every time.”</em></p>
+</div></blockquote>
 </section>
 <section id="normal-gaussian-distribution">
 <span id="id6"></span><h3>13.3.2 Normal (Gaussian) Distribution<a class="headerlink" href="#normal-gaussian-distribution" title="Link to this heading">#</a></h3>
@@ -1038,6 +1189,26 @@ P(\mu - 3\sigma &lt; X &lt; \mu + 3\sigma) \approx 99.7\%
 </ul>
 <p>This is the foundation of <strong>Six Sigma</strong> quality control — a process is “6σ” if specification limits are 6 standard deviations from the mean, meaning only 3.4 defects per million.</p>
 <p>The <strong>standard normal</strong> <span class="math notranslate nohighlight">\(Z \sim \mathcal{N}(0, 1)\)</span> arises by standardizing: <span class="math notranslate nohighlight">\(Z = (X - \mu)/\sigma\)</span>. This lets us use a single table or function for all normal distributions.</p>
+<blockquote>
+<div><p><strong>Instructor Note — Normal Distribution Theory</strong></p>
+<p><em>“The normal distribution is the workhorse of engineering statistics. Spend time here — this is the distribution students will use most in their careers.”</em></p>
+<p><strong>On the formula:</strong> You don’t need to derive it, but point to the key features:</p>
+<ul class="simple">
+<li><p>The <span class="math notranslate nohighlight">\(\exp(-(x-\mu)^2 / 2\sigma^2)\)</span> term: <em>“This is a Gaussian — it’s largest when x = μ (the peak) and decays symmetrically.”</em></p></li>
+<li><p>The <span class="math notranslate nohighlight">\(\sigma\sqrt{2\pi}\)</span> denominator: <em>“This is just a normalization constant to make the total area = 1.”</em></p></li>
+</ul>
+<p><strong>On the 68-95-99.7 rule — this is the most important thing to memorize:</strong>
+Write on the board: <strong>68 — 95 — 99.7</strong>. Say it out loud. <em>“If you remember nothing else from today, remember these three numbers.”</em></p>
+<p>Work through the N(88%, 2%) example with the class:</p>
+<ul class="simple">
+<li><p><em>“68% of batches: between 86% and 90% — that’s 88 ± 1×2”</em></p></li>
+<li><p><em>“95% of batches: between 84% and 92% — that’s 88 ± 2×2”</em></p></li>
+<li><p><em>“99.7% of batches: between 82% and 94%”</em></p></li>
+<li><p><em>“So if I see a batch at 93%, is that alarming? Well, it’s beyond 2σ — that happens only 5% of the time. Worth investigating.”</em></p></li>
+</ul>
+<p><strong>On Six Sigma:</strong> <em>“This is where ‘Six Sigma’ gets its name — you design processes so spec limits are 6 standard deviations away. That gives a defect rate of 3.4 per million. Companies like GE and Motorola built quality programs around this concept.”</em></p>
+<p><strong>On standardization:</strong> <em>“Any normal distribution can be converted to the standard normal Z ~ N(0,1) by subtracting the mean and dividing by sigma. This is why there’s only one normal distribution table — you always convert to Z first.”</em></p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Normal distribution ───────────────────────────────────────────────────────</span>
@@ -1097,6 +1268,15 @@ P(85 ≤ yield ≤ 92%) = 0.9104
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — Normal Distribution Plot</strong></p>
+<p>Run the cell. Give students a moment to look at both panels.</p>
+<p><strong>Left panel (PDF with shaded regions):</strong> <em>“The blue shading is ±1σ — covers 68% of the area. Orange is ±2σ — 95%. Green is ±3σ — 99.7%. Notice how quickly the tails fall off — events beyond 3σ are rare.”</em></p>
+<p><strong>Right panel (histogram vs PDF):</strong> <em>“We drew 3000 random yield values and plotted the histogram. The red curve is the theoretical PDF. They match very closely — this is what you expect with 3000 samples. With 15 samples (like our actual data), the histogram would be much rougher.”</em></p>
+<p>Read the printed probabilities: <em>“P(yield &lt; 85%) = 2.28%. So about 1 in 44 batches falls below the lower limit. P(yield &gt; 92%) is also 2.28% by symmetry — same distance above the mean.”</em></p>
+<p><em>“P(85 ≤ yield ≤ 92%) = 95.44%. This is the ±1.5σ range, which is between the 68% and 95% of the empirical rule.”</em></p>
+<p><strong>Ask the class:</strong> <em>“If the lower spec limit were tightened to 87% instead of 85%, what fraction of batches would fail? Don’t compute — just estimate from the 68-95-99.7 rule.”</em> (Answer: about 16%, since 87 is 0.5σ below the mean — students may not get this exactly, but it motivates the need for <code class="docutils literal notranslate"><span class="pre">.cdf()</span></code>)</p>
+</div></blockquote>
 </section>
 <section id="using-the-cdf-and-percent-point-function-ppf">
 <h3>Using the CDF and Percent Point Function (PPF)<a class="headerlink" href="#using-the-cdf-and-percent-point-function-ppf" title="Link to this heading">#</a></h3>
@@ -1138,6 +1318,21 @@ $<span class="math notranslate nohighlight">\(x = F^{-1}(p) = \texttt{dist.ppf(p
 </tbody>
 </table>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — CDF and PPF</strong></p>
+<p><em>“We just used <code class="docutils literal notranslate"><span class="pre">.cdf()</span></code> to go from a value to a probability. The PPF goes the other direction: from a probability to a value. These are the two questions you’ll ask most often.”</em></p>
+<p>Write two question templates on the board:</p>
+<ul class="simple">
+<li><p><strong>CDF question:</strong> <em>“What fraction of the time does X fall below [value]?”</em> → <code class="docutils literal notranslate"><span class="pre">.cdf(value)</span></code></p></li>
+<li><p><strong>PPF question:</strong> <em>“What value is exceeded only [p]% of the time?”</em> → <code class="docutils literal notranslate"><span class="pre">.ppf(1-p/100)</span></code></p></li>
+</ul>
+<p>Give a concrete engineering example for each:</p>
+<ul class="simple">
+<li><p>CDF: <em>“Our yield model is N(88, 2²). What fraction of batches will fail the 85% lower limit?”</em> → <code class="docutils literal notranslate"><span class="pre">dist.cdf(85)</span></code> = 0.0668 = 6.7%</p></li>
+<li><p>PPF: <em>“We want to set a warning limit such that only 1% of batches trigger it. Where should that limit be?”</em> → <code class="docutils literal notranslate"><span class="pre">dist.ppf(0.01)</span></code> = 83.35%</p></li>
+</ul>
+<p><em>“The <code class="docutils literal notranslate"><span class="pre">.cdf()</span></code> and <code class="docutils literal notranslate"><span class="pre">.ppf()</span></code> together give you full control over any probability question you can ask about a distribution.”</em></p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── CDF / PPF examples ────────────────────────────────────────────────────────</span>
@@ -1177,6 +1372,32 @@ PPF — what yield value corresponds to the p-th percentile:
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — CDF/PPF Code</strong></p>
+<p>Run the cell. Walk through the CDF table first.</p>
+<p><em>“P(yield ≤ 88%) = 0.50 — of course, since 88 is the mean of N(88, 2). Half the distribution is below the mean.”</em></p>
+<p><em>“P(yield ≤ 84%) = 0.0228. 84 is 2 standard deviations below the mean (88 − 2×2 = 84), and 2.28% is exactly the tail beyond 2σ from the empirical rule. The rule works!”</em></p>
+<p>Walk through the PPF table: <em>“The 5th percentile is 84.71% — meaning 5% of batches will fall below 84.71%. If our spec limit is 85%, we’re in trouble: our process produces batches below spec about 5% of the time.”</em></p>
+<p><em>“The median (50th percentile) is exactly 88% — again, because that’s the mean of this symmetric distribution.”</em></p>
+<p><strong>Ask:</strong> <em>“How would you use the PPF to answer: ‘What yield can we guarantee at least 90% of the time?’”</em> Answer: <code class="docutils literal notranslate"><span class="pre">dist.ppf(0.10)</span></code> — the 10th percentile = 85.44%. So 90% of batches exceed 85.44%.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Instructor Note — Exponential &amp; Poisson (Brief Mention)</strong></p>
+<p><em>“The full notebook also covers two more distributions that come up frequently in process engineering — I’ll describe them briefly here.”</em></p>
+<p><strong>Exponential distribution</strong> — for time between random events:</p>
+<ul class="simple">
+<li><p><em>“If a pump fails on average every 500 hours, failure times follow Exp(scale=500). The distribution is right-skewed — most failures happen sooner than the mean, but occasionally a unit lasts a very long time.”</em></p></li>
+<li><p>Key insight: <strong>memorylessness</strong> — the probability of failure in the next hour doesn’t depend on how long the pump has been running. Valid for random failures, not wear-out.</p></li>
+<li><p>Key property: mean = std = scale = 1/λ.</p></li>
+</ul>
+<p><strong>Poisson distribution</strong> — for counts of random events in a fixed interval:</p>
+<ul class="simple">
+<li><p><em>“If a plant averages 3 safety incidents per year, the count in any year follows Poisson(λ=3). Unlike the others, this is a discrete distribution — only integer values.”</em></p></li>
+<li><p>Key property: <strong>mean = variance = λ</strong>. If your count data has variance &gt;&gt; mean, you have over-dispersion.</p></li>
+<li><p>Connection to exponential: if inter-event times are exponential with rate λ, then the count of events per unit time is Poisson(λ).</p></li>
+</ul>
+<p><em>“Both distributions are in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> and follow the same <code class="docutils literal notranslate"><span class="pre">.pdf()/.cdf()/.ppf()</span></code> pattern. See the full Chapter 13 notebook for worked examples.”</em></p>
+</div></blockquote>
 </section>
 </section>
 <section id="central-limit-theorem">
@@ -1215,6 +1436,17 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)
 \text{SE} = \frac{\sigma}{\sqrt{n}} \approx \frac{s}{\sqrt{n}}
 \]</div>
 <p>The SE tells you: “How precisely do I know the population mean, given my sample?” It is always smaller than the sample standard deviation <span class="math notranslate nohighlight">\(s\)</span>, which describes individual measurement-to-measurement variation.</p>
+<blockquote>
+<div><p><strong>Instructor Note — Central Limit Theorem</strong></p>
+<p><em>“The Central Limit Theorem is the reason statistics works. It’s arguably the most important theorem in applied mathematics.”</em></p>
+<p><strong>Slow down here.</strong> Students often hear the CLT as a formula and miss the intuition. Build it up in steps:</p>
+<p><strong>Step 1 — the mean:</strong> <em>“If I draw n measurements and average them, the average converges to the true mean μ. This is the law of large numbers — you’ve probably heard of it.”</em></p>
+<p><strong>Step 2 — the spread:</strong> <em>“The sample mean has spread σ/√n. This is called the standard error. Notice: to cut the uncertainty in half, you need 4 times more data. To cut it to 1/10, you need 100 times more data. This is why large n matters.”</em></p>
+<p><strong>Step 3 — the shape:</strong> <em>“No matter what distribution your data comes from — even exponential, uniform, bimodal — the sample mean is approximately normally distributed for large n. This is the miracle.”</em></p>
+<p><strong>Draw this on the board:</strong> A skewed distribution on the left. Then boxes showing: n=1 (still skewed), n=5 (less skewed), n=30 (bell shape). This visual is worth 2 minutes.</p>
+<p><strong>ChE application — measurement precision:</strong> <em>“You measure a concentration 5 times and average. The uncertainty in your average is σ/√5 ≈ 0.45σ. Measure 20 times: σ/√20 ≈ 0.22σ. Each additional measurement gives diminishing returns. This is why ‘run it in triplicate’ is the practical standard — it’s a reasonable balance between effort and precision.”</em></p>
+<p><strong>Important distinction to make:</strong> <em>“The standard deviation σ describes how individual measurements vary. The standard error SE = σ/√n describes how the sample mean varies. These are different things. If you report SE instead of σ in a histogram, you’re misrepresenting the data.”</em></p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Central Limit Theorem demonstration ──────────────────────────────────────</span>
@@ -1273,6 +1505,18 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — CLT Demo</strong></p>
+<p>This is one of the most visually compelling demos in the course. Let it breathe.</p>
+<p>Run the cell and point to the four panels left-to-right:</p>
+<p><em>“We start with exponential data — very right-skewed. n=1: the histogram of single draws looks exactly like an exponential. Still highly skewed.”</em></p>
+<p><em>“n=2: we’re averaging pairs. Already less skewed — the right tail is pulling in.”</em></p>
+<p><em>“n=5: starting to look bell-shaped. The red curve — which is the theoretical normal — is already a decent fit.”</em></p>
+<p><em>“n=30: nearly perfect match with the normal distribution. Starting from an exponential! This is the Central Limit Theorem in action.”</em></p>
+<p>Point to the SE values in the titles: <em>“Notice SE shrinks: 1.0 → 0.707 → 0.447 → 0.183. Each time we quadruple n, SE halves.”</em></p>
+<p>Read the table at the bottom: <em>“The theoretical SE matches the observed SE from 10,000 simulations very closely. The CLT is not an approximation for this demo — it’s essentially exact at n=30.”</em></p>
+<p><strong>Ask the class:</strong> <em>“At what n would you say the approximation is ‘good enough’ for practical use?”</em> Typical engineering answer: n ≥ 30 for roughly symmetric data, n ≥ 50 for highly skewed data. For the exponential, n=30 is already excellent.</p>
+</div></blockquote>
 </section>
 </section>
 <section id="confidence-intervals">
@@ -1343,6 +1587,25 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)
 </table>
 </div>
 <p><strong>ChE practical rule:</strong> Use the <span class="math notranslate nohighlight">\(t\)</span>-interval for sample sizes up to ~30. Above that, the difference from the <span class="math notranslate nohighlight">\(z\)</span>-interval is negligible. With small samples (<span class="math notranslate nohighlight">\(n &lt; 10\)</span>), the <span class="math notranslate nohighlight">\(t\)</span>-interval can be substantially wider — this is appropriate, because you truly have less information.</p>
+<blockquote>
+<div><p><strong>Instructor Note — Confidence Intervals</strong></p>
+<p><em>“We can now answer the question we posed at the beginning: is our batch process actually hitting the 88% target?”</em></p>
+<p><strong>On the interpretation — be very precise here:</strong> Students almost universally misstate this. Write on the board:</p>
+<p>❌ <em>“There is a 95% probability that μ is in the interval.”</em>
+✓ <em>“If we repeated this experiment many times, 95% of the intervals we compute would contain μ.”</em></p>
+<p><em>“μ is a fixed number — it’s either in our interval or it isn’t. The 95% refers to the reliability of the procedure, not a probability about μ.”</em></p>
+<p><strong>Walk through the 5 steps on the board</strong> as you explain them:</p>
+<ol class="arabic simple">
+<li><p>Compute x̄, s, n</p></li>
+<li><p>SE = s/√n</p></li>
+<li><p>Choose confidence level → find t-critical</p></li>
+<li><p>Margin = t × SE</p></li>
+<li><p>CI = [x̄ − margin, x̄ + margin]</p></li>
+</ol>
+<p><strong>On t vs z:</strong> <em>“Why t and not z? Because we don’t know the true σ — we’re estimating it with s from the same 15 data points. That extra uncertainty means the interval needs to be wider. The t-distribution has heavier tails to account for this.”</em></p>
+<p>Point to the t-table: <em>“With n=5, the t-critical for 95% is 2.776 — significantly larger than 1.96 from the normal. With n=30, it’s 2.045 — almost identical to 1.96. The t-distribution converges to normal as n grows.”</em></p>
+<p><strong>Rule to write on board:</strong> <em>“n &lt; 30: always use t. n ≥ 30: t and z give nearly identical results.”</em></p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Confidence interval for yield data ───────────────────────────────────────</span>
@@ -1380,6 +1643,16 @@ scipy.stats.t.interval(0.95): [86.6950, 88.7316]%
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — CI Code</strong></p>
+<p>Run the cell. Walk through the output slowly.</p>
+<p><em>“n=15, mean=87.71%, s=1.84%, SE=0.47%. Notice SE is much smaller than s — that’s the √n factor.”</em></p>
+<p>Read the 95% CI: <em>“[86.70%, 88.73%]. This is our answer to the question from the beginning of class: Is the process hitting the 88% target? The 88% target falls inside this interval — so we cannot conclude the process is off-target. There’s not enough statistical evidence with only 15 batches.”</em></p>
+<p>Compare the three confidence levels: <em>“The 90% CI is narrower — [86.88, 88.55]. The 99% CI is wider — [86.30, 89.13]. More confidence requires a wider net.”</em></p>
+<p>Point to the t-critical values: <em>“90% uses t=1.761, 95% uses t=2.145, 99% uses t=2.977. These come from the t-distribution with 14 degrees of freedom.”</em></p>
+<p><em>“The last line shows <code class="docutils literal notranslate"><span class="pre">stats.t.interval()</span></code> — a one-liner that does everything for you. For production code, use this. For understanding what’s happening, use the manual calculation above.”</em></p>
+<p><strong>Answer the original question explicitly:</strong> <em>“So — is the mean yield 88%? We can’t reject that hypothesis at the 5% significance level. We’d need more batches (or to accept that the process is slightly below target).”</em></p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── How CI width shrinks with sample size ─────────────────────────────────────</span>
@@ -1424,6 +1697,15 @@ scipy.stats.t.interval(0.95): [86.6950, 88.7316]%
 <img alt="../../_images/5c7a8a1a94d4db0108ea19409bee930984c6465e13e985eb78f9aa2279ca64ea.png" src="../../_images/5c7a8a1a94d4db0108ea19409bee930984c6465e13e985eb78f9aa2279ca64ea.png" />
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — CI Width vs. n</strong></p>
+<p>Run the cell. Point to the table and the plot.</p>
+<p><em>“As n increases from 5 to 200, the CI width drops from about 2.5% down to 0.3%. Each time n quadruples, the width roughly halves — that’s the 1/√n relationship.”</em></p>
+<p>Pose the experimental design question: <em>“If I need my 95% CI width to be ±0.5% (total width 1%), and my std dev is about 2%, how many batches do I need?”</em></p>
+<p>Work it out: width = 2 × t × s/√n ≈ 2 × 2 × 2/√n = 8/√n. Set 8/√n = 1 → √n = 8 → n = 64.</p>
+<p><em>“So 64 batches to estimate the mean within ±0.5%. That’s the last question from the motivation slide — answered.”</em></p>
+<p><strong>Key message:</strong> <em>“The CI width formula quantifies the fundamental trade-off between experimental effort and precision. If someone asks ‘how many experiments do I need?’, you now have the math to answer it.”</em></p>
+</div></blockquote>
 </section>
 <section id="reading-the-ci-output">
 <h3>Reading the CI output<a class="headerlink" href="#reading-the-ci-output" title="Link to this heading">#</a></h3>
@@ -1494,6 +1776,20 @@ scipy.stats.t.interval(0.95): [86.6950, 88.7316]%
 <li><p><strong>Equipment sizing</strong> — given uncertain feed compositions, what reactor volume ensures 99% of scenarios achieve desired conversion?</p></li>
 <li><p><strong>Financial analysis</strong> — uncertainty in raw material costs, utility prices, and yields propagates to process economics</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Instructor Note — 13.6 Monte Carlo Simulation</strong></p>
+<p>Transition: <em>“Everything we’ve done so far has been about analyzing data we already have. Monte Carlo simulation is about predicting the future — simulating what will happen given uncertain inputs.”</em></p>
+<p><strong>Sell the concept first:</strong> <em>“This is one of the most used computational tools in the chemical industry. Process design groups at large companies run Monte Carlo simulations to understand how uncertainty in raw material quality, utility costs, kinetic parameters, and equipment performance propagates to uncertainty in process economics and product quality.”</em></p>
+<p><strong>Walk through the 4 steps out loud:</strong></p>
+<ol class="arabic simple">
+<li><p><em>“Identify which inputs have uncertainty. Model each as a distribution — normal if you have mean and std, uniform if you only know bounds.”</em></p></li>
+<li><p><em>“Draw, say, 100,000 random input sets. Each is a plausible scenario.”</em></p></li>
+<li><p><em>“Run your calculation for each scenario. This is just a vectorized numpy operation — it takes milliseconds.”</em></p></li>
+<li><p><em>“Analyze the outputs. Build a histogram. Compute percentiles. Ask: what fraction of scenarios lead to failure?”</em></p></li>
+</ol>
+<p><strong>On the comparison table:</strong> <em>“Analytical error propagation requires taking derivatives — hard for complex models, and only valid for small uncertainties and near-linear functions. Monte Carlo has none of these restrictions. If you can write a function in Python, you can propagate uncertainty through it.”</em></p>
+<p><em>“The only cost of Monte Carlo is compute time — and with N=100,000 on a modern laptop, that’s under a second for most problems.”</em></p>
+</div></blockquote>
 </section>
 <section id="error-propagation-arrhenius-rate-constant">
 <span id="id10"></span><h3>13.7.1 Error Propagation: Arrhenius Rate Constant<a class="headerlink" href="#error-propagation-arrhenius-rate-constant" title="Link to this heading">#</a></h3>
@@ -1515,6 +1811,19 @@ $<span class="math notranslate nohighlight">\(k = A \exp\!\left(-\frac{E_a}{RT}\
 <li><p><span class="math notranslate nohighlight">\(R = 8.314\)</span> J/(mol·K)</p></li>
 </ul>
 <p>The notation <span class="math notranslate nohighlight">\(\pm\)</span> here refers to 1 standard deviation (the 68% confidence range for a normal distribution).</p>
+<blockquote>
+<div><p><strong>Instructor Note — Arrhenius MC Setup</strong></p>
+<p><em>“Our first Monte Carlo example: the Arrhenius rate constant. This is perfect for ChE students because you’ve all worked with this equation.”</em></p>
+<p>Walk through the problem setup:</p>
+<ul class="simple">
+<li><p><em>“Pre-exponential A is known exactly — no uncertainty.”</em></p></li>
+<li><p><em>“Activation energy Ea = 75,000 J/mol with a standard deviation of 500 J/mol. This could come from fitting an Arrhenius plot — the fit has some uncertainty.”</em></p></li>
+<li><p><em>“Temperature T = 500 K with std dev 1.5 K — from a thermocouple reading.”</em></p></li>
+</ul>
+<p><em>“The question is: given these two uncertain inputs, how uncertain is k? Because k depends exponentially on Ea and T, a small uncertainty in those inputs gets amplified into a larger uncertainty in k.”</em></p>
+<p><strong>Motivate why MC is better than the analytical formula here:</strong>
+<em>“The first-order uncertainty formula would require ∂k/∂Ea and ∂k/∂T. You could compute those — they’re straightforward. But the Arrhenius function is exponential and highly nonlinear. The first-order approximation underestimates the true uncertainty, especially for large uncertainties. Monte Carlo gives the exact answer.”</em></p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Monte Carlo error propagation: Arrhenius rate constant ────────────────────</span>
@@ -1609,6 +1918,17 @@ Monte Carlo slightly exceeds the nominal k computed at the mean inputs.
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — Arrhenius MC Code</strong></p>
+<p>Walk through the code structure before running it, pointing to the four numbered steps in the comments.</p>
+<p><em>“Step 1: we define the distributions. Step 2: we draw 100,000 samples from each — one line of code. Step 3: we compute k for all 100,000 scenarios simultaneously — vectorized numpy, no loop needed. Step 4: we analyze the results.”</em></p>
+<p>Run the cell. Walk through the output:</p>
+<p><em>“Nominal k = [read value]. This is what you’d compute ignoring all uncertainty — plug in the mean values and get one answer.”</em></p>
+<p><em>“Monte Carlo mean is slightly higher than nominal. This is Jensen’s inequality — because the exponential is a convex function, the expected value of the output exceeds the output at the expected input. For the Arrhenius equation this effect is real and matters.”</em></p>
+<p><em>“The CV (coefficient of variation) is [read value]% — this is the relative uncertainty in k. A CV of, say, 10% means k is uncertain by ±10% relative to its mean.”</em></p>
+<p>Point to the three plots: <em>“Left two panels: the inputs. Both look normally distributed as expected. Right panel: the output k distribution — notice it’s slightly right-skewed, not perfectly normal. This is what the analytical formula would miss.”</em></p>
+<p><em>“The 95% range gives you: 95% of the time, k will fall between [read lower] and [read upper]. This is directly useful for reactor design — you’d size the reactor for the worst-case (low k) scenario.”</em></p>
+</div></blockquote>
 </section>
 <section id="process-reliability-fraction-of-batches-meeting-spec">
 <span id="id11"></span><h3>13.7.2 Process Reliability: Fraction of Batches Meeting Spec<a class="headerlink" href="#process-reliability-fraction-of-batches-meeting-spec" title="Link to this heading">#</a></h3>
@@ -1633,6 +1953,14 @@ Monte Carlo slightly exceeds the nominal k computed at the mean inputs.
 <li><p>Count what fraction fall below the 97.5% spec</p></li>
 <li><p>Visualize the purity distribution and identify which conditions cause failures</p></li>
 </ol>
+<blockquote>
+<div><p><strong>Instructor Note — Process Reliability Setup</strong></p>
+<p><em>“Now a second Monte Carlo application — process reliability. This directly answers the question: what fraction of our batches will fail spec?”</em></p>
+<p>Explain the purity model: <em>“Purity depends on how long the reactant spends in the reactor (residence time τ) and the temperature T. Both vary from batch to batch due to control system variability.”</em></p>
+<p><em>“The residence time varies because the feed flow controller isn’t perfect — it overshoots and undershoots. The temperature varies because the heat exchanger control loop responds to disturbances. We model both as normal distributions centered on the nominal values.”</em></p>
+<p><em>“The nominal operating point would give a certain purity. But with real variability, sometimes τ is short and T is low — purity drops. How often? Monte Carlo tells us.”</em></p>
+<p><strong>Ask students before running:</strong> <em>“If the nominal τ=120s and T=400K gives, say, 98% purity — would you expect a lot of batches to fail the 97.5% spec? Take a guess.”</em> Get responses, then reveal with the code.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Monte Carlo process reliability ───────────────────────────────────────────</span>
@@ -1701,6 +2029,15 @@ Monte Carlo slightly exceeds the nominal k computed at the mean inputs.
 <img alt="../../_images/c5fce6580d0c28355085488e2b4cac499a2d662bb95b9102c74a6e245b58efeb.png" src="../../_images/c5fce6580d0c28355085488e2b4cac499a2d662bb95b9102c74a6e245b58efeb.png" />
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — Process Reliability Code</strong></p>
+<p>Run the cell. Point to the output first, then the plots.</p>
+<p>Read the failure rate: <em>“[Read failure fraction]% of batches fail the 97.5% spec. That’s roughly 1 in [X] batches. For a process running 500 batches per year, that’s [500 × fraction] failed batches per year — each one is wasted product and cost.”</em></p>
+<p>Point to the <strong>left plot</strong> (purity histogram): <em>“The red dashed line is the spec limit at 97.5%. The shaded area to the left is the failing fraction. Notice the mean is comfortably above spec, but the left tail dips below.”</em></p>
+<p>Point to the <strong>right plot</strong> (scatter, purity vs temperature): <em>“Red points are failing batches. They cluster at low temperatures — which makes physical sense, because lower T means lower rate constant k, meaning the reaction goes to lower conversion.”</em></p>
+<p><strong>Engineering insight:</strong> <em>“This scatter plot tells you where to focus process improvement. The failures are caused primarily by low temperature, not by low residence time. So the highest-impact fix is to improve temperature control — tighten the heat exchanger control loop. This is how Monte Carlo guides process improvement.”</em></p>
+<p><em>“Without simulation, you’d run the process, accumulate failures, and eventually figure this out empirically — at significant cost. Simulation lets you identify this in minutes, before you build anything.”</em></p>
+</div></blockquote>
 </section>
 <section id="classic-monte-carlo-estimating">
 <span id="id12"></span><h3>13.7.3 Classic Monte Carlo: Estimating π<a class="headerlink" href="#classic-monte-carlo-estimating" title="Link to this heading">#</a></h3>
@@ -1719,6 +2056,12 @@ Monte Carlo slightly exceeds the nominal k computed at the mean inputs.
 <li><p>It shows that Monte Carlo can compute quantities defined by geometric or probabilistic conditions, not just explicit formulas</p></li>
 </ul>
 <p><strong>Convergence rate:</strong> To gain one extra decimal place of accuracy, you need 100× more samples. This is Monte Carlo’s weakness — it is accurate but not efficient. For 1D integrals, direct numerical integration (Chapter 11) is far more efficient. Monte Carlo shines for <strong>high-dimensional</strong> problems where the number of integration variables makes standard methods impractical.</p>
+<blockquote>
+<div><p><strong>Instructor Note — π Estimation</strong></p>
+<p><em>“Before we close, let’s do the classic Monte Carlo example — estimating π by throwing darts. This isn’t a ChE problem, but it builds intuition for why Monte Carlo works and how it converges.”</em></p>
+<p>Explain the geometry: <em>“Imagine a unit square with a quarter-circle inscribed in the lower-left corner. If we throw darts uniformly at the square, the fraction landing inside the quarter-circle equals the ratio of their areas: π/4 over 1. So we multiply the fraction by 4 to get π.”</em></p>
+<p><em>“The ‘darts’ are just random (x,y) pairs from Uniform(0,1). A dart is ‘inside’ if x² + y² ≤ 1.”</em></p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Monte Carlo estimate of π ─────────────────────────────────────────────────</span>
@@ -1775,6 +2118,16 @@ Error                = 8.09e-03
 </div>
 </div>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — π Estimation Code</strong></p>
+<p>Run the cell. Let students look at both plots.</p>
+<p><strong>Left plot (dart scatter):</strong> <em>“Blue dots landed inside the quarter-circle, red outside. With 5000 darts shown, you can clearly see the arc of the quarter-circle emerging from the randomness. This is beautiful — order from chaos.”</em></p>
+<p><strong>Right plot (convergence):</strong> <em>“With 10 darts, our estimate of π is way off. With 1000 darts, we’re getting close. With 50,000 darts, we’re accurate to about 3 decimal places.”</em></p>
+<p>Point to the convergence rate: <em>“The error shrinks as 1/√N. To gain one more decimal place of accuracy, you need 100× more darts. This is Monte Carlo’s fundamental limitation for smooth problems.”</em></p>
+<p>Read the final estimate: <em>“With 50,000 darts, we get π ≈ [read value], error ≈ [read error]. That’s pretty good for just counting random points.”</em></p>
+<p><strong>Connect back to engineering:</strong> <em>“The convergence we see here is the same convergence that governs Monte Carlo for process simulations. With 10,000 scenarios, uncertainty estimates (like failure fractions) are accurate to about 1% of their true value — usually sufficient for engineering decisions.”</em></p>
+<p><em>“For problems with 10+ input variables, Monte Carlo is often the only practical approach. Direct numerical integration over 10 dimensions would require billions of function evaluations; Monte Carlo converges at the same 1/√N rate regardless of dimensionality.”</em></p>
+</div></blockquote>
 <p><strong>Summary</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1831,6 +2184,20 @@ Error                = 8.09e-03
 </tbody>
 </table>
 </div>
+<blockquote>
+<div><p><strong>Instructor Note — Chapter Wrap-Up</strong></p>
+<p><em>“Let’s come back to the questions from the beginning. We had a batch reactor with 15 yield measurements. We can now answer every question:”</em></p>
+<ul class="simple">
+<li><p><em>“What is the average yield and how much does it vary? → Mean 87.71%, std 1.84%.”</em></p></li>
+<li><p><em>“Is the process meeting the 88% target on average? → The 95% CI is [86.70, 88.73%]. The target 88% is inside the interval — we cannot reject that the process is on target with n=15.”</em></p></li>
+<li><p><em>“What fraction of future batches will fall below 85%? → If yield ~ N(88, 2²), then P(yield &lt; 85) ≈ 6.7%. We’d need to fit a distribution to our data first (Section 13.8).”</em></p></li>
+<li><p><em>“How many measurements to estimate the mean within ±0.5%? → About 64 batches.”</em></p></li>
+</ul>
+<p><strong>Big picture:</strong> <em>“Statistics is not just a set of formulas. It’s a framework for reasoning carefully about uncertainty. Every measurement has uncertainty. Every model has parameters with uncertainty. Every prediction has uncertainty. Statistics lets you be precise about all of that.”</em></p>
+<p><strong>What we didn’t cover:</strong> Hypothesis testing (t-tests, ANOVA), regression uncertainty, design of experiments. These build on everything you’ve learned today and are covered in later courses.</p>
+<p><strong>For the homework/lab:</strong> Remind students that any Monte Carlo simulation must use a fixed seed, report N (number of simulations), and justify their choice of input distributions.</p>
+<p><strong>Office hours reminder / questions.</strong></p>
+</div></blockquote>
 </section>
 </section>
 </section>

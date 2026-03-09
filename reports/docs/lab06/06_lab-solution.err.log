@@ -15,38 +15,13 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-
-# Task 1 
-
-# Your code here
-vdw = {
-    "Low": [],
-    "medium": [],
-    "high": []}
-n = 1
-R = .08206
-a = 3.640 
-b = .04267
-V = 1.5 
-P = (n*R*t)/(V-nb) - ((n**2)(a))/V**2
-temperatures = [250, 300, 350, 400, 500]
-if P < 10:
-    vdw = low
-elif P <= 20:
-    vdw = medium
-if P > 20:
-    vdw = high
+np.linalg.in
 ------------------
 
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[3], line 13[0m
-[1;32m     11[0m b [38;5;241m=[39m [38;5;241m.04267[39m
-[1;32m     12[0m V [38;5;241m=[39m [38;5;241m1.5[39m 
-[0;32m---> 13[0m P [38;5;241m=[39m (n[38;5;241m*[39mR[38;5;241m*[39m[43mt[49m)[38;5;241m/[39m(V[38;5;241m-[39mnb) [38;5;241m-[39m ((n[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m)(a))[38;5;241m/[39mV[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m
-[1;32m     14[0m temperatures [38;5;241m=[39m [[38;5;241m250[39m, [38;5;241m300[39m, [38;5;241m350[39m, [38;5;241m400[39m, [38;5;241m500[39m]
-[1;32m     15[0m [38;5;28;01mif[39;00m P [38;5;241m<[39m [38;5;241m10[39m:
+[0;36m  Cell [0;32mIn[3], line 1[0;36m[0m
+[0;31m    np.linalg.in[0m
+[0m              ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
 
-[0;31mNameError[0m: name 't' is not defined
 

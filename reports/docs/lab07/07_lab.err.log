@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 1323, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+
+# Define q(x) = x^2 - 5x + 6
+q = np.poly1d([___,  ___, ___])   # fill in the three coefficients
+
+print(q)
+print("Coefficients:", q.coeffs)  # should print [1, -5, 6]
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[2], line 6[0m
+[1;32m      3[0m [38;5;66;03m# Define q(x) = x^2 - 5x + 6[39;00m
+[1;32m      4[0m q [38;5;241m=[39m np[38;5;241m.[39mpoly1d([___,  ___, ___])   [38;5;66;03m# fill in the three coefficients[39;00m
+[0;32m----> 6[0m [38;5;28;43mprint[39;49m[43m([49m[43mq[49m[43m)[49m
+[1;32m      7[0m [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mCoefficients:[39m[38;5;124m"[39m, q[38;5;241m.[39mcoeffs)  [38;5;66;03m# should print [1, -5, 6][39;00m
+
+File [0;32m~/miniconda3/envs/chemcomp/lib/python3.10/site-packages/numpy/lib/polynomial.py:1284[0m, in [0;36mpoly1d.__str__[0;34m(self)[0m
+[1;32m   1282[0m [38;5;28;01mfor[39;00m k, coeff [38;5;129;01min[39;00m [38;5;28menumerate[39m(coeffs):
+[1;32m   1283[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m iscomplex(coeff):
+[0;32m-> 1284[0m         coefstr [38;5;241m=[39m [43mfmt_float[49m[43m([49m[43mreal[49m[43m([49m[43mcoeff[49m[43m)[49m[43m)[49m
+[1;32m   1285[0m     [38;5;28;01melif[39;00m real(coeff) [38;5;241m==[39m [38;5;241m0[39m:
+[1;32m   1286[0m         coefstr [38;5;241m=[39m [38;5;124m'[39m[38;5;132;01m%s[39;00m[38;5;124mj[39m[38;5;124m'[39m [38;5;241m%[39m fmt_float(imag(coeff))
+
+File [0;32m~/miniconda3/envs/chemcomp/lib/python3.10/site-packages/numpy/lib/polynomial.py:1277[0m, in [0;36mpoly1d.__str__.<locals>.fmt_float[0;34m(q)[0m
+[1;32m   1276[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mfmt_float[39m(q):
+[0;32m-> 1277[0m     s [38;5;241m=[39m [38;5;124;43m'[39;49m[38;5;132;43;01m%.4g[39;49;00m[38;5;124;43m'[39;49m[43m [49m[38;5;241;43m%[39;49m[43m [49m[43mq[49m
+[1;32m   1278[0m     [38;5;28;01mif[39;00m s[38;5;241m.[39mendswith([38;5;124m'[39m[38;5;124m.0000[39m[38;5;124m'[39m):
+[1;32m   1279[0m         s [38;5;241m=[39m s[:[38;5;241m-[39m[38;5;241m5[39m]
+
+[0;31mTypeError[0m: must be real number, not numpy.str_
+

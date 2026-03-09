@@ -1,0 +1,1170 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 07: Polynomials &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab07/07_lab-solution';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_lab.html">Lab 07: Polynomials</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab07/07_lab-solution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lab07/07_lab-solution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 07: Polynomials</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-by-instructor">Examples (by instructor)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-polynomial-basics-np-poly1d-np-polyval">Example 1: Polynomial Basics — <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-root-finding-chemical-equilibrium">Example 2: Root Finding — Chemical Equilibrium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-fitting-c-p-t-for-co-2-with-np-polyfit">Example 3: Fitting <span class="math notranslate nohighlight">\(C_p(T)\)</span> for CO<span class="math notranslate nohighlight">\(_2\)</span> with <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up-syntax-practice">Warm-Up: Syntax Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems-by-students">Practice Problems (by students)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-polynomial-evaluation">Problem 1: Polynomial Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-fitting-viscosity-data-degrees-of-freedom-overfitting">Problem 2: Fitting Viscosity Data — Degrees of Freedom &amp; Overfitting</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-07-polynomials">
+<h1>Lab 07: Polynomials<a class="headerlink" href="#lab-07-polynomials" title="Link to this heading">#</a></h1>
+<section id="examples-by-instructor">
+<h2>Examples (by instructor)<a class="headerlink" href="#examples-by-instructor" title="Link to this heading">#</a></h2>
+<p>In this lab, you’ll learn to work with polynomials in NumPy: creating and evaluating polynomial objects, fitting data with least-squares polynomial regression, and assessing fit quality with residuals, MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
+<section id="example-1-polynomial-basics-np-poly1d-np-polyval">
+<h3>Example 1: Polynomial Basics — <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code><a class="headerlink" href="#example-1-polynomial-basics-np-poly1d-np-polyval" title="Link to this heading">#</a></h3>
+<p>A degree-<span class="math notranslate nohighlight">\(n\)</span> polynomial is:</p>
+<div class="math notranslate nohighlight">
+\[p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0\]</div>
+<p>NumPy stores coefficients in <strong>descending order</strong> (highest power first).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code></p></td>
+<td><p>Create a callable polynomial object</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code></p></td>
+<td><p>Evaluate polynomial at <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code></p></td>
+<td><p>Least-squares fit — returns coefficients</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Define <span class="math notranslate nohighlight">\(p(x) = 2x^3 - 3x^2 + x - 5\)</span> and:</p>
+<ol class="arabic simple">
+<li><p>Print its <code class="docutils literal notranslate"><span class="pre">poly1d</span></code> representation</p></li>
+<li><p>Evaluate it at <span class="math notranslate nohighlight">\(x = 2\)</span> using both <code class="docutils literal notranslate"><span class="pre">poly1d</span></code> and <code class="docutils literal notranslate"><span class="pre">polyval</span></code></p></li>
+<li><p>Print its derivative and its roots</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define p(x) = 2x^3 - 3x^2 + x - 5  (coefficients in descending order)</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Polynomial p(x):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Evaluate at x = 2</span>
+<span class="n">x_val</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">p(</span><span class="si">{</span><span class="n">x_val</span><span class="si">}</span><span class="s2">) using poly1d  : </span><span class="si">{</span><span class="n">p</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p(</span><span class="si">{</span><span class="n">x_val</span><span class="si">}</span><span class="s2">) using polyval : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span><span class="w"> </span><span class="n">x_val</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Manual: 2(8) - 3(4) + 1(2) - 5 = 16 - 12 + 2 - 5 = 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Manual check          : </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">x_val</span><span class="o">**</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="o">*</span><span class="n">x_val</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">*</span><span class="n">x_val</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Derivative p&#39;(x):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">deriv</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots (p(x) = 0):&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">roots</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Polynomial p(x):
+   3     2
+2 x - 3 x + 1 x - 5
+
+p(2.0) using poly1d  : 1.0000
+p(2.0) using polyval : 1.0000
+Manual check          : 1.0000
+
+Derivative p&#39;(x):
+   2
+6 x - 6 x + 1
+Roots (p(x) = 0): [ 1.9186+0.j     -0.2093+1.1222j -0.2093-1.1222j]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-root-finding-chemical-equilibrium">
+<h3>Example 2: Root Finding — Chemical Equilibrium<a class="headerlink" href="#example-2-root-finding-chemical-equilibrium" title="Link to this heading">#</a></h3>
+<p>In chemical engineering, we often need to find where a polynomial equals zero. A classic example is solving an equilibrium expression that reduces to a polynomial equation.</p>
+<p><strong>Problem:</strong> The equilibrium conversion <span class="math notranslate nohighlight">\(x\)</span> for the gas-phase reaction <span class="math notranslate nohighlight">\(A \rightleftharpoons 2B\)</span> at constant <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(P\)</span> satisfies:</p>
+<div class="math notranslate nohighlight">
+\[K_p = \frac{4x^2}{1 - x^2}\]</div>
+<p>Rearranging for <span class="math notranslate nohighlight">\(K_p = 2.0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[K_p(1 - x^2) = 4x^2 \implies K_p = (4 + K_p)\,x^2 \implies (4 + K_p)\,x^2 - K_p = 0\]</div>
+<p>This is a degree-2 polynomial in <span class="math notranslate nohighlight">\(x\)</span>. We will:</p>
+<ol class="arabic simple">
+<li><p>Express it as <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> and find its roots via <code class="docutils literal notranslate"><span class="pre">p.roots</span></code></p></li>
+<li><p>Keep only the physically meaningful root (<span class="math notranslate nohighlight">\(0 &lt; x &lt; 1\)</span>)</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">Kp</span> <span class="o">=</span> <span class="mf">2.0</span>
+
+<span class="c1"># Polynomial: (4 + Kp)*x^2 - Kp = 0</span>
+<span class="c1"># coefficients in descending order: [4 + Kp, 0, -Kp]</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span> <span class="o">+</span> <span class="n">Kp</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">Kp</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equilibrium polynomial p(x) =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Find all roots</span>
+<span class="n">roots</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">roots</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All roots: </span><span class="si">{</span><span class="n">roots</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Keep only the physically meaningful root: real, 0 &lt; x &lt; 1</span>
+<span class="n">real_roots</span> <span class="o">=</span> <span class="n">roots</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isreal</span><span class="p">(</span><span class="n">roots</span><span class="p">)]</span><span class="o">.</span><span class="n">real</span>
+<span class="n">x_eq</span> <span class="o">=</span> <span class="n">real_roots</span><span class="p">[(</span><span class="n">real_roots</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">real_roots</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Physical root (0 &lt; x &lt; 1): x = </span><span class="si">{</span><span class="n">x_eq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Verify: Kp = 4x² / (1 - x²)</span>
+<span class="n">x_sol</span> <span class="o">=</span> <span class="n">x_eq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Kp_check</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x_sol</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x_sol</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Verification: Kp = 4x²/(1-x²) = </span><span class="si">{</span><span class="n">Kp_check</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  (expected </span><span class="si">{</span><span class="n">Kp</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot Kp(x) = 4x² / (1 - x²) and mark the solution</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">Kp_curve</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Kp_curve</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$K_p(x) = \frac{4x^2}{1-x^2}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$K_p = </span><span class="si">{</span><span class="n">Kp</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_sol</span><span class="p">,</span> <span class="n">Kp</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Equilibrium: $x = </span><span class="si">{</span><span class="n">x_sol</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Conversion $x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$K_p$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Root Finding: Equilibrium Conversion for $A \rightleftharpoons 2B$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Equilibrium polynomial p(x) =
+   2
+6 x - 2
+
+All roots: [-0.57735  0.57735]
+Physical root (0 &lt; x &lt; 1): x = 0.577350
+
+Verification: Kp = 4x²/(1-x²) = 2.000000  (expected 2.0)
+</pre></div>
+</div>
+<img alt="../../_images/c41413e8a584afabfeb98022ca0d06a9481228e359f261028bc7d5d6d32d9517.png" src="../../_images/c41413e8a584afabfeb98022ca0d06a9481228e359f261028bc7d5d6d32d9517.png" />
+</div>
+</div>
+</section>
+<section id="example-3-fitting-c-p-t-for-co-2-with-np-polyfit">
+<h3>Example 3: Fitting <span class="math notranslate nohighlight">\(C_p(T)\)</span> for CO<span class="math notranslate nohighlight">\(_2\)</span> with <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code><a class="headerlink" href="#example-3-fitting-c-p-t-for-co-2-with-np-polyfit" title="Link to this heading">#</a></h3>
+<p>Below is NIST tabulated heat capacity data for CO<span class="math notranslate nohighlight">\(_2\)</span>. Use <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code> to fit degree 2 polynomial, then:</p>
+<ol class="arabic simple">
+<li><p>Plot fit against the data</p></li>
+<li><p>Compute and print MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span> for each degree</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{MAE} = \frac{1}{N}\sum|e_i|, \quad
+\text{MSE} = \frac{1}{N}\sum e_i^2, \quad
+R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
+\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(T\)</span> (K)</p></th>
+<th class="head"><p>300</p></th>
+<th class="head"><p>400</p></th>
+<th class="head"><p>500</p></th>
+<th class="head"><p>600</p></th>
+<th class="head"><p>700</p></th>
+<th class="head"><p>800</p></th>
+<th class="head"><p>900</p></th>
+<th class="head"><p>1000</p></th>
+<th class="head"><p>1100</p></th>
+<th class="head"><p>1200</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(C_p\)</span> (J/mol/K)</p></td>
+<td><p>37.13</p></td>
+<td><p>41.33</p></td>
+<td><p>44.60</p></td>
+<td><p>47.33</p></td>
+<td><p>49.65</p></td>
+<td><p>51.61</p></td>
+<td><p>53.26</p></td>
+<td><p>54.31</p></td>
+<td><p>55.37</p></td>
+<td><p>56.21</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># NIST tabulated Cp data for CO2</span>
+<span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1200</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">37.13</span><span class="p">,</span> <span class="mf">41.33</span><span class="p">,</span> <span class="mf">44.60</span><span class="p">,</span> <span class="mf">47.33</span><span class="p">,</span> <span class="mf">49.65</span><span class="p">,</span>
+                    <span class="mf">51.61</span><span class="p">,</span> <span class="mf">53.26</span><span class="p">,</span> <span class="mf">54.31</span><span class="p">,</span> <span class="mf">55.37</span><span class="p">,</span> <span class="mf">56.21</span><span class="p">])</span>
+
+<span class="n">T_fine</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">280</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">degree</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">colors</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">]</span>
+<span class="n">fits</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+
+<span class="c1"># ── Plot fits ─────────────────────────────────────────────────────────────────</span>
+<span class="c1">#fig, ax = plt.subplots(figsize=(9, 4))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;NIST data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_fine</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">,</span> <span class="n">T_fine</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$C_p$ (J mol$^{-1}$ K$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Polynomial fits to CO$_2$ $C_p$ data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># ── Metrics ───────────────────────────────────────────────────────────────────</span>
+<span class="n">SS_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">Cp_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Cp_data</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Degree&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MAE (J/mol/K)&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MSE (J/mol/K)²&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;R²&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">Cp_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">,</span> <span class="n">T_data</span><span class="p">)</span>
+<span class="n">MAE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+<span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">res</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">R2</span>  <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">res</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">SS_tot</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">degree</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">MAE</span><span class="si">:</span><span class="s2">&gt;16.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">MSE</span><span class="si">:</span><span class="s2">&gt;16.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">R2</span><span class="si">:</span><span class="s2">&gt;8.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── Residual stem plots ───────────────────────────────────────────────────────</span>
+
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">Cp_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">,</span> <span class="n">T_data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">linefmt</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">basefmt</span><span class="o">=</span><span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s1"> residuals&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$C_p$ residual (J mol$^{-1}$ K$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2ebdfea7502c8636367abdc4ee2f5b6bcd1a08b1ceb5b285ca4ab1d0301c4943.png" src="../../_images/2ebdfea7502c8636367abdc4ee2f5b6bcd1a08b1ceb5b285ca4ab1d0301c4943.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree     MAE (J/mol/K)    MSE (J/mol/K)²        R²
+-------------------------------------------------------
+     2          0.179212          0.043519  0.998817
+</pre></div>
+</div>
+<img alt="../../_images/74311c030cdf2e374ad9f8529a30cee0febbbccf842c19bbc58ec7e22a915a31.png" src="../../_images/74311c030cdf2e374ad9f8529a30cee0febbbccf842c19bbc58ec7e22a915a31.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="warm-up-syntax-practice">
+<h2>Warm-Up: Syntax Practice<a class="headerlink" href="#warm-up-syntax-practice" title="Link to this heading">#</a></h2>
+<p>Short exercises to get comfortable with the key NumPy polynomial functions before the main problems.</p>
+<p><strong>Exercise 1 — Define a polynomial.</strong></p>
+<p>Define <span class="math notranslate nohighlight">\(q(x) = x^2 - 5x + 6\)</span> using <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> and print it. Then confirm that the coefficients stored inside match what you passed in.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Define q(x) = x^2 - 5x + 6</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="n">___</span><span class="p">,</span>  <span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">])</span>   <span class="c1"># fill in the three coefficients</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span>  <span class="c1"># should print [1, -5, 6]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Define q(x) = x^2 - 5x + 6</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="n">___</span><span class="p">,</span>  <span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">])</span>   <span class="c1"># fill in the three coefficients</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span>  <span class="c1"># should print [1, -5, 6]</span>
+
+<span class="nn">File ~/miniconda3/envs/chemcomp/lib/python3.10/site-packages/numpy/lib/polynomial.py:1284,</span> in <span class="ni">poly1d.__str__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1282</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coeffs</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1283</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">iscomplex</span><span class="p">(</span><span class="n">coeff</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1284</span>         <span class="n">coefstr</span> <span class="o">=</span> <span class="n">fmt_float</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">coeff</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1285</span>     <span class="k">elif</span> <span class="n">real</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1286</span>         <span class="n">coefstr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">j&#39;</span> <span class="o">%</span> <span class="n">fmt_float</span><span class="p">(</span><span class="n">imag</span><span class="p">(</span><span class="n">coeff</span><span class="p">))</span>
+
+<span class="nn">File ~/miniconda3/envs/chemcomp/lib/python3.10/site-packages/numpy/lib/polynomial.py:1277,</span> in <span class="ni">poly1d.__str__.&lt;locals&gt;.fmt_float</span><span class="nt">(q)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1276</span> <span class="k">def</span><span class="w"> </span><span class="nf">fmt_float</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1277</span>     <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.4g</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">q</span>
+<span class="g g-Whitespace">   </span><span class="mi">1278</span>     <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.0000&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1279</span>         <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="ne">TypeError</span>: must be real number, not numpy.str_
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 2 — Evaluate at a point.</strong></p>
+<p>Using the same <span class="math notranslate nohighlight">\(q(x) = x^2 - 5x + 6\)</span>, evaluate <span class="math notranslate nohighlight">\(q(2)\)</span> and <span class="math notranslate nohighlight">\(q(3)\)</span> two ways: via the <code class="docutils literal notranslate"><span class="pre">poly1d</span></code> object and via <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code>. Confirm both give the same answer, and check manually that the values make sense (hint: <span class="math notranslate nohighlight">\(q(2) = 0\)</span> and <span class="math notranslate nohighlight">\(q(3) = 0\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x_val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+    <span class="n">via_poly1d</span> <span class="o">=</span> <span class="n">___</span>          <span class="c1"># call q like a function</span>
+    <span class="n">via_polyval</span> <span class="o">=</span> <span class="n">___</span>         <span class="c1"># use np.polyval</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;q(</span><span class="si">{</span><span class="n">x_val</span><span class="si">}</span><span class="s2">): poly1d = </span><span class="si">{</span><span class="n">via_poly1d</span><span class="si">}</span><span class="s2">,  polyval = </span><span class="si">{</span><span class="n">via_polyval</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 3 — Find roots.</strong></p>
+<p>Find the roots of <span class="math notranslate nohighlight">\(q(x) = x^2 - 5x + 6\)</span> using <code class="docutils literal notranslate"><span class="pre">p.roots</span></code>. You should get two real roots. Print them and verify they match what you’d get by factoring: <span class="math notranslate nohighlight">\(q(x) = (x-2)(x-3)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+
+<span class="n">roots</span> <span class="o">=</span> <span class="n">___</span>          <span class="c1"># get the roots of q</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots:&quot;</span><span class="p">,</span> <span class="n">roots</span><span class="p">)</span>
+
+<span class="c1"># Verify by evaluating q at each root — should both be ~0</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;q(</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">q</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 4 — Fit a polynomial to data.</strong></p>
+<p>Five measurements of reaction rate <span class="math notranslate nohighlight">\(r\)</span> at different temperatures <span class="math notranslate nohighlight">\(T\)</span> are given below. Fit a degree-2 polynomial using <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code>, then evaluate it at <span class="math notranslate nohighlight">\(T = 350\)</span> K.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(T\)</span> (K)</p></th>
+<th class="head text-center"><p>300</p></th>
+<th class="head text-center"><p>325</p></th>
+<th class="head text-center"><p>350</p></th>
+<th class="head text-center"><p>375</p></th>
+<th class="head text-center"><p>400</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(r\)</span> (mol/L/s)</p></td>
+<td class="text-center"><p>1.2</p></td>
+<td class="text-center"><p>2.3</p></td>
+<td class="text-center"><p>3.8</p></td>
+<td class="text-center"><p>5.7</p></td>
+<td class="text-center"><p>8.1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">T_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">325</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">375</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">r_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">5.7</span><span class="p">,</span> <span class="mf">8.1</span><span class="p">])</span>
+
+<span class="c1"># Fit a degree-2 polynomial</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">)</span>   <span class="c1"># x, y, degree</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitted polynomial:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Evaluate at T = 350 K</span>
+<span class="n">T_query</span> <span class="o">=</span> <span class="mf">350.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">r(</span><span class="si">{</span><span class="n">T_query</span><span class="si">}</span><span class="s2"> K) = </span><span class="si">{</span><span class="n">p</span><span class="p">(</span><span class="n">___</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L/s&quot;</span><span class="p">)</span>   <span class="c1"># call p at T_query</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="practice-problems-by-students">
+<h2>Practice Problems (by students)<a class="headerlink" href="#practice-problems-by-students" title="Link to this heading">#</a></h2>
+<section id="problem-1-polynomial-evaluation">
+<h3>Problem 1: Polynomial Evaluation<a class="headerlink" href="#problem-1-polynomial-evaluation" title="Link to this heading">#</a></h3>
+<p>Consider the polynomial <span class="math notranslate nohighlight">\(p(x) = 4x^3 - 2x^2 + 7x - 1\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Create it as a <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> object and print its representation.</p></li>
+<li><p>Evaluate <span class="math notranslate nohighlight">\(p(3)\)</span> using both <code class="docutils literal notranslate"><span class="pre">poly1d</span></code> and <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code>. Verify manually.</p></li>
+<li><p>Find all roots of <span class="math notranslate nohighlight">\(p(x)\)</span>. Which roots are real? Which are complex?</p></li>
+<li><p>Plot <span class="math notranslate nohighlight">\(p(x)\)</span> over <span class="math notranslate nohighlight">\(x \in [-2, 4]\)</span> and mark the real root(s) with a red dot.</p></li>
+</ol>
+<p><strong>Hint:</strong> <code class="docutils literal notranslate"><span class="pre">p.roots</span></code> returns all roots (may be complex); filter with <code class="docutils literal notranslate"><span class="pre">np.isreal()</span></code> to find real ones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># 1. Create poly1d object</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p(x) =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># 2. Evaluate at x = 3</span>
+<span class="n">x_val</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">p(</span><span class="si">{</span><span class="n">x_val</span><span class="si">}</span><span class="s2">) via poly1d  : </span><span class="si">{</span><span class="n">p</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p(</span><span class="si">{</span><span class="n">x_val</span><span class="si">}</span><span class="s2">) via polyval : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span><span class="w"> </span><span class="n">x_val</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Manual check        : </span><span class="si">{</span><span class="mi">4</span><span class="o">*</span><span class="n">x_val</span><span class="o">**</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">x_val</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span><span class="o">*</span><span class="n">x_val</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. All roots (may be complex)</span>
+<span class="n">roots</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">roots</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All roots: </span><span class="si">{</span><span class="n">roots</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">real_roots</span> <span class="o">=</span> <span class="n">roots</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isreal</span><span class="p">(</span><span class="n">roots</span><span class="p">)]</span><span class="o">.</span><span class="n">real</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Real roots: </span><span class="si">{</span><span class="n">real_roots</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 4. Plot</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$p(x) = 4x^3 - 2x^2 + 7x - 1$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">real_roots</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">real_roots</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">real_roots</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span>
+             <span class="n">markersize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Real root(s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Problem 1: Cubic Polynomial&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p(x) =
+   3     2
+4 x - 2 x + 7 x - 1
+
+p(3) via poly1d  : 110.0000
+p(3) via polyval : 110.0000
+Manual check        : 110.0000
+
+All roots: [0.1764+1.2911j 0.1764-1.2911j 0.1472+0.j    ]
+Real roots: [0.1472]
+</pre></div>
+</div>
+<img alt="../../_images/b65f9f91f4c46b7658b3be91b8bdcb46405cbaa1a09b3c5fbe5abd4ac3418c27.png" src="../../_images/b65f9f91f4c46b7658b3be91b8bdcb46405cbaa1a09b3c5fbe5abd4ac3418c27.png" />
+</div>
+</div>
+</section>
+<section id="problem-2-fitting-viscosity-data-degrees-of-freedom-overfitting">
+<h3>Problem 2: Fitting Viscosity Data — Degrees of Freedom &amp; Overfitting<a class="headerlink" href="#problem-2-fitting-viscosity-data-degrees-of-freedom-overfitting" title="Link to this heading">#</a></h3>
+<p>The dynamic viscosity of liquid water varies with temperature (11 data points):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(T\)</span> (°C)</p></th>
+<th class="head"><p>0</p></th>
+<th class="head"><p>10</p></th>
+<th class="head"><p>20</p></th>
+<th class="head"><p>30</p></th>
+<th class="head"><p>40</p></th>
+<th class="head"><p>50</p></th>
+<th class="head"><p>60</p></th>
+<th class="head"><p>70</p></th>
+<th class="head"><p>80</p></th>
+<th class="head"><p>90</p></th>
+<th class="head"><p>100</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mu\)</span> (mPa·s)</p></td>
+<td><p>1.793</p></td>
+<td><p>1.307</p></td>
+<td><p>1.002</p></td>
+<td><p>0.798</p></td>
+<td><p>0.653</p></td>
+<td><p>0.547</p></td>
+<td><p>0.467</p></td>
+<td><p>0.404</p></td>
+<td><p>0.355</p></td>
+<td><p>0.315</p></td>
+<td><p>0.282</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>(a)</strong> Fill in the degrees of freedom table below. Recall: <span class="math notranslate nohighlight">\(\text{DOF} = N - (n+1)\)</span> where <span class="math notranslate nohighlight">\(N\)</span> = number of data points and <span class="math notranslate nohighlight">\(n\)</span> = polynomial degree.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Degree <span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head text-center"><p>Parameters <span class="math notranslate nohighlight">\(n+1\)</span></p></th>
+<th class="head text-center"><p>DOF = <span class="math notranslate nohighlight">\(11 - (n+1)\)</span></p></th>
+<th class="head text-center"><p>Overdetermined?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>10</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>(b)</strong> Fit polynomials of degree 1, 3, 5, and 10, plot all fits over <span class="math notranslate nohighlight">\(T \in [-10, 120]\)</span> °C, and print MAE and <span class="math notranslate nohighlight">\(R^2\)</span> for each. Then answer: which degrees overfit, and how can you tell?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">mu_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.793</span><span class="p">,</span> <span class="mf">1.307</span><span class="p">,</span> <span class="mf">1.002</span><span class="p">,</span> <span class="mf">0.798</span><span class="p">,</span> <span class="mf">0.653</span><span class="p">,</span> <span class="mf">0.547</span><span class="p">,</span>
+                    <span class="mf">0.467</span><span class="p">,</span> <span class="mf">0.404</span><span class="p">,</span> <span class="mf">0.355</span><span class="p">,</span> <span class="mf">0.315</span><span class="p">,</span> <span class="mf">0.282</span><span class="p">])</span>
+
+<span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">colors</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:purple&#39;</span><span class="p">]</span>
+<span class="n">T_fine</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># (b-1) Fit each degree — complete the polyfit call</span>
+<span class="n">fits</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
+    <span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">mu_data</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>   <span class="c1"># x, y, degree</span>
+
+<span class="c1"># (b-2) Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">mu_data</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">deg</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_fine</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">],</span> <span class="n">T_fine</span><span class="p">),</span>
+             <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">deg</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu$ (mPa·s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Water Viscosity: Polynomial Fits&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># (b-3) Metrics</span>
+<span class="n">N</span>      <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">T_data</span><span class="p">)</span>
+<span class="n">SS_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">mu_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mu_data</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Degree&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;DOF&#39;</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MAE (mPa·s)&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;R²&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">mu_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">[</span><span class="n">deg</span><span class="p">],</span> <span class="n">T_data</span><span class="p">)</span>
+    <span class="n">MAE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>           <span class="c1"># mean absolute error</span>
+    <span class="n">R2</span>  <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">res</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">SS_tot</span> <span class="c1"># R-squared</span>
+    <span class="n">dof</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="p">(</span><span class="n">deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>                  <span class="c1"># degrees of freedom</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">deg</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">dof</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">MAE</span><span class="si">:</span><span class="s2">&gt;14.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">R2</span><span class="si">:</span><span class="s2">&gt;10.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d48b1bcca968179ac9a5521e3174c8863979852abe5390bcf74d5bf854bb756b.png" src="../../_images/d48b1bcca968179ac9a5521e3174c8863979852abe5390bcf74d5bf854bb756b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree    DOF     MAE (mPa·s)          R²
+---------------------------------------------
+     1      9        0.153527    0.835236
+     3      7        0.019299    0.997815
+     5      5        0.001522    0.999986
+    10      0        0.000000    1.000000
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>(a) DOF table — fill in your answers:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Degree <span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head text-center"><p>Parameters <span class="math notranslate nohighlight">\(n+1\)</span></p></th>
+<th class="head text-center"><p>DOF</p></th>
+<th class="head text-center"><p>Overdetermined?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>9</p></td>
+<td class="text-center"><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>4</p></td>
+<td class="text-center"><p>7</p></td>
+<td class="text-center"><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>6</p></td>
+<td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>10</p></td>
+<td class="text-center"><p>11</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>No (exact fit)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>(b) Which degrees overfit, and how can you tell?</strong></p>
+<p><em>Your answer here:</em></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lab07"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-by-instructor">Examples (by instructor)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-polynomial-basics-np-poly1d-np-polyval">Example 1: Polynomial Basics — <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-root-finding-chemical-equilibrium">Example 2: Root Finding — Chemical Equilibrium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-fitting-c-p-t-for-co-2-with-np-polyfit">Example 3: Fitting <span class="math notranslate nohighlight">\(C_p(T)\)</span> for CO<span class="math notranslate nohighlight">\(_2\)</span> with <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up-syntax-practice">Warm-Up: Syntax Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems-by-students">Practice Problems (by students)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-polynomial-evaluation">Problem 1: Polynomial Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-fitting-viscosity-data-degrees-of-freedom-overfitting">Problem 2: Fitting Viscosity Data — Degrees of Freedom &amp; Overfitting</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

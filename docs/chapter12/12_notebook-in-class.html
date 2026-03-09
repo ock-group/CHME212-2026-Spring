@@ -209,6 +209,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
 </ul>
 
     </div>
@@ -786,6 +787,40 @@ Manual check          : 1.0000
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Fit Cp(T) with degree 1, 2, 3 polynomials ────────────────────────────────</span>
+<span class="n">T_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">280</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># Fit each degree separately</span>
+<span class="n">coeffs_deg1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">coeffs_deg2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">coeffs_deg3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Evaluate each fit on the fine grid</span>
+<span class="n">Cp_deg1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_deg1</span><span class="p">,</span> <span class="n">T_fine</span><span class="p">)</span>
+<span class="n">Cp_deg2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_deg2</span><span class="p">,</span> <span class="n">T_fine</span><span class="p">)</span>
+<span class="n">Cp_deg3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs_deg3</span><span class="p">,</span> <span class="n">T_fine</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;NIST data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_fine</span><span class="p">,</span> <span class="n">Cp_deg1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span>    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Degree 1&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_fine</span><span class="p">,</span> <span class="n">Cp_deg2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Degree 2&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_fine</span><span class="p">,</span> <span class="n">Cp_deg3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span>   <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Degree 3&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$C_p$ (J mol$^{-1}$ K$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Polynomial fits to CO$_2$ $C_p$ data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/763563129095e3e3714517e9182b5016ca6d176ac233d477b98e531710b57330.png" src="../../_images/763563129095e3e3714517e9182b5016ca6d176ac233d477b98e531710b57330.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Fit Cp(T) with degree 1, 2, 3 polynomials ────────────────────────────────</span>
 <span class="n">T_fine</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">280</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
 <span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="n">colors</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">]</span>
@@ -890,12 +925,155 @@ R^2 = 1 - \frac{\sum_i e_i^2}{\sum_i (y_i - \bar{y})^2}
 <li><p><strong>Penalize large errors more heavily</strong> — an error of 2 contributes 4× more than an error of 1; the fit is driven by the worst offenders</p></li>
 <li><p><strong>Smooth, differentiable objective</strong> — <span class="math notranslate nohighlight">\(e_i^2\)</span> has a clean derivative everywhere, which is what allows least-squares to be solved analytically; <span class="math notranslate nohighlight">\(|e_i|\)</span> is not differentiable at zero</p></li>
 </ul>
-<p><strong>Interpreting <span class="math notranslate nohighlight">\(R^2\)</span>:</strong> The denominator <span class="math notranslate nohighlight">\(\sum_i(y_i - \bar{y})^2\)</span> is the total variance in the data (how spread out the measurements are). The numerator <span class="math notranslate nohighlight">\(\sum_i e_i^2\)</span> is the variance the model <em>failed</em> to explain. Subtracting their ratio from 1 gives the fraction the model <em>does</em> explain.</p>
+<p><strong>Interpreting <span class="math notranslate nohighlight">\(R^2\)</span>:</strong> Here <span class="math notranslate nohighlight">\(\bar{y} = \frac{1}{N}\sum_i y_i\)</span> is the mean of all measured values — the “dumbest possible prediction” (just guess the average every time). The denominator <span class="math notranslate nohighlight">\(\sum_i(y_i - \bar{y})^2\)</span> is how much the data varies around that mean (total spread). The numerator <span class="math notranslate nohighlight">\(\sum_i e_i^2\)</span> is the variance your model <em>failed</em> to explain. Subtracting their ratio from 1 gives the fraction the model <em>does</em> explain. If the model only predicted <span class="math notranslate nohighlight">\(\bar{y}\)</span> for every point, <span class="math notranslate nohighlight">\(R^2 = 0\)</span>; a perfect fit gives <span class="math notranslate nohighlight">\(R^2 = 1\)</span>.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(R^2 = 1\)</span> — perfect fit; every residual is zero</p></li>
-<li><p><span class="math notranslate nohighlight">\(R^2 = 0\)</span> — the model does no better than just predicting <span class="math notranslate nohighlight">\(\bar{y}\)</span> for every point</p></li>
+<li><p><span class="math notranslate nohighlight">\(R^2 = 0\)</span> — the model does no better than predicting <span class="math notranslate nohighlight">\(\bar{y}\)</span> for every point</p></li>
 <li><p><span class="math notranslate nohighlight">\(R^2 &lt; 0\)</span> — the model is worse than the mean (a sign something is seriously wrong)</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">])</span> 
+<span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mean</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">mean</span><span class="p">])</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">true</span> <span class="o">-</span> <span class="n">pred</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;True values:     &quot;</span><span class="p">,</span> <span class="n">true</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted values:&quot;</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Residuals (true - pred):&quot;</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)</span>
+
+
+
+
+<span class="c1"># numerator = variance of residuals (model error)</span>
+<span class="n">residual_variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of residuals (model error):&quot;</span><span class="p">,</span> <span class="n">residual_variance</span><span class="p">)</span>
+
+<span class="c1"># denominator = variance of true values (data variability)</span>
+<span class="n">true_variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of true values (data variability):&quot;</span><span class="p">,</span> <span class="n">true_variance</span><span class="p">)</span>
+
+
+<span class="c1"># caculate R2</span>
+<span class="n">R2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">residual_variance</span> <span class="o">/</span> <span class="n">true_variance</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R² (coefficient of determination):&quot;</span><span class="p">,</span> <span class="n">R2</span><span class="p">)</span>
+
+<span class="c1"># plot the parity plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>  <span class="c1"># parity line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;True values&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted values&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Parity plot&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True values:      [1 2 3]
+Predicted values: [2. 2. 2.]
+Residuals (true - pred): [-1.  0.  1.]
+Variance of residuals (model error): 1.0
+Variance of true values (data variability): 1.0
+R² (coefficient of determination): 0.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Parity plot&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/0dd269822bd75dacb1131206bc5e83d358e2787de8eee1c976796230f6707bf4.png" src="../../_images/0dd269822bd75dacb1131206bc5e83d358e2787de8eee1c976796230f6707bf4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Three-point worked example: compute MAE, MSE, R² by hand ─────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Suppose you fit a line to 3 data points and got these predictions:</span>
+<span class="n">y_obs</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>   <span class="c1"># measured values</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span>  <span class="mf">9.0</span><span class="p">])</span>   <span class="c1"># model predictions</span>
+
+<span class="c1"># Step 1: residuals</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">y_obs</span> <span class="o">-</span> <span class="n">y_pred</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Residuals e_i:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="c1"># Step 2: MAE</span>
+<span class="n">MAE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">MAE = mean(|e_i|) = (</span><span class="si">{</span><span class="s1">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;|</span><span class="si">{</span><span class="n">ei</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">|&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">ei</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">) / 3 = </span><span class="si">{</span><span class="n">MAE</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 3: MSE</span>
+<span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE = mean(e_i^2) = (</span><span class="si">{</span><span class="s1">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ei</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">^2&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">ei</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">) / 3 = </span><span class="si">{</span><span class="n">MSE</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 4: R²</span>
+<span class="n">y_bar</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_obs</span><span class="p">)</span>
+<span class="n">SS_res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">SS_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_obs</span> <span class="o">-</span> <span class="n">y_bar</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">R2</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">SS_res</span> <span class="o">/</span> <span class="n">SS_tot</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">y_bar = </span><span class="si">{</span><span class="n">y_bar</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SS_res = sum(e_i^2)          = </span><span class="si">{</span><span class="n">SS_res</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SS_tot = sum((y_i - y_bar)^2) = </span><span class="si">{</span><span class="n">SS_tot</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R² = 1 - </span><span class="si">{</span><span class="n">SS_res</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">SS_tot</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">R2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Residuals e_i: [-1.  1.  1.]
+
+MAE = mean(|e_i|) = (|-1| + |1| + |1|) / 3 = 1.0000
+MSE = mean(e_i^2) = (-1^2 + 1^2 + 1^2) / 3 = 1.0000
+
+y_bar = 5.6667
+SS_res = sum(e_i^2)          = 3.0000
+SS_tot = sum((y_i - y_bar)^2) = 32.6667
+R² = 1 - 3.0000/32.6667 = 0.9082
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ── MAE vs MSE: sensitivity to large errors ──────────────────────────────────</span>
+<span class="c1"># Two models, same number of points, same MAE — but very different MSE.</span>
+<span class="c1">#</span>
+<span class="c1"># Model A: errors are small and uniform</span>
+<span class="c1"># Model B: errors are mostly tiny, but one is very large (an outlier)</span>
+
+<span class="n">e_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">])</span>   <span class="c1"># all errors = 1</span>
+<span class="n">e_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span>  <span class="mf">0.1</span><span class="p">,</span>  <span class="mf">0.1</span><span class="p">,</span>  <span class="mf">0.1</span><span class="p">,</span>  <span class="mf">0.1</span><span class="p">,</span>  <span class="mf">5.5</span><span class="p">])</span>   <span class="c1"># one large outlier</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MAE&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MSE&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">28</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;Model A&#39;</span><span class="p">,</span> <span class="n">e_A</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Model B&#39;</span><span class="p">,</span> <span class="n">e_B</span><span class="p">)]:</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">:</span><span class="s2">8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s2">&gt;8.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">mse</span><span class="si">:</span><span class="s2">&gt;8.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model A errors:&quot;</span><span class="p">,</span> <span class="n">e_A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model B errors:&quot;</span><span class="p">,</span> <span class="n">e_B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MAE treats every error equally — |5.5| counts the same as five |1|s (by magnitude).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE squares it: 5.5^2 = 30.25 vs 1^2 = 1.  The outlier dominates MSE.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               MAE       MSE
+----------------------------
+Model A     1.0000    1.0000
+Model B     1.0000    5.0500
+
+Model A errors: [1. 1. 1. 1. 1. 1.]
+Model B errors: [0.1 0.1 0.1 0.1 0.1 5.5]
+
+MAE treats every error equally — |5.5| counts the same as five |1|s (by magnitude).
+MSE squares it: 5.5^2 = 30.25 vs 1^2 = 1.  The outlier dominates MSE.
+</pre></div>
+</div>
+</div>
+</div>
 <blockquote>
 <div><h3 class="rubric" id="instructor-note-12-3-2">📋 Instructor Note — 12.3.2</h3>
 <p><em>(Run the metrics table cell — show the printed table)</em></p>
@@ -1209,6 +1387,10 @@ With <span class="math notranslate nohighlight">\(N\)</span> data points and a d
 <li><p>A low-degree polynomial is <em>too rigid</em> — it misses real structure in the data</p></li>
 <li><p>A high-degree polynomial is <em>too flexible</em> — it chases every fluctuation and noise spike</p></li>
 </ul>
+<blockquote>
+<div><p>Bias = systematic error from the model being too simple to capture the true shape of the data.
+Variance = sensitivity to the specific data points you happened to measure.</p>
+</div></blockquote>
 <p>The right degree sits in between: flexible enough to capture the physical trend, not so flexible that it fits the noise. A practical warning sign: if the polynomial behaves wildly <em>between</em> data points or shoots off just outside the data range, the degree is too high.</p>
 <div class="math notranslate nohighlight">
 \[

@@ -19,7 +19,6 @@
 ## Part A — Fix the Code (20 points, 5 pts each)
 
 Each snippet below contains **one bug**. Write the corrected line(s) in the provided cell in `submission_form.ipynb`.
-
 ---
 
 **1.** The following code should print **"Number is smaller than 20"**, but it raises an error. Fix it.
