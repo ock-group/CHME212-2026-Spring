@@ -62,6 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter13/13_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="prev" title="Chapter 12: Polynomial Fitting" href="../chapter12/12_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +125,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -195,11 +195,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -441,14 +442,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-ci-output">Reading the CI output</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-simulation">13.6 Monte Carlo Simulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-idea">The core idea</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-to-analytical-error-propagation">Comparison to analytical error propagation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-propagation-arrhenius-rate-constant">13.7.1 Error Propagation: Arrhenius Rate Constant</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#process-reliability-fraction-of-batches-meeting-spec">13.7.2 Process Reliability: Fraction of Batches Meeting Spec</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classic-monte-carlo-estimating">13.7.3 Classic Monte Carlo: Estimating π</a></li>
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -468,7 +461,6 @@ document.write(`
 <li><p>Random number generation with <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code></p></li>
 <li><p>Key probability distributions: uniform, normal, exponential, Poisson</p></li>
 <li><p>The Central Limit Theorem and why it matters in engineering</p></li>
-<li><p>Monte Carlo simulation: error propagation and process reliability</p></li>
 <li><p>Confidence intervals and hypothesis testing basics</p></li>
 </ul>
 <div class="cell docutils container">
@@ -836,6 +828,46 @@ kurtosis : -0.7790   (0 = normal tail weight)
 </tbody>
 </table>
 </div>
+<p>or</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Distribution</p></th>
+<th class="head"><p>Parameters</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.random.random(n)</span></code></p></td>
+<td><p>Uniform [0, 1)</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.random.uniform(low,</span> <span class="pre">high,</span> <span class="pre">n)</span></code></p></td>
+<td><p>Uniform [low, high)</p></td>
+<td><p>low, high</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.random.normal(mu,</span> <span class="pre">sigma,</span> <span class="pre">n)</span></code></p></td>
+<td><p>Normal (Gaussian)</p></td>
+<td><p>mean <span class="math notranslate nohighlight">\(\mu\)</span>, std <span class="math notranslate nohighlight">\(\sigma\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.random.exponential(scale,</span> <span class="pre">n)</span></code></p></td>
+<td><p>Exponential</p></td>
+<td><p>mean = <code class="docutils literal notranslate"><span class="pre">scale</span></code> = <span class="math notranslate nohighlight">\(1/\lambda\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.random.randint(low,</span> <span class="pre">high,</span> <span class="pre">n)</span></code></p></td>
+<td><p>Discrete uniform</p></td>
+<td><p>integer range</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">np.random.choice(a,</span> <span class="pre">n)</span></code></p></td>
+<td><p>Random selection</p></td>
+<td><p>array <code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">np.random.shuffle(a)</span></code></p></td>
+<td><p>Shuffle in-place</p></td>
+<td><p>array <code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">size</span></code> parameter controls the shape of the output — pass a single integer for 1-D arrays, or a tuple <code class="docutils literal notranslate"><span class="pre">(rows,</span> <span class="pre">cols)</span></code> for 2-D arrays.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1021,7 +1053,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\!\left(-\frac{(x - \mu)^2}{2\sigma^2}\ri
 </section>
 <section id="the-68-95-99-7-rule-empirical-rule">
 <h3>The 68-95-99.7 rule (empirical rule)<a class="headerlink" href="#the-68-95-99-7-rule-empirical-rule" title="Link to this heading">#</a></h3>
-<p>This is the most practical fact about the normal distribution — memorize it:</p>
+<p>This is the most practical fact about the normal distribution:</p>
 <div class="math notranslate nohighlight">
 \[
 P(\mu - \sigma &lt; X &lt; \mu + \sigma) \approx 68\%
@@ -1437,344 +1469,6 @@ scipy.stats.t.interval(0.95): [86.6950, 88.7316]%
 </ul>
 <p><strong>Notice the trade-off:</strong> The 99% CI is wider than the 95% CI, which is wider than the 90% CI. More confidence requires a wider interval — this makes intuitive sense.</p>
 <p><strong>Notice the effect of <span class="math notranslate nohighlight">\(n\)</span>:</strong> The cell below shows that CI width shrinks proportionally to <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>. To cut the CI in half, we need 4× more samples. This guides experimental design: “How many batches do I need to estimate the mean within ±0.5%?”</p>
-</section>
-</section>
-<section id="monte-carlo-simulation">
-<span id="id9"></span><h2>13.6 Monte Carlo Simulation<a class="headerlink" href="#monte-carlo-simulation" title="Link to this heading">#</a></h2>
-<p><strong>Monte Carlo simulation</strong> uses random sampling to estimate quantities that are difficult or impossible to compute analytically. It is named after the Monte Carlo casino — randomness is the core mechanism.</p>
-<section id="the-core-idea">
-<h3>The core idea<a class="headerlink" href="#the-core-idea" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Model each uncertain input as a probability distribution</p></li>
-<li><p>Draw thousands of random samples from those input distributions</p></li>
-<li><p>Compute the output for each combination of sampled inputs</p></li>
-<li><p>Analyze the resulting distribution of outputs</p></li>
-</ol>
-<p>This approach is powerful because it:</p>
-<ul class="simple">
-<li><p>Works for <strong>any function</strong>, no matter how nonlinear or complex</p></li>
-<li><p>Handles <strong>any distribution</strong> for inputs, not just normal</p></li>
-<li><p>Gives you the <strong>full output distribution</strong>, not just a mean and standard deviation</p></li>
-<li><p>Can be extended to <strong>correlated inputs</strong> (e.g., pressure and temperature are not independent in a process)</p></li>
-</ul>
-</section>
-<section id="comparison-to-analytical-error-propagation">
-<h3>Comparison to analytical error propagation<a class="headerlink" href="#comparison-to-analytical-error-propagation" title="Link to this heading">#</a></h3>
-<p>The standard first-order (linearized) uncertainty propagation formula is:</p>
-<div class="math notranslate nohighlight">
-\[
-\sigma_f^2 \approx \sum_i \left(\frac{\partial f}{\partial x_i}\right)^2 \sigma_{x_i}^2
-\quad \text{(assuming independent inputs)}
-\]</div>
-<p>This works well for smooth, nearly linear functions with small uncertainties. Monte Carlo is more general:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Method</p></th>
-<th class="head"><p>Pros</p></th>
-<th class="head"><p>Cons</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Analytical (first-order)</p></td>
-<td><p>Fast, exact for linear functions</p></td>
-<td><p>Requires derivatives; fails for nonlinear functions; assumes normal inputs</p></td>
-</tr>
-<tr class="row-odd"><td><p>Monte Carlo</p></td>
-<td><p>No derivatives needed; handles any distribution; reveals full output distribution</p></td>
-<td><p>Slower; statistical noise in estimates</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>ChE applications of Monte Carlo:</strong></p>
-<ul class="simple">
-<li><p><strong>Uncertainty propagation</strong> through thermodynamic calculations (e.g., how does uncertainty in <span class="math notranslate nohighlight">\(E_a\)</span> affect predicted conversion?)</p></li>
-<li><p><strong>Process reliability</strong> — what fraction of operating conditions lead to off-spec product?</p></li>
-<li><p><strong>Risk assessment</strong> — what is the probability of exceeding a safety threshold?</p></li>
-<li><p><strong>Equipment sizing</strong> — given uncertain feed compositions, what reactor volume ensures 99% of scenarios achieve desired conversion?</p></li>
-<li><p><strong>Financial analysis</strong> — uncertainty in raw material costs, utility prices, and yields propagates to process economics</p></li>
-</ul>
-</section>
-<section id="error-propagation-arrhenius-rate-constant">
-<span id="id10"></span><h3>13.7.1 Error Propagation: Arrhenius Rate Constant<a class="headerlink" href="#error-propagation-arrhenius-rate-constant" title="Link to this heading">#</a></h3>
-<p>The Arrhenius equation is fundamental to reaction engineering:
-$<span class="math notranslate nohighlight">\(k = A \exp\!\left(-\frac{E_a}{RT}\right)\)</span>$</p>
-<p>Both <span class="math notranslate nohighlight">\(E_a\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are measured quantities with uncertainty. Because <span class="math notranslate nohighlight">\(k\)</span> depends <strong>exponentially</strong> on <span class="math notranslate nohighlight">\(E_a\)</span> and <span class="math notranslate nohighlight">\(T\)</span>, even small uncertainties in these inputs can produce surprisingly large uncertainty in <span class="math notranslate nohighlight">\(k\)</span>.</p>
-<p><strong>Step-by-step Monte Carlo approach:</strong></p>
-<ol class="arabic simple">
-<li><p>Model <span class="math notranslate nohighlight">\(E_a\)</span> and <span class="math notranslate nohighlight">\(T\)</span> as normal distributions (measurement errors are approximately normally distributed)</p></li>
-<li><p>Draw <span class="math notranslate nohighlight">\(N = 100{,}000\)</span> independent pairs <span class="math notranslate nohighlight">\((E_a^{(i)}, T^{(i)})\)</span></p></li>
-<li><p>Compute <span class="math notranslate nohighlight">\(k^{(i)} = A \exp(-E_a^{(i)} / (R T^{(i)}))\)</span> for each pair</p></li>
-<li><p>Analyze the distribution of <span class="math notranslate nohighlight">\(k^{(i)}\)</span>: mean, std, percentiles</p></li>
-</ol>
-<p><strong>Given:</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(A = 1 \times 10^8\)</span> s<span class="math notranslate nohighlight">\(^{-1}\)</span> (exact, no uncertainty)</p></li>
-<li><p><span class="math notranslate nohighlight">\(E_a = 75{,}000 \pm 500\)</span> J/mol — normal distribution: <span class="math notranslate nohighlight">\(E_a \sim \mathcal{N}(75000, 500^2)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(T = 500 \pm 1.5\)</span> K — normal distribution: <span class="math notranslate nohighlight">\(T \sim \mathcal{N}(500, 1.5^2)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(R = 8.314\)</span> J/(mol·K)</p></li>
-</ul>
-<p>The notation <span class="math notranslate nohighlight">\(\pm\)</span> here refers to 1 standard deviation (the 68% confidence range for a normal distribution).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Monte Carlo error propagation: Arrhenius rate constant ────────────────────</span>
-<span class="n">rng</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">N_mc</span>   <span class="o">=</span> <span class="mi">100_000</span>
-<span class="n">R</span>      <span class="o">=</span> <span class="mf">8.314</span>
-<span class="n">A_pre</span>  <span class="o">=</span> <span class="mf">1e8</span>
-
-<span class="c1"># Step 1: Define input distributions</span>
-<span class="n">Ea_mu</span><span class="p">,</span> <span class="n">Ea_sig</span> <span class="o">=</span> <span class="mf">75_000.0</span><span class="p">,</span> <span class="mf">500.0</span>    <span class="c1"># J/mol  — mean and std dev of Ea measurement</span>
-<span class="n">T_mu</span><span class="p">,</span>  <span class="n">T_sig</span>  <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span>    <span class="mf">1.5</span>      <span class="c1"># K      — mean and std dev of T measurement</span>
-
-<span class="c1"># Step 2: Draw N_mc random samples from each input distribution</span>
-<span class="n">Ea_samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">Ea_mu</span><span class="p">,</span> <span class="n">Ea_sig</span><span class="p">,</span> <span class="n">N_mc</span><span class="p">)</span>   <span class="c1"># shape: (N_mc,)</span>
-<span class="n">T_samples</span>  <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">T_mu</span><span class="p">,</span>  <span class="n">T_sig</span><span class="p">,</span>  <span class="n">N_mc</span><span class="p">)</span>   <span class="c1"># shape: (N_mc,)</span>
-
-<span class="c1"># Step 3: Evaluate the function for each sample pair</span>
-<span class="n">k_samples</span> <span class="o">=</span> <span class="n">A_pre</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea_samples</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T_samples</span><span class="p">))</span>
-
-<span class="c1"># Nominal (deterministic) value using the mean inputs</span>
-<span class="n">k_nominal</span> <span class="o">=</span> <span class="n">A_pre</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea_mu</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T_mu</span><span class="p">))</span>
-
-<span class="c1"># Step 4: Analyze the output distribution</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nominal k at (Ea=</span><span class="si">{</span><span class="n">Ea_mu</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> J/mol, T=</span><span class="si">{</span><span class="n">T_mu</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> K):&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  k_nominal = </span><span class="si">{</span><span class="n">k_nominal</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> s⁻¹&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monte Carlo results (N = </span><span class="si">{</span><span class="n">N_mc</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  k mean  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_samples</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> s⁻¹  (slightly &gt; nominal due to nonlinearity)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  k std   = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_samples</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> s⁻¹&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  k CV    = </span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">k_samples</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_samples</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%  (coefficient of variation — relative uncertainty)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  95% range of k:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    2.5th percentile  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">k_samples</span><span class="p">,</span><span class="w">  </span><span class="mf">2.5</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> s⁻¹&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    97.5th percentile = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">k_samples</span><span class="p">,</span><span class="w"> </span><span class="mf">97.5</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> s⁻¹&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Interpretation: 95% of the time, k falls in this range due to&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  measurement uncertainty in Ea and T alone.&quot;</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">Ea_samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">Ea_mu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$E_a$ (J/mol)&#39;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Input: $E_a$ ~ N(</span><span class="si">{</span><span class="n">Ea_mu</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">Ea_sig</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">²)&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">T_samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">T_mu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;T (K)&#39;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Input: T ~ N(</span><span class="si">{</span><span class="n">T_mu</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">T_sig</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">²)&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">k_samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">k_nominal</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;k nominal&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k_samples</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;k MC mean&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;k (s⁻¹)&#39;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Output: k distribution</span><span class="se">\n</span><span class="s1">(skewed due to exponential nonlinearity)&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Note: k_mean &gt; k_nominal — Jensen&#39;s inequality: for a convex function f,&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;E[f(X)] &gt; f(E[X]). The exponential function is convex, so the mean k from&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Monte Carlo slightly exceeds the nominal k computed at the mean inputs.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nominal k at (Ea=75000 J/mol, T=500 K):
-  k_nominal = 1.460565 s⁻¹
-
-Monte Carlo results (N = 100,000):
-  k mean  = 1.474138 s⁻¹  (slightly &gt; nominal due to nonlinearity)
-  k std   = 0.195817 s⁻¹
-  k CV    = 13.28%  (coefficient of variation — relative uncertainty)
-
-  95% range of k:
-    2.5th percentile  = 1.125242 s⁻¹
-    97.5th percentile = 1.893896 s⁻¹
-
-  Interpretation: 95% of the time, k falls in this range due to
-  measurement uncertainty in Ea and T alone.
-</pre></div>
-</div>
-<img alt="../../_images/07dc5d282f31d2552f1044a2108ac7058089732ffcbfa8012ade82e574535bc3.png" src="../../_images/07dc5d282f31d2552f1044a2108ac7058089732ffcbfa8012ade82e574535bc3.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: k_mean &gt; k_nominal — Jensen&#39;s inequality: for a convex function f,
-E[f(X)] &gt; f(E[X]). The exponential function is convex, so the mean k from
-Monte Carlo slightly exceeds the nominal k computed at the mean inputs.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="process-reliability-fraction-of-batches-meeting-spec">
-<span id="id11"></span><h3>13.7.2 Process Reliability: Fraction of Batches Meeting Spec<a class="headerlink" href="#process-reliability-fraction-of-batches-meeting-spec" title="Link to this heading">#</a></h3>
-<p>A key question in process design and operations: <strong>what fraction of batches will meet product specifications</strong> when operating conditions fluctuate?</p>
-<p>This can’t be answered by just computing the nominal output — you need to know how variability in inputs propagates to variability in the output.</p>
-<p><strong>Problem setup:</strong></p>
-<p>A chemical product must have purity <span class="math notranslate nohighlight">\(\geq 97.5\%\)</span> to be sold. The purity model is:</p>
-<div class="math notranslate nohighlight">
-\[
-\text{Purity} = 100 \times \left(1 - 0.04\,e^{-k(T)\,\tau} \right)
-\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(k(T) = 0.1 \exp\!\left(-5000/T\right)\)</span> is a simplified rate constant (s<span class="math notranslate nohighlight">\(^{-1}\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\tau\)</span> (residence time, s) varies: <span class="math notranslate nohighlight">\(\tau \sim \mathcal{N}(120, 10^2)\)</span> — due to flow control variability</p></li>
-<li><p><span class="math notranslate nohighlight">\(T\)</span> (temperature, K) varies: <span class="math notranslate nohighlight">\(T \sim \mathcal{N}(400, 5^2)\)</span> — due to heat exchanger control variability</p></li>
-</ul>
-<p><strong>Step-by-step:</strong></p>
-<ol class="arabic simple">
-<li><p>Sample 200,000 operating scenarios <span class="math notranslate nohighlight">\((\tau^{(i)}, T^{(i)})\)</span></p></li>
-<li><p>Compute purity for each scenario</p></li>
-<li><p>Count what fraction fall below the 97.5% spec</p></li>
-<li><p>Visualize the purity distribution and identify which conditions cause failures</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Monte Carlo process reliability ───────────────────────────────────────────</span>
-<span class="n">rng</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">17</span><span class="p">)</span>
-<span class="n">N_mc</span>  <span class="o">=</span> <span class="mi">200_000</span>
-
-<span class="c1"># Uncertain inputs</span>
-<span class="n">tau_samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">120.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span>  <span class="n">N_mc</span><span class="p">)</span>    <span class="c1"># residence time (s)</span>
-<span class="n">T_samples2</span>  <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">400.0</span><span class="p">,</span>  <span class="mf">5.0</span><span class="p">,</span>  <span class="n">N_mc</span><span class="p">)</span>    <span class="c1"># temperature (K)</span>
-
-<span class="c1"># Simplified rate constant and purity model</span>
-<span class="n">k_samples2</span>  <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">5000.0</span> <span class="o">/</span> <span class="n">T_samples2</span><span class="p">)</span>
-<span class="n">purity</span>      <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mf">0.04</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k_samples2</span> <span class="o">*</span> <span class="n">tau_samples</span><span class="p">))</span>
-
-<span class="n">spec_limit</span>  <span class="o">=</span> <span class="mf">97.5</span>   <span class="c1"># %</span>
-<span class="n">frac_fail</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">purity</span> <span class="o">&lt;</span> <span class="n">spec_limit</span><span class="p">)</span>
-<span class="n">frac_pass</span>   <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">frac_fail</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monte Carlo reliability analysis  (N = </span><span class="si">{</span><span class="n">N_mc</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Purity mean  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">purity</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Purity std   = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">purity</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Purity 5th percentile  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">purity</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Spec limit             = </span><span class="si">{</span><span class="n">spec_limit</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Fraction BELOW spec    = </span><span class="si">{</span><span class="n">frac_fail</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">frac_fail</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% failure rate)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Fraction ABOVE spec    = </span><span class="si">{</span><span class="n">frac_pass</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">frac_pass</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% pass rate)&quot;</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">purity</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">spec_limit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Spec limit </span><span class="si">{</span><span class="n">spec_limit</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">purity</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">purity</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
-<span class="c1"># shade the failing region</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">purity</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">spec_limit</span><span class="p">],</span>
-                <span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Fail (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">frac_fail</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Purity (%)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Purity distribution&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">T_samples2</span><span class="p">[:</span><span class="mi">3000</span><span class="p">],</span> <span class="n">purity</span><span class="p">[:</span><span class="mi">3000</span><span class="p">],</span>
-           <span class="n">c</span><span class="o">=</span><span class="p">(</span><span class="n">purity</span><span class="p">[:</span><span class="mi">3000</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">spec_limit</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlGn_r&#39;</span><span class="p">,</span>
-           <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">spec_limit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature T (K)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Purity (%)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Purity vs Temperature (red = failing batches)&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Monte Carlo reliability analysis  (N = 200,000)
-  Purity mean  = 96.000%
-  Purity std   = 0.000%
-  Purity 5th percentile  = 96.000%
-  Spec limit             = 97.5%
-  Fraction BELOW spec    = 1.0000  (100.00% failure rate)
-  Fraction ABOVE spec    = 0.0000  (0.00% pass rate)
-</pre></div>
-</div>
-<img alt="../../_images/c5fce6580d0c28355085488e2b4cac499a2d662bb95b9102c74a6e245b58efeb.png" src="../../_images/c5fce6580d0c28355085488e2b4cac499a2d662bb95b9102c74a6e245b58efeb.png" />
-</div>
-</div>
-</section>
-<section id="classic-monte-carlo-estimating">
-<span id="id12"></span><h3>13.7.3 Classic Monte Carlo: Estimating π<a class="headerlink" href="#classic-monte-carlo-estimating" title="Link to this heading">#</a></h3>
-<p>Before applying Monte Carlo to engineering problems, let’s build intuition with a classic example: estimating <span class="math notranslate nohighlight">\(\pi\)</span> by “throwing darts.”</p>
-<p><strong>The idea:</strong> Randomly throw darts at a unit square <span class="math notranslate nohighlight">\([0,1]^2\)</span>. A quarter-circle of radius 1 has area <span class="math notranslate nohighlight">\(\pi/4\)</span>. If darts are thrown uniformly, the fraction landing inside the quarter-circle equals the ratio of areas:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\text{darts inside quarter-circle}}{\text{total darts}} \approx \frac{\pi/4}{1} = \frac{\pi}{4}
-\quad \Rightarrow \quad
-\hat{\pi} = 4 \times \frac{\text{darts inside}}{\text{total darts}}
-\]</div>
-<p><strong>Why this is instructive for ChE:</strong></p>
-<ul class="simple">
-<li><p>It demonstrates the <strong>law of large numbers</strong>: the Monte Carlo estimate converges to the true value as <span class="math notranslate nohighlight">\(N \to \infty\)</span></p></li>
-<li><p>The error shrinks as <span class="math notranslate nohighlight">\(\sim 1/\sqrt{N}\)</span> — the same scaling as SE = <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span></p></li>
-<li><p>It shows that Monte Carlo can compute quantities defined by geometric or probabilistic conditions, not just explicit formulas</p></li>
-</ul>
-<p><strong>Convergence rate:</strong> To gain one extra decimal place of accuracy, you need 100× more samples. This is Monte Carlo’s weakness — it is accurate but not efficient. For 1D integrals, direct numerical integration (Chapter 11) is far more efficient. Monte Carlo shines for <strong>high-dimensional</strong> problems where the number of integration variables makes standard methods impractical.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Monte Carlo estimate of π ─────────────────────────────────────────────────</span>
-<span class="n">rng</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">N_darts</span> <span class="o">=</span> <span class="mi">50_000</span>
-
-<span class="n">x_darts</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N_darts</span><span class="p">)</span>
-<span class="n">y_darts</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N_darts</span><span class="p">)</span>
-<span class="n">inside</span>  <span class="o">=</span> <span class="p">(</span><span class="n">x_darts</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y_darts</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span>
-
-<span class="c1"># Running estimate as we add more darts</span>
-<span class="n">N_run</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N_darts</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">pi_est</span>   <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_run</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-
-<span class="c1"># Dart scatter plot (show first 5000)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">n_show</span> <span class="o">=</span> <span class="mi">5000</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_darts</span><span class="p">[:</span><span class="n">n_show</span><span class="p">][</span><span class="n">inside</span><span class="p">[:</span><span class="n">n_show</span><span class="p">]],</span>  <span class="n">y_darts</span><span class="p">[:</span><span class="n">n_show</span><span class="p">][</span><span class="n">inside</span><span class="p">[:</span><span class="n">n_show</span><span class="p">]],</span>
-           <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Inside&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_darts</span><span class="p">[:</span><span class="n">n_show</span><span class="p">][</span><span class="o">~</span><span class="n">inside</span><span class="p">[:</span><span class="n">n_show</span><span class="p">]],</span> <span class="n">y_darts</span><span class="p">[:</span><span class="n">n_show</span><span class="p">][</span><span class="o">~</span><span class="n">inside</span><span class="p">[:</span><span class="n">n_show</span><span class="p">]],</span>
-           <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;salmon&#39;</span><span class="p">,</span>    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Outside&#39;</span><span class="p">)</span>
-<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Monte Carlo π  (first </span><span class="si">{</span><span class="n">n_show</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> darts)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">markerscale</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="c1"># Convergence</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">N_run</span><span class="p">,</span> <span class="n">pi_est</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True π&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of darts (log scale)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Estimated π&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Convergence of Monte Carlo π estimate&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True π               = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MC estimate (N=</span><span class="si">{</span><span class="n">N_darts</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">pi_est</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error                = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">pi_est</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/363a8bf22e13cf81d54128d9b9eb76be9a63f7536057fa5732039b9c0e22cd90.png" src="../../_images/363a8bf22e13cf81d54128d9b9eb76be9a63f7536057fa5732039b9c0e22cd90.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True π               = 3.14159265
-MC estimate (N=50,000) = 3.14968000
-Error                = 8.09e-03
-</pre></div>
-</div>
-</div>
-</div>
 <p><strong>Summary</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1824,10 +1518,6 @@ Error                = 8.09e-03
 <td><p><code class="docutils literal notranslate"><span class="pre">stats.t.interval(conf,</span> <span class="pre">df,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code></p></td>
 <td><p>Range for the true mean</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Monte Carlo</strong></p></td>
-<td><p>Sample inputs → compute outputs → analyze</p></td>
-<td><p>Uncertainty propagation, reliability</p></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1865,6 +1555,24 @@ Error                = 8.09e-03
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../chapter12/12_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 12: Polynomial Fitting</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lab01/01_lab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1915,14 +1623,6 @@ Error                = 8.09e-03
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ci-for-the-mean-known-z-interval">CI for the mean — known σ (Z-interval)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ci-for-the-mean-unknown-t-interval">CI for the mean — unknown σ (t-interval)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-ci-output">Reading the CI output</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-simulation">13.6 Monte Carlo Simulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-idea">The core idea</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-to-analytical-error-propagation">Comparison to analytical error propagation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-propagation-arrhenius-rate-constant">13.7.1 Error Propagation: Arrhenius Rate Constant</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#process-reliability-fraction-of-batches-meeting-spec">13.7.2 Process Reliability: Fraction of Batches Meeting Spec</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classic-monte-carlo-estimating">13.7.3 Classic Monte Carlo: Estimating π</a></li>
 </ul>
 </li>
 </ul>

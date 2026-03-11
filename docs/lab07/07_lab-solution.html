@@ -200,6 +200,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -643,6 +644,7 @@ R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
 <span class="n">colors</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">]</span>
 <span class="n">fits</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
 
+
 <span class="c1"># ── Plot fits ─────────────────────────────────────────────────────────────────</span>
 <span class="c1">#fig, ax = plt.subplots(figsize=(9, 4))</span>
 
@@ -659,11 +661,20 @@ R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
 <span class="n">SS_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">Cp_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Cp_data</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Degree&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MAE (J/mol/K)&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;MSE (J/mol/K)²&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;R²&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">Cp_data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">,</span> <span class="n">T_data</span><span class="p">)</span>
+<span class="n">Cp_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">fits</span><span class="p">,</span> <span class="n">T_data</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">Cp_data</span> <span class="o">-</span> <span class="n">Cp_pred</span>
 <span class="n">MAE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
 <span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">res</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">R2</span>  <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">res</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">SS_tot</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">degree</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">MAE</span><span class="si">:</span><span class="s2">&gt;16.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">MSE</span><span class="si">:</span><span class="s2">&gt;16.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">R2</span><span class="si">:</span><span class="s2">&gt;8.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Note: by using scikitt-learn</span>
+<span class="c1"># from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score</span>
+<span class="c1"># MAE = mean_absolute_error(Cp_data, Cp_pred)</span>
+<span class="c1"># MSE = mean_squared_error(Cp_data, Cp_pred)</span>
+<span class="c1"># R2  = r2_score(Cp_data, Cp_pred)</span>
+<span class="c1"># print(f&quot;{degree:&gt;6}  {MAE:&gt;16.6f}  {MSE:&gt;16.6f}  {R2:&gt;8.6f}&quot;)</span>
+
 
 <span class="c1"># ── Residual stem plots ───────────────────────────────────────────────────────</span>
 
@@ -701,7 +712,7 @@ R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># Define q(x) = x^2 - 5x + 6</span>
-<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="n">___</span><span class="p">,</span>  <span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">])</span>   <span class="c1"># fill in the three coefficients</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span>  <span class="c1"># should print [1, -5, 6]</span>
@@ -709,28 +720,9 @@ R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Define q(x) = x^2 - 5x + 6</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="n">___</span><span class="p">,</span>  <span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">])</span>   <span class="c1"># fill in the three coefficients</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)</span>  <span class="c1"># should print [1, -5, 6]</span>
-
-<span class="nn">File ~/miniconda3/envs/chemcomp/lib/python3.10/site-packages/numpy/lib/polynomial.py:1284,</span> in <span class="ni">poly1d.__str__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1282</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coeffs</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1283</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">iscomplex</span><span class="p">(</span><span class="n">coeff</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1284</span>         <span class="n">coefstr</span> <span class="o">=</span> <span class="n">fmt_float</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">coeff</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1285</span>     <span class="k">elif</span> <span class="n">real</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1286</span>         <span class="n">coefstr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">j&#39;</span> <span class="o">%</span> <span class="n">fmt_float</span><span class="p">(</span><span class="n">imag</span><span class="p">(</span><span class="n">coeff</span><span class="p">))</span>
-
-<span class="nn">File ~/miniconda3/envs/chemcomp/lib/python3.10/site-packages/numpy/lib/polynomial.py:1277,</span> in <span class="ni">poly1d.__str__.&lt;locals&gt;.fmt_float</span><span class="nt">(q)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1276</span> <span class="k">def</span><span class="w"> </span><span class="nf">fmt_float</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1277</span>     <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.4g</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">q</span>
-<span class="g g-Whitespace">   </span><span class="mi">1278</span>     <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.0000&#39;</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1279</span>         <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span>
-
-<span class="ne">TypeError</span>: must be real number, not numpy.str_
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   2
+1 x - 5 x + 6
+Coefficients: [ 1 -5  6]
 </pre></div>
 </div>
 </div>
@@ -745,9 +737,15 @@ R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
 <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">x_val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
-    <span class="n">via_poly1d</span> <span class="o">=</span> <span class="n">___</span>          <span class="c1"># call q like a function</span>
-    <span class="n">via_polyval</span> <span class="o">=</span> <span class="n">___</span>         <span class="c1"># use np.polyval</span>
+    <span class="n">via_poly1d</span> <span class="o">=</span> <span class="n">q</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>          <span class="c1"># call q like a function</span>
+    <span class="n">via_polyval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">x_val</span><span class="p">)</span>         <span class="c1"># use np.polyval</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;q(</span><span class="si">{</span><span class="n">x_val</span><span class="si">}</span><span class="s2">): poly1d = </span><span class="si">{</span><span class="n">via_poly1d</span><span class="si">}</span><span class="s2">,  polyval = </span><span class="si">{</span><span class="n">via_polyval</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>q(2): poly1d = 0,  polyval = 0
+q(3): poly1d = 0,  polyval = 0
 </pre></div>
 </div>
 </div>
@@ -760,12 +758,19 @@ R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
 
 <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
 
-<span class="n">roots</span> <span class="o">=</span> <span class="n">___</span>          <span class="c1"># get the roots of q</span>
+<span class="n">roots</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">roots</span>         <span class="c1"># get the roots of q</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots:&quot;</span><span class="p">,</span> <span class="n">roots</span><span class="p">)</span>
 
 <span class="c1"># Verify by evaluating q at each root — should both be ~0</span>
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;q(</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">q</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Roots: [3. 2.]
+q(3.0) = 0.000000
+q(2.0) = 0.000000
 </pre></div>
 </div>
 </div>
@@ -801,7 +806,7 @@ R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
 <span class="n">r_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">5.7</span><span class="p">,</span> <span class="mf">8.1</span><span class="p">])</span>
 
 <span class="c1"># Fit a degree-2 polynomial</span>
-<span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">)</span>   <span class="c1"># x, y, degree</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">r_data</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># x, y, degree</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitted polynomial:&quot;</span><span class="p">)</span>
@@ -809,7 +814,16 @@ R^2 = 1 - \frac{\sum e_i^2}{\sum(y_i - \bar{y})^2}
 
 <span class="c1"># Evaluate at T = 350 K</span>
 <span class="n">T_query</span> <span class="o">=</span> <span class="mf">350.0</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">r(</span><span class="si">{</span><span class="n">T_query</span><span class="si">}</span><span class="s2"> K) = </span><span class="si">{</span><span class="n">p</span><span class="p">(</span><span class="n">___</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L/s&quot;</span><span class="p">)</span>   <span class="c1"># call p at T_query</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">r(</span><span class="si">{</span><span class="n">T_query</span><span class="si">}</span><span class="s2"> K) = </span><span class="si">{</span><span class="n">p</span><span class="p">(</span><span class="n">T_query</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L/s&quot;</span><span class="p">)</span>   <span class="c1"># call p at T_query</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted polynomial:
+           2
+0.0003429 x - 0.1712 x + 21.71
+
+r(350.0 K) = 3.7914 mol/L/s
 </pre></div>
 </div>
 </div>
