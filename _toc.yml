@@ -23,7 +23,7 @@ parts:
       - file: docs/chapter11/11_notebook
       - file: docs/chapter11/11_rank_supplement
       - file: docs/chapter12/12_notebook
-  #     - file: docs/chapter13/13_notebook
+      - file: docs/chapter13/13_notebook
   #     - file: docs/chapter14/14_notebook
   #     - file: docs/chapter15/15_notebook
   #     - file: docs/chapter16/16_notebook
