@@ -1,0 +1,965 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 11 Practice Problems: Linear Algebra &amp; Matrices &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter11/11_practice';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter11/11_practice.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter11/11_practice.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 11 Practice Problems: Linear Algebra & Matrices</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-matrix-creation-multiplication-and-properties">Problem 1: Matrix Creation, Multiplication, and Properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-1">Solution 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-setting-up-and-solving-linear-systems">Problem 2: Setting Up and Solving Linear Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-2">Solution 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-four-stream-distillation-column-material-balance">Problem 3: Four-Stream Distillation Column Material Balance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-3">Solution 3</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-11-practice-problems-linear-algebra-matrices">
+<h1>Chapter 11 Practice Problems: Linear Algebra &amp; Matrices<a class="headerlink" href="#chapter-11-practice-problems-linear-algebra-matrices" title="Link to this heading">#</a></h1>
+<p>These problems reinforce the NumPy linear algebra concepts from Chapter 11.</p>
+<ul class="simple">
+<li><p><strong>Problems 1–2:</strong> Basic matrix syntax and operations</p></li>
+<li><p><strong>Problems 3–4:</strong> Chemical engineering applications</p></li>
+</ul>
+<hr class="docutils" />
+<section id="problem-1-matrix-creation-multiplication-and-properties">
+<h2>Problem 1: Matrix Creation, Multiplication, and Properties<a class="headerlink" href="#problem-1-matrix-creation-multiplication-and-properties" title="Link to this heading">#</a></h2>
+<p><strong>(a)</strong> Create the following matrices:</p>
+<ol class="arabic simple">
+<li><p>A 3×3 identity matrix using <code class="docutils literal notranslate"><span class="pre">np.eye</span></code></p></li>
+<li><p>The matrix <span class="math notranslate nohighlight">\(A\)</span> and vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> below using <code class="docutils literal notranslate"><span class="pre">np.array</span></code>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}A = \begin{pmatrix} 3 &amp; 1 \\ 2 &amp; 4 \end{pmatrix}, \qquad \mathbf{b} = \begin{pmatrix} 9 \\ 14 \end{pmatrix}\end{split}\]</div>
+<p><strong>(b)</strong> Given:
+$<span class="math notranslate nohighlight">\(P = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}, \qquad Q = \begin{pmatrix} 5 &amp; 0 \\ 1 &amp; 3 \end{pmatrix}\)</span>$</p>
+<p>Compute:</p>
+<ol class="arabic simple">
+<li><p>Element-wise product <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">*</span> <span class="pre">Q</span></code></p></li>
+<li><p>Matrix product <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#64;</span> <span class="pre">Q</span></code></p></li>
+<li><p>Matrix product <code class="docutils literal notranslate"><span class="pre">Q</span> <span class="pre">&#64;</span> <span class="pre">P</span></code></p></li>
+<li><p>Are <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#64;</span> <span class="pre">Q</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span> <span class="pre">&#64;</span> <span class="pre">P</span></code> equal? What does this tell you about matrix multiplication?</p></li>
+</ol>
+<p><strong>(c)</strong> For matrix <span class="math notranslate nohighlight">\(A\)</span> from part (a):</p>
+<ol class="arabic simple">
+<li><p>Compute the determinant. Does a unique solution to <span class="math notranslate nohighlight">\(A\mathbf{x} = \mathbf{b}\)</span> exist?</p></li>
+<li><p>Compute the inverse <span class="math notranslate nohighlight">\(A^{-1}\)</span></p></li>
+<li><p>Verify: compute <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">A_inv</span></code> and confirm it equals the identity matrix</p></li>
+<li><p>Compute the rank of <span class="math notranslate nohighlight">\(A\)</span></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) Matrix creation</span>
+<span class="c1"># 1. 3x3 identity matrix</span>
+
+
+<span class="c1"># 2. Matrix A and vector b</span>
+
+
+<span class="c1"># (b) Matrix operations</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+
+<span class="c1"># 1. Element-wise product</span>
+
+
+<span class="c1"># 2. Matrix product P @ Q</span>
+
+
+<span class="c1"># 3. Matrix product Q @ P</span>
+
+
+<span class="c1"># 4. Written answer (comment): are they equal?</span>
+<span class="c1"># </span>
+
+<span class="c1"># (c) Properties of A</span>
+<span class="c1"># 1. Determinant</span>
+
+
+<span class="c1"># 2. Inverse</span>
+
+
+<span class="c1"># 3. Verify A @ A_inv</span>
+
+
+<span class="c1"># 4. Rank</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="solution-1">
+<h3>Solution 1<a class="headerlink" href="#solution-1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) Matrix creation</span>
+<span class="c1"># 1. 3x3 identity matrix</span>
+<span class="n">I3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Identity (3x3):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">I3</span><span class="p">)</span>
+
+<span class="c1"># 2. Matrix A and vector b</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   b =&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># (b) Matrix operations</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. P * Q (element-wise):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Q</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. P @ Q (matrix product):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">Q</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Q @ P (matrix product):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">Q</span> <span class="o">@</span> <span class="n">P</span><span class="p">)</span>
+<span class="c1"># 4. P @ Q ≠ Q @ P — matrix multiplication is NOT commutative in general.</span>
+<span class="c1">#    The order of multiplication matters: swapping A and B changes the result.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">4. P @ Q == Q @ P?&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">Q</span><span class="p">,</span> <span class="n">Q</span> <span class="o">@</span> <span class="n">P</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Matrix multiplication is NOT commutative in general.&quot;</span><span class="p">)</span>
+
+<span class="c1"># (c) Properties of A</span>
+<span class="n">det_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. det(A) = </span><span class="si">{</span><span class="n">det_A</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  → unique solution exists: </span><span class="si">{</span><span class="n">det_A</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">A_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. A_inv =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A_inv</span><span class="p">)</span>
+
+<span class="n">check</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">A_inv</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. A @ A_inv =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="s2">&quot;  (should be identity)&quot;</span><span class="p">)</span>
+
+<span class="n">rank_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">4. rank(A) = </span><span class="si">{</span><span class="n">rank_A</span><span class="si">}</span><span class="s2">  (full rank: </span><span class="si">{</span><span class="n">rank_A</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1. Identity (3x3):
+ [[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+
+2. A =
+ [[3 1]
+ [2 4]]
+   b = [ 9 14]
+
+1. P * Q (element-wise):
+ [[ 5  0]
+ [ 3 12]]
+
+2. P @ Q (matrix product):
+ [[ 7  6]
+ [19 12]]
+
+3. Q @ P (matrix product):
+ [[ 5 10]
+ [10 14]]
+
+4. P @ Q == Q @ P? False
+   Matrix multiplication is NOT commutative in general.
+
+1. det(A) = 10.0000  → unique solution exists: True
+
+2. A_inv =
+ [[ 0.4 -0.1]
+ [-0.2  0.3]]
+
+3. A @ A_inv =
+ [[1. 0.]
+ [0. 1.]]   (should be identity)
+
+4. rank(A) = 2  (full rank: True)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-2-setting-up-and-solving-linear-systems">
+<h2>Problem 2: Setting Up and Solving Linear Systems<a class="headerlink" href="#problem-2-setting-up-and-solving-linear-systems" title="Link to this heading">#</a></h2>
+<p><strong>(a)</strong> Solve the following 2×2 system using <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>. Then verify your answer by computing <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span></code> and checking it matches <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases} 4x_1 - x_2 = 7 \\ 2x_1 + 3x_2 = 1 \end{cases}\end{split}\]</div>
+<p><strong>(b)</strong> Solve the following 3×3 system. Verify with <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span> <span class="pre">≈</span> <span class="pre">b</span></code>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases} 2x_1 + x_2 - x_3 = 8 \\ -3x_1 - x_2 + 2x_3 = -11 \\ -2x_1 + x_2 + 2x_3 = -3 \end{cases}\end{split}\]</div>
+<p><strong>(c)</strong> <strong>(optional)</strong> Determine whether each matrix below is singular (no unique solution) or non-singular. Use <code class="docutils literal notranslate"><span class="pre">np.linalg.det</span></code> and <code class="docutils literal notranslate"><span class="pre">np.linalg.matrix_rank</span></code>. Explain physically what a singular matrix means in the context of a system of equations.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}M_1 = \begin{pmatrix} 2 &amp; 4 \\ 1 &amp; 2 \end{pmatrix}, \qquad M_2 = \begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 0 &amp; 1 &amp; 4 \\ 5 &amp; 6 &amp; 0 \end{pmatrix}\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) 2x2 system: 4x1 - x2 = 7,  2x1 + 3x2 = 1</span>
+<span class="n">A_a</span> <span class="o">=</span> 
+<span class="n">b_a</span> <span class="o">=</span> 
+
+<span class="n">x_a</span> <span class="o">=</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(a) Solution:&quot;</span><span class="p">,</span> <span class="n">x_a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Verification A @ x =&quot;</span><span class="p">,</span> <span class="n">A_a</span> <span class="o">@</span> <span class="n">x_a</span><span class="p">,</span> <span class="s2">&quot; (expected b =&quot;</span><span class="p">,</span> <span class="n">b_a</span><span class="p">,</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
+
+<span class="c1"># (b) 3x3 system</span>
+<span class="n">A_b</span> <span class="o">=</span> 
+<span class="n">b_b</span> <span class="o">=</span> 
+
+<span class="n">x_b</span> <span class="o">=</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(b) Solution:&quot;</span><span class="p">,</span> <span class="n">x_b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Verification A @ x =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">A_b</span> <span class="o">@</span> <span class="n">x_b</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="s2">&quot; (expected b =&quot;</span><span class="p">,</span> <span class="n">b_b</span><span class="p">,</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
+
+<span class="c1"># (c) Singular check</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="c1"># M1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(c) M1: det = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, rank = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># M2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    M2: det = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, rank = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Written answer: what does a singular matrix mean physically?</span>
+<span class="c1"># </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+    <span class="n">A_a</span> <span class="o">=</span>
+          <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<section id="solution-2">
+<h3>Solution 2<a class="headerlink" href="#solution-2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) 2x2 system: 4x1 - x2 = 7,  2x1 + 3x2 = 1</span>
+<span class="n">A_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">]])</span>
+<span class="n">b_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">x_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_a</span><span class="p">,</span> <span class="n">b_a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(a) Solution:&quot;</span><span class="p">,</span> <span class="n">x_a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    x1 = </span><span class="si">{</span><span class="n">x_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">,  x2 = </span><span class="si">{</span><span class="n">x_a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Verification A @ x =&quot;</span><span class="p">,</span> <span class="n">A_a</span> <span class="o">@</span> <span class="n">x_a</span><span class="p">,</span> <span class="s2">&quot; (expected b =&quot;</span><span class="p">,</span> <span class="n">b_a</span><span class="p">,</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
+
+<span class="c1"># (b) 3x3 system</span>
+<span class="n">A_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">2</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">]])</span>
+<span class="n">b_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">x_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_b</span><span class="p">,</span> <span class="n">b_b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(b) Solution: x1=</span><span class="si">{</span><span class="n">x_b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, x2=</span><span class="si">{</span><span class="n">x_b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, x3=</span><span class="si">{</span><span class="n">x_b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Verification A @ x =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">A_b</span> <span class="o">@</span> <span class="n">x_b</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="s2">&quot; (expected b =&quot;</span><span class="p">,</span> <span class="n">b_b</span><span class="p">,</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
+
+<span class="c1"># (c) Singular check</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(c) M1: det = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, rank = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    → SINGULAR (row 2 = 0.5 × row 1 — the two equations are not independent)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    M2: det = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, rank = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    → NON-SINGULAR (unique solution exists)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Physical meaning of singular matrix:</span>
+<span class="c1"># A singular matrix means at least two of your equations are linearly dependent —</span>
+<span class="c1"># one is just a rescaled or combined version of another. This means you have fewer</span>
+<span class="c1"># independent constraints than unknowns, so the system has either no solution or</span>
+<span class="c1"># infinitely many solutions. In engineering terms, you are missing a real physical</span>
+<span class="c1"># constraint (an underdefined process).</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-3-four-stream-distillation-column-material-balance">
+<h2>Problem 3: Four-Stream Distillation Column Material Balance<a class="headerlink" href="#problem-3-four-stream-distillation-column-material-balance" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Suggested time: ~20 minutes</strong></p>
+</div></blockquote>
+<p>A distillation column separates a feed stream into a distillate and a bottoms product. The system has <strong>three components</strong> (benzene B, toluene T, xylene X) and <strong>three unknown flow rates</strong>: the distillate <span class="math notranslate nohighlight">\(D\)</span> (mol/s), the bottoms <span class="math notranslate nohighlight">\(W\)</span> (mol/s), and a side-draw <span class="math notranslate nohighlight">\(S\)</span> (mol/s).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>             Feed F = 100 mol/s
+             x_B = 0.50,  x_T = 0.30,  x_X = 0.20
+                       │
+                       ▼
+              ┌────────────────┐
+              │  Distillation  ├──────► D (mol/s),  y_B=0.90, y_T=0.08, y_X=0.02
+              │    Column      │
+              │                ├──────► S (mol/s),  z_B=0.40, z_T=0.45, z_X=0.15
+              └────────────────┘
+                       │
+                       ▼
+               W (mol/s),  w_B=0.02, w_T=0.24, w_X=0.74
+</pre></div>
+</div>
+<p><strong>Tasks:</strong></p>
+<p><strong>(a)</strong> Complete balance equations (one overall + two component balances — the third component is redundant):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Balance</p></th>
+<th class="head"><p>Equation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Overall</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Benzene</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Toluene</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>(a)</strong> Write the system as <span class="math notranslate nohighlight">\(A\mathbf{x} = \mathbf{b}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{x} = [D, S, W]^T\)</span>. Build <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> as NumPy arrays.</p>
+<p><strong>(b)</strong> Check that a unique solution exists.</p>
+<p><strong>(c)</strong> Solve for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(S\)</span>, and <span class="math notranslate nohighlight">\(W\)</span>. Print each flow rate.</p>
+<p><strong>(d)</strong> Verify your solution:</p>
+<ol class="arabic simple">
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span> <span class="pre">≈</span> <span class="pre">b</span></code></p></li>
+<li><p>Confirm the xylene balance independently: <span class="math notranslate nohighlight">\(0.02D + 0.15S + 0.74W\)</span> should equal <span class="math notranslate nohighlight">\(0.20 \times 100 = 20\)</span> mol/s</p></li>
+</ol>
+<p>(a) your solution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (b) Build A and b</span>
+<span class="c1"># Unknowns: x = [D, S, W]</span>
+<span class="c1"># Row 0: overall balance        D +    S +    W = 100</span>
+<span class="c1"># Row 1: benzene balance  0.90*D + 0.40*S + 0.02*W = 50</span>
+<span class="c1"># Row 2: toluene balance  0.08*D + 0.45*S + 0.24*W = 30</span>
+
+<span class="n">A</span> <span class="o">=</span> 
+<span class="n">b</span> <span class="o">=</span> 
+
+<span class="c1"># (c) Check det and rank</span>
+
+
+<span class="c1"># (d) Solve</span>
+
+
+<span class="c1"># (e) Verification</span>
+<span class="c1"># 1. A @ x vs b</span>
+
+
+<span class="c1"># 2. Independent xylene check: 0.02*D + 0.15*S + 0.74*W should = 20</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="solution-3">
+<h3>Solution 3<a class="headerlink" href="#solution-3" title="Link to this heading">#</a></h3>
+<p>(a)</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Balance</p></th>
+<th class="head"><p>Equation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Overall</p></td>
+<td><p><span class="math notranslate nohighlight">\(D + S + W = 100\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Benzene</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.90D + 0.40S + 0.02W = 50\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Toluene</p></td>
+<td><p><span class="math notranslate nohighlight">\(0.08D + 0.45S + 0.24W = 30\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (b) Build A and b</span>
+<span class="c1"># Unknowns: x = [D, S, W]</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">],</span>   <span class="c1"># overall balance</span>
+              <span class="p">[</span><span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">],</span>   <span class="c1"># benzene balance</span>
+              <span class="p">[</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">]])</span>  <span class="c1"># toluene balance</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;b =&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># (c) Check det and rank</span>
+<span class="n">det_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">rank_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(b) det(A) = </span><span class="si">{</span><span class="n">det_A</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    rank(A) = </span><span class="si">{</span><span class="n">rank_A</span><span class="si">}</span><span class="s2">  → unique solution: </span><span class="si">{</span><span class="n">rank_A</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># (d) Solve</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">D</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(c) D (distillate) = </span><span class="si">{</span><span class="n">D</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    S (side-draw)   = </span><span class="si">{</span><span class="n">S</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    W (bottoms)     = </span><span class="si">{</span><span class="n">W</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mol/s&quot;</span><span class="p">)</span>
+
+<span class="c1"># (e) Verification</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(d) Verification:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    A @ x = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s2">  (expected b = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="n">xylene_check</span> <span class="o">=</span> <span class="mf">0.02</span><span class="o">*</span><span class="n">D</span> <span class="o">+</span> <span class="mf">0.15</span><span class="o">*</span><span class="n">S</span> <span class="o">+</span> <span class="mf">0.74</span><span class="o">*</span><span class="n">W</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Xylene balance: 0.02D + 0.15S + 0.74W = </span><span class="si">{</span><span class="n">xylene_check</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (expected 20.0)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter11"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-matrix-creation-multiplication-and-properties">Problem 1: Matrix Creation, Multiplication, and Properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-1">Solution 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-setting-up-and-solving-linear-systems">Problem 2: Setting Up and Solving Linear Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-2">Solution 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-four-stream-distillation-column-material-balance">Problem 3: Four-Stream Distillation Column Material Balance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-3">Solution 3</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

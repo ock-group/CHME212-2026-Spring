@@ -1,0 +1,1131 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 10 Practice Problems: Basic Array Methods &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter10/10_practice';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter10/10_practice.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter10/10_practice.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 10 Practice Problems: Basic Array Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-array-creation-and-indexing">Problem 1: Array Creation and Indexing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-1">Solution 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-array-operations-and-broadcasting">Problem 2: Array Operations and Broadcasting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-2">Solution 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-analyzing-batch-reactor-temperature-data">Problem 3: Analyzing Batch Reactor Temperature Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-3">Solution 3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-first-order-reaction-concentration-profile">Problem 4: First-Order Reaction Concentration Profile</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-4">Solution 4</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-10-practice-problems-basic-array-methods">
+<h1>Chapter 10 Practice Problems: Basic Array Methods<a class="headerlink" href="#chapter-10-practice-problems-basic-array-methods" title="Link to this heading">#</a></h1>
+<p>These problems are designed to reinforce the NumPy concepts covered in Chapter 10.</p>
+<ul class="simple">
+<li><p><strong>Problems 1–2:</strong> Basic syntax and array operations</p></li>
+<li><p><strong>Problems 3–4:</strong> Chemical engineering applications</p></li>
+</ul>
+<hr class="docutils" />
+<section id="problem-1-array-creation-and-indexing">
+<h2>Problem 1: Array Creation and Indexing<a class="headerlink" href="#problem-1-array-creation-and-indexing" title="Link to this heading">#</a></h2>
+<p><strong>(a)</strong> Create the following arrays using the appropriate NumPy functions:</p>
+<ol class="arabic simple">
+<li><p>A 1D array of 6 evenly spaced values from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">5</span></code> (inclusive) using <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code></p></li>
+<li><p>A 1D array of values from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">9</span></code> with a step size of <code class="docutils literal notranslate"><span class="pre">2</span></code> using <code class="docutils literal notranslate"><span class="pre">np.arange</span></code></p></li>
+<li><p>A 2D array (3×3) filled with zeros</p></li>
+</ol>
+<p><strong>(b)</strong> Given the 2D array below, extract the following using indexing/slicing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>The element at row 1, column 2</p></li>
+<li><p>The entire second row</p></li>
+<li><p>The entire last column</p></li>
+<li><p>The sub-array formed by the first two rows and last two columns</p></li>
+</ol>
+<p><strong>(c)</strong> Explain in one sentence: what is the difference between <code class="docutils literal notranslate"><span class="pre">np.linspace(0,</span> <span class="pre">5,</span> <span class="pre">6)</span></code> and <code class="docutils literal notranslate"><span class="pre">np.arange(0,</span> <span class="pre">5,</span> <span class="pre">1)</span></code>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) Array creation</span>
+<span class="c1"># 1. linspace: 6 evenly spaced values from 0 to 5</span>
+
+
+<span class="c1"># 2. arange: values from 0 to 9 with step 2</span>
+
+
+<span class="c1"># 3. 2D array of zeros (3x3)</span>
+
+
+<span class="c1"># (b) 2D indexing</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="c1"># 1. Element at row 1, column 2</span>
+
+
+<span class="c1"># 2. Entire second row</span>
+
+
+<span class="c1"># 3. Entire last column</span>
+
+
+<span class="c1"># 4. First two rows, last two columns</span>
+
+
+<span class="c1"># (c) Your written answer below as a comment:</span>
+<span class="c1"># </span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="solution-1">
+<h3>Solution 1<a class="headerlink" href="#solution-1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) Array creation</span>
+<span class="c1"># 1. linspace: 6 evenly spaced values from 0 to 5 (inclusive)</span>
+<span class="n">arr_linspace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. linspace:&quot;</span><span class="p">,</span> <span class="n">arr_linspace</span><span class="p">)</span>
+
+<span class="c1"># 2. arange: values from 0 to 9 with step 2</span>
+<span class="n">arr_arange</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. arange:  &quot;</span><span class="p">,</span> <span class="n">arr_arange</span><span class="p">)</span>
+
+<span class="c1"># 3. 2D array of zeros (3x3)</span>
+<span class="n">zeros_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. zeros:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">zeros_2d</span><span class="p">)</span>
+
+<span class="c1"># (b) 2D indexing</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Element at row 1, col 2:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>       <span class="c1"># 70</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Entire second row:      &quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>         <span class="c1"># [50 60 70 80]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Entire last column:     &quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>        <span class="c1"># [40 80 120]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Sub-array [0:2, 2:]:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">:])</span>        <span class="c1"># [[30 40],[70 80]]</span>
+
+<span class="c1"># (c) Difference explanation:</span>
+<span class="c1"># np.linspace(0, 5, 6) produces 6 points from 0 to 5 inclusive: [0, 1, 2, 3, 4, 5]</span>
+<span class="c1"># np.arange(0, 5, 1)   produces values from 0 up to (but NOT including) 5: [0, 1, 2, 3, 4]</span>
+<span class="c1"># Key difference: linspace includes the endpoint and you specify the COUNT of points;</span>
+<span class="c1"># arange excludes the endpoint and you specify the STEP SIZE.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1. linspace: [0. 1. 2. 3. 4. 5.]
+2. arange:   [0 2 4 6 8]
+3. zeros:
+ [[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]
+
+1. Element at row 1, col 2: 70
+2. Entire second row:       [50 60 70 80]
+3. Entire last column:      [ 40  80 120]
+4. Sub-array [0:2, 2:]:
+ [[30 40]
+ [70 80]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-2-array-operations-and-broadcasting">
+<h2>Problem 2: Array Operations and Broadcasting<a class="headerlink" href="#problem-2-array-operations-and-broadcasting" title="Link to this heading">#</a></h2>
+<p><strong>(a)</strong> Given the two arrays below, compute the following without using any loops:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Element-wise sum <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code></p></li>
+<li><p>Element-wise product <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> raised to the power of 2</p></li>
+<li><p>The mean, standard deviation, min, and max of <code class="docutils literal notranslate"><span class="pre">a</span></code></p></li>
+<li><p>The index of the maximum value in <code class="docutils literal notranslate"><span class="pre">b</span></code></p></li>
+</ol>
+<p><strong>(b)</strong> Given a 2D array of shape <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4)</span></code>, use the <code class="docutils literal notranslate"><span class="pre">axis</span></code> argument to:</p>
+<ol class="arabic simple">
+<li><p>Compute the <strong>sum along each column</strong> (result should have shape <code class="docutils literal notranslate"><span class="pre">(4,)</span></code>)</p></li>
+<li><p>Compute the <strong>mean along each row</strong> (result should have shape <code class="docutils literal notranslate"><span class="pre">(3,)</span></code>)</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>(c)</strong> Reshape the 1D array <code class="docutils literal notranslate"><span class="pre">np.arange(1,</span> <span class="pre">13)</span></code> into a <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4)</span></code> matrix, then transpose it. Print the shape before and after each operation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) Element-wise operations</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+
+<span class="c1"># 1. Element-wise sum</span>
+
+
+<span class="c1"># 2. Element-wise product</span>
+
+
+<span class="c1"># 3. a squared</span>
+
+
+<span class="c1"># 4. Mean, std, min, max of a</span>
+
+
+<span class="c1"># 5. Index of max value in b</span>
+
+
+<span class="c1"># (b) Axis operations</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="c1"># 1. Sum along each column (axis=0)</span>
+
+
+<span class="c1"># 2. Mean along each row (axis=1)</span>
+
+
+<span class="c1"># (c) Reshape and transpose</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original shape:&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Reshape to (3, 4)</span>
+
+
+<span class="c1"># Transpose</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original shape: (12,)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="solution-2">
+<h3>Solution 2<a class="headerlink" href="#solution-2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) Element-wise operations</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. a + b =&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>           <span class="c1"># [ 3  7 11 15 19]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. a * b =&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>           <span class="c1"># [ 2 12 30 56 90]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. a ** 2 =&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>         <span class="c1"># [  4  16  36  64 100]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. mean =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">),</span>
+      <span class="s2">&quot;| std =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">a</span><span class="p">),</span>
+      <span class="s2">&quot;| min =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">),</span>
+      <span class="s2">&quot;| max =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5. argmax(b) =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>  <span class="c1"># 4  (index of value 9)</span>
+
+<span class="c1"># (b) Axis operations</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">col_sums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># collapse rows → one value per column</span>
+<span class="n">row_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># collapse columns → one value per row</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Sum along each column (axis=0):&quot;</span><span class="p">,</span> <span class="n">col_sums</span><span class="p">)</span>    <span class="c1"># [15 18 21 24]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Mean along each row  (axis=1):&quot;</span><span class="p">,</span> <span class="n">row_means</span><span class="p">)</span>     <span class="c1"># [2.5 6.5 10.5]</span>
+
+<span class="c1"># (c) Reshape and transpose</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Original shape:&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>          <span class="c1"># (12,)</span>
+
+<span class="n">mat</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After reshape(3,4):&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>        <span class="c1"># (3, 4)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+
+<span class="n">mat_T</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">T</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After transpose:&quot;</span><span class="p">,</span> <span class="n">mat_T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>         <span class="c1"># (4, 3)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mat_T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1. a + b = [ 3  7 11 15 19]
+2. a * b = [ 2 12 30 56 90]
+3. a ** 2 = [  4  16  36  64 100]
+4. mean = 6.0 | std = 2.8284271247461903 | min = 2 | max = 10
+5. argmax(b) = 4
+
+1. Sum along each column (axis=0): [15 18 21 24]
+2. Mean along each row  (axis=1): [ 2.5  6.5 10.5]
+
+Original shape: (12,)
+After reshape(3,4): (3, 4)
+[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+After transpose: (4, 3)
+[[ 1  5  9]
+ [ 2  6 10]
+ [ 3  7 11]
+ [ 4  8 12]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-3-analyzing-batch-reactor-temperature-data">
+<h2>Problem 3: Analyzing Batch Reactor Temperature Data<a class="headerlink" href="#problem-3-analyzing-batch-reactor-temperature-data" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Suggested time: ~10 minutes</strong></p>
+</div></blockquote>
+<p>In a batch reactor experiment, a student measured the temperature (in °C) inside a reactor at 6 time points (every 10 minutes) across 5 separate runs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>         <span class="n">t</span><span class="o">=</span><span class="mi">0</span>   <span class="n">t</span><span class="o">=</span><span class="mi">10</span>  <span class="n">t</span><span class="o">=</span><span class="mi">20</span>  <span class="n">t</span><span class="o">=</span><span class="mi">30</span>  <span class="n">t</span><span class="o">=</span><span class="mi">40</span>  <span class="n">t</span><span class="o">=</span><span class="mi">50</span>
+<span class="n">Run</span> <span class="mi">1</span><span class="p">:</span>  <span class="p">[</span> <span class="mi">25</span><span class="p">,</span>   <span class="mi">48</span><span class="p">,</span>   <span class="mi">72</span><span class="p">,</span>   <span class="mi">91</span><span class="p">,</span>  <span class="mi">105</span><span class="p">,</span>  <span class="mi">113</span><span class="p">]</span>
+<span class="n">Run</span> <span class="mi">2</span><span class="p">:</span>  <span class="p">[</span> <span class="mi">25</span><span class="p">,</span>   <span class="mi">45</span><span class="p">,</span>   <span class="mi">69</span><span class="p">,</span>   <span class="mi">88</span><span class="p">,</span>  <span class="mi">102</span><span class="p">,</span>  <span class="mi">110</span><span class="p">]</span>
+<span class="n">Run</span> <span class="mi">3</span><span class="p">:</span>  <span class="p">[</span> <span class="mi">25</span><span class="p">,</span>   <span class="mi">51</span><span class="p">,</span>   <span class="mi">75</span><span class="p">,</span>   <span class="mi">94</span><span class="p">,</span>  <span class="mi">108</span><span class="p">,</span>  <span class="mi">116</span><span class="p">]</span>
+<span class="n">Run</span> <span class="mi">4</span><span class="p">:</span>  <span class="p">[</span> <span class="mi">25</span><span class="p">,</span>   <span class="mi">46</span><span class="p">,</span>   <span class="mi">70</span><span class="p">,</span>   <span class="mi">90</span><span class="p">,</span>  <span class="mi">104</span><span class="p">,</span>  <span class="mi">112</span><span class="p">]</span>
+<span class="n">Run</span> <span class="mi">5</span><span class="p">:</span>  <span class="p">[</span> <span class="mi">25</span><span class="p">,</span>   <span class="mi">49</span><span class="p">,</span>   <span class="mi">73</span><span class="p">,</span>   <span class="mi">92</span><span class="p">,</span>  <span class="mi">106</span><span class="p">,</span>  <span class="mi">114</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>(a)</strong> Store this data in a 2D NumPy array called <code class="docutils literal notranslate"><span class="pre">reactor_temps</span></code> (shape: 5 runs × 6 time points). Also create a <code class="docutils literal notranslate"><span class="pre">time</span></code> array for the time points in minutes.</p>
+<p><strong>(b)</strong> Convert all temperature values from <strong>°C to K</strong> (add 273.15) using broadcasting. Store the result in <code class="docutils literal notranslate"><span class="pre">reactor_temps_K</span></code>.</p>
+<p><strong>(c)</strong> Using <code class="docutils literal notranslate"><span class="pre">axis</span></code> operations on <code class="docutils literal notranslate"><span class="pre">reactor_temps_K</span></code>:</p>
+<ol class="arabic simple">
+<li><p>Compute the <strong>average temperature at each time point</strong> across all 5 runs</p></li>
+<li><p>Compute the <strong>standard deviation at each time point</strong> across all 5 runs</p></li>
+<li><p>Compute the <strong>average temperature for each run</strong> across all time points</p></li>
+</ol>
+<p><strong>(d)</strong> Extract only the <strong>final temperature (t=50 min)</strong> for each run. Which run reached the highest final temperature?</p>
+<p><strong>(e)</strong> The temperature rise between t=0 and t=50 is the <strong>total temperature increase</strong> for each run. Compute this for all 5 runs in a single vectorized line (no loops). Which run had the largest increase?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) Create the data array and time array</span>
+<span class="n">reactor_temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">48</span><span class="p">,</span>  <span class="mi">72</span><span class="p">,</span>  <span class="mi">91</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">113</span><span class="p">],</span>  <span class="c1"># Run 1</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">45</span><span class="p">,</span>  <span class="mi">69</span><span class="p">,</span>  <span class="mi">88</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">110</span><span class="p">],</span>  <span class="c1"># Run 2</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">51</span><span class="p">,</span>  <span class="mi">75</span><span class="p">,</span>  <span class="mi">94</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">116</span><span class="p">],</span>  <span class="c1"># Run 3</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">46</span><span class="p">,</span>  <span class="mi">70</span><span class="p">,</span>  <span class="mi">90</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">112</span><span class="p">],</span>  <span class="c1"># Run 4</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">49</span><span class="p">,</span>  <span class="mi">73</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">114</span><span class="p">],</span>  <span class="c1"># Run 5</span>
+<span class="p">])</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># minutes: 0, 10, 20, 30, 40, 50</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">reactor_temps</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># should be (5, 6)</span>
+
+<span class="c1"># (b) Convert to Kelvin using broadcasting</span>
+
+
+<span class="c1"># (c) Axis operations on reactor_temps_K</span>
+<span class="c1"># 1. Average temperature at each time point (axis=0)</span>
+
+
+<span class="c1"># 2. Standard deviation at each time point (axis=0)</span>
+
+
+<span class="c1"># 3. Average temperature for each run (axis=1)</span>
+
+
+<span class="c1"># (d) Extract final temperature column and find which run was highest</span>
+
+
+<span class="c1"># (e) Total temperature increase per run (vectorized, no loops)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape: (5, 6)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="solution-3">
+<h3>Solution 3<a class="headerlink" href="#solution-3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (a) Data array and time array</span>
+<span class="n">reactor_temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">48</span><span class="p">,</span>  <span class="mi">72</span><span class="p">,</span>  <span class="mi">91</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">113</span><span class="p">],</span>  <span class="c1"># Run 1</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">45</span><span class="p">,</span>  <span class="mi">69</span><span class="p">,</span>  <span class="mi">88</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">110</span><span class="p">],</span>  <span class="c1"># Run 2</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">51</span><span class="p">,</span>  <span class="mi">75</span><span class="p">,</span>  <span class="mi">94</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">116</span><span class="p">],</span>  <span class="c1"># Run 3</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">46</span><span class="p">,</span>  <span class="mi">70</span><span class="p">,</span>  <span class="mi">90</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">112</span><span class="p">],</span>  <span class="c1"># Run 4</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">49</span><span class="p">,</span>  <span class="mi">73</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">114</span><span class="p">],</span>  <span class="c1"># Run 5</span>
+<span class="p">])</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># [0, 10, 20, 30, 40, 50] min</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">reactor_temps</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (5, 6)</span>
+
+<span class="c1"># (b) Convert to Kelvin — broadcasting adds 273.15 to every element</span>
+<span class="n">reactor_temps_K</span> <span class="o">=</span> <span class="n">reactor_temps</span> <span class="o">+</span> <span class="mf">273.15</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Temperatures in K (first row):&quot;</span><span class="p">,</span> <span class="n">reactor_temps_K</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># (c) Axis operations</span>
+<span class="n">avg_per_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">reactor_temps_K</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># average across runs at each t</span>
+<span class="n">std_per_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">reactor_temps_K</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># std across runs at each t</span>
+<span class="n">avg_per_run</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">reactor_temps_K</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># average across time per run</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Avg temp at each time point (K):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">avg_per_time</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Std dev at each time point (K): &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">std_per_time</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Avg temp per run (K):           &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">avg_per_run</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># (d) Final temperatures (last column) and which run was highest</span>
+<span class="n">final_temps</span> <span class="o">=</span> <span class="n">reactor_temps_K</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># column index -1 → t=50 min</span>
+<span class="n">best_run</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">final_temps</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(d) Final temperatures (K): </span><span class="si">{</span><span class="n">final_temps</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Highest final temp: Run </span><span class="si">{</span><span class="n">best_run</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">final_temps</span><span class="p">[</span><span class="n">best_run</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K)&quot;</span><span class="p">)</span>
+
+<span class="c1"># (e) Total temperature increase per run — vectorized (first col vs last col)</span>
+<span class="n">temp_increase</span> <span class="o">=</span> <span class="n">reactor_temps_K</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">reactor_temps_K</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">best_increase_run</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">temp_increase</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(e) Temperature increase per run (K): </span><span class="si">{</span><span class="n">temp_increase</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Largest increase: Run </span><span class="si">{</span><span class="n">best_increase_run</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">temp_increase</span><span class="p">[</span><span class="n">best_increase_run</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape: (5, 6)
+
+Temperatures in K (first row): [298.15 321.15 345.15 364.15 378.15 386.15]
+
+1. Avg temp at each time point (K): [298.15 320.95 344.95 364.15 378.15 386.15]
+2. Std dev at each time point (K):  [0.   2.14 2.14 2.   2.   2.  ]
+3. Avg temp per run (K):            [348.82 346.32 351.32 347.65 349.65]
+
+(d) Final temperatures (K): [386.15 383.15 389.15 385.15 387.15]
+    Highest final temp: Run 3 (389.15 K)
+
+(e) Temperature increase per run (K): [88. 85. 91. 87. 89.]
+    Largest increase: Run 3 (91.00 K)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-4-first-order-reaction-concentration-profile">
+<h2>Problem 4: First-Order Reaction Concentration Profile<a class="headerlink" href="#problem-4-first-order-reaction-concentration-profile" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Suggested time: ~25 minutes</strong></p>
+</div></blockquote>
+<p>For a first-order irreversible reaction A → B in a batch reactor, the concentration of A decays exponentially over time:</p>
+<div class="math notranslate nohighlight">
+\[C_A(t) = C_{A0} \cdot e^{-k t}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_{A0}\)</span> is the initial concentration (mol/L)</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span> is the rate constant (1/min)</p></li>
+<li><p><span class="math notranslate nohighlight">\(t\)</span> is time (min)</p></li>
+</ul>
+<p>You are given three reactions with different rate constants:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Reaction</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(C_{A0}\)</span> (mol/L)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(k\)</span> (1/min)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>R1</p></td>
+<td><p>5.0</p></td>
+<td><p>0.10</p></td>
+</tr>
+<tr class="row-odd"><td><p>R2</p></td>
+<td><p>5.0</p></td>
+<td><p>0.25</p></td>
+</tr>
+<tr class="row-even"><td><p>R3</p></td>
+<td><p>5.0</p></td>
+<td><p>0.50</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>(a)</strong> Create a time array <code class="docutils literal notranslate"><span class="pre">t</span></code> of 100 evenly spaced points from 0 to 20 minutes.</p>
+<p><strong>(b)</strong> For each reaction, compute the concentration profile <span class="math notranslate nohighlight">\(C_A(t)\)</span> as a NumPy array using a <strong>single vectorized expression</strong> (no loops). Name them <code class="docutils literal notranslate"><span class="pre">C_R1</span></code>, <code class="docutils literal notranslate"><span class="pre">C_R2</span></code>, <code class="docutils literal notranslate"><span class="pre">C_R3</span></code>.</p>
+<p><strong>(c)</strong> Stack the three concentration arrays into a single 2D array <code class="docutils literal notranslate"><span class="pre">C_all</span></code> with shape <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">100)</span></code> using <code class="docutils literal notranslate"><span class="pre">np.vstack</span></code>. Verify the shape.</p>
+<p><strong>(d)</strong> Using <code class="docutils literal notranslate"><span class="pre">C_all</span></code>, find for each reaction:</p>
+<ol class="arabic simple">
+<li><p>The <strong>minimum concentration</strong> reached (should be near 0 for fast reactions)</p></li>
+<li><p>The <strong>time index</strong> at which each reaction drops below 10% of its initial concentration (<code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">0.5</span> <span class="pre">mol/L</span></code>). Use <code class="docutils literal notranslate"><span class="pre">np.argmax</span></code> on a boolean condition like <code class="docutils literal notranslate"><span class="pre">C_all[i]</span> <span class="pre">&lt;</span> <span class="pre">0.5</span></code>.</p></li>
+</ol>
+<p><strong>(e)</strong> Compute the <strong>half-life</strong> of each reaction analytically: <span class="math notranslate nohighlight">\(t_{1/2} = \ln(2) / k\)</span>. Then verify numerically by finding the time index where <span class="math notranslate nohighlight">\(C_A(t)\)</span> first drops below <span class="math notranslate nohighlight">\(C_{A0}/2 = 2.5\)</span> mol/L for each reaction. Compare the analytical and numerical results.</p>
+<p><em>Hint: <code class="docutils literal notranslate"><span class="pre">np.log(2)</span></code> gives <span class="math notranslate nohighlight">\(\ln(2)\)</span>. For the numerical search, <code class="docutils literal notranslate"><span class="pre">np.argmax(condition_array)</span></code> returns the index of the first <code class="docutils literal notranslate"><span class="pre">True</span></code> value.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Given parameters</span>
+<span class="n">C_A0</span> <span class="o">=</span> <span class="mf">5.0</span>          <span class="c1"># mol/L</span>
+<span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span>  <span class="c1"># 1/min</span>
+
+<span class="c1"># (a) Time array: 100 points from 0 to 20 min</span>
+
+
+<span class="c1"># (b) Concentration profiles (vectorized, no loops)</span>
+<span class="c1"># C_R1 =</span>
+<span class="c1"># C_R2 =</span>
+<span class="c1"># C_R3 =</span>
+
+
+<span class="c1"># (c) Stack into 2D array and verify shape</span>
+<span class="c1"># C_all = np.vstack(...)</span>
+
+
+<span class="c1"># (d) For each reaction: min concentration and time index to drop below 0.5 mol/L</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">]):</span>
+    <span class="k">pass</span>  <span class="c1"># replace with your code</span>
+
+
+<span class="c1"># (e) Analytical half-life and numerical verification</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">]):</span>
+    <span class="n">t_half_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">k</span>
+    <span class="c1"># Find numerical half-life index</span>
+    <span class="c1"># ...</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: analytical t_1/2 = </span><span class="si">{</span><span class="n">t_half_analytical</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R1: analytical t_1/2 = 6.93 min
+R2: analytical t_1/2 = 2.77 min
+R3: analytical t_1/2 = 1.39 min
+</pre></div>
+</div>
+</div>
+</div>
+<section id="solution-4">
+<h3>Solution 4<a class="headerlink" href="#solution-4" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Given parameters</span>
+<span class="n">C_A0</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span>  <span class="c1"># 1/min</span>
+
+<span class="c1"># (a) Time array: 100 points from 0 to 20 min</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># (b) Concentration profiles — single vectorized expression per reaction</span>
+<span class="n">C_R1</span> <span class="o">=</span> <span class="n">C_A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">C_R2</span> <span class="o">=</span> <span class="n">C_A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">C_R3</span> <span class="o">=</span> <span class="n">C_A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k3</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C_R1 at t=0:&quot;</span><span class="p">,</span> <span class="n">C_R1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;| at t=20:&quot;</span><span class="p">,</span> <span class="n">C_R1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C_R2 at t=0:&quot;</span><span class="p">,</span> <span class="n">C_R2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;| at t=20:&quot;</span><span class="p">,</span> <span class="n">C_R2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C_R3 at t=0:&quot;</span><span class="p">,</span> <span class="n">C_R3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;| at t=20:&quot;</span><span class="p">,</span> <span class="n">C_R3</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># (c) Stack into 2D array</span>
+<span class="n">C_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">C_R1</span><span class="p">,</span> <span class="n">C_R2</span><span class="p">,</span> <span class="n">C_R3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">C_all shape:&quot;</span><span class="p">,</span> <span class="n">C_all</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3, 100)</span>
+
+<span class="c1"># (d) Min concentration and time index to drop below 0.5 mol/L (10% of C_A0)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">]):</span>
+    <span class="n">min_conc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">C_all</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">idx_10pct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">C_all</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span>   <span class="c1"># first True index</span>
+    <span class="n">t_10pct</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">idx_10pct</span><span class="p">]</span> <span class="k">if</span> <span class="n">C_all</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">idx_10pct</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+    <span class="c1"># Alternatively</span>
+    <span class="c1"># if idx_10pct &lt; len(t) and C_all[i, idx_10pct] &lt; 0.5:</span>
+    <span class="c1">#     t_10pct = t[idx_10pct]</span>
+    <span class="c1"># else:</span>
+    <span class="c1">#     t_10pct = float(&#39;inf&#39;)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> (k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">): min conc = </span><span class="si">{</span><span class="n">min_conc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;drops below 0.5 mol/L at t ≈ </span><span class="si">{</span><span class="n">t_10pct</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
+
+<span class="c1"># (e) Analytical half-life vs numerical verification</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">]):</span>
+    <span class="n">t_half_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">k</span>
+    <span class="n">idx_half</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">C_all</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">C_A0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># first index where C &lt; 2.5</span>
+    <span class="n">t_half_numerical</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">idx_half</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> (k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">): analytical t_1/2 = </span><span class="si">{</span><span class="n">t_half_analytical</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> min | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;numerical t_1/2 ≈ </span><span class="si">{</span><span class="n">t_half_numerical</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C_R1 at t=0: 5.0 | at t=20: 0.6766764161830635
+C_R2 at t=0: 5.0 | at t=20: 0.03368973499542734
+C_R3 at t=0: 5.0 | at t=20: 0.00022699964881242428
+
+C_all shape: (3, 100)
+
+R1 (k=0.1): min conc = 0.6767 mol/L | drops below 0.5 mol/L at t ≈ inf min
+R2 (k=0.25): min conc = 0.0337 mol/L | drops below 0.5 mol/L at t ≈ 9.29 min
+R3 (k=0.5): min conc = 0.0002 mol/L | drops below 0.5 mol/L at t ≈ 4.65 min
+
+R1 (k=0.1): analytical t_1/2 = 6.931 min | numerical t_1/2 ≈ 7.071 min
+R2 (k=0.25): analytical t_1/2 = 2.773 min | numerical t_1/2 ≈ 2.828 min
+R3 (k=0.5): analytical t_1/2 = 1.386 min | numerical t_1/2 ≈ 1.414 min
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter10"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-array-creation-and-indexing">Problem 1: Array Creation and Indexing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-1">Solution 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-array-operations-and-broadcasting">Problem 2: Array Operations and Broadcasting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-2">Solution 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-analyzing-batch-reactor-temperature-data">Problem 3: Analyzing Batch Reactor Temperature Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-3">Solution 3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-first-order-reaction-concentration-profile">Problem 4: First-Order Reaction Concentration Profile</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-4">Solution 4</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

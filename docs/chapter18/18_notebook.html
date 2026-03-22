@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,6 +57,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter18/18_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -197,6 +199,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -206,6 +210,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
 </ul>
 
     </div>
@@ -378,7 +384,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -394,6 +402,48 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-why-do-we-need-odes">Motivation: Why Do We Need ODEs?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-ode">18.1 What is an ODE?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-key-idea-integration">18.1.1 The Key Idea: Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-an-analytical-solution">18.1.2 Verifying an Analytical Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-method">18.2 Euler’s Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-idea">18.2.1 The Core Idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-and-step-size">18.2.2 Error and Step Size</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-ivp-scipy-s-ode-solver">18.3 <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>: SciPy’s ODE Solver</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-convention">18.3.1 Calling Convention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#under-the-hood-runge-kutta-4-5">18.3.2 Under the Hood: Runge-Kutta 4/5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-parameters-with-args">18.3.3 Passing Parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systems-of-odes">18.4 Systems of ODEs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-reactions-a-b-c">18.4.1 Consecutive Reactions: A → B → C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-ode-damped-oscillator-tank-level">18.4.2 Second-Order ODE: Damped Oscillator (Tank Level)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stiff-odes">18.5 Stiff ODEs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-stiffness">18.5.1 What is Stiffness?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stiff-solvers">18.5.2 Stiff Solvers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fast-and-slow-reaction-network">18.5.3 Example: Fast and Slow Reaction Network</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#che-application-non-isothermal-batch-reactor">18.6 ChE Application: Non-Isothermal Batch Reactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-equations">18.6.1 Model Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-parameters">18.6.2 Physical Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cstr-start-up-dynamics">18.6.3 CSTR Start-Up Dynamics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-18-summary">Chapter 18 Summary</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -405,6 +455,942 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-18-ordinary-differential-equations">
 <span id="id1"></span><h1>Chapter 18: Ordinary Differential Equations<a class="headerlink" href="#chapter-18-ordinary-differential-equations" title="Link to this heading">#</a></h1>
+<p><strong>Topics Covered:</strong></p>
+<ul class="simple">
+<li><p>What an ODE is and how to think about it</p></li>
+<li><p>Euler’s method: building intuition by stepping forward manually</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code>: Python’s general-purpose ODE solver</p></li>
+<li><p>Systems of ODEs: multiple coupled equations</p></li>
+<li><p>Stiff ODEs and choosing the right solver</p></li>
+<li><p>Chemical engineering application: batch reactor and CSTR dynamics</p></li>
+</ul>
+<section id="motivation-why-do-we-need-odes">
+<h2>Motivation: Why Do We Need ODEs?<a class="headerlink" href="#motivation-why-do-we-need-odes" title="Link to this heading">#</a></h2>
+<p>Many real processes evolve <strong>over time</strong> — not just at steady state. When a quantity changes continuously, the governing equation usually involves a <strong>derivative</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dC_A}{dt} = -k\,C_A
+\]</div>
+<p>This says: <em>the rate of change of concentration equals minus a rate constant times the current concentration.</em> It is a <strong>first-order ODE</strong>.</p>
+<p>Some familiar ChE examples:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Physical situation</p></th>
+<th class="head"><p>ODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>First-order batch reaction</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{dC_A}{dt} = -k C_A\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Newton’s law of cooling</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{dT}{dt} = -\frac{UA}{mC_p}(T - T_\infty)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Tank draining (Torricelli)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{dh}{dt} = -\frac{A_o}{A_t}\sqrt{2gh}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>CSTR start-up</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{dC_A}{dt} = \frac{F}{V}(C_{A0} - C_A) - k C_A\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In all these cases we know the <em>rate of change</em> and want to find the <em>trajectory</em> — how the quantity evolves from an <strong>initial condition</strong> at <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
+<p>Analytically, the first equation gives <span class="math notranslate nohighlight">\(C_A(t) = C_{A0}\,e^{-kt}\)</span>. But most real ODEs have no closed-form solution. We need numerical methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-is-an-ode">
+<span id="id2"></span><h2>18.1 What is an ODE?<a class="headerlink" href="#what-is-an-ode" title="Link to this heading">#</a></h2>
+<p>An <strong>ordinary differential equation (ODE)</strong> relates a function to its own derivatives. The general first-order form is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{dt} = f(t,\, y), \qquad y(t_0) = y_0
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y(t)\)</span> — the unknown function we want to find</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(t, y)\)</span> — a known expression for the rate of change</p></li>
+<li><p><span class="math notranslate nohighlight">\(y(t_0) = y_0\)</span> — the <strong>initial condition</strong> that pins down the solution</p></li>
+</ul>
+<p><strong>Why first-order?</strong><br />
+Any higher-order ODE can be converted into a <em>system</em> of first-order ODEs. For example:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{d^2x}{dt^2} = -\omega^2 x
+\quad\longrightarrow\quad
+\begin{cases}
+\frac{dx}{dt} = v \\
+\frac{dv}{dt} = -\omega^2 x
+\end{cases}
+\end{split}\]</div>
+<p>So learning to solve first-order systems is sufficient for everything.</p>
+<section id="the-key-idea-integration">
+<h3>18.1.1 The Key Idea: Integration<a class="headerlink" href="#the-key-idea-integration" title="Link to this heading">#</a></h3>
+<p>Solving an ODE is really just <strong>integrating a rate</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+y(t) = y_0 + \int_{t_0}^{t} f(\tau,\, y(\tau))\, d\tau
+\]</div>
+<p>The complication is that <span class="math notranslate nohighlight">\(f\)</span> depends on <span class="math notranslate nohighlight">\(y\)</span> itself — so we cannot evaluate the integral without already knowing the answer. Numerical methods break this circularity by marching forward in small time steps.</p>
+</section>
+<section id="verifying-an-analytical-solution">
+<h3>18.1.2 Verifying an Analytical Solution<a class="headerlink" href="#verifying-an-analytical-solution" title="Link to this heading">#</a></h3>
+<p>Before diving into numerics, let us confirm the exponential decay solution analytically:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dC_A}{dt} = -k C_A, \quad C_A(0) = C_{A0}
+\quad\Longrightarrow\quad
+C_A(t) = C_{A0}\,e^{-kt}
+\]</div>
+<p><strong>Proof:</strong> differentiate the proposed solution and check it satisfies the ODE.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span>    <span class="o">=</span> <span class="mf">0.3</span>          <span class="c1"># 1/min — first-order rate constant</span>
+<span class="n">C_A0</span> <span class="o">=</span> <span class="mf">2.0</span>          <span class="c1"># mol/L — initial concentration</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">C_A_exact</span> <span class="o">=</span> <span class="n">C_A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C_A_exact</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$C_A(t) = C_</span><span class="si">{A0}</span><span class="s1">\,e^{-kt}$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">C_A0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$C_</span><span class="se">{{</span><span class="s1">A0</span><span class="se">}}</span><span class="s1">$ = </span><span class="si">{</span><span class="n">C_A0</span><span class="si">}</span><span class="s1"> mol/L&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time  (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration  (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;First-Order Batch Reaction: Analytical Solution&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At t = 5 min:  C_A = </span><span class="si">{</span><span class="n">C_A0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/190eca3bdafa574877e0dcdd0fccb9924fb614f4f0fc981e87e5d67b360b772f.png" src="../../_images/190eca3bdafa574877e0dcdd0fccb9924fb614f4f0fc981e87e5d67b360b772f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At t = 5 min:  C_A = 0.4463 mol/L
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="euler-s-method">
+<span id="id3"></span><h2>18.2 Euler’s Method<a class="headerlink" href="#euler-s-method" title="Link to this heading">#</a></h2>
+<p>Before using SciPy’s black-box solver, let’s implement the simplest numerical method by hand. This builds intuition for what every ODE solver is doing under the hood.</p>
+<section id="the-core-idea">
+<h3>18.2.1 The Core Idea<a class="headerlink" href="#the-core-idea" title="Link to this heading">#</a></h3>
+<p>Given <span class="math notranslate nohighlight">\(\frac{dy}{dt} = f(t, y)\)</span> and a current value <span class="math notranslate nohighlight">\(y_n\)</span> at time <span class="math notranslate nohighlight">\(t_n\)</span>, we approximate the next value using the tangent line:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{y_{n+1} = y_n + h\, f(t_n,\, y_n)}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(h = \Delta t\)</span> is the <strong>step size</strong>. We are pretending the rate stays constant over each small interval <span class="math notranslate nohighlight">\([t_n,\, t_{n+1}]\)</span>.</p>
+<p><strong>Geometric picture:</strong> At each point, we know the slope <span class="math notranslate nohighlight">\(f(t_n, y_n)\)</span>. We follow that slope for a tiny distance <span class="math notranslate nohighlight">\(h\)</span>, land at a new point, read the new slope, and repeat.</p>
+</section>
+<section id="error-and-step-size">
+<h3>18.2.2 Error and Step Size<a class="headerlink" href="#error-and-step-size" title="Link to this heading">#</a></h3>
+<p>Euler’s method has <strong>first-order accuracy</strong>: halving <span class="math notranslate nohighlight">\(h\)</span> halves the global error.</p>
+<ul class="simple">
+<li><p><strong>Local truncation error</strong> per step: <span class="math notranslate nohighlight">\(O(h^2)\)</span> — from the Taylor expansion<br />
+<span class="math notranslate nohighlight">\(y(t+h) = y(t) + h\,y'(t) + \frac{h^2}{2}y''(t) + \cdots\)</span><br />
+We keep only the first two terms.</p></li>
+<li><p><strong>Global error</strong> after <span class="math notranslate nohighlight">\(N = T/h\)</span> steps: <span class="math notranslate nohighlight">\(O(h)\)</span> — errors accumulate.</p></li>
+</ul>
+<p>This means Euler is not very efficient: to get 10× more accuracy you need 10× smaller steps (10× more work). Runge-Kutta and adaptive methods do much better.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Euler&#39;s method for dC_A/dt = -k*C_A ─────────────────────────────────────</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dCA_dt</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C_A</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A</span>          <span class="c1"># f(t, y)  — the ODE right-hand side</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple Euler integrator.  Returns (t_array, y_array).&quot;&quot;&quot;</span>
+    <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span> <span class="o">=</span> <span class="n">t_span</span>
+    <span class="n">t_arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">t0</span><span class="p">]</span>
+    <span class="n">y_arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">y0</span><span class="p">]</span>
+    <span class="n">t_cur</span><span class="p">,</span> <span class="n">y_cur</span> <span class="o">=</span> <span class="n">t0</span><span class="p">,</span> <span class="n">y0</span>
+    <span class="k">while</span> <span class="n">t_cur</span> <span class="o">&lt;</span> <span class="n">tf</span> <span class="o">-</span> <span class="mf">1e-10</span><span class="p">:</span>
+        <span class="n">h_step</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">tf</span> <span class="o">-</span> <span class="n">t_cur</span><span class="p">)</span>   <span class="c1"># don&#39;t overshoot the end</span>
+        <span class="n">y_cur</span>  <span class="o">=</span> <span class="n">y_cur</span> <span class="o">+</span> <span class="n">h_step</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t_cur</span><span class="p">,</span> <span class="n">y_cur</span><span class="p">)</span>
+        <span class="n">t_cur</span>  <span class="o">=</span> <span class="n">t_cur</span> <span class="o">+</span> <span class="n">h_step</span>
+        <span class="n">t_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_cur</span><span class="p">)</span>
+        <span class="n">y_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_cur</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t_arr</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_arr</span><span class="p">)</span>
+
+<span class="c1"># Compare three step sizes</span>
+<span class="n">t_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">C_exact</span> <span class="o">=</span> <span class="n">C_A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">t_exact</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_exact</span><span class="p">,</span> <span class="n">C_exact</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact&#39;</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">h_val</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">t_eu</span><span class="p">,</span> <span class="n">y_eu</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">dCA_dt</span><span class="p">,</span> <span class="n">C_A0</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">h_val</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_eu</span><span class="p">,</span> <span class="n">y_eu</span><span class="p">,</span> <span class="s1">&#39;o--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Euler  h=</span><span class="si">{</span><span class="n">h_val</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$C_A$ (mol/L)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Euler&#39;s Method: Effect of Step Size&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Error vs step size</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">h_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h_val</span> <span class="ow">in</span> <span class="n">h_vals</span><span class="p">:</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">y_eu</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">dCA_dt</span><span class="p">,</span> <span class="n">C_A0</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">h_val</span><span class="p">)</span>
+    <span class="n">C_ref</span> <span class="o">=</span> <span class="n">C_A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_eu</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">C_ref</span><span class="p">))</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">h_vals</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Euler error&#39;</span><span class="p">)</span>
+<span class="c1"># Reference slope-1 line</span>
+<span class="n">h_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">h_ref</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">h_ref</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;slope = 1  (1st order)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Step size  $h$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Global error at $t=10$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Euler Convergence: $O(h)$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4f9cf2c0edaae1d9be3a76218dd61592426ad2957082d18e72a8f126486912c2.png" src="../../_images/4f9cf2c0edaae1d9be3a76218dd61592426ad2957082d18e72a8f126486912c2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="solve-ivp-scipy-s-ode-solver">
+<span id="id4"></span><h2>18.3 <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>: SciPy’s ODE Solver<a class="headerlink" href="#solve-ivp-scipy-s-ode-solver" title="Link to this heading">#</a></h2>
+<p>In practice, we never use Euler’s method — it is too inaccurate. SciPy’s <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> uses <strong>Runge-Kutta</strong> methods that achieve much higher accuracy with fewer function evaluations, and can <strong>adapt the step size</strong> automatically.</p>
+<section id="calling-convention">
+<h3>18.3.1 Calling Convention<a class="headerlink" href="#calling-convention" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;RK45&#39;</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_points</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fun</span></code></p></td>
+<td><p>Function <code class="docutils literal notranslate"><span class="pre">f(t,</span> <span class="pre">y)</span></code> — must accept scalar <code class="docutils literal notranslate"><span class="pre">t</span></code> and array <code class="docutils literal notranslate"><span class="pre">y</span></code>, return array same shape as <code class="docutils literal notranslate"><span class="pre">y</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t_span</span></code></p></td>
+<td><p>Tuple <code class="docutils literal notranslate"><span class="pre">(t0,</span> <span class="pre">tf)</span></code> — integration interval</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">y0</span></code></p></td>
+<td><p>List or array of <strong>initial conditions</strong> — one value per ODE variable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">method</span></code></p></td>
+<td><p>Solver algorithm (default <code class="docutils literal notranslate"><span class="pre">'RK45'</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t_eval</span></code></p></td>
+<td><p>Optional array of times where solution is saved</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The result <code class="docutils literal notranslate"><span class="pre">sol</span></code> has:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sol.t</span></code> — time points</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sol.y</span></code> — solution array, shape <code class="docutils literal notranslate"><span class="pre">(n_vars,</span> <span class="pre">n_time_points)</span></code> — <strong>each row is one variable</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sol.success</span></code> — <code class="docutils literal notranslate"><span class="pre">True</span></code> if the solver converged</p></li>
+</ul>
+</section>
+<section id="under-the-hood-runge-kutta-4-5">
+<h3>18.3.2 Under the Hood: Runge-Kutta 4/5<a class="headerlink" href="#under-the-hood-runge-kutta-4-5" title="Link to this heading">#</a></h3>
+<p>The default <code class="docutils literal notranslate"><span class="pre">'RK45'</span></code> method takes <strong>4 slope evaluations per step</strong> and combines them with optimal weights (much better than Euler’s single evaluation). The “45” means it uses a 4th-order estimate and a 5th-order estimate — the <em>difference</em> between them is used as an <strong>error estimate</strong>, allowing the step size to be adjusted automatically.</p>
+<div class="math notranslate nohighlight">
+\[
+k_1 = f(t_n,\, y_n)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_2 = f\!\left(t_n + \tfrac{h}{2},\, y_n + \tfrac{h}{2}k_1\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_3 = f\!\left(t_n + \tfrac{h}{2},\, y_n + \tfrac{h}{2}k_2\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_4 = f(t_n + h,\, y_n + h\,k_3)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+y_{n+1} = y_n + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\]</div>
+<p>Global error is <span class="math notranslate nohighlight">\(O(h^4)\)</span> — reducing <span class="math notranslate nohighlight">\(h\)</span> by half reduces error by <strong>16×</strong> (vs 2× for Euler).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── solve_ivp: first-order batch reaction ────────────────────────────────────</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dCA_dt_ivp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">]</span>          <span class="c1"># must return a list/array, not a scalar</span>
+
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">dCA_dt_ivp</span><span class="p">,</span>
+                <span class="n">t_span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+                <span class="n">y0</span><span class="o">=</span><span class="p">[</span><span class="n">C_A0</span><span class="p">],</span>          <span class="c1"># initial condition as a list</span>
+                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;RK45&#39;</span><span class="p">,</span>
+                <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">,</span>
+                <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solver succeeded:&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of RHS evaluations: </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">nfev</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;C_A at t=10: numerical = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">,  exact = </span><span class="si">{</span><span class="n">C_A0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_exact</span><span class="p">,</span> <span class="n">C_exact</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">markevery</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;solve_ivp (RK45)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$C_A$ (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;solve_ivp vs Exact Solution&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solver succeeded: True
+Number of RHS evaluations: 92
+C_A at t=10: numerical = 0.099574,  exact = 0.099574
+</pre></div>
+</div>
+<img alt="../../_images/febf7cb0fc6a92638e15b6e8d248896ac1f41fcd926747be2ba555db53e5b81c.png" src="../../_images/febf7cb0fc6a92638e15b6e8d248896ac1f41fcd926747be2ba555db53e5b81c.png" />
+</div>
+</div>
+</section>
+<section id="passing-parameters-with-args">
+<h3>18.3.3 Passing Parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code><a class="headerlink" href="#passing-parameters-with-args" title="Link to this heading">#</a></h3>
+<p>Often the ODE contains physical parameters (rate constants, temperatures, etc.). Pass them cleanly with the <code class="docutils literal notranslate"><span class="pre">args</span></code> keyword:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dCA_dt</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">dCA_dt</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">[</span><span class="n">C_A0</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,))</span>
+</pre></div>
+</div>
+<p>This avoids global variables and makes your functions reusable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Comparing different rate constants with args ─────────────────────────────</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dCA_dt_param</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k_val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k_val</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">k_val</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="s1">&#39;tomato&#39;</span><span class="p">]):</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">dCA_dt_param</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">[</span><span class="n">C_A0</span><span class="p">],</span>
+                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k_val</span><span class="p">,),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;k = </span><span class="si">{</span><span class="n">k_val</span><span class="si">}</span><span class="s1"> min⁻¹&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$C_A$ (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Effect of Rate Constant on Batch Decay&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b3756c4ffb804374f5875c8c48f572ffc9f6798bcf64466f3d921720c6a1335b.png" src="../../_images/b3756c4ffb804374f5875c8c48f572ffc9f6798bcf64466f3d921720c6a1335b.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="systems-of-odes">
+<span id="id5"></span><h2>18.4 Systems of ODEs<a class="headerlink" href="#systems-of-odes" title="Link to this heading">#</a></h2>
+<p>Most real problems involve <strong>multiple coupled variables</strong> — temperatures, concentrations, and flow rates that all affect each other simultaneously. <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> handles this naturally: <code class="docutils literal notranslate"><span class="pre">y</span></code> is a vector and <code class="docutils literal notranslate"><span class="pre">f</span></code> returns a vector of the same length.</p>
+<section id="consecutive-reactions-a-b-c">
+<h3>18.4.1 Consecutive Reactions: A → B → C<a class="headerlink" href="#consecutive-reactions-a-b-c" title="Link to this heading">#</a></h3>
+<p>A classic ChE scenario: reactant A converts to intermediate B, which then converts to product C.</p>
+<div class="math notranslate nohighlight">
+\[
+A \xrightarrow{k_1} B \xrightarrow{k_2} C
+\]</div>
+<p><strong>Material balances</strong> (liquid phase, constant volume):</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dC_A}{dt} = -k_1 C_A
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{dC_B}{dt} = k_1 C_A - k_2 C_B
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{dC_C}{dt} = k_2 C_B
+\]</div>
+<p>Three equations, three unknowns. <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">[C_A,</span> <span class="pre">C_B,</span> <span class="pre">C_C]</span></code>.</p>
+<p>Note that <span class="math notranslate nohighlight">\(C_A + C_B + C_C = \text{const}\)</span> (total moles conserved) — a good check for correctness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Consecutive reactions A → B → C ──────────────────────────────────────────</span>
+
+<span class="n">k1</span> <span class="o">=</span> <span class="mf">0.4</span>    <span class="c1"># 1/min  (A → B)</span>
+<span class="n">k2</span> <span class="o">=</span> <span class="mf">0.1</span>    <span class="c1"># 1/min  (B → C)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">consecutive_rxn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">):</span>
+    <span class="n">C_A</span><span class="p">,</span> <span class="n">C_B</span><span class="p">,</span> <span class="n">C_C</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dCA</span> <span class="o">=</span> <span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span>
+    <span class="n">dCB</span> <span class="o">=</span>  <span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">-</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">C_B</span>
+    <span class="n">dCC</span> <span class="o">=</span>  <span class="n">k2</span> <span class="o">*</span> <span class="n">C_B</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dCA</span><span class="p">,</span> <span class="n">dCB</span><span class="p">,</span> <span class="n">dCC</span><span class="p">]</span>
+
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">consecutive_rxn</span><span class="p">,</span>
+                <span class="n">t_span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+                <span class="n">y0</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>   <span class="c1"># [C_A0, C_B0, C_C0] in mol/L</span>
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">),</span>
+                <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+
+<span class="c1"># Check mass conservation</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mass balance check — max deviation from 1.0: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Find time of maximum C_B</span>
+<span class="n">idx_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">t_max_B</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum C_B = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">idx_max</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L  at  t = </span><span class="si">{</span><span class="n">t_max_B</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$C_A$  (reactant)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$C_B$  (intermediate)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span>   <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$C_C$  (product)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">t_max_B</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$C_B$ max at t=</span><span class="si">{</span><span class="n">t_max_B</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> min&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Consecutive Reactions: A $\rightarrow$ B $\rightarrow$ C&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mass balance check — max deviation from 1.0: 4.44e-16
+Maximum C_B = 0.6299 mol/L  at  t = 4.61 min
+</pre></div>
+</div>
+<img alt="../../_images/bf9b4e5cfdee1a0a4c03f4451e809a4452ae5be747c6f485318d077edd355aa5.png" src="../../_images/bf9b4e5cfdee1a0a4c03f4451e809a4452ae5be747c6f485318d077edd355aa5.png" />
+</div>
+</div>
+</section>
+<section id="second-order-ode-damped-oscillator-tank-level">
+<h3>18.4.2 Second-Order ODE: Damped Oscillator (Tank Level)<a class="headerlink" href="#second-order-ode-damped-oscillator-tank-level" title="Link to this heading">#</a></h3>
+<p>A liquid tank with a spring-loaded valve exhibits <strong>second-order dynamics</strong> common in process control:</p>
+<div class="math notranslate nohighlight">
+\[
+\tau^2 \frac{d^2h}{dt^2} + 2\zeta\tau\frac{dh}{dt} + h = h_{ss}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tau\)</span> is the time constant and <span class="math notranslate nohighlight">\(\zeta\)</span> is the <strong>damping ratio</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(\zeta\)</span></p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\zeta &gt; 1\)</span></p></td>
+<td><p>Overdamped — slow return, no oscillation</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\zeta = 1\)</span></p></td>
+<td><p>Critically damped — fastest non-oscillatory return</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\zeta &lt; 1\)</span></p></td>
+<td><p>Underdamped — oscillates before settling</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Rewrite as a system by letting <span class="math notranslate nohighlight">\(y_1 = h\)</span> and <span class="math notranslate nohighlight">\(y_2 = \frac{dh}{dt}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy_1}{dt} = y_2
+\qquad
+\frac{dy_2}{dt} = \frac{1}{\tau^2}\left(h_{ss} - y_1 - 2\zeta\tau\, y_2\right)
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Second-order ODE: damped oscillator ──────────────────────────────────────</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">damped_oscillator</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">zeta</span><span class="p">,</span> <span class="n">h_ss</span><span class="p">):</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">dhdt</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">d2hdt2</span> <span class="o">=</span> <span class="p">(</span><span class="n">h_ss</span> <span class="o">-</span> <span class="n">h</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">zeta</span><span class="o">*</span><span class="n">tau</span><span class="o">*</span><span class="n">dhdt</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dhdt</span><span class="p">,</span> <span class="n">d2hdt2</span><span class="p">]</span>
+
+<span class="n">tau</span> <span class="o">=</span> <span class="mf">2.0</span>      <span class="c1"># time constant (min)</span>
+<span class="n">h_ss</span> <span class="o">=</span> <span class="mf">1.0</span>     <span class="c1"># steady-state level (m) — step change from h=0</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>   <span class="c1"># starts at rest at h=0</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">zeta</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;tomato&#39;</span><span class="p">,</span>     <span class="s1">&#39;Underdamped (ζ=0.3)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>  <span class="s1">&#39;Critically damped (ζ=1.0)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span>   <span class="s1">&#39;Overdamped (ζ=2.0)&#39;</span><span class="p">),</span>
+<span class="p">]:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">damped_oscillator</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">y0</span><span class="p">,</span>
+                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">zeta</span><span class="p">,</span> <span class="n">h_ss</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">h_ss</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Steady state&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tank level  h  (m)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Second-Order Step Response: Tank Level Dynamics&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0da48845d25fc0179d0a810439d74d6ca9907974bcbcb856823e79d46eebb22e.png" src="../../_images/0da48845d25fc0179d0a810439d74d6ca9907974bcbcb856823e79d46eebb22e.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="stiff-odes">
+<span id="id6"></span><h2>18.5 Stiff ODEs<a class="headerlink" href="#stiff-odes" title="Link to this heading">#</a></h2>
+<section id="what-is-stiffness">
+<h3>18.5.1 What is Stiffness?<a class="headerlink" href="#what-is-stiffness" title="Link to this heading">#</a></h3>
+<p>A system is <strong>stiff</strong> when it contains processes operating on vastly different time scales simultaneously. For example, in chemical kinetics:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dC_A}{dt} = -10^6\, C_A + C_B
+\qquad
+\frac{dC_B}{dt} = 10^{-3}\, C_A
+\]</div>
+<p>The first equation has a “fast” term (<span class="math notranslate nohighlight">\(k_1 = 10^6\)</span>) and a “slow” term. To remain stable, an explicit method like RK45 must take tiny steps sized to the <em>fastest</em> time scale — even when the solution is actually changing slowly. This makes RK45 extremely slow (millions of steps) on stiff problems.</p>
+<p><strong>Rule of thumb:</strong> if RK45 takes a very long time or requires very small steps with no apparent reason, try <code class="docutils literal notranslate"><span class="pre">method='Radau'</span></code> or <code class="docutils literal notranslate"><span class="pre">method='BDF'</span></code>.</p>
+</section>
+<section id="stiff-solvers">
+<h3>18.5.2 Stiff Solvers<a class="headerlink" href="#stiff-solvers" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Best for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'RK45'</span></code></p></td>
+<td><p>Explicit, adaptive</p></td>
+<td><p>Smooth, non-stiff problems</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'RK23'</span></code></p></td>
+<td><p>Explicit, lower order</p></td>
+<td><p>Quick/rough solutions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'Radau'</span></code></p></td>
+<td><p>Implicit Runge-Kutta</p></td>
+<td><p><strong>Stiff problems</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'BDF'</span></code></p></td>
+<td><p>Implicit multi-step</p></td>
+<td><p><strong>Stiff problems</strong>, large systems</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'LSODA'</span></code></p></td>
+<td><p>Auto-switching</p></td>
+<td><p>When stiffness is uncertain</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Implicit methods</strong> solve a system of equations at each step — more work per step, but can take huge steps, so they win on stiff problems.</p>
+</section>
+<section id="example-fast-and-slow-reaction-network">
+<h3>18.5.3 Example: Fast and Slow Reaction Network<a class="headerlink" href="#example-fast-and-slow-reaction-network" title="Link to this heading">#</a></h3>
+<p>Consider a reaction network where species <span class="math notranslate nohighlight">\(X\)</span> is produced and consumed very rapidly (a “short-lived intermediate”):</p>
+<div class="math notranslate nohighlight">
+\[
+A \xrightarrow{k_1 = 1000} X, \quad X \xrightarrow{k_2 = 1000} B, \quad A \xrightarrow{k_3 = 0.01} B
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Stiff system: compare RK45 vs Radau ──────────────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">k1_s</span><span class="p">,</span> <span class="n">k2_s</span><span class="p">,</span> <span class="n">k3_s</span> <span class="o">=</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">0.01</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">stiff_rxn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span><span class="p">,</span> <span class="n">C_X</span><span class="p">,</span> <span class="n">C_B</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dCA</span> <span class="o">=</span> <span class="o">-</span><span class="n">k1_s</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">-</span> <span class="n">k3_s</span> <span class="o">*</span> <span class="n">C_A</span>
+    <span class="n">dCX</span> <span class="o">=</span>  <span class="n">k1_s</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">-</span> <span class="n">k2_s</span> <span class="o">*</span> <span class="n">C_X</span>
+    <span class="n">dCB</span> <span class="o">=</span>  <span class="n">k2_s</span> <span class="o">*</span> <span class="n">C_X</span> <span class="o">+</span> <span class="n">k3_s</span> <span class="o">*</span> <span class="n">C_A</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dCA</span><span class="p">,</span> <span class="n">dCX</span><span class="p">,</span> <span class="n">dCB</span><span class="p">]</span>
+
+<span class="n">y0_stiff</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">t_span</span>   <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">t_eval</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># RK45</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">sol_rk45</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">stiff_rxn</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0_stiff</span><span class="p">,</span>
+                     <span class="n">method</span><span class="o">=</span><span class="s1">&#39;RK45&#39;</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+<span class="n">t_rk45</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="c1"># Radau</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">sol_radau</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">stiff_rxn</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0_stiff</span><span class="p">,</span>
+                      <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Radau&#39;</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+<span class="n">t_radau</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RK45 :  </span><span class="si">{</span><span class="n">sol_rk45</span><span class="o">.</span><span class="n">nfev</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> function evaluations,  </span><span class="si">{</span><span class="n">t_rk45</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Radau:  </span><span class="si">{</span><span class="n">sol_radau</span><span class="o">.</span><span class="n">nfev</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> function evaluations,  </span><span class="si">{</span><span class="n">t_radau</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">[</span><span class="n">sol_rk45</span><span class="p">,</span> <span class="n">sol_radau</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;RK45&#39;</span><span class="p">,</span> <span class="s1">&#39;Radau&#39;</span><span class="p">]):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$C_A$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$C_X$ (fast intermediate)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span>   <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$C_B$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">nfev</span><span class="si">}</span><span class="s1"> evals)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RK45 :   2246 function evaluations,  13.9 ms
+Radau:    345 function evaluations,  5.6 ms
+</pre></div>
+</div>
+<img alt="../../_images/93ddd2a1f8e8506caed416b1caeb8d076ac88bd0a09344e36a0d71d9971612da.png" src="../../_images/93ddd2a1f8e8506caed416b1caeb8d076ac88bd0a09344e36a0d71d9971612da.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="che-application-non-isothermal-batch-reactor">
+<span id="id7"></span><h2>18.6 ChE Application: Non-Isothermal Batch Reactor<a class="headerlink" href="#che-application-non-isothermal-batch-reactor" title="Link to this heading">#</a></h2>
+<p>The most important ODE application in ChE is the <strong>non-isothermal reactor</strong> — where both concentration and temperature evolve together. The temperature affects the rate (Arrhenius), and the reaction releases heat which changes the temperature. These two effects are <strong>coupled</strong>.</p>
+<section id="model-equations">
+<h3>18.6.1 Model Equations<a class="headerlink" href="#model-equations" title="Link to this heading">#</a></h3>
+<p>Consider an <strong>exothermic first-order liquid-phase reaction</strong> <span class="math notranslate nohighlight">\(A \to B\)</span> in an adiabatic batch reactor:</p>
+<p><strong>Mole balance:</strong>
+$<span class="math notranslate nohighlight">\(
+\frac{dC_A}{dt} = -k(T)\, C_A
+\)</span>$</p>
+<p><strong>Energy balance</strong> (adiabatic, liquid phase):
+$<span class="math notranslate nohighlight">\(
+\rho C_p \frac{dT}{dt} = (-\Delta H_{rxn})\, k(T)\, C_A
+\)</span>$</p>
+<p><strong>Arrhenius rate:</strong>
+$<span class="math notranslate nohighlight">\(
+k(T) = A\, e^{-E_a / RT}
+\)</span>$</p>
+<p>The two equations are <strong>coupled</strong>: temperature changes <span class="math notranslate nohighlight">\(k\)</span>, which changes the rate of <span class="math notranslate nohighlight">\(C_A\)</span> consumption, which changes the heat released.</p>
+</section>
+<section id="physical-parameters">
+<h3>18.6.2 Physical Parameters<a class="headerlink" href="#physical-parameters" title="Link to this heading">#</a></h3>
+<p>We use parameters typical of an industrial hydrogenation:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Units</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Pre-exponential <span class="math notranslate nohighlight">\(A\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1.0 \times 10^{10}\)</span></p></td>
+<td><p>min⁻¹</p></td>
+</tr>
+<tr class="row-odd"><td><p>Activation energy <span class="math notranslate nohighlight">\(E_a\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(75{,}000\)</span></p></td>
+<td><p>J/mol</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(-\Delta H_{rxn}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(50{,}000\)</span></p></td>
+<td><p>J/mol</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\rho C_p\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(4{,}000\)</span></p></td>
+<td><p>J/(L·K)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(C_{A0}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2.0\)</span></p></td>
+<td><p>mol/L</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(T_0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(300\)</span></p></td>
+<td><p>K</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Non-isothermal adiabatic batch reactor ───────────────────────────────────</span>
+
+<span class="n">R_gas</span>  <span class="o">=</span> <span class="mf">8.314</span>       <span class="c1"># J/(mol·K)</span>
+<span class="n">A_arr</span>  <span class="o">=</span> <span class="mf">1.0e10</span>      <span class="c1"># pre-exponential  (1/min)</span>
+<span class="n">Ea</span>     <span class="o">=</span> <span class="mf">75_000.0</span>    <span class="c1"># activation energy (J/mol)</span>
+<span class="n">dH_rxn</span> <span class="o">=</span> <span class="o">-</span><span class="mf">50_000.0</span>   <span class="c1"># heat of reaction  (J/mol)  — exothermic → negative</span>
+<span class="n">rho_Cp</span> <span class="o">=</span> <span class="mf">4_000.0</span>     <span class="c1"># volumetric heat capacity (J/(L·K))</span>
+
+<span class="n">C_A0_batch</span> <span class="o">=</span> <span class="mf">2.0</span>     <span class="c1"># mol/L</span>
+<span class="n">T0_batch</span>   <span class="o">=</span> <span class="mf">300.0</span>   <span class="c1"># K</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_reactor</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">k_T</span>    <span class="o">=</span> <span class="n">A_arr</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
+    <span class="n">dCA_dt</span> <span class="o">=</span> <span class="o">-</span><span class="n">k_T</span> <span class="o">*</span> <span class="n">C_A</span>
+    <span class="n">dT_dt</span>  <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">dH_rxn</span><span class="p">)</span> <span class="o">*</span> <span class="n">k_T</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">/</span> <span class="n">rho_Cp</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dCA_dt</span><span class="p">,</span> <span class="n">dT_dt</span><span class="p">]</span>
+
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">sol_batch</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">batch_reactor</span><span class="p">,</span>
+                      <span class="n">t_span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+                      <span class="n">y0</span><span class="o">=</span><span class="p">[</span><span class="n">C_A0_batch</span><span class="p">,</span> <span class="n">T0_batch</span><span class="p">],</span>
+                      <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Radau&#39;</span><span class="p">,</span>          <span class="c1"># can be stiff near ignition</span>
+                      <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">,</span>
+                      <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
+
+<span class="n">C_A_sol</span> <span class="o">=</span> <span class="n">sol_batch</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">T_sol</span>   <span class="o">=</span> <span class="n">sol_batch</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Conversion</span>
+<span class="n">X_A</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_A0_batch</span> <span class="o">-</span> <span class="n">C_A_sol</span><span class="p">)</span> <span class="o">/</span> <span class="n">C_A0_batch</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final conversion X_A = </span><span class="si">{</span><span class="n">X_A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final temperature  T = </span><span class="si">{</span><span class="n">T_sol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K  (ΔT = </span><span class="si">{</span><span class="n">T_sol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">T0_batch</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adiabatic temp rise (check): </span><span class="si">{</span><span class="o">-</span><span class="n">dH_rxn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">C_A0_batch</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rho_Cp</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Concentration</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol_batch</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">C_A_sol</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$C_A$ (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reactant Concentration&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Temperature</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol_batch</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">T_sol</span><span class="p">,</span> <span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">T0_batch</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_0$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reactor Temperature&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Phase plot: C_A vs T</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_sol</span><span class="p">,</span> <span class="n">C_A_sol</span><span class="p">,</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T0_batch</span><span class="p">,</span> <span class="n">C_A0_batch</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Start&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_sol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">C_A_sol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r*&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;End&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$C_A$ (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Phase Portrait&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Adiabatic Batch Reactor: Coupled Mole &amp; Energy Balances&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final conversion X_A = 0.0267
+Final temperature  T = 300.67 K  (ΔT = 0.67 K)
+Adiabatic temp rise (check): 25.00 K
+</pre></div>
+</div>
+<img alt="../../_images/540a79422aa844e04133e06db45f03c9a9b5bff89f4200483ca06a160613d57b.png" src="../../_images/540a79422aa844e04133e06db45f03c9a9b5bff89f4200483ca06a160613d57b.png" />
+</div>
+</div>
+</section>
+<section id="cstr-start-up-dynamics">
+<h3>18.6.3 CSTR Start-Up Dynamics<a class="headerlink" href="#cstr-start-up-dynamics" title="Link to this heading">#</a></h3>
+<p>A <strong>continuous stirred tank reactor (CSTR)</strong> at start-up must transition from empty (initial conditions) to steady state. The governing equations are:</p>
+<p><strong>Mole balance</strong> (liquid phase, constant volume <span class="math notranslate nohighlight">\(V\)</span>, volumetric flow rate <span class="math notranslate nohighlight">\(Q\)</span>):
+$<span class="math notranslate nohighlight">\(
+\frac{dC_A}{dt} = \frac{Q}{V}(C_{A,\text{in}} - C_A) - k(T)\, C_A
+\)</span>$</p>
+<p><strong>Energy balance</strong> (with jacket cooling at temperature <span class="math notranslate nohighlight">\(T_c\)</span>):
+$<span class="math notranslate nohighlight">\(
+\rho C_p \frac{dT}{dt} = \frac{Q\,\rho C_p}{V}(T_\text{in} - T) + (-\Delta H_{rxn})\,k(T)\,C_A - \frac{UA}{V}(T - T_c)
+\)</span>$</p>
+<p>We want to find:</p>
+<ol class="arabic simple">
+<li><p>How long does it take to reach steady state?</p></li>
+<li><p>Does the reactor settle smoothly or oscillate?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── CSTR start-up dynamics ───────────────────────────────────────────────────</span>
+
+<span class="c1"># Reactor parameters</span>
+<span class="n">Q</span>      <span class="o">=</span> <span class="mf">10.0</span>        <span class="c1"># L/min   — volumetric flow rate</span>
+<span class="n">V</span>      <span class="o">=</span> <span class="mf">100.0</span>       <span class="c1"># L       — reactor volume  → τ = V/Q = 10 min</span>
+<span class="n">CA_in</span>  <span class="o">=</span> <span class="mf">2.0</span>         <span class="c1"># mol/L   — feed concentration</span>
+<span class="n">T_in</span>   <span class="o">=</span> <span class="mf">300.0</span>       <span class="c1"># K       — feed temperature</span>
+<span class="n">T_c</span>    <span class="o">=</span> <span class="mf">290.0</span>       <span class="c1"># K       — cooling jacket temperature</span>
+<span class="n">UA</span>     <span class="o">=</span> <span class="mf">2000.0</span>      <span class="c1"># J/(min·K)</span>
+<span class="n">rho_Cp_cstr</span> <span class="o">=</span> <span class="mf">4000.0</span> <span class="c1"># J/(L·K)</span>
+
+<span class="c1"># Kinetics (same Arrhenius as batch)</span>
+<span class="n">A_cstr</span> <span class="o">=</span> <span class="mf">1.0e10</span>
+<span class="n">Ea_cstr</span> <span class="o">=</span> <span class="mf">75_000.0</span>
+<span class="n">dH_cstr</span> <span class="o">=</span> <span class="o">-</span><span class="mf">50_000.0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cstr_startup</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">k_T</span>    <span class="o">=</span> <span class="n">A_cstr</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea_cstr</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
+    <span class="n">tau_</span>   <span class="o">=</span> <span class="n">V</span> <span class="o">/</span> <span class="n">Q</span>
+
+    <span class="n">dCA_dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">CA_in</span> <span class="o">-</span> <span class="n">C_A</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau_</span> <span class="o">-</span> <span class="n">k_T</span> <span class="o">*</span> <span class="n">C_A</span>
+    <span class="n">dT_dt</span>  <span class="o">=</span> <span class="p">((</span><span class="n">T_in</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau_</span>
+              <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">dH_cstr</span><span class="p">)</span> <span class="o">*</span> <span class="n">k_T</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">/</span> <span class="n">rho_Cp_cstr</span>
+              <span class="o">-</span> <span class="n">UA</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">T_c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">*</span> <span class="n">rho_Cp_cstr</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dCA_dt</span><span class="p">,</span> <span class="n">dT_dt</span><span class="p">]</span>
+
+<span class="n">t_eval_cstr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
+
+<span class="c1"># Start cold and empty (feed conditions as IC)</span>
+<span class="n">sol_cstr</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">cstr_startup</span><span class="p">,</span>
+                     <span class="n">t_span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
+                     <span class="n">y0</span><span class="o">=</span><span class="p">[</span><span class="n">CA_in</span><span class="p">,</span> <span class="n">T_in</span><span class="p">],</span>   <span class="c1"># start with feed filling reactor</span>
+                     <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Radau&#39;</span><span class="p">,</span>
+                     <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval_cstr</span><span class="p">,</span>
+                     <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+
+<span class="c1"># Approximate steady state (last 5 points average)</span>
+<span class="n">CA_ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sol_cstr</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
+<span class="n">T_ss</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sol_cstr</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
+<span class="n">X_ss</span>  <span class="o">=</span> <span class="p">(</span><span class="n">CA_in</span> <span class="o">-</span> <span class="n">CA_ss</span><span class="p">)</span> <span class="o">/</span> <span class="n">CA_in</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steady-state C_A ≈ </span><span class="si">{</span><span class="n">CA_ss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steady-state T   ≈ </span><span class="si">{</span><span class="n">T_ss</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steady-state conversion X_A ≈ </span><span class="si">{</span><span class="n">X_ss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol_cstr</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol_cstr</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">CA_ss</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;SS: </span><span class="si">{</span><span class="n">CA_ss</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> mol/L&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$C_A$ (mol/L)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CSTR Start-Up: Concentration&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol_cstr</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol_cstr</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">T_ss</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;SS: </span><span class="si">{</span><span class="n">T_ss</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> K&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CSTR Start-Up: Temperature&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Non-Isothermal CSTR Start-Up Dynamics&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Steady-state C_A ≈ 1.9832 mol/L
+Steady-state T   ≈ 299.72 K
+Steady-state conversion X_A ≈ 0.0084
+</pre></div>
+</div>
+<img alt="../../_images/82b0bf461fe7a7448a8e92d8916c17e459a2de8e326796383e91ed520252ae8c.png" src="../../_images/82b0bf461fe7a7448a8e92d8916c17e459a2de8e326796383e91ed520252ae8c.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="chapter-18-summary">
+<h2>Chapter 18 Summary<a class="headerlink" href="#chapter-18-summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Code</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Define ODE</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">f(t,</span> <span class="pre">y):</span> <span class="pre">return</span> <span class="pre">[...]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y</span></code> is always a list/array; return same shape</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solve ODE</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">solve_ivp(f,</span> <span class="pre">(t0,tf),</span> <span class="pre">y0)</span></code></p></td>
+<td><p>Default method: <code class="docutils literal notranslate"><span class="pre">'RK45'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Save output times</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t_eval=np.linspace(t0,</span> <span class="pre">tf,</span> <span class="pre">N)</span></code></p></td>
+<td><p>Otherwise solver picks its own points</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pass parameters</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">args=(p1,</span> <span class="pre">p2)</span></code></p></td>
+<td><p>Add params to <code class="docutils literal notranslate"><span class="pre">f(t,</span> <span class="pre">y,</span> <span class="pre">p1,</span> <span class="pre">p2)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Access solution</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sol.t</span></code>, <code class="docutils literal notranslate"><span class="pre">sol.y[i]</span></code></p></td>
+<td><p>Row <code class="docutils literal notranslate"><span class="pre">i</span></code> of <code class="docutils literal notranslate"><span class="pre">sol.y</span></code> is variable <code class="docutils literal notranslate"><span class="pre">i</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Stiff problem</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">method='Radau'</span></code> or <code class="docutils literal notranslate"><span class="pre">'BDF'</span></code></p></td>
+<td><p>When RK45 is very slow or takes tiny steps</p></td>
+</tr>
+<tr class="row-even"><td><p>Euler’s method</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y_next</span> <span class="pre">=</span> <span class="pre">y</span> <span class="pre">+</span> <span class="pre">h</span> <span class="pre">*</span> <span class="pre">f(t,</span> <span class="pre">y)</span></code></p></td>
+<td><p>For understanding only — don’t use in practice</p></td>
+</tr>
+<tr class="row-odd"><td><p>System of ODEs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y0=[C_A0,</span> <span class="pre">T0,</span> <span class="pre">...]</span></code></p></td>
+<td><p>One IC per equation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Workflow for any ODE problem:</strong></p>
+<ol class="arabic simple">
+<li><p>Identify state variables <span class="math notranslate nohighlight">\(\to\)</span> one entry in <code class="docutils literal notranslate"><span class="pre">y</span></code> per variable</p></li>
+<li><p>Write each <span class="math notranslate nohighlight">\(\frac{dy_i}{dt}\)</span> as a function of <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p>Collect into <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">rhs(t,</span> <span class="pre">y):</span> <span class="pre">return</span> <span class="pre">[dy1,</span> <span class="pre">dy2,</span> <span class="pre">...]</span></code></p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">solve_ivp(rhs,</span> <span class="pre">(t0,</span> <span class="pre">tf),</span> <span class="pre">y0,</span> <span class="pre">t_eval=...)</span></code></p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">sol.success</span></code> and verify physics (mass balance, energy balance)</p></li>
+<li><p>If slow or failing, try <code class="docutils literal notranslate"><span class="pre">method='Radau'</span></code></p></li>
+</ol>
+<p><strong>Key insight:</strong> every ODE solver is doing essentially the same thing as Euler’s method — just with smarter, higher-order estimates of the slope at each step. The core idea is always: march forward from the initial condition using the known rate of change.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -443,6 +1429,55 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-why-do-we-need-odes">Motivation: Why Do We Need ODEs?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-ode">18.1 What is an ODE?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-key-idea-integration">18.1.1 The Key Idea: Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-an-analytical-solution">18.1.2 Verifying an Analytical Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-method">18.2 Euler’s Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-idea">18.2.1 The Core Idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-and-step-size">18.2.2 Error and Step Size</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-ivp-scipy-s-ode-solver">18.3 <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>: SciPy’s ODE Solver</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-convention">18.3.1 Calling Convention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#under-the-hood-runge-kutta-4-5">18.3.2 Under the Hood: Runge-Kutta 4/5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-parameters-with-args">18.3.3 Passing Parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systems-of-odes">18.4 Systems of ODEs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-reactions-a-b-c">18.4.1 Consecutive Reactions: A → B → C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-ode-damped-oscillator-tank-level">18.4.2 Second-Order ODE: Damped Oscillator (Tank Level)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stiff-odes">18.5 Stiff ODEs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-stiffness">18.5.1 What is Stiffness?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stiff-solvers">18.5.2 Stiff Solvers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fast-and-slow-reaction-network">18.5.3 Example: Fast and Slow Reaction Network</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#che-application-non-isothermal-batch-reactor">18.6 ChE Application: Non-Isothermal Batch Reactor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-equations">18.6.1 Model Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-parameters">18.6.2 Physical Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cstr-start-up-dynamics">18.6.3 CSTR Start-Up Dynamics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-18-summary">Chapter 18 Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

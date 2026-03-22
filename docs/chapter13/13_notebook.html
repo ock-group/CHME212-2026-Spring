@@ -211,6 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
 </ul>
 
     </div>
@@ -638,6 +639,19 @@ Batches below 85%  : 1
 <p><strong><code class="docutils literal notranslate"><span class="pre">ddof</span></code> (delta degrees of freedom):</strong> By default NumPy uses <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code> (divides by <span class="math notranslate nohighlight">\(N\)</span>), which gives the <strong>population</strong> variance. For a <strong>sample</strong> drawn from a larger population, always use <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> (divides by <span class="math notranslate nohighlight">\(N-1\)</span>) to get an unbiased estimate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yields</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([85.2, 87.9, 90.1, 86.3, 88.7, 84.5, 89.3, 87.1, 91. , 85.8, 88.2,
+       86.7, 89.5, 87.4, 88. ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Descriptive statistics on the yield data ──────────────────────────────────</span>
 <span class="c1"># Each line below answers a specific engineering question about the batch process.</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Descriptive statistics for batch yield data&quot;</span><span class="p">)</span>
@@ -710,6 +724,25 @@ s^2 = \frac{1}{N-1}\sum(x_i - \bar{x})^2
 <p><strong>Rule:</strong> Always use <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> when working with sample data from an experiment. Only use <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code> when you have the <em>entire</em> population (e.g., when you simulate all possible outcomes).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">yields</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">yields</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.381238095238093
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.381238095238093
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Population vs sample variance ────────────────────────────────────────────</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Effect of ddof on variance estimate&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  np.var(yields, ddof=0)  = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">yields</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (population / divides by N)&quot;</span><span class="p">)</span>
@@ -744,8 +777,17 @@ Manual check:
 <p><code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> provides a convenience function <code class="docutils literal notranslate"><span class="pre">describe()</span></code> that returns all basic statistics in one call.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── scipy.stats.describe ──────────────────────────────────────────────────────</span>
+
 <span class="n">desc</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;nobs     : </span><span class="si">{</span><span class="n">desc</span><span class="o">.</span><span class="n">nobs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min/max  : </span><span class="si">{</span><span class="n">desc</span><span class="o">.</span><span class="n">minmax</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mean     : </span><span class="si">{</span><span class="n">desc</span><span class="o">.</span><span class="n">mean</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -869,6 +911,45 @@ kurtosis : -0.7790   (0 = normal tail weight)
 </table>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">size</span></code> parameter controls the shape of the output — pass a single integer for 1-D arrays, or a tuple <code class="docutils literal notranslate"><span class="pre">(rows,</span> <span class="pre">cols)</span></code> for 2-D arrays.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="c1"># np.random.seed(42) # random seed number</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="n">array</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;c&#39;, &#39;d&#39;, &#39;b&#39;, &#39;a&#39;], dtype=&#39;&lt;U1&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.51182162, 0.9504637 , 0.14415961, 0.94864945, 0.31183145,
+       0.42332645, 0.82770259, 0.40919914, 0.54959369, 0.02755911])
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Basic random number generation ───────────────────────────────────────────</span>

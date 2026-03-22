@@ -211,6 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
 </ul>
 
     </div>
@@ -543,7 +544,7 @@ Roots (p(x) = 0): [ 1.9186+0.j     -0.2093+1.1222j -0.2093-1.1222j]
 
 <span class="c1"># Keep only the physically meaningful root: real, 0 &lt; x &lt; 1</span>
 <span class="n">real_roots</span> <span class="o">=</span> <span class="n">roots</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isreal</span><span class="p">(</span><span class="n">roots</span><span class="p">)]</span><span class="o">.</span><span class="n">real</span>
-<span class="n">x_eq</span> <span class="o">=</span> <span class="n">real_roots</span><span class="p">[(</span><span class="n">real_roots</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">real_roots</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">x_eq</span> <span class="o">=</span> <span class="n">real_roots</span><span class="p">[(</span><span class="n">real_roots</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">real_roots</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)]</span> <span class="c1"># Boolean indexing: This keeps only the elements where the condition is True.</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Physical root (0 &lt; x &lt; 1): x = </span><span class="si">{</span><span class="n">x_eq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Verify: Kp = 4x² / (1 - x²)</span>
@@ -582,6 +583,20 @@ Verification: Kp = 4x²/(1-x²) = 2.000000  (expected 2.0)
 </pre></div>
 </div>
 <img alt="../../_images/c41413e8a584afabfeb98022ca0d06a9481228e359f261028bc7d5d6d32d9517.png" src="../../_images/c41413e8a584afabfeb98022ca0d06a9481228e359f261028bc7d5d6d32d9517.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">real_roots</span> <span class="o">=</span> <span class="n">roots</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isreal</span><span class="p">(</span><span class="n">roots</span><span class="p">)]</span><span class="o">.</span><span class="n">real</span>
+
+<span class="n">real_roots</span><span class="p">[(</span><span class="n">real_roots</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">real_roots</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.57735027])
+</pre></div>
+</div>
 </div>
 </div>
 </section>
