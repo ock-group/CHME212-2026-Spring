@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 1323, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+fig, ax = plt.subplots(figsize=(5, 5))
+
+ax.scatter(x[inside],  y[inside],  s=2, color='steelblue', alpha=0.5, label='Inside')
+ax.scatter(x[~inside], y[~inside], s=2, color='salmon',    alpha=0.5, label='Outside')
+
+# Draw the quarter-circle boundary
+theta = np.linspace(0, np.pi/2, 300)
+ax.plot(np.cos(theta), np.sin(theta), 'k-', linewidth=2, label='Quarter-circle boundary')
+
+ax.set_aspect('equal')
+ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+ax.set_xlabel('x'); ax.set_ylabel('y')
+ax.set_title(f'Dart throw: N = {N},  π ≈ {pi_estimate:.4f}')
+ax.legend(fontsize=9, markerscale=5)
+plt.tight_layout()
+plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[3], line 3[0m
+[1;32m      1[0m fig, ax [38;5;241m=[39m plt[38;5;241m.[39msubplots(figsize[38;5;241m=[39m([38;5;241m5[39m, [38;5;241m5[39m))
+[0;32m----> 3[0m ax[38;5;241m.[39mscatter([43mx[49m[inside],  y[inside],  s[38;5;241m=[39m[38;5;241m2[39m, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124msteelblue[39m[38;5;124m'[39m, alpha[38;5;241m=[39m[38;5;241m0.5[39m, label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mInside[39m[38;5;124m'[39m)
+[1;32m      4[0m ax[38;5;241m.[39mscatter(x[[38;5;241m~[39minside], y[[38;5;241m~[39minside], s[38;5;241m=[39m[38;5;241m2[39m, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124msalmon[39m[38;5;124m'[39m,    alpha[38;5;241m=[39m[38;5;241m0.5[39m, label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mOutside[39m[38;5;124m'[39m)
+[1;32m      6[0m [38;5;66;03m# Draw the quarter-circle boundary[39;00m
+
+[0;31mNameError[0m: name 'x' is not defined
+

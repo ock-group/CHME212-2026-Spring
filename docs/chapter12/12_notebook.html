@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Chapter 12: Polynomial Fitting &#8212; Introduction to Chemical Engineering Computation</title>
+    <title>12.1 Motivation: Heat Capacity of CO\(_2\) &#8212; Introduction to Chemical Engineering Computation</title>
   
   
   
@@ -199,8 +199,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -397,7 +401,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 12: Polynomial Fitting</h1>
+    <h1>12.1 Motivation: Heat Capacity of CO_2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -407,29 +411,30 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-heat-capacity-of-co-2">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-basics">12.2 Polynomial Basics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coefficient-array">The coefficient array</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-poly1d-coeffs-callable-polynomial-object"><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly"><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyfit-x-y-deg-find-best-fit-coefficients"><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-basics">12.2 Polynomial Basics</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coefficient-array">The coefficient array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-poly1d-coeffs-callable-polynomial-object"><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly"><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyfit-x-y-deg-find-best-fit-coefficients"><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-polynomial-fitting">12.3 Least-Squares Polynomial Fitting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-in-polynomial-fitting">12.3.4 Degrees of Freedom in Polynomial Fitting</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-fit-degree-1">1. Linear fit (degree 1)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-fit-degree-2">2. Quadratic fit (degree 2)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General rule</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-polynomial-fitting">12.3 Least-Squares Polynomial Fitting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-in-polynomial-fitting">12.3.4 Degrees of Freedom in Polynomial Fitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-fit-degree-1">1. Linear fit (degree 1)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-fit-degree-2">2. Quadratic fit (degree 2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General rule</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.5 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.5 Overfitting: When Higher Degree Hurts</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.4 Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.4 Summary</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -440,14 +445,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-12-polynomial-fitting">
-<span id="id1"></span><h1>Chapter 12: Polynomial Fitting<a class="headerlink" href="#chapter-12-polynomial-fitting" title="Link to this heading">#</a></h1>
-<p><strong>Topics Covered:</strong></p>
-<ul class="simple">
-<li><p>Polynomial basics: <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code>, <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code></p></li>
-<li><p>Least-squares polynomial fitting: choosing the right degree, residuals, <span class="math notranslate nohighlight">\(R^2\)</span></p></li>
-</ul>
-<div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── All imports ─────────────────────────────────────────────────────────────</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -457,7 +455,7 @@ document.write(`
 </div>
 </div>
 <section id="motivation-heat-capacity-of-co-2">
-<span id="id2"></span><h2>12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span><a class="headerlink" href="#motivation-heat-capacity-of-co-2" title="Link to this heading">#</a></h2>
+<span id="id1"></span><h1>12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span><a class="headerlink" href="#motivation-heat-capacity-of-co-2" title="Link to this heading">#</a></h1>
 <p>In chemical engineering, we frequently need <span class="math notranslate nohighlight">\(C_p(T)\)</span> — the molar heat capacity as a function of temperature — to compute:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -530,7 +528,7 @@ Q = n \int_{T_1}^{T_2} C_p(T)\, dT
 </div>
 </section>
 <section id="polynomial-basics">
-<span id="id3"></span><h2>12.2 Polynomial Basics<a class="headerlink" href="#polynomial-basics" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h1>12.2 Polynomial Basics<a class="headerlink" href="#polynomial-basics" title="Link to this heading">#</a></h1>
 <p>A degree-<span class="math notranslate nohighlight">\(n\)</span> polynomial is:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -559,7 +557,7 @@ p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0
 <p><strong>Convention:</strong> <code class="docutils literal notranslate"><span class="pre">coeffs</span> <span class="pre">=</span> <span class="pre">[a_n,</span> <span class="pre">a_{n-1},</span> <span class="pre">...,</span> <span class="pre">a_1,</span> <span class="pre">a_0]</span></code> — highest power first.</p>
 <hr class="docutils" />
 <section id="the-coefficient-array">
-<h3>The coefficient array<a class="headerlink" href="#the-coefficient-array" title="Link to this heading">#</a></h3>
+<h2>The coefficient array<a class="headerlink" href="#the-coefficient-array" title="Link to this heading">#</a></h2>
 <p>Say you have <span class="math notranslate nohighlight">\(p(x) = 3x^2 + 5x - 2\)</span>. NumPy represents this as <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">5,</span> <span class="pre">-2]</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>index:  0    1    2
 value: [3,   5,  -2]
@@ -569,7 +567,7 @@ value: [3,   5,  -2]
 </div>
 </section>
 <section id="np-poly1d-coeffs-callable-polynomial-object">
-<h3><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object<a class="headerlink" href="#np-poly1d-coeffs-callable-polynomial-object" title="Link to this heading">#</a></h3>
+<h2><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object<a class="headerlink" href="#np-poly1d-coeffs-callable-polynomial-object" title="Link to this heading">#</a></h2>
 <p>Wraps the coefficient list into an object you can call like a function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">p</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># → 3(1)² + 5(1) - 2 = 6</span>
@@ -579,7 +577,7 @@ value: [3,   5,  -2]
 <p>Bonus methods: <code class="docutils literal notranslate"><span class="pre">p.deriv()</span></code> (derivative), <code class="docutils literal notranslate"><span class="pre">p.integ()</span></code> (integral), <code class="docutils literal notranslate"><span class="pre">p.roots</span></code> (zeros).</p>
 </section>
 <section id="np-polyval-coeffs-x-evaluate-from-the-list-directly">
-<h3><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly<a class="headerlink" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly" title="Link to this heading">#</a></h3>
+<h2><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly<a class="headerlink" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly" title="Link to this heading">#</a></h2>
 <p>Same result, no object needed. Works on scalars or arrays:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>           <span class="c1"># → 6</span>
 <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>   <span class="c1"># → [-2, 6, 20]</span>
@@ -588,7 +586,7 @@ value: [3,   5,  -2]
 <p>Use this when you only need values and don’t need derivatives/integrals.</p>
 </section>
 <section id="np-polyfit-x-y-deg-find-best-fit-coefficients">
-<h3><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients<a class="headerlink" href="#np-polyfit-x-y-deg-find-best-fit-coefficients" title="Link to this heading">#</a></h3>
+<h2><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients<a class="headerlink" href="#np-polyfit-x-y-deg-find-best-fit-coefficients" title="Link to this heading">#</a></h2>
 <p>Given data points, returns a coefficient array in the same descending convention:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># fit  → coeffs</span>
 <span class="n">p</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>                  <span class="c1"># wrap → callable</span>
@@ -705,7 +703,7 @@ Manual check          : 1.0000
 </section>
 </section>
 <section id="least-squares-polynomial-fitting">
-<span id="id4"></span><h2>12.3 Least-Squares Polynomial Fitting<a class="headerlink" href="#least-squares-polynomial-fitting" title="Link to this heading">#</a></h2>
+<span id="id3"></span><h1>12.3 Least-Squares Polynomial Fitting<a class="headerlink" href="#least-squares-polynomial-fitting" title="Link to this heading">#</a></h1>
 <p><strong><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code></strong> finds the degree-<code class="docutils literal notranslate"><span class="pre">deg</span></code> polynomial coefficients that minimize the sum of squared residuals:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -713,7 +711,7 @@ Manual check          : 1.0000
 \]</div>
 <p>This is ordinary least squares applied to a polynomial basis. The function returns coefficients in descending order (highest power first), just like <code class="docutils literal notranslate"><span class="pre">np.poly1d</span></code> expects.</p>
 <section id="fitting-cp-t-with-different-degrees">
-<span id="id5"></span><h3>12.3.1 Fitting Cp(T) with Different Degrees<a class="headerlink" href="#fitting-cp-t-with-different-degrees" title="Link to this heading">#</a></h3>
+<span id="id4"></span><h2>12.3.1 Fitting Cp(T) with Different Degrees<a class="headerlink" href="#fitting-cp-t-with-different-degrees" title="Link to this heading">#</a></h2>
 <p>We fit the CO<span class="math notranslate nohighlight">\(_2\)</span> data with degree 1, 2, and 3 polynomials and compare the results visually.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -775,7 +773,7 @@ e_i = y_i - p(x_i)
 </div>
 </section>
 <section id="fit-quality-metrics-mae-mse-and-r-2">
-<span id="id6"></span><h3>12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#fit-quality-metrics-mae-mse-and-r-2" title="Link to this heading">#</a></h3>
+<span id="id5"></span><h2>12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#fit-quality-metrics-mae-mse-and-r-2" title="Link to this heading">#</a></h2>
 <p>Given residuals <span class="math notranslate nohighlight">\(e_i = y_i - p(x_i)\)</span>, where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(y_i\)</span> — observed (measured) value at point <span class="math notranslate nohighlight">\(i\)</span></p></li>
@@ -860,7 +858,7 @@ R^2 = 1 - \frac{\sum_i e_i^2}{\sum_i (y_i - \bar{y})^2}
 </div>
 </section>
 <section id="mae-vs-r-2-they-can-disagree">
-<span id="id7"></span><h3>12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree<a class="headerlink" href="#mae-vs-r-2-they-can-disagree" title="Link to this heading">#</a></h3>
+<span id="id6"></span><h2>12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree<a class="headerlink" href="#mae-vs-r-2-they-can-disagree" title="Link to this heading">#</a></h2>
 <p>MAE and <span class="math notranslate nohighlight">\(R^2\)</span> measure different things, so a model can score well on one and poorly on the other.</p>
 <p><strong>Case A — Low MAE, low <span class="math notranslate nohighlight">\(R^2\)</span>:</strong>
 All errors are small in absolute magnitude, but the data has almost no variance. The model barely outperforms the flat mean, so <span class="math notranslate nohighlight">\(R^2\)</span> stays near zero even though MAE looks fine.</p>
@@ -945,14 +943,14 @@ Case B — High MAE, High R²
 </div>
 </section>
 <section id="degrees-of-freedom-in-polynomial-fitting">
-<span id="id8"></span><h3>12.3.4 Degrees of Freedom in Polynomial Fitting<a class="headerlink" href="#degrees-of-freedom-in-polynomial-fitting" title="Link to this heading">#</a></h3>
+<span id="id7"></span><h2>12.3.4 Degrees of Freedom in Polynomial Fitting<a class="headerlink" href="#degrees-of-freedom-in-polynomial-fitting" title="Link to this heading">#</a></h2>
 <p><strong>Degrees of freedom (DOF)</strong> quantify how much “slack” a model has after satisfying all data constraints:</p>
 <div class="math notranslate nohighlight">
 \[\text{DOF} = N - p\]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> = number of data points and <span class="math notranslate nohighlight">\(p\)</span> = number of model parameters (coefficients).</p>
 <hr class="docutils" />
 <section id="linear-fit-degree-1">
-<h4>1. Linear fit (degree 1)<a class="headerlink" href="#linear-fit-degree-1" title="Link to this heading">#</a></h4>
+<h3>1. Linear fit (degree 1)<a class="headerlink" href="#linear-fit-degree-1" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[y = ax + b \qquad (p = 2 \text{ parameters})\]</div>
 <p>With <span class="math notranslate nohighlight">\(N = 2\)</span> data points:</p>
@@ -962,7 +960,7 @@ Case B — High MAE, High R²
 </section>
 <hr class="docutils" />
 <section id="quadratic-fit-degree-2">
-<h4>2. Quadratic fit (degree 2)<a class="headerlink" href="#quadratic-fit-degree-2" title="Link to this heading">#</a></h4>
+<h3>2. Quadratic fit (degree 2)<a class="headerlink" href="#quadratic-fit-degree-2" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[y = ax^2 + bx + c \qquad (p = 3 \text{ parameters})\]</div>
 <p>With <span class="math notranslate nohighlight">\(N = 2\)</span> data points:</p>
@@ -972,7 +970,7 @@ Case B — High MAE, High R²
 </section>
 <hr class="docutils" />
 <section id="general-rule">
-<h4>General rule<a class="headerlink" href="#general-rule" title="Link to this heading">#</a></h4>
+<h3>General rule<a class="headerlink" href="#general-rule" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>DOF</p></th>
@@ -1085,7 +1083,7 @@ Degree 2 (DOF = -1) — all four pass exactly through the same two points:
 </section>
 </section>
 <section id="overfitting-when-higher-degree-hurts">
-<span id="id9"></span><h3>12.3.5 Overfitting: When Higher Degree Hurts<a class="headerlink" href="#overfitting-when-higher-degree-hurts" title="Link to this heading">#</a></h3>
+<span id="id8"></span><h2>12.3.5 Overfitting: When Higher Degree Hurts<a class="headerlink" href="#overfitting-when-higher-degree-hurts" title="Link to this heading">#</a></h2>
 <p>Adding more polynomial terms always reduces training error, but can create <strong>overfitting</strong>: the polynomial wiggles between data points and performs poorly outside the training range.</p>
 <p><strong>Why does adding terms always reduce training error?</strong>
 With <span class="math notranslate nohighlight">\(N\)</span> data points and a degree-<span class="math notranslate nohighlight">\((N-1)\)</span> polynomial, you have exactly enough free coefficients to pass through every point perfectly — residuals become zero by construction. But this is not a good model; it has memorized the noise in the data rather than learned the underlying trend.</p>
@@ -1234,7 +1232,7 @@ Use R² and visual inspection — not just training error — to choose degree.
 </section>
 </section>
 <section id="summary">
-<span id="id10"></span><h2>12.4 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<span id="id9"></span><h1>12.4 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h1>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concept</p></th>
@@ -1274,7 +1272,6 @@ Use R² and visual inspection — not just training error — to choose degree.
 </tbody>
 </table>
 </div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1341,29 +1338,30 @@ Use R² and visual inspection — not just training error — to choose degree.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-heat-capacity-of-co-2">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-basics">12.2 Polynomial Basics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coefficient-array">The coefficient array</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-poly1d-coeffs-callable-polynomial-object"><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly"><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyfit-x-y-deg-find-best-fit-coefficients"><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-basics">12.2 Polynomial Basics</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coefficient-array">The coefficient array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-poly1d-coeffs-callable-polynomial-object"><code class="docutils literal notranslate"><span class="pre">np.poly1d(coeffs)</span></code> — callable polynomial object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyval-coeffs-x-evaluate-from-the-list-directly"><code class="docutils literal notranslate"><span class="pre">np.polyval(coeffs,</span> <span class="pre">x)</span></code> — evaluate from the list directly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-polyfit-x-y-deg-find-best-fit-coefficients"><code class="docutils literal notranslate"><span class="pre">np.polyfit(x,</span> <span class="pre">y,</span> <span class="pre">deg)</span></code> — find best-fit coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-polynomial-fitting">12.3 Least-Squares Polynomial Fitting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-in-polynomial-fitting">12.3.4 Degrees of Freedom in Polynomial Fitting</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-fit-degree-1">1. Linear fit (degree 1)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-fit-degree-2">2. Quadratic fit (degree 2)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General rule</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-polynomial-fitting">12.3 Least-Squares Polynomial Fitting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-cp-t-with-different-degrees">12.3.1 Fitting Cp(T) with Different Degrees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-quality-metrics-mae-mse-and-r-2">12.3.2 Fit Quality Metrics: MAE, MSE, and <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mae-vs-r-2-they-can-disagree">12.3.3 MAE vs <span class="math notranslate nohighlight">\(R^2\)</span>: They Can Disagree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-in-polynomial-fitting">12.3.4 Degrees of Freedom in Polynomial Fitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-fit-degree-1">1. Linear fit (degree 1)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-fit-degree-2">2. Quadratic fit (degree 2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General rule</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.5 Overfitting: When Higher Degree Hurts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-when-higher-degree-hurts">12.3.5 Overfitting: When Higher Degree Hurts</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.4 Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.4 Summary</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>

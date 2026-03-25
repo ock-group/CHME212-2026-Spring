@@ -199,8 +199,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -211,6 +215,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
 </ul>
 
     </div>
@@ -422,6 +427,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">13.3 Probability Distributions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pdf-and-cdf">The PDF and CDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-do-pdf-and-cdf-look-like">What do PDF and CDF look like?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">13.3.1 Uniform Distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-gaussian-distribution">13.3.2 Normal (Gaussian) Distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-68-95-99-7-rule-empirical-rule">The 68-95-99.7 rule (empirical rule)</a></li>
@@ -946,7 +952,7 @@ kurtosis : -0.7790   (0 = normal tail weight)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.82497676, 0.2078899 , 0.56066892, 0.60663431, 0.61081658])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.95313528, 0.3593586 , 0.55334592, 0.15333908, 0.25275431])
 </pre></div>
 </div>
 </div>
@@ -967,12 +973,12 @@ kurtosis : -0.7790   (0 = normal tail weight)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.07126958 0.48616025 0.69044879 0.4947092  0.85963933 0.37355365
- 0.51900872 0.15068102 0.19589082 0.92816592]
-[ 0.74654191  0.42677652 -0.00291098  1.71854798 -1.05431578  0.31141033
- -0.52698621 -0.15186319  0.17106715 -0.57190012]
-[ 5  5  9  6 10  8  1  8 10  9]
-[&#39;N2&#39; &#39;H2O&#39; &#39;CO2&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.66134031 0.40181483 0.55193914 0.20308688 0.41706801 0.0716066
+ 0.5695588  0.73103426 0.4422068  0.83504097]
+[-0.76317082  0.62863372 -1.1549174   0.68145651 -0.41388584 -0.03125645
+  0.07341458  0.75402064  0.20162285 -1.84900144]
+[10  2  9  4  2  7  5  4  3  6]
+[&#39;CH4&#39; &#39;O2&#39; &#39;CO2&#39;]
 </pre></div>
 </div>
 </div>
@@ -1092,7 +1098,6 @@ F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t)\, dt
 <li><p><code class="docutils literal notranslate"><span class="pre">.pdf(x)</span></code> — evaluate the PDF</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.cdf(x)</span></code> — evaluate the CDF (probability <span class="math notranslate nohighlight">\(\leq x\)</span>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.ppf(p)</span></code> — inverse CDF: find <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(P(X \leq x) = p\)</span></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.rvs(size)</span></code> — draw random samples</p></li>
 </ul>
 <blockquote>
 <div><p><strong>Instructor Note — 13.3 Probability Distributions Intro</strong></p>
@@ -1103,6 +1108,97 @@ F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t)\, dt
 <p><strong>On the scipy API:</strong> Write on the board the four methods: <code class="docutils literal notranslate"><span class="pre">.pdf()</span></code>, <code class="docutils literal notranslate"><span class="pre">.cdf()</span></code>, <code class="docutils literal notranslate"><span class="pre">.ppf()</span></code>, <code class="docutils literal notranslate"><span class="pre">.rvs()</span></code>. Tell students to memorize this pattern — it’s the same for every distribution in scipy.stats.</p>
 <p><strong>Preview:</strong> <em>“We’ll cover four distributions: uniform, normal, exponential, and Poisson. Each has a natural engineering use case.”</em></p>
 </div></blockquote>
+</section>
+<section id="what-do-pdf-and-cdf-look-like">
+<h3>What do PDF and CDF look like?<a class="headerlink" href="#what-do-pdf-and-cdf-look-like" title="Link to this heading">#</a></h3>
+<p>Before looking at specific distributions, let’s build intuition for the <strong>PDF</strong> and <strong>CDF</strong> side by side using the Normal distribution as an example.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>PDF <span class="math notranslate nohighlight">\(f(x)\)</span></p></th>
+<th class="head"><p>CDF <span class="math notranslate nohighlight">\(F(x)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>What it shows</strong></p></td>
+<td><p>How <em>dense</em> probability is at each point</p></td>
+<td><p>Total probability accumulated up to <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Range</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(f(x) \geq 0\)</span>, can exceed 1</p></td>
+<td><p>Always between 0 and 1</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Area</strong></p></td>
+<td><p>Area under the whole curve = 1</p></td>
+<td><p>Starts at 0, ends at 1</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Use</strong></p></td>
+<td><p>Shape of the distribution</p></td>
+<td><p><span class="math notranslate nohighlight">\(P(X \leq x)\)</span> — probability below a threshold</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The CDF is the integral of the PDF:</p>
+<div class="math notranslate nohighlight">
+\[F(x) = P(X \leq x) = \int_{-\infty}^x f(t)\,dt\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">88.0</span><span class="p">,</span> <span class="mf">2.0</span>          <span class="c1"># batch yield: mean 88%, std 2%</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">x_shade</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="mf">87.0</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>   <span class="c1"># area to the left of x=87</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># ── Left: PDF ────────────────────────────────────────────────────────────────</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_shade</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_shade</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;P(X ≤ 87) = </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">87</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Yield (%)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)  — probability density&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PDF: shape of the distribution&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># ── Right: CDF ───────────────────────────────────────────────────────────────</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">87</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">87</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;F(87) = </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">87</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">87</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Yield (%)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;F(x) = P(X ≤ x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CDF: accumulated probability&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Normal $\mathcal</span><span class="si">{N}</span><span class="s1">(88,\; 2^2)$  —  PDF and CDF&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading the CDF: P(yield ≤ 87%) = F(87) = </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The shaded area in the PDF equals the CDF value at x=87.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/15192436481dee3e246f9da8721f5603f90b2761d0b59ac79a197f044913d0ff.png" src="../../_images/15192436481dee3e246f9da8721f5603f90b2761d0b59ac79a197f044913d0ff.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading the CDF: P(yield ≤ 87%) = F(87) = 0.3085
+The shaded area in the PDF equals the CDF value at x=87.
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="uniform-distribution">
 <span id="id5"></span><h3>13.3.1 Uniform Distribution<a class="headerlink" href="#uniform-distribution" title="Link to this heading">#</a></h3>
@@ -1362,11 +1458,11 @@ Write on the board: <strong>68 — 95 — 99.7</strong>. Say it out loud. <em>�
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_n</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mathcal</span><span class="si">{N}</span><span class="s1">(88, 2^2)$&#39;</span><span class="p">)</span>
 
 <span class="c1"># shade ±1σ, ±2σ, ±3σ regions</span>
-<span class="c1"># for k, color, label in [(1, &#39;steelblue&#39;, r&#39;$\pm 1\sigma$ (68%)&#39;)  ,</span>
-<span class="c1">#                          (2, &#39;orange&#39;,    r&#39;$\pm 2\sigma$ (95%)&#39;)  ,</span>
-<span class="c1">#                          (3, &#39;lightgreen&#39;,r&#39;$\pm 3\sigma$ (99.7%)&#39;)]:</span>
-<span class="c1">#     x_fill = np.linspace(mu - k*sigma, mu + k*sigma, 200)</span>
-<span class="c1">#     ax.fill_between(x_fill, dist_n.pdf(x_fill), alpha=0.3, color=color, label=label)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\pm 1\sigma$ (68%)&#39;</span><span class="p">)</span>  <span class="p">,</span>
+                         <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span>    <span class="sa">r</span><span class="s1">&#39;$\pm 2\sigma$ (95%)&#39;</span><span class="p">)</span>  <span class="p">,</span>
+                         <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$\pm 3\sigma$ (99.7%)&#39;</span><span class="p">)]:</span>
+    <span class="n">x_fill</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="n">k</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_fill</span><span class="p">,</span> <span class="n">dist_n</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_fill</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Yield (%)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
@@ -1396,7 +1492,7 @@ Write on the board: <strong>68 — 95 — 99.7</strong>. Say it out loud. <em>�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a790d16aeaf363e00ae435f72733a47ef0feda0301f69603a803c660ebb73193.png" src="../../_images/a790d16aeaf363e00ae435f72733a47ef0feda0301f69603a803c660ebb73193.png" />
+<img alt="../../_images/bf1b045a301479a24beb994aa5b833c25bdb26b5fd487f437b3e00039e65877a.png" src="../../_images/bf1b045a301479a24beb994aa5b833c25bdb26b5fd487f437b3e00039e65877a.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(yield &lt; 85%)  = 0.0668  (6.68% of batches fail lower limit)
 P(yield &gt; 92%)  = 0.0228  (2.28% of batches exceed upper limit)
 P(85 ≤ yield ≤ 92%) = 0.9104
@@ -1542,7 +1638,7 @@ PPF — what yield value corresponds to the p-th percentile:
 <blockquote>
 <div><p><strong>Statement:</strong> If you draw a sample of size <span class="math notranslate nohighlight">\(n\)</span> from <em>any</em> distribution with finite mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>, the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> is approximately normally distributed for sufficiently large <span class="math notranslate nohighlight">\(n\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\bar{X} \sim \mathcal{N}\!\left(\mu,\; \frac{\sigma^2}{n}\right) \qquad \text{as } n \to \infty\]</div>
+\[\bar{X} \sim \mathcal{N}\!\left(\mu,\; \frac{\sigma^2}{n}\right) \qquad \text{as } n \approx \infty\]</div>
 </div></blockquote>
 <p>Equivalently, the <strong>standardized</strong> sample mean converges to a standard normal:
 $<span class="math notranslate nohighlight">\(
@@ -1592,13 +1688,16 @@ Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)
 <span class="n">true_mu</span>    <span class="o">=</span> <span class="mf">1.0</span>      <span class="c1"># mean of Exp(1)</span>
 <span class="n">true_sigma</span> <span class="o">=</span> <span class="mf">1.0</span>      <span class="c1"># std  of Exp(1)</span>
 <span class="n">n_simulations</span> <span class="o">=</span> <span class="mi">10_000</span>
-<span class="n">sample_sizes</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="n">sample_sizes</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span> 
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample_sizes</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">sample_sizes</span><span class="p">):</span>
     <span class="c1"># Draw n_simulations samples of size n; compute each sample mean</span>
     <span class="n">data</span>      <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">true_mu</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_simulations</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="c1"># data shape: (10000, n) → 10000 rows of n samples each</span>
+    <span class="c1"># what&#39;s n_simulations? 10000 independent samples of size n</span>
+    <span class="c1"># what&#39;s size n? number of samples in each sample mean</span>
     <span class="n">means</span>     <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">se</span>        <span class="o">=</span> <span class="n">true_sigma</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
@@ -2400,6 +2499,7 @@ Error                = 8.09e-03
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">13.3 Probability Distributions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pdf-and-cdf">The PDF and CDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-do-pdf-and-cdf-look-like">What do PDF and CDF look like?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">13.3.1 Uniform Distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-gaussian-distribution">13.3.2 Normal (Gaussian) Distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-68-95-99-7-rule-empirical-rule">The 68-95-99.7 rule (empirical rule)</a></li>

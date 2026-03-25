@@ -199,8 +199,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -451,6 +455,11 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Std    : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">yields</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> %  (sample, ddof=1)&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Below 81% : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">yields</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">81</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">yields</span><span class="p">)</span><span class="si">}</span><span class="s2"> batches&quot;</span><span class="p">)</span>
+
+<span class="c1"># # by using scipy</span>
+<span class="c1"># print(f&quot;Mean   : {stats.tmean(yields):.2f} %&quot;)</span>
+<span class="c1"># print(f&quot;Median : {stats.tmedian(yields):.2f} %&quot;)</span>
+<span class="c1"># print(f&quot;Std    : {stats.tstd(yields, ddof=1):.  2f} %  (sample, ddof=1)&quot;)   </span>
 </pre></div>
 </div>
 </div>
@@ -480,6 +489,22 @@ Below 81% : 2 / 10 batches
 
 <span class="c1"># 2. Temperature exceeded only 5% of the time → 95th percentile</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T exceeded 5% of the time = </span><span class="si">{</span><span class="n">dist_T</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.95</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualize the distribution</span>
+<span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">dist_T</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">dist_T</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">dist_T</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal Distribution&#39;</span><span class="p">)</span>
+<span class="c1"># 343 K as vertical line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">343</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;T = 343 K&#39;</span><span class="p">)</span>
+<span class="c1"># 95th percentile as vertical line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">dist_T</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.95</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;95th Percentile&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Normal Distribution of Temperature&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -488,6 +513,7 @@ Below 81% : 2 / 10 batches
 T exceeded 5% of the time = 358.22 K
 </pre></div>
 </div>
+<img alt="../../_images/88ccb46f17daec17934ecdc8a6bcae41f37202f0ad0308e5c16d47ab61f0c1fd.png" src="../../_images/88ccb46f17daec17934ecdc8a6bcae41f37202f0ad0308e5c16d47ab61f0c1fd.png" />
 </div>
 </div>
 </section>
@@ -504,6 +530,11 @@ T exceeded 5% of the time = 358.22 K
 <span class="n">se</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">xbar</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">se</span><span class="p">)</span>
+<span class="c1"># explanation: stats.t.interval --&gt; confidence interval for the t-distribution</span>
+<span class="c1"># 0.95 --&gt; confidence level (95%)</span>
+<span class="c1"># df=n-1 --&gt; degrees of freedom (n-1 for sample)</span>
+<span class="c1"># loc=xbar --&gt; mean of the distribution (sample mean)</span>
+<span class="c1"># scale=se --&gt; standard error of the mean (sample std / sqrt(n))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean = </span><span class="si">{</span><span class="n">xbar</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95% CI: [</span><span class="si">{</span><span class="n">lo</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">] mol/L  (width = </span><span class="si">{</span><span class="n">hi</span><span class="o">-</span><span class="n">lo</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 </pre></div>
@@ -533,10 +564,10 @@ T exceeded 5% of the time = 358.22 K
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">78.2</span><span class="p">,</span> <span class="mf">81.5</span><span class="p">,</span> <span class="mf">76.9</span><span class="p">,</span> <span class="mf">83.1</span><span class="p">,</span> <span class="mf">79.4</span><span class="p">,</span> <span class="mf">80.7</span><span class="p">,</span> <span class="mf">77.8</span><span class="p">,</span> <span class="mf">82.3</span><span class="p">])</span>
 
-<span class="n">mean</span>   <span class="o">=</span> <span class="n">___</span>                          <span class="c1"># mean</span>
-<span class="n">median</span> <span class="o">=</span> <span class="n">___</span>                          <span class="c1"># median</span>
-<span class="n">std</span>    <span class="o">=</span> <span class="n">___</span>                          <span class="c1"># sample std dev (ddof=1)</span>
-<span class="n">iqr</span>    <span class="o">=</span> <span class="n">___</span> <span class="o">-</span> <span class="n">___</span>                    <span class="c1"># Q3 - Q1 (use np.percentile)</span>
+<span class="n">mean</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                        <span class="c1"># mean</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                      <span class="c1"># median</span>
+<span class="n">std</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                 <span class="c1"># sample std dev (ddof=1)</span>
+<span class="n">iqr</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>   <span class="c1"># Q3 - Q1 (use np.percentile)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean   = </span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median = </span><span class="si">{</span><span class="n">median</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
@@ -551,16 +582,11 @@ T exceeded 5% of the time = 358.22 K
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">median</span> <span class="o">=</span> <span class="n">___</span>                          <span class="c1"># median</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">std</span>    <span class="o">=</span> <span class="n">___</span>                          <span class="c1"># sample std dev (ddof=1)</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">iqr</span>    <span class="o">=</span> <span class="n">___</span> <span class="o">-</span> <span class="n">___</span>                    <span class="c1"># Q3 - Q1 (use np.percentile)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean   = </span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median = </span><span class="si">{</span><span class="n">median</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: unsupported operand type(s) for -: &#39;str&#39; and &#39;str&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean   = 79.99 %
+Median = 80.05 %
+Std    = 2.26 %
+IQR    = 3.60 %
+Mean and median are close — distribution is roughly symmetric.
 </pre></div>
 </div>
 </div>
@@ -575,15 +601,22 @@ T exceeded 5% of the time = 358.22 K
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">___</span><span class="p">)</span>   <span class="c1"># use seed=7</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>        <span class="c1"># use seed=7</span>
 
-<span class="n">samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">)</span>     <span class="c1"># loc=350, scale=15, size=1000</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>        <span class="c1"># loc=350, scale=15, size=1000</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample mean : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample std  : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
 
-<span class="n">frac_above</span> <span class="o">=</span> <span class="n">___</span>                        <span class="c1"># fraction of samples &gt; 375</span>
+<span class="n">frac_above</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span> <span class="o">&gt;</span> <span class="mi">375</span><span class="p">)</span>        <span class="c1"># fraction of samples &gt; 375</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fraction &gt; 375 K : </span><span class="si">{</span><span class="n">frac_above</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample mean : 348.92 K
+Sample std  : 14.13 K
+Fraction &gt; 375 K : 0.0350
 </pre></div>
 </div>
 </div>
@@ -599,15 +632,21 @@ T exceeded 5% of the time = 358.22 K
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 
-<span class="n">dist_flow</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">___</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">___</span><span class="p">)</span>   <span class="c1"># mu=50, sigma=4</span>
+<span class="n">dist_flow</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>    <span class="c1"># mu=50, sigma=4</span>
 
 <span class="c1"># 1. P(flow &lt; 45)</span>
-<span class="n">p_below_45</span> <span class="o">=</span> <span class="n">___</span>                             <span class="c1"># use .cdf()</span>
+<span class="n">p_below_45</span> <span class="o">=</span> <span class="n">dist_flow</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>             <span class="c1"># use .cdf()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(flow &lt; 45 L/min) = </span><span class="si">{</span><span class="n">p_below_45</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># 2. Flow rate exceeded 90% of the time  →  10th percentile</span>
-<span class="n">flow_p10</span> <span class="o">=</span> <span class="n">___</span>                               <span class="c1"># use .ppf(0.10)</span>
+<span class="n">flow_p10</span> <span class="o">=</span> <span class="n">dist_flow</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.10</span><span class="p">)</span>             <span class="c1"># use .ppf(0.10)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flow exceeded 90% of the time = </span><span class="si">{</span><span class="n">flow_p10</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> L/min&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(flow &lt; 45 L/min) = 0.1056
+Flow exceeded 90% of the time = 44.87 L/min
 </pre></div>
 </div>
 </div>
@@ -759,6 +798,10 @@ T exceeded 5% of the time = 358.22 K
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
 <span class="n">errors_unif</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">meas_unif</span>   <span class="o">=</span> <span class="n">true_flow</span> <span class="o">+</span> <span class="n">errors_unif</span>
+<span class="c1">## legacy approach by using np.random seed and np.random.uniform</span>
+<span class="c1"># np.random.seed(21)</span>
+<span class="c1"># errors_unif = np.random.uniform(-0.5, 0.5, 500)</span>
+<span class="c1"># meas_unif   = true_flow + errors_unif</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(a) Uniform instrument — sample vs theoretical&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Sample mean : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">meas_unif</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> L/min  (theoretical: </span><span class="si">{</span><span class="n">true_flow</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
@@ -782,6 +825,11 @@ T exceeded 5% of the time = 358.22 K
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
 <span class="n">errors_norm</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">meas_norm</span>   <span class="o">=</span> <span class="n">true_flow</span> <span class="o">+</span> <span class="n">errors_norm</span>
+
+<span class="c1">## legacy approach by using np.random seed and np.random.normal</span>
+<span class="c1"># np.random.seed(21)</span>
+<span class="c1"># errors_norm = np.random.normal(0, 0.2, 500)</span>
+<span class="c1"># meas_norm   = true_flow + errors_norm</span>
 
 <span class="n">frac_out_norm_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">meas_norm</span> <span class="o">&lt;</span> <span class="n">lo_spec</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">meas_norm</span> <span class="o">&gt;</span> <span class="n">hi_spec</span><span class="p">))</span>
 

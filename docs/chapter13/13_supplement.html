@@ -1,0 +1,859 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 13 Supplement &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter13/13_supplement';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter13/13_supplement.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter13/13_supplement.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 13 Supplement</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-and-variance-of-the-uniform-distribution">1. Mean and Variance of the Uniform Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-discrete-to-continuous-expected-value">From Discrete to Continuous: Expected Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-of-the-uniform-distribution">Mean of the Uniform Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-the-uniform-distribution">Variance of the Uniform Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-e-x-2">Step 1: Compute <span class="math notranslate nohighlight">\(E[X^2]\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-subtract-mu-2">Step 2: Subtract <span class="math notranslate nohighlight">\(\mu^2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-verification">Numerical Verification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-normal-distribution-integral-why-there-is-no-simple-antiderivative">2. The Normal Distribution Integral — Why There Is No Simple Antiderivative</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-can-do-instead">What We Can Do Instead</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-special-function-for-the-cdf">1. Define a special function for the CDF</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-definite-integrals-numerically">2. Compute definite integrals numerically</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-one-gaussian-integral-you-can-do-by-hand">The One Gaussian Integral You <em>Can</em> Do by Hand</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trick-square-the-integral-and-switch-to-polar-coordinates">The Trick: Square the Integral and Switch to Polar Coordinates</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-back-to-the-normal-pdf">Connecting Back to the Normal PDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Numerical Verification</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-13-supplement">
+<h1>Chapter 13 Supplement<a class="headerlink" href="#chapter-13-supplement" title="Link to this heading">#</a></h1>
+<section id="mean-and-variance-of-the-uniform-distribution">
+<h2>1. Mean and Variance of the Uniform Distribution<a class="headerlink" href="#mean-and-variance-of-the-uniform-distribution" title="Link to this heading">#</a></h2>
+<p>This supplement shows <strong>where the formulas</strong> <span class="math notranslate nohighlight">\(\mu = \frac{a+b}{2}\)</span> and <span class="math notranslate nohighlight">\(\sigma^2 = \frac{(b-a)^2}{12}\)</span> come from by deriving them from the definition of expected value.</p>
+<section id="from-discrete-to-continuous-expected-value">
+<h3>From Discrete to Continuous: Expected Value<a class="headerlink" href="#from-discrete-to-continuous-expected-value" title="Link to this heading">#</a></h3>
+<p>For a <strong>discrete</strong> random variable, the mean (expected value) is:</p>
+<div class="math notranslate nohighlight">
+\[\mu = E[X] = \sum_x x \, P(X = x)\]</div>
+<p>This is a weighted average — each possible value <span class="math notranslate nohighlight">\(x\)</span> is weighted by its probability <span class="math notranslate nohighlight">\(P(X=x)\)</span>.</p>
+<hr class="docutils" />
+<p>For a <strong>continuous</strong> random variable, <span class="math notranslate nohighlight">\(P(X = x) = 0\)</span> for any single point. Instead, we work with the probability density function <span class="math notranslate nohighlight">\(f(x)\)</span>, where:</p>
+<div class="math notranslate nohighlight">
+\[P(x \leq X \leq x + dx) \approx f(x)\,dx\]</div>
+<p>The discrete sum becomes an integral:</p>
+<div class="math notranslate nohighlight">
+\[\sum_x x \cdot P(X=x) \quad\longrightarrow\quad \int x \cdot f(x)\,dx\]</div>
+<p>So the <strong>expected value of a continuous random variable</strong> is:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\mu = E[X] = \int_{-\infty}^{\infty} x\, f(x)\,dx}\]</div>
+<p>Each term <span class="math notranslate nohighlight">\(x \cdot f(x)\,dx\)</span> means:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)\,dx\)</span> — the probability mass in the small interval near <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>multiplied by <span class="math notranslate nohighlight">\(x\)</span> — the contribution of that region to the weighted average</p></li>
+</ul>
+<p>It is a <strong>weighted average of all possible values</strong>, with the PDF as the weight function.</p>
+</section>
+<section id="mean-of-the-uniform-distribution">
+<h3>Mean of the Uniform Distribution<a class="headerlink" href="#mean-of-the-uniform-distribution" title="Link to this heading">#</a></h3>
+<p>The Uniform distribution on <span class="math notranslate nohighlight">\([a, b]\)</span> has PDF:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{1}{b - a} \quad \text{for } a \leq x \leq b, \qquad f(x) = 0 \text{ otherwise}\]</div>
+<p>So the integral only needs to run from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(b\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mu = \int_a^b x\, f(x)\,dx\]</div>
+<p>Substituting <span class="math notranslate nohighlight">\(f(x) = \frac{1}{b-a}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mu = \int_a^b x \cdot \frac{1}{b-a}\,dx = \frac{1}{b-a} \int_a^b x\,dx\]</div>
+<p>Evaluate the integral:</p>
+<div class="math notranslate nohighlight">
+\[= \frac{1}{b-a} \cdot \left[\frac{x^2}{2}\right]_a^b = \frac{1}{b-a} \cdot \frac{b^2 - a^2}{2}\]</div>
+<p>Factor <span class="math notranslate nohighlight">\(b^2 - a^2 = (b-a)(b+a)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[= \frac{1}{b-a} \cdot \frac{(b-a)(b+a)}{2} = \frac{b+a}{2}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{\mu = \frac{a + b}{2}}\]</div>
+<p>This makes intuitive sense — the mean is the midpoint of the interval.</p>
+</section>
+<section id="variance-of-the-uniform-distribution">
+<h3>Variance of the Uniform Distribution<a class="headerlink" href="#variance-of-the-uniform-distribution" title="Link to this heading">#</a></h3>
+<p>The variance is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2 = E[X^2] - \mu^2\]</div>
+</section>
+<section id="step-1-compute-e-x-2">
+<h3>Step 1: Compute <span class="math notranslate nohighlight">\(E[X^2]\)</span><a class="headerlink" href="#step-1-compute-e-x-2" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[E[X^2] = \int_a^b x^2\, f(x)\,dx = \frac{1}{b-a} \int_a^b x^2\,dx\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{1}{b-a} \cdot \left[\frac{x^3}{3}\right]_a^b = \frac{b^3 - a^3}{3(b-a)}\]</div>
+<p>Factor <span class="math notranslate nohighlight">\(b^3 - a^3 = (b-a)(b^2 + ab + a^2)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[E[X^2] = \frac{b^2 + ab + a^2}{3}\]</div>
+</section>
+<section id="step-2-subtract-mu-2">
+<h3>Step 2: Subtract <span class="math notranslate nohighlight">\(\mu^2\)</span><a class="headerlink" href="#step-2-subtract-mu-2" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\mu^2 = \left(\frac{a+b}{2}\right)^2 = \frac{a^2 + 2ab + b^2}{4}\]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2 = \frac{b^2 + ab + a^2}{3} - \frac{a^2 + 2ab + b^2}{4}\]</div>
+<p>Finding a common denominator of 12:</p>
+<div class="math notranslate nohighlight">
+\[= \frac{4(b^2 + ab + a^2) - 3(a^2 + 2ab + b^2)}{12} = \frac{4b^2 + 4ab + 4a^2 - 3a^2 - 6ab - 3b^2}{12}\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{b^2 - 2ab + a^2}{12} = \frac{(b - a)^2}{12}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{\sigma^2 = \frac{(b-a)^2}{12}}\]</div>
+</section>
+<section id="numerical-verification">
+<h3>Numerical Verification<a class="headerlink" href="#numerical-verification" title="Link to this heading">#</a></h3>
+<p>Let’s confirm both formulas numerically using a large sample from <code class="docutils literal notranslate"><span class="pre">scipy.stats.uniform</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">9.0</span>
+
+<span class="c1"># Analytical formulas</span>
+<span class="n">mu_theory</span>    <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">var_theory</span>   <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">12</span>
+<span class="n">sigma_theory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_theory</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Analytical results&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  μ        = (a+b)/2          = </span><span class="si">{</span><span class="n">mu_theory</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  σ²       = (b-a)²/12        = </span><span class="si">{</span><span class="n">var_theory</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  σ        = (b-a)/√12        = </span><span class="si">{</span><span class="n">sigma_theory</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># scipy.stats confirmation</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">scipy.stats.uniform&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  μ        = </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  σ        = </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Large-sample numerical check</span>
+<span class="n">rng</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1_000_000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sample from 1,000,000 draws&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Sample μ = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Sample σ = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Analytical results
+  μ        = (a+b)/2          = 6.000000
+  σ²       = (b-a)²/12        = 3.000000
+  σ        = (b-a)/√12        = 1.732051
+
+scipy.stats.uniform
+  μ        = 6.000000
+  σ        = 1.732051
+
+Sample from 1,000,000 draws
+  Sample μ = 6.000956
+  Sample σ = 1.732758
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="the-normal-distribution-integral-why-there-is-no-simple-antiderivative">
+<h2>2. The Normal Distribution Integral — Why There Is No Simple Antiderivative<a class="headerlink" href="#the-normal-distribution-integral-why-there-is-no-simple-antiderivative" title="Link to this heading">#</a></h2>
+<p>The Normal (Gaussian) PDF is:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{1}{\sigma\sqrt{2\pi}}\,e^{-(x-\mu)^2/2\sigma^2}\]</div>
+<p>Standardizing with <span class="math notranslate nohighlight">\(z = (x-\mu)/\sigma\)</span> reduces everything to the <strong>standard normal</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\sqrt{2\pi}}\,e^{-z^2/2}\]</div>
+<p>A natural question: can we integrate this by hand, the way we would integrate <span class="math notranslate nohighlight">\(x^2\)</span> or <span class="math notranslate nohighlight">\(e^x\)</span>?</p>
+<p><strong>The answer is no</strong> — the function <span class="math notranslate nohighlight">\(e^{-z^2/2}\)</span> has no antiderivative expressible in elementary functions (polynomials, exponentials, trig, logs, and their compositions). This is a theorem proved by Liouville in the 19th century.</p>
+<hr class="docutils" />
+<section id="what-we-can-do-instead">
+<h3>What We Can Do Instead<a class="headerlink" href="#what-we-can-do-instead" title="Link to this heading">#</a></h3>
+<section id="define-a-special-function-for-the-cdf">
+<h4>1. Define a special function for the CDF<a class="headerlink" href="#define-a-special-function-for-the-cdf" title="Link to this heading">#</a></h4>
+<p>Since the integral cannot be written in closed form, we give it a name and define it as a function in its own right.</p>
+<p>The <strong>standard normal CDF</strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\Phi(z) = \int_{-\infty}^{z} \frac{1}{\sqrt{2\pi}}\,e^{-t^2/2}\,dt\]</div>
+<p>An equivalent form uses the <strong>error function</strong> <span class="math notranslate nohighlight">\(\operatorname{erf}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2}\,dt\]</div>
+<p>These two are related by:</p>
+<div class="math notranslate nohighlight">
+\[\Phi(z) = \frac{1}{2}\left[1 + \operatorname{erf}\!\left(\frac{z}{\sqrt{2}}\right)\right]\]</div>
+<p>Both <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\operatorname{erf}\)</span> are <strong>not</strong> elementary — they are special functions that are pre-computed numerically and stored in tables (or in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>).</p>
+</section>
+<section id="compute-definite-integrals-numerically">
+<h4>2. Compute definite integrals numerically<a class="headerlink" href="#compute-definite-integrals-numerically" title="Link to this heading">#</a></h4>
+<p>Even though the indefinite integral doesn’t exist in closed form, <strong>definite integrals</strong> over specific ranges can be evaluated numerically.</p>
+<p>For example:</p>
+<div class="math notranslate nohighlight">
+\[P(-1 &lt; Z &lt; 1) = \int_{-1}^{1} \frac{1}{\sqrt{2\pi}}\,e^{-z^2/2}\,dz\]</div>
+<p>cannot be written as a simple formula, but it equals:</p>
+<div class="math notranslate nohighlight">
+\[= \Phi(1) - \Phi(-1) = 2\Phi(1) - 1 \approx 0.6827\]</div>
+<p>This is where the <strong>68-95-99.7 rule</strong> comes from — it is the numerical result of evaluating <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="the-one-gaussian-integral-you-can-do-by-hand">
+<h3>The One Gaussian Integral You <em>Can</em> Do by Hand<a class="headerlink" href="#the-one-gaussian-integral-you-can-do-by-hand" title="Link to this heading">#</a></h3>
+<p>There is a famous result:</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}\]</div>
+<p>This <strong>can</strong> be proved analytically — but the trick is indirect and clever. It does <strong>not</strong> find an antiderivative; it evaluates the <em>whole</em> improper integral at once using a double-integral argument.</p>
+<section id="the-trick-square-the-integral-and-switch-to-polar-coordinates">
+<h4>The Trick: Square the Integral and Switch to Polar Coordinates<a class="headerlink" href="#the-trick-square-the-integral-and-switch-to-polar-coordinates" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(I = \displaystyle\int_{-\infty}^{\infty} e^{-x^2}\,dx\)</span>. We want to find <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p><strong>Step 1.</strong> Consider <span class="math notranslate nohighlight">\(I^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[I^2 = \left(\int_{-\infty}^{\infty} e^{-x^2}\,dx\right)\!\left(\int_{-\infty}^{\infty} e^{-y^2}\,dy\right) = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-(x^2+y^2)}\,dx\,dy\]</div>
+<p>We turned a product of two identical 1-D integrals into a single 2-D integral over the entire <span class="math notranslate nohighlight">\(xy\)</span>-plane.</p>
+<p><strong>Step 2.</strong> Switch to polar coordinates: <span class="math notranslate nohighlight">\(x = r\cos\theta\)</span>, <span class="math notranslate nohighlight">\(y = r\sin\theta\)</span>, <span class="math notranslate nohighlight">\(x^2 + y^2 = r^2\)</span>, and <span class="math notranslate nohighlight">\(dx\,dy = r\,dr\,d\theta\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[I^2 = \int_0^{2\pi}\int_0^{\infty} e^{-r^2}\, r\,dr\,d\theta\]</div>
+<p><strong>Step 3.</strong> The <span class="math notranslate nohighlight">\(\theta\)</span> integral is trivial (integrand has no <span class="math notranslate nohighlight">\(\theta\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[I^2 = 2\pi \int_0^{\infty} r\,e^{-r^2}\,dr\]</div>
+<p><strong>Step 4.</strong> Substitute <span class="math notranslate nohighlight">\(u = r^2\)</span>, <span class="math notranslate nohighlight">\(du = 2r\,dr\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\int_0^{\infty} r\,e^{-r^2}\,dr = \frac{1}{2}\int_0^{\infty} e^{-u}\,du = \frac{1}{2}\Big[-e^{-u}\Big]_0^{\infty} = \frac{1}{2}\]</div>
+<p><strong>Step 5.</strong> Combine:</p>
+<div class="math notranslate nohighlight">
+\[I^2 = 2\pi \cdot \frac{1}{2} = \pi \qquad \Longrightarrow \qquad I = \sqrt{\pi}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}}\]</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="connecting-back-to-the-normal-pdf">
+<h3>Connecting Back to the Normal PDF<a class="headerlink" href="#connecting-back-to-the-normal-pdf" title="Link to this heading">#</a></h3>
+<p>The result above is exactly what ensures the Normal PDF integrates to 1. With the substitution <span class="math notranslate nohighlight">\(x = z/\sqrt{2}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\infty} e^{-z^2/2}\,dz = \sqrt{2}\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{2}\cdot\sqrt{\pi} = \sqrt{2\pi}\]</div>
+<p>So the normalizing constant <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2\pi}}\)</span> in the PDF is exactly what makes the total area equal to 1.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Result</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} e^{-x^2}\,dx\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sqrt{\pi}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} e^{-z^2/2}\,dz\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sqrt{2\pi}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-z^2/2}\,dz\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1\)</span> ✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note what the trick <strong>does not give us</strong>: the indefinite integral <span class="math notranslate nohighlight">\(\int e^{-x^2}\,dx\)</span>, or a formula for <span class="math notranslate nohighlight">\(\Phi(z)\)</span> at any specific <span class="math notranslate nohighlight">\(z\)</span>. For those, numerical methods (or tables) are still required.</p>
+</section>
+<section id="id1">
+<h3>Numerical Verification<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span><span class="p">,</span> <span class="n">special</span><span class="p">,</span> <span class="n">integrate</span>
+
+<span class="c1"># ── 1. Verify the Gaussian integral ──────────────────────────────────────────</span>
+<span class="n">I_numerical</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;∫ e^(-x²) dx  from -∞ to ∞ = </span><span class="si">{</span><span class="n">I_numerical</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;√π                          = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── 2. Verify the normalizing constant ───────────────────────────────────────</span>
+<span class="n">norm_check</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span>
+                                <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">∫ (1/√2π) e^(-z²/2) dz     = </span><span class="si">{</span><span class="n">norm_check</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">  (should be 1.0)&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── 3. The Φ ↔ erf relationship ──────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Φ(z) = ½[1 + erf(z/√2)]  —  verification:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+    <span class="n">Phi_stats</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">Phi_erf</span>   <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">special</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">z</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  z = </span><span class="si">{</span><span class="n">z</span><span class="si">:</span><span class="s2">+d</span><span class="si">}</span><span class="s2">:  Φ = </span><span class="si">{</span><span class="n">Phi_stats</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">,  ½[1+erf(z/√2)] = </span><span class="si">{</span><span class="n">Phi_erf</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── 4. The 68-95-99.7 rule from Φ ────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">68-95-99.7 rule:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  P(-</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> &lt; Z &lt; </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">) = 2Φ(</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">) - 1 = </span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">p</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>∫ e^(-x²) dx  from -∞ to ∞ = 1.77245385
+√π                          = 1.77245385
+
+∫ (1/√2π) e^(-z²/2) dz     = 1.00000000  (should be 1.0)
+
+Φ(z) = ½[1 + erf(z/√2)]  —  verification:
+  z = -2:  Φ = 0.022750,  ½[1+erf(z/√2)] = 0.022750
+  z = -1:  Φ = 0.158655,  ½[1+erf(z/√2)] = 0.158655
+  z = +0:  Φ = 0.500000,  ½[1+erf(z/√2)] = 0.500000
+  z = +1:  Φ = 0.841345,  ½[1+erf(z/√2)] = 0.841345
+  z = +2:  Φ = 0.977250,  ½[1+erf(z/√2)] = 0.977250
+
+68-95-99.7 rule:
+  P(-1 &lt; Z &lt; 1) = 2Φ(1) - 1 = 0.6827  (68.27%)
+  P(-2 &lt; Z &lt; 2) = 2Φ(2) - 1 = 0.9545  (95.45%)
+  P(-3 &lt; Z &lt; 3) = 2Φ(3) - 1 = 0.9973  (99.73%)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter13"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-and-variance-of-the-uniform-distribution">1. Mean and Variance of the Uniform Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-discrete-to-continuous-expected-value">From Discrete to Continuous: Expected Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-of-the-uniform-distribution">Mean of the Uniform Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-the-uniform-distribution">Variance of the Uniform Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-e-x-2">Step 1: Compute <span class="math notranslate nohighlight">\(E[X^2]\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-subtract-mu-2">Step 2: Subtract <span class="math notranslate nohighlight">\(\mu^2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-verification">Numerical Verification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-normal-distribution-integral-why-there-is-no-simple-antiderivative">2. The Normal Distribution Integral — Why There Is No Simple Antiderivative</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-can-do-instead">What We Can Do Instead</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-special-function-for-the-cdf">1. Define a special function for the CDF</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-definite-integrals-numerically">2. Compute definite integrals numerically</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-one-gaussian-integral-you-can-do-by-hand">The One Gaussian Integral You <em>Can</em> Do by Hand</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trick-square-the-integral-and-switch-to-polar-coordinates">The Trick: Square the Integral and Switch to Polar Coordinates</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-back-to-the-normal-pdf">Connecting Back to the Normal PDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Numerical Verification</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

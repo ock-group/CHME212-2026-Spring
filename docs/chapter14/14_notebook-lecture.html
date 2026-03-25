@@ -1,0 +1,1481 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 14: Monte Carlo Simulation &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter14/14_notebook-lecture';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter14/14_notebook-lecture.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter14/14_notebook-lecture.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 14: Monte Carlo Simulation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-monte-carlo-simulation">14.1 What Is Monte Carlo Simulation?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-step-recipe">The three-step recipe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-this-useful-for-chemical-engineers">Why is this useful for chemical engineers?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-intuition-estimating-by-throwing-darts">14.2 Building Intuition: Estimating π by Throwing Darts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dart-throw">Visualizing the dart throw</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-many-darts-do-we-need">How many darts do we need?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-engineering-problem-process-reliability">14.3 A Real Engineering Problem: Process Reliability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem statement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-visualize-the-input-distributions">Step 1: Visualize the input distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-purity-at-the-mean-values">Step 2: Purity at the mean values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-a-few-sampled-batches-success-and-failure">Step 3: A few sampled batches — success and failure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-full-monte-carlo-100-000-batches">Step 4: Full Monte Carlo — 100,000 batches</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-did-we-learn-from-this-simulation">What did we learn from this simulation?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">14.4 Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-monte-carlo-template-reuse-this">The Monte Carlo template (reuse this!)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-14-monte-carlo-simulation">
+<span id="id1"></span><h1>Chapter 14: Monte Carlo Simulation<a class="headerlink" href="#chapter-14-monte-carlo-simulation" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 INSTRUCTOR SCRIPT — Chapter 14: Monte Carlo Simulation</strong></p>
+<p><strong>Learning objectives for today:</strong></p>
+<ol class="arabic simple">
+<li><p>Understand what Monte Carlo simulation is and when to use it</p></li>
+<li><p>Implement the three-step MC recipe in NumPy</p></li>
+<li><p>Apply MC to estimate a process failure rate</p></li>
+</ol>
+<p><strong>Pacing (~75 min total):</strong></p>
+<ul class="simple">
+<li><p>Section 14.1 intro + motivation: ~10 min</p></li>
+<li><p>Section 14.2 π estimation demo: ~20 min</p></li>
+<li><p>Section 14.3 engineering example (4 steps): ~35 min</p></li>
+<li><p>Wrap-up / Q&amp;A: ~10 min</p></li>
+</ul>
+<p><strong>Before class:</strong> Make sure outputs are cleared so students see cells run live.</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="what-is-monte-carlo-simulation">
+<span id="id2"></span><h2>14.1 What Is Monte Carlo Simulation?<a class="headerlink" href="#what-is-monte-carlo-simulation" title="Link to this heading">#</a></h2>
+<p>Imagine you’re designing a reactor, but you don’t know the exact feed temperature — it fluctuates a bit every day. How does that uncertainty in temperature affect the conversion you get out?</p>
+<p>You could try to work this out analytically (with calculus and error propagation formulas), but what if the relationship between temperature and conversion is nonlinear? What if multiple inputs are uncertain at once?</p>
+<p><strong>Monte Carlo simulation</strong> is a simple, powerful alternative:</p>
+<blockquote>
+<div><p>Instead of solving the math analytically, just <em>try it thousands of times</em> with randomly sampled inputs, and look at what comes out.</p>
+</div></blockquote>
+<p>The name comes from the Monte Carlo casino in Monaco — the core idea is random sampling, just like rolling dice.</p>
+<section id="the-three-step-recipe">
+<h3>The three-step recipe<a class="headerlink" href="#the-three-step-recipe" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Define your uncertain inputs</strong> as probability distributions<br />
+(e.g., “temperature is normally distributed with mean 400 K and std 5 K”)</p></li>
+<li><p><strong>Draw thousands of random samples</strong> from those distributions<br />
+(e.g., sample 100,000 temperatures from that normal distribution)</p></li>
+<li><p><strong>Run your model for every sample</strong>, then <strong>look at the output distribution</strong><br />
+(e.g., compute conversion for each temperature → plot the histogram of conversions)</p></li>
+</ol>
+</section>
+<section id="why-is-this-useful-for-chemical-engineers">
+<h3>Why is this useful for chemical engineers?<a class="headerlink" href="#why-is-this-useful-for-chemical-engineers" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Uncertainty propagation</strong>: How does uncertainty in activation energy <span class="math notranslate nohighlight">\(E_a\)</span> affect predicted conversion?</p></li>
+<li><p><strong>Process reliability</strong>: What fraction of batches will meet the purity spec given normal operating variability?</p></li>
+<li><p><strong>Risk assessment</strong>: What is the probability that reactor temperature exceeds a safety limit?</p></li>
+<li><p><strong>Equipment sizing</strong>: Given uncertain feed compositions, what reactor volume ensures 99% of scenarios achieve the desired conversion?</p></li>
+</ul>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [14.1 — Intro, ~10 min]</strong></p>
+<p><em>Open with this scenario — hold up (or draw) a bucket divided into two sections:</em></p>
+<p>“Imagine you have a bucket split into two sections by a divider — but the divider is irregular, so you can’t easily calculate the exact area of each section. How would you figure out the area ratio?”</p>
+<ul class="simple">
+<li><p>Let students suggest ideas. They’ll say: measure with a ruler, use geometry, etc.</p></li>
+<li><p>Then: “What if the shape is really complicated — curved divider, weird corners? Measuring gets tedious.”</p></li>
+<li><p>“Here’s a different idea: <strong>throw balls into the bucket randomly, thousands of times.</strong> If your throws are truly random and uniform, the fraction of balls that land in each section will converge to the true area ratio.”</p></li>
+</ul>
+<p><strong>Write on the board:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Area of Section A     balls in Section A
+─────────────────  ≈  ──────────────────   (as N → ∞)
+ Total bucket area       total balls thrown
+</pre></div>
+</div>
+<p>“You didn’t measure anything. You didn’t do any geometry. You just counted. That’s the core idea of Monte Carlo — <strong>use random sampling to estimate something you’d otherwise have to calculate analytically.</strong>”</p>
+<ul class="simple">
+<li><p>“The more balls you throw, the better your estimate.”</p></li>
+<li><p>“And this scales: if the bucket had 10 sections with complicated shapes, the method is exactly the same — just count.”</p></li>
+</ul>
+<p><strong>Bridge to the chapter:</strong>
+“In chemical engineering, the ‘bucket’ is your model, and the ‘sections’ are regions like ‘batch passes spec’ vs ‘batch fails spec’. Instead of solving the math, we sample thousands of random operating conditions and count outcomes.”</p>
+<p><strong>Walk through the three-step recipe verbally before showing any code:</strong></p>
+<ol class="arabic simple">
+<li><p>“Define your uncertain inputs as distributions”</p></li>
+<li><p>“Sample randomly — thousands of times”</p></li>
+<li><p>“Run your model for each sample, look at what comes out”</p></li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Bucket outline (slightly tapered) ────────────────────────────────────────</span>
+<span class="n">bucket_x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>
+<span class="n">bucket_y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">bucket_x</span><span class="p">,</span> <span class="n">bucket_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#f0e6cc&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bucket_x</span><span class="p">,</span> <span class="n">bucket_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#8B6914&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># ── Irregular divider (dashed squiggly line) ──────────────────────────────────</span>
+<span class="n">divider_x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">,</span> <span class="mf">5.3</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
+<span class="n">divider_y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">divider_x</span><span class="p">,</span> <span class="n">divider_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#444&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># ── Section shading ───────────────────────────────────────────────────────────</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">([</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">7.3</span><span class="p">,</span> <span class="mf">7.3</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">([</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">8.7</span><span class="p">,</span> <span class="mf">8.7</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">7.3</span><span class="p">,</span> <span class="mf">7.3</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># ── Section labels ────────────────────────────────────────────────────────────</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="s1">&#39;Section A&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="s1">&#39;Section B&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># ── Question annotation ───────────────────────────────────────────────────────</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span>
+        <span class="s1">&#39;What is the area ratio   A : B ?&#39;</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span>
+        <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round,pad=0.4&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span>
+                  <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#aaa&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">),</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;A bucket with an irregular divider — how do you find the area ratio?&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;bucket_area_ratio.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e2d8ee17c8a7cf741b99c9114e808e7476e999fcd6008735a22dc3654410d303.png" src="../../_images/e2d8ee17c8a7cf741b99c9114e808e7476e999fcd6008735a22dc3654410d303.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Bucket outline (slightly tapered) ────────────────────────────────────────</span>
+<span class="n">bucket_x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>
+<span class="n">bucket_y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">bucket_x</span><span class="p">,</span> <span class="n">bucket_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#f0e6cc&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bucket_x</span><span class="p">,</span> <span class="n">bucket_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#8B6914&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># ── Irregular divider (dashed squiggly line) ──────────────────────────────────</span>
+<span class="n">divider_x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">,</span> <span class="mf">5.3</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
+<span class="n">divider_y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">divider_x</span><span class="p">,</span> <span class="n">divider_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#444&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># ── Section labels ────────────────────────────────────────────────────────────</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="s1">&#39;Section A&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="s1">&#39;Section B&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># ── Scatter random balls inside the bucket ────────────────────────────────────</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">in_bucket</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">left</span>  <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6.5</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="mf">9.0</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6.5</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mf">1.2</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mf">7.3</span><span class="p">)</span>
+
+<span class="n">n_balls</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">count_A</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">balls_plotted</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">balls_plotted</span> <span class="o">&lt;</span> <span class="n">n_balls</span><span class="p">:</span>
+    <span class="n">bx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">8.8</span><span class="p">)</span>
+    <span class="n">by</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">7.3</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">in_bucket</span><span class="p">(</span><span class="n">bx</span><span class="p">,</span> <span class="n">by</span><span class="p">):</span>
+        <span class="n">in_A</span> <span class="o">=</span> <span class="n">bx</span> <span class="o">&lt;</span> <span class="mf">5.0</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;steelblue&#39;</span> <span class="k">if</span> <span class="n">in_A</span> <span class="k">else</span> <span class="s1">&#39;darkorange&#39;</span>
+        <span class="k">if</span> <span class="n">in_A</span><span class="p">:</span>
+            <span class="n">count_A</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">bx</span><span class="p">,</span> <span class="n">by</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                   <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">balls_plotted</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">count_B</span> <span class="o">=</span> <span class="n">n_balls</span> <span class="o">-</span> <span class="n">count_A</span>
+
+<span class="c1"># ── Ball count labels ─────────────────────────────────────────────────────────</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">count_A</span><span class="si">}</span><span class="s1"> balls&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">count_B</span><span class="si">}</span><span class="s1"> balls&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># ── Formula box ───────────────────────────────────────────────────────────────</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s1">&#39;$\dfrac{\mathrm{Area\ A}}{\mathrm{Total\ Area}}\ \approx\ &#39;</span>
+        <span class="sa">r</span><span class="s1">&#39;\dfrac</span><span class="si">{N_A}</span><span class="s1">{N_\mathrm</span><span class="si">{total}</span><span class="s1">}$    as  $N \to \infty$&#39;</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+        <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round,pad=0.4&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span>
+                  <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#aaa&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">),</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># ── Legend ────────────────────────────────────────────────────────────────────</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Ball in Section A  (N = </span><span class="si">{</span><span class="n">count_A</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">),</span>
+    <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Ball in Section B  (N = </span><span class="si">{</span><span class="n">count_B</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">),</span>
+<span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">framealpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Monte Carlo Intuition: throw balls → count → estimate area ratio&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;bucket_area_ratio_monte_carlo.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/731191bdb7faff4f1f1fc3eb3d77518cab82b2c63066d52d4424d731b8802928.png" src="../../_images/731191bdb7faff4f1f1fc3eb3d77518cab82b2c63066d52d4424d731b8802928.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="building-intuition-estimating-by-throwing-darts">
+<span id="id3"></span><h2>14.2 Building Intuition: Estimating π by Throwing Darts<a class="headerlink" href="#building-intuition-estimating-by-throwing-darts" title="Link to this heading">#</a></h2>
+<p>Before tackling engineering problems, let’s build intuition with a playful classic example.</p>
+<p><strong>The setup:</strong> Imagine throwing darts randomly at a square dartboard. Inside the square, there’s a quarter-circle drawn in the corner. If your throws are truly random (uniform), what fraction of darts land inside the quarter-circle?</p>
+<p>Run the cell below to see it — then we’ll work out the math.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [14.2 — π estimation, ~20 min]</strong></p>
+<p><em>Before running anything:</em> “Let’s think about this geometrically first.”</p>
+<ul class="simple">
+<li><p>Ask: “If I throw a dart randomly at this unit square, what’s the probability it lands inside the quarter-circle?”</p></li>
+<li><p>Let students work it out: area of quarter-circle = π/4, area of square = 1, so P = π/4 ≈ 0.785.</p></li>
+<li><p>“So if I throw enough darts and count, I can estimate π. That’s Monte Carlo.”</p></li>
+</ul>
+<p><strong>Run the diagram cell</strong> (next one). Let it sink in visually before moving to the simulation.</p>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Square</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Quarter-circle region</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Quarter-circle  (area = π/4)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+
+<span class="c1"># Labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="s1">&#39;Area = π/4&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.82</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="s1">&#39;Area = 1&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>      <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Unit square with a quarter-circle&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/765daa5904b04343ed045f0173c0d0cf19eb856d601095f109f48b768de0210b.png" src="../../_images/765daa5904b04343ed045f0173c0d0cf19eb856d601095f109f48b768de0210b.png" />
+</div>
+</div>
+<p>Notice that the blue darts (inside the quarter-circle) fill roughly <strong>78%</strong> of the square — and <span class="math notranslate nohighlight">\(\pi/4 \approx 0.785\)</span>. That’s no coincidence!</p>
+<p>The square has area <span class="math notranslate nohighlight">\(1 \times 1 = 1\)</span>.<br />
+The quarter-circle of radius 1 has area <span class="math notranslate nohighlight">\(\dfrac{\pi}{4}\)</span>.</p>
+<p>So the fraction of darts inside is:
+$<span class="math notranslate nohighlight">\(
+\frac{\text{darts inside}}{\text{total darts}} \approx \frac{\pi/4}{1} = \frac{\pi}{4}
+\quad \Longrightarrow \quad
+\hat{\pi} \approx 4 \times \frac{\text{darts inside}}{\text{total darts}}
+\)</span>$</p>
+<p>We can use this to <em>estimate</em> <span class="math notranslate nohighlight">\(\pi\)</span> just by counting random points. Let’s do it properly with more darts.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [After showing diagram — transition to code]</strong></p>
+<p>Point to the math on screen: “So the formula is simple: π ≈ 4 × (# inside) / (# total). Now let’s actually do it.”</p>
+<p><strong>Before running the simulation cell</strong>, walk students through the code structure:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rng</span> <span class="pre">=</span> <span class="pre">np.random.default_rng(seed=0)</span></code> — “This sets up our random number generator. The seed makes it reproducible — same result every time we run it. Important for debugging and sharing results.”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">rng.random(N)</span></code> — “N uniform random numbers between 0 and 1. These are our dart x-coordinates.”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inside</span> <span class="pre">=</span> <span class="pre">(x**2</span> <span class="pre">+</span> <span class="pre">y**2)</span> <span class="pre">&lt;=</span> <span class="pre">1.0</span></code> — “This is a boolean array. True for every dart inside the circle. NumPy checks all N darts at once — no loop needed.”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pi_estimate</span> <span class="pre">=</span> <span class="pre">4.0</span> <span class="pre">*</span> <span class="pre">np.sum(inside)</span> <span class="pre">/</span> <span class="pre">N</span></code> — “Count the Trues, multiply by 4.”</p></li>
+</ul>
+<p><strong>Run the cell. Then ask:</strong> “We got ~3.13. Why isn’t it exactly π?” → Statistical fluctuation. More darts = closer.</p>
+<p><strong>Key teaching moment:</strong> “Notice there’s no for-loop. We generated all N dart throws at once as arrays. This is the NumPy way — vectorized. It’s also much faster.”</p>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># --- Step 1: Set up the random number generator ---</span>
+<span class="c1"># Using a fixed seed so results are reproducible (same &quot;random&quot; numbers every run)</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># --- Step 2: Throw random darts ---</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">20_000</span>   <span class="c1"># number of darts (try changing this!)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>   <span class="c1"># x-coordinates uniformly between 0 and 1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>   <span class="c1"># y-coordinates uniformly between 0 and 1</span>
+
+<span class="c1"># --- Step 3: Check which darts land inside the quarter-circle ---</span>
+<span class="c1"># A point (x, y) is inside the quarter-circle if x² + y² ≤ 1</span>
+<span class="n">inside</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span>
+
+<span class="c1"># --- Step 4: Estimate π ---</span>
+<span class="n">pi_estimate</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of darts: </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Darts inside quarter-circle: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fraction inside: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated π = 4 × </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">pi_estimate</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True π      = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error       = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">pi_estimate</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of darts: 20000
+Darts inside quarter-circle: 15709
+Fraction inside: 0.7854
+Estimated π = 4 × 0.7854 = 3.1418
+True π      = 3.1416
+Error       = 0.0002
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualizing-the-dart-throw">
+<h3>Visualizing the dart throw<a class="headerlink" href="#visualizing-the-dart-throw" title="Link to this heading">#</a></h3>
+<p>Let’s plot the darts — blue for inside the quarter-circle, red for outside. You can see how the ratio of blue to total gives us π/4.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [Scatter plot — visualizing the dart throw]</strong></p>
+<p>“Now let’s actually <em>see</em> the darts. Run this cell.”</p>
+<p><strong>After the plot appears, point out:</strong></p>
+<ul class="simple">
+<li><p>“Each blue dot landed inside the quarter-circle — <span class="math notranslate nohighlight">\(x^2 + y^2 \leq 1\)</span>. Each red dot landed outside.”</p></li>
+<li><p>“The black curve is the boundary. Notice how the blue region fills roughly 78% of the square — that’s our <span class="math notranslate nohighlight">\(\pi/4\)</span>.”</p></li>
+<li><p>“The title already shows our estimate. With N = 5,000 it’s close but not exact.”</p></li>
+</ul>
+<p><strong>Live demo — change N and re-run:</strong></p>
+<ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">100</span></code> → re-run both cells. The scatter is sparse and the estimate is rough (~2.9 to 3.3).</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">50000</span></code> → the scatter fills in densely and the estimate stabilizes near 3.14.</p></li>
+<li><p>“More darts = better estimate. But <em>how much</em> better? That’s what the next plot shows.”</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">inside</span><span class="p">],</span>  <span class="n">y</span><span class="p">[</span><span class="n">inside</span><span class="p">],</span>  <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Inside&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">inside</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="o">~</span><span class="n">inside</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;salmon&#39;</span><span class="p">,</span>    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Outside&#39;</span><span class="p">)</span>
+
+<span class="c1"># Draw the quarter-circle boundary</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Quarter-circle boundary&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dart throw: N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1">,  π ≈ </span><span class="si">{</span><span class="n">pi_estimate</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">markerscale</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8a41fc76c1db196e128e827b68071449d80edeecf4e71598ff3b07bb3b280889.png" src="../../_images/8a41fc76c1db196e128e827b68071449d80edeecf4e71598ff3b07bb3b280889.png" />
+</div>
+</div>
+</section>
+<section id="how-many-darts-do-we-need">
+<h3>How many darts do we need?<a class="headerlink" href="#how-many-darts-do-we-need" title="Link to this heading">#</a></h3>
+<p>More darts = better estimate. But how fast does the estimate improve?</p>
+<p>The key insight: the error in a Monte Carlo estimate shrinks as <span class="math notranslate nohighlight">\(\sim 1/\sqrt{N}\)</span>.<br />
+That means to get <strong>10× more accurate</strong>, you need <strong>100× more samples</strong>.</p>
+<p>This is Monte Carlo’s main limitation — it’s not very efficient for 1D problems. But it shines for high-dimensional problems (many uncertain inputs), where traditional methods become impractical.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [Convergence — 1/√N rule]</strong></p>
+<p>Before running: “Here’s a key question — if I want my estimate to be 10× more accurate, how many more darts do I need?”</p>
+<ul class="simple">
+<li><p>Let students guess. Common answers: 10×, or 100×.</p></li>
+<li><p>Correct answer: <strong>100×</strong>, because error ∝ 1/√N. To halve the error, quadruple N.</p></li>
+</ul>
+<p><strong>Run the convergence plot.</strong> Point out:</p>
+<ul class="simple">
+<li><p>x-axis is log scale — you can see the estimate “settling in” as N grows</p></li>
+<li><p>The red band is ±1/√N — it narrows as N increases</p></li>
+<li><p>Even at 50,000 samples, there’s still some residual error</p></li>
+</ul>
+<p>“This is Monte Carlo’s tradeoff: it’s easy to set up and works for any model, but it converges slowly. For 1D problems, numerical integration is faster. But for problems with 10 uncertain inputs? Monte Carlo is often the only practical option.”</p>
+<p><em>Transition:</em> “Okay, now let’s use this for something real.”</p>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Throw 50,000 darts and track the running estimate of π</span>
+<span class="n">rng2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">N_total</span> <span class="o">=</span> <span class="mi">50_000</span>
+
+<span class="n">x_all</span> <span class="o">=</span> <span class="n">rng2</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N_total</span><span class="p">)</span>
+<span class="n">y_all</span> <span class="o">=</span> <span class="n">rng2</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N_total</span><span class="p">)</span>
+<span class="n">inside_all</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_all</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y_all</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span>
+
+<span class="c1"># Running estimate after each dart</span>
+<span class="n">N_run</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N_total</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pi_running</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">inside_all</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_run</span>
+
+<span class="c1"># Plot convergence</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">N_run</span><span class="p">,</span> <span class="n">pi_running</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MC estimate&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;True π = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">N_run</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_run</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_run</span><span class="p">),</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;±1/√N error band&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of darts (log scale)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Estimated π&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Monte Carlo convergence: more darts → better estimate&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final estimate with </span><span class="si">{</span><span class="n">N_total</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> darts: π ≈ </span><span class="si">{</span><span class="n">pi_running</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  (true: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9f59a7e88cbc29a9e5190fc04810d772d5e4b33cd9ecf777fc0592f3f1985ba8.png" src="../../_images/9f59a7e88cbc29a9e5190fc04810d772d5e4b33cd9ecf777fc0592f3f1985ba8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final estimate with 50,000 darts: π ≈ 3.14968  (true: 3.14159)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="a-real-engineering-problem-process-reliability">
+<span id="id4"></span><h2>14.3 A Real Engineering Problem: Process Reliability<a class="headerlink" href="#a-real-engineering-problem-process-reliability" title="Link to this heading">#</a></h2>
+<p>Now let’s apply Monte Carlo to a chemical engineering scenario.</p>
+<section id="problem-statement">
+<h3>Problem statement<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h3>
+<p>A chemical product must have <strong>purity ≥ 97.5%</strong> to be sold. The purity depends on two process variables that fluctuate daily due to normal operating variability:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Distribution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Residence time (s)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{N}(\mu=120,\, \sigma=12)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Temperature (K)</p></td>
+<td><p><span class="math notranslate nohighlight">\(T\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{N}(\mu=400,\, \sigma=8)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The purity model is:
+$<span class="math notranslate nohighlight">\(
+\text{Purity} = 100 \times \left(1 - 0.2\, e^{-k(T)\,\tau} \right), \quad k(T) = \exp\!\left(\frac{-1550}{T}\right)
+\)</span>$</p>
+<p><strong>Question:</strong> What fraction of batches will fail the purity spec?</p>
+<p>We’ll build up to the full simulation in four steps:</p>
+<ol class="arabic simple">
+<li><p>Visualize the input distributions</p></li>
+<li><p>Compute purity at the mean values — and ask: is that enough information?</p></li>
+<li><p>Sample a few batches by hand to see success and failure cases</p></li>
+<li><p>Run the full Monte Carlo</p></li>
+</ol>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [14.3 — Engineering problem intro, ~5 min]</strong></p>
+<p>Read the problem statement aloud (or have a student read it). Then ask:</p>
+<ul class="simple">
+<li><p>“What are the two uncertain inputs here?” → τ and T</p></li>
+<li><p>“What does the purity model look like? Is it linear in τ and T?” → No — exponential in both</p></li>
+<li><p>“If I just plug in τ = 120 s and T = 400 K, will that tell me the failure rate?” → No! Nonlinearity means the tail behavior matters.</p></li>
+</ul>
+<p>“We’re going to build up to the full simulation in four steps. Don’t skip ahead — each step adds something.”</p>
+<p><strong>Write on board:</strong> <code class="docutils literal notranslate"><span class="pre">Purity</span> <span class="pre">=</span> <span class="pre">f(τ,</span> <span class="pre">T)</span></code> where both τ and T are random → Purity is also random → we want P(Purity &lt; 97.5%).</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="step-1-visualize-the-input-distributions">
+<h3>Step 1: Visualize the input distributions<a class="headerlink" href="#step-1-visualize-the-input-distributions" title="Link to this heading">#</a></h3>
+<p>Before running any simulation, let’s see what the two uncertain inputs look like.
+Each day, τ and T are drawn from their respective normal distributions.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [Step 1 — Visualize inputs]</strong></p>
+<p>“Before any simulation, always look at your inputs. This is good practice.”</p>
+<p>Run the cell. Point out:</p>
+<ul class="simple">
+<li><p>Both are bell curves (normal distributions)</p></li>
+<li><p>τ has larger relative spread (σ/μ = 10%) vs T (σ/μ = 2%)</p></li>
+<li><p>“The residence time is actually more variable relative to its mean. That will matter.”</p></li>
+</ul>
+<p>Ask students: “Which input do you think has more impact on purity — τ or T?” Let them guess. (Answer revealed by Step 4 scatter plot.)</p>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">tau_mean</span><span class="p">,</span> <span class="n">tau_std</span> <span class="o">=</span> <span class="mf">120.0</span><span class="p">,</span> <span class="mf">12.0</span>   <span class="c1"># residence time (s)</span>
+<span class="n">T_mean</span><span class="p">,</span>   <span class="n">T_std</span>   <span class="o">=</span> <span class="mf">400.0</span><span class="p">,</span>  <span class="mf">8.0</span>   <span class="c1"># temperature (K)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tau_mean</span><span class="p">,</span> <span class="n">tau_std</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;Residence time $\tau$&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>  <span class="s1">&#39;steelblue&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">T_mean</span><span class="p">,</span>   <span class="n">T_std</span><span class="p">,</span>   <span class="sa">r</span><span class="s1">&#39;Temperature $T$&#39;</span><span class="p">,</span>       <span class="s1">&#39;K&#39;</span><span class="p">,</span>  <span class="s1">&#39;darkorange&#39;</span><span class="p">),</span>
+<span class="p">]:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mean</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">std</span><span class="p">,</span> <span class="n">mean</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">std</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span>       <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>  <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean = </span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span> <span class="o">-</span> <span class="n">std</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>   <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;±1σ = </span><span class="si">{</span><span class="n">std</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span> <span class="o">+</span> <span class="n">std</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability density&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\mathcal</span><span class="si">{N}</span><span class="s1">$&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">std</span><span class="si">}</span><span class="s1">²)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/63f09b174ffa4e07a9ecef4dd24f0b70689b2396c0de687984071e2726cb0f00.png" src="../../_images/63f09b174ffa4e07a9ecef4dd24f0b70689b2396c0de687984071e2726cb0f00.png" />
+</div>
+</div>
+</section>
+<section id="step-2-purity-at-the-mean-values">
+<h3>Step 2: Purity at the mean values<a class="headerlink" href="#step-2-purity-at-the-mean-values" title="Link to this heading">#</a></h3>
+<p>A natural first question: if everything runs at its mean value, what is the purity?</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [Step 2 — Purity at the mean]</strong></p>
+<p>“A naive engineer might ask: ‘What’s the purity when everything is at its average?’ Let’s compute that first.”</p>
+<p>Walk through <code class="docutils literal notranslate"><span class="pre">purity_model()</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">exp(-1550/T)</span></code> — this is an Arrhenius-type rate constant (simplified)</p></li>
+<li><p>“Higher T → larger k → faster reaction → higher purity”</p></li>
+<li><p>“Longer τ → more time in reactor → higher purity”</p></li>
+</ul>
+<p>Run the cell. Output: <strong>98.34% — comfortably above 97.5%.</strong></p>
+<p><strong>Ask the class:</strong> “Does this mean the process is fine? Can we go home?” → Pause for responses.
+→ “No! Because τ and T vary. Some batches will be worse than average.”</p>
+<p>“This is the classic mistake: plugging in mean values and assuming you’re safe. Monte Carlo exists to fix this mistake.”</p>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">purity_model</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">1550.0</span> <span class="o">/</span> <span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">tau</span><span class="p">))</span>
+
+<span class="n">spec</span> <span class="o">=</span> <span class="mf">97.5</span>   <span class="c1"># minimum acceptable purity (%)</span>
+
+<span class="n">purity_at_mean</span> <span class="o">=</span> <span class="n">purity_model</span><span class="p">(</span><span class="n">tau_mean</span><span class="p">,</span> <span class="n">T_mean</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At mean conditions:  τ = </span><span class="si">{</span><span class="n">tau_mean</span><span class="si">}</span><span class="s2"> s,  T = </span><span class="si">{</span><span class="n">T_mean</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  k(T_mean) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1550</span><span class="o">/</span><span class="n">T_mean</span><span class="p">)</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> s⁻¹&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  k·τ       = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1550</span><span class="o">/</span><span class="n">T_mean</span><span class="p">)</span><span class="o">*</span><span class="n">tau_mean</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Purity    = </span><span class="si">{</span><span class="n">purity_at_mean</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">purity_at_mean</span> <span class="o">&gt;=</span> <span class="n">spec</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Passes spec (</span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="s2">%) at the mean — but does every batch pass?&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Already fails spec (</span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="s2">%) at the mean!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At mean conditions:  τ = 120.0 s,  T = 400.0 K
+  k(T_mean) = 0.02075 s⁻¹
+  k·τ       = 2.491
+  Purity    = 98.343 %
+
+  Passes spec (97.5%) at the mean — but does every batch pass?
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-a-few-sampled-batches-success-and-failure">
+<h3>Step 3: A few sampled batches — success and failure<a class="headerlink" href="#step-3-a-few-sampled-batches-success-and-failure" title="Link to this heading">#</a></h3>
+<p>The mean purity looks fine. But each real batch runs at a slightly different τ and T. Let’s sample 10 batches and compute purity for each one to see how much it varies.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [Step 3 — 10 sample batches]</strong></p>
+<p>“Let’s simulate just 10 batches manually first so we can see each one individually.”</p>
+<p>Run the print table. Walk through a couple of rows:</p>
+<ul class="simple">
+<li><p>Batch 2: τ = 89.3 s (much shorter than mean 120 s) → FAIL. “Short residence time → less conversion → purity drops.”</p></li>
+<li><p>Batch 7: τ = 95.8 s → FAIL despite T being slightly high. “Still not enough time.”</p></li>
+<li><p>Batch 1: τ = 144.5 s → PASS easily. “Long residence time saves it.”</p></li>
+</ul>
+<p>“Two out of 10 failed. Does that mean ~20% failure rate? Maybe — but 10 is too small a sample to trust. We need thousands.”</p>
+<p>Run the scatter plot. Point to the (τ, T) space:</p>
+<ul class="simple">
+<li><p>“Failures (X markers) are in the lower-left — low τ and moderate T.”</p></li>
+<li><p>“The mean point (+ marker) is safely in PASS territory, but the cloud of batches extends into failure.”</p></li>
+</ul>
+<p><strong>Bridge to Step 4:</strong> “Now let’s run 100,000 batches. Same code — just scale N up.”</p>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">n_preview</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">tau_s</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">tau_mean</span><span class="p">,</span> <span class="n">tau_std</span><span class="p">,</span> <span class="n">n_preview</span><span class="p">)</span>
+<span class="n">T_s</span>   <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">T_mean</span><span class="p">,</span>   <span class="n">T_std</span><span class="p">,</span>   <span class="n">n_preview</span><span class="p">)</span>
+<span class="n">pur_s</span> <span class="o">=</span> <span class="n">purity_model</span><span class="p">(</span><span class="n">tau_s</span><span class="p">,</span> <span class="n">T_s</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Batch&#39;</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;τ (s)&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;T (K)&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Purity (%)&#39;</span><span class="si">:</span><span class="s2">&gt;11</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Result&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_preview</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;PASS ✓&quot;</span> <span class="k">if</span> <span class="n">pur_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">spec</span> <span class="k">else</span> <span class="s2">&quot;FAIL ✗&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">tau_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;8.1f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">T_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;8.1f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">pur_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11.3f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batch     τ (s)     T (K)   Purity (%)    Result
+--------------------------------------------------
+    1     144.5     401.8       99.054    PASS ✓
+    2      89.3     397.2       96.706    FAIL ✗
+    3     125.0     397.7       98.420    PASS ✓
+    4     113.2     394.7       97.847    PASS ✓
+    5     114.6     391.6       97.755    PASS ✓
+    6     117.4     396.9       98.118    PASS ✓
+    7      95.8     403.9       97.457    FAIL ✗
+    8     117.2     398.1       98.164    PASS ✓
+    9     109.6     407.7       98.269    PASS ✓
+   10     159.9     398.4       99.238    PASS ✓
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_preview</span><span class="p">):</span>
+    <span class="n">color</span>  <span class="o">=</span> <span class="s1">&#39;steelblue&#39;</span> <span class="k">if</span> <span class="n">pur_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">spec</span> <span class="k">else</span> <span class="s1">&#39;salmon&#39;</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span>         <span class="k">if</span> <span class="n">pur_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">spec</span> <span class="k">else</span> <span class="s1">&#39;X&#39;</span>
+    <span class="n">label</span>  <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Pass ✓&#39;</span> <span class="k">if</span> <span class="n">pur_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">spec</span> <span class="k">else</span> <span class="s1">&#39;Fail ✗&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">pur_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">spec</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="n">pur_s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">spec</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tau_s</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">T_s</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">pur_s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">tau_s</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">T_s</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Mark the mean</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tau_mean</span><span class="p">,</span> <span class="n">T_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+           <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean (τ, T)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Legend proxies</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.lines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Line2D</span>
+<span class="n">handles</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pass ✓&#39;</span><span class="p">),</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;salmon&#39;</span><span class="p">,</span>    <span class="n">markersize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fail ✗&#39;</span><span class="p">),</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">handles</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Residence time τ (s)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature T (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;10 sampled batches in (τ, T) space&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3d02d85dd001d5478730cb2e07bfbb6a879ab26f575e4be7545af70335f59e80.png" src="../../_images/3d02d85dd001d5478730cb2e07bfbb6a879ab26f575e4be7545af70335f59e80.png" />
+</div>
+</div>
+<p>With only 10 batches we can already see some failures — but 10 is not enough to reliably estimate the failure <em>rate</em>. We need to scale this up to thousands of batches. That’s exactly what Monte Carlo does.</p>
+</section>
+<section id="step-4-full-monte-carlo-100-000-batches">
+<h3>Step 4: Full Monte Carlo — 100,000 batches<a class="headerlink" href="#step-4-full-monte-carlo-100-000-batches" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [Step 4 — Full Monte Carlo, ~10 min]</strong></p>
+<p>“Now we scale up. Same three lines of logic — just N = 100,000.”</p>
+<p>Before running, ask: “What do you predict the failure rate will be?” Take 2–3 guesses from the class.</p>
+<p>Run the cell. Key results to highlight:</p>
+<ul class="simple">
+<li><p><strong>Mean purity = ~98.3%</strong> — same as at the mean, roughly (Jensen’s inequality is small here)</p></li>
+<li><p><strong>Std dev = ~0.6%</strong> — the spread is what causes failures</p></li>
+<li><p><strong>Failure rate ≈ 9%</strong> — nearly 1 in 10 batches fails!</p></li>
+</ul>
+<p>“The process <em>looked</em> fine from the mean alone. But 9% failure is a serious quality problem.”</p>
+<p><strong>Left plot (histogram):</strong></p>
+<ul class="simple">
+<li><p>Red dashed line = spec limit</p></li>
+<li><p>The left tail below 97.5% is the fail region</p></li>
+<li><p>“The bulk of the distribution is fine, but the tail reaches into failure.”</p></li>
+</ul>
+<p><strong>Right plot (scatter):</strong></p>
+<ul class="simple">
+<li><p>“Red dots cluster at lower T — lower temperature slows the reaction rate.”</p></li>
+<li><p>Return to the earlier question: “Which matters more — τ or T?” → Both matter; failures are in the low-τ, low-T corner.</p></li>
+</ul>
+<p><strong>Wrap-up question for students:</strong> “What could you change in the process to reduce the failure rate?” Possible answers:</p>
+<ul class="simple">
+<li><p>Increase mean τ (longer residence time) — shifts the whole distribution right</p></li>
+<li><p>Reduce σ of τ (tighter process control) — narrows the distribution</p></li>
+<li><p>Increase mean T — speeds up reaction</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng_mc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">N_mc</span>   <span class="o">=</span> <span class="mi">100_000</span>
+
+<span class="c1"># Sample all batches at once</span>
+<span class="n">tau_mc</span> <span class="o">=</span> <span class="n">rng_mc</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">tau_mean</span><span class="p">,</span> <span class="n">tau_std</span><span class="p">,</span> <span class="n">N_mc</span><span class="p">)</span>
+<span class="n">T_mc</span>   <span class="o">=</span> <span class="n">rng_mc</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">T_mean</span><span class="p">,</span>   <span class="n">T_std</span><span class="p">,</span>   <span class="n">N_mc</span><span class="p">)</span>
+<span class="n">pur_mc</span> <span class="o">=</span> <span class="n">purity_model</span><span class="p">(</span><span class="n">tau_mc</span><span class="p">,</span> <span class="n">T_mc</span><span class="p">)</span>
+
+<span class="n">frac_fail</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pur_mc</span> <span class="o">&lt;</span> <span class="n">spec</span><span class="p">)</span>
+<span class="n">frac_pass</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">frac_fail</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Monte Carlo results  (N = </span><span class="si">{</span><span class="n">N_mc</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> batches)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean purity:        </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pur_mc</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Std dev:            </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">pur_mc</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  5th percentile:     </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">pur_mc</span><span class="p">,</span><span class="w">  </span><span class="mi">5</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Spec limit:         </span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Fraction PASSING:   </span><span class="si">{</span><span class="n">frac_pass</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">frac_pass</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Fraction FAILING:   </span><span class="si">{</span><span class="n">frac_fail</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">frac_fail</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">n_plot</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">pur_mc</span><span class="p">[:</span><span class="n">n_plot</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">spec</span><span class="p">,</span> <span class="s1">&#39;salmon&#39;</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot 1: purity histogram</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pur_mc</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Spec = </span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pur_mc</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pur_mc</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="n">ymax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_betweenx</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="p">],</span> <span class="n">pur_mc</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">spec</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Fail region (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">frac_fail</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Purity (%)&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribution of purity</span><span class="se">\n</span><span class="s1">across 100,000 batches&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="c1"># # Plot 2: purity vs temperature</span>
+<span class="c1"># ax = axes[1]</span>
+<span class="c1"># ax.scatter(T_mc[:n_plot], pur_mc[:n_plot], c=colors, alpha=0.3, s=5)</span>
+<span class="c1"># ax.axhline(spec, color=&#39;red&#39;, linestyle=&#39;--&#39;, linewidth=2, label=f&#39;Spec = {spec}%&#39;)</span>
+<span class="c1"># ax.set_xlabel(&#39;Temperature T (K)&#39;); ax.set_ylabel(&#39;Purity (%)&#39;)</span>
+<span class="c1"># ax.set_title(&#39;Purity vs. Temperature\n(red = fails spec)&#39;)</span>
+<span class="c1"># ax.legend(fontsize=9)</span>
+
+<span class="c1"># # Plot 3: purity vs residence time</span>
+<span class="c1"># ax = axes[2]</span>
+<span class="c1"># ax.scatter(tau_mc[:n_plot], pur_mc[:n_plot], c=colors, alpha=0.3, s=5)</span>
+<span class="c1"># ax.axhline(spec, color=&#39;red&#39;, linestyle=&#39;--&#39;, linewidth=2, label=f&#39;Spec = {spec}%&#39;)</span>
+<span class="c1"># ax.set_xlabel(&#39;Residence time τ (s)&#39;); ax.set_ylabel(&#39;Purity (%)&#39;)</span>
+<span class="c1"># ax.set_title(&#39;Purity vs. Residence time\n(red = fails spec)&#39;)</span>
+<span class="c1"># ax.legend(fontsize=9)</span>
+
+<span class="c1"># Plot 4: τ vs T scatter in input space, colored by pass/fail</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tau_mc</span><span class="p">[:</span><span class="n">n_plot</span><span class="p">],</span> <span class="n">T_mc</span><span class="p">[:</span><span class="n">n_plot</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tau_mean</span><span class="p">,</span> <span class="n">T_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+           <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean (τ, T)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Residence time τ (s)&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature T (K)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Input space (τ, T)</span><span class="se">\n</span><span class="s1">(red = fails spec)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=============================================
+  Monte Carlo results  (N = 100,000 batches)
+=============================================
+  Mean purity:        98.265 %
+  Std dev:            0.546 %
+  5th percentile:     97.264 %
+  Spec limit:         97.5 %
+  Fraction PASSING:   0.9089  (90.89%)
+  Fraction FAILING:   0.0911  (9.11%)
+=============================================
+</pre></div>
+</div>
+<img alt="../../_images/bd744f3cf12b4d61a47798355e6b7f5f96fecd5be786e111872da489b951e07f.png" src="../../_images/bd744f3cf12b4d61a47798355e6b7f5f96fecd5be786e111872da489b951e07f.png" />
+</div>
+</div>
+</section>
+<section id="what-did-we-learn-from-this-simulation">
+<h3>What did we learn from this simulation?<a class="headerlink" href="#what-did-we-learn-from-this-simulation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>mean purity (~98.3%) is above the spec</strong>, which might make you think the process is fine.</p></li>
+<li><p>But the output distribution has <strong>a spread of ~0.5–0.7%</strong>, so the tail dips below 97.5%.</p></li>
+<li><p>Monte Carlo tells us roughly <strong>~9% of batches will fail</strong> — a number you cannot get from just computing purity at the mean.</p></li>
+<li><p>The scatter plot shows failures cluster at <strong>lower temperatures and shorter residence times</strong> — both reduce the rate constant and slow the reaction.</p></li>
+</ul>
+<p>This is the central lesson: <strong>the mean alone is not enough</strong>. You need the full distribution.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>14.4 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Key idea</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Monte Carlo simulation</p></td>
+<td><p>Estimate outputs by sampling inputs randomly and running the model many times</p></td>
+</tr>
+<tr class="row-odd"><td><p>Random number generator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rng</span> <span class="pre">=</span> <span class="pre">np.random.default_rng(seed=...)</span></code> creates reproducible random numbers</p></td>
+</tr>
+<tr class="row-even"><td><p>Sampling from a distribution</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rng.normal(mean,</span> <span class="pre">std,</span> <span class="pre">N)</span></code> for normal; <code class="docutils literal notranslate"><span class="pre">rng.uniform(low,</span> <span class="pre">high,</span> <span class="pre">N)</span></code> for uniform</p></td>
+</tr>
+<tr class="row-odd"><td><p>Output analysis</p></td>
+<td><p>Use <code class="docutils literal notranslate"><span class="pre">np.mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">np.std()</span></code>, <code class="docutils literal notranslate"><span class="pre">np.percentile()</span></code> on the output array</p></td>
+</tr>
+<tr class="row-even"><td><p>Convergence</p></td>
+<td><p>Error shrinks as <span class="math notranslate nohighlight">\(\sim 1/\sqrt{N}\)</span> — more samples = more accurate</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="the-monte-carlo-template-reuse-this">
+<h3>The Monte Carlo template (reuse this!)<a class="headerlink" href="#the-monte-carlo-template-reuse-this" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100_000</span>
+
+<span class="c1"># 1. Sample inputs</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean1</span><span class="p">,</span> <span class="n">std1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean2</span><span class="p">,</span> <span class="n">std2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="c1"># 2. Compute output for all samples at once</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">my_model</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>   <span class="c1"># works if my_model uses numpy operations</span>
+
+<span class="c1"># 3. Summarize</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean:   </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Std:    </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(output &lt; threshold) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">output</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">threshold</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>🎤 [14.4 Summary — wrap-up, ~5 min]</strong></p>
+<p>Walk through the summary table. Emphasize the reusable template:</p>
+<ul class="simple">
+<li><p>“Copy this template any time you need to do Monte Carlo. Fill in your own distributions and model function.”</p></li>
+<li><p>“The three lines that matter: sample inputs, compute outputs, summarize.”</p></li>
+</ul>
+<p><strong>Recap the central lesson:</strong></p>
+<ol class="arabic simple">
+<li><p>Monte Carlo = random sampling + run model many times + look at output distribution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.random.default_rng(seed)</span></code> for reproducibility</p></li>
+<li><p>Vectorize — generate all N samples at once, no loops</p></li>
+<li><p>The mean alone is not enough — you need the tail</p></li>
+</ol>
+<p><strong>Common student mistakes to warn about:</strong></p>
+<ul class="simple">
+<li><p>Forgetting the seed → results change every run (fine for exploration, bad for homework)</p></li>
+<li><p>Using a for-loop over samples → works but very slow for large N</p></li>
+<li><p>Using N = 100 and trusting the result → too noisy, use ≥ 10,000 for most problems</p></li>
+</ul>
+<p><strong>Preview of lab:</strong> “In the lab, you’ll apply Monte Carlo to two new problems — one with a uniform distribution and one with correlated inputs. Same recipe, new context.”</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter14"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-monte-carlo-simulation">14.1 What Is Monte Carlo Simulation?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-step-recipe">The three-step recipe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-this-useful-for-chemical-engineers">Why is this useful for chemical engineers?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-intuition-estimating-by-throwing-darts">14.2 Building Intuition: Estimating π by Throwing Darts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-dart-throw">Visualizing the dart throw</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-many-darts-do-we-need">How many darts do we need?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-real-engineering-problem-process-reliability">14.3 A Real Engineering Problem: Process Reliability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem statement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-visualize-the-input-distributions">Step 1: Visualize the input distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-purity-at-the-mean-values">Step 2: Purity at the mean values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-a-few-sampled-batches-success-and-failure">Step 3: A few sampled batches — success and failure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-full-monte-carlo-100-000-batches">Step 4: Full Monte Carlo — 100,000 batches</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-did-we-learn-from-this-simulation">What did we learn from this simulation?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">14.4 Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-monte-carlo-template-reuse-this">The Monte Carlo template (reuse this!)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
