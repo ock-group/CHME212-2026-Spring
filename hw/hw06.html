@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Homework 03: NumPy Arrays and Linear Algebra &#8212; Introduction to Chemical Engineering Computation</title>
+    <title>Homework 06: Statistics, Random Sampling, and Monte Carlo Simulation &#8212; Introduction to Chemical Engineering Computation</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -199,6 +199,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -208,6 +215,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
 </ul>
 
     </div>
@@ -393,7 +402,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Homework 03: NumPy Arrays and Linear Algebra</h1>
+    <h1>Homework 06: Statistics, Random Sampling, and Monte Carlo Simulation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -403,13 +412,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-arrhenius-analysis-extracting-kinetic-parameters-from-data">Problem 1: Arrhenius Analysis — Extracting Kinetic Parameters from Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-15-points-temperature-profile-in-a-reactor">Problem 1 (15 points) – Temperature Profile in a Reactor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-15-points-concentration-matrix-operations">Problem 2 (15 points) – Concentration Matrix Operations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-12-points-material-balance-using-linear-algebra">Problem 3 (12 points) – Material Balance using Linear Algebra</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-12-points-melting-and-boiling-points-of-elements">Problem 4 (12 points) – Melting and Boiling Points of Elements</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-16-points-eigenvalues-and-eigenvectors">Problem 5 (16 points) – Eigenvalues and Eigenvectors</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bouns-15-points-vector-operations-and-chemical-engineering-applications">Bouns (15 points) – Vector Operations and Chemical Engineering Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-30-points-descriptive-statistics-batch-reactor-yield">Problem 1 (30 points) – Descriptive Statistics: Batch Reactor Yield</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-20-points-random-sampling-and-probability-distributions">Problem 2 (20 points) – Random Sampling and Probability Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-40-points-monte-carlo-simulation-reactor-product-purity">Problem 3 (40 points) – Monte Carlo Simulation: Reactor Product Purity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-problem-20-points-monte-carlo-simulation-ideal-gas-pressure">Bonus Problem (20 points) – Monte Carlo Simulation: Ideal Gas Pressure</a></li>
 </ul>
             </nav>
         </div>
@@ -421,17 +427,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="homework-03-numpy-arrays-and-linear-algebra">
-<h1>Homework 03: NumPy Arrays and Linear Algebra<a class="headerlink" href="#homework-03-numpy-arrays-and-linear-algebra" title="Link to this heading">#</a></h1>
-<p><strong>Release Date:</strong> Feb 6</p>
-<p><strong>Due Date:</strong> Feb 9 11:59 PM</p>
-<p><strong>Total Points:</strong> 60 pts (+ 5 bonus pts)</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-06-statistics-random-sampling-and-monte-carlo-simulation">
+<h1>Homework 06: Statistics, Random Sampling, and Monte Carlo Simulation<a class="headerlink" href="#homework-06-statistics-random-sampling-and-monte-carlo-simulation" title="Link to this heading">#</a></h1>
+<p><strong>Release Date:</strong> Mar 29</p>
+<p><strong>Due Date:</strong> Apr 10 11:59 PM</p>
+<p><strong>Total Points:</strong> 95 pts (+ 20 pts bonus)</p>
 <p><strong>Instructions:</strong></p>
 <ul class="simple">
 <li><p>Complete all problems in this notebook</p></li>
 <li><p>Show all your work with clear comments</p></li>
-<li><p>Use NumPy arrays for all calculations</p></li>
-<li><p>Format all outputs professionally with units</p></li>
+<li><p>Format all outputs professionally with units and labels</p></li>
 <li><p>Test your code to ensure it runs without errors</p></li>
 </ul>
 <p><strong>Submission:</strong></p>
@@ -439,134 +444,57 @@ document.write(`
 <li><p>Submit this completed Jupyter notebook to Gradescope</p></li>
 <li><p>Make sure all cells have been executed and outputs are visible</p></li>
 </ul>
-<hr class="docutils" />
-<section id="problem-1-arrhenius-analysis-extracting-kinetic-parameters-from-data">
-<h2>Problem 1: Arrhenius Analysis — Extracting Kinetic Parameters from Data<a class="headerlink" href="#problem-1-arrhenius-analysis-extracting-kinetic-parameters-from-data" title="Link to this heading">#</a></h2>
-<p>The <strong>Arrhenius equation</strong> describes how reaction rate constants vary with temperature:</p>
-<div class="math notranslate nohighlight">
-\[
-k = A \, e^{-E_a / (RT)}
-\]</div>
-<p>Taking the natural log linearizes this:</p>
-<div class="math notranslate nohighlight">
-\[
-\ln k = \ln A - \frac{E_a}{R} \cdot \frac{1}{T}
-\]</div>
-<p>So a plot of <span class="math notranslate nohighlight">\(\ln k\)</span> vs <span class="math notranslate nohighlight">\(1/T\)</span> should be a straight line with <strong>slope</strong> <span class="math notranslate nohighlight">\(= -E_a/R\)</span> and <strong>intercept</strong> <span class="math notranslate nohighlight">\(= \ln A\)</span>.</p>
-<p>A laboratory measured the following rate constants for the decomposition of N₂O₅:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>T (K)</p></th>
-<th class="head"><p>k (s⁻¹)</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>273</p></td>
-<td><p>7.87 × 10⁻⁷</p></td>
-</tr>
-<tr class="row-odd"><td><p>298</p></td>
-<td><p>3.46 × 10⁻⁵</p></td>
-</tr>
-<tr class="row-even"><td><p>318</p></td>
-<td><p>4.98 × 10⁻⁴</p></td>
-</tr>
-<tr class="row-odd"><td><p>338</p></td>
-<td><p>4.87 × 10⁻³</p></td>
-</tr>
-<tr class="row-even"><td><p>358</p></td>
-<td><p>3.50 × 10⁻²</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Tasks:</strong></p>
-<ol class="arabic simple">
-<li><p>Store the data as numpy arrays <code class="docutils literal notranslate"><span class="pre">T_data</span></code> (K) and <code class="docutils literal notranslate"><span class="pre">k_data</span></code> (s⁻¹).</p></li>
-<li><p>Compute <code class="docutils literal notranslate"><span class="pre">inv_T</span> <span class="pre">=</span> <span class="pre">1/T_data</span></code> and <code class="docutils literal notranslate"><span class="pre">ln_k</span> <span class="pre">=</span> <span class="pre">np.log(k_data)</span></code>.</p></li>
-<li><p>Use <strong><code class="docutils literal notranslate"><span class="pre">np.polyfit(inv_T,</span> <span class="pre">ln_k,</span> <span class="pre">1)</span></code></strong> to fit a line to the Arrhenius plot. Extract:</p>
-<ul class="simple">
-<li><p><strong>Activation energy</strong> <span class="math notranslate nohighlight">\(E_a\)</span> (in kJ/mol) from the slope: <span class="math notranslate nohighlight">\(E_a = -\text{slope} \times R\)</span>, with <span class="math notranslate nohighlight">\(R = 8.314\)</span> J/(mol·K)</p></li>
-<li><p><strong>Pre-exponential factor</strong> <span class="math notranslate nohighlight">\(A\)</span> (in s⁻¹) from the intercept: <span class="math notranslate nohighlight">\(A = e^{\text{intercept}}\)</span></p></li>
-</ul>
-</li>
-<li><p>Create an <strong>Arrhenius plot</strong>: <span class="math notranslate nohighlight">\(\ln k\)</span> vs <span class="math notranslate nohighlight">\(1/T\)</span> (×10³ for readability on the x-axis).</p>
-<ul class="simple">
-<li><p>Plot the <strong>data points</strong> as markers (<code class="docutils literal notranslate"><span class="pre">'o'</span></code>, color <code class="docutils literal notranslate"><span class="pre">'steelblue'</span></code>, label <code class="docutils literal notranslate"><span class="pre">'Experimental</span> <span class="pre">data'</span></code>).</p></li>
-<li><p>Plot the <strong>fitted line</strong> (<code class="docutils literal notranslate"><span class="pre">'r--'</span></code>, label with fitted <span class="math notranslate nohighlight">\(E_a\)</span> value, e.g. <code class="docutils literal notranslate"><span class="pre">f'Fit:</span> <span class="pre">$E_a$</span> <span class="pre">=</span> <span class="pre">{Ea:.1f}</span> <span class="pre">kJ/mol'</span></code>).</p></li>
-<li><p>Label x-axis as <code class="docutils literal notranslate"><span class="pre">'1/T</span> <span class="pre">(×10⁻³</span> <span class="pre">K⁻¹)'</span></code>, y-axis as <code class="docutils literal notranslate"><span class="pre">'ln</span> <span class="pre">k'</span></code>, add title, legend, grid.</p></li>
-</ul>
-</li>
-<li><p>Print <span class="math notranslate nohighlight">\(E_a\)</span> (kJ/mol) and <span class="math notranslate nohighlight">\(A\)</span> (s⁻¹) clearly with units.</p></li>
-<li><p><strong>In a markdown cell below your code</strong>, write 2–3 sentences: <em>What does a higher <span class="math notranslate nohighlight">\(E_a\)</span> physically mean for a reaction? Based on your fitted <span class="math notranslate nohighlight">\(E_a\)</span>, is the N₂O₅ decomposition highly temperature-sensitive?</em></p></li>
-</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span>   <span class="c1"># J/(mol·K)</span>
-
-<span class="c1"># Task 1: Data</span>
-<span class="n">T_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">273</span><span class="p">,</span> <span class="mi">298</span><span class="p">,</span> <span class="mi">318</span><span class="p">,</span> <span class="mi">338</span><span class="p">,</span> <span class="mi">358</span><span class="p">])</span>          <span class="c1"># K</span>
-<span class="n">k_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.87e-7</span><span class="p">,</span> <span class="mf">3.46e-5</span><span class="p">,</span> <span class="mf">4.98e-4</span><span class="p">,</span> <span class="mf">4.87e-3</span><span class="p">,</span> <span class="mf">3.50e-2</span><span class="p">])</span>  <span class="c1"># s^-1</span>
-
-<span class="c1"># Task 2: Linearize</span>
-<span class="n">inv_T</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">T_data</span>          <span class="c1"># K^-1</span>
-<span class="n">ln_k</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">k_data</span><span class="p">)</span>      <span class="c1"># dimensionless</span>
-
-<span class="c1"># Task 3: Arrhenius fit</span>
-<span class="n">coeffs</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">inv_T</span><span class="p">,</span> <span class="n">ln_k</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">coeffs</span>
-
-<span class="n">Ea</span> <span class="o">=</span> <span class="o">-</span><span class="n">slope</span> <span class="o">*</span> <span class="n">R</span> <span class="o">/</span> <span class="mi">1000</span>      <span class="c1"># kJ/mol  (slope = -Ea/R)</span>
-<span class="n">A</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">intercept</span><span class="p">)</span>      <span class="c1"># s^-1</span>
-
-<span class="c1"># Task 5: Print results</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Activation energy:    Ea = </span><span class="si">{</span><span class="n">Ea</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kJ/mol&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pre-exponential factor: A = </span><span class="si">{</span><span class="n">A</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2"> s⁻¹&quot;</span><span class="p">)</span>
-
-<span class="c1"># Task 4: Arrhenius plot</span>
-<span class="n">inv_T_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">inv_T</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">inv_T</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">ln_k_fit</span>  <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">inv_T_fit</span> <span class="o">+</span> <span class="n">intercept</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">inv_T</span> <span class="o">*</span> <span class="mf">1e3</span><span class="p">,</span> <span class="n">ln_k</span><span class="p">,</span>
-         <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Experimental data&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">inv_T_fit</span> <span class="o">*</span> <span class="mf">1e3</span><span class="p">,</span> <span class="n">ln_k_fit</span><span class="p">,</span>
-         <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Fit: $E_a$ = </span><span class="si">{</span><span class="n">Ea</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> kJ/mol&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;1/T (×10⁻³ K⁻¹)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;ln k&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Arrhenius Plot — N₂O₅ Decomposition&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Activation energy:    Ea = 102.60 kJ/mol
-Pre-exponential factor: A = 3.4111e+13 s⁻¹
-</pre></div>
 </div>
-<img alt="../_images/79f0780e20f5b73609fc3a77d7c105c5910c4845ab5ff5b04c361b4f1052017d.png" src="../_images/79f0780e20f5b73609fc3a77d7c105c5910c4845ab5ff5b04c361b4f1052017d.png" />
-</div>
-</div>
-</section>
 <hr class="docutils" />
-<section id="problem-1-15-points-temperature-profile-in-a-reactor">
-<h2>Problem 1 (15 points) – Temperature Profile in a Reactor<a class="headerlink" href="#problem-1-15-points-temperature-profile-in-a-reactor" title="Link to this heading">#</a></h2>
-<p>A tubular reactor has temperature measurements at 8 equally-spaced positions along its length (<span class="math notranslate nohighlight">\(L\)</span> = 10 m). The temperatures (in K) are stored in a NumPy array:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">450</span><span class="p">,</span> <span class="mi">475</span><span class="p">,</span> <span class="mi">490</span><span class="p">,</span> <span class="mi">510</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">515</span><span class="p">,</span> <span class="mi">495</span><span class="p">,</span> <span class="mi">470</span><span class="p">])</span>
+<section id="problem-1-30-points-descriptive-statistics-batch-reactor-yield">
+<h2>Problem 1 (30 points) – Descriptive Statistics: Batch Reactor Yield<a class="headerlink" href="#problem-1-30-points-descriptive-statistics-batch-reactor-yield" title="Link to this heading">#</a></h2>
+<p>A pharmaceutical process runs 20 consecutive batches. The percent yield of the active ingredient is recorded below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">yields</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">87.3</span><span class="p">,</span> <span class="mf">89.1</span><span class="p">,</span> <span class="mf">85.6</span><span class="p">,</span> <span class="mf">90.2</span><span class="p">,</span> <span class="mf">86.8</span><span class="p">,</span> <span class="mf">88.4</span><span class="p">,</span> <span class="mf">91.0</span><span class="p">,</span> <span class="mf">84.9</span><span class="p">,</span> <span class="mf">87.7</span><span class="p">,</span> <span class="mf">89.5</span><span class="p">,</span>
+                   <span class="mf">86.2</span><span class="p">,</span> <span class="mf">90.8</span><span class="p">,</span> <span class="mf">85.1</span><span class="p">,</span> <span class="mf">88.9</span><span class="p">,</span> <span class="mf">87.4</span><span class="p">,</span> <span class="mf">91.3</span><span class="p">,</span> <span class="mf">86.0</span><span class="p">,</span> <span class="mf">89.7</span><span class="p">,</span> <span class="mf">88.1</span><span class="p">,</span> <span class="mf">87.6</span><span class="p">])</span>
 </pre></div>
 </div>
+<p>The process specification requires a minimum yield of <strong>86.0%</strong>. Your job is to characterize this dataset statistically and assess process performance.</p>
 <p><strong>Tasks:</strong></p>
-<p>a) <strong>(3 pts)</strong> Calculate and print:</p>
+<p>a) <strong>(5 pts)</strong> Compute and print the following descriptive statistics. Use <code class="docutils literal notranslate"><span class="pre">np.std</span></code> with <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> for the sample standard deviation (Bessel’s correction).</p>
 <ul class="simple">
-<li><p>Mean temperature</p></li>
-<li><p>Maximum temperature and its position (index)</p></li>
-<li><p>Minimum temperature and its position (index)</p></li>
-<li><p>Temperature range (max - min)</p></li>
+<li><p>Sample mean <span class="math notranslate nohighlight">\(\bar{y}\)</span></p></li>
+<li><p>Sample standard deviation <span class="math notranslate nohighlight">\(s\)</span> (with <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>)</p></li>
+<li><p>Median</p></li>
+<li><p>10th, 25th, 75th, and 90th percentiles</p></li>
+</ul>
+<p>Recall that the <strong>sample</strong> standard deviation uses <span class="math notranslate nohighlight">\(n-1\)</span> in the denominator:
+$<span class="math notranslate nohighlight">\(s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(y_i - \bar{y})^2}\)</span>$
+This corrects for the fact that the sample mean is estimated from the same data, which underestimates the true spread.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">yields</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">87.3</span><span class="p">,</span> <span class="mf">89.1</span><span class="p">,</span> <span class="mf">85.6</span><span class="p">,</span> <span class="mf">90.2</span><span class="p">,</span> <span class="mf">86.8</span><span class="p">,</span> <span class="mf">88.4</span><span class="p">,</span> <span class="mf">91.0</span><span class="p">,</span> <span class="mf">84.9</span><span class="p">,</span> <span class="mf">87.7</span><span class="p">,</span> <span class="mf">89.5</span><span class="p">,</span>
+                   <span class="mf">86.2</span><span class="p">,</span> <span class="mf">90.8</span><span class="p">,</span> <span class="mf">85.1</span><span class="p">,</span> <span class="mf">88.9</span><span class="p">,</span> <span class="mf">87.4</span><span class="p">,</span> <span class="mf">91.3</span><span class="p">,</span> <span class="mf">86.0</span><span class="p">,</span> <span class="mf">89.7</span><span class="p">,</span> <span class="mf">88.1</span><span class="p">,</span> <span class="mf">87.6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) <strong>(5 pts)</strong> Plot a histogram of the yield data using <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code>. Overlay a vertical line at the spec limit (86.0%) and another at the sample mean. Use distinct colors and a legend. Label axes with units.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">spec</span> <span class="o">=</span> <span class="mf">86.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>c) <strong>(10 pts)</strong> Assume the yield follows a normal distribution with the sample mean <span class="math notranslate nohighlight">\(\bar{y}\)</span> and sample standard deviation <span class="math notranslate nohighlight">\(s\)</span> you computed in part (a). Use <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code> to answer the following two questions. Print each answer clearly.</p>
+<ul class="simple">
+<li><p>What is the probability that a randomly chosen batch yields <strong>less than 86.0%</strong>?</p></li>
+<li><p>Below what yield value do the <strong>bottom 5%</strong> of batches fall?</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -575,7 +503,12 @@ Pre-exponential factor: A = 3.4111e+13 s⁻¹
 </div>
 </div>
 </div>
-<p>b) <strong>(3 pts)</strong> Find all positions where the temperature exceeds 500 K using NumPy boolean indexing.</p>
+<p>d) <strong>(10 pts)</strong> You now have two estimates of the probability that a batch falls below spec:</p>
+<ul class="simple">
+<li><p><strong>Theoretical probability</strong> — from the fitted normal distribution in part (c)</p></li>
+<li><p><strong>Empirical probability</strong> — from directly counting how many of the 20 batches fell below 86.0%</p></li>
+</ul>
+<p>Compute both values and print them side by side. Then, in the markdown cell below, discuss: <em>Why do these two numbers differ? Which one should an engineer trust more with only 20 data points, and why? What would happen to the gap between them as the number of batches grows?</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
@@ -583,68 +516,116 @@ Pre-exponential factor: A = 3.4111e+13 s⁻¹
 </div>
 </div>
 </div>
-<p>c) <strong>(4 pts)</strong> Calculate the temperature gradient (temperature difference between consecutive positions):</p>
+<p><strong>Discussion:</strong></p>
+<p>Your solution here</p>
+</section>
+<hr class="docutils" />
+<section id="problem-2-20-points-random-sampling-and-probability-distributions">
+<h2>Problem 2 (20 points) – Random Sampling and Probability Distributions<a class="headerlink" href="#problem-2-20-points-random-sampling-and-probability-distributions" title="Link to this heading">#</a></h2>
+<p>A continuous stirred-tank reactor (CSTR) operates at a nominal residence time of <span class="math notranslate nohighlight">\(\tau = 30\)</span> min. Due to flow fluctuations, the actual residence time on any given run is <strong>normally distributed</strong> with mean <span class="math notranslate nohighlight">\(\mu_\tau = 30\)</span> min and standard deviation <span class="math notranslate nohighlight">\(\sigma_\tau = 3\)</span> min.</p>
+<p>The conversion of a first-order reaction in a CSTR is given by:
+$<span class="math notranslate nohighlight">\(X = \frac{k\tau}{1 + k\tau}\)</span>$</p>
+<p>where the rate constant is <span class="math notranslate nohighlight">\(k = 0.08 \text{ min}^{-1}\)</span> (assume constant, known exactly).</p>
+<p><strong>Tasks:</strong></p>
+<p>a) <strong>(5 pts)</strong> Using <code class="docutils literal notranslate"><span class="pre">np.random.default_rng(seed=42)</span></code>, generate <span class="math notranslate nohighlight">\(N = 10{,}000\)</span> samples of <span class="math notranslate nohighlight">\(\tau\)</span> from the normal distribution <span class="math notranslate nohighlight">\(\mathcal{N}(30, 3^2)\)</span>.</p>
+<ul class="simple">
+<li><p>Compute and print: mean, standard deviation, 5th percentile, and 95th percentile of the sampled <span class="math notranslate nohighlight">\(\tau\)</span> values.</p></li>
+<li><p>Verify that the sample mean and std are close to the true parameters (they should be within ~0.1 of <span class="math notranslate nohighlight">\(\mu_\tau\)</span> and <span class="math notranslate nohighlight">\(\sigma_\tau\)</span>).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.08</span>       <span class="c1"># min^-1</span>
+<span class="n">mu_tau</span> <span class="o">=</span> <span class="mi">30</span>    <span class="c1"># min</span>
+<span class="n">sig_tau</span> <span class="o">=</span> <span class="mi">3</span>    <span class="c1"># min</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10_000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) <strong>(10 pts)</strong> For each sampled <span class="math notranslate nohighlight">\(\tau\)</span>, compute the conversion <span class="math notranslate nohighlight">\(X = k\tau / (1 + k\tau)\)</span>.</p>
+<ul class="simple">
+<li><p>Plot a histogram of the conversion values <span class="math notranslate nohighlight">\(X\)</span> (use at least 40 bins, <code class="docutils literal notranslate"><span class="pre">density=True</span></code>).</p></li>
+<li><p>Overlay a vertical dashed line at the <strong>nominal conversion</strong> (conversion at <span class="math notranslate nohighlight">\(\tau = \mu_\tau = 30\)</span> min). Label it clearly.</p></li>
+<li><p>Label axes with units and include a title.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>c) <strong>(10 pts)</strong> Compute and print:</p>
+<ul class="simple">
+<li><p>Mean conversion <span class="math notranslate nohighlight">\(\bar{X}\)</span></p></li>
+<li><p>Standard deviation of conversion <span class="math notranslate nohighlight">\(s_X\)</span></p></li>
+<li><p>Fraction of runs with <span class="math notranslate nohighlight">\(X &lt; 0.70\)</span> (below an acceptable threshold)</p></li>
+</ul>
+<p>Then answer in the markdown cell below: <em>Is the mean conversion equal to the conversion at the mean residence time? If not, why not? (Hint: think about whether <span class="math notranslate nohighlight">\(X(\tau)\)</span> is a linear function of <span class="math notranslate nohighlight">\(\tau\)</span>.)</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Answer:</strong></p>
+<p>Your solution here</p>
+</section>
+<hr class="docutils" />
+<section id="problem-3-40-points-monte-carlo-simulation-reactor-product-purity">
+<h2>Problem 3 (40 points) – Monte Carlo Simulation: Reactor Product Purity<a class="headerlink" href="#problem-3-40-points-monte-carlo-simulation-reactor-product-purity" title="Link to this heading">#</a></h2>
+<p>A distillation column separates a binary mixture. The <strong>product purity</strong> <span class="math notranslate nohighlight">\(P\)</span> (mol% of the desired component in the distillate) depends on two operating variables that fluctuate from run to run:</p>
+<ul class="simple">
+<li><p><strong>Reflux ratio</strong> <span class="math notranslate nohighlight">\(R \sim \mathcal{N}(3.5,\; 0.3^2)\)</span> (dimensionless)</p></li>
+<li><p><strong>Feed temperature</strong> <span class="math notranslate nohighlight">\(T_F \sim \mathcal{N}(350,\; 10^2)\)</span> K</p></li>
+</ul>
+<p>The purity model is:</p>
 <div class="math notranslate nohighlight">
-\[
-   \frac{dT}{dx} \approx \frac{T_{i+1} - T_i}{\Delta x}
-   \]</div>
-<p>Print the gradient array and identify where the largest temperature drop occurs.</p>
-<p><strong>(Bous 5 pts)</strong> Use index slicing to compute the temperature gradient in a single line of code.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">temperatures</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">450</span><span class="p">,</span> <span class="mi">475</span><span class="p">,</span> <span class="mi">490</span><span class="p">,</span> <span class="mi">510</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">515</span><span class="p">,</span> <span class="mi">495</span><span class="p">,</span> <span class="mi">470</span><span class="p">])</span>
-<span class="n">gradient</span> <span class="o">=</span> <span class="n">temperatures</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">temperatures</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">gradient</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 25  15  20  15 -10 -20 -25]
-</pre></div>
-</div>
-</div>
-</div>
-<p>d) <strong>(5 pts)</strong> Normalize the temperature array to a 0-1 scale using:
-$<span class="math notranslate nohighlight">\(T_{norm} = \frac{T - T_{min}}{T_{max} - T_{min}}\)</span>$</p>
-<p>Print the normalized array and verify that the minimum value is 0 and maximum is 1.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="problem-2-15-points-concentration-matrix-operations">
-<h2>Problem 2 (15 points) – Concentration Matrix Operations<a class="headerlink" href="#problem-2-15-points-concentration-matrix-operations" title="Link to this heading">#</a></h2>
-<p>A 3×4 matrix contains concentration data (mol/L) from 3 experiments (rows) measured at 4 different times (columns):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">concentrations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-                          <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span>
-                          <span class="p">[</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]])</span>
-</pre></div>
-</div>
+\[P = 95 + 4\left(1 - e^{-0.5\,(R - 2)}\right) - 0.03\,(T_F - 340)\]</div>
+<p>The product specification requires <span class="math notranslate nohighlight">\(P \geq 97.0\)</span> mol%.</p>
+<p><strong>Your task:</strong> Use Monte Carlo simulation with <span class="math notranslate nohighlight">\(N = 100{,}000\)</span> samples to characterize the distribution of <span class="math notranslate nohighlight">\(P\)</span> and estimate the probability that a run fails to meet spec.</p>
 <p><strong>Tasks:</strong></p>
-<p>a) <strong>(3 pts)</strong> Use array slicing to extract:</p>
+<p>a) <strong>(5 pts)</strong> First evaluate the purity model at the <strong>mean values</strong> (<span class="math notranslate nohighlight">\(R = 3.5\)</span>, <span class="math notranslate nohighlight">\(T_F = 350\)</span> K). Print the result. Does plugging in the means predict that the process passes the spec?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) <strong>(15 pts)</strong> Run the Monte Carlo simulation:</p>
 <ul class="simple">
-<li><p>The concentration data from experiment 2 (second row)</p></li>
-<li><p>The concentration data at time point 3 (third column) for all experiments</p></li>
-<li><p>The 2×2 submatrix of experiments 1-2 at times 2-3</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">np.random.default_rng(seed=0)</span></code> to sample <span class="math notranslate nohighlight">\(N = 100{,}000\)</span> values of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(T_F\)</span> from their respective normal distributions.</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(P\)</span> for every sample.</p></li>
+<li><p>Print: mean purity, standard deviation, 5th percentile, and the <strong>failure rate</strong> (fraction of runs with <span class="math notranslate nohighlight">\(P &lt; 97.0\)</span> mol%).</p></li>
 </ul>
+<p>Format output clearly, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mean</span> <span class="n">purity</span><span class="p">:</span>       <span class="n">XX</span><span class="o">.</span><span class="n">XX</span> <span class="n">mol</span><span class="o">%</span>
+<span class="n">Std</span> <span class="n">dev</span><span class="p">:</span>            <span class="n">X</span><span class="o">.</span><span class="n">XX</span> <span class="n">mol</span><span class="o">%</span>
+<span class="mi">5</span><span class="n">th</span> <span class="n">percentile</span><span class="p">:</span>    <span class="n">XX</span><span class="o">.</span><span class="n">XX</span> <span class="n">mol</span><span class="o">%</span>
+<span class="n">Failure</span> <span class="n">rate</span><span class="p">:</span>       <span class="n">X</span><span class="o">.</span><span class="n">X</span><span class="o">%</span>
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100_000</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>b) <strong>(4 pts)</strong> Calculate and print:</p>
+<p>c) <strong>(10 pts)</strong> Create a figure with <strong>two subplots side by side</strong>:</p>
 <ul class="simple">
-<li><p>Mean concentration for each experiment (row-wise mean)</p></li>
-<li><p>Mean concentration at each time point (column-wise mean)</p></li>
-<li><p>Overall mean concentration</p></li>
+<li><p><strong>Left:</strong> Histogram of purity <span class="math notranslate nohighlight">\(P\)</span> (use <code class="docutils literal notranslate"><span class="pre">density=True</span></code>, at least 60 bins). Mark the spec limit at 97.0 mol% with a vertical dashed red line. Shade the failing region (below 97.0) in light red using <code class="docutils literal notranslate"><span class="pre">ax.axvspan</span></code>. Label axes.</p></li>
+<li><p><strong>Right:</strong> Scatter plot of a random subset of 2,000 points: <span class="math notranslate nohighlight">\(R\)</span> on the x-axis, <span class="math notranslate nohighlight">\(T_F\)</span> on the y-axis. Color points green if they pass the spec (<span class="math notranslate nohighlight">\(P \geq 97.0\)</span>) and red if they fail. Add a legend and axis labels.</p></li>
 </ul>
+<p><strong>Hint for scatter coloring:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">P_samples</span> <span class="o">&gt;=</span> <span class="mf">97.0</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">R_samples</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">T_samples</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
@@ -652,174 +633,48 @@ $<span class="math notranslate nohighlight">\(T_{norm} = \frac{T - T_{min}}{T_{m
 </div>
 </div>
 </div>
-<p>c) <strong>(4 pts)</strong> Compute the percent decay from the first to last time point for each experiment:
-$<span class="math notranslate nohighlight">\(\text{Decay} = \frac{C_0 - C_f}{C_0} \times 100\%\)</span><span class="math notranslate nohighlight">\(
-   where \)</span>C_0<span class="math notranslate nohighlight">\( is the concentration at time 0 (first column) and \)</span>C_f$ is at the final time (last column).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>d) <strong>(4 pts)</strong> Create a new matrix where all values are normalized by dividing each experiment’s row by its initial concentration (first column value). This shows the fractional remaining concentration.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>d) <strong>(10 pts)</strong> In 3–4 sentences, answer:</p>
+<ul class="simple">
+<li><p>Does “plugging in the mean values” give the same failure rate as the Monte Carlo simulation? Why or why not?</p></li>
+<li><p>Which operating variable (<span class="math notranslate nohighlight">\(R\)</span> or <span class="math notranslate nohighlight">\(T_F\)</span>) appears to have more influence on whether a run passes or fails? How can you tell from the scatter plot?</p></li>
+</ul>
+<p><strong>Answer:</strong></p>
+<p>Your solution here</p>
 </section>
 <hr class="docutils" />
-<section id="problem-3-12-points-material-balance-using-linear-algebra">
-<h2>Problem 3 (12 points) – Material Balance using Linear Algebra<a class="headerlink" href="#problem-3-12-points-material-balance-using-linear-algebra" title="Link to this heading">#</a></h2>
-<p>A mixing unit receives three feed streams and produces one outlet stream. The mass flow rates and compositions must satisfy material balances.</p>
-<p><strong>Given:</strong></p>
-<ul class="simple">
-<li><p>Stream 1: Flow rate F₁ (kg/h), composition: 50% A, 30% B, 20% C</p></li>
-<li><p>Stream 2: Flow rate F₂ (kg/h), composition: 20% A, 50% B, 30% C</p></li>
-<li><p>Stream 3: Flow rate F₃ (kg/h), composition: 30% A, 20% B, 50% C</p></li>
-</ul>
-<p><strong>Outlet specifications:</strong></p>
-<ul class="simple">
-<li><p>Total flow rate: 800 kg/h</p></li>
-<li><p>Component A: 320 kg/h</p></li>
-<li><p>Component B: 280 kg/h</p></li>
-</ul>
-<p><strong>Tasks:</strong></p>
-<p>a) <strong>(2 pts)</strong> Set up the system of linear equations in matrix form Ax = b where:</p>
-<ul class="simple">
-<li><p>x = [F₁, F₂, F₃]</p></li>
-<li><p>The equations represent: total mass balance, component A balance, component B balance</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>b) <strong>(5 pts)</strong> Solve for F₁, F₂, F₃ using <code class="docutils literal notranslate"><span class="pre">np.linalg.solve()</span></code></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>c) <strong>(5 pts)</strong> Verify that component C balance is satisfied (should equal 200 kg/h) and check that all flow rates are positive and physically meaningful</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="problem-4-12-points-melting-and-boiling-points-of-elements">
-<h2>Problem 4 (12 points) – Melting and Boiling Points of Elements<a class="headerlink" href="#problem-4-12-points-melting-and-boiling-points-of-elements" title="Link to this heading">#</a></h2>
-<p>The file “data_TmTb.csv” (where .csv stands for comma separated values) contains the values of the melting points (T_m) and boiling points (T_b) of the elements. Read these data using NumPy tools and create a scatter plot of these data (i.e., T_b vs T_m) coloring the markers differently for metals and non-metals (use two distinguishable colors).</p>
-<p>For this exercise, the nonmetallic elements may be taken from this list:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nonmetals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;Ne&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;Ar&#39;</span><span class="p">,</span>
-             <span class="s1">&#39;Se&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;Kr&#39;</span><span class="p">,</span> <span class="s1">&#39;Br&#39;</span><span class="p">,</span> <span class="s1">&#39;Xe&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;Rn&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Also, annotate the plot to indicate the position of the elements ‘C’ and ‘Br’, as well as the elements with greatest and smallest difference between their melting point and boiling point.</p>
-<p><strong>Tasks:</strong></p>
-<p>a) <strong>(2 pts)</strong> First, create the data file “data_TmTb.csv” with the following content (use the code cell below to create it):</p>
-<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>Element,Tm,Tb
-H,14.01,20.28
-He,0.95,4.22
-C,3823,4098
-N,63.15,77.36
-O,54.36,90.20
-F,53.53,85.03
-Ne,24.56,27.07
-P,317.3,553
-S,388.36,717.8
-Cl,171.6,239.11
-Ar,83.80,87.30
-Br,265.8,332.0
-Kr,115.79,119.93
-Xe,161.4,165.1
-I,386.85,457.4
-Rn,202,211.3
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here </span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>b) <strong>(4 pts)</strong> Read the CSV file using <code class="docutils literal notranslate"><span class="pre">np.genfromtxt()</span></code> with appropriate parameters:</p>
-<ul class="simple">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">delimiter=','</span></code></p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">skip_header=1</span></code> to skip the header row</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">dtype=None</span></code> and <code class="docutils literal notranslate"><span class="pre">encoding='utf-8'</span></code> to read mixed data types</p></li>
-<li><p>Extract element names, melting points, and boiling points into separate arrays</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here </span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>c) <strong>(6 pts)</strong> Create a scatter plot with T_m on x-axis (K) and T_b on y-axis (K). Please follow this:</p>
-<ul>
-<li><p>Metals in one color (e.g., blue) with label “Metals”</p></li>
-<li><p>Non-metals in another color (e.g., red) with label “Non-metals”</p></li>
-<li><p>Appropriate axis labels with units</p></li>
-<li><p>Title: “Melting vs. Boiling Points of Elements”</p></li>
-<li><p>Legend</p></li>
-<li><p>Grid for readability</p></li>
-<li><p>Add annotations to the plot for</p>
-<ul class="simple">
-<li><p>Element ‘C’ (Carbon)</p></li>
-<li><p>Element ‘Br’ (Bromine)</p></li>
-<li><p>Element with the greatest difference (T_b - T_m)</p></li>
-<li><p>Element with the smallest difference (T_b - T_m)</p></li>
-</ul>
-<p>Use <code class="docutils literal notranslate"><span class="pre">plt.annotate()</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.text()</span></code> to label these points.</p>
-</li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here </span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="problem-5-16-points-eigenvalues-and-eigenvectors">
-<h2>Problem 5 (16 points) – Eigenvalues and Eigenvectors<a class="headerlink" href="#problem-5-16-points-eigenvalues-and-eigenvectors" title="Link to this heading">#</a></h2>
-<p>Compute the eigenvalues and eigenvectors analytically for the following matrix A and then check the results using NumPy in Python:</p>
+<section id="bonus-problem-20-points-monte-carlo-simulation-ideal-gas-pressure">
+<h2>Bonus Problem (20 points) – Monte Carlo Simulation: Ideal Gas Pressure<a class="headerlink" href="#bonus-problem-20-points-monte-carlo-simulation-ideal-gas-pressure" title="Link to this heading">#</a></h2>
+<p>In an atomistic simulation, we can estimate the <strong>pressure</strong> of an ideal gas by thinking about how often molecules hit a wall. Each molecule has a velocity component <span class="math notranslate nohighlight">\(v_x\)</span> drawn from the <strong>Maxwell–Boltzmann distribution</strong>, which for one direction is just a normal distribution:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-A = \begin{bmatrix}
-3 &amp; 1 &amp; 2 \\
-2 &amp; 4 &amp; 3 \\
-1 &amp; 2 &amp; 5
-\end{bmatrix}
-\end{split}\]</div>
+\[v_x \sim \mathcal{N}\!\left(0,\; \frac{k_B T}{m}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_B = 1.38 \times 10^{-23}\)</span> J/K is Boltzmann’s constant, <span class="math notranslate nohighlight">\(T\)</span> is temperature, and <span class="math notranslate nohighlight">\(m\)</span> is the molecular mass.</p>
+<p>The pressure on a wall comes only from molecules moving <strong>toward</strong> it (<span class="math notranslate nohighlight">\(v_x &gt; 0\)</span>). Each such collision transfers momentum <span class="math notranslate nohighlight">\(2mv_x\)</span>, and the average pressure is:</p>
+<div class="math notranslate nohighlight">
+\[P = \frac{n}{V} \cdot m \cdot \langle v_x^2 \rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(n/V\)</span> is the number density. For an ideal gas this simplifies to the familiar <span class="math notranslate nohighlight">\(PV = Nk_BT\)</span>.</p>
+<p><strong>System:</strong> <span class="math notranslate nohighlight">\(N = 1000\)</span> molecules of N₂ (<span class="math notranslate nohighlight">\(m = 4.65 \times 10^{-26}\)</span> kg) in a box of volume <span class="math notranslate nohighlight">\(V = 1 \times 10^{-23}\)</span> m³ at <span class="math notranslate nohighlight">\(T = 300\)</span> K.</p>
 <p><strong>Tasks:</strong></p>
-<p>a) <strong>(8 pts)</strong> <strong>Analytical Solution:</strong> Compute the eigenvalues and eigenvectors by hand:</p>
-<ul class="simple">
-<li><p>Include your solution in a Markdown cell (you may insert an image or write the solution using Markdown).</p></li>
-<li><p><em>[Insert photo/scan of your analytical work here using markdown image syntax: <code class="docutils literal notranslate"><span class="pre">![Analytical</span> <span class="pre">Solution](path/to/image.jpg)</span></code> or attach separately to your submission]</em></p></li>
-</ul>
-<!-- Your solution here --><p>b) <strong>(8 pts)</strong> <strong>NumPy Verification:</strong> Use NumPy to compute the eigenvalues and eigenvectors:</p>
-<ul class="simple">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">np.linalg.eig()</span></code> to get eigenvalues and eigenvectors</p></li>
-<li><p>Print the eigenvalues</p></li>
-<li><p>Print the eigenvectors (each column is an eigenvector)</p></li>
-<li><p>Compare with your analytical solution</p></li>
-</ul>
+<p>a) <strong>(5 pts)</strong> Using <code class="docutils literal notranslate"><span class="pre">np.random.default_rng(seed=7)</span></code>, sample <span class="math notranslate nohighlight">\(v_x\)</span> for all <span class="math notranslate nohighlight">\(N = 1000\)</span> molecules from <span class="math notranslate nohighlight">\(\mathcal{N}(0,\; k_BT/m)\)</span>.</p>
+<p>Plot a histogram of <span class="math notranslate nohighlight">\(v_x\)</span> (use <code class="docutils literal notranslate"><span class="pre">density=True</span></code>). Label the x-axis with units (m/s) and add a title.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">kB</span> <span class="o">=</span> <span class="mf">1.38e-23</span>   <span class="c1"># J/K</span>
+<span class="n">T</span>  <span class="o">=</span> <span class="mf">300.0</span>      <span class="c1"># K</span>
+<span class="n">m</span>  <span class="o">=</span> <span class="mf">4.65e-26</span>   <span class="c1"># kg  (N2)</span>
+<span class="n">N</span>  <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">V</span>  <span class="o">=</span> <span class="mf">1e-23</span>      <span class="c1"># m^3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) <strong>(8 pts)</strong> Estimate the pressure using the MC formula:</p>
+<div class="math notranslate nohighlight">
+\[P_\text{MC} = \frac{N}{V} \cdot m \cdot \langle v_x^2 \rangle = \frac{N}{V} \cdot m \cdot \frac{1}{N}\sum_{i=1}^{N} v_{x,i}^2\]</div>
+<p>Also compute the exact ideal gas pressure:</p>
+<div class="math notranslate nohighlight">
+\[P_\text{exact} = \frac{N k_B T}{V}\]</div>
+<p>Print both values in Pascals and compute the relative error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
@@ -827,58 +682,56 @@ A = \begin{bmatrix}
 </div>
 </div>
 </div>
-</section>
-<hr class="docutils" />
-<section id="bouns-15-points-vector-operations-and-chemical-engineering-applications">
-<h2>Bouns (15 points) – Vector Operations and Chemical Engineering Applications<a class="headerlink" href="#bouns-15-points-vector-operations-and-chemical-engineering-applications" title="Link to this heading">#</a></h2>
-<p><strong>Part A: Velocity Vectors (7 pts)</strong></p>
-<p>Two fluid streams merge at a junction. Their velocity vectors are:</p>
-<ul class="simple">
-<li><p>Stream 1: v₁ = [3.0, 4.0, 2.0] m/s</p></li>
-<li><p>Stream 2: v₂ = [2.0, -1.0, 5.0] m/s</p></li>
-</ul>
-<p>a) <strong>(2 pts)</strong> Calculate the dot product v₁ · v₂. What does this tell you about the angle between the vectors?</p>
-<p>b) <strong>(2 pts)</strong> Calculate the cross product v₁ × v₂.</p>
-<p>c) <strong>(3 pts)</strong> Calculate the magnitude (Euclidean norm) of each velocity vector using:
-$<span class="math notranslate nohighlight">\(|\mathbf{v}| = \sqrt{v_x^2 + v_y^2 + v_z^2}\)</span>$
-Use <code class="docutils literal notranslate"><span class="pre">np.linalg.norm()</span></code> and verify by manual calculation.</p>
-<p><strong>Part B: Force Balance (8 pts)</strong></p>
-<p>Three forces act on a mixing impeller:</p>
-<ul class="simple">
-<li><p>F₁ = [150, 200, 100] N</p></li>
-<li><p>F₂ = [-80, 150, -50] N</p></li>
-<li><p>F₃ = [-70, -350, -50] N</p></li>
-</ul>
-<p>d) <strong>(4 pts)</strong> Calculate the resultant force F_total = F₁ + F₂ + F₃. Is the system in equilibrium (F_total ≈ 0)?</p>
-<p>e) <strong>(4 pts)</strong> Calculate the unit vector in the direction of F₁:
-$<span class="math notranslate nohighlight">\(\hat{\mathbf{F}}_1 = \frac{\mathbf{F}_1}{|\mathbf{F}_1|}\)</span>$
-Verify that its magnitude is 1.</p>
+<p>c) <strong>(7 pts)</strong> Repeat the pressure calculation for sample sizes <span class="math notranslate nohighlight">\(N = [10, 50, 100, 500, 1000, 5000]\)</span> using the same seed. Plot the relative error (%) vs. <span class="math notranslate nohighlight">\(N\)</span> on a log-scale x-axis.</p>
+<p>In 2 sentences below the plot, explain the trend: <em>why does the MC pressure estimate improve as <span class="math notranslate nohighlight">\(N\)</span> increases?</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<span class="n">N_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>Answer:</strong></p>
+<p>Your solution here</p>
 <hr class="docutils" />
 <p><strong>Point Distribution:</strong></p>
-<ul class="simple">
-<li><p>Problem 1: 15 pts</p></li>
-<li><p>Problem 2: 15 pts</p></li>
-<li><p>Problem 3: 12 pts</p></li>
-<li><p>Problem 4: 12 pts</p></li>
-<li><p>Problem 5: 16 pts</p></li>
-<li><p>Bonus: 15 pts</p></li>
-<li><p><strong>Total: 60 pts (+ 5 bonus)</strong></p></li>
-</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Sub-parts</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Problem 1 — Descriptive Statistics</p></td>
+<td><p>a) 5 + b) 5 + c) 10 + d) 10</p></td>
+<td><p><strong>30 pts</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Problem 2 — Random Sampling</p></td>
+<td><p>a) 5 + b) 10 + c) 10</p></td>
+<td><p><strong>25 pts</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Problem 3 — Monte Carlo: Purity</p></td>
+<td><p>a) 5 + b) 15 + c) 10 + d) 10</p></td>
+<td><p><strong>40 pts</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Bonus — Atomistic MC</p></td>
+<td><p>a) 5 + b) 8 + c) 7</p></td>
+<td><p><strong>20 pts</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total (without bonus)</strong></p></td>
+<td><p></p></td>
+<td><p><strong>95 pts</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Total (with bonus)</strong></p></td>
+<td><p></p></td>
+<td><p><strong>115 pts</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Good luck!</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 
@@ -928,13 +781,10 @@ Verify that its magnitude is 1.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-arrhenius-analysis-extracting-kinetic-parameters-from-data">Problem 1: Arrhenius Analysis — Extracting Kinetic Parameters from Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-15-points-temperature-profile-in-a-reactor">Problem 1 (15 points) – Temperature Profile in a Reactor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-15-points-concentration-matrix-operations">Problem 2 (15 points) – Concentration Matrix Operations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-12-points-material-balance-using-linear-algebra">Problem 3 (12 points) – Material Balance using Linear Algebra</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-12-points-melting-and-boiling-points-of-elements">Problem 4 (12 points) – Melting and Boiling Points of Elements</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-16-points-eigenvalues-and-eigenvectors">Problem 5 (16 points) – Eigenvalues and Eigenvectors</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bouns-15-points-vector-operations-and-chemical-engineering-applications">Bouns (15 points) – Vector Operations and Chemical Engineering Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-30-points-descriptive-statistics-batch-reactor-yield">Problem 1 (30 points) – Descriptive Statistics: Batch Reactor Yield</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-20-points-random-sampling-and-probability-distributions">Problem 2 (20 points) – Random Sampling and Probability Distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-40-points-monte-carlo-simulation-reactor-product-purity">Problem 3 (40 points) – Monte Carlo Simulation: Reactor Product Purity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-problem-20-points-monte-carlo-simulation-ideal-gas-pressure">Bonus Problem (20 points) – Monte Carlo Simulation: Ideal Gas Pressure</a></li>
 </ul>
   </nav></div>
 

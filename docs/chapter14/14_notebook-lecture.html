@@ -205,6 +205,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -752,7 +753,7 @@ $<span class="math notranslate nohighlight">\(
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># --- Step 2: Throw random darts ---</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">20_000</span>   <span class="c1"># number of darts (try changing this!)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>   <span class="c1"># number of darts (try changing this!)</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>   <span class="c1"># x-coordinates uniformly between 0 and 1</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>   <span class="c1"># y-coordinates uniformly between 0 and 1</span>
@@ -762,7 +763,7 @@ $<span class="math notranslate nohighlight">\(
 <span class="n">inside</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span>
 
 <span class="c1"># --- Step 4: Estimate π ---</span>
-<span class="n">pi_estimate</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+<span class="n">pi_estimate</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span> <span class="c1">#number of darts inside quarter-circle / total darts in square, multiplied by 4 because quarter-circle is 1/4 of full circle</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of darts: </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Darts inside quarter-circle: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -774,12 +775,12 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of darts: 20000
-Darts inside quarter-circle: 15709
-Fraction inside: 0.7854
-Estimated π = 4 × 0.7854 = 3.1418
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of darts: 1000
+Darts inside quarter-circle: 787
+Fraction inside: 0.7870
+Estimated π = 4 × 0.7870 = 3.1480
 True π      = 3.1416
-Error       = 0.0002
+Error       = 0.0064
 </pre></div>
 </div>
 </div>
@@ -827,7 +828,7 @@ Error       = 0.0002
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8a41fc76c1db196e128e827b68071449d80edeecf4e71598ff3b07bb3b280889.png" src="../../_images/8a41fc76c1db196e128e827b68071449d80edeecf4e71598ff3b07bb3b280889.png" />
+<img alt="../../_images/8adeb1d623e348f6b4b7fc5a3dd0f8728cf06fca8903f360ee303c1910dfffbe.png" src="../../_images/8adeb1d623e348f6b4b7fc5a3dd0f8728cf06fca8903f360ee303c1910dfffbe.png" />
 </div>
 </div>
 </section>

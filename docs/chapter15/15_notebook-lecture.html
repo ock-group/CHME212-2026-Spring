@@ -59,11 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter15/15_notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter15/15_notebook-lecture';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
-    <link rel="prev" title="Chapter 14: Monte Carlo Simulation" href="../chapter14/14_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,6 +123,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
@@ -205,7 +205,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -288,7 +288,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter15/15_notebook.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter15/15_notebook-lecture.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -318,7 +318,7 @@
       
       
       
-      <li><a href="../../_sources/docs/chapter15/15_notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/chapter15/15_notebook-lecture.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -735,7 +735,7 @@ $<span class="math notranslate nohighlight">\(f'(x_n) \approx \frac{f(x_n) - f(x
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
 
 <span class="c1"># Compute v = dx/dt at every point</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">__</span><span class="p">,</span> <span class="n">__</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t (s):&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;v (m/s):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -743,19 +743,15 @@ $<span class="math notranslate nohighlight">\(f'(x_n) \approx \frac{f(x_n) - f(x
 <span class="c1"># Which formula was used at each point?</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Formula used:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  v[0]  = (x[1]-x[0])/(t[1]-t[0])           = </span><span class="si">{</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  ← forward&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  v[2]  = (x[3]-x[1])/(t[3]-t[1])           = </span><span class="si">{</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  ← central&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  v[-1] = (x[-1]-x[-2])/(t[-1]-t[-2])       = </span><span class="si">{</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  ← backward&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t (s): [0.  0.5 1.  1.5 2. ]
-v (m/s): [2.4 2.1 1.5 0.9 0.6]
+v (m/s): []
 
 Formula used:
   v[0]  = (x[1]-x[0])/(t[1]-t[0])           = 2.4000  ← forward
-  v[2]  = (x[3]-x[1])/(t[3]-t[1])           = 1.5000  ← central
-  v[-1] = (x[-1]-x[-2])/(t[-1]-t[-2])       = 0.6000  ← backward
 </pre></div>
 </div>
 </div>
@@ -767,43 +763,32 @@ Formula used:
 <p>For a uniform grid with spacing <span class="math notranslate nohighlight">\(h\)</span>, the central difference error is proportional to <span class="math notranslate nohighlight">\(h^2 f'''(x)/6\)</span>. With 50 points over <span class="math notranslate nohighlight">\([0, 2\pi]\)</span>, <span class="math notranslate nohighlight">\(h \approx 0.13\)</span>, so we expect the max error to be on the order of <span class="math notranslate nohighlight">\(h^2 \approx 0.017\)</span> — consistent with what we observe below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">y_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_sin</span><span class="p">)</span>
 
 <span class="c1"># Numerical derivative</span>
-<span class="n">dy_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y_sin</span><span class="p">,</span> <span class="n">x_sin</span><span class="p">)</span>
+<span class="n">dy_num</span> <span class="o">=</span> <span class="n">___</span>
 
 <span class="c1"># Exact derivative</span>
-<span class="n">dy_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x_sin</span><span class="p">)</span>
+<span class="n">dy_exact</span> <span class="o">=</span> <span class="n">___</span>
 
 <span class="n">max_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dy_num</span> <span class="o">-</span> <span class="n">dy_exact</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max absolute error vs exact cos(x): </span><span class="si">{</span><span class="n">max_error</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_sin</span><span class="p">,</span> <span class="n">y_sin</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sin(x)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original function: sin(x)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_sin</span><span class="p">,</span> <span class="n">dy_exact</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span>  <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact: cos(x)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_sin</span><span class="p">,</span> <span class="n">dy_num</span><span class="p">,</span>   <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;np.gradient (50 pts)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f &#39;(x)&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Derivative: numerical vs exact&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max absolute error vs exact cos(x): 2.74e-03
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Exact derivative</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">dy_exact</span> <span class="o">=</span> <span class="n">___</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">max_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dy_num</span> <span class="o">-</span> <span class="n">dy_exact</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max absolute error vs exact cos(x): </span><span class="si">{</span><span class="n">max_error</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for -: &#39;str&#39; and &#39;str&#39;
 </pre></div>
 </div>
-<img alt="../../_images/e59b22ecd956aee7d0588e065f3b7b79e019eca3c455f9922f4fb4548e8b4eb0.png" src="../../_images/e59b22ecd956aee7d0588e065f3b7b79e019eca3c455f9922f4fb4548e8b4eb0.png" />
 </div>
 </div>
 </section>
@@ -820,43 +805,14 @@ $<span class="math notranslate nohighlight">\(r_A = -\frac{dC_A}{dt}\)</span>$</
 
 <span class="c1"># Reaction rate: r_A = -dC_A/dt</span>
 <span class="c1"># IMPORTANT: pass t as the second argument — spacing is 10 s, not 1</span>
-<span class="n">r_A</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">C_A</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">r_A</span> <span class="o">=</span> <span class="n">___</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;t (s)&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;C_A (mol/L)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;r_A (mol/L·s)&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">38</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;4.0f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">C_A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12.3f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">r_A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;14.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C_A</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$C_A$ (mol/L)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Concentration vs. time&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">r_A</span><span class="p">,</span> <span class="s1">&#39;s-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$r_A$ (mol/L·s)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reaction rate vs. time&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> t (s)   C_A (mol/L)   r_A (mol/L·s)
---------------------------------------
-     0         1.000         0.02200
-    10         0.780         0.01950
-    20         0.610         0.01500
-    30         0.480         0.01200
-    40         0.370         0.00950
-    50         0.290         0.00700
-    60         0.230         0.00600
-</pre></div>
-</div>
-<img alt="../../_images/04af5068c5c3fae41e41e6c9fc7de3482131bb079afab9a37a0f632eea5ecdbc.png" src="../../_images/04af5068c5c3fae41e41e6c9fc7de3482131bb079afab9a37a0f632eea5ecdbc.png" />
 </div>
 </div>
 </section>
@@ -867,9 +823,9 @@ $<span class="math notranslate nohighlight">\(r_A = -\frac{dC_A}{dt}\)</span>$</
 <h3>The mathematics: deriving the formula<a class="headerlink" href="#the-mathematics-deriving-the-formula" title="Link to this heading">#</a></h3>
 <p>The trapezoidal rule approximates the area under a curve by connecting adjacent data points with <strong>straight lines</strong> and summing the resulting trapezoid areas.</p>
 <p>For two adjacent points <span class="math notranslate nohighlight">\((x_i, f_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, f_{i+1})\)</span>, the area of the trapezoid is:
-$<span class="math notranslate nohighlight">\(A_i = (x_{i+1} - x_i)\bigl(\frac{f_i + f_{i+1}}{2}\bigr)\)</span>$</p>
+$<span class="math notranslate nohighlight">\(A_i = \frac{x_{i+1} - x_i}{2}\bigl(f_i + f_{i+1}\bigr)\)</span>$</p>
 <p>This is just the base times the average height. Summing over all <span class="math notranslate nohighlight">\(n-1\)</span> intervals:
-$<span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx \approx \sum_{i=0}^{n-2} (x_{i+1} - x_i)\bigl(\frac{f_i + f_{i+1}}{2}\bigr)\)</span>$</p>
+$<span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx \approx \sum_{i=0}^{n-2} \frac{x_{i+1} - x_i}{2}\bigl(f_i + f_{i+1}\bigr)\)</span>$</p>
 <p>For a <strong>uniform</strong> grid with spacing <span class="math notranslate nohighlight">\(h = (b-a)/(n-1)\)</span>, this simplifies to:
 $<span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx \approx h\left[\frac{f_0}{2} + f_1 + f_2 + \cdots + f_{n-2} + \frac{f_{n-1}}{2}\right]\)</span>$</p>
 <p>The endpoints are weighted by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> because each endpoint belongs to only one trapezoid, while interior points are shared between two.</p>
@@ -994,9 +950,6 @@ $<span class="math notranslate nohighlight">\(\text{Error} \approx -\frac{(b-a)^
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/d32076b38ffcb234af50e4fe731ccf2bc6310276c51af721d905fa20ed634332.png" src="../../_images/d32076b38ffcb234af50e4fe731ccf2bc6310276c51af721d905fa20ed634332.png" />
-</div>
 </div>
 </section>
 <section id="building-intuition-visualizing-trapezoids">
@@ -1008,44 +961,22 @@ $<span class="math notranslate nohighlight">\(\int_0^1 \frac{4}{1+x^2}\,dx = 4\a
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_pi</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">___</span>
 
 <span class="c1"># N-point trapezoidal approximation</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">___</span>
 <span class="n">x_trap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-<span class="n">y_trap</span> <span class="o">=</span> <span class="n">f_pi</span><span class="p">(</span><span class="n">x_trap</span><span class="p">)</span>
+<span class="n">y_trap</span> <span class="o">=</span> <span class="n">f_pi</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
 
-<span class="n">area_trap</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">y_trap</span><span class="p">,</span> <span class="n">x_trap</span><span class="p">)</span>
+<span class="n">area_trap</span> <span class="o">=</span> <span class="n">___</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">-point trapezoidal estimate: </span><span class="si">{</span><span class="n">area_trap</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True value (π):               </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error:                        </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">area_trap</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Visualize</span>
-<span class="n">x_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">f_pi</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 4/(1+x²)&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_trap</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">x_trap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x_trap</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span>
-                    <span class="p">[</span><span class="n">y_trap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_trap</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_trap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x_trap</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_trap</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_trap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x_trap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_trap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_trap</span><span class="p">,</span> <span class="n">y_trap</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data points&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Trapezoidal rule (</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1"> pts): estimate = </span><span class="si">{</span><span class="n">area_trap</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">,  π = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-point trapezoidal estimate: 3.131176
-True value (π):               3.141593
-Error:                        0.010416
-</pre></div>
-</div>
-<img alt="../../_images/ad71389a59fe2cff614ecc2dc9d792f9c624dba918d4d0be5e2c7b01e65f89b5.png" src="../../_images/ad71389a59fe2cff614ecc2dc9d792f9c624dba918d4d0be5e2c7b01e65f89b5.png" />
 </div>
 </div>
 </section>
@@ -1077,12 +1008,6 @@ $<span class="math notranslate nohighlight">\(\Delta H = \int_{400}^{1000} C_p(T
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ΔH = ∫Cp dT  =  22485.0 J/mol  =  22.485 kJ/mol
-</pre></div>
-</div>
-<img alt="../../_images/e98f79223857702fbbf36608524877ba38e86c0f2dc068351250cd4cc5ffdd24.png" src="../../_images/e98f79223857702fbbf36608524877ba38e86c0f2dc068351250cd4cc5ffdd24.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -1146,13 +1071,6 @@ $<span class="math notranslate nohighlight">\(\int_0^3 x^2\,dx = \left[\frac{x^3
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>∫₀³ x² dx  =  9.0000000000
-Exact answer:   9.0000000000
-Error estimate: 9.99e-14
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="the-motivation-problem-solved-delta-h-for-n2">
@@ -1204,15 +1122,6 @@ $<span class="math notranslate nohighlight">\(\Delta H = \int_{T_1}^{T_2} C_p(T)
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ΔH from 300 K to 1200 K:
-  quad          : 28103.3488 J/mol  (error bound: 7.51e-08)
-  trapezoid 10  : 28103.5655 J/mol  (error vs quad: 0.2167)
-  trapezoid 100 : 28103.3511 J/mol  (error vs quad: 0.002255)
-</pre></div>
-</div>
-<img alt="../../_images/aebcfc00f47cae0e2123fd22c30a07d73e704dd0f7a028b76e69eba224382f1b.png" src="../../_images/aebcfc00f47cae0e2123fd22c30a07d73e704dd0f7a028b76e69eba224382f1b.png" />
 </div>
 </div>
 </section>
@@ -1276,12 +1185,6 @@ $<span class="math notranslate nohighlight">\(F(x_0) = 0\)</span><span class="ma
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ΔH at T=1200 K: </span><span class="si">{</span><span class="n">dH_cumulative</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">T_range</span><span class="o">-</span><span class="mi">1200</span><span class="p">))]</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kJ/mol&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/5c67fa97f388f22eade1dee289b172967fbcf61d3bcf97f3662daf1185a84cdd.png" src="../../_images/5c67fa97f388f22eade1dee289b172967fbcf61d3bcf97f3662daf1185a84cdd.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ΔH at T=1200 K: 28.12 kJ/mol
 </pre></div>
 </div>
 </div>
@@ -1374,9 +1277,6 @@ $<span class="math notranslate nohighlight">\(\frac{1}{-r_A} = \frac{1}{k C_{A0}
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/eb876174cfb3d6157ff36d16d667b2081b997fe2972acb61e45dcc853cf09576.png" src="../../_images/eb876174cfb3d6157ff36d16d667b2081b997fe2972acb61e45dcc853cf09576.png" />
-</div>
 </div>
 </section>
 <section id="part-b-numerical-integration-with-quad">
@@ -1396,14 +1296,6 @@ $<span class="math notranslate nohighlight">\(V_\text{exact} = \frac{F_{A0}}{k C
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Numerical (quad): V = </span><span class="si">{</span><span class="n">V_numerical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> L&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Analytical:       V = </span><span class="si">{</span><span class="n">V_exact</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> L&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Relative error:   </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">V_numerical</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">V_exact</span><span class="p">)</span><span class="o">/</span><span class="n">V_exact</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PFR volume for X = 80% conversion:
-  Numerical (quad): V = 100.0000 L
-  Analytical:       V = 100.0000 L
-  Relative error:   0.00e+00
 </pre></div>
 </div>
 </div>
@@ -1432,9 +1324,6 @@ $<span class="math notranslate nohighlight">\(V(X) = F_{A0} \int_0^{X} \frac{dX'
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/7735dcb8448e660fbc0863446a1bead7bb8718f789e7d55b2c425849091bcf5e.png" src="../../_images/7735dcb8448e660fbc0863446a1bead7bb8718f789e7d55b2c425849091bcf5e.png" />
 </div>
 </div>
 </section>
@@ -1514,24 +1403,6 @@ $<span class="math notranslate nohighlight">\(V(X) = F_{A0} \int_0^{X} \frac{dX'
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../chapter14/14_notebook.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 14: Monte Carlo Simulation</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../lab01/01_lab.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
