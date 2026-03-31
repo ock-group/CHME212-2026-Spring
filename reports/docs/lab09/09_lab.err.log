@@ -17,23 +17,27 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ------------------
 import numpy as np
 
-rng = np.random.default_rng(seed=___)     # seed=10
+k, t = 0.5, 3.0
 
-samples = rng.normal(___, ___, ___)       # mu=500, sigma=20, N=1000
+rng = np.random.default_rng(___)
+C0  = rng.normal(___, ___, ___)
 
-print(f"Sample mean : {np.mean(samples):.2f}")
-print(f"Sample std  : {np.std(samples, ddof=1):.2f}")
-print(f"Fraction > 530 : {___:.4f}")      # np.mean(samples > 530)
+C_out = ___
+
+print(f"Mean C_out : {np.mean(C_out):.4f} mol/L")
+print(f"Std  C_out : {np.std(C_out, ddof=1):.4f} mol/L")
+print(f"Fraction below 0.25 mol/L : {np.mean(C_out < 0.25):.4f}")
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mTypeError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[4], line 3[0m
+Cell [0;32mIn[3], line 5[0m
 [1;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-[0;32m----> 3[0m rng [38;5;241m=[39m [43mnp[49m[38;5;241;43m.[39;49m[43mrandom[49m[38;5;241;43m.[39;49m[43mdefault_rng[49m[43m([49m[43mseed[49m[38;5;241;43m=[39;49m[43m___[49m[43m)[49m     [38;5;66;03m# seed=10[39;00m
-[1;32m      5[0m samples [38;5;241m=[39m rng[38;5;241m.[39mnormal(___, ___, ___)       [38;5;66;03m# mu=500, sigma=20, N=1000[39;00m
-[1;32m      7[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mSample mean : [39m[38;5;132;01m{[39;00mnp[38;5;241m.[39mmean(samples)[38;5;132;01m:[39;00m[38;5;124m.2f[39m[38;5;132;01m}[39;00m[38;5;124m"[39m)
+[1;32m      3[0m k, t [38;5;241m=[39m [38;5;241m0.5[39m, [38;5;241m3.0[39m
+[0;32m----> 5[0m rng [38;5;241m=[39m [43mnp[49m[38;5;241;43m.[39;49m[43mrandom[49m[38;5;241;43m.[39;49m[43mdefault_rng[49m[43m([49m[43m___[49m[43m)[49m
+[1;32m      6[0m C0  [38;5;241m=[39m rng[38;5;241m.[39mnormal(___, ___, ___)
+[1;32m      8[0m C_out [38;5;241m=[39m ___
 
 File [0;32mnumpy/random/_generator.pyx:4957[0m, in [0;36mnumpy.random._generator.default_rng[0;34m()[0m
 

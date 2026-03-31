@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 09 Lecture Script: Monte Carlo Simulation &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab09/09_lecture_script';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab09/09_lecture_script.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lab09/09_lecture_script.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 09 Lecture Script: Monte Carlo Simulation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-estimating-with-monte-carlo">Example 1: Estimating π with Monte Carlo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-process-reliability-propagating-input-uncertainty">Example 2: Process Reliability — Propagating Input Uncertainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-convergence-how-many-samples-are-enough">Example 3: Convergence — How Many Samples Are Enough?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up-exercises">Warm-Up Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-sample-and-characterize">Exercise 1 — Sample and characterize</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-single-uncertain-input-through-a-model">Exercise 2 — Single uncertain input through a model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-multiple-uncertain-inputs">Exercise 3 — Multiple uncertain inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-percentiles-and-visualization">Exercise 4 — Percentiles and visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-heat-exchanger-outlet-temperature-reliability">Problem 1: Heat Exchanger — Outlet Temperature Reliability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-batch-reactor-yield-operating-condition-optimization">Problem 2: Batch Reactor Yield — Operating Condition Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-09-lecture-script-monte-carlo-simulation">
+<h1>Lab 09 Lecture Script: Monte Carlo Simulation<a class="headerlink" href="#lab-09-lecture-script-monte-carlo-simulation" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Today’s lab is about <strong>Monte Carlo simulation</strong> — a technique for propagating uncertainty through a model by repeated random sampling. The core workflow is always the same:</p>
+<ol class="arabic simple">
+<li><p>Identify which inputs are uncertain and characterize their distributions</p></li>
+<li><p>Draw a large number of random samples from those distributions</p></li>
+<li><p>Run each sample through your model</p></li>
+<li><p>Analyze the output distribution to answer engineering questions (failure rates, percentiles, etc.)</p></li>
+</ol>
+<p>We’ll go through three instructor examples, then you’ll work through problems on your own.</p>
+</section>
+<hr class="docutils" />
+<section id="example-1-estimating-with-monte-carlo">
+<h2>Example 1: Estimating π with Monte Carlo<a class="headerlink" href="#example-1-estimating-with-monte-carlo" title="Link to this heading">#</a></h2>
+<p>This is the classic “dart-throwing” demonstration. The idea: randomly throw darts at a unit square. The fraction that land inside the quarter-circle of radius 1 is approximately π/4.</p>
+<p><strong>The geometry:</strong></p>
+<ul class="simple">
+<li><p>Square: x ∈ [0, 1], y ∈ [0, 1]</p></li>
+<li><p>Quarter-circle condition: x² + y² ≤ 1</p></li>
+</ul>
+<p>So if we throw N darts and count the ones inside the circle:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>π ≈ 4 × (number inside) / N
+</pre></div>
+</div>
+<p><strong>Walk through the code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">N</span>   <span class="o">=</span> <span class="mi">10_000</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">inside</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span>
+
+<span class="n">pi_est</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rng.random(N)</span></code> gives N uniform samples in [0, 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inside</span></code> is a boolean array — True where the dart landed in the circle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.sum(inside)</span></code> counts the True values</p></li>
+</ul>
+<p>With N = 10,000, you get about 3–4 decimal places of accuracy. The error shrinks as 1/√N — we’ll see this convergence idea again in Example 3.</p>
+<p><strong>Key takeaway:</strong> Monte Carlo is flexible. Geometry that would be hard to integrate analytically becomes trivial to simulate.</p>
+</section>
+<hr class="docutils" />
+<section id="example-2-process-reliability-propagating-input-uncertainty">
+<h2>Example 2: Process Reliability — Propagating Input Uncertainty<a class="headerlink" href="#example-2-process-reliability-propagating-input-uncertainty" title="Link to this heading">#</a></h2>
+<p>Now we apply Monte Carlo to a real engineering scenario. A reactor must produce product with <strong>purity ≥ 97.5%</strong>, but process conditions vary batch to batch:</p>
+<ul class="simple">
+<li><p>Residence time: τ ~ N(120, 12²) s</p></li>
+<li><p>Temperature: T ~ N(400, 8²) K</p></li>
+</ul>
+<p>The purity model is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Purity = 100 × (1 − 0.2 × exp(−k(T) × τ))
+k(T) = exp(−1550 / T)
+</pre></div>
+</div>
+<p><strong>The simulation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tau_mc</span> <span class="o">=</span> <span class="n">rng_mc</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">tau_mean</span><span class="p">,</span> <span class="n">tau_std</span><span class="p">,</span> <span class="n">N_mc</span><span class="p">)</span>   <span class="c1"># sample τ</span>
+<span class="n">T_mc</span>   <span class="o">=</span> <span class="n">rng_mc</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">T_mean</span><span class="p">,</span>   <span class="n">T_std</span><span class="p">,</span>   <span class="n">N_mc</span><span class="p">)</span>   <span class="c1"># sample T</span>
+<span class="n">pur_mc</span> <span class="o">=</span> <span class="n">purity_model</span><span class="p">(</span><span class="n">tau_mc</span><span class="p">,</span> <span class="n">T_mc</span><span class="p">)</span>                <span class="c1"># vectorized model call</span>
+</pre></div>
+</div>
+<p>Notice: we call <code class="docutils literal notranslate"><span class="pre">purity_model</span></code> <strong>once</strong> on the entire array. NumPy handles all 50,000 evaluations simultaneously — no explicit loop needed.</p>
+<p><strong>Reading the results:</strong></p>
+<ul class="simple">
+<li><p>Mean purity tells you where the distribution is centered</p></li>
+<li><p>Std tells you how spread out it is</p></li>
+<li><p>Failure rate = fraction of batches below the spec limit</p></li>
+</ul>
+<p><strong>The histogram</strong> shows the full output distribution. The spec line (red dashed) lets you visually see how much of the distribution falls below the threshold.</p>
+<p><strong>Key takeaway:</strong> Monte Carlo turns “how often does my process fail?” into a counting problem. Sample → evaluate → count.</p>
+</section>
+<hr class="docutils" />
+<section id="example-3-convergence-how-many-samples-are-enough">
+<h2>Example 3: Convergence — How Many Samples Are Enough?<a class="headerlink" href="#example-3-convergence-how-many-samples-are-enough" title="Link to this heading">#</a></h2>
+<p>A natural question: how large does N need to be? The answer depends on what you’re estimating.</p>
+<ul class="simple">
+<li><p>For the <strong>mean</strong>, you converge quickly (a few thousand samples is often enough)</p></li>
+<li><p>For <strong>tail probabilities</strong> (rare failures), you need many more — if the true failure rate is 0.1%, you need at least ~10,000 samples just to see a handful of failures</p></li>
+</ul>
+<p><strong>The running failure rate plot</strong> shows this directly. Track the cumulative failure estimate as more batches are added:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">running_fail</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pur_cv</span> <span class="o">&lt;</span> <span class="n">spec</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N_total</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(pur_cv</span> <span class="pre">&lt;</span> <span class="pre">spec)</span></code> → boolean array of failures</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.cumsum(...)</span></code> → cumulative count of failures at each step</p></li>
+<li><p>Dividing by the number of samples so far gives the running fraction</p></li>
+</ul>
+<p>We plot this on a <strong>log scale</strong> for the x-axis (<code class="docutils literal notranslate"><span class="pre">ax.semilogx</span></code>) so you can see the early noisy behavior and the later convergence in the same figure.</p>
+<p><strong>Rule of thumb:</strong> To estimate a failure rate of p% with reasonable precision, you want at least 10/p samples. For a 1% failure rate, that’s at least ~1,000. For 0.01%, you need ~100,000.</p>
+</section>
+<hr class="docutils" />
+<section id="warm-up-exercises">
+<h2>Warm-Up Exercises<a class="headerlink" href="#warm-up-exercises" title="Link to this heading">#</a></h2>
+<p>Before the main problems, four quick exercises to build familiarity with the building blocks.</p>
+<section id="exercise-1-sample-and-characterize">
+<h3>Exercise 1 — Sample and characterize<a class="headerlink" href="#exercise-1-sample-and-characterize" title="Link to this heading">#</a></h3>
+<p>Draw 1,000 samples from N(500, 20²) and compute the sample mean, std, and fraction exceeding 530.</p>
+<p>The sample mean (~498.6) and std (~19.9) won’t match the true parameters exactly — that’s sampling variability. With larger N they’d get closer.</p>
+</section>
+<section id="exercise-2-single-uncertain-input-through-a-model">
+<h3>Exercise 2 — Single uncertain input through a model<a class="headerlink" href="#exercise-2-single-uncertain-input-through-a-model" title="Link to this heading">#</a></h3>
+<p>C₀ ~ N(2.0, 0.1²) mol/L goes through a first-order reactor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>C_out = C0 × exp(−k × t)
+</pre></div>
+</div>
+<p>With k = 0.5 min⁻¹ and t = 3 min fixed. Notice that the mean of C_out is close to C₀_mean × exp(−k×t) = 2.0 × e^(−1.5) ≈ 0.446 mol/L. The small std (0.022) reflects the ×exp(−1.5) scaling of the C₀ uncertainty.</p>
+</section>
+<section id="exercise-3-multiple-uncertain-inputs">
+<h3>Exercise 3 — Multiple uncertain inputs<a class="headerlink" href="#exercise-3-multiple-uncertain-inputs" title="Link to this heading">#</a></h3>
+<p>Now k and t are also uncertain. When you add uncertainty in both k and t:</p>
+<ul class="simple">
+<li><p>The mean barely changes (0.453 vs 0.447)</p></li>
+<li><p>The <strong>std increases significantly</strong> (0.082 vs 0.022) — more uncertainty sources → wider output distribution</p></li>
+<li><p>A small but nonzero fraction falls below 0.25 mol/L</p></li>
+</ul>
+<p>This illustrates why it matters to identify <strong>all</strong> major uncertainty sources.</p>
+</section>
+<section id="exercise-4-percentiles-and-visualization">
+<h3>Exercise 4 — Percentiles and visualization<a class="headerlink" href="#exercise-4-percentiles-and-visualization" title="Link to this heading">#</a></h3>
+<p>From the Exercise 3 distribution, compute the 5th and 95th percentiles:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p5</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">C_out2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">p95</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">C_out2</span><span class="p">,</span> <span class="mi">95</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The 5th percentile is the value below which 5% of batches fall — a useful way to characterize worst-case scenarios without focusing on the extreme tail.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="practice-problems">
+<h2>Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<section id="problem-1-heat-exchanger-outlet-temperature-reliability">
+<h3>Problem 1: Heat Exchanger — Outlet Temperature Reliability<a class="headerlink" href="#problem-1-heat-exchanger-outlet-temperature-reliability" title="Link to this heading">#</a></h3>
+<p>The model is the “effectiveness” formulation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>T_out = T_in + η × (T_hot − T_in)
+</pre></div>
+</div>
+<p>Three uncertain inputs: T_in ~ N(25, 3²), T_hot ~ N(120, 5²), η ~ N(0.75, 0.04²). Spec: T_out ≥ 80°C.</p>
+<p><strong>(a)</strong> Run 50,000 samples and compute statistics.</p>
+<p>Results: Mean ≈ 96.3°C, Std ≈ 5.4°C, Failure rate ≈ 0.08%. The process is well above spec on average — but not zero failures.</p>
+<p><strong>(b)</strong> Histogram with spec line.</p>
+<p>Look at where the spec line sits relative to the distribution bulk. Even a small tail can represent thousands of failed batches per year if you run many batches.</p>
+<p><strong>(c) Sensitivity analysis — one-at-a-time (OAT)</strong></p>
+<p>To find the most influential input, hold two at their mean values and vary only one:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T_out_Tin</span>  <span class="o">=</span> <span class="n">T_out_model</span><span class="p">(</span><span class="n">T_in_s</span><span class="p">,</span>  <span class="mi">120</span><span class="p">,</span>     <span class="mf">0.75</span><span class="p">)</span>   <span class="c1"># only T_in varies</span>
+<span class="n">T_out_Thot</span> <span class="o">=</span> <span class="n">T_out_model</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span>      <span class="n">T_hot_s</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>   <span class="c1"># only T_hot varies</span>
+<span class="n">T_out_eta</span>  <span class="o">=</span> <span class="n">T_out_model</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span>      <span class="mi">120</span><span class="p">,</span>     <span class="n">eta_s</span><span class="p">)</span>   <span class="c1"># only eta varies</span>
+</pre></div>
+</div>
+<p>Results:</p>
+<ul class="simple">
+<li><p>σ(T_out | only T_in varies)  ≈ 0.75°C</p></li>
+<li><p>σ(T_out | only T_hot varies) ≈ 3.73°C</p></li>
+<li><p>σ(T_out | only η varies)     ≈ 3.81°C</p></li>
+</ul>
+<p><strong>Conclusion:</strong> η (effectiveness) is the most influential input. If you want to reduce output variability, improving consistency of the heat exchanger effectiveness will have the most impact — not tighter control of inlet temperatures.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-2-batch-reactor-yield-operating-condition-optimization">
+<h3>Problem 2: Batch Reactor Yield — Operating Condition Optimization<a class="headerlink" href="#problem-2-batch-reactor-yield-operating-condition-optimization" title="Link to this heading">#</a></h3>
+<p>The Arrhenius-based model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>k(T) = A × exp(−Ea/R / T)
+Y    = 100 × (1 − exp(−k × τ))
+</pre></div>
+</div>
+<p>With A = 2×10⁶ min⁻¹, Ea/R = 6000 K. Baseline: τ ~ N(30, 3²) min, T ~ N(370, 10²) K. Spec: Y ≥ 85%.</p>
+<p><strong>(a)</strong> Baseline simulation.</p>
+<p>Mean yield ≈ 98.2%, Std ≈ 3.5%, Failure rate ≈ 1.56%. Despite a high mean, the wide temperature distribution causes a non-trivial failure rate.</p>
+<p><strong>(b)</strong> Raise mean temperature to 380 K.</p>
+<p>Failure rate drops to 0.09% — a reduction of 1.47 percentage points. Higher temperature → faster reaction → higher yield on average.</p>
+<p><strong>(c)</strong> Tighten temperature control: σ_T = 5 K (mean stays at 370 K).</p>
+<p>Failure rate drops to 0.00% (with 50,000 samples, no failures observed). This is <strong>more effective</strong> than raising the mean temperature.</p>
+<p><strong>Why?</strong> The yield curve is nonlinear and the distribution is already centered well above the spec. The problem isn’t the mean — it’s the spread. Tightening σ_T cuts off the low-yield tail without needing to push the average higher.</p>
+<p>This is a general lesson: <strong>sometimes reducing variability is more effective than shifting the mean</strong>.</p>
+<p><strong>(d)</strong> Overlaid histograms.</p>
+<p>Plot all three scenarios together with the spec line. You can visually confirm:</p>
+<ul class="simple">
+<li><p>Baseline: leftmost, most spread out, visibly overlapping with the spec</p></li>
+<li><p>Higher T: shifted right but same width</p></li>
+<li><p>Tighter control: narrower, even if centered the same as baseline</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="key-takeaways">
+<h2>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>The MC workflow is always the same:</strong> sample inputs → evaluate model → analyze output distribution</p></li>
+<li><p><strong>Vectorize:</strong> pass the full sample array through your model at once — no loops</p></li>
+<li><p><strong>More samples = more accurate estimates</strong>, especially for rare events. Error scales as 1/√N</p></li>
+<li><p><strong>Percentiles and failure rates</strong> translate the output distribution into engineering decisions</p></li>
+<li><p><strong>Sensitivity analysis</strong> (OAT) identifies which inputs drive output variability — guide where to focus improvement effort</p></li>
+<li><p><strong>Reducing variance can be more effective than shifting the mean</strong> when your process is already well-centered above spec</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lab09"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-estimating-with-monte-carlo">Example 1: Estimating π with Monte Carlo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-process-reliability-propagating-input-uncertainty">Example 2: Process Reliability — Propagating Input Uncertainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-convergence-how-many-samples-are-enough">Example 3: Convergence — How Many Samples Are Enough?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up-exercises">Warm-Up Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-sample-and-characterize">Exercise 1 — Sample and characterize</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-single-uncertain-input-through-a-model">Exercise 2 — Single uncertain input through a model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-multiple-uncertain-inputs">Exercise 3 — Multiple uncertain inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-percentiles-and-visualization">Exercise 4 — Percentiles and visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-heat-exchanger-outlet-temperature-reliability">Problem 1: Heat Exchanger — Outlet Temperature Reliability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-batch-reactor-yield-operating-condition-optimization">Problem 2: Batch Reactor Yield — Operating Condition Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
