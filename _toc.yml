@@ -44,3 +44,4 @@ parts:
       - file: docs/lab06/06_lab
       - file: docs/lab07/07_lab
       - file: docs/lab08/08_lab
+      - file: docs/lab09/09_lab
