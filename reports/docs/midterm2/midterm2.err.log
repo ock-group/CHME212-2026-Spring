@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 1323, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+from scipy.integrate import trapezoid, quad
+
+T_data  = np.array([400,  500,  600,  700,  800,  900, 1000])  # K
+Cp_data = np.array([34.3, 35.2, 36.3, 37.5, 38.6, 39.7, 40.8])  # J/mol·K
+
+# Task 1 — trapezoidal integration on tabulated data
+dH_trap = TODO          # 
+print(f"Task 1  ΔH (trapezoid) = {dH_trap:.3f} J/mol")
+
+# Task 2 — integrate the fitted polynomial with quad
+coeffs = np.polyfit(TODO)  # linear fit with "1st" degree polynomial
+
+def Cp_fit(T):
+    return TODO         # use coeffs from polyfit to compute Cp at temperature T (a.k.a. evaluate the polynomial at T)
+
+dH_quad, _ = TODO      # integrate Cp_fit from 400 to 1000 K 
+print(f"\nTask 2  ΔH (quad fit)  = {dH_quad:.3f} J/mol")
+print(f"        Difference     = {abs(dH_trap - dH_quad):.4f} J/mol")
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[3], line 8[0m
+[1;32m      5[0m Cp_data [38;5;241m=[39m np[38;5;241m.[39marray([[38;5;241m34.3[39m, [38;5;241m35.2[39m, [38;5;241m36.3[39m, [38;5;241m37.5[39m, [38;5;241m38.6[39m, [38;5;241m39.7[39m, [38;5;241m40.8[39m])  [38;5;66;03m# J/mol·K[39;00m
+[1;32m      7[0m [38;5;66;03m# Task 1 — trapezoidal integration on tabulated data[39;00m
+[0;32m----> 8[0m dH_trap [38;5;241m=[39m [43mTODO[49m          [38;5;66;03m# [39;00m
+[1;32m      9[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mTask 1  ΔH (trapezoid) = [39m[38;5;132;01m{[39;00mdH_trap[38;5;132;01m:[39;00m[38;5;124m.3f[39m[38;5;132;01m}[39;00m[38;5;124m J/mol[39m[38;5;124m"[39m)
+[1;32m     11[0m [38;5;66;03m# Task 2 — integrate the fitted polynomial with quad[39;00m
+
+[0;31mNameError[0m: name 'TODO' is not defined
+

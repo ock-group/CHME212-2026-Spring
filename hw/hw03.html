@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -199,6 +199,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -208,6 +216,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
 </ul>
 
     </div>
@@ -619,10 +630,11 @@ PV = nRT
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
 
-<span class="c1"># Universal gas constant</span>
-<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute temperature using the ideal gas law: T = PV / (nR)&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">P</span> <span class="o">*</span> <span class="n">V</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -632,9 +644,13 @@ PV = nRT
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
 
-<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute temperature using the van der Waals equation:</span>
+<span class="sd">    T = (P + a*n^2/V^2) * (V - n*b) / (n*R)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">P</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -651,9 +667,29 @@ PV = nRT
 <p>Briefly comment on whether the ideal gas approximation is reasonable under these conditions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
 
-<span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
+<span class="c1"># System parameters</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mi">100</span>   <span class="c1"># atm</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">8.0</span>   <span class="c1"># L</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>    <span class="c1"># mol</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.211</span> <span class="c1"># L²·atm/mol²  (neon)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0171</span>  <span class="c1"># L/mol       (neon)</span>
+
+<span class="n">T_ideal</span>     <span class="o">=</span> <span class="n">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">T_corrected</span> <span class="o">=</span> <span class="n">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">pct_diff</span>    <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">T_ideal</span> <span class="o">-</span> <span class="n">T_corrected</span><span class="p">)</span> <span class="o">/</span> <span class="n">T_corrected</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ideal gas temperature:     </span><span class="si">{</span><span class="n">T_ideal</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Corrected gas temperature: </span><span class="si">{</span><span class="n">T_corrected</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Percent difference:        </span><span class="si">{</span><span class="n">pct_diff</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ideal gas temperature:     649.9547 K
+Corrected gas temperature: 633.7823 K
+Percent difference:        2.5517 %
 </pre></div>
 </div>
 </div>
@@ -672,7 +708,61 @@ PV = nRT
 <p>Print the results for each pressure.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="mf">0.082057</span>  <span class="c1"># L·atm/(mol·K)</span>
+
+<span class="n">V</span> <span class="o">=</span> <span class="mf">8.0</span>    <span class="c1"># L</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>     <span class="c1"># mol</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.211</span>  <span class="c1"># L²·atm/mol²</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0171</span> <span class="c1"># L/mol</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;P (atm)&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;T_ideal (K)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;T_corrected (K)&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;% Diff&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">52</span><span class="p">)</span>
+
+<span class="n">threshold_found</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span>
+    <span class="n">T_ideal</span>     <span class="o">=</span> <span class="n">ideal_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">T_corrected</span> <span class="o">=</span> <span class="n">corrected_gas_temperature</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">pct_diff</span>    <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">T_ideal</span> <span class="o">-</span> <span class="n">T_corrected</span><span class="p">)</span> <span class="o">/</span> <span class="n">T_corrected</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">P</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">T_ideal</span><span class="si">:</span><span class="s2">&gt;12.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">T_corrected</span><span class="si">:</span><span class="s2">&gt;16.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">pct_diff</span><span class="si">:</span><span class="s2">&gt;8.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">threshold_found</span> <span class="ow">and</span> <span class="n">pct_diff</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="n">threshold_found</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">threshold_P</span> <span class="o">=</span> <span class="n">P</span>
+
+<span class="k">if</span> <span class="n">threshold_found</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Percent difference drops below 1% at P = </span><span class="si">{</span><span class="n">threshold_P</span><span class="si">}</span><span class="s2"> atm&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Percent difference does not drop below 1</span><span class="si">% i</span><span class="s2">n the range 10-200 atm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> P (atm)   T_ideal (K)   T_corrected (K)    % Diff
+----------------------------------------------------
+      10       64.9955           67.5783    3.8220
+      20      129.9909          130.4899    0.3823
+      30      194.9864          193.4014    0.8195
+      40      259.9819          256.3130    1.4314
+      50      324.9774          319.2245    1.8021
+      60      389.9728          382.1361    2.0508
+      70      454.9683          445.0476    2.2291
+      80      519.9638          507.9592    2.3633
+      90      584.9592          570.8707    2.4679
+     100      649.9547          633.7823    2.5517
+     110      714.9502          696.6938    2.6204
+     120      779.9456          759.6054    2.6777
+     130      844.9411          822.5170    2.7263
+     140      909.9366          885.4285    2.7679
+     150      974.9321          948.3401    2.8041
+     160     1039.9275         1011.2516    2.8357
+     170     1104.9230         1074.1632    2.8636
+     180     1169.9185         1137.0747    2.8884
+     190     1234.9139         1199.9863    2.9107
+     200     1299.9094         1262.8978    2.9307
+
+Percent difference drops below 1% at P = 20 atm
 </pre></div>
 </div>
 </div>
@@ -724,7 +814,32 @@ c_A(t) = \frac{c_0}{1 + c_0 k_2 t}
 <p>Each function should return the concentration <span class="math notranslate nohighlight">\(c_A(t)\)</span> using the appropriate analytical expression.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">c0</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># initial concentration [mol/L]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">first_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return concentration at time t for first-order kinetics: c(t) = c0 * exp(-k*t)&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">c0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">second_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return concentration at time t for second-order kinetics: c(t) = c0 / (1 + c0*k*t)&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">c0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">c0</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">c_first_order</span> <span class="o">=</span> <span class="n">first_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="n">c_second_order</span> <span class="o">=</span> <span class="n">second_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First-order concentration at t=</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> s: </span><span class="si">{</span><span class="n">c_first_order</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Second-order concentration at t=</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> s: </span><span class="si">{</span><span class="n">c_second_order</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2"> mol/L&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First-order concentration at t=5 s: 0.6065 mol/L
+Second-order concentration at t=5 s: 0.6667 mol/L
 </pre></div>
 </div>
 </div>
@@ -741,7 +856,34 @@ c_A(t) = \frac{c_0}{1 + c_0 k_2 t}
 <p>Print the first 10 values to verify your results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k1</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># first-order rate constant [1/s]</span>
+<span class="n">k2</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># second-order rate constant [L/(mol·s)]</span>
+<span class="n">n_points</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">t_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_points</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">)]</span>  <span class="c1"># 0 to 10, 100 points</span>
+
+<span class="n">c1_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">first_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k1</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_values</span><span class="p">]</span>
+<span class="n">c2_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">second_order_concentration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k2</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_values</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Time (s)&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;1st-Order (mol/L)&#39;</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;2nd-Order (mol/L)&#39;</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">t_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">c1_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;20.6f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">c2_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;20.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Time (s)     1st-Order (mol/L)     2nd-Order (mol/L)
+-------------------------------------------------------
+    0.0000              1.000000              1.000000
+    0.1010              0.950749              0.951923
+    0.2020              0.903924              0.908257
+    0.3030              0.859405              0.868421
+    0.4040              0.817078              0.831933
+    0.5051              0.776837              0.798387
+    0.6061              0.738577              0.767442
+    0.7071              0.702201              0.738806
+    0.8081              0.667617              0.712230
+    0.9091              0.634736              0.687500
 </pre></div>
 </div>
 </div>

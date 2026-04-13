@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -199,6 +199,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -208,6 +216,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
 </ul>
 
     </div>
@@ -1714,6 +1725,62 @@ Average Temperatures:
 
 Phase Transition Points:
   Locations at transition: [3, 4]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+<span class="n">solid_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">liquid_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">gas_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">solid_temperature_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">liquid_temperature_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">gas_temperature_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> -&gt; Phase: Solid&quot;</span><span class="p">)</span>
+        <span class="n">solid_count</span> <span class="o">=</span> <span class="n">solid_count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">solid_temperature_sum</span> <span class="o">=</span> <span class="n">solid_temperature_sum</span> <span class="o">+</span> <span class="n">t</span>
+    <span class="k">elif</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> -&gt; Phase: Liquid&quot;</span><span class="p">)</span>
+        <span class="n">liquid_count</span> <span class="o">=</span> <span class="n">liquid_count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">liquid_temperature_sum</span> <span class="o">=</span> <span class="n">liquid_temperature_sum</span> <span class="o">+</span> <span class="n">t</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> is a phase transition point&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> -&gt; Phase: Gas&quot;</span><span class="p">)</span>
+        <span class="n">gas_count</span> <span class="o">=</span> <span class="n">gas_count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">gas_temperature_sum</span> <span class="o">=</span> <span class="n">gas_temperature_sum</span> <span class="o">+</span> <span class="n">t</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> is a phase transition point&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of locations in solid phase: </span><span class="si">{</span><span class="n">solid_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of locations in liquid phase: </span><span class="si">{</span><span class="n">liquid_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of locations in gas phase: </span><span class="si">{</span><span class="n">gas_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average temperature of the solid phase: </span><span class="si">{</span><span class="n">solid_temperature_sum</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperature 1: -15 -&gt; Phase: Solid
+Temperature 2: 25 -&gt; Phase: Liquid
+Temperature 3: 100 -&gt; Phase: Gas
+Temperature 3 is a phase transition point
+Temperature 4: 0 -&gt; Phase: Liquid
+Temperature 4 is a phase transition point
+Temperature 5: 150 -&gt; Phase: Gas
+Temperature 6: 37 -&gt; Phase: Liquid
+Temperature 7: -40 -&gt; Phase: Solid
+Temperature 8: 85 -&gt; Phase: Liquid
+Temperature 9: 105 -&gt; Phase: Gas
+Temperature 10: 50 -&gt; Phase: Liquid
+Number of locations in solid phase: 2
+Number of locations in liquid phase: 5
+Number of locations in gas phase: 3
+Average temperature of the solid phase: -55
 </pre></div>
 </div>
 </div>

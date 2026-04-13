@@ -1,0 +1,763 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Midterm 2 Practice:Multiple Choice Practice Problems &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/midterm2-practice/mid2-multiple-choice';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/midterm2-practice/mid2-multiple-choice.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/midterm2-practice/mid2-multiple-choice.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Midterm 2 Practice:Multiple Choice Practice Problems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-1-min">Question 1 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-1-min">Question 2 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-1-min">Question 3 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-1-min">Question 4 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-1-min">Question 5 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-1-min">Question 6 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-1-min">Question 7 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-1-min">Question 8 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-1-min">Question 9 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-1-min">Question 10 — ⏱ ~1 min</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="midterm-2-practice-multiple-choice-practice-problems">
+<h1>Midterm 2 Practice:Multiple Choice Practice Problems<a class="headerlink" href="#midterm-2-practice-multiple-choice-practice-problems" title="Link to this heading">#</a></h1>
+<p>These problems test key concepts from Chapters 7–15. Select the best answer for each question.</p>
+<hr class="docutils" />
+<section id="question-1-1-min">
+<h2>Question 1 — ⏱ ~1 min<a class="headerlink" href="#question-1-1-min" title="Link to this heading">#</a></h2>
+<p>Consider the following function definition:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">arrhenius</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">Ea</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mf">8.314</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>What is the return value of <code class="docutils literal notranslate"><span class="pre">arrhenius(500)</span></code> compared to <code class="docutils literal notranslate"><span class="pre">arrhenius(500,</span> <span class="pre">A=2.0)</span></code>?</p>
+<p><strong>(A)</strong> They return the same value because <code class="docutils literal notranslate"><span class="pre">A</span></code> does not affect the exponential term.<br />
+<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">arrhenius(500,</span> <span class="pre">A=2.0)</span></code> returns exactly twice the value of <code class="docutils literal notranslate"><span class="pre">arrhenius(500)</span></code>.<br />
+<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">arrhenius(500,</span> <span class="pre">A=2.0)</span></code> returns four times the value of <code class="docutils literal notranslate"><span class="pre">arrhenius(500)</span></code>.<br />
+<strong>(D)</strong> A <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> is raised because <code class="docutils literal notranslate"><span class="pre">A</span></code> is a keyword-only argument.</p>
+<details>
+<summary>Answer</summary>
+**(B)** — The function returns $A \cdot e^{-E_a/(RT)}$. Since `A` multiplies the entire expression, doubling `A` from 1.0 to 2.0 doubles the result. The other parameters are unchanged.
+</details><blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-2-1-min">
+<h2>Question 2 — ⏱ ~1 min<a class="headerlink" href="#question-2-1-min" title="Link to this heading">#</a></h2>
+<p>Given:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">700</span><span class="p">])</span>   <span class="c1"># Kelvin</span>
+</pre></div>
+</div>
+<p>Which expression correctly converts all temperatures to Celsius <strong>in a single vectorised operation</strong>?</p>
+<p><strong>(A)</strong> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(len(T)):</span> <span class="pre">T[i]</span> <span class="pre">=</span> <span class="pre">T[i]</span> <span class="pre">-</span> <span class="pre">273.15</span></code><br />
+<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">T_C</span> <span class="pre">=</span> <span class="pre">T</span> <span class="pre">-</span> <span class="pre">273.15</span></code><br />
+<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">T_C</span> <span class="pre">=</span> <span class="pre">[t</span> <span class="pre">-</span> <span class="pre">273.15</span> <span class="pre">for</span> <span class="pre">t</span> <span class="pre">in</span> <span class="pre">T]</span></code><br />
+<strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">T_C</span> <span class="pre">=</span> <span class="pre">np.subtract(T,</span> <span class="pre">[273.15,</span> <span class="pre">273.15,</span> <span class="pre">273.15,</span> <span class="pre">273.15,</span> <span class="pre">273.15])</span></code></p>
+<details>
+<summary>Answer</summary>
+<p><strong>(B)</strong> — NumPy broadcasting lets you subtract a scalar from every element at once with <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">-</span> <span class="pre">273.15</span></code>. It is the most concise and fastest option. (D) works but is unnecessarily verbose. (A) is an in-place loop — not vectorised. (C) produces a plain Python list, not a NumPy array.</p>
+</details><blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-3-1-min">
+<h2>Question 3 — ⏱ ~1 min<a class="headerlink" href="#question-3-1-min" title="Link to this heading">#</a></h2>
+<p>A three-stream mixing problem yields the matrix equation <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> contains unknown flow rates. The code below attempts to solve it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Before trusting the answer, which check is <strong>most important</strong>?</p>
+<p><strong>(A)</strong> Confirm <code class="docutils literal notranslate"><span class="pre">np.linalg.det(A)</span> <span class="pre">!=</span> <span class="pre">0</span></code>, indicating a unique solution exists.<br />
+<strong>(B)</strong> Confirm all elements of <code class="docutils literal notranslate"><span class="pre">x</span></code> are positive (physically meaningful flow rates).<br />
+<strong>(C)</strong> Verify by computing <code class="docutils literal notranslate"><span class="pre">np.allclose(A</span> <span class="pre">&#64;</span> <span class="pre">x,</span> <span class="pre">b)</span></code>.<br />
+<strong>(D)</strong> All of the above are important, in roughly that order.</p>
+<details>
+<summary>Answer</summary>
+<p><strong>(D)</strong> — A non-zero determinant guarantees a unique solution exists (A). Physical validation checks sign/magnitude (B). Back-substitution <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span> <span class="pre">≈</span> <span class="pre">b</span></code> is the definitive numerical check (C). In practice (C) is the fastest single verification, but all three are good engineering habits.</p>
+</details><blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-4-1-min">
+<h2>Question 4 — ⏱ ~1 min<a class="headerlink" href="#question-4-1-min" title="Link to this heading">#</a></h2>
+<p>You estimate <span class="math notranslate nohighlight">\(\pi\)</span> by randomly throwing <span class="math notranslate nohighlight">\(N\)</span> points into the unit square <span class="math notranslate nohighlight">\([0,1]^2\)</span> and counting how many fall inside the quarter-circle of radius 1. After 10,000 trials you get <span class="math notranslate nohighlight">\(\hat{\pi} = 3.138\)</span>. What is the <strong>primary reason</strong> the estimate is not exactly <span class="math notranslate nohighlight">\(\pi\)</span>?</p>
+<p><strong>(A)</strong> The random number generator in Python is not truly random.<br />
+<strong>(B)</strong> Monte Carlo estimates have inherent statistical error that shrinks as <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span>; 10,000 samples give roughly <span class="math notranslate nohighlight">\(\pm 0.02\)</span> uncertainty.<br />
+<strong>(C)</strong> The quarter-circle area formula was applied incorrectly.<br />
+<strong>(D)</strong> The unit square has an area of 1, so only the first quadrant can be sampled.</p>
+<details>
+<summary>Answer</summary>
+<p><strong>(B)</strong> — Monte Carlo integration has a statistical error of order <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span>. For <span class="math notranslate nohighlight">\(N = 10{,}000\)</span>, the standard error is about <span class="math notranslate nohighlight">\(1/100 = 0.01\)</span>, so deviations like <span class="math notranslate nohighlight">\(|3.138 - \pi| \approx 0.004\)</span> are expected. This is a feature of the method, not a bug in the code or the formula.</p>
+</details><blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-5-1-min">
+<h2>Question 5 — ⏱ ~1 min<a class="headerlink" href="#question-5-1-min" title="Link to this heading">#</a></h2>
+<p>Which of the following import statements lets you call <code class="docutils literal notranslate"><span class="pre">sqrt(16)</span></code> directly — without any module prefix?</p>
+<p><strong>(A)</strong> <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code><br />
+<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span> <span class="pre">as</span> <span class="pre">m</span></code><br />
+<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">sqrt</span></code><br />
+<strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">math.sqrt</span></code></p>
+<details>
+<summary>Answer</summary>
+<p><strong>(C)</strong> — <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">sqrt</span></code> brings <code class="docutils literal notranslate"><span class="pre">sqrt</span></code> into the current namespace so you can call it as <code class="docutils literal notranslate"><span class="pre">sqrt(16)</span></code>. Option (A) requires <code class="docutils literal notranslate"><span class="pre">math.sqrt(16)</span></code>. Option (B) requires <code class="docutils literal notranslate"><span class="pre">m.sqrt(16)</span></code>. Option (D) is a syntax error.</p>
+</details>
+<blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-6-1-min">
+<h2>Question 6 — ⏱ ~1 min<a class="headerlink" href="#question-6-1-min" title="Link to this heading">#</a></h2>
+<p>Which statement <strong>best</strong> describes the difference between a <strong>module</strong> and a <strong>package</strong> in Python?</p>
+<p><strong>(A)</strong> A module is a .py file containing Python code; a package is a directory that contains multiple modules (and optionally an <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file).<br />
+<strong>(B)</strong> A module is installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>; a package is written by the user.<br />
+<strong>(C)</strong> A module can only hold functions; a package can also hold classes.<br />
+<strong>(D)</strong> There is no real difference — “module” and “package” are interchangeable terms.</p>
+<details>
+<summary>Answer</summary>
+<p><strong>(A)</strong> — A module is a single <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. A package is a directory that groups related modules together and may optionally include an <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file (in modern Python, this file is not required). Both modules and packages can contain functions, classes, and variables.</p>
+</details><blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-7-1-min">
+<h2>Question 7 — ⏱ ~1 min<a class="headerlink" href="#question-7-1-min" title="Link to this heading">#</a></h2>
+<p>You create a file <code class="docutils literal notranslate"><span class="pre">chem_utils.py</span></code> in the same folder as your notebook, containing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># chem_utils.py</span>
+<span class="n">GAS_CONSTANT</span> <span class="o">=</span> <span class="mf">8.314</span>   <span class="c1"># J / (mol·K)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ideal_gas_volume</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">GAS_CONSTANT</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">P</span>
+</pre></div>
+</div>
+<p>Which code block correctly imports <strong>only</strong> the function (not the constant) and calls it?</p>
+<p><strong>(A)</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">chem_utils</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">ideal_gas_volume</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">101325</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>(B)</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">chem_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ideal_gas_volume</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">ideal_gas_volume</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">101325</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>(C)</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">chem_utils.ideal_gas_volume</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">ideal_gas_volume</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">101325</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>(D)</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">chem_utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="n">volume</span> <span class="o">=</span> <span class="n">chem_utils</span><span class="o">.</span><span class="n">ideal_gas_volume</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">101325</span><span class="p">)</span>
+</pre></div>
+</div>
+<details>
+<summary>Answer</summary>
+<p><strong>(B)</strong> — <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">chem_utils</span> <span class="pre">import</span> <span class="pre">ideal_gas_volume</span></code> imports only the function and makes it available without a prefix. Option (A) works but requires the prefix <code class="docutils literal notranslate"><span class="pre">chem_utils.ideal_gas_volume(...)</span></code>. Option (C) is invalid syntax for importing a function. Option (D) imports everything with <code class="docutils literal notranslate"><span class="pre">*</span></code> but then incorrectly uses the module prefix.</p>
+</details><blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-8-1-min">
+<h2>Question 8 — ⏱ ~1 min<a class="headerlink" href="#question-8-1-min" title="Link to this heading">#</a></h2>
+<p>A teammate’s code starts with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+<p>Why is using <strong>aliases</strong> (<code class="docutils literal notranslate"><span class="pre">np</span></code>, <code class="docutils literal notranslate"><span class="pre">plt</span></code>) considered good practice?</p>
+<p><strong>(A)</strong> It makes the code run faster because shorter names are parsed more quickly.<br />
+<strong>(B)</strong> It prevents name collisions with built-in Python functions.<br />
+<strong>(C)</strong> It follows widely adopted community conventions, making code easier to read and share across projects.<br />
+<strong>(D)</strong> It is required by Python — you cannot use <code class="docutils literal notranslate"><span class="pre">numpy</span></code> or <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> directly without an alias.</p>
+<details>
+<summary>Answer</summary>
+<p><strong>(C)</strong> — Aliases like <code class="docutils literal notranslate"><span class="pre">np</span></code> and <code class="docutils literal notranslate"><span class="pre">plt</span></code> are community-wide conventions (documented in the NumPy and Matplotlib official guides). Anyone familiar with scientific Python immediately recognises them. They do <strong>not</strong> affect runtime speed, are not required by Python, and do not prevent name collisions (that is handled by namespaces).</p>
+</details>
+<blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-9-1-min">
+<h2>Question 9 — ⏱ ~1 min<a class="headerlink" href="#question-9-1-min" title="Link to this heading">#</a></h2>
+<p>Consider:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">pi</span> <span class="o">=</span> <span class="mf">3.0</span>   <span class="c1"># user-defined variable</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>          <span class="c1"># line A</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>     <span class="c1"># line B</span>
+</pre></div>
+</div>
+<p>What do lines A and B print, respectively?</p>
+<p><strong>(A)</strong> Both print <code class="docutils literal notranslate"><span class="pre">3.141592653589793</span></code> because <code class="docutils literal notranslate"><span class="pre">math.pi</span></code> overwrites the local variable.<br />
+<strong>(B)</strong> Line A prints <code class="docutils literal notranslate"><span class="pre">3.0</span></code>; line B prints <code class="docutils literal notranslate"><span class="pre">3.141592653589793</span></code>.<br />
+<strong>(C)</strong> Line A raises a <code class="docutils literal notranslate"><span class="pre">NameError</span></code> because <code class="docutils literal notranslate"><span class="pre">pi</span></code> is shadowed by <code class="docutils literal notranslate"><span class="pre">math.pi</span></code>.<br />
+<strong>(D)</strong> Both print <code class="docutils literal notranslate"><span class="pre">3.0</span></code> because the local variable takes precedence everywhere.</p>
+<details>
+<summary>Answer</summary>
+<p><strong>(B)</strong> — <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code> does <strong>not</strong> overwrite names in the local namespace. The user-defined <code class="docutils literal notranslate"><span class="pre">pi</span> <span class="pre">=</span> <span class="pre">3.0</span></code> lives in the local/global scope, while <code class="docutils literal notranslate"><span class="pre">math.pi</span></code> lives inside the <code class="docutils literal notranslate"><span class="pre">math</span></code> module’s namespace. Using the <code class="docutils literal notranslate"><span class="pre">math.</span></code> prefix explicitly accesses the module’s version, so both names coexist without conflict.</p>
+</details><blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="question-10-1-min">
+<h2>Question 10 — ⏱ ~1 min<a class="headerlink" href="#question-10-1-min" title="Link to this heading">#</a></h2>
+<p>You have 20 reactor yield measurements and want to compute the <strong>sample</strong> standard deviation. Which call is correct, and why?</p>
+<p><strong>(A)</strong> <code class="docutils literal notranslate"><span class="pre">np.std(yields)</span></code> — the default is always correct for experimental data.<br />
+<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">np.std(yields,</span> <span class="pre">ddof=1)</span></code> — dividing by <span class="math notranslate nohighlight">\(N-1\)</span> corrects for the bias introduced by estimating the mean from the same data.<br />
+<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">np.std(yields,</span> <span class="pre">ddof=2)</span></code> — you must account for two lost degrees of freedom when computing std from a sample.<br />
+<strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">np.std(yields)</span> <span class="pre">/</span> <span class="pre">np.sqrt(20)</span></code> — you need to normalize by the sample size.</p>
+<details>
+<summary>Answer</summary>
+<p><strong>(B)</strong> — NumPy’s default (<code class="docutils literal notranslate"><span class="pre">ddof=0</span></code>) divides by <span class="math notranslate nohighlight">\(N\)</span>, giving the <strong>population</strong> standard deviation. For a sample drawn from a larger population, <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code> divides by <span class="math notranslate nohighlight">\(N-1\)</span> (Bessel’s correction), which produces an unbiased estimate of the true population variance. One degree of freedom is “used up” when the sample mean is estimated from the same data.</p>
+</details><blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/midterm2-practice"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-1-min">Question 1 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-1-min">Question 2 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-1-min">Question 3 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-1-min">Question 4 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-1-min">Question 5 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-1-min">Question 6 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-1-min">Question 7 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-1-min">Question 8 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-1-min">Question 9 — ⏱ ~1 min</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-1-min">Question 10 — ⏱ ~1 min</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

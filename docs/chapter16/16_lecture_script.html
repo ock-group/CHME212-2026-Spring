@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 16 Lecture Script: Root Finding &amp; Newton’s Method &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter16/16_lecture_script';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter16/16_lecture_script.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter16/16_lecture_script.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 16 Lecture Script: Root Finding & Newton’s Method</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening">Opening</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-root">16.1 — What Is a Root?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-roots-polynomial-roots">16.2 — <code class="docutils literal notranslate"><span class="pre">np.roots</span></code>: Polynomial Roots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-np-roots-actually-work">How does <code class="docutils literal notranslate"><span class="pre">np.roots</span></code> actually work?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection-method">16.3 — Bisection Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-plot">Convergence plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-s-method">16.4 — Newton’s Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-derivation">The derivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-walkthrough">Step-by-step walkthrough</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stopping-criteria">Stopping criteria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-quadratic-vs-linear">Convergence: quadratic vs. linear</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-newton-s-method-fails">When Newton’s method fails</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brentq-the-practical-choice">16.5 — <code class="docutils literal notranslate"><span class="pre">brentq</span></code>: The Practical Choice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-van-der-waals-molar-volume">Application: van der Waals molar volume</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fsolve-systems-of-equations">16.6 — <code class="docutils literal notranslate"><span class="pre">fsolve</span></code>: Systems of Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-reaction-equilibrium">16.7 — Application: Reaction Equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-16-lecture-script-root-finding-newton-s-method">
+<h1>Chapter 16 Lecture Script: Root Finding &amp; Newton’s Method<a class="headerlink" href="#chapter-16-lecture-script-root-finding-newton-s-method" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="opening">
+<h2>Opening<a class="headerlink" href="#opening" title="Link to this heading">#</a></h2>
+<p>Today’s topic is <strong>root finding</strong>.</p>
+<p>Here is the problem we keep running into. You know the van der Waals equation:</p>
+<div class="math notranslate nohighlight">
+\[\left(P + \frac{a}{V^2}\right)(V - b) = RT\]</div>
+<p>You know <span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(P\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span> — you want <span class="math notranslate nohighlight">\(V\)</span>. But <span class="math notranslate nohighlight">\(V\)</span> appears three times and the equation expands into a cubic. There is no simple rearrangement. Same story with the Antoine equation, or a reaction equilibrium expression with complex stoichiometry. The unknown is trapped inside the equation in a way you cannot untangle by hand easily.</p>
+<p>The strategy in all these cases: <strong>rewrite as <span class="math notranslate nohighlight">\(f(x) = 0\)</span> and find the root numerically.</strong></p>
+</section>
+<hr class="docutils" />
+<section id="what-is-a-root">
+<h2>16.1 — What Is a Root?<a class="headerlink" href="#what-is-a-root" title="Link to this heading">#</a></h2>
+<p>A <strong>root</strong> (or zero) of <span class="math notranslate nohighlight">\(f(x)\)</span> is any <span class="math notranslate nohighlight">\(x^*\)</span> such that <span class="math notranslate nohighlight">\(f(x^*) = 0\)</span>.</p>
+<p>Almost any equation fits this form. If you have <span class="math notranslate nohighlight">\(e^x = 2x + 1\)</span>, subtract the right side: <span class="math notranslate nohighlight">\(f(x) = e^x - 2x - 1 = 0\)</span>. If you have the van der Waals equation, move everything to one side: <span class="math notranslate nohighlight">\(f(V) = (P + a/V^2)(V - b) - RT = 0\)</span>.</p>
+<blockquote>
+<div><p><em>Point to the table in the notebook.</em> Every equation in the table gets rewritten the same way — subtract one side from the other, call it <span class="math notranslate nohighlight">\(f\)</span>, find where it is zero.</p>
+</div></blockquote>
+<p>Geometrically, a root is where the curve <span class="math notranslate nohighlight">\(f(x)\)</span> <strong>crosses the x-axis</strong>.</p>
+<blockquote>
+<div><p><em>Show the plot of <span class="math notranslate nohighlight">\(f(x) = e^x - 2x - 1\)</span>.</em> This function has two roots: one at <span class="math notranslate nohighlight">\(x^* = 0\)</span> (you can verify by hand: <span class="math notranslate nohighlight">\(e^0 - 0 - 1 = 0\)</span>) and one near <span class="math notranslate nohighlight">\(x^* \approx 1.256\)</span> which you cannot get analytically.</p>
+</div></blockquote>
+<p><strong>The most important habit:</strong> always plot <span class="math notranslate nohighlight">\(f(x)\)</span> before running any solver. The plot tells you how many roots exist, roughly where they are, and whether your equation is well-behaved.</p>
+</section>
+<hr class="docutils" />
+<section id="np-roots-polynomial-roots">
+<h2>16.2 — <code class="docutils literal notranslate"><span class="pre">np.roots</span></code>: Polynomial Roots<a class="headerlink" href="#np-roots-polynomial-roots" title="Link to this heading">#</a></h2>
+<p>If your equation happens to be a polynomial, NumPy gives you all roots at once with a single call.</p>
+<p><strong>Syntax:</strong> pass the coefficients from highest to lowest degree.</p>
+<p>For example, the van der Waals equation expands to a cubic in <span class="math notranslate nohighlight">\(V\)</span>:
+$<span class="math notranslate nohighlight">\(PV^3 - (Pb + RT)V^2 + aV - ab = 0\)</span>$</p>
+<p>The four coefficients are <span class="math notranslate nohighlight">\([P,\ -(Pb+RT),\ a,\ -ab]\)</span>.</p>
+<blockquote>
+<div><p><em>Run cell 6.</em> <code class="docutils literal notranslate"><span class="pre">np.roots</span></code> returns three roots. Two of them are complex — those are not physical. The one real root greater than <span class="math notranslate nohighlight">\(b\)</span> is the molar volume we want.</p>
+</div></blockquote>
+<p>Notice what we did not have to do: no initial guess, no bracket, no iteration. This is a direct algebraic method.</p>
+<section id="how-does-np-roots-actually-work">
+<h3>How does <code class="docutils literal notranslate"><span class="pre">np.roots</span></code> actually work?<a class="headerlink" href="#how-does-np-roots-actually-work" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>Show cells 7 and 8.</em></p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">np.roots</span></code> does not iterate. It uses linear algebra. For a polynomial of degree <span class="math notranslate nohighlight">\(n\)</span>, NumPy builds an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix called the <strong>companion matrix</strong>, then computes its eigenvalues. The eigenvalues are the roots.</p>
+<p>Let me show you why this works, starting with the simplest case.</p>
+<p><strong>Degree-2 example:</strong> Take <span class="math notranslate nohighlight">\(p(x) = x^2 + a_1 x + a_2\)</span>. The companion matrix is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C = \begin{bmatrix} -a_1 &amp; -a_2 \\ 1 &amp; 0 \end{bmatrix}\end{split}\]</div>
+<p>Now compute the characteristic polynomial of <span class="math notranslate nohighlight">\(C\)</span> — this is the polynomial whose roots are the eigenvalues of <span class="math notranslate nohighlight">\(C\)</span>. You set <span class="math notranslate nohighlight">\(\det(C - \lambda I) = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\det \begin{bmatrix} -a_1 - \lambda &amp; -a_2 \\ 1 &amp; -\lambda \end{bmatrix} = (-a_1 - \lambda)(-\lambda) - (-a_2)(1) = \lambda^2 + a_1\lambda + a_2\end{split}\]</div>
+<p>That is exactly <span class="math notranslate nohighlight">\(p(\lambda)\)</span>. The characteristic polynomial of <span class="math notranslate nohighlight">\(C\)</span> is identical to the original polynomial <span class="math notranslate nohighlight">\(p\)</span>. So <span class="math notranslate nohighlight">\(\det(C - \lambda I) = 0\)</span> is the same equation as <span class="math notranslate nohighlight">\(p(\lambda) = 0\)</span> — <strong>the eigenvalues of <span class="math notranslate nohighlight">\(C\)</span> are the roots of <span class="math notranslate nohighlight">\(p\)</span>.</strong></p>
+<blockquote>
+<div><p><em>Run the 2×2 demo in cell 8.</em> For <span class="math notranslate nohighlight">\(p(x) = x^2 - 5x + 6\)</span>, the companion matrix is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C = \begin{bmatrix} 5 &amp; -6 \\ 1 &amp; 0 \end{bmatrix}\end{split}\]</div>
+<p>Computing <span class="math notranslate nohighlight">\(\det(C - \lambda I) = \lambda^2 - 5\lambda + 6\)</span>. Eigenvalues: 2 and 3. That matches <code class="docutils literal notranslate"><span class="pre">np.roots([1,</span> <span class="pre">-5,</span> <span class="pre">6])</span></code> exactly.</p>
+</div></blockquote>
+<p>The same construction works for degree <span class="math notranslate nohighlight">\(n\)</span>. The first row of the <span class="math notranslate nohighlight">\(n \times n\)</span> companion matrix holds the negated coefficients <span class="math notranslate nohighlight">\([-a_1, -a_2, \ldots, -a_n]\)</span>, and there is a sub-diagonal of 1s below. NumPy then calls <code class="docutils literal notranslate"><span class="pre">np.linalg.eigvals</span></code> on that matrix.</p>
+<blockquote>
+<div><p><em>Run the 3×3 demo in cell 8.</em> For <span class="math notranslate nohighlight">\(x^3 - 6x^2 + 11x - 6\)</span>, eigenvalues give exactly <span class="math notranslate nohighlight">\([1, 2, 3]\)</span>.</p>
+</div></blockquote>
+<p><strong>Key point:</strong> <code class="docutils literal notranslate"><span class="pre">np.roots</span></code> is exact (up to floating point), fast, requires no initial guess, and finds all roots including complex ones simultaneously. The only limitation is that your equation must be a polynomial.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="bisection-method">
+<h2>16.3 — Bisection Method<a class="headerlink" href="#bisection-method" title="Link to this heading">#</a></h2>
+<p>Now what if your equation is not a polynomial? We need an iterative method.</p>
+<p>The bisection method is the simplest root finder. It is grounded in a theorem from calculus you have already seen: the <strong>Intermediate Value Theorem (IVT)</strong>.</p>
+<blockquote>
+<div><p>If <span class="math notranslate nohighlight">\(f\)</span> is continuous on <span class="math notranslate nohighlight">\([a, b]\)</span> and <span class="math notranslate nohighlight">\(f(a) \cdot f(b) &lt; 0\)</span>, then there exists at least one root <span class="math notranslate nohighlight">\(x^* \in (a, b)\)</span>.</p>
+</div></blockquote>
+<p>The sign change <span class="math notranslate nohighlight">\(f(a) \cdot f(b) &lt; 0\)</span> is not just a programming check — it is a mathematical guarantee. If the function is positive at one end and negative at the other, it had to cross zero somewhere in between.</p>
+<p><strong>The algorithm:</strong></p>
+<ol class="arabic simple">
+<li><p>Start with a bracket <span class="math notranslate nohighlight">\([a, b]\)</span> where <span class="math notranslate nohighlight">\(f(a) \cdot f(b) &lt; 0\)</span></p></li>
+<li><p>Compute the midpoint <span class="math notranslate nohighlight">\(m = (a + b) / 2\)</span></p></li>
+<li><p>Check which half contains the root:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(f(a) \cdot f(m) &lt; 0\)</span>: root is in the left half → set <span class="math notranslate nohighlight">\(b = m\)</span></p></li>
+<li><p>Otherwise: root is in the right half → set <span class="math notranslate nohighlight">\(a = m\)</span></p></li>
+</ul>
+</li>
+<li><p>Repeat until <span class="math notranslate nohighlight">\((b - a)/2 &lt; \epsilon\)</span></p></li>
+</ol>
+<blockquote>
+<div><p><em>Walk through the 6-panel visualization in cell 11, one panel at a time.</em></p>
+</div></blockquote>
+<p><strong>Panel 1:</strong> We start with <span class="math notranslate nohighlight">\(a = 1.0\)</span>, <span class="math notranslate nohighlight">\(b = 2.0\)</span>. The shaded red region is the bracket — we know the root is somewhere in there. The midpoint is <span class="math notranslate nohighlight">\(m = (1.0 + 2.0)/2 = 1.5\)</span>. We compute <span class="math notranslate nohighlight">\(f(a) = f(1.0) \approx 0.718\)</span> and <span class="math notranslate nohighlight">\(f(m) = f(1.5) \approx -0.518\)</span>. Do they have the same sign? No — <span class="math notranslate nohighlight">\(f(a)\)</span> is positive and <span class="math notranslate nohighlight">\(f(m)\)</span> is negative. That means the root is in the left half <span class="math notranslate nohighlight">\([1.0, 1.5]\)</span>. So we set <span class="math notranslate nohighlight">\(b \leftarrow 1.5\)</span>. The bracket width was 1.0 and is now 0.5.</p>
+<p><strong>Panel 2:</strong> Now <span class="math notranslate nohighlight">\(a = 1.0\)</span>, <span class="math notranslate nohighlight">\(b = 1.5\)</span>. Midpoint <span class="math notranslate nohighlight">\(m = 1.25\)</span>. Compute <span class="math notranslate nohighlight">\(f(1.0) \approx 0.718\)</span> and <span class="math notranslate nohighlight">\(f(1.25) \approx 0.117\)</span>. Both positive — same sign as <span class="math notranslate nohighlight">\(f(a)\)</span>. Root is in the right half <span class="math notranslate nohighlight">\([1.25, 1.5]\)</span>. Set <span class="math notranslate nohighlight">\(a \leftarrow 1.25\)</span>. Width is now 0.25.</p>
+<blockquote>
+<div><p><em>Continue through remaining panels.</em> Notice the red shaded region getting narrower each time, and the midpoint converging toward the root. The annotation box in each panel shows the exact arithmetic: what <span class="math notranslate nohighlight">\(m\)</span> is, what <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(m)\)</span> are, and which endpoint gets updated.</p>
+</div></blockquote>
+<p><strong>Panel 3:</strong> <span class="math notranslate nohighlight">\(a = 1.25\)</span>, <span class="math notranslate nohighlight">\(b = 1.5\)</span>, <span class="math notranslate nohighlight">\(m = 1.375\)</span>. Check signs. <span class="math notranslate nohighlight">\(f(1.25) &gt; 0\)</span>, <span class="math notranslate nohighlight">\(f(1.375) &lt; 0\)</span> — different signs, set <span class="math notranslate nohighlight">\(b \leftarrow 1.375\)</span>.</p>
+<p><strong>Panel 4–6:</strong> The bracket keeps halving. By step 6, the bracket width is <span class="math notranslate nohighlight">\(1.0/2^6 = 0.015625\)</span> and the midpoint is already very close to the true root.</p>
+<section id="convergence-plot">
+<h3>Convergence plot<a class="headerlink" href="#convergence-plot" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>Run cell 12 and look at the convergence plot.</em></p>
+</div></blockquote>
+<p>Let’s take a look at how it’s implemented in Python.</p>
+<p>First, let’s look at the function definition:</p>
+<p>def bisection(f, a, b, tol=1e-8, max_iter=100)</p>
+<p>This function finds a root of f(x) = 0 within the interval [a, b].
+Here, f is the function, a and b define the interval, tol is the tolerance for accuracy, and max_iter is the maximum number of iterations.</p>
+<p>Next, we have an important assumption:</p>
+<p>assert f(a) * f(b) &lt; 0</p>
+<p>This means that f(a) and f(b) must have opposite signs. In other words, the function crosses zero somewhere between a and b. This guarantees that a root exists in the interval.</p>
+<p>We also initialize a list:</p>
+<p>history = []</p>
+<p>This will store all midpoint values so we can track how the solution converges.</p>
+<p>Now we enter the main loop:</p>
+<p>for i in range(max_iter):</p>
+<p>At each iteration, we compute the midpoint:</p>
+<p>m = (a + b) / 2.0</p>
+<p>This is why the method is called “bisection” — we keep cutting the interval in half.</p>
+<p>We store this midpoint:</p>
+<p>history.append(m)</p>
+<p>Then we check if we should stop:</p>
+<p>if abs(f(m)) &lt; tol or (b - a) / 2 &lt; tol:</p>
+<p>We stop if either the function value at m is close enough to zero, or the interval is sufficiently small.</p>
+<p>If not, we decide which half of the interval to keep:</p>
+<p>if f(a) * f(m) &lt; 0:
+b = m
+else:
+a = m</p>
+<p>If the sign change is between a and m, we keep the left half.
+Otherwise, we keep the right half.</p>
+<p>We repeat this process, continuously shrinking the interval that contains the root.</p>
+<p>Finally, we return:</p>
+<p>return m, history</p>
+<p>Here, m is our estimated root, and history contains all intermediate guesses.</p>
+<p>Overall, the bisection method is simple, robust, and guaranteed to converge, as long as the initial interval satisfies the sign condition.</p>
+<p>After <span class="math notranslate nohighlight">\(n\)</span> iterations, the bracket width is <span class="math notranslate nohighlight">\((b - a)/2^n\)</span> and the error is bounded by:
+$<span class="math notranslate nohighlight">\(|x_n - x^*| \leq \frac{b - a}{2^n}\)</span>$</p>
+<p>This is <strong>linear convergence</strong> — on a log scale, the error decreases as a straight line, halving exactly every iteration. To reach tolerance <span class="math notranslate nohighlight">\(\epsilon = 10^{-8}\)</span> from an interval of width 1, you need <span class="math notranslate nohighlight">\(\log_2(10^8) \approx 27\)</span> iterations. Slow, but completely predictable. You can calculate in advance exactly how many iterations you need.</p>
+<p><strong>Strengths of bisection:</strong></p>
+<ul class="simple">
+<li><p>Always works if the initial bracket is valid</p></li>
+<li><p>No derivative needed</p></li>
+<li><p>Error bound is known in advance</p></li>
+</ul>
+<p><strong>Weakness:</strong> Slow. Linear convergence means 27 iterations for 8 decimal places.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="newton-s-method">
+<h2>16.4 — Newton’s Method<a class="headerlink" href="#newton-s-method" title="Link to this heading">#</a></h2>
+<p>Bisection is safe but slow because it only uses the sign of <span class="math notranslate nohighlight">\(f\)</span> — it ignores the actual values. Newton’s method uses the derivative to make a much smarter prediction of where the root is.</p>
+<section id="the-derivation">
+<h3>The derivation<a class="headerlink" href="#the-derivation" title="Link to this heading">#</a></h3>
+<p>Start from the current guess <span class="math notranslate nohighlight">\(x_n\)</span>. Write the first-order Taylor expansion of <span class="math notranslate nohighlight">\(f\)</span> around <span class="math notranslate nohighlight">\(x_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f(x) \approx f(x_n) + f'(x_n)(x - x_n)\]</div>
+<p>We want to find <span class="math notranslate nohighlight">\(x\)</span> where <span class="math notranslate nohighlight">\(f(x) = 0\)</span>. Substitute <span class="math notranslate nohighlight">\(f(x) = 0\)</span> and solve for <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[0 = f(x_n) + f'(x_n)(x_{n+1} - x_n)\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}}\]</div>
+<p><strong>Geometric interpretation:</strong> draw the tangent line to <span class="math notranslate nohighlight">\(f\)</span> at the point <span class="math notranslate nohighlight">\((x_n, f(x_n))\)</span>. The tangent line is <span class="math notranslate nohighlight">\(y = f(x_n) + f'(x_n)(x - x_n)\)</span>. Set <span class="math notranslate nohighlight">\(y = 0\)</span> and solve — you get exactly the formula above. So <span class="math notranslate nohighlight">\(x_{n+1}\)</span> is the x-intercept of the tangent line at <span class="math notranslate nohighlight">\(x_n\)</span>.</p>
+</section>
+<section id="step-by-step-walkthrough">
+<h3>Step-by-step walkthrough<a class="headerlink" href="#step-by-step-walkthrough" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>Walk through the 6-panel visualization in cell 15, one panel at a time.</em></p>
+</div></blockquote>
+<p>We are solving <span class="math notranslate nohighlight">\(f(x) = e^x - 2x - 1 = 0\)</span>, starting from <span class="math notranslate nohighlight">\(x_0 = 2.0\)</span>. The derivative is <span class="math notranslate nohighlight">\(f'(x) = e^x - 2\)</span>.</p>
+<p><strong>Panel 1 (Step 1):</strong> Current guess <span class="math notranslate nohighlight">\(x_0 = 2.0\)</span>. The orange dot sits on the curve at <span class="math notranslate nohighlight">\((2.0,\ f(2.0))\)</span>. We evaluate:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x_0) = e^2 - 4 - 1 \approx 2.389\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f'(x_0) = e^2 - 2 \approx 5.389\)</span></p></li>
+</ul>
+<p>The dashed orange line is the tangent at this point. We follow it down to where it crosses zero:
+$<span class="math notranslate nohighlight">\(x_1 = 2.0 - \frac{2.389}{5.389} \approx 1.557\)</span>$</p>
+<p>The triangle on the x-axis marks <span class="math notranslate nohighlight">\(x_1\)</span>. Error dropped from 0.644 to 0.113.</p>
+<p><strong>Panel 2 (Step 2):</strong> Now at <span class="math notranslate nohighlight">\(x_1 = 1.557\)</span>. Evaluate <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f'\)</span> there, draw the new tangent line, follow it to zero:
+$<span class="math notranslate nohighlight">\(x_2 = 1.557 - \frac{f(1.557)}{f'(1.557)} \approx 1.295\)</span>$</p>
+<p>Error is now 0.019. Already much better — and we have only done 2 steps.</p>
+<p><strong>Panel 3 (Step 3):</strong> At <span class="math notranslate nohighlight">\(x_2 = 1.295\)</span>. The tangent line is much flatter now (we’re closer to the root), and the next step jumps very close. Error drops to <span class="math notranslate nohighlight">\(\approx 5 \times 10^{-4}\)</span>.</p>
+<blockquote>
+<div><p><em>Note to students: watch how the error column in the annotation box shrinks — not by half each time like bisection, but much faster. Step 3 error is already 100× smaller than step 2.</em></p>
+</div></blockquote>
+<p><strong>Panels 4–6:</strong> By step 4, the error is already <span class="math notranslate nohighlight">\(10^{-7}\)</span>. By step 5, <span class="math notranslate nohighlight">\(10^{-13}\)</span>. By step 6, we are at machine precision.</p>
+</section>
+<section id="stopping-criteria">
+<h3>Stopping criteria<a class="headerlink" href="#stopping-criteria" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>Point to cell 14 markdown.</em></p>
+</div></blockquote>
+<p>We stop when either:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|f(x_n)| &lt; \epsilon\)</span> — the residual (function value) is small enough</p></li>
+<li><p><span class="math notranslate nohighlight">\(|x_{n+1} - x_n| &lt; \epsilon\)</span> — the step size is negligible</p></li>
+</ul>
+<p>In the code, <code class="docutils literal notranslate"><span class="pre">tol=1e-12</span></code> means we stop when <span class="math notranslate nohighlight">\(|f(x)| &lt; 10^{-12}\)</span>.</p>
+</section>
+<section id="convergence-quadratic-vs-linear">
+<h3>Convergence: quadratic vs. linear<a class="headerlink" href="#convergence-quadratic-vs-linear" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>Run cell 16 to see the convergence table.</em></p>
+</div></blockquote>
+<p>First, we define the function and its derivative:</p>
+<p>def f(x):   return np.exp(x) - 2*x - 1
+def df(x):  return np.exp(x) - 2</p>
+<p>Here, f(x) is the function whose root we want to find, and df(x) is its derivative.
+Notice that the derivative of e^x is still e^x, so f’(x) = e^x - 2.</p>
+<p>Next, we choose an initial guess:</p>
+<p>x0 = 2.0</p>
+<p>Newton’s method requires a starting point, and the quality of this guess can affect convergence.</p>
+<p>We then create a list to store all iterates:</p>
+<p>iterates = [x0]</p>
+<p>This allows us to track how the solution evolves over each step.</p>
+<p>Now we perform the iterations:</p>
+<p>for _ in range(4):</p>
+<p>We will run exactly 4 iterations of Newton’s method.</p>
+<p>Inside the loop, we take the most recent estimate:</p>
+<p>xn = iterates[-1]</p>
+<p>Then we apply the Newton update formula:</p>
+<p>xn - f(xn) / df(xn)</p>
+<p>This comes from the idea of approximating the function with a tangent line and finding where that tangent crosses zero.</p>
+<p>We append the new estimate to our list:</p>
+<p>iterates.append(xn - f(xn) / df(xn))</p>
+<p>Each iteration should move us closer to the true root.</p>
+<p>After the loop, the list “iterates” contains the full sequence:
+x0, x1, x2, x3, x4</p>
+<p>This allows us to observe how quickly Newton’s method converges.</p>
+<p>The key idea is that Newton’s method uses both the function value and its derivative to rapidly refine the estimate of the root.</p>
+<p>The error <span class="math notranslate nohighlight">\(e_n = |x_n - x^*|\)</span> satisfies:</p>
+<div class="math notranslate nohighlight">
+\[e_{n+1} \approx \frac{|f''(x^*)|}{2|f'(x^*)|} \cdot e_n^2\]</div>
+<p>The error is <strong>squared</strong> at each step — this is <strong>quadratic convergence</strong>. If you have 1 correct decimal place, the next step gives 2, then 4, then 8, then 16.</p>
+<p>Look at the last column of the table: <span class="math notranslate nohighlight">\(e_{n+1}/e_n^2\)</span>. That ratio stays roughly constant at about 0.27. The constant value is the proof — if convergence were quadratic, this ratio should be constant, and it is.</p>
+<p>Contrast with bisection:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Newton</p></th>
+<th class="head"><p>Bisection</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Error at step <span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sim C \cdot e_{n-1}^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sim (b-a)/2^n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Iterations for <span class="math notranslate nohighlight">\(10^{-16}\)</span></p></td>
+<td><p>~5</p></td>
+<td><p>~53</p></td>
+</tr>
+<tr class="row-even"><td><p>Needs derivative</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Needs bracket</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><em>Run cell 18 for the convergence comparison plot.</em> On a log scale, bisection is a straight line (linear). Newton’s curve bends sharply downward — the slope doubles each iteration. That visual difference is the definition of quadratic vs. linear convergence.</p>
+</div></blockquote>
+</section>
+<section id="when-newton-s-method-fails">
+<h3>When Newton’s method fails<a class="headerlink" href="#when-newton-s-method-fails" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(f'(x_n) \approx 0\)</span>:</strong> the tangent line is nearly horizontal and the next guess <span class="math notranslate nohighlight">\(x_{n+1} = x_n - f/f'\)</span> shoots to infinity. Division by near-zero.</p></li>
+<li><p><strong>Poor initial guess:</strong> if <span class="math notranslate nohighlight">\(x_0\)</span> is far from the root, the tangent at <span class="math notranslate nohighlight">\(x_0\)</span> may point toward a completely different region of the function.</p></li>
+<li><p><strong>Multiple roots close together:</strong> the method can oscillate between them.</p></li>
+</ul>
+<p><strong>Rule of thumb:</strong> always plot first, pick <span class="math notranslate nohighlight">\(x_0\)</span> close to the root you want, and verify <span class="math notranslate nohighlight">\(f'(x_0) \neq 0\)</span>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="brentq-the-practical-choice">
+<h2>16.5 — <code class="docutils literal notranslate"><span class="pre">brentq</span></code>: The Practical Choice<a class="headerlink" href="#brentq-the-practical-choice" title="Link to this heading">#</a></h2>
+<p>In practice, you will rarely hand-code bisection or Newton. For a single equation, <code class="docutils literal notranslate"><span class="pre">scipy.optimize.brentq</span></code> is the standard tool.</p>
+<p>Brent’s method (1973) is a hybrid that switches between three techniques at each step:</p>
+<ol class="arabic simple">
+<li><p><strong>Bisection</strong> — always makes progress, but slow</p></li>
+<li><p><strong>Secant method</strong> — Newton-like but approximates the derivative using two recent points:
+$<span class="math notranslate nohighlight">\(x_{n+1} = x_n - f(x_n) \cdot \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}\)</span>$
+Superlinear convergence (~order 1.6), but no bracket guarantee.</p></li>
+<li><p><strong>Inverse quadratic interpolation</strong> — fits a quadratic through three recent <span class="math notranslate nohighlight">\((f, x)\)</span> pairs and uses its inverse to predict the root. Even faster when <span class="math notranslate nohighlight">\(f\)</span> is smooth.</p></li>
+</ol>
+<p>Brent’s method tries the fast methods first. If either would step outside the current bracket, it falls back to bisection. You get <strong>near-Newton speed</strong> with <strong>bisection’s guarantee</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">brentq</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">brentq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>               <span class="c1"># basic usage</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">brentq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>   <span class="c1"># tighter tolerance</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">brentq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">p1</span><span class="p">,))</span>   <span class="c1"># pass extra parameters to f</span>
+</pre></div>
+</div>
+<p><strong>Requirements:</strong> <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span> must have opposite signs. If not, you get a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. Always plot first.</p>
+<section id="application-van-der-waals-molar-volume">
+<h3>Application: van der Waals molar volume<a class="headerlink" href="#application-van-der-waals-molar-volume" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>Run cells 21–22.</em></p>
+</div></blockquote>
+<p>We define <span class="math notranslate nohighlight">\(f(V) = (P + a/V^2)(V - b) - RT\)</span> and plot it. The plot shows exactly one sign change in a physically meaningful range. We read off the bracket and call <code class="docutils literal notranslate"><span class="pre">brentq</span></code>. The result gives the molar volume with residual <span class="math notranslate nohighlight">\(\approx 10^{-12}\)</span> — essentially exact.</p>
+<p>We can also compare to the ideal gas: <span class="math notranslate nohighlight">\(V_{\text{ideal}} = RT/P\)</span>. The van der Waals result is smaller because intermolecular attractions effectively compress the gas.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="fsolve-systems-of-equations">
+<h2>16.6 — <code class="docutils literal notranslate"><span class="pre">fsolve</span></code>: Systems of Equations<a class="headerlink" href="#fsolve-systems-of-equations" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">brentq</span></code> handles one equation, one unknown. For <span class="math notranslate nohighlight">\(N\)</span> equations and <span class="math notranslate nohighlight">\(N\)</span> unknowns, use <code class="docutils literal notranslate"><span class="pre">fsolve</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fsolve</span></code> generalizes Newton’s method to multiple dimensions. Recall the scalar update:
+$<span class="math notranslate nohighlight">\(x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\)</span>$</p>
+<p>In <span class="math notranslate nohighlight">\(N\)</span> dimensions, the scalar derivative <span class="math notranslate nohighlight">\(f'(x)\)</span> becomes the <strong>Jacobian matrix</strong> <span class="math notranslate nohighlight">\(J\)</span>:
+$<span class="math notranslate nohighlight">\(J_{ij} = \frac{\partial F_i}{\partial x_j}\)</span>$</p>
+<p>The update becomes:
+$<span class="math notranslate nohighlight">\(\mathbf{x}_{n+1} = \mathbf{x}_n - J^{-1}\mathbf{F}(\mathbf{x}_n)\)</span>$</p>
+<p><code class="docutils literal notranslate"><span class="pre">fsolve</span></code> estimates <span class="math notranslate nohighlight">\(J\)</span> numerically using finite differences — you do not need to derive it by hand.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">fsolve</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">F</span><span class="p">(</span><span class="nb">vars</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">vars</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">]</span>   <span class="c1"># one residual per equation</span>
+
+<span class="n">solution</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="n">x_guess</span><span class="p">,</span> <span class="n">y_guess</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">solution</span><span class="p">))</span>       <span class="c1"># always check: must be near [0, 0]</span>
+</pre></div>
+</div>
+<p><strong>Critical warning:</strong> Unlike <code class="docutils literal notranslate"><span class="pre">brentq</span></code>, <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> has no bracket guarantee. It can converge silently to the wrong answer. <strong>Always print the residuals</strong> after solving.</p>
+<blockquote>
+<div><p><em>Run cell 25.</em> We find the intersections of <span class="math notranslate nohighlight">\(y = x^2\)</span> and <span class="math notranslate nohighlight">\(y = 2 - x\)</span> by solving the system simultaneously. Using two different initial guesses finds both intersection points. Check <code class="docutils literal notranslate"><span class="pre">equations(solution)</span></code> each time — it should return <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0]</span></code>.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="application-reaction-equilibrium">
+<h2>16.7 — Application: Reaction Equilibrium<a class="headerlink" href="#application-reaction-equilibrium" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Run cells 27–30.</em></p>
+</div></blockquote>
+<p>For the gas-phase reaction A ⇌ 2B, starting from pure A, the equilibrium condition is:</p>
+<div class="math notranslate nohighlight">
+\[f(X_e) = \frac{(2X_e/(1+X_e))^2}{(1-X_e)/(1+X_e)} \cdot P - K_{eq} = 0\]</div>
+<p><strong>Step 1 (always):</strong> plot <span class="math notranslate nohighlight">\(K_p(X)\)</span> alongside the horizontal line <span class="math notranslate nohighlight">\(K_{eq} = 1.5\)</span>. The intersection is the equilibrium conversion. The plot confirms there is exactly one root in <span class="math notranslate nohighlight">\((0, 1)\)</span>.</p>
+<p><strong>Step 2:</strong> call <code class="docutils literal notranslate"><span class="pre">brentq</span></code> on <span class="math notranslate nohighlight">\([0.01, 0.99]\)</span>. Result: <span class="math notranslate nohighlight">\(X_e \approx 0.44\)</span>, or about 44% conversion.</p>
+<p><strong>Verify:</strong> print <code class="docutils literal notranslate"><span class="pre">f_equil(X_eq)</span></code> — it should be <span class="math notranslate nohighlight">\(\approx 10^{-15}\)</span>.</p>
+<p><strong>Le Chatelier check:</strong> loop over pressures from 0.5 to 10 atm, solving <code class="docutils literal notranslate"><span class="pre">brentq</span></code> each time. The plot shows <span class="math notranslate nohighlight">\(X_e\)</span> decreasing monotonically with pressure. Increasing pressure shifts A ⇌ 2B toward fewer moles (toward A), exactly as Le Chatelier’s principle predicts — and now we have the quantitative curve.</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Tool</p></th>
+<th class="head"><p>Speed</p></th>
+<th class="head"><p>Requires</p></th>
+<th class="head"><p>Use when</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Polynomial roots</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.roots</span></code></p></td>
+<td><p>Exact (eigenvalue)</p></td>
+<td><p>Coefficients</p></td>
+<td><p>Equation is a polynomial</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bisection</p></td>
+<td><p>hand-coded</p></td>
+<td><p>Linear (<span class="math notranslate nohighlight">\(2^n\)</span>)</p></td>
+<td><p>Bracket <span class="math notranslate nohighlight">\([a,b]\)</span></p></td>
+<td><p>Learning / guaranteed fallback</p></td>
+</tr>
+<tr class="row-even"><td><p>Newton</p></td>
+<td><p>hand-coded</p></td>
+<td><p>Quadratic</p></td>
+<td><p><span class="math notranslate nohighlight">\(f'(x)\)</span> + good <span class="math notranslate nohighlight">\(x_0\)</span></p></td>
+<td><p>You can compute the derivative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Brent’s method</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">brentq</span></code></p></td>
+<td><p>Superlinear</p></td>
+<td><p>Bracket <span class="math notranslate nohighlight">\([a,b]\)</span></p></td>
+<td><p><strong>Single equation, single unknown</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Newton (N-D)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fsolve</span></code></p></td>
+<td><p>Quadratic</p></td>
+<td><p>Initial guess</p></td>
+<td><p><strong><span class="math notranslate nohighlight">\(N\)</span> equations, <span class="math notranslate nohighlight">\(N\)</span> unknowns</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>The workflow every time:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Rewrite</strong> as <span class="math notranslate nohighlight">\(f(x) = 0\)</span></p></li>
+<li><p><strong>Plot</strong> <span class="math notranslate nohighlight">\(f(x)\)</span> — count roots, find brackets or good initial guesses</p></li>
+<li><p><strong>Choose your tool</strong> — polynomial → <code class="docutils literal notranslate"><span class="pre">np.roots</span></code>; single eq → <code class="docutils literal notranslate"><span class="pre">brentq</span></code>; system → <code class="docutils literal notranslate"><span class="pre">fsolve</span></code></p></li>
+<li><p><strong>Verify</strong> — always check that <span class="math notranslate nohighlight">\(f(x^*) \approx 0\)</span></p></li>
+</ol>
+<p><strong>Common pitfalls:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.roots</span></code> returns complex roots — filter for real, physically meaningful values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">brentq</span></code> needs a sign change — if <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span> have the same sign you get a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fsolve</span></code> can silently give the wrong answer — always print residuals</p></li>
+<li><p>Newton diverges when <span class="math notranslate nohighlight">\(f'(x_n) \approx 0\)</span> — plot first and pick a good starting point</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter16"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening">Opening</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-root">16.1 — What Is a Root?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-roots-polynomial-roots">16.2 — <code class="docutils literal notranslate"><span class="pre">np.roots</span></code>: Polynomial Roots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-np-roots-actually-work">How does <code class="docutils literal notranslate"><span class="pre">np.roots</span></code> actually work?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection-method">16.3 — Bisection Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-plot">Convergence plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-s-method">16.4 — Newton’s Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-derivation">The derivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-walkthrough">Step-by-step walkthrough</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stopping-criteria">Stopping criteria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-quadratic-vs-linear">Convergence: quadratic vs. linear</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-newton-s-method-fails">When Newton’s method fails</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brentq-the-practical-choice">16.5 — <code class="docutils literal notranslate"><span class="pre">brentq</span></code>: The Practical Choice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-van-der-waals-molar-volume">Application: van der Waals molar volume</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fsolve-systems-of-equations">16.6 — <code class="docutils literal notranslate"><span class="pre">fsolve</span></code>: Systems of Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-reaction-equilibrium">16.7 — Application: Reaction Equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -17,7 +17,7 @@ We'll go through three instructor examples, then you'll work through problems on
 
 ## Example 1: Estimating π with Monte Carlo
 
-This is the classic "dart-throwing" demonstration. The idea: randomly throw darts at a unit square. The fraction that land inside the quarter-circle of radius 1 is approximately π/4.
+This is the classic "dart--throwing" demonstration. The idea: randomly throw darts at a unit square. The fraction that land inside the quarter-circle of radius 1 is approximately π/4.
 
 **The geometry:**
 - Square: x ∈ [0, 1], y ∈ [0, 1]

@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -1135,6 +1136,116 @@ $<span class="math notranslate nohighlight">\(\int_a^b f(x)\,dx \approx \sum_{j=
 </pre></div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizing Gaussian Quadrature vs. Trapezoidal Rule</span>
+<span class="c1"># Key idea: Gaussian quadrature picks a few *strategic* sample points</span>
+<span class="c1"># (with associated weights) that can exactly integrate high-degree polynomials,</span>
+<span class="c1"># while the trapezoid rule uses equally spaced points with uniform weights.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
+
+<span class="c1"># A smooth but non-trivial function to integrate on [0, 3]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.5</span>
+
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">3.0</span>
+<span class="n">x_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># --- Trapezoidal rule: 6 equally spaced points ---</span>
+<span class="n">n_trap</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">x_trap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n_trap</span><span class="p">)</span>
+<span class="n">y_trap</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_trap</span><span class="p">)</span>
+
+<span class="c1"># --- Gaussian quadrature: 6 points (Gauss-Legendre on [a, b]) ---</span>
+<span class="c1"># np.polynomial.legendre.leggauss returns nodes/weights on [-1, 1]</span>
+<span class="c1"># We transform to [a, b] via: x = (b-a)/2 * xi + (a+b)/2</span>
+<span class="n">xi_gl</span><span class="p">,</span> <span class="n">w_gl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polynomial</span><span class="o">.</span><span class="n">legendre</span><span class="o">.</span><span class="n">leggauss</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">x_gauss</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xi_gl</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">w_gauss</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">w_gl</span>          <span class="c1"># scaled weights</span>
+<span class="n">y_gauss</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_gauss</span><span class="p">)</span>
+<span class="n">gauss_integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w_gauss</span> <span class="o">*</span> <span class="n">y_gauss</span><span class="p">)</span>
+
+<span class="c1"># Exact integral for reference</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span> <span class="k">as</span> <span class="n">scipy_quad</span>
+<span class="n">exact</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scipy_quad</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># ---------------------------------------------------------------</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Gaussian Quadrature vs. Trapezoidal Rule — same number of points (6)&quot;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># --- Left panel: Trapezoidal ---</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="c1"># Draw trapezoids</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trap</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_trap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x_trap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x_trap</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">x_trap</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span>          <span class="n">y_trap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_trap</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span>          <span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="c1"># Mark sample points — all equally weighted (same size)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_trap</span><span class="p">,</span> <span class="n">y_trap</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sample points</span><span class="se">\n</span><span class="s1">(equal spacing, equal weight)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x_trap</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y_trap</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">trap_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">y_trap</span><span class="p">,</span> <span class="n">x_trap</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Trapezoidal Rule</span><span class="se">\n</span><span class="s1">Estimate = </span><span class="si">{</span><span class="n">trap_val</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">  |  Error = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">trap_val</span><span class="o">-</span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="c1"># --- Right panel: Gaussian Quadrature ---</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="c1"># Marker size proportional to weight (so students see the weight idea)</span>
+<span class="n">w_norm</span> <span class="o">=</span> <span class="n">w_gauss</span> <span class="o">/</span> <span class="n">w_gauss</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c1"># normalize for display</span>
+<span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">wi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x_gauss</span><span class="p">,</span> <span class="n">y_gauss</span><span class="p">,</span> <span class="n">w_norm</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">40</span> <span class="o">+</span> <span class="mi">180</span> <span class="o">*</span> <span class="n">wi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># Legend proxy with explanation</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sample points&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">s</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;larger marker = higher weight&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;Gaussian Quadrature (6-point Gauss-Legendre)</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;Estimate = </span><span class="si">{</span><span class="n">gauss_integral</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">  |  Error = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">gauss_integral</span><span class="o">-</span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="c1"># Annotate the key insight</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="s1">&#39;Points cluster away</span><span class="se">\n</span><span class="s1">from endpoints —</span><span class="se">\n</span><span class="s1">strategically placed&#39;</span><span class="p">,</span>
+    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x_gauss</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y_gauss</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">),</span>
+    <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">),</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mf">8.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgray&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Exact integral:              </span><span class="si">{</span><span class="n">exact</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Trapezoidal (6 pts):         </span><span class="si">{</span><span class="n">trap_val</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">  error = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">trap_val</span><span class="o">-</span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Gaussian quadrature (6 pts): </span><span class="si">{</span><span class="n">gauss_integral</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">  error = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">gauss_integral</span><span class="o">-</span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ea2ae0adc07a3976f5af2b95f40e99ca7a170448f06513f661c8c1005c55cf79.png" src="../../_images/ea2ae0adc07a3976f5af2b95f40e99ca7a170448f06513f661c8c1005c55cf79.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exact integral:              4.877103
+Trapezoidal (6 pts):         4.830028  error = 4.71e-02
+Gaussian quadrature (6 pts): 4.877103  error = 2.96e-07
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="basic-usage">
 <h3>15.4.1 Basic usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h3>
@@ -1143,12 +1254,13 @@ $<span class="math notranslate nohighlight">\(\int_0^3 x^2\,dx = \left[\frac{x^3
 <p>Notice that <code class="docutils literal notranslate"><span class="pre">quad</span></code> achieves essentially machine-precision accuracy (error <span class="math notranslate nohighlight">\(\sim 10^{-13}\)</span>) — far better than what the trapezoidal rule would give with a moderate number of points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integrate f(x) = x^2 from 0 to 3  (exact answer = 9)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+
+<span class="c1"># Integrate f(x) = x^2 from 0 to 3  (exact answer = 9)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">f_sq</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 
 <span class="n">result</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">f_sq</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;∫₀³ x² dx  =  </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exact answer:   9.0000000000&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error estimate: </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1174,7 +1286,9 @@ $<span class="math notranslate nohighlight">\(\Delta H = \int_{T_1}^{T_2} C_p(T)
 <p>This is a perfectly well-defined analytic function, so <code class="docutils literal notranslate"><span class="pre">quad</span></code> can evaluate it to near machine precision. We compare it against <code class="docutils literal notranslate"><span class="pre">trapezoid</span></code> with 10 and 100 points to see how accuracy scales with grid resolution — consistent with the <span class="math notranslate nohighlight">\(\mathcal{O}(h^2)\)</span> error of the trapezoidal rule.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NIST Shomate coefficients for N2 (298-6000 K range)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">trapezoid</span>
+
+<span class="c1"># NIST Shomate coefficients for N2 (298-6000 K range)</span>
 <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="mf">26.09200</span><span class="p">,</span> <span class="mf">8.218801</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.976141</span><span class="p">,</span> <span class="mf">0.159274</span><span class="p">,</span> <span class="mf">0.044434</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">Cp_N2</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
@@ -1185,14 +1299,19 @@ $<span class="math notranslate nohighlight">\(\Delta H = \int_{T_1}^{T_2} C_p(T)
 
 <span class="c1"># --- Method 1: quad (high accuracy) ---</span>
 <span class="n">dH_quad</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">Cp_N2</span><span class="p">,</span> <span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="p">)</span>
+<span class="c1"># print(dH_quad, err)</span>
+
 
 <span class="c1"># --- Method 2: trapezoid with only 10 points ---</span>
-<span class="n">T_10</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">T_10</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">dH_trap10</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">Cp_N2</span><span class="p">(</span><span class="n">T_10</span><span class="p">),</span> <span class="n">T_10</span><span class="p">)</span>
+<span class="c1"># print(dH_trap10)</span>
 
 <span class="c1"># --- Method 3: trapezoid with 100 points ---</span>
 <span class="n">T_100</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">dH_trap100</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">Cp_N2</span><span class="p">(</span><span class="n">T_100</span><span class="p">),</span> <span class="n">T_100</span><span class="p">)</span>
+<span class="c1"># print(dH_trap100)</span>
+
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ΔH from 300 K to 1200 K:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  quad          : </span><span class="si">{</span><span class="n">dH_quad</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> J/mol  (error bound: </span><span class="si">{</span><span class="n">err</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
@@ -1260,12 +1379,92 @@ $<span class="math notranslate nohighlight">\(F(x_0) = 0\)</span><span class="ma
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enthalpy of N2 as a function of temperature, relative to 298 K</span>
-<span class="n">T_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">298</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>   <span class="c1"># K</span>
-<span class="n">Cp_range</span> <span class="o">=</span> <span class="n">Cp_N2</span><span class="p">(</span><span class="n">T_range</span><span class="p">)</span>              <span class="c1"># J/mol·K</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizing cumulative integration: f(x) vs. F(x)</span>
+<span class="c1"># The top panel shows f(x) — the rate/density.</span>
+<span class="c1"># The bottom panel shows F(x) — the running total of area accumulated from x=0.</span>
+<span class="c1"># Shaded regions in the top panel correspond directly to the rise in the bottom panel.</span>
 
-<span class="c1"># Cumulative integral: ΔH(T) = ∫₂₉₈ᵀ Cp dT&#39;</span>
-<span class="n">dH_cumulative</span> <span class="o">=</span> <span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">Cp_range</span><span class="p">,</span> <span class="n">T_range</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># J/mol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">cumulative_trapezoid</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.5</span>          <span class="c1"># a smooth, non-trivial positive-ish function</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Pick three x-positions to highlight accumulated area</span>
+<span class="n">highlight</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
+<span class="n">colors</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#4C9BE8&#39;</span><span class="p">,</span> <span class="s1">&#39;#F4A261&#39;</span><span class="p">,</span> <span class="s1">&#39;#2EC4B6&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_top</span><span class="p">,</span> <span class="n">ax_bot</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Cumulative Integration: from f(x) to F(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># ---- Top panel: f(x) with growing shaded areas ----</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x)  [integrand]&#39;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">xh</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">highlight</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">xh</span>
+    <span class="n">ax_top</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
+    <span class="c1"># Mark the vertical boundary</span>
+    <span class="n">ax_top</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">xh</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Area accumulated under f(x) up to each x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># ---- Bottom panel: F(x) = cumulative integral ----</span>
+<span class="n">ax_bot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;F(x) = cumulative_trapezoid(f, x)&#39;</span><span class="p">)</span>
+<span class="n">ax_bot</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">xh</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">highlight</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xh</span><span class="p">))</span>
+    <span class="n">ax_bot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xh</span><span class="p">,</span> <span class="n">F</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">ax_bot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">xh</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax_bot</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;F(</span><span class="si">{</span><span class="n">xh</span><span class="si">}</span><span class="s1">) = </span><span class="si">{</span><span class="n">F</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">xh</span><span class="p">,</span> <span class="n">F</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">xh</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">F</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1.5</span><span class="p">),</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mf">8.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                    <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">ax_bot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax_bot</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;F(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax_bot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;F(x): total area from x=0 up to x  (each dot matches the shaded region above)&#39;</span><span class="p">,</span>
+                  <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax_bot</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Key insight: the slope of F(x) at any point equals f(x) there.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Where f(x) is large (steep function), F(x) rises quickly.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Where f(x) is small (flat function), F(x) barely changes.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a34e55ff0f359e779598c4dd6441e75c8b9f5fe2b6b5cde719942a6c07e74556.png" src="../../_images/a34e55ff0f359e779598c4dd6441e75c8b9f5fe2b6b5cde719942a6c07e74556.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key insight: the slope of F(x) at any point equals f(x) there.
+Where f(x) is large (steep function), F(x) rises quickly.
+Where f(x) is small (flat function), F(x) barely changes.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="mf">26.09200</span><span class="p">,</span> <span class="mf">8.218801</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.976141</span><span class="p">,</span> <span class="mf">0.159274</span><span class="p">,</span> <span class="mf">0.044434</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Cp_N2</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="mf">1000.0</span>
+    <span class="k">return</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">C</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">E</span><span class="o">/</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span>   <span class="c1"># J/mol·K</span>
+
+
+<span class="n">T_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">298</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">Cp_range</span> <span class="o">=</span> <span class="n">Cp_N2</span><span class="p">(</span><span class="n">T_range</span><span class="p">)</span>
+
+<span class="n">dH_cumulative</span> <span class="o">=</span> <span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">Cp_range</span><span class="p">,</span> <span class="n">T_range</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
