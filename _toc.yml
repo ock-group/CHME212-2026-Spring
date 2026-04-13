@@ -26,7 +26,7 @@ parts:
       - file: docs/chapter13/13_notebook
       - file: docs/chapter14/14_notebook
       - file: docs/chapter15/15_notebook
-  #     - file: docs/chapter16/16_notebook
+      - file: docs/chapter16/16_notebook
   #     - file: docs/chapter17/17_notebook
   #     - file: docs/chapter18/18_notebook
   # - caption: Advanced Topics & Applications
