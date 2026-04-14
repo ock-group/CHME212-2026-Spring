@@ -199,8 +199,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -212,6 +218,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
 </ul>
 
     </div>
@@ -942,12 +950,22 @@ P = \frac{RT}{V - b} - \frac{a}{V^2}
 <span class="n">crit_eq2</span> <span class="o">=</span> <span class="n">d2PdV2</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">V</span><span class="p">,</span> <span class="n">V_c</span><span class="p">),</span> <span class="p">(</span><span class="n">T_s</span><span class="p">,</span> <span class="n">T_c</span><span class="p">)])</span>
 
 <span class="n">crit_sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">([</span><span class="n">crit_eq1</span><span class="p">,</span> <span class="n">crit_eq2</span><span class="p">],</span> <span class="p">[</span><span class="n">V_c</span><span class="p">,</span> <span class="n">T_c</span><span class="p">])</span>
+
+<span class="c1"># sp.solve may return a list of solutions or a dict — handle both</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">crit_sol</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="n">crit_sol</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>          <span class="c1"># take the first (positive) solution</span>
+    <span class="n">Vc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>            <span class="c1"># tuple-indexed</span>
+    <span class="n">Tc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">Vc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">V_c</span><span class="p">]</span>          <span class="c1"># dict-indexed</span>
+    <span class="n">Tc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">T_c</span><span class="p">]</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Critical point:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  V_c =&quot;</span><span class="p">,</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">V_c</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  T_c =&quot;</span><span class="p">,</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">T_c</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  V_c =&quot;</span><span class="p">,</span> <span class="n">Vc_val</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  T_c =&quot;</span><span class="p">,</span> <span class="n">Tc_val</span><span class="p">)</span>
 
 <span class="c1"># Critical pressure</span>
-<span class="n">P_c</span> <span class="o">=</span> <span class="n">P_vdw</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">V</span><span class="p">,</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">V_c</span><span class="p">]),</span> <span class="p">(</span><span class="n">T_s</span><span class="p">,</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">T_c</span><span class="p">])])</span>
+<span class="n">P_c</span> <span class="o">=</span> <span class="n">P_vdw</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">V</span><span class="p">,</span> <span class="n">Vc_val</span><span class="p">),</span> <span class="p">(</span><span class="n">T_s</span><span class="p">,</span> <span class="n">Tc_val</span><span class="p">)])</span>
 <span class="n">P_c_simplified</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">P_c</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  P_c =&quot;</span><span class="p">,</span> <span class="n">P_c_simplified</span><span class="p">)</span>
 </pre></div>
@@ -961,18 +979,9 @@ dP/dV = -R*T/(V - b)**2 + 2*a/V**3
 d²P/dV² = 2*R*T/(V - b)**3 - 6*a/V**4
 
 Critical point:
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">crit_sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">([</span><span class="n">crit_eq1</span><span class="p">,</span> <span class="n">crit_eq2</span><span class="p">],</span> <span class="p">[</span><span class="n">V_c</span><span class="p">,</span> <span class="n">T_c</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Critical point:&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">25</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  V_c =&quot;</span><span class="p">,</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">V_c</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  T_c =&quot;</span><span class="p">,</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">T_c</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="c1"># Critical pressure</span>
-
-<span class="ne">TypeError</span>: list indices must be integers or slices, not Symbol
+  V_c = 3*b
+  T_c = 8*a/(27*R*b)
+  P_c = a/(27*b**2)
 </pre></div>
 </div>
 </div>
@@ -1015,6 +1024,13 @@ Critical point:
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CO₂ critical temperature: T_c = </span><span class="si">{</span><span class="n">T_c_co2</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> K  (</span><span class="si">{</span><span class="n">T_c_co2</span><span class="o">-</span><span class="mf">273.15</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> °C)&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CO₂ critical pressure:    P_c = </span><span class="si">{</span><span class="n">a_co2</span><span class="o">/</span><span class="p">(</span><span class="mi">27</span><span class="o">*</span><span class="n">b_co2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dda45105cc1dcfa3ed891bbc2221d659d1d0ed3faefc0addfaf6a725b2c3d009.png" src="../../_images/dda45105cc1dcfa3ed891bbc2221d659d1d0ed3faefc0addfaf6a725b2c3d009.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CO₂ critical temperature: T_c = 304.2 K  (31.0 °C)
+CO₂ critical pressure:    P_c = 7.38 MPa
 </pre></div>
 </div>
 </div>
@@ -1099,6 +1115,21 @@ Critical point:
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Critical points of f(x) on [0, 4π]:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">zeros</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  x = </span><span class="si">{</span><span class="n">z</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">,  f(x) = </span><span class="si">{</span><span class="n">f</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">,  f&#39;(x) ≈ </span><span class="si">{</span><span class="n">df</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f(x)   = exp(-x/3)*sin(x)
+f&#39;(x)  = -exp(-x/3)*sin(x)/3 + exp(-x/3)*cos(x)
+f&#39;&#39;(x) = -2*(4*sin(x) + 3*cos(x))*exp(-x/3)/9
+</pre></div>
+</div>
+<img alt="../../_images/a06a0358d6c8871b9c96c5752c2a49394e264694023a23f583723093f05f9a06.png" src="../../_images/a06a0358d6c8871b9c96c5752c2a49394e264694023a23f583723093f05f9a06.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Critical points of f(x) on [0, 4π]:
+  x = 1.2490,  f(x) = 0.6256,  f&#39;(x) ≈ -9.32e-14
+  x = 4.3906,  f(x) = -0.2195,  f&#39;(x) ≈ -2.84e-14
+  x = 7.5322,  f(x) = 0.0770,  f&#39;(x) ≈ 4.75e-16
+  x = 10.6738,  f(x) = -0.0270,  f&#39;(x) ≈ 2.03e-16
 </pre></div>
 </div>
 </div>

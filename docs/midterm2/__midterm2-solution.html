@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/midterm2/midterm2-solution';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/midterm2/__midterm2-solution';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -291,7 +291,7 @@
       
       
       
-      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/midterm2/midterm2-solution.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/midterm2/__midterm2-solution.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +321,7 @@
       
       
       
-      <li><a href="../../_sources/docs/midterm2/midterm2-solution.ipynb" target="_blank"
+      <li><a href="../../_sources/docs/midterm2/__midterm2-solution.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -416,21 +416,18 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-this-cell-if-package-installation-is-required-if-not-ignore">Run this cell if package installation is required. If not, ignore.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-information">Student Information</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-multiple-choice-30-pts-10-pts-each-3-min-1-min-each-ideally-30-sec-each">Part A — Multiple Choice (30 pts, 10 pts each; ⏱ ~3 min, ~1 min each, ideally &lt;30 sec each)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-multiple-choice-20-pts-5-pts-each-4-min-1-min-each">Part A — Multiple Choice (20 pts, 5 pts each; ⏱ ~4 min, ~1 min each)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1">Q1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2">Q2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3">Q3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4">Q4</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-coding-problems-70-pts">Part B — Coding Problems (70 pts)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-numerical-integration-polynomial-fitting-20-pts-8-min">Q1 — Numerical Integration &amp; Polynomial Fitting (20 pts; ⏱ ~8 min)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-monte-carlo-simulation-25-pts-8-min">Q2 — Monte Carlo Simulation (25 pts; ⏱ ~8 min)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-heat-mass-balance-25-pts-14-min">Q3 — Heat &amp; Mass Balance (25 pts; ⏱ ~14 min)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-below-cell-for-visualization-after-running-please-collapse-the-code-cell-in-jupyterlab-click-the-small-arrow-to-the-left-of-the-cell-use-view-collapse-selected-code-or-click-the-vertical-bar-next-to-the-cell"><strong>!!!Run the below cell for visualization!!!</strong>  After running, please collapse the code cell (in JupyterLab, click the small arrow to the left of the cell, use View → Collapse Selected Code, or click the vertical bar next to the cell).</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-coding-problems-75-pts">Part B — Coding Problems (75 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-numerical-integration-polynomial-fitting-25-pts-9-min">Q1 — Numerical Integration &amp; Polynomial Fitting (25 pts; ⏱ ~9 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-monte-carlo-simulation-25-pts-9-min">Q2 — Monte Carlo Simulation (25 pts; ⏱ ~9 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-heat-mass-balance-25-pts-15-min">Q3 — Heat &amp; Mass Balance (25 pts; ⏱ ~15 min)</a></li>
 </ul>
 </li>
 </ul>
@@ -458,49 +455,46 @@ document.write(`
 <li><p><strong>Before submitting:</strong> Restart the kernel and run all cells to confirm your notebook runs without errors.</p></li>
 </ol>
 </section>
-<section id="run-this-cell-if-package-installation-is-required-if-not-ignore">
-<h2>Run this cell if package installation is required. If not, ignore.<a class="headerlink" href="#run-this-cell-if-package-installation-is-required-if-not-ignore" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
-<span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span> <span class="s2">&quot;scipy&quot;</span><span class="p">,</span> <span class="s2">&quot;-q&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="student-information">
 <h2>Student Information<a class="headerlink" href="#student-information" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>        <span class="c1"># Your full name</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>   <span class="c1"># Your full name</span>
+<span class="n">nuid</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>        <span class="c1"># Your NUID</span>
+<span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>        <span class="c1"># Your UNL email</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <hr class="docutils" />
-<section id="part-a-multiple-choice-30-pts-10-pts-each-3-min-1-min-each-ideally-30-sec-each">
-<h2>Part A — Multiple Choice (30 pts, 10 pts each; ⏱ ~3 min, ~1 min each, ideally &lt;30 sec each)<a class="headerlink" href="#part-a-multiple-choice-30-pts-10-pts-each-3-min-1-min-each-ideally-30-sec-each" title="Link to this heading">#</a></h2>
+<section id="part-a-multiple-choice-20-pts-5-pts-each-4-min-1-min-each">
+<h2>Part A — Multiple Choice (20 pts, 5 pts each; ⏱ ~4 min, ~1 min each)<a class="headerlink" href="#part-a-multiple-choice-20-pts-5-pts-each-4-min-1-min-each" title="Link to this heading">#</a></h2>
 <p>Answer each question by assigning the correct letter in the answer cell below.</p>
 <section id="q1">
 <h3>Q1<a class="headerlink" href="#q1" title="Link to this heading">#</a></h3>
 <p>Which of the following correctly matches each <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> method to what it draws?</p>
-<p><strong>(A)</strong> <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> → scatter points,  <code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code> → line,  <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> → histogram<br />
-<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> → line,  <code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code> → scatter points,  <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> → histogram<br />
-<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> → histogram,  <code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code> → line,  <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> → scatter points<br />
-<strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> → line,  <code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code> → histogram,  <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> → scatter points</p>
+<p><strong>(A)</strong> <code class="docutils literal notranslate"><span class="pre">ax.plot</span></code> → scatter points,  <code class="docutils literal notranslate"><span class="pre">ax.scatter</span></code> → line,  <code class="docutils literal notranslate"><span class="pre">ax.hist</span></code> → histogram<br />
+<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">ax.plot</span></code> → line,  <code class="docutils literal notranslate"><span class="pre">ax.scatter</span></code> → scatter points,  <code class="docutils literal notranslate"><span class="pre">ax.hist</span></code> → histogram<br />
+<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">ax.plot</span></code> → histogram,  <code class="docutils literal notranslate"><span class="pre">ax.scatter</span></code> → line,  <code class="docutils literal notranslate"><span class="pre">ax.hist</span></code> → scatter points<br />
+<strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">ax.plot</span></code> → line,  <code class="docutils literal notranslate"><span class="pre">ax.scatter</span></code> → histogram,  <code class="docutils literal notranslate"><span class="pre">ax.hist</span></code> → scatter points</p>
 <blockquote>
-<div><p><strong>Solution:</strong> <strong>(B)</strong> — <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> draws a line, <code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code> draws scatter points, <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> draws a histogram.</p>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
 </div></blockquote>
 </section>
 <section id="q2">
 <h3>Q2<a class="headerlink" href="#q2" title="Link to this heading">#</a></h3>
+<p>Which import lets you call <code class="docutils literal notranslate"><span class="pre">linspace(0,</span> <span class="pre">1,</span> <span class="pre">50)</span></code> <strong>without</strong> any prefix?</p>
+<p><strong>(A)</strong> <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span></code><br />
+<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code><br />
+<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">numpy</span> <span class="pre">import</span> <span class="pre">linspace</span></code><br />
+<strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">numpy</span> <span class="pre">import</span> <span class="pre">numpy.linspace</span></code></p>
+<blockquote>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
+</div></blockquote>
+</section>
+<section id="q3">
+<h3>Q3<a class="headerlink" href="#q3" title="Link to this heading">#</a></h3>
 <p>A project is organized like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reactor_tools</span><span class="o">/</span>
     <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
@@ -514,42 +508,39 @@ document.write(`
 <strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">reactor_tools</span></code><br />
 <strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">kinetics</span> <span class="pre">import</span> <span class="pre">reactor_tools</span></code></p>
 <blockquote>
-<div><p><strong>Solution:</strong> <strong>(B)</strong> — <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">reactor_tools</span> <span class="pre">import</span> <span class="pre">kinetics</span></code> imports the <code class="docutils literal notranslate"><span class="pre">kinetics</span></code> module from the package, allowing <code class="docutils literal notranslate"><span class="pre">kinetics.rate(T)</span></code> to be called.</p>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
 </div></blockquote>
 </section>
-<section id="q3">
-<h3>Q3<a class="headerlink" href="#q3" title="Link to this heading">#</a></h3>
+<section id="q4">
+<h3>Q4<a class="headerlink" href="#q4" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
-<span class="p">])</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Which line produces <code class="docutils literal notranslate"><span class="pre">[15,</span> <span class="pre">18,</span> <span class="pre">21,</span> <span class="pre">24]</span></code> (the sum of each column)?</p>
-<p><strong>(A)</strong> <code class="docutils literal notranslate"><span class="pre">np.sum(matrix)</span></code><br />
-<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">np.sum(matrix,</span> <span class="pre">axis=1)</span></code><br />
-<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">np.sum(matrix,</span> <span class="pre">axis=0)</span></code><br />
-<strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">np.mean(matrix,</span> <span class="pre">axis=0)</span></code></p>
+<p>What does this print?</p>
+<p><strong>(A)</strong> <code class="docutils literal notranslate"><span class="pre">[10</span> <span class="pre">20</span> <span class="pre">30]</span></code><br />
+<strong>(B)</strong> <code class="docutils literal notranslate"><span class="pre">[20</span> <span class="pre">30</span> <span class="pre">40]</span></code><br />
+<strong>(C)</strong> <code class="docutils literal notranslate"><span class="pre">[20</span> <span class="pre">30</span> <span class="pre">40</span> <span class="pre">50]</span></code><br />
+<strong>(D)</strong> <code class="docutils literal notranslate"><span class="pre">[10</span> <span class="pre">20</span> <span class="pre">30</span> <span class="pre">40]</span></code></p>
 <blockquote>
-<div><p><strong>Solution:</strong> <strong>(C)</strong> — <code class="docutils literal notranslate"><span class="pre">np.sum(matrix,</span> <span class="pre">axis=0)</span></code> sums along axis 0 (rows), producing the column sums <code class="docutils literal notranslate"><span class="pre">[15,</span> <span class="pre">18,</span> <span class="pre">21,</span> <span class="pre">24]</span></code>.</p>
+<div><p><strong>Solution:</strong> <em>(Put your solution here)</em></p>
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
-<span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Part A — Multiple Choice Answers</span>
 
-<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">A1</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span>   <span class="c1"># ax.plot → line, ax.scatter → points, ax.hist → histogram</span>
+<span class="n">A2</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>   <span class="c1"># from numpy import linspace → call linspace without prefix</span>
+<span class="n">A3</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span>   <span class="c1"># from reactor_tools import kinetics → lets you call kinetics.rate(T)</span>
+<span class="n">A4</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span>   <span class="c1"># a[1:4] → indices 1,2,3 → [20 30 40]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Part A answers recorded.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([15, 18, 21, 24])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Part A answers recorded.
 </pre></div>
 </div>
 </div>
@@ -557,20 +548,21 @@ document.write(`
 </section>
 </section>
 <hr class="docutils" />
-<section id="part-b-coding-problems-70-pts">
-<h2>Part B — Coding Problems (70 pts)<a class="headerlink" href="#part-b-coding-problems-70-pts" title="Link to this heading">#</a></h2>
+<section id="part-b-coding-problems-75-pts">
+<h2>Part B — Coding Problems (75 pts)<a class="headerlink" href="#part-b-coding-problems-75-pts" title="Link to this heading">#</a></h2>
 <p>Read each problem carefully and fill in the blanks marked with <code class="docutils literal notranslate"><span class="pre">TODO</span></code>, or complete the code as instructed. Do not modify the pre-provided lines.</p>
 <hr class="docutils" />
-<section id="q1-numerical-integration-polynomial-fitting-20-pts-8-min">
-<h3>Q1 — Numerical Integration &amp; Polynomial Fitting (20 pts; ⏱ ~8 min)<a class="headerlink" href="#q1-numerical-integration-polynomial-fitting-20-pts-8-min" title="Link to this heading">#</a></h3>
+<section id="q1-numerical-integration-polynomial-fitting-25-pts-9-min">
+<h3>Q1 — Numerical Integration &amp; Polynomial Fitting (25 pts; ⏱ ~9 min)<a class="headerlink" href="#q1-numerical-integration-polynomial-fitting-25-pts-9-min" title="Link to this heading">#</a></h3>
 <p>A steam process requires heating from 400 K to 1000 K. The heat capacity <span class="math notranslate nohighlight">\(C_p\)</span> of steam was measured at seven temperatures:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">400</span><span class="p">,</span>  <span class="mi">500</span><span class="p">,</span>  <span class="mi">600</span><span class="p">,</span>  <span class="mi">700</span><span class="p">,</span>  <span class="mi">800</span><span class="p">,</span>  <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>  <span class="c1"># K</span>
 <span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">34.3</span><span class="p">,</span> <span class="mf">35.2</span><span class="p">,</span> <span class="mf">36.3</span><span class="p">,</span> <span class="mf">37.5</span><span class="p">,</span> <span class="mf">38.6</span><span class="p">,</span> <span class="mf">39.7</span><span class="p">,</span> <span class="mf">40.8</span><span class="p">])</span>  <span class="c1"># J/mol·K</span>
 </pre></div>
 </div>
 <p>The enthalpy change is <span class="math notranslate nohighlight">\(\Delta H = \displaystyle\int_{400}^{1000} C_p(T)\,dT\)</span>.</p>
-<p><strong>(Task 1 — 7 pts):</strong> Using the trapezoidal rule on the tabulated data, compute <span class="math notranslate nohighlight">\(\Delta H\)</span> in J/mol directly from the tabulated data.</p>
-<p><strong>(Task 2 — 13 pts):</strong> Define a Python function <code class="docutils literal notranslate"><span class="pre">Cp_fit(T)</span></code> that <strong>evaluates</strong> the fitted polynomial, then recompute <span class="math notranslate nohighlight">\(\Delta H\)</span> in J/mol from the fitted curve.</p>
+<p><strong>(Task 1 — 8 pts):</strong> Compute <span class="math notranslate nohighlight">\(\Delta H\)</span> in kJ/mol directly from the tabulated data.</p>
+<p><strong>(Task 2 — 8 pts):</strong> Fit a <strong>degree-1 polynomial</strong> (linear) to the data.</p>
+<p><strong>(Task 3 — 9 pts):</strong> Define a Python function <code class="docutils literal notranslate"><span class="pre">Cp_fit(T)</span></code> that evaluates the polynomial fit, then recompute <span class="math notranslate nohighlight">\(\Delta H\)</span> in kJ/mol from the fitted curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -580,17 +572,66 @@ document.write(`
 <span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">34.3</span><span class="p">,</span> <span class="mf">35.2</span><span class="p">,</span> <span class="mf">36.3</span><span class="p">,</span> <span class="mf">37.5</span><span class="p">,</span> <span class="mf">38.6</span><span class="p">,</span> <span class="mf">39.7</span><span class="p">,</span> <span class="mf">40.8</span><span class="p">])</span>  <span class="c1"># J/mol·K</span>
 
 <span class="c1"># Task 1 — trapezoidal integration on tabulated data</span>
-<span class="n">dH_trap</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">Cp_data</span><span class="p">,</span> <span class="n">T_data</span><span class="p">)</span>
+<span class="n">dH_trap</span> <span class="o">=</span> <span class="n">TODO</span>          <span class="c1">#</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task 1  ΔH (trapezoid) = </span><span class="si">{</span><span class="n">dH_trap</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
 
-<span class="c1"># Task 2 — integrate the fitted polynomial with quad</span>
-<span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># linear fit with 1st degree polynomial</span>
+<span class="c1"># Task 2 — polynomial fit</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="n">TODO</span>           <span class="c1"># </span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">coeffs</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Task 2  slope     = </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> J/mol·K²&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;        intercept = </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> J/mol·K&quot;</span><span class="p">)</span>
 
+<span class="c1"># Task 3 — integrate the fitted polynomial with quad</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">Cp_fit</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>  <span class="c1"># evaluate the polynomial at T</span>
+    <span class="k">return</span> <span class="n">TODO</span>         
 
-<span class="n">dH_quad</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">Cp_fit</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># integrate Cp_fit from 400 to 1000 K</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Task 2  ΔH (quad fit)  = </span><span class="si">{</span><span class="n">dH_quad</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+<span class="n">dH_quad</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">TODO</span>       
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Task 3  ΔH (quad fit)  = </span><span class="si">{</span><span class="n">dH_quad</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;        Difference     = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">dH_trap</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dH_quad</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">34.3</span><span class="p">,</span> <span class="mf">35.2</span><span class="p">,</span> <span class="mf">36.3</span><span class="p">,</span> <span class="mf">37.5</span><span class="p">,</span> <span class="mf">38.6</span><span class="p">,</span> <span class="mf">39.7</span><span class="p">,</span> <span class="mf">40.8</span><span class="p">])</span>  <span class="c1"># J/mol·K</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Task 1 — trapezoidal integration on tabulated data</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">dH_trap</span> <span class="o">=</span> <span class="n">TODO</span>          <span class="c1">#</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task 1  ΔH (trapezoid) = </span><span class="si">{</span><span class="n">dH_trap</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Task 2 — polynomial fit</span>
+
+<span class="ne">NameError</span>: name &#39;TODO&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">trapezoid</span><span class="p">,</span> <span class="n">quad</span>
+
+<span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">400</span><span class="p">,</span>  <span class="mi">500</span><span class="p">,</span>  <span class="mi">600</span><span class="p">,</span>  <span class="mi">700</span><span class="p">,</span>  <span class="mi">800</span><span class="p">,</span>  <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>  <span class="c1"># K</span>
+<span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">34.3</span><span class="p">,</span> <span class="mf">35.2</span><span class="p">,</span> <span class="mf">36.3</span><span class="p">,</span> <span class="mf">37.5</span><span class="p">,</span> <span class="mf">38.6</span><span class="p">,</span> <span class="mf">39.7</span><span class="p">,</span> <span class="mf">40.8</span><span class="p">])</span>  <span class="c1"># J/mol·K</span>
+
+<span class="c1"># Task 1 — trapezoidal integration on tabulated data</span>
+<span class="n">dH_trap</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">Cp_data</span><span class="p">,</span> <span class="n">T_data</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task 1  ΔH (trapezoid) = </span><span class="si">{</span><span class="n">dH_trap</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 2 — polynomial fit</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span> <span class="n">Cp_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">coeffs</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Task 2  slope     = </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> J/mol·K²&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;        intercept = </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> J/mol·K&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Task 3 — integrate the fitted polynomial with quad</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Cp_fit</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="n">dH_quad</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">Cp_fit</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Task 3  ΔH (quad fit)  = </span><span class="si">{</span><span class="n">dH_quad</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;        Difference     = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">dH_trap</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dH_quad</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -598,7 +639,10 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task 1  ΔH (trapezoid) = 22485.000 J/mol
 
-Task 2  ΔH (quad fit)  = 22491.429 J/mol
+Task 2  slope     = 0.01100 J/mol·K²
+        intercept = 29.7857 J/mol·K
+
+Task 3  ΔH (quad fit)  = 22491.429 J/mol
         Difference     = 6.4286 J/mol
 </pre></div>
 </div>
@@ -606,8 +650,8 @@ Task 2  ΔH (quad fit)  = 22491.429 J/mol
 </div>
 </section>
 <hr class="docutils" />
-<section id="q2-monte-carlo-simulation-25-pts-8-min">
-<h3>Q2 — Monte Carlo Simulation (25 pts; ⏱ ~8 min)<a class="headerlink" href="#q2-monte-carlo-simulation-25-pts-8-min" title="Link to this heading">#</a></h3>
+<section id="q2-monte-carlo-simulation-25-pts-9-min">
+<h3>Q2 — Monte Carlo Simulation (25 pts; ⏱ ~9 min)<a class="headerlink" href="#q2-monte-carlo-simulation-25-pts-9-min" title="Link to this heading">#</a></h3>
 <p>A shell-and-tube heat exchanger heats a process stream. The outlet temperature is modeled as:</p>
 <div class="math notranslate nohighlight">
 \[T_{out} = T_{in} + \frac{Q}{\dot{m} \, c_p}\]</div>
@@ -619,12 +663,47 @@ Task 2  ΔH (quad fit)  = 22491.429 J/mol
 <li><p><span class="math notranslate nohighlight">\(\dot{m} \sim \mathcal{N}(100,\;5^2)\,\text{g/s}\)</span> (mass flow rate, <strong>normally distributed</strong>)</p></li>
 </ul>
 <p>The outlet temperature must be <strong>at least 35 °C</strong> to meet process requirements.</p>
-<p><strong>(Task 1 — 8 pts):</strong> Compute <span class="math notranslate nohighlight">\(T_{out}\)</span> at the mean flow rate <span class="math notranslate nohighlight">\(\dot{m} = 100\,\text{g/s}\)</span>. Does it meet the spec?</p>
-<p><strong>(Task 2 — 17 pts):</strong> Generate <span class="math notranslate nohighlight">\(N = 50{,}000\)</span> samples of <span class="math notranslate nohighlight">\(\dot{m}\)</span> and compute <span class="math notranslate nohighlight">\(T_{out}\)</span> for each. Then find:</p>
+<p><strong>(Task 1 — 10 pts):</strong> Compute <span class="math notranslate nohighlight">\(T_{out}\)</span> at the mean flow rate <span class="math notranslate nohighlight">\(\dot{m} = 100\,\text{g/s}\)</span>. Does it meet the spec?</p>
+<p><strong>(Task 2 — 15 pts):</strong> Sample <span class="math notranslate nohighlight">\(N = 50{,}000\)</span> values of <span class="math notranslate nohighlight">\(\dot{m}\)</span> and compute <span class="math notranslate nohighlight">\(T_{out}\)</span> for each. Then find:</p>
 <ul class="simple">
 <li><p>Mean and standard deviation of <span class="math notranslate nohighlight">\(T_{out}\)</span></p></li>
 <li><p>Fraction of runs where <span class="math notranslate nohighlight">\(T_{out} &lt; 35\,°C\)</span> (failure rate)</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">T_in</span> <span class="o">=</span> <span class="mf">25.0</span>    <span class="c1"># °C</span>
+<span class="n">Q</span>    <span class="o">=</span> <span class="mf">5000.0</span>  <span class="c1"># W</span>
+<span class="n">cp</span>   <span class="o">=</span> <span class="mf">4.18</span>    <span class="c1"># J/(g·°C)</span>
+<span class="n">spec_T</span> <span class="o">=</span> <span class="mf">35.0</span>  <span class="c1"># °C</span>
+
+<span class="c1"># Task 1 — nominal outlet temperature at mean flow rate</span>
+<span class="n">mdot_mean</span> <span class="o">=</span> <span class="mf">100.0</span>   <span class="c1"># g/s</span>
+<span class="n">T_nominal</span> <span class="o">=</span> <span class="n">TODO</span>  <span class="c1"># compute T_out at mdot_mean</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nominal T_out = </span><span class="si">{</span><span class="n">T_nominal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Meets spec?   </span><span class="si">{</span><span class="s1">&#39;YES&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">T_nominal</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">spec_T</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 2 — Monte Carlo</span>
+<span class="n">N</span>   <span class="o">=</span> <span class="mi">50_000</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">mdot_samples</span> <span class="o">=</span> <span class="n">TODO</span>         <span class="c1"># sample N values from N(100, 5^2)</span>
+<span class="n">T_samples</span>    <span class="o">=</span> <span class="n">TODO</span>         <span class="c1"># compute T_out for each sample</span>
+
+<span class="n">mean_T</span>    <span class="o">=</span> <span class="n">TODO</span>            <span class="c1"># mean of T_samples</span>
+<span class="n">std_T</span>     <span class="o">=</span> <span class="n">TODO</span>            <span class="c1"># std of T_samples (ddof=1)</span>
+<span class="n">fail_rate</span> <span class="o">=</span> <span class="n">TODO</span>            <span class="c1"># fraction where T_out &lt; spec_T</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Monte Carlo results (N = </span><span class="si">{</span><span class="n">N</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean T_out   = </span><span class="si">{</span><span class="n">mean_T</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Std T_out    = </span><span class="si">{</span><span class="n">std_T</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Failure rate = </span><span class="si">{</span><span class="n">fail_rate</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -645,8 +724,8 @@ Task 2  ΔH (quad fit)  = 22491.429 J/mol
 <span class="n">N</span>   <span class="o">=</span> <span class="mi">50_000</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
-<span class="n">mdot_samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>         <span class="c1"># sample N values from N(100, 5^2)</span>
-<span class="n">T_samples</span>    <span class="o">=</span> <span class="n">T_in</span> <span class="o">+</span> <span class="n">Q</span> <span class="o">/</span> <span class="p">(</span><span class="n">mdot_samples</span> <span class="o">*</span> <span class="n">cp</span><span class="p">)</span>  <span class="c1"># compute T_out for each sample</span>
+<span class="n">mdot_samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">T_samples</span>    <span class="o">=</span> <span class="n">T_in</span> <span class="o">+</span> <span class="n">Q</span> <span class="o">/</span> <span class="p">(</span><span class="n">mdot_samples</span> <span class="o">*</span> <span class="n">cp</span><span class="p">)</span>
 
 <span class="n">mean_T</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">T_samples</span><span class="p">)</span>
 <span class="n">std_T</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">T_samples</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -673,8 +752,8 @@ Monte Carlo results (N = 50,000):
 </div>
 </section>
 <hr class="docutils" />
-<section id="q3-heat-mass-balance-25-pts-14-min">
-<h3>Q3 — Heat &amp; Mass Balance (25 pts; ⏱ ~14 min)<a class="headerlink" href="#q3-heat-mass-balance-25-pts-14-min" title="Link to this heading">#</a></h3>
+<section id="q3-heat-mass-balance-25-pts-15-min">
+<h3>Q3 — Heat &amp; Mass Balance (25 pts; ⏱ ~15 min)<a class="headerlink" href="#q3-heat-mass-balance-25-pts-15-min" title="Link to this heading">#</a></h3>
 <p>A mixing unit combines two feed streams and produces a single outlet stream. Each stream carries three components (A, B, C) and has its own temperature.</p>
 <p><strong>Stream data:</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -719,18 +798,13 @@ Monte Carlo results (N = 50,000):
 </tbody>
 </table>
 </div>
-<p>The mixer operates at <strong>steady state</strong> with <strong>no heat loss</strong> to the surroundings.
-Assume constant heat capacities, negligible heat of mixing, and a common reference temperature for all streams. Use the given outlet c_p value directly in the energy balance.</p>
-<p><strong>(Task 1 — 10 pts):</strong> Set up and solve the <strong>2×2 linear system</strong> for <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> using the total mass balance and component A balance.</p>
-<p><strong>(Task 2 — 10 pts):</strong> Compute the outlet temperature <span class="math notranslate nohighlight">\(T_{out}\)</span> using the energy balance equation. Think about what “steady state, no heat loss” implies: all the thermal energy carried in by the feed streams must equal the thermal energy carried out by the outlet stream. Each stream’s thermal energy rate is proportional to its flow rate, heat capacity, and temperature.</p>
-<p><strong>(Task 3 — 5 pts):</strong> If <span class="math notranslate nohighlight">\(F_1\)</span> increases while <span class="math notranslate nohighlight">\(F_2\)</span> stays the same, would <span class="math notranslate nohighlight">\(T_{out}\)</span> go <strong>up or down</strong>?</p>
-<section id="run-the-below-cell-for-visualization-after-running-please-collapse-the-code-cell-in-jupyterlab-click-the-small-arrow-to-the-left-of-the-cell-use-view-collapse-selected-code-or-click-the-vertical-bar-next-to-the-cell">
-<h4><strong>!!!Run the below cell for visualization!!!</strong>  After running, please collapse the code cell (in JupyterLab, click the small arrow to the left of the cell, use View → Collapse Selected Code, or click the vertical bar next to the cell).<a class="headerlink" href="#run-the-below-cell-for-visualization-after-running-please-collapse-the-code-cell-in-jupyterlab-click-the-small-arrow-to-the-left-of-the-cell-use-view-collapse-selected-code-or-click-the-vertical-bar-next-to-the-cell" title="Link to this heading">#</a></h4>
+<p>The mixer operates at <strong>steady state</strong> with <strong>no heat loss</strong> to the surroundings.</p>
+<p><strong>(Task 1 — 10 pts):</strong> Set up and solve the <strong>2×2 linear system</strong> for <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> using the total mass balance and component A balance. Use <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>.</p>
+<p><strong>(Task 2 — 15 pts):</strong> Write an energy balance for the mixer and compute the outlet temperature <span class="math notranslate nohighlight">\(T_{out}\)</span>. Think about what “steady state, no heat loss” implies: all the thermal energy carried in by the feed streams must equal the thermal energy carried out by the outlet stream. Each stream’s thermal energy rate is proportional to its flow rate, heat capacity, and temperature.</p>
+<p>Run this code for visualization!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## !!!!!!! THIS IS NOT THE PROBLEM CODE!!!!!!!</span>
-<span class="c1">### ONLY FOR VISUALIZATION PURPOSES — COLLAPSE THIS CELL AFTER RUNNING !!!!!!! ###</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">FancyArrowPatch</span>
 
@@ -778,8 +852,6 @@ Assume constant heat capacities, negligible heat of mixing, and a common referen
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="c1">## !!!!!!! THIS IS NOT THE PROBLEM CODE!!!!!!!</span>
-<span class="c1">### ONLY FOR VISUALIZATION PURPOSES — COLLAPSE THIS CELL AFTER RUNNING !!!!!!! ###</span>
 </pre></div>
 </div>
 </div>
@@ -800,13 +872,40 @@ Assume constant heat capacities, negligible heat of mixing, and a common referen
 <span class="n">cp_out</span>  <span class="o">=</span> <span class="mf">3.8</span>          <span class="c1"># kJ/(kg·°C)</span>
 
 <span class="c1"># Task 1 — solve 2×2 system for F1 and F2</span>
-<span class="c1"># Total mass balance:     F1 + F2 = 500</span>
-<span class="c1"># Component A balance:    0.60*F1 + 0.20*F2 = 0.40*500 = 200</span>
-<span class="c1">#</span>
-<span class="c1"># In matrix form: A @ [F1, F2]^T = b</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">],</span>
+<span class="c1"># Build the system of equations from mass and component balances</span>
+<span class="c1"># Construction of A and b is the key step here (A@b = constants)</span>
+<span class="c1"># Then solve for F1 and F2 </span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1 = </span><span class="si">{</span><span class="n">F1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F2 = </span><span class="si">{</span><span class="n">F2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Check: F1 + F2 = </span><span class="si">{</span><span class="n">F1</span><span class="o">+</span><span class="n">F2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h  (expected </span><span class="si">{</span><span class="n">F_out</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Task 2 — outlet temperature from energy balance</span>
+<span class="c1"># Derive the energy balance equation and solve for T_out</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Outlet temperature T_out = </span><span class="si">{</span><span class="n">T_out</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Known stream properties</span>
+<span class="n">F_out</span>  <span class="o">=</span> <span class="mf">500.0</span>   <span class="c1"># kg/h</span>
+<span class="n">xA_out</span> <span class="o">=</span> <span class="mf">0.40</span>    <span class="c1"># outlet mass fraction of A</span>
+
+<span class="n">cp1</span><span class="p">,</span> <span class="n">T1</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">80.0</span>   <span class="c1"># kJ/(kg·°C), °C</span>
+<span class="n">cp2</span><span class="p">,</span> <span class="n">T2</span> <span class="o">=</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">40.0</span>
+<span class="n">cp_out</span>  <span class="o">=</span> <span class="mf">3.8</span>          <span class="c1"># kJ/(kg·°C)</span>
+
+<span class="c1"># Task 1 — solve 2×2 system for F1 and F2</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span>  <span class="mf">1.0</span> <span class="p">],</span>
               <span class="p">[</span><span class="mf">0.60</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">]])</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">F_out</span><span class="p">,</span> <span class="n">xA_out</span> <span class="o">*</span> <span class="n">F_out</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">F_out</span><span class="p">,</span> <span class="n">xA_out</span> <span class="o">*</span> <span class="n">F_out</span><span class="p">])</span>   <span class="c1"># [500, 200]</span>
 
 <span class="n">F1</span><span class="p">,</span> <span class="n">F2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
@@ -814,24 +913,10 @@ Assume constant heat capacities, negligible heat of mixing, and a common referen
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F2 = </span><span class="si">{</span><span class="n">F2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Check: F1 + F2 = </span><span class="si">{</span><span class="n">F1</span><span class="o">+</span><span class="n">F2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h  (expected </span><span class="si">{</span><span class="n">F_out</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 
-<span class="c1"># Task 2 — Outlet temperature from energy balance</span>
-<span class="c1"># Steady state, no heat loss:  energy in = energy out</span>
-<span class="c1">#   F1*cp1*T1 + F2*cp2*T2 = F_out*cp_out*T_out</span>
+<span class="c1"># Task 2 — outlet temperature from energy balance</span>
 <span class="n">T_out</span> <span class="o">=</span> <span class="p">(</span><span class="n">F1</span> <span class="o">*</span> <span class="n">cp1</span> <span class="o">*</span> <span class="n">T1</span> <span class="o">+</span> <span class="n">F2</span> <span class="o">*</span> <span class="n">cp2</span> <span class="o">*</span> <span class="n">T2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">F_out</span> <span class="o">*</span> <span class="n">cp_out</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Outlet temperature T_out = </span><span class="si">{</span><span class="n">T_out</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
-
-<span class="c1"># Task 3 — written answer</span>
-<span class="n">answer</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">T_out would go UP.</span>
-
-<span class="s2">Stream 1 enters at 80 °C, which is hotter than Stream 2 (40 °C).</span>
-<span class="s2">If F1 increases while F2 stays fixed, F_out also increases, but the extra</span>
-<span class="s2">mass carries more thermal energy at the higher temperature T1.</span>
-<span class="s2">The numerator (F1*cp1*T1 + F2*cp2*T2) grows faster than the denominator</span>
-<span class="s2">(F_out * cp_out), so T_out rises toward T1 = 80 °C.</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -842,18 +927,14 @@ Check: F1 + F2 = 500.00 kg/h  (expected 500.0)
 
 Outlet temperature T_out = 58.95 °C
 
-T_out would go UP.
-
-Stream 1 enters at 80 °C, which is hotter than Stream 2 (40 °C).
-If F1 increases while F2 stays fixed, F_out also increases, but the extra
-mass carries more thermal energy at the higher temperature T1.
-The numerator (F1*cp1*T1 + F2*cp2*T2) grows faster than the denominator
-(F_out * cp_out), so T_out rises toward T1 = 80 °C.
+If F1 increases while F2 stays the same, more of the hotter stream (80 °C)
+enters the mixer relative to the cooler stream (40 °C), so T_out rises.
+The outlet temperature is a flow-weighted average, and a larger weight on
+the higher-temperature stream pushes it upward.
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 </section>
@@ -905,21 +986,18 @@ The numerator (F1*cp1*T1 + F2*cp2*T2) grows faster than the denominator
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-this-cell-if-package-installation-is-required-if-not-ignore">Run this cell if package installation is required. If not, ignore.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-information">Student Information</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-multiple-choice-30-pts-10-pts-each-3-min-1-min-each-ideally-30-sec-each">Part A — Multiple Choice (30 pts, 10 pts each; ⏱ ~3 min, ~1 min each, ideally &lt;30 sec each)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-multiple-choice-20-pts-5-pts-each-4-min-1-min-each">Part A — Multiple Choice (20 pts, 5 pts each; ⏱ ~4 min, ~1 min each)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1">Q1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2">Q2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3">Q3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4">Q4</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-coding-problems-70-pts">Part B — Coding Problems (70 pts)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-numerical-integration-polynomial-fitting-20-pts-8-min">Q1 — Numerical Integration &amp; Polynomial Fitting (20 pts; ⏱ ~8 min)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-monte-carlo-simulation-25-pts-8-min">Q2 — Monte Carlo Simulation (25 pts; ⏱ ~8 min)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-heat-mass-balance-25-pts-14-min">Q3 — Heat &amp; Mass Balance (25 pts; ⏱ ~14 min)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-below-cell-for-visualization-after-running-please-collapse-the-code-cell-in-jupyterlab-click-the-small-arrow-to-the-left-of-the-cell-use-view-collapse-selected-code-or-click-the-vertical-bar-next-to-the-cell"><strong>!!!Run the below cell for visualization!!!</strong>  After running, please collapse the code cell (in JupyterLab, click the small arrow to the left of the cell, use View → Collapse Selected Code, or click the vertical bar next to the cell).</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-coding-problems-75-pts">Part B — Coding Problems (75 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-numerical-integration-polynomial-fitting-25-pts-9-min">Q1 — Numerical Integration &amp; Polynomial Fitting (25 pts; ⏱ ~9 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-monte-carlo-simulation-25-pts-9-min">Q2 — Monte Carlo Simulation (25 pts; ⏱ ~9 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-heat-mass-balance-25-pts-15-min">Q3 — Heat &amp; Mass Balance (25 pts; ⏱ ~15 min)</a></li>
 </ul>
 </li>
 </ul>
