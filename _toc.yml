@@ -45,3 +45,4 @@ parts:
       - file: docs/lab07/07_lab
       - file: docs/lab08/08_lab
       - file: docs/lab09/09_lab
+      - file: docs/lab10/10_lab
