@@ -207,6 +207,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -483,10 +484,18 @@ document.write(`
 <span class="c1"># Reaction rate: r_A = -dC_A/dt</span>
 <span class="n">r_A</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">C_A</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;t (s)&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;C_A (mol/L)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;r_A (mol/L·s)&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">38</span><span class="p">)</span>
+
+<span class="c1"># Verification with manual finite differences</span>
+<span class="n">dCdt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">dCdt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">C_A</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">dCdt</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_A</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">C_A</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">dCdt</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">C_A</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">r_A_manual</span> <span class="o">=</span> <span class="o">-</span><span class="n">dCdt</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;t (s)&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;C_A (mol/L)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;r_A (mol/L·s)&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;r_A_manual (mol/L·s)&#39;</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">58</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;4.0f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">C_A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12.2f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">r_A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;14.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;4.0f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">C_A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12.2f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">r_A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;14.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">r_A_manual</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;20.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C_A</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
@@ -501,15 +510,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> t (s)   C_A (mol/L)   r_A (mol/L·s)
---------------------------------------
-     0          1.00          0.0220
-    10          0.78          0.0195
-    20          0.61          0.0150
-    30          0.48          0.0120
-    40          0.37          0.0095
-    50          0.29          0.0070
-    60          0.23          0.0060
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> t (s)   C_A (mol/L)   r_A (mol/L·s)  r_A_manual (mol/L·s)
+----------------------------------------------------------
+     0          1.00          0.0220                0.2200
+    10          0.78          0.0195                0.0195
+    20          0.61          0.0150                0.0150
+    30          0.48          0.0120                0.0120
+    40          0.37          0.0095                0.0095
+    50          0.29          0.0070                0.0070
+    60          0.23          0.0060                0.0060
 </pre></div>
 </div>
 <img alt="../../_images/c9434467f73d15b9702b24febb24196b4bb8f78ab723abccbd04a2d16eb04a0f.png" src="../../_images/c9434467f73d15b9702b24febb24196b4bb8f78ab723abccbd04a2d16eb04a0f.png" />
@@ -590,7 +599,7 @@ document.write(`
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
 
-<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t (s):&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;v (m/s):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -599,7 +608,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t (s): [0.  0.5 1.  1.5 2.  2.5 3. ]
-v (m/s): []
+v (m/s): [2.8 2.5 1.9 1.3 0.7 0.2 0. ]
 </pre></div>
 </div>
 </div>
@@ -638,29 +647,14 @@ Use <code class="docutils literal notranslate"><span class="pre">trapezoid</span
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_pump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">5</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span>   <span class="mi">10</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>  <span class="mi">15</span> <span class="p">])</span>   <span class="c1"># min</span>
 <span class="n">Q</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">5.8</span><span class="p">,</span> <span class="mf">6.4</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>   <span class="c1"># L/min</span>
 
-<span class="n">V_total</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">)</span>
+<span class="n">V_total</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">t_pump</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total volume delivered: </span><span class="si">{</span><span class="n">V_total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> L&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">t_pump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">5</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span>   <span class="mi">10</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>  <span class="mi">15</span> <span class="p">])</span>   <span class="c1"># min</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">Q</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">5.8</span><span class="p">,</span> <span class="mf">6.4</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>   <span class="c1"># L/min</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">V_total</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total volume delivered: </span><span class="si">{</span><span class="n">V_total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> L&quot;</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/chemcomp/lib/python3.10/site-packages/scipy/integrate/_quadrature.py:131,</span> in <span class="ni">trapezoid</span><span class="nt">(y, x, dx, axis)</span>
-<span class="g g-Whitespace">    </span><span class="mi">129</span> <span class="n">slice1</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span><span class="o">*</span><span class="n">nd</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span> <span class="n">slice2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span><span class="o">*</span><span class="n">nd</span>
-<span class="ne">--&gt; </span><span class="mi">131</span> <span class="n">slice1</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span> <span class="n">slice2</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="ne">IndexError</span>: list assignment index out of range
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total volume delivered: 68.65 L
 </pre></div>
 </div>
 </div>
@@ -677,12 +671,18 @@ Use <code class="docutils literal notranslate"><span class="pre">trapezoid</span
 
 <span class="k">def</span><span class="w"> </span><span class="nf">Cp_N2</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="mf">1000.0</span>
-    <span class="k">return</span> <span class="n">___</span>   <span class="c1"># J/mol·K</span>
+    <span class="k">return</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">C</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">E</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">4</span>   <span class="c1"># J/mol·K</span>
 
-<span class="n">dH</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">,</span> <span class="n">___</span><span class="p">)</span>
+<span class="n">dH</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">Cp_N2</span><span class="p">,</span> <span class="mi">298</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ΔH = </span><span class="si">{</span><span class="n">dH</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> kJ/mol&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error estimate: </span><span class="si">{</span><span class="n">err</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ΔH = 21.468 kJ/mol
+Error estimate: 2.38e-10 J/mol
 </pre></div>
 </div>
 </div>
@@ -731,7 +731,7 @@ Use <code class="docutils literal notranslate"><span class="pre">trapezoid</span
 <span class="n">C_A</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.00</span><span class="p">,</span> <span class="mf">1.55</span><span class="p">,</span> <span class="mf">1.22</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">])</span>  <span class="c1"># mol/L</span>
 
 <span class="c1"># (a) Compute reaction rate</span>
-<span class="n">r_A</span> <span class="o">=</span> <span class="n">TODO</span>
+<span class="n">r_A</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">C_A</span><span class="p">,</span> <span class="n">t_rxn</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;t (min)&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;C_A (mol/L)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;r_A (mol/L·min)&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">42</span><span class="p">)</span>

@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 10 Lecture Script: Numerical Differentiation &amp; Integration &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab10/10_lab_script';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab10/10_lab_script.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lab10/10_lab_script.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 10 Lecture Script: Numerical Differentiation & Integration</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-instructor-demo">Part 1: Instructor Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#framing">Framing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-reaction-rate-from-concentration-data-np-gradient">Example 1: Reaction Rate from Concentration Data (<code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-heat-required-from-tabulated-cp-data-trapezoid">Example 2: Heat Required from Tabulated Cp Data (<code class="docutils literal notranslate"><span class="pre">trapezoid</span></code>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-warm-up-exercises-10-min">Part 2: Warm-Up Exercises (~10 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-np-gradient-velocity-from-position-data">Exercise 1 — <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>: velocity from position data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-trapezoid-total-volume-from-flow-data">Exercise 2 — <code class="docutils literal notranslate"><span class="pre">trapezoid</span></code>: total volume from flow data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-quad-shomate-equation-for-n2">Exercise 3 — <code class="docutils literal notranslate"><span class="pre">quad</span></code>: Shomate equation for N₂</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-practice-problems-30-min">Part 3: Practice Problems (~30 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-batch-reactor-rate-from-concentration-data">Problem 1: Batch Reactor — Rate from Concentration Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-pfr-design-levenspiel-integration">Problem 2: PFR Design — Levenspiel Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up-3-min">Wrap-Up (~3 min)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-10-lecture-script-numerical-differentiation-integration">
+<h1>Lab 10 Lecture Script: Numerical Differentiation &amp; Integration<a class="headerlink" href="#lab-10-lecture-script-numerical-differentiation-integration" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p><strong>Learning objectives for today:</strong></p>
+<ul class="simple">
+<li><p>Compute derivatives of discrete data with <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code></p></li>
+<li><p>Integrate discrete data with <code class="docutils literal notranslate"><span class="pre">scipy.integrate.trapezoid</span></code></p></li>
+<li><p>Integrate Python functions with <code class="docutils literal notranslate"><span class="pre">scipy.integrate.quad</span></code></p></li>
+<li><p>Apply these tools to real chemical engineering problems (reactor design, thermodynamics)</p></li>
+</ul>
+<p><strong>Structure:</strong> ~10 min instructor demo → ~10 min warm-up → ~30 min practice problems</p>
+</section>
+<hr class="docutils" />
+<section id="part-1-instructor-demo">
+<h2>Part 1: Instructor Demo<a class="headerlink" href="#part-1-instructor-demo" title="Link to this heading">#</a></h2>
+<section id="framing">
+<h3>Framing<a class="headerlink" href="#framing" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>“Today we’re connecting calculus to data. In the real world you almost never have a clean analytical function — you have measurements at discrete time points, or tabulated values from a reference. Python gives us three workhorses for these situations.”</p>
+</div></blockquote>
+<p>Write on board or show the summary table:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Tool</p></th>
+<th class="head"><p>Key syntax</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Derivative of discrete data</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.gradient</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.gradient(y,</span> <span class="pre">x)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Integral of discrete data</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trapezoid</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trapezoid(y,</span> <span class="pre">x)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Integral of a Python function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">quad</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">result,</span> <span class="pre">err</span> <span class="pre">=</span> <span class="pre">quad(f,</span> <span class="pre">a,</span> <span class="pre">b)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="example-1-reaction-rate-from-concentration-data-np-gradient">
+<h3>Example 1: Reaction Rate from Concentration Data (<code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>)<a class="headerlink" href="#example-1-reaction-rate-from-concentration-data-np-gradient" title="Link to this heading">#</a></h3>
+<p><strong>Setup — motivate the problem:</strong></p>
+<blockquote>
+<div><p>“Imagine you’re running a batch reactor. You can’t measure reaction rate directly — you measure concentration at a few time points. But the rate is just the derivative of concentration with respect to time. So we need numerical differentiation.”</p>
+</div></blockquote>
+<p>Write the governing equation on the board:
+$<span class="math notranslate nohighlight">\(r_A = -\frac{dC_A}{dt}\)</span>$</p>
+<p><strong>Walk through the code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span>    <span class="mi">10</span><span class="p">,</span>   <span class="mi">20</span><span class="p">,</span>   <span class="mi">30</span><span class="p">,</span>   <span class="mi">40</span><span class="p">,</span>   <span class="mi">50</span><span class="p">,</span>   <span class="mi">60</span>  <span class="p">])</span>  <span class="c1"># s</span>
+<span class="n">C_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">,</span> <span class="mf">0.29</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">])</span>  <span class="c1"># mol/L</span>
+
+<span class="n">r_A</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">C_A</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key points to stress:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Argument order matters:</strong> <code class="docutils literal notranslate"><span class="pre">np.gradient(y,</span> <span class="pre">x)</span></code> — the thing you’re differentiating comes first, the independent variable second. A common mistake is writing <code class="docutils literal notranslate"><span class="pre">np.gradient(t,</span> <span class="pre">C_A)</span></code> — that gives the inverse.</p></li>
+<li><p><strong>How does <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> work?</strong> It uses:</p>
+<ul class="simple">
+<li><p><em>Central differences</em> at interior points: <span class="math notranslate nohighlight">\(\dfrac{f(x+h) - f(x-h)}{2h}\)</span></p></li>
+<li><p><em>One-sided differences</em> at the endpoints (higher-order, not just first-order)</p></li>
+<li><p>This handles <strong>non-uniform spacing</strong> automatically — you don’t need equally-spaced data.</p></li>
+</ul>
+</li>
+<li><p><strong>The negative sign:</strong> The reaction rate of disappearance is positive, but <span class="math notranslate nohighlight">\(dC_A/dt\)</span> is negative (concentration is decreasing). So we negate it.</p></li>
+</ol>
+<p><strong>Show the printed table and plots.</strong> Point out that the rate decreases over time as concentration falls — this is physically expected for any positive-order reaction.</p>
+</section>
+<hr class="docutils" />
+<section id="example-2-heat-required-from-tabulated-cp-data-trapezoid">
+<h3>Example 2: Heat Required from Tabulated Cp Data (<code class="docutils literal notranslate"><span class="pre">trapezoid</span></code>)<a class="headerlink" href="#example-2-heat-required-from-tabulated-cp-data-trapezoid" title="Link to this heading">#</a></h3>
+<p><strong>Setup:</strong></p>
+<blockquote>
+<div><p>“Now integration. A common thermodynamics calculation: how much heat does it take to raise a gas from one temperature to another? You need to integrate Cp over the temperature range. If you have tabulated data, you use the trapezoidal rule.”</p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\Delta H = \int_{400}^{1000} C_p(T) \, dT\]</div>
+<p><strong>Walk through the code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">400</span><span class="p">,</span>  <span class="mi">500</span><span class="p">,</span>  <span class="mi">600</span><span class="p">,</span>  <span class="mi">700</span><span class="p">,</span>  <span class="mi">800</span><span class="p">,</span>  <span class="mi">900</span><span class="p">,</span>  <span class="mi">1000</span><span class="p">])</span>  <span class="c1"># K</span>
+<span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">34.3</span><span class="p">,</span> <span class="mf">35.2</span><span class="p">,</span> <span class="mf">36.3</span><span class="p">,</span> <span class="mf">37.5</span><span class="p">,</span> <span class="mf">38.6</span><span class="p">,</span> <span class="mf">39.7</span><span class="p">,</span>  <span class="mf">40.8</span><span class="p">])</span>  <span class="c1"># J/mol·K</span>
+
+<span class="n">delta_H</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">Cp_data</span><span class="p">,</span> <span class="n">T_data</span><span class="p">)</span>   <span class="c1"># J/mol</span>
+</pre></div>
+</div>
+<p><strong>Key points to stress:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Always pass <code class="docutils literal notranslate"><span class="pre">x</span></code> as the second argument.</strong> If you write <code class="docutils literal notranslate"><span class="pre">trapezoid(Cp_data)</span></code> without <code class="docutils literal notranslate"><span class="pre">T_data</span></code>, it assumes unit spacing (i.e., spacing of 1) and gives you a number 100× too small. Your x-axis has units — tell the function what they are.</p></li>
+<li><p><strong>What is the trapezoidal rule?</strong> It approximates the area under the curve by connecting adjacent data points with straight lines and summing the resulting trapezoids. It’s exact for linear functions; the error grows when the function curves significantly between data points.</p></li>
+<li><p><strong>Show the shaded area plot.</strong> The filled region is exactly what <code class="docutils literal notranslate"><span class="pre">trapezoid</span></code> is computing.</p></li>
+</ol>
+<blockquote>
+<div><p>“Notice Cp increases roughly linearly with temperature for steam in this range — so the trapezoidal rule is very accurate here.”</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-2-warm-up-exercises-10-min">
+<h2>Part 2: Warm-Up Exercises (~10 min)<a class="headerlink" href="#part-2-warm-up-exercises-10-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Before the main problems, let’s make sure everyone is comfortable with the syntax. Three quick exercises — work independently, I’ll give you about 3 minutes per exercise, then we’ll go over them together.”</p>
+</div></blockquote>
+<section id="exercise-1-np-gradient-velocity-from-position-data">
+<h3>Exercise 1 — <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>: velocity from position data<a class="headerlink" href="#exercise-1-np-gradient-velocity-from-position-data" title="Link to this heading">#</a></h3>
+<p><strong>Circulate and check:</strong> The blanks are <code class="docutils literal notranslate"><span class="pre">np.gradient(x,</span> <span class="pre">t)</span></code>. Watch for students who write <code class="docutils literal notranslate"><span class="pre">np.gradient(t,</span> <span class="pre">x)</span></code> — that’s the most common error.</p>
+<p><strong>When reviewing:</strong></p>
+<blockquote>
+<div><p>“At <code class="docutils literal notranslate"><span class="pre">t=0</span></code>, np.gradient used a forward difference formula. At <code class="docutils literal notranslate"><span class="pre">t=3.0</span></code>, it used a backward difference. At all interior points, it used central differences. The order of arguments determines what derivative you’re computing — y with respect to x.”</p>
+</div></blockquote>
+<p>Expected output: velocity starts fast (~2.8 m/s), slows to zero by the end as the object decelerates to rest.</p>
+</section>
+<section id="exercise-2-trapezoid-total-volume-from-flow-data">
+<h3>Exercise 2 — <code class="docutils literal notranslate"><span class="pre">trapezoid</span></code>: total volume from flow data<a class="headerlink" href="#exercise-2-trapezoid-total-volume-from-flow-data" title="Link to this heading">#</a></h3>
+<p><strong>Key teaching moment:</strong> the time points are <em>not</em> equally spaced (0, 2, 5, 8, 10, 13, 15 min). This is intentional. Emphasize that <code class="docutils literal notranslate"><span class="pre">trapezoid(Q,</span> <span class="pre">t_pump)</span></code> handles this correctly without any extra work from the user.</p>
+<p><strong>When reviewing:</strong></p>
+<blockquote>
+<div><p>“This is why we always pass the x-array. The gaps between measurements are different sizes — 2 min, then 3 min, then 3 min, then 2 min, etc. <code class="docutils literal notranslate"><span class="pre">trapezoid</span></code> accounts for each interval’s actual width.”</p>
+</div></blockquote>
+</section>
+<section id="exercise-3-quad-shomate-equation-for-n2">
+<h3>Exercise 3 — <code class="docutils literal notranslate"><span class="pre">quad</span></code>: Shomate equation for N₂<a class="headerlink" href="#exercise-3-quad-shomate-equation-for-n2" title="Link to this heading">#</a></h3>
+<p><strong>Key teaching point:</strong> <code class="docutils literal notranslate"><span class="pre">quad</span></code> integrates a Python <em>function</em>, not an array. You define a function <code class="docutils literal notranslate"><span class="pre">Cp_N2(T)</span></code> and pass it to <code class="docutils literal notranslate"><span class="pre">quad</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dH</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">Cp_N2</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>“<code class="docutils literal notranslate"><span class="pre">quad</span></code> also returns an error estimate — this is the estimated absolute error in the result. It’s almost always tiny (like 1e-9), but it’s good practice to check it, especially near singularities.”</p>
+</div></blockquote>
+<p><strong>The Shomate formula:</strong> <span class="math notranslate nohighlight">\(C_p = A + B\tau + C\tau^2 + D\tau^3 + E/\tau^2\)</span> where <span class="math notranslate nohighlight">\(\tau = T/1000\)</span>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-3-practice-problems-30-min">
+<h2>Part 3: Practice Problems (~30 min)<a class="headerlink" href="#part-3-practice-problems-30-min" title="Link to this heading">#</a></h2>
+<section id="problem-1-batch-reactor-rate-from-concentration-data">
+<h3>Problem 1: Batch Reactor — Rate from Concentration Data<a class="headerlink" href="#problem-1-batch-reactor-rate-from-concentration-data" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>“This is a more realistic version of the demo. The reaction order is unknown — you’ll figure it out from the data.”</p>
+</div></blockquote>
+<p><strong>Part (a) — <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>:</strong></p>
+<p>One-liner solution: <code class="docutils literal notranslate"><span class="pre">r_A</span> <span class="pre">=</span> <span class="pre">-np.gradient(C_A,</span> <span class="pre">t_rxn)</span></code></p>
+<p>If students are confused about the negative sign, ask: <em>“Is the concentration increasing or decreasing? So what sign is dC_A/dt? And we want the rate of reaction, which is positive…”</em></p>
+<p><strong>Part (b) — manual finite differences (no <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>):</strong></p>
+<p>This part builds understanding of what <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> is doing under the hood.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dCdt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_rxn</span><span class="p">))</span>
+
+<span class="c1"># Forward difference: first point only</span>
+<span class="n">dCdt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">C_A</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">t_rxn</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t_rxn</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Central differences: all interior points at once (vectorized)</span>
+<span class="n">dCdt</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_A</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">C_A</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">t_rxn</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t_rxn</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Backward difference: last point only</span>
+<span class="n">dCdt</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">C_A</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">t_rxn</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t_rxn</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">r_A_manual</span> <span class="o">=</span> <span class="o">-</span><span class="n">dCdt</span>
+</pre></div>
+</div>
+<p><strong>Highlight the slicing:</strong> <code class="docutils literal notranslate"><span class="pre">C_A[2:]</span></code> skips the first two elements; <code class="docutils literal notranslate"><span class="pre">C_A[:-2]</span></code> skips the last two. Their difference, divided by the spacing, gives the central difference at every interior point simultaneously — no loop needed.</p>
+<blockquote>
+<div><p>“The endpoint values from (a) and (b) differ slightly. <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> uses a higher-order (more accurate) one-sided formula at the boundaries, while we’re using simple first-order formulas here.”</p>
+</div></blockquote>
+<p><strong>Part (c) — log-log plot for reaction order:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">C_A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">r_A</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># slope = reaction order</span>
+</pre></div>
+</div>
+<p><strong>Explain the math:</strong> If <span class="math notranslate nohighlight">\(r_A = k C_A^n\)</span>, then <span class="math notranslate nohighlight">\(\ln(r_A) = \ln(k) + n \ln(C_A)\)</span>. A plot of <span class="math notranslate nohighlight">\(\ln(r_A)\)</span> vs. <span class="math notranslate nohighlight">\(\ln(C_A)\)</span> is a straight line with slope <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<blockquote>
+<div><p>“From the data, the slope should come out close to 1.5 — so this appears to be a 3/2-order reaction. In practice you’d round to 1 or 2 unless there’s strong reason to believe a fractional order.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="problem-2-pfr-design-levenspiel-integration">
+<h3>Problem 2: PFR Design — Levenspiel Integration<a class="headerlink" href="#problem-2-pfr-design-levenspiel-integration" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>“This is the classic Levenspiel plot from kinetics. The PFR design equation is an integral — and quad is perfect for this.”</p>
+</div></blockquote>
+<p><strong>The design equation:</strong>
+$<span class="math notranslate nohighlight">\(V = F_{A0} \int_0^{X_f} \frac{dX}{-r_A(X)}\)</span>$</p>
+<p><strong>Part (a) — <code class="docutils literal notranslate"><span class="pre">quad</span></code> integration:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">levenspiel_1st</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">X</span><span class="p">))</span>
+
+<span class="n">integral</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">levenspiel_1st</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">X_f</span><span class="p">)</span>
+<span class="n">V_quad</span> <span class="o">=</span> <span class="n">F_A0</span> <span class="o">*</span> <span class="n">integral</span>
+</pre></div>
+</div>
+<p><strong>Compare to analytical result:</strong>
+$<span class="math notranslate nohighlight">\(V_\text{exact} = \frac{F_{A0}}{k C_{A0}} \ln\!\left(\frac{1}{1-X_f}\right)\)</span>$</p>
+<blockquote>
+<div><p>“The relative error from <code class="docutils literal notranslate"><span class="pre">quad</span></code> should be essentially machine precision — around 1e-14. This is the power of adaptive Gaussian quadrature: it chooses its own evaluation points to minimize error.”</p>
+</div></blockquote>
+<p><strong>Connect to the Levenspiel plot:</strong> The area under the <span class="math notranslate nohighlight">\(1/(-r_A)\)</span> vs. <span class="math notranslate nohighlight">\(X\)</span> curve equals <span class="math notranslate nohighlight">\(V/F_{A0}\)</span>. This is a visual and physical interpretation of the integral.</p>
+<blockquote>
+<div><p>“Notice the curve shoots up near X=1 — the rate approaches zero as conversion approaches 100%, so you need infinite volume to achieve complete conversion. This is why we design for 90%, not 100%.”</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="wrap-up-3-min">
+<h2>Wrap-Up (~3 min)<a class="headerlink" href="#wrap-up-3-min" title="Link to this heading">#</a></h2>
+<p><strong>Key takeaways — write on board:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Situation</p></th>
+<th class="head"><p>Use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Derivative from data points</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.gradient(y,</span> <span class="pre">x)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Integral from data points</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trapezoid(y,</span> <span class="pre">x)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Integral of a function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">quad(f,</span> <span class="pre">a,</span> <span class="pre">b)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Common mistakes to remember:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.gradient(y,</span> <span class="pre">x)</span></code> not <code class="docutils literal notranslate"><span class="pre">np.gradient(x,</span> <span class="pre">y)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trapezoid(y,</span> <span class="pre">x)</span></code> not <code class="docutils literal notranslate"><span class="pre">trapezoid(y)</span></code> — always include the x-array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quad</span></code> returns <code class="docutils literal notranslate"><span class="pre">(result,</span> <span class="pre">error)</span></code> — unpack both</p></li>
+</ul>
+<p><strong>Looking ahead:</strong></p>
+<blockquote>
+<div><p>“Next chapter we move into solving differential equations numerically. Everything you did today with derivatives and integrals feeds directly into that — the finite difference formulas from Problem 1(b) are the building blocks of numerical ODE solvers.”</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lab10"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-instructor-demo">Part 1: Instructor Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#framing">Framing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-reaction-rate-from-concentration-data-np-gradient">Example 1: Reaction Rate from Concentration Data (<code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-heat-required-from-tabulated-cp-data-trapezoid">Example 2: Heat Required from Tabulated Cp Data (<code class="docutils literal notranslate"><span class="pre">trapezoid</span></code>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-warm-up-exercises-10-min">Part 2: Warm-Up Exercises (~10 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-np-gradient-velocity-from-position-data">Exercise 1 — <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>: velocity from position data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-trapezoid-total-volume-from-flow-data">Exercise 2 — <code class="docutils literal notranslate"><span class="pre">trapezoid</span></code>: total volume from flow data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-quad-shomate-equation-for-n2">Exercise 3 — <code class="docutils literal notranslate"><span class="pre">quad</span></code>: Shomate equation for N₂</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-practice-problems-30-min">Part 3: Practice Problems (~30 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-batch-reactor-rate-from-concentration-data">Problem 1: Batch Reactor — Rate from Concentration Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-pfr-design-levenspiel-integration">Problem 2: PFR Design — Levenspiel Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up-3-min">Wrap-Up (~3 min)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

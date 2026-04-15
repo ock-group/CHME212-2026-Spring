@@ -207,6 +207,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -419,7 +420,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-why-symbolic-math">17.1 — Motivation: Why Symbolic Math?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbols-expressions-and-basic-operations">17.2 — Symbols, Expressions, and Basic Operations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-symbols">17.2.1 — Defining Symbols</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-expressions">17.2.2 — Building Expressions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-arithmetic">17.2.3 — Exact Arithmetic</a></li>
 </ul>
 </li>
@@ -494,27 +494,48 @@ document.write(`
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">init_printing</span></code> tells SymPy to display expressions with nice Unicode characters in the terminal. In a notebook, it renders full LaTeX.</p>
-<p>Now, everything in SymPy starts with <code class="docutils literal notranslate"><span class="pre">sp.symbols()</span></code>. This is the step that makes a variable symbolic — before you call this, Python treats <code class="docutils literal notranslate"><span class="pre">x</span></code> as an ordinary variable name.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
-<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a b c&#39;</span><span class="p">)</span>
+<p>Everything in SymPy starts with <code class="docutils literal notranslate"><span class="pre">sp.symbols()</span></code>. This is the step that makes a variable symbolic — before you call this, Python treats <code class="docutils literal notranslate"><span class="pre">x</span></code> as an ordinary variable name.</p>
+<p>The notation is flexible — you can define one symbol or several at once:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>              <span class="c1"># single symbol</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y z&#39;</span><span class="p">)</span>    <span class="c1"># multiple — space-separated string</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a, b, c&#39;</span><span class="p">)</span>  <span class="c1"># commas also work</span>
 </pre></div>
 </div>
-<p>Notice the <strong>assumptions</strong> you can attach:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;T P V&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p>For <strong>subscripts and Greek letters</strong>, use the LaTeX naming convention inside the string:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span>      <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x_1 x_2&#39;</span><span class="p">)</span>       <span class="c1"># renders as x₁, x₂</span>
+<span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;alpha beta&#39;</span><span class="p">)</span>     <span class="c1"># Greek letters</span>
+<span class="n">T_inf</span>       <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;T_inf&#39;</span><span class="p">)</span>          <span class="c1"># renders as T∞</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">positive=True</span></code> tells SymPy that these variables are strictly greater than zero. This matters when SymPy simplifies expressions — for example, <span class="math notranslate nohighlight">\(\sqrt{x^2} = x\)</span> is only true when <span class="math notranslate nohighlight">\(x \geq 0\)</span>. If SymPy doesn’t know that, it has to write <span class="math notranslate nohighlight">\(|x|\)</span> instead. For physical quantities like temperature, pressure, and volume, always declare <code class="docutils literal notranslate"><span class="pre">positive=True</span></code>.</p>
-</section>
-<section id="building-expressions">
-<h3>17.2.2 — Building Expressions<a class="headerlink" href="#building-expressions" title="Link to this heading">#</a></h3>
-<p>Run the code cell. Look at what <code class="docutils literal notranslate"><span class="pre">expand</span></code>, <code class="docutils literal notranslate"><span class="pre">factor</span></code>, <code class="docutils literal notranslate"><span class="pre">simplify</span></code>, and <code class="docutils literal notranslate"><span class="pre">subs</span></code> do:</p>
+<p>Run that code cell and look at how these print — SymPy renders them with the proper Unicode.</p>
+<p>Now the important part: <strong>assumptions</strong>. You can tell SymPy the mathematical domain of a symbol:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;T P V&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># T, P, V &gt; 0</span>
+<span class="n">n</span>       <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>         <span class="c1"># n ∈ ℤ</span>
+<span class="n">x</span>       <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>            <span class="c1"># x ∈ ℝ</span>
+</pre></div>
+</div>
+<p>Run the assumptions code cell. Look at the three versions of <code class="docutils literal notranslate"><span class="pre">sqrt(x²)</span></code>:</p>
+<ul class="simple">
+<li><p>No assumption → SymPy keeps it as <code class="docutils literal notranslate"><span class="pre">sqrt(x**2)</span></code> because <span class="math notranslate nohighlight">\(x\)</span> could be complex.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">real=True</span></code> → SymPy writes <code class="docutils literal notranslate"><span class="pre">Abs(x)</span></code>, since <span class="math notranslate nohighlight">\(\sqrt{x^2} = |x|\)</span> for real <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">positive=True</span></code> → SymPy simplifies all the way to <code class="docutils literal notranslate"><span class="pre">x</span></code>, since <span class="math notranslate nohighlight">\(x &gt; 0\)</span> guarantees it.</p></li>
+</ul>
+<p>For physical quantities like temperature, pressure, and volume, always declare <code class="docutils literal notranslate"><span class="pre">positive=True</span></code> — it keeps your expressions clean.</p>
+<p>There’s also a lower-level form, <code class="docutils literal notranslate"><span class="pre">sp.Symbol('x')</span></code> (singular), which is identical to <code class="docutils literal notranslate"><span class="pre">sp.symbols('x')</span></code> for a single variable. You’ll see both in documentation; they behave the same way.</p>
+<p>Run the key operations cell. Before the operations, notice that <code class="docutils literal notranslate"><span class="pre">expr1</span></code> and <code class="docutils literal notranslate"><span class="pre">expr3</span></code> are defined at the top:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">expr1</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>       <span class="c1"># x² + 2x + 1</span>
+<span class="n">expr3</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span>      <span class="c1"># general quadratic</span>
+</pre></div>
+</div>
+<p>These are symbolic expressions built with ordinary Python operators — SymPy overloads <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">**</span></code>, etc. to return symbolic objects instead of numbers.</p>
+<p>Now look at what each operation does:</p>
 <ul class="simple">
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">expand</span></code></strong>: multiplies out — <span class="math notranslate nohighlight">\((x+1)^3\)</span> becomes <span class="math notranslate nohighlight">\(x^3 + 3x^2 + 3x + 1\)</span>.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">factor</span></code></strong>: goes the other way — <span class="math notranslate nohighlight">\(x^3 - x^2 - x + 1\)</span> becomes <span class="math notranslate nohighlight">\((x-1)^2(x+1)\)</span>.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">simplify</span></code></strong>: catches cancellations — <span class="math notranslate nohighlight">\((x^2 - 1)/(x - 1)\)</span> simplifies to <span class="math notranslate nohighlight">\(x + 1\)</span>.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">subs</span></code></strong>: substitutes a value or expression. You can plug in a number, a symbol, or a list of pairs.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">subs</span></code></strong>: substitutes a value for a symbol. Single substitution: <code class="docutils literal notranslate"><span class="pre">expr.subs(x,</span> <span class="pre">3)</span></code>. Multiple at once: <code class="docutils literal notranslate"><span class="pre">expr.subs([(a,</span> <span class="pre">1),</span> <span class="pre">(b,</span> <span class="pre">-3),</span> <span class="pre">(c,</span> <span class="pre">2)])</span></code>.</p></li>
 </ul>
-<p>One thing to notice: <code class="docutils literal notranslate"><span class="pre">expr1.subs(x,</span> <span class="pre">3)</span></code> returns <code class="docutils literal notranslate"><span class="pre">16</span></code> — an exact integer, not <code class="docutils literal notranslate"><span class="pre">16.0</span></code>. SymPy never introduces floating-point error unless you ask for it.</p>
+<p>One thing to notice: <code class="docutils literal notranslate"><span class="pre">expr1.subs(x,</span> <span class="pre">3)</span></code> returns <code class="docutils literal notranslate"><span class="pre">16</span></code> — an exact integer, not <code class="docutils literal notranslate"><span class="pre">16.0</span></code>. SymPy never introduces floating-point error unless you ask for it. You can also substitute symbolic values like <code class="docutils literal notranslate"><span class="pre">sp.pi</span></code> and the expression stays exact.</p>
 </section>
 <section id="exact-arithmetic">
 <h3>17.2.3 — Exact Arithmetic<a class="headerlink" href="#exact-arithmetic" title="Link to this heading">#</a></h3>
@@ -524,7 +545,13 @@ document.write(`
 </pre></div>
 </div>
 <p>Both give 0.5, but the Python version gets there by rounding two finite binary fractions. The SymPy version carries the exact fraction through every step. For engineering derivations, that matters — accumulated rounding can change which root of a cubic you land on.</p>
-<p><code class="docutils literal notranslate"><span class="pre">sp.N(sp.pi,</span> <span class="pre">50)</span></code> gives you <span class="math notranslate nohighlight">\(\pi\)</span> to 50 significant figures. That’s not useful for computation, but it illustrates that SymPy has no loss of precision anywhere in its symbolic pipeline.</p>
+<p>The key exact types to know:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sp.Rational(p,</span> <span class="pre">q)</span></code> — exact fraction <span class="math notranslate nohighlight">\(p/q\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sp.sqrt(n)</span></code> — exact square root, simplified automatically (<code class="docutils literal notranslate"><span class="pre">sp.sqrt(8)</span></code> → <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sp.pi</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.E</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.oo</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.I</span></code> — symbolic <span class="math notranslate nohighlight">\(\pi\)</span>, <span class="math notranslate nohighlight">\(e\)</span>, <span class="math notranslate nohighlight">\(\infty\)</span>, and <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<p>To convert any of these to a decimal, use <code class="docutils literal notranslate"><span class="pre">sp.N(expr,</span> <span class="pre">n)</span></code> or equivalently <code class="docutils literal notranslate"><span class="pre">expr.evalf(n)</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of significant figures. <code class="docutils literal notranslate"><span class="pre">sp.N(sp.pi,</span> <span class="pre">50)</span></code> gives you <span class="math notranslate nohighlight">\(\pi\)</span> to 50 significant figures. Both forms do the same thing — <code class="docutils literal notranslate"><span class="pre">sp.N</span></code> is a function, <code class="docutils literal notranslate"><span class="pre">.evalf()</span></code> is the method form on the expression itself.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -532,35 +559,55 @@ document.write(`
 <h2>17.3 — Symbolic Calculus<a class="headerlink" href="#symbolic-calculus" title="Link to this heading">#</a></h2>
 <section id="differentiation">
 <h3>17.3.1 — Differentiation<a class="headerlink" href="#differentiation" title="Link to this heading">#</a></h3>
-<p>The function is <code class="docutils literal notranslate"><span class="pre">sp.diff(expression,</span> <span class="pre">variable)</span></code>. Run the cell and look at the output:</p>
+<p>The syntax is <code class="docutils literal notranslate"><span class="pre">sp.diff(expression,</span> <span class="pre">variable)</span></code>. Run the cell and look at the output:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>          <span class="c1"># → 4x³</span>
 <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>     <span class="c1"># → cos(x)</span>
 <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span> <span class="c1"># → -2x·exp(-x²)  (chain rule, automatic)</span>
 </pre></div>
 </div>
 <p>SymPy applies the product rule, chain rule, and all differentiation rules exactly — you don’t write them, SymPy knows them.</p>
-<p>For higher-order derivatives, pass an integer:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># → -sin(x)  (second derivative)</span>
-<span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>        <span class="c1"># → 60x²</span>
+<p>For <strong>higher-order derivatives</strong>, pass an integer as the third argument:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># → -sin(x)  (d²/dx²)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>        <span class="c1"># → 60x²    (d³/dx³)</span>
 </pre></div>
 </div>
-<p>For <strong>partial derivatives</strong>, you just specify which symbol to differentiate with respect to. Look at the ideal gas example:</p>
+<p>For <strong>partial derivatives</strong>, just pass a different symbol — SymPy treats everything else as a constant automatically. Look at the ideal gas example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">P_ideal</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">V</span>
-<span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">P_ideal</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>   <span class="c1"># → R/V   (∂P/∂T at constant V)</span>
-<span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">P_ideal</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>   <span class="c1"># → -RT/V²  (∂P/∂V at constant T)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">P_ideal</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>   <span class="c1"># → R/V       (∂P/∂T, V held constant)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">P_ideal</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>   <span class="c1"># → -RT/V²   (∂P/∂V, T held constant)</span>
 </pre></div>
 </div>
-<p>This is the Clausius-Clapeyron type of calculation — SymPy handles multivariate partial differentiation automatically.</p>
+<p>For <strong>mixed partial derivatives</strong>, chain the variables in a single call:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>      <span class="c1"># ∂²expr/∂x∂y</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>   <span class="c1"># ∂³expr/∂x²∂y</span>
+</pre></div>
+</div>
+<p>The result is always a new symbolic expression — you can pass it to <code class="docutils literal notranslate"><span class="pre">simplify</span></code>, <code class="docutils literal notranslate"><span class="pre">subs</span></code>, or <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> just like any other SymPy expression.</p>
 </section>
 <section id="integration">
 <h3>17.3.2 — Integration<a class="headerlink" href="#integration" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">sp.integrate(expression,</span> <span class="pre">variable)</span></code> for indefinite; <code class="docutils literal notranslate"><span class="pre">sp.integrate(expression,</span> <span class="pre">(variable,</span> <span class="pre">lower,</span> <span class="pre">upper))</span></code> for definite.</p>
+<p>The syntax breaks into two forms:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>            <span class="c1"># indefinite integral w.r.t. x  (+ C implied)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>    <span class="c1"># definite integral from a to b</span>
+</pre></div>
+</div>
+<p>The limits in the tuple can be numbers, symbolic values, or SymPy constants:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>    <span class="c1"># limits are 0 and π</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">))</span>   <span class="c1"># improper integral to ∞</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>                <span class="c1"># symbolic limits — result stays symbolic</span>
+</pre></div>
+</div>
+<p>For <strong>multiple integrals</strong>, chain the variable tuples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># ∫₀¹ ∫₀¹ expr dy dx</span>
+</pre></div>
+</div>
 <p>Run the cell. Notice:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>     <span class="c1"># → ln(x)</span>
-<span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">))</span>  <span class="c1"># → 1</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>                        <span class="c1"># → ln(x)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">))</span>    <span class="c1"># → 1</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">sp.oo</span></code> is SymPy’s infinity. The integral of <span class="math notranslate nohighlight">\(e^{-x}\)</span> from 0 to <span class="math notranslate nohighlight">\(\infty\)</span> is exactly 1 — SymPy confirms this symbolically.</p>
+<p>If SymPy can’t find a closed form, it returns an unevaluated <code class="docutils literal notranslate"><span class="pre">Integral</span></code> object rather than raising an error. You can then call <code class="docutils literal notranslate"><span class="pre">.evalf()</span></code> on it to get a numerical result.</p>
 <p>Now look at the ChE example. The <span class="math notranslate nohighlight">\(C_p\)</span> of CO₂ is given as a polynomial in <span class="math notranslate nohighlight">\(T\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[C_p(T) = 20.71 + 0.06745T - 4.498 \times 10^{-5} T^2 + 1.119 \times 10^{-8} T^3\]</div>
@@ -568,15 +615,25 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dH</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">Cp</span><span class="p">,</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">900</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>SymPy evaluates this exactly as a rational number (or simple float), then we convert to a decimal with <code class="docutils literal notranslate"><span class="pre">float(dH)</span></code>. Compare this to the trapezoidal rule from Chapter 15 — same answer, but this one is exact.</p>
+<p>SymPy evaluates this exactly, then we convert to a decimal with <code class="docutils literal notranslate"><span class="pre">float(dH)</span></code>. Compare this to the trapezoidal rule from Chapter 15 — same answer, but this one is exact.</p>
 </section>
 <section id="limits">
 <h3>17.3.3 — Limits<a class="headerlink" href="#limits" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">sp.limit(expression,</span> <span class="pre">variable,</span> <span class="pre">point)</span></code>. This is less commonly needed but extremely useful for verifying physical behavior.</p>
-<p>The classic example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1"># → 1</span>
+<p>The syntax is <code class="docutils literal notranslate"><span class="pre">sp.limit(expression,</span> <span class="pre">variable,</span> <span class="pre">point)</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>       <span class="c1"># two-sided limit as x → point</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span>      <span class="c1"># one-sided from the right (x → 0⁺)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>      <span class="c1"># one-sided from the left  (x → 0⁻)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">)</span>       <span class="c1"># limit as x → ∞</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">)</span>      <span class="c1"># limit as x → -∞</span>
 </pre></div>
 </div>
+<p>The point argument can be a number, <code class="docutils literal notranslate"><span class="pre">sp.pi</span></code>, <code class="docutils literal notranslate"><span class="pre">sp.oo</span></code>, or a symbolic variable. Run the cell:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>          <span class="c1"># → 1</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">)</span>     <span class="c1"># → e</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">ln</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span>        <span class="c1"># → -∞</span>
+</pre></div>
+</div>
+<p>When one-sided limits differ, <code class="docutils literal notranslate"><span class="pre">sp.limit</span></code> returns the right-hand limit by default. To check whether a limit exists, compare the <code class="docutils literal notranslate"><span class="pre">'+'</span></code> and <code class="docutils literal notranslate"><span class="pre">'-'</span></code> results explicitly.</p>
 <p>Now look at the ChE application. We want to verify that the van der Waals equation reduces to the ideal gas law when <span class="math notranslate nohighlight">\(V \to \infty\)</span>. The compressibility factor <span class="math notranslate nohighlight">\(Z = PV/RT\)</span> should approach 1:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">P_vdw</span> <span class="o">=</span> <span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="o">/</span><span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="o">/</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span>
 <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">P_vdw</span> <span class="o">*</span> <span class="n">V</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">),</span> <span class="n">V</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">)</span>   <span class="c1"># → 1  ✓</span>
@@ -787,7 +844,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-why-symbolic-math">17.1 — Motivation: Why Symbolic Math?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbols-expressions-and-basic-operations">17.2 — Symbols, Expressions, and Basic Operations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-symbols">17.2.1 — Defining Symbols</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-expressions">17.2.2 — Building Expressions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-arithmetic">17.2.3 — Exact Arithmetic</a></li>
 </ul>
 </li>
