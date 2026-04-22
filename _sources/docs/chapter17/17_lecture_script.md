@@ -213,7 +213,23 @@ SymPy evaluates this exactly, then we convert to a decimal with `float(dH)`. Com
 
 ### 17.3.3 — Limits
 
-The syntax is `sp.limit(expression, variable, point)`.
+Before the syntax, let's be clear on what a limit actually is.
+
+The limit of $f(x)$ as $x$ approaches a point $a$ is the value $L$ that $f(x)$ gets arbitrarily close to — written:
+
+$$\lim_{x \to a} f(x) = L$$
+
+This is a two-sided limit: $x$ can approach $a$ from either direction. Sometimes we only care about one side:
+
+$$\lim_{x \to a^+} f(x) \quad \text{(from the right)} \qquad \lim_{x \to a^-} f(x) \quad \text{(from the left)}$$
+
+The two-sided limit $L$ exists if and only if both one-sided limits exist and agree:
+
+$$\lim_{x \to a^+} f(x) = \lim_{x \to a^-} f(x) = L$$
+
+If they disagree — say $\ln(x)$ as $x \to 0$ — the two-sided limit does not exist.
+
+`sp.limit(expr, var, point)` evaluates the limit as `var → point`. Use `sp.oo` for $\infty$ and pass `'+'` or `'-'` as a fourth argument for one-sided limits:
 
 ```python
 sp.limit(expr, x, point)       # two-sided limit as x → point
@@ -320,14 +336,44 @@ The van der Waals equation:
 
 $$P = \frac{RT}{V - b} - \frac{a}{V^2}$$
 
-Run the cell. We:
+Run the cell. We do four things in sequence.
 
-1. Define the expression `P_vdw` symbolically.
-2. Compute `dP/dV` with `sp.diff`.
-3. Compute `d²P/dV²` with `sp.diff(..., 2)`.
-4. Set both equal to zero and solve for $V_c$ and $T_c$.
+**Step 1 — Define `P_vdw` symbolically.** Straightforward — just translate the formula into SymPy.
 
-The critical point conditions — $(\partial P/\partial V)_T = 0$ and $(\partial^2 P/\partial V^2)_T = 0$ — define the inflection point of the isotherm where the liquid and vapor phases become identical.
+**Step 2 — Solve analytically for $V$.**
+
+```python
+V_solutions = sp.solve(P_vdw - P, V)
+```
+
+Passing `P_vdw - P` tells SymPy to solve $P_\text{vdw} = P$ for $V$ — "given a pressure $P$, what volumes are consistent with it?" Multiplying through by $V^2(V-b)$ clears the denominators and gives a **cubic in $V$**:
+
+$$PV^3 - (Pb + RT)V^2 + aV - ab = 0$$
+
+SymPy solves this cubic analytically (via Cardano's formula) and returns three roots — one per physical branch: liquid, two-phase, and vapor. Above the critical temperature only one real root exists; below it, three do.
+
+**Step 3 — Compute $dP/dV$ and $d^2P/dV^2$.**
+
+```python
+dPdV  = sp.diff(P_vdw, V)
+d2PdV2 = sp.diff(P_vdw, V, 2)
+```
+
+These are the spinodal and critical-point conditions. The spinodal curve is where $(\partial P/\partial V)_T = 0$ — the boundary of mechanical instability inside the two-phase region.
+
+**Step 4 — Find the critical point.**
+
+The **critical point** is the unique state $(T_c, P_c, V_c)$ where the liquid and vapor phases become identical — the meniscus between them disappears. Mathematically, it is where the $P$–$V$ isotherm has both zero slope and zero curvature:
+
+$$\left(\frac{\partial P}{\partial V}\right)_T = 0 \qquad \text{and} \qquad \left(\frac{\partial^2 P}{\partial V^2}\right)_T = 0$$
+
+The first condition gives a horizontal tangent (liquid and vapor compressibilities merge). The second ensures it is an inflection point, not just a local extremum — the two-phase hump has flattened entirely. Above $T_c$, no amount of pressure can condense the gas into a distinct liquid phase.
+
+We solve both conditions simultaneously for $V_c$ and $T_c$:
+
+```python
+crit_sol = sp.solve([dPdV.subs(...), d2PdV2.subs(...)], [V_c, T_c])
+```
 
 SymPy returns:
 
@@ -366,13 +412,33 @@ The critical isotherm (red, ~304 K for CO₂) has exactly one inflection point �
 
 Let me make the `lambdify` pattern explicit, because you'll use it in every project where SymPy is involved.
 
-SymPy expressions are **not** NumPy arrays. You cannot pass a SymPy expression to `np.linspace` or use it in a for loop over numbers. `lambdify` converts it into a regular Python function that accepts NumPy arrays.
+In short: `lambdify` is a translator. SymPy expressions are symbolic objects — they can't do arithmetic on numbers or arrays. `lambdify` wraps one into a plain Python function that can. It's equivalent to writing this by hand:
 
 ```python
-f_num = sp.lambdify(variables, expression, 'numpy')
+# What lambdify does for you automatically:
+def f_num(x):
+    return x**2 + np.sin(x)
 ```
 
-Run the example. We start with $f(x) = \sin(x) \cdot e^{-x/3}$, compute $f'(x)$ and $f''(x)$ symbolically, then `lambdify` all three and plot them together.
+So instead of manually translating every SymPy symbol to its NumPy equivalent, you write:
+
+```python
+f_sym = x**2 + sp.sin(x)
+f_num = sp.lambdify(x, f_sym, 'numpy')   # generates the function above
+f_num(2.0)                                # scalar — works
+f_num(np.linspace(0, 10, 100))            # array  — also works
+```
+
+For multiple variables, pass a tuple:
+
+```python
+g_num = sp.lambdify((x, y), x**2 + y**2, 'numpy')
+g_num(3, 4)    # → 25
+```
+
+You can lambdify any SymPy expression — a derivative, an integral result, a simplified expression — not just the original formula.
+
+Run the syntax examples cell first to get comfortable with these basics. Then run the visualization example. We start with $f(x) = \sin(x) \cdot e^{-x/3}$, compute $f'(x)$ and $f''(x)$ symbolically, then `lambdify` all three and plot them together.
 
 The workflow is three steps:
 

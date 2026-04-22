@@ -206,6 +206,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -217,6 +220,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab07/07_lab.html">Lab 07: Polynomials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/lab11/11_lab.html">Lab 11: Root Finding</a></li>
 </ul>
 
     </div>
@@ -556,6 +562,28 @@ Median             = 87.90 %
 
 CDF → P(Y &lt; 86.0%) = 0.1449  (14.49% of batches)
 PPF → 5th percentile yield = 84.85%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">std</span><span class="p">)</span> 
+<span class="n">prob_less</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">86</span><span class="p">)</span>
+<span class="n">values_bottom</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">.05</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;prob less than 86% = </span><span class="si">{</span><span class="n">prob_less</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> and value of bottom 5% = </span><span class="si">{</span><span class="n">values_bottom</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">std</span><span class="p">)</span> 
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">prob_less</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">86</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">values_bottom</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">.05</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;mean&#39; is not defined
 </pre></div>
 </div>
 </div>

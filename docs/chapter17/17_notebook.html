@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter17/17_notebook';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lab 01: Python Fundamentals" href="../lab01/01_lab.html" />
+    <link rel="next" title="Chapter 18: Ordinary Differential Equations (Not the final version)" href="../chapter18/18_notebook.html" />
     <link rel="prev" title="Chapter 16: Root Finding &amp; Newton’s Method" href="../chapter16/16_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -208,6 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -221,6 +222,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab11/11_lab.html">Lab 11: Root Finding</a></li>
 </ul>
 
     </div>
@@ -438,7 +440,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-van-der-waals-pv-isotherm">17.5.1 Plotting the van der Waals P–V Isotherm</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-lambdify-bridging-sympy-and-numpy">17.6 (Optional) <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>: Bridging SymPy and NumPy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lambdify-bridging-sympy-and-numpy">17.6 <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>: Bridging SymPy and NumPy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">17.7 Summary</a></li>
 </ul>
             </nav>
@@ -1011,13 +1013,14 @@ d³/dx³ [x^5]    = 60*x**2
 ∫ 1/x dx        = log(x)
 
 ∫₀^π sin(x) dx = 2
-∫₀^∞ exp(-x) dx = 1
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ΔH = ∫₄₀₀⁹⁰⁰ Cp dT = 24069.51 J/mol  =  24.0695 kJ/mol
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>∫₀^∞ exp(-x) dx =
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1
+
+ΔH = ∫₄₀₀⁹⁰⁰ Cp dT = 24069.51 J/mol  =  24.0695 kJ/mol
 </pre></div>
 </div>
 </div>
@@ -1135,8 +1138,8 @@ lim V→∞  PV/(RT) for van der Waals = 1   (→ 1 = ideal gas ✓)
 <span class="c1"># ── System of equations ───────────────────────────────────────────────────────</span>
 <span class="c1"># 2x + 3y = 7</span>
 <span class="c1"># x  - y  = 1</span>
-<span class="n">eq1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-<span class="n">eq2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">eq1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="c1"># 2x+3y = 7</span>
+<span class="n">eq2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># x-y = 1</span>
 <span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">System solution:&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="p">)</span>
 <span class="c1"># verification</span>
@@ -1148,7 +1151,7 @@ lim V→∞  PV/(RT) for van der Waals = 1   (→ 1 = ideal gas ✓)
 
 <span class="c1"># ── ChE: solve ideal gas for V ────────────────────────────────────────────────</span>
 <span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">R_s</span><span class="p">,</span> <span class="n">T_s</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;P V R T n&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ideal_gas</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">P</span><span class="o">*</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="o">*</span><span class="n">R_s</span><span class="o">*</span><span class="n">T_s</span><span class="p">)</span>
+<span class="n">ideal_gas</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">P</span><span class="o">*</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="o">*</span><span class="n">R_s</span><span class="o">*</span><span class="n">T_s</span><span class="p">)</span> <span class="c1"># PV = nRT</span>
 <span class="n">V_sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">ideal_gas</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ideal gas V =&quot;</span><span class="p">,</span> <span class="n">V_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
@@ -1252,18 +1255,22 @@ P = \frac{RT}{V - b} - \frac{a}{V^2}
 <span class="n">P_vdw</span> <span class="o">=</span> <span class="n">R_s</span><span class="o">*</span><span class="n">T_s</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">b_s</span><span class="p">)</span> <span class="o">-</span> <span class="n">a_s</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P(V) =&quot;</span><span class="p">,</span> <span class="n">P_vdw</span><span class="p">)</span>
 
-<span class="c1"># ── dP/dV at constant T (compressibility / spinodal condition) ────────────────</span>
+<span class="c1"># ── Solve analytically for V (cubic roots) ───────────────────────────────────</span>
+<span class="c1"># van der Waals rearranges to: P*V³ - (Pb + RT)*V² + a*V - ab = 0</span>
+<span class="n">V_solutions</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">P_vdw</span> <span class="o">-</span> <span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span> <span class="c1"># R*T / (V - b) - a / V**2 - P = 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Analytic roots V(P,T):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">sol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">V_solutions</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  V_</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> =&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="p">)</span>
+
+<span class="c1"># ── dP/dV at constant T (spinodal condition: dP/dV = 0) ─────────────────────</span>
 <span class="n">dPdV</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">P_vdw</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">dP/dV =&quot;</span><span class="p">,</span> <span class="n">dPdV</span><span class="p">)</span>
-<span class="c1"># dPdV_simplified = sp.simplify(dPdV)</span>
-<span class="c1"># print(&quot;\ndP/dV =&quot;, dPdV_simplified)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">dP/dV =&quot;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">dPdV</span><span class="p">))</span>
 
 <span class="c1"># ── d²P/dV² ──────────────────────────────────────────────────────────────────</span>
 <span class="n">d2PdV2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">P_vdw</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">d²P/dV² =&quot;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">d2PdV2</span><span class="p">))</span>
 
-<span class="c1"># ── Critical point: solve dP/dV = 0 and d²P/dV² = 0 simultaneously ───────────</span>
-<span class="c1"># Unknowns: Vc, Tc  (treating a, b, R as parameters)</span>
+<span class="c1"># ── Critical point: solve dP/dV = 0 and d²P/dV² = 0 simultaneously ──────────</span>
 <span class="n">V_c</span><span class="p">,</span> <span class="n">T_c</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;V_c T_c&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">crit_eq1</span> <span class="o">=</span> <span class="n">dPdV</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">V</span><span class="p">,</span> <span class="n">V_c</span><span class="p">),</span> <span class="p">(</span><span class="n">T_s</span><span class="p">,</span> <span class="n">T_c</span><span class="p">)])</span>
@@ -1271,28 +1278,31 @@ P = \frac{RT}{V - b} - \frac{a}{V^2}
 
 <span class="n">crit_sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">([</span><span class="n">crit_eq1</span><span class="p">,</span> <span class="n">crit_eq2</span><span class="p">],</span> <span class="p">[</span><span class="n">V_c</span><span class="p">,</span> <span class="n">T_c</span><span class="p">])</span>
 
-<span class="c1"># sp.solve may return a list of solutions or a dict — handle both</span>
 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">crit_sol</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-    <span class="n">crit_sol</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>          <span class="c1"># take the first (positive) solution</span>
-    <span class="n">Vc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>            <span class="c1"># tuple-indexed</span>
+    <span class="n">crit_sol</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Vc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">Tc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">Vc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">V_c</span><span class="p">]</span>          <span class="c1"># dict-indexed</span>
+    <span class="n">Vc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">V_c</span><span class="p">]</span>
     <span class="n">Tc_val</span> <span class="o">=</span> <span class="n">crit_sol</span><span class="p">[</span><span class="n">T_c</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Critical point:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  V_c =&quot;</span><span class="p">,</span> <span class="n">Vc_val</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  T_c =&quot;</span><span class="p">,</span> <span class="n">Tc_val</span><span class="p">)</span>
 
-<span class="c1"># Critical pressure</span>
 <span class="n">P_c</span> <span class="o">=</span> <span class="n">P_vdw</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">V</span><span class="p">,</span> <span class="n">Vc_val</span><span class="p">),</span> <span class="p">(</span><span class="n">T_s</span><span class="p">,</span> <span class="n">Tc_val</span><span class="p">)])</span>
-<span class="n">P_c_simplified</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">P_c</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  P_c =&quot;</span><span class="p">,</span> <span class="n">P_c_simplified</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  P_c =&quot;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">P_c</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(V) = R*T/(V - b) - a/V**2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Analytic roots V(P,T):
+  V_1 = -(-3*a/P + (-P*b - R*T)**2/P**2)/(3*(sqrt(-4*(-3*a/P + (-P*b - R*T)**2/P**2)**3 + (-27*a*b/P - 9*a*(-P*b - R*T)/P**2 + 2*(-P*b - R*T)**3/P**3)**2)/2 - 27*a*b/(2*P) - 9*a*(-P*b - R*T)/(2*P**2) + (-P*b - R*T)**3/P**3)**(1/3)) - (sqrt(-4*(-3*a/P + (-P*b - R*T)**2/P**2)**3 + (-27*a*b/P - 9*a*(-P*b - R*T)/P**2 + 2*(-P*b - R*T)**3/P**3)**2)/2 - 27*a*b/(2*P) - 9*a*(-P*b - R*T)/(2*P**2) + (-P*b - R*T)**3/P**3)**(1/3)/3 - (-P*b - R*T)/(3*P)
+  V_2 = -(-3*a/P + (-P*b - R*T)**2/P**2)/(3*(-1/2 - sqrt(3)*I/2)*(sqrt(-4*(-3*a/P + (-P*b - R*T)**2/P**2)**3 + (-27*a*b/P - 9*a*(-P*b - R*T)/P**2 + 2*(-P*b - R*T)**3/P**3)**2)/2 - 27*a*b/(2*P) - 9*a*(-P*b - R*T)/(2*P**2) + (-P*b - R*T)**3/P**3)**(1/3)) - (-1/2 - sqrt(3)*I/2)*(sqrt(-4*(-3*a/P + (-P*b - R*T)**2/P**2)**3 + (-27*a*b/P - 9*a*(-P*b - R*T)/P**2 + 2*(-P*b - R*T)**3/P**3)**2)/2 - 27*a*b/(2*P) - 9*a*(-P*b - R*T)/(2*P**2) + (-P*b - R*T)**3/P**3)**(1/3)/3 - (-P*b - R*T)/(3*P)
+  V_3 = -(-3*a/P + (-P*b - R*T)**2/P**2)/(3*(-1/2 + sqrt(3)*I/2)*(sqrt(-4*(-3*a/P + (-P*b - R*T)**2/P**2)**3 + (-27*a*b/P - 9*a*(-P*b - R*T)/P**2 + 2*(-P*b - R*T)**3/P**3)**2)/2 - 27*a*b/(2*P) - 9*a*(-P*b - R*T)/(2*P**2) + (-P*b - R*T)**3/P**3)**(1/3)) - (-1/2 + sqrt(3)*I/2)*(sqrt(-4*(-3*a/P + (-P*b - R*T)**2/P**2)**3 + (-27*a*b/P - 9*a*(-P*b - R*T)/P**2 + 2*(-P*b - R*T)**3/P**3)**2)/2 - 27*a*b/(2*P) - 9*a*(-P*b - R*T)/(2*P**2) + (-P*b - R*T)**3/P**3)**(1/3)/3 - (-P*b - R*T)/(3*P)
 
 dP/dV = -R*T/(V - b)**2 + 2*a/V**3
 
@@ -1357,8 +1367,8 @@ CO₂ critical pressure:    P_c = 7.38 MPa
 </div>
 </section>
 </section>
-<section id="optional-lambdify-bridging-sympy-and-numpy">
-<span id="id7"></span><h2>17.6 (Optional) <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>: Bridging SymPy and NumPy<a class="headerlink" href="#optional-lambdify-bridging-sympy-and-numpy" title="Link to this heading">#</a></h2>
+<section id="lambdify-bridging-sympy-and-numpy">
+<span id="id7"></span><h2>17.6 <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>: Bridging SymPy and NumPy<a class="headerlink" href="#lambdify-bridging-sympy-and-numpy" title="Link to this heading">#</a></h2>
 <p>The key workflow: <strong>derive symbolically → convert to a fast numerical function with <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> → evaluate or plot</strong>.</p>
 <p>SymPy expressions are <strong>symbolic objects</strong> — they cannot be evaluated on NumPy arrays directly. <code class="docutils literal notranslate"><span class="pre">sp.lambdify</span></code> converts a symbolic expression into a regular Python function backed by NumPy (or any other numerical library), giving you the best of both worlds: symbolic derivation + numerical speed.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
@@ -1389,6 +1399,92 @@ CO₂ critical pressure:    P_c = 7.38 MPa
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> to get a fast numerical function</p></li>
 <li><p>Evaluate on arrays, plot, or pass to a solver</p></li>
 </ol>
+<p><strong>Syntax examples — single variable, multiple variables, and scalar evaluation:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single variable</span>
+<span class="n">f_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>      <span class="c1"># f_num(x_val)</span>
+
+<span class="c1"># Multiple variables — pass a tuple</span>
+<span class="n">g_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">expr</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span> <span class="c1"># g_num(x_val, y_val)</span>
+
+<span class="c1"># Evaluate at a scalar</span>
+<span class="n">f_num</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>                                  <span class="c1"># returns a float</span>
+
+<span class="c1"># Evaluate on a NumPy array (vectorized automatically)</span>
+<span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">f_num</span><span class="p">(</span><span class="n">x_arr</span><span class="p">)</span>                                <span class="c1"># returns an array</span>
+</pre></div>
+</div>
+<p>The backend argument controls which library is used under the hood:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Backend</p></th>
+<th class="head"><p>When to use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'numpy'</span></code></p></td>
+<td><p>Default — arrays, plotting</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'math'</span></code></p></td>
+<td><p>Scalar-only (no arrays)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'scipy'</span></code></p></td>
+<td><p>When the expression uses special functions (e.g. <code class="docutils literal notranslate"><span class="pre">erf</span></code>, <code class="docutils literal notranslate"><span class="pre">jv</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Single-variable lambdify ──────────────────────────────────────────────────</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">f_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f(x) =&quot;</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f(1.0) =&quot;</span><span class="p">,</span> <span class="n">f_num</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>                        <span class="c1"># scalar</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f([0,1,2]) =&quot;</span><span class="p">,</span> <span class="n">f_num</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])))</span>  <span class="c1"># array</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;numpy f_numpy([0,1,2]) =&quot;</span><span class="p">,</span> <span class="n">f_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])))</span>
+<span class="c1"># ── Multi-variable lambdify ───────────────────────────────────────────────────</span>
+<span class="n">expr2</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">g_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">expr2</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">g(x,y) =&quot;</span><span class="p">,</span> <span class="n">expr2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g(3, 4) =&quot;</span><span class="p">,</span> <span class="n">g_num</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>                       <span class="c1"># → 25</span>
+
+<span class="c1"># ── Lambdify a derivative ─────────────────────────────────────────────────────</span>
+<span class="n">df_sym</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">df_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df_sym</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">f&#39;(x) =&quot;</span><span class="p">,</span> <span class="n">df_sym</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f&#39;(0) =&quot;</span><span class="p">,</span> <span class="n">df_num</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>                         <span class="c1"># → 1.0  (0 + cos(0))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f&#39;(π) =&quot;</span><span class="p">,</span> <span class="n">df_num</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">pi</span><span class="p">)))</span>                <span class="c1"># → 2π - 1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f(x) = x**2 + sin(x)
+f(1.0) = 1.8414709848078965
+f([0,1,2]) = [0.         1.84147098 4.90929743]
+numpy f_numpy([0,1,2]) = [0.         1.84147098 4.90929743]
+
+g(x,y) = x**2 + y**2
+g(3, 4) = 25
+
+f&#39;(x) = 2*x + cos(x)
+f&#39;(0) = 1.0
+f&#39;(π) = 5.283185307179586
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1573,11 +1669,11 @@ f&#39;&#39;(x) = -2*(4*sin(x) + 3*cos(x))*exp(-x/3)/9
       </div>
     </a>
     <a class="right-next"
-       href="../lab01/01_lab.html"
+       href="../chapter18/18_notebook.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 01: Python Fundamentals</p>
+        <p class="prev-next-title">Chapter 18: Ordinary Differential Equations (Not the final version)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1619,7 +1715,7 @@ f&#39;&#39;(x) = -2*(4*sin(x) + 3*cos(x))*exp(-x/3)/9
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-van-der-waals-pv-isotherm">17.5.1 Plotting the van der Waals P–V Isotherm</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-lambdify-bridging-sympy-and-numpy">17.6 (Optional) <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>: Bridging SymPy and NumPy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lambdify-bridging-sympy-and-numpy">17.6 <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>: Bridging SymPy and NumPy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">17.7 Summary</a></li>
 </ul>
   </nav></div>

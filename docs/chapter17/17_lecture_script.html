@@ -208,6 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 <li class="toctree-l1"><a class="reference internal" href="17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -221,6 +222,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab11/11_lab.html">Lab 11: Root Finding</a></li>
 </ul>
 
     </div>
@@ -619,7 +621,18 @@ document.write(`
 </section>
 <section id="limits">
 <h3>17.3.3 — Limits<a class="headerlink" href="#limits" title="Link to this heading">#</a></h3>
-<p>The syntax is <code class="docutils literal notranslate"><span class="pre">sp.limit(expression,</span> <span class="pre">variable,</span> <span class="pre">point)</span></code>.</p>
+<p>Before the syntax, let’s be clear on what a limit actually is.</p>
+<p>The limit of <span class="math notranslate nohighlight">\(f(x)\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches a point <span class="math notranslate nohighlight">\(a\)</span> is the value <span class="math notranslate nohighlight">\(L\)</span> that <span class="math notranslate nohighlight">\(f(x)\)</span> gets arbitrarily close to — written:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x \to a} f(x) = L\]</div>
+<p>This is a two-sided limit: <span class="math notranslate nohighlight">\(x\)</span> can approach <span class="math notranslate nohighlight">\(a\)</span> from either direction. Sometimes we only care about one side:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x \to a^+} f(x) \quad \text{(from the right)} \qquad \lim_{x \to a^-} f(x) \quad \text{(from the left)}\]</div>
+<p>The two-sided limit <span class="math notranslate nohighlight">\(L\)</span> exists if and only if both one-sided limits exist and agree:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x \to a^+} f(x) = \lim_{x \to a^-} f(x) = L\]</div>
+<p>If they disagree — say <span class="math notranslate nohighlight">\(\ln(x)\)</span> as <span class="math notranslate nohighlight">\(x \to 0\)</span> — the two-sided limit does not exist.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sp.limit(expr,</span> <span class="pre">var,</span> <span class="pre">point)</span></code> evaluates the limit as <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">→</span> <span class="pre">point</span></code>. Use <code class="docutils literal notranslate"><span class="pre">sp.oo</span></code> for <span class="math notranslate nohighlight">\(\infty\)</span> and pass <code class="docutils literal notranslate"><span class="pre">'+'</span></code> or <code class="docutils literal notranslate"><span class="pre">'-'</span></code> as a fourth argument for one-sided limits:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>       <span class="c1"># two-sided limit as x → point</span>
 <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span>      <span class="c1"># one-sided from the right (x → 0⁺)</span>
 <span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>      <span class="c1"># one-sided from the left  (x → 0⁻)</span>
@@ -698,14 +711,31 @@ document.write(`
 <p>The van der Waals equation:</p>
 <div class="math notranslate nohighlight">
 \[P = \frac{RT}{V - b} - \frac{a}{V^2}\]</div>
-<p>Run the cell. We:</p>
-<ol class="arabic simple">
-<li><p>Define the expression <code class="docutils literal notranslate"><span class="pre">P_vdw</span></code> symbolically.</p></li>
-<li><p>Compute <code class="docutils literal notranslate"><span class="pre">dP/dV</span></code> with <code class="docutils literal notranslate"><span class="pre">sp.diff</span></code>.</p></li>
-<li><p>Compute <code class="docutils literal notranslate"><span class="pre">d²P/dV²</span></code> with <code class="docutils literal notranslate"><span class="pre">sp.diff(...,</span> <span class="pre">2)</span></code>.</p></li>
-<li><p>Set both equal to zero and solve for <span class="math notranslate nohighlight">\(V_c\)</span> and <span class="math notranslate nohighlight">\(T_c\)</span>.</p></li>
-</ol>
-<p>The critical point conditions — <span class="math notranslate nohighlight">\((\partial P/\partial V)_T = 0\)</span> and <span class="math notranslate nohighlight">\((\partial^2 P/\partial V^2)_T = 0\)</span> — define the inflection point of the isotherm where the liquid and vapor phases become identical.</p>
+<p>Run the cell. We do four things in sequence.</p>
+<p><strong>Step 1 — Define <code class="docutils literal notranslate"><span class="pre">P_vdw</span></code> symbolically.</strong> Straightforward — just translate the formula into SymPy.</p>
+<p><strong>Step 2 — Solve analytically for <span class="math notranslate nohighlight">\(V\)</span>.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V_solutions</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">P_vdw</span> <span class="o">-</span> <span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Passing <code class="docutils literal notranslate"><span class="pre">P_vdw</span> <span class="pre">-</span> <span class="pre">P</span></code> tells SymPy to solve <span class="math notranslate nohighlight">\(P_\text{vdw} = P\)</span> for <span class="math notranslate nohighlight">\(V\)</span> — “given a pressure <span class="math notranslate nohighlight">\(P\)</span>, what volumes are consistent with it?” Multiplying through by <span class="math notranslate nohighlight">\(V^2(V-b)\)</span> clears the denominators and gives a <strong>cubic in <span class="math notranslate nohighlight">\(V\)</span></strong>:</p>
+<div class="math notranslate nohighlight">
+\[PV^3 - (Pb + RT)V^2 + aV - ab = 0\]</div>
+<p>SymPy solves this cubic analytically (via Cardano’s formula) and returns three roots — one per physical branch: liquid, two-phase, and vapor. Above the critical temperature only one real root exists; below it, three do.</p>
+<p><strong>Step 3 — Compute <span class="math notranslate nohighlight">\(dP/dV\)</span> and <span class="math notranslate nohighlight">\(d^2P/dV^2\)</span>.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dPdV</span>  <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">P_vdw</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+<span class="n">d2PdV2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">P_vdw</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These are the spinodal and critical-point conditions. The spinodal curve is where <span class="math notranslate nohighlight">\((\partial P/\partial V)_T = 0\)</span> — the boundary of mechanical instability inside the two-phase region.</p>
+<p><strong>Step 4 — Find the critical point.</strong></p>
+<p>The <strong>critical point</strong> is the unique state <span class="math notranslate nohighlight">\((T_c, P_c, V_c)\)</span> where the liquid and vapor phases become identical — the meniscus between them disappears. Mathematically, it is where the <span class="math notranslate nohighlight">\(P\)</span>–<span class="math notranslate nohighlight">\(V\)</span> isotherm has both zero slope and zero curvature:</p>
+<div class="math notranslate nohighlight">
+\[\left(\frac{\partial P}{\partial V}\right)_T = 0 \qquad \text{and} \qquad \left(\frac{\partial^2 P}{\partial V^2}\right)_T = 0\]</div>
+<p>The first condition gives a horizontal tangent (liquid and vapor compressibilities merge). The second ensures it is an inflection point, not just a local extremum — the two-phase hump has flattened entirely. Above <span class="math notranslate nohighlight">\(T_c\)</span>, no amount of pressure can condense the gas into a distinct liquid phase.</p>
+<p>We solve both conditions simultaneously for <span class="math notranslate nohighlight">\(V_c\)</span> and <span class="math notranslate nohighlight">\(T_c\)</span>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">crit_sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">([</span><span class="n">dPdV</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="n">d2PdV2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span> <span class="p">[</span><span class="n">V_c</span><span class="p">,</span> <span class="n">T_c</span><span class="p">])</span>
+</pre></div>
+</div>
 <p>SymPy returns:</p>
 <div class="math notranslate nohighlight">
 \[V_c = 3b, \qquad T_c = \frac{8a}{27Rb}, \qquad P_c = \frac{a}{27b^2}\]</div>
@@ -734,11 +764,26 @@ document.write(`
 <section id="lambdify-bridging-sympy-and-numpy">
 <h2>17.6 — <code class="docutils literal notranslate"><span class="pre">lambdify</span></code>: Bridging SymPy and NumPy<a class="headerlink" href="#lambdify-bridging-sympy-and-numpy" title="Link to this heading">#</a></h2>
 <p>Let me make the <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> pattern explicit, because you’ll use it in every project where SymPy is involved.</p>
-<p>SymPy expressions are <strong>not</strong> NumPy arrays. You cannot pass a SymPy expression to <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code> or use it in a for loop over numbers. <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> converts it into a regular Python function that accepts NumPy arrays.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+<p>In short: <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> is a translator. SymPy expressions are symbolic objects — they can’t do arithmetic on numbers or arrays. <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> wraps one into a plain Python function that can. It’s equivalent to writing this by hand:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># What lambdify does for you automatically:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_num</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Run the example. We start with <span class="math notranslate nohighlight">\(f(x) = \sin(x) \cdot e^{-x/3}\)</span>, compute <span class="math notranslate nohighlight">\(f'(x)\)</span> and <span class="math notranslate nohighlight">\(f''(x)\)</span> symbolically, then <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> all three and plot them together.</p>
+<p>So instead of manually translating every SymPy symbol to its NumPy equivalent, you write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f_sym</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">f_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_sym</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>   <span class="c1"># generates the function above</span>
+<span class="n">f_num</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>                                <span class="c1"># scalar — works</span>
+<span class="n">f_num</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>            <span class="c1"># array  — also works</span>
+</pre></div>
+</div>
+<p>For multiple variables, pass a tuple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g_num</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="n">g_num</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>    <span class="c1"># → 25</span>
+</pre></div>
+</div>
+<p>You can lambdify any SymPy expression — a derivative, an integral result, a simplified expression — not just the original formula.</p>
+<p>Run the syntax examples cell first to get comfortable with these basics. Then run the visualization example. We start with <span class="math notranslate nohighlight">\(f(x) = \sin(x) \cdot e^{-x/3}\)</span>, compute <span class="math notranslate nohighlight">\(f'(x)\)</span> and <span class="math notranslate nohighlight">\(f''(x)\)</span> symbolically, then <code class="docutils literal notranslate"><span class="pre">lambdify</span></code> all three and plot them together.</p>
 <p>The workflow is three steps:</p>
 <ol class="arabic simple">
 <li><p><strong>Derive</strong> — <code class="docutils literal notranslate"><span class="pre">sp.diff(f_sym,</span> <span class="pre">x)</span></code></p></li>

@@ -1,0 +1,1266 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 18 Lecture Script: Ordinary Differential Equations &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter18/18_lecture_script';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab11/11_lab.html">Lab 11: Root Finding</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter18/18_lecture_script.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter18/18_lecture_script.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 18 Lecture Script: Ordinary Differential Equations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 18 Lecture Script: Ordinary Differential Equations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sections-18-1-18-3">Sections 18.1 – 18.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-begin">Before You Begin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-hook-3-min">Opening Hook (3 min)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-ode-25-min">18.1  What Is an ODE? (25 min)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-contrast-3-min">Opening contrast (3 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-standard-form-5-min">18.1.1  The standard form (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-an-ode-4-min">18.1.2  Order of an ODE (4 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-an-ode-integration-4-min">18.1.3  Solving an ODE = integration (4 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-an-analytical-solution-4-min">18.1.4  Verifying an analytical solution (4 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-syntax-primer-5-min">18.1.5  Python syntax primer (5 min)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-method-25-min">18.2  Euler’s Method (25 min)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#framing-2-min">Framing (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stepping-formula-8-min">18.2.1  The stepping formula (8 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-the-error-behave-the-way-it-does-10-min">18.2.2  Why does the error behave the way it does? (10 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-euler-in-python-5-min">18.2.3  Implementing Euler in Python (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up-the-limitations-of-euler-2-min">18.2.4  Wrap-up: the limitations of Euler (2 min)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-odes-in-python-with-solve-ivp-25-min">18.3  Solving ODEs in Python with <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> (25 min)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#framing-1-min">Framing (1 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-writing-the-ode-function-7-min">18.3.1  Step 1 — Writing the ODE function (7 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calling-solve-ivp-and-reading-the-result-10-min">18.3.2  Step 2 — Calling <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> and reading the result (10 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-under-the-hood-what-is-rk45-5-min">18.3.3  Step 3 — Under the hood: what is RK45? (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-parameters-with-args-3-min">18.3.4  Passing parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code> (3 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-the-complete-workflow-2-min">Closing: the complete workflow (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exam-and-hw-tips">Exam and HW Tips</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-18-lecture-script-ordinary-differential-equations">
+<h1>Chapter 18 Lecture Script: Ordinary Differential Equations<a class="headerlink" href="#chapter-18-lecture-script-ordinary-differential-equations" title="Link to this heading">#</a></h1>
+<section id="sections-18-1-18-3">
+<h2>Sections 18.1 – 18.3<a class="headerlink" href="#sections-18-1-18-3" title="Link to this heading">#</a></h2>
+</section>
+<hr class="docutils" />
+<section id="before-you-begin">
+<h2>Before You Begin<a class="headerlink" href="#before-you-begin" title="Link to this heading">#</a></h2>
+<p><strong>What students need from earlier chapters:</strong></p>
+<ul class="simple">
+<li><p>Derivatives and the idea that dy/dt is a slope</p></li>
+<li><p>Numpy arrays and matplotlib basics</p></li>
+<li><p>Writing Python functions</p></li>
+</ul>
+<p><strong>Learning goals for today:</strong>
+By the end of this lecture students should be able to:</p>
+<ol class="arabic simple">
+<li><p>Recognize and write down a first-order ODE from a word description</p></li>
+<li><p>Explain what an initial condition does and why it is required</p></li>
+<li><p>Carry out two Euler steps by hand given an ODE and a step size</p></li>
+<li><p>Translate any first-order ODE (or system) into a Python function for <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code></p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>, check whether it converged, and extract the solution</p></li>
+</ol>
+<p><strong>Approximate timing:</strong> 75 minutes total (25 / 25 / 25)</p>
+</section>
+<hr class="docutils" />
+<section id="opening-hook-3-min">
+<h2>Opening Hook (3 min)<a class="headerlink" href="#opening-hook-3-min" title="Link to this heading">#</a></h2>
+<p>Start by putting this equation on the board with no context:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dC_A</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A</span>
+</pre></div>
+</div>
+<p>Ask the room: <em>“What is this telling you?”</em></p>
+<p>Let students respond. Likely answers: “how concentration changes”, “the rate of reaction”, “an ODE”.</p>
+<p>Then say:</p>
+<blockquote>
+<div><p>“Every process you will ever model in chemical engineering — a reactor, a heat exchanger, a distillation column during startup, a drug moving through the bloodstream — can eventually be written down as one of these. An ordinary differential equation. Today we learn what that means, and by the end of this lecture you will be able to solve any first-order ODE in Python in about ten lines of code.”</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-an-ode-25-min">
+<h1>18.1  What Is an ODE? (25 min)<a class="headerlink" href="#what-is-an-ode-25-min" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="opening-contrast-3-min">
+<h2>Opening contrast (3 min)<a class="headerlink" href="#opening-contrast-3-min" title="Link to this heading">#</a></h2>
+<p>Write side by side on the board:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Algebraic</span> <span class="n">equation</span><span class="p">:</span>    <span class="mi">2</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">ODE</span><span class="p">:</span>                   <span class="n">dC_A</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A</span>
+</pre></div>
+</div>
+<p>Ask: <em>“What is the difference between these two?”</em></p>
+<p>The key point to draw out:</p>
+<ul class="simple">
+<li><p>The algebraic equation tells you the <strong>value</strong> of x directly. You solve it and you’re done.</p></li>
+<li><p>The ODE does <strong>not</strong> tell you C_A. It tells you the <strong>rule by which C_A changes</strong>. You know the slope everywhere, but you don’t yet know the curve.</p></li>
+</ul>
+<p>Say:</p>
+<blockquote>
+<div><p>“An ODE is not an answer — it’s a rule. To get the answer — the actual trajectory C_A(t) — you have to integrate it. And to integrate it, you need to know where to start. That starting point is the initial condition.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="the-standard-form-5-min">
+<h2>18.1.1  The standard form (5 min)<a class="headerlink" href="#the-standard-form-5-min" title="Link to this heading">#</a></h2>
+<p>Write on the board:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>dy/dt = f(t, y),    y(t₀) = y₀
+</pre></div>
+</div>
+<p>Walk through each piece:</p>
+<p><strong>y(t)</strong> — this is the unknown function we want to find. In a batch reactor it is concentration. In a heat exchanger it is temperature. In a tank it is liquid level. It is whatever quantity is evolving.</p>
+<p><strong>f(t, y)</strong> — this is the right-hand side. It is an expression that tells you the slope at any given time t and any given value y. Crucially, we know this. The ODE gives it to us.</p>
+<p><strong>y(t₀) = y₀</strong> — the initial condition. This is the value of y at the starting time t₀. Without it, we cannot determine the solution uniquely.</p>
+<p><strong>The car analogy:</strong></p>
+<blockquote>
+<div><p>“Imagine I give you a speedometer that tells you the car’s velocity at every instant. Can you tell me where the car is? No. You also need to know where it started. The initial condition is that starting location. The ODE is the speedometer.”</p>
+</div></blockquote>
+<p>Write this mapping explicitly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>velocity   ↔   dy/dt = f(t, y)    (the rule of change, given)
+position   ↔   y(t)               (what we want)
+start loc  ↔   y(t₀) = y₀        (initial condition, given)
+</pre></div>
+</div>
+<p><strong>Pause and check:</strong> Ask students: “In the batch reactor equation dC_A/dt = -k*C_A, what plays the role of f(t,y)?” Answer: f(t, C_A) = -k * C_A. Note that it doesn’t actually depend on t here — that’s common but not always the case.</p>
+</section>
+<hr class="docutils" />
+<section id="order-of-an-ode-4-min">
+<h2>18.1.2  Order of an ODE (4 min)<a class="headerlink" href="#order-of-an-ode-4-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“The order of an ODE is just the highest derivative that appears.”</p>
+</div></blockquote>
+<p>Write the three cases:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1st order:   dy/dt  = f(t, y)
+2nd order:   d²y/dt² = f(t, y, dy/dt)
+nth order:   involves d^n y/dt^n
+</pre></div>
+</div>
+<p>Give ChE examples for each:</p>
+<ul class="simple">
+<li><p>1st order: batch reaction, Newton’s cooling, CSTR startup</p></li>
+<li><p>2nd order: spring-mass system, liquid tank with spring-loaded valve, vibrating pipeline</p></li>
+</ul>
+<p>Then make the key point that students should write down:</p>
+<blockquote>
+<div><p>“Any higher-order ODE can always be rewritten as a <strong>system</strong> of first-order ODEs.”</p>
+</div></blockquote>
+<p>Show the conversion for a second-order equation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>d²x/dt² = -ω²x
+
+Let:  y₁ = x           (position)
+      y₂ = dx/dt       (velocity)
+
+Then:
+  dy₁/dt =  y₂
+  dy₂/dt = -ω²y₁
+</pre></div>
+</div>
+<blockquote>
+<div><p>“We introduced a new variable for each derivative. Now we have two first-order equations instead of one second-order equation. This trick is how <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> handles everything — it only knows how to do first-order systems, but that’s enough for all of engineering.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="solving-an-ode-integration-4-min">
+<h2>18.1.3  Solving an ODE = integration (4 min)<a class="headerlink" href="#solving-an-ode-integration-4-min" title="Link to this heading">#</a></h2>
+<p>Start from the standard form and rearrange:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dy</span><span class="o">/</span><span class="n">dt</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="n">dt</span>
+</pre></div>
+</div>
+<p>Integrate both sides from t₀ to t:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>y(t) = y₀ + ∫[t₀ to t]  f(τ, y(τ)) dτ
+</pre></div>
+</div>
+<blockquote>
+<div><p>“This is just integration. But notice the problem: f depends on y(τ), which is the very thing we are trying to find. It’s circular. You can’t evaluate the integral without knowing y, but you can’t know y without evaluating the integral.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“This is why we need numerical methods. They break the circularity by doing something very practical: they start at y₀, which we know, compute f(t₀, y₀), which gives the slope right now, take a small step forward using that slope, arrive at an approximate y₁, and repeat. Each step uses only information that we already have.”</p>
+</div></blockquote>
+<p>This is the bridge into 18.2.</p>
+</section>
+<hr class="docutils" />
+<section id="verifying-an-analytical-solution-4-min">
+<h2>18.1.4  Verifying an analytical solution (4 min)<a class="headerlink" href="#verifying-an-analytical-solution-4-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“For simple ODEs like dC_A/dt = -k*C_A, we actually can find the solution analytically. Let me show you how to verify it — this is a skill you’ll use to check numerical results.”</p>
+</div></blockquote>
+<p>Write the proposed solution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C_A</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">C_A0</span> <span class="o">*</span> <span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">kt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Verify by substitution — differentiate the right side and check it equals the ODE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>d/dt [C_A0 * e^(-kt)] = -k * C_A0 * e^(-kt) = -k * C_A(t)  ✓
+</pre></div>
+</div>
+<blockquote>
+<div><p>“It satisfies the ODE. Also check the initial condition: at t=0, C_A(0) = C_A0 * e^0 = C_A0. ✓”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“In the notebook we plot this solution. Notice that the curve starts at C_A0 and decays exponentially. Most ODEs do not have such clean analytical solutions — that’s exactly why we need numerical methods.”</p>
+</div></blockquote>
+<p><strong>Key takeaway to state explicitly:</strong></p>
+<blockquote>
+<div><p>“Whenever you solve an ODE numerically, always ask yourself: does this limit case have an analytical solution I can use to verify my code? For first-order linear ODEs with constant coefficients, the answer is usually yes.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="python-syntax-primer-5-min">
+<h2>18.1.5  Python syntax primer (5 min)<a class="headerlink" href="#python-syntax-primer-5-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Before we write a single solver call, I want to make sure everyone is comfortable translating a math equation into a Python function. This is a purely mechanical translation — once you see the pattern, it becomes automatic.”</p>
+</div></blockquote>
+<p>Write the pattern on the board:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="c1"># t : scalar — current time</span>
+    <span class="c1"># y : list   — current values of all variables</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span> <span class="n">of</span> <span class="n">derivatives</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Two rules. Repeat them.</strong></p>
+<p>Rule 1: <code class="docutils literal notranslate"><span class="pre">y</span></code> is always a list. Even if you only have one variable, you unpack it as <code class="docutils literal notranslate"><span class="pre">y[0]</span></code>.</p>
+<p>Rule 2: You always return a list. Even if you only have one derivative.</p>
+<p>Show a single-variable example first:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ODE: dC_A/dt = -k * C_A</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Walk through it line by line:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">y[0]</span></code> unpacks C_A from the state list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-k</span> <span class="pre">*</span> <span class="pre">C_A</span></code> is f(t, y) — the right-hand side of the ODE</p></li>
+<li><p>We return it inside a list <code class="docutils literal notranslate"><span class="pre">[...]</span></code></p></li>
+</ul>
+<p>Then show a two-variable example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># System: dC_A/dt = -k1*C_A</span>
+<span class="c1">#         dC_B/dt =  k1*C_A - k2*C_B</span>
+<span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs_system</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span><span class="p">,</span> <span class="n">C_B</span> <span class="o">=</span> <span class="n">y</span>        <span class="c1"># unpack both variables</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">,</span>
+             <span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">-</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">C_B</span><span class="p">]</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Notice: two variables go in, two derivatives come out. The list you return must always have the same number of entries as the list y.”</p>
+</div></blockquote>
+<p><strong>Quick test for the room:</strong> Write on the board: <code class="docutils literal notranslate"><span class="pre">dT/dt</span> <span class="pre">=</span> <span class="pre">(T_in</span> <span class="pre">-</span> <span class="pre">T)</span> <span class="pre">/</span> <span class="pre">tau</span></code>. Ask: “Write me the Python function for this ODE.” Give 60 seconds. Expected answer:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">T_in</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">]</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="euler-s-method-25-min">
+<h1>18.2  Euler’s Method (25 min)<a class="headerlink" href="#euler-s-method-25-min" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="framing-2-min">
+<h2>Framing (2 min)<a class="headerlink" href="#framing-2-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“We now know what an ODE is, and we know that solving it means finding y(t) given the rule dy/dt = f(t,y) and a starting point. Let’s build the simplest possible numerical method from scratch. This method, called Euler’s method, is not what we use in practice — but understanding it completely will make everything that follows obvious.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="the-stepping-formula-8-min">
+<h2>18.2.1  The stepping formula (8 min)<a class="headerlink" href="#the-stepping-formula-8-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Here is the core idea. Suppose we are at time t₀ and we know y₀. The ODE tells us the slope right now: it is f(t₀, y₀). If we assume the slope stays constant over a short time interval h, then after time h the value of y is approximately:”</p>
+</div></blockquote>
+<p>Write on the board, building it up step by step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Start at:   (t₀, y₀)
+Slope now:  f(t₀, y₀)
+After h:    y₁ = y₀ + h * f(t₀, y₀)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“That’s it. That one line is Euler’s method. Now we’re at (t₁, y₁). We do it again.”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>At (t₁, y₁):
+Slope now:  f(t₁, y₁)
+After h:    y₂ = y₁ + h * f(t₁, y₁)
+</pre></div>
+</div>
+<p>Write the general pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>y₁ = y₀ + h * f(t₀, y₀)
+y₂ = y₁ + h * f(t₁, y₁)
+y₃ = y₂ + h * f(t₂, y₂)
+...
+yₙ = yₙ₋₁ + h * f(tₙ₋₁, yₙ₋₁)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Each step uses only the result from the previous step. We are marching forward in time, one step at a time. Notice we never need to know y at any other point — just the immediate previous value.”</p>
+</div></blockquote>
+<p><strong>Now refer to the notebook visualization.</strong></p>
+<blockquote>
+<div><p>“Look at the figure in the notebook. The exact solution is the smooth black curve. The blue arrow is step 1: we start at y₀, we know the slope there — that’s f(t₀, y₀) — and we follow it in a straight line for horizontal distance h. That straight-line landing point is y₁.”</p>
+</div></blockquote>
+<p>Walk through the labeled quantities:</p>
+<ul class="simple">
+<li><p><strong>h</strong>: the horizontal distance — the step size — shown by the gray bracket</p></li>
+<li><p><strong>h·f(t₀, y₀)</strong>: the vertical rise of that straight-line step — shown by the blue bracket</p></li>
+<li><p><strong>error of y₁</strong>: the red dotted gap between y₁ (where Euler landed) and the exact curve at t₁</p></li>
+</ul>
+<blockquote>
+<div><p>“Why is there an error? Because the slope is not actually constant over [t₀, t₁]. The true solution is curved. Euler assumed it was straight. The difference is the error.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“The orange arrow is step 2. Notice that Euler starts from y₁, which is already a little wrong. So the second step has two sources of error: the curvature mistake within this step, plus the fact that we started from a wrong value.”</p>
+</div></blockquote>
+<p><strong>The student question from the notebook.</strong> Pose it directly:</p>
+<blockquote>
+<div><p>“Looking at this picture, what would you do to reduce the error?”</p>
+</div></blockquote>
+<p>Take responses. Guide toward: make h smaller. The steps would be shorter, the tangent-line approximation would be more accurate within each step, and the errors would accumulate more slowly. This is exactly right — and we’ll quantify exactly how much smaller.</p>
+</section>
+<hr class="docutils" />
+<section id="why-does-the-error-behave-the-way-it-does-10-min">
+<h2>18.2.2  Why does the error behave the way it does? (10 min)<a class="headerlink" href="#why-does-the-error-behave-the-way-it-does-10-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Let’s think carefully about where the error comes from, because this will tell us how to make it smaller.”</p>
+</div></blockquote>
+<p><strong>The Taylor series argument.</strong> Write on the board:</p>
+<blockquote>
+<div><p>“The exact value of y at t + h is given by the Taylor series:”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">=</span> <span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">h·y</span><span class="s1">&#39;(t) + (h²/2)·y&#39;&#39;(t) + (h³/6)·y&#39;&#39;&#39;</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="o">...</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>“This expansion is exact — it’s not an approximation. It is the precise value of y(t+h) expressed in terms of derivatives at t.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Euler’s method keeps only the first two terms:”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>y(t + h) ≈ y(t) + h·y&#39;(t)
+                = y(t) + h·f(t, y)   ← because y&#39; = f(t,y)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“So the <strong>local truncation error</strong> — the error we make in a single step — is everything we dropped:”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>e_local = (h²/2)·y&#39;&#39;(t) + higher order terms
+        ≈ (h²/2)·y&#39;&#39;(t)
+        ~ O(h²)
+</pre></div>
+</div>
+<p>Pause here and make sure this lands. Ask: <em>“If I cut h in half, what happens to the local error?”</em> It goes down by a factor of 4 (since h² appears). Good.</p>
+<p><strong>But the global error is only O(h), not O(h²).</strong> This is the crucial point that trips students up.</p>
+<blockquote>
+<div><p>“Over a total time T, how many steps do we take? N = T/h. So we make N errors, each of size roughly h²/2 * y’’. How big is their sum?”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>e_global ≈ N * e_local
+         = (T/h) * (h²/2) * |y&#39;&#39;|
+         = (T/2) * h * |y&#39;&#39;|
+         ~ O(h)
+</pre></div>
+</div>
+<p>Write this cancellation explicitly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(1/h) × h² = h
+</pre></div>
+</div>
+<blockquote>
+<div><p>“One power of h cancels. The global error is only first-order in h, not second-order. This means: to get 10 times more accurate, you need 10 times more steps. That’s a lot of work for not much payoff.”</p>
+</div></blockquote>
+<p>Summarize in a table on the board:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Local truncation error (1 step):   O(h²)   ← halving h → 4× smaller
+Number of steps:                   O(1/h)  ← halving h → 2× more steps
+Global error (total):              O(h)    ← halving h → 2× smaller
+</pre></div>
+</div>
+<p><strong>Concrete verification.</strong> Bring this to life with the batch reactor:</p>
+<blockquote>
+<div><p>“For dC_A/dt = -k·C_A, we know y’’ = k²·C_A. So the local error at the first step is exactly (h²/2)·k²·C_A0. Let’s check: if h = 1, k = 0.3, C_A0 = 2.0, then e_local ≈ (0.5)(0.09)(2.0) = 0.09 mol/L. That’s almost 5% error in a single step — already not great. But if h = 0.1, e_local ≈ 0.0009 mol/L. Much better.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“The notebook shows the convergence plot: as h decreases, the error falls along a straight line on a log-log scale with slope 1. That slope-1 line is the signature of first-order accuracy.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="implementing-euler-in-python-5-min">
+<h2>18.2.3  Implementing Euler in Python (5 min)<a class="headerlink" href="#implementing-euler-in-python-5-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Let’s code Euler’s method. This is just the formula in a loop.”</p>
+</div></blockquote>
+<p>Write on the board:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span> <span class="o">=</span> <span class="n">t_span</span>
+    <span class="n">t_arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">t0</span><span class="p">]</span>
+    <span class="n">y_arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">y0</span><span class="p">]</span>
+    <span class="n">t_cur</span><span class="p">,</span> <span class="n">y_cur</span> <span class="o">=</span> <span class="n">t0</span><span class="p">,</span> <span class="n">y0</span>
+    <span class="k">while</span> <span class="n">t_cur</span> <span class="o">&lt;</span> <span class="n">tf</span><span class="p">:</span>
+        <span class="n">y_cur</span> <span class="o">=</span> <span class="n">y_cur</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t_cur</span><span class="p">,</span> <span class="n">y_cur</span><span class="p">)</span>
+        <span class="n">t_cur</span> <span class="o">=</span> <span class="n">t_cur</span> <span class="o">+</span> <span class="n">h</span>
+        <span class="n">t_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_cur</span><span class="p">)</span>
+        <span class="n">y_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_cur</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t_arr</span><span class="p">,</span> <span class="n">y_arr</span>
+</pre></div>
+</div>
+<p>Walk through line by line:</p>
+<ul class="simple">
+<li><p>We initialize lists with the starting point</p></li>
+<li><p>Each iteration: compute the new y using the formula, advance time by h</p></li>
+<li><p>Append both to our lists</p></li>
+<li><p>Return arrays when done</p></li>
+</ul>
+<blockquote>
+<div><p>“Notice this function takes <code class="docutils literal notranslate"><span class="pre">f</span></code> as an argument — the ODE right-hand side. It doesn’t care what the ODE is. You write your ODE as a Python function, and you pass it in.”</p>
+</div></blockquote>
+<p><strong>Run it mentally:</strong> Say aloud the first two iterations for dC_A/dt = k*C_A with k=0.3, y₀=0.5, h=2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>t=0:  y=0.5,    slope = 0.3*0.5 = 0.15,   y₁ = 0.5 + 2*0.15 = 0.8
+t=2:  y=0.8,    slope = 0.3*0.8 = 0.24,   y₂ = 0.8 + 2*0.24 = 1.28
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Students, check: the exact value at t=4 is 0.5<em>e^(0.3</em>4) = 0.5*e^1.2 ≈ 1.66. Euler got 1.28. That’s an error of about 0.38 — almost 23%. This is why we don’t use Euler in practice.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="wrap-up-the-limitations-of-euler-2-min">
+<h2>18.2.4  Wrap-up: the limitations of Euler (2 min)<a class="headerlink" href="#wrap-up-the-limitations-of-euler-2-min" title="Link to this heading">#</a></h2>
+<p>Summarize at the board:</p>
+<blockquote>
+<div><p>“Euler’s method has three problems:”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. First-order accuracy — need 10× more steps to get 10× better answer
+2. Fixed step size — can&#39;t adapt to regions where the solution changes fast
+3. Single slope evaluation — uses only the slope at the start of the step,
+   ignoring how the slope changes within the step
+</pre></div>
+</div>
+<blockquote>
+<div><p>“All three of these are fixed by the methods inside <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>. That’s what we cover next.”</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="solving-odes-in-python-with-solve-ivp-25-min">
+<h1>18.3  Solving ODEs in Python with <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> (25 min)<a class="headerlink" href="#solving-odes-in-python-with-solve-ivp-25-min" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="framing-1-min">
+<h2>Framing (1 min)<a class="headerlink" href="#framing-1-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Everything in 18.2 was about building intuition. Now we switch to the tool you will actually use for the rest of this course and your careers: <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code>. The workflow has three steps. I’ll do each step in turn, with code.”</p>
+</div></blockquote>
+<p>Write on the board:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Step</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Write</span> <span class="n">the</span> <span class="n">ODE</span> <span class="k">as</span> <span class="n">a</span> <span class="n">Python</span> <span class="n">function</span>
+<span class="n">Step</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Call</span> <span class="n">solve_ivp</span> <span class="ow">and</span> <span class="n">read</span> <span class="n">the</span> <span class="n">result</span>
+<span class="n">Step</span> <span class="mi">3</span><span class="p">:</span> <span class="n">Understand</span> <span class="n">what</span> <span class="n">the</span> <span class="n">solver</span> <span class="ow">is</span> <span class="n">doing</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="step-1-writing-the-ode-function-7-min">
+<h2>18.3.1  Step 1 — Writing the ODE function (7 min)<a class="headerlink" href="#step-1-writing-the-ode-function-7-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“The first thing to internalize is that <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> does not know your equation. You have to give it the right-hand side as a Python function. The contract is fixed and simple.”</p>
+</div></blockquote>
+<p>Write the signature on the board:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="c1"># inputs:</span>
+    <span class="c1">#   t : scalar — current time</span>
+    <span class="c1">#   y : list   — current state, one entry per variable</span>
+    <span class="c1"># output:</span>
+    <span class="c1">#   list of derivatives, same length as y</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dy_dt</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Rule 1: y is always a list.</strong> Even for a single variable. Say this twice.</p>
+<blockquote>
+<div><p>“I see this mistake every semester. Someone writes <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">-k</span> <span class="pre">*</span> <span class="pre">y</span></code> and gets an error because y is a list, not a number. Always write <code class="docutils literal notranslate"><span class="pre">y[0]</span></code> to get the first variable.”</p>
+</div></blockquote>
+<p><strong>Rule 2: return a list, not a scalar.</strong> Say this twice.</p>
+<blockquote>
+<div><p>“If you return just a number, <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> will complain. Always wrap it: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">[-k</span> <span class="pre">*</span> <span class="pre">y[0]]</span></code>.”</p>
+</div></blockquote>
+<p>Write two examples side by side on the board:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single ODE: dC_A/dt = k * C_A</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs_single</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">]</span>      <span class="c1"># list with one entry</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Two ODEs:  dC_A/dt = -k1 * C_A</span>
+<span class="c1">#            dC_B/dt =  k1*C_A - k2*C_B</span>
+<span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs_system</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span><span class="p">,</span> <span class="n">C_B</span> <span class="o">=</span> <span class="n">y</span>          <span class="c1"># unpack both</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">,</span>
+             <span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">-</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">C_B</span><span class="p">]</span>   <span class="c1"># list with two entries</span>
+</pre></div>
+</div>
+<p><strong>Quick debugging trick:</strong></p>
+<blockquote>
+<div><p>“Before you call the solver, test your function manually. Call <code class="docutils literal notranslate"><span class="pre">rhs_single(0,</span> <span class="pre">[0.5])</span></code> and check you get <code class="docutils literal notranslate"><span class="pre">[0.15]</span></code>. This takes 5 seconds and catches 90% of syntax bugs.”</p>
+</div></blockquote>
+<p>Write this on the board:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">rhs_single</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]))</span>   <span class="c1"># should print [0.15]</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="step-2-calling-solve-ivp-and-reading-the-result-10-min">
+<h2>18.3.2  Step 2 — Calling <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> and reading the result (10 min)<a class="headerlink" href="#step-2-calling-solve-ivp-and-reading-the-result-10-min" title="Link to this heading">#</a></h2>
+<p>Write the full call on the board:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=...</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Go through each argument one at a time. Do not rush this.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">fun</span></code></strong> — your ODE function. Just pass the name, no parentheses.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">t_span</span></code></strong> — a tuple <code class="docutils literal notranslate"><span class="pre">(t_start,</span> <span class="pre">t_end)</span></code>. This tells the solver the interval to integrate over. Example: <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">10)</span></code> means from t=0 to t=10 minutes.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">y0</span></code></strong> — the initial conditions, as a list. One value per variable. Example: <code class="docutils literal notranslate"><span class="pre">[0.5]</span></code> for a single variable starting at 0.5. <code class="docutils literal notranslate"><span class="pre">[1.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0]</span></code> for a three-variable system.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">t_eval</span></code></strong> — optional, but almost always used. A numpy array of times where you want the solution saved. If you omit it, the solver picks its own internal times — often inconvenient for plotting. Use <code class="docutils literal notranslate"><span class="pre">np.linspace(0,</span> <span class="pre">10,</span> <span class="pre">200)</span></code> to get 200 evenly-spaced points.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">args</span></code></strong> — optional tuple of extra parameters to pass to your ODE function. Covered in 18.3.4.</p>
+<p><strong>Now: reading the result.</strong></p>
+<blockquote>
+<div><p>“<code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> returns an object — let’s call it <code class="docutils literal notranslate"><span class="pre">sol</span></code>. Three things you always check:”</p>
+</div></blockquote>
+<p>Write on the board:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sol</span><span class="o">.</span><span class="n">success</span>    <span class="c1"># True if the solver converged — always check this first!</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">t</span>          <span class="c1"># array of time points, shape (N,)</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">y</span>          <span class="c1"># array of solution values, shape (n_vars, N)</span>
+</pre></div>
+</div>
+<p>Spend extra time on <code class="docutils literal notranslate"><span class="pre">sol.y</span></code> — this is the one that confuses students.</p>
+<blockquote>
+<div><p>“<code class="docutils literal notranslate"><span class="pre">sol.y</span></code> is a 2D array. Row 0 is the trajectory of variable 0. Row 1 is variable 1. And so on.”</p>
+</div></blockquote>
+<p>Draw this on the board as a literal 2D table:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sol.y:
+         t₀      t₁      t₂    ...   t_N
+var 0 [  0.50    0.65    0.84  ...   10.2  ]
+var 1 [  0.00    0.03    0.08  ...    0.1  ]
+</pre></div>
+</div>
+<blockquote>
+<div><p>“So <code class="docutils literal notranslate"><span class="pre">sol.y[0]</span></code> gives the entire trajectory of variable 0 — a 1D array of length N. <code class="docutils literal notranslate"><span class="pre">sol.y[0,</span> <span class="pre">-1]</span></code> gives the final value of variable 0. <code class="docutils literal notranslate"><span class="pre">sol.y[1]</span></code> gives the trajectory of variable 1.”</p>
+</div></blockquote>
+<p><strong>Live example — work through it together:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+    <span class="n">fun</span>    <span class="o">=</span> <span class="n">rhs</span><span class="p">,</span>
+    <span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">y0</span>     <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span>
+    <span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>     <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>           <span class="c1"># [0, 2, 4, 6, 8, 10]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>        <span class="c1"># six values of C_A</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># C_A at t=10</span>
+</pre></div>
+</div>
+<p>Ask students to predict the answer before running: “C_A(10) = 0.5 * e^(0.3*10) = 0.5 * e^3 ≈ 10.04.”</p>
+<blockquote>
+<div><p>“The notebook cell runs this and shows the output. Notice how closely the numerical solution tracks the exact curve — the markers sit right on the line. This is the difference between Euler and RK45.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="step-3-under-the-hood-what-is-rk45-5-min">
+<h2>18.3.3  Step 3 — Under the hood: what is RK45? (5 min)<a class="headerlink" href="#step-3-under-the-hood-what-is-rk45-5-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“You don’t need to understand this to use solve_ivp, but knowing the idea will help you debug and choose solver settings.”</p>
+</div></blockquote>
+<p>Write side by side:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Euler:   y_{n+1} = yₙ + h * k₁
+                          ↑
+                   slope at start only
+
+RK45:    y_{n+1} = yₙ + (h/6) * (k₁ + 2k₂ + 2k₃ + k₄)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“RK45 takes four slope measurements within each step — at the start, two midpoints, and the end — and combines them with the weights 1, 2, 2, 1. This weighted average tracks the curvature of the true solution much more closely than a single slope at the start.”</p>
+</div></blockquote>
+<p>Explain the error order comparison:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Euler:  global error O(h)    — halving h → 2× more accurate
+RK4:    global error O(h⁴)   — halving h → 16× more accurate
+RK45:   adaptive h           — error controlled by rtol, atol
+</pre></div>
+</div>
+<blockquote>
+<div><p>“The ‘45’ in RK45 means it runs both a 4th-order and a 5th-order estimate at each step. The difference between them is the error estimate. If the error is too large, the step is rejected and retried with smaller h. If the error is much smaller than needed, the next step is bigger. You never choose h — the solver finds the right h automatically.”</p>
+</div></blockquote>
+<p><strong>The tolerances:</strong></p>
+<blockquote>
+<div><p>“Two keywords control accuracy: <code class="docutils literal notranslate"><span class="pre">rtol</span></code> (relative tolerance, default 1e-3) and <code class="docutils literal notranslate"><span class="pre">atol</span></code> (absolute tolerance, default 1e-6). For most ChE problems the defaults are fine. If you need higher accuracy — say, for a phase portrait or stiff reactor — use <code class="docutils literal notranslate"><span class="pre">rtol=1e-6,</span> <span class="pre">atol=1e-9</span></code>.”</p>
+</div></blockquote>
+<p>Show the convergence plot from the notebook:</p>
+<blockquote>
+<div><p>“Here is the key picture: Euler errors fall along a slope-1 line on the log-log plot. The RK45 error is the flat horizontal line at the bottom. Notice it is orders of magnitude lower with far fewer function evaluations.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="passing-parameters-with-args-3-min">
+<h2>18.3.4  Passing parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code> (3 min)<a class="headerlink" href="#passing-parameters-with-args-3-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Your ODE function will almost always have parameters — rate constants, temperatures, volumes. There are two ways to handle them.”</p>
+</div></blockquote>
+<p><strong>Bad way — global variables:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>                    <span class="c1"># global variable</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>      <span class="c1"># silently uses k from outer scope</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>“This works, but it’s fragile. If you have multiple ODEs with different k values, or you want to run a loop over k, you’ll need to redefine the function every time.”</p>
+</div></blockquote>
+<p><strong>Good way — <code class="docutils literal notranslate"><span class="pre">args</span></code>:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>          <span class="c1"># k is a parameter</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,))</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>“<code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> will call your function as <code class="docutils literal notranslate"><span class="pre">rhs(t,</span> <span class="pre">y,</span> <span class="pre">0.3)</span></code> at every step. The <code class="docutils literal notranslate"><span class="pre">args</span></code> tuple is appended after t and y.”</p>
+</div></blockquote>
+<p><strong>The trailing comma.</strong> Write this on the board and underline it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,)</span>    <span class="err">←</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">tuple</span> <span class="k">with</span> <span class="n">one</span> <span class="n">element</span>
+<span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>     <span class="err">←</span> <span class="n">WRONG</span><span class="p">:</span>  <span class="n">just</span> <span class="n">parentheses</span> <span class="n">around</span> <span class="mf">0.3</span><span class="p">,</span> <span class="ow">not</span> <span class="n">a</span> <span class="nb">tuple</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Python requires a trailing comma to make a one-element tuple. <code class="docutils literal notranslate"><span class="pre">(0.3)</span></code> is just 0.3 in parentheses. <code class="docutils literal notranslate"><span class="pre">(0.3,)</span></code> is a tuple. The difference will give you a cryptic TypeError.”</p>
+</div></blockquote>
+<p>Now show the parameter sweep from the notebook:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k_val</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k_val</span><span class="p">,),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;k = </span><span class="si">{</span><span class="n">k_val</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Four different k values, one function definition, four lines of code. This is the payoff of using <code class="docutils literal notranslate"><span class="pre">args</span></code> instead of global variables.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="closing-the-complete-workflow-2-min">
+<h2>Closing: the complete workflow (2 min)<a class="headerlink" href="#closing-the-complete-workflow-2-min" title="Link to this heading">#</a></h2>
+<p>Write the four-line workflow on the board and leave it there:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. Write the ODE function:
+       def rhs(t, y, *params):
+           return [f(t, y)]
+
+2. Call solve_ivp:
+       sol = solve_ivp(rhs, (t0, tf), [y0], t_eval=..., args=(...))
+
+3. Always check:
+       assert sol.success
+
+4. Extract results:
+       sol.t      — time
+       sol.y[0]   — first variable
+       sol.y[1]   — second variable (if system)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“That’s the entire workflow. In the next section we’ll apply it to consecutive reactions, second-order dynamics, and the non-isothermal batch reactor. Every one of those problems fits into exactly this framework.”</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<hr class="docutils" />
+<section id="frequently-asked-questions">
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Link to this heading">#</a></h2>
+<p><strong>Q: What if my ODE doesn’t depend on t explicitly?</strong>
+A: You still need <code class="docutils literal notranslate"><span class="pre">t</span></code> as the first argument — <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> always passes it. Just ignore it in the function body. Example: <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">rhs(t,</span> <span class="pre">y):</span> <span class="pre">return</span> <span class="pre">[-k</span> <span class="pre">*</span> <span class="pre">y[0]]</span></code> — t is there but never used.</p>
+<p><strong>Q: Do I have to use <code class="docutils literal notranslate"><span class="pre">t_eval</span></code>?</strong>
+A: No. If you omit it, <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> saves the solution at its own internal adaptive time points. These may not be evenly spaced. Usually you want <code class="docutils literal notranslate"><span class="pre">t_eval</span></code> for plotting.</p>
+<p><strong>Q: When should I worry about <code class="docutils literal notranslate"><span class="pre">rtol</span></code> and <code class="docutils literal notranslate"><span class="pre">atol</span></code>?</strong>
+A: Default values work for most problems. Tighten them (e.g., <code class="docutils literal notranslate"><span class="pre">rtol=1e-6</span></code>) when: (a) you are comparing to an analytical solution and need high accuracy, (b) the problem has sharp features like a sudden temperature rise, or (c) you’re finding a steady state by integrating to large t.</p>
+<p><strong>Q: <code class="docutils literal notranslate"><span class="pre">sol.success</span></code> is False — what do I do?</strong>
+A: First, print <code class="docutils literal notranslate"><span class="pre">sol.message</span></code> — it will tell you what went wrong. Common causes: (1) the ODE blows up to infinity (check your physics), (2) the tolerances are too tight for the problem (loosen <code class="docutils literal notranslate"><span class="pre">rtol</span></code>), (3) the equation is stiff (switch to <code class="docutils literal notranslate"><span class="pre">method='Radau'</span></code>).</p>
+<p><strong>Q: Why does Euler still appear in textbooks if it’s so bad?</strong>
+A: Because it is the clearest possible illustration of the core idea — and every more sophisticated method (RK4, RK45, Radau) is a direct improvement on Euler. Understanding Euler means understanding all numerical ODE solvers at the conceptual level.</p>
+</section>
+<hr class="docutils" />
+<section id="exam-and-hw-tips">
+<h2>Exam and HW Tips<a class="headerlink" href="#exam-and-hw-tips" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If asked to “apply Euler’s method,” show two full steps by hand with numbers: compute the slope, multiply by h, add to the current value, advance time.</p></li>
+<li><p>If asked to “solve an ODE in Python,” always show: the <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">rhs(t,</span> <span class="pre">y):</span></code> function, the <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> call with <code class="docutils literal notranslate"><span class="pre">t_span</span></code>, <code class="docutils literal notranslate"><span class="pre">y0</span></code>, and <code class="docutils literal notranslate"><span class="pre">t_eval</span></code>, and the <code class="docutils literal notranslate"><span class="pre">sol.y[0]</span></code> extraction.</p></li>
+<li><p>For a system of N ODEs: <code class="docutils literal notranslate"><span class="pre">y0</span></code> has N entries, <code class="docutils literal notranslate"><span class="pre">rhs</span></code> returns a list of N entries, <code class="docutils literal notranslate"><span class="pre">sol.y</span></code> has shape (N, n_timepoints).</p></li>
+<li><p>Always verify your function with a manual print call before running the solver.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter18"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 18 Lecture Script: Ordinary Differential Equations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sections-18-1-18-3">Sections 18.1 – 18.3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-begin">Before You Begin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-hook-3-min">Opening Hook (3 min)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-ode-25-min">18.1  What Is an ODE? (25 min)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-contrast-3-min">Opening contrast (3 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-standard-form-5-min">18.1.1  The standard form (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-an-ode-4-min">18.1.2  Order of an ODE (4 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-an-ode-integration-4-min">18.1.3  Solving an ODE = integration (4 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-an-analytical-solution-4-min">18.1.4  Verifying an analytical solution (4 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-syntax-primer-5-min">18.1.5  Python syntax primer (5 min)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-method-25-min">18.2  Euler’s Method (25 min)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#framing-2-min">Framing (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stepping-formula-8-min">18.2.1  The stepping formula (8 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-the-error-behave-the-way-it-does-10-min">18.2.2  Why does the error behave the way it does? (10 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-euler-in-python-5-min">18.2.3  Implementing Euler in Python (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up-the-limitations-of-euler-2-min">18.2.4  Wrap-up: the limitations of Euler (2 min)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-odes-in-python-with-solve-ivp-25-min">18.3  Solving ODEs in Python with <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> (25 min)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#framing-1-min">Framing (1 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-writing-the-ode-function-7-min">18.3.1  Step 1 — Writing the ODE function (7 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calling-solve-ivp-and-reading-the-result-10-min">18.3.2  Step 2 — Calling <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> and reading the result (10 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-under-the-hood-what-is-rk45-5-min">18.3.3  Step 3 — Under the hood: what is RK45? (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-parameters-with-args-3-min">18.3.4  Passing parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code> (3 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-the-complete-workflow-2-min">Closing: the complete workflow (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exam-and-hw-tips">Exam and HW Tips</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

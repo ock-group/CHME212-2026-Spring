@@ -1,0 +1,1080 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CHME 212 — Midterm Makeup Exam &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/midterm-makeup/midterm-makeup copy 2';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab11/11_lab.html">Lab 11: Root Finding</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/midterm-makeup/midterm-makeup copy 2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/midterm-makeup/midterm-makeup copy 2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>CHME 212 — Midterm Makeup Exam</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-this-cell-if-package-installation-is-required-if-not-ignore">Run this cell if package installation is required. If not, ignore.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-information">Student Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-fix-the-code-20-pts-5-pts-each-8-min">Part A — Fix the Code (20 pts, 5 pts each; ⏱ ~8 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a1">A1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a2">A2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a3">A3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a4">A4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a5">A5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a6">A6</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-coding-problems-80-pts">Part B — Coding Problems (80 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b1-30-pts-18-min">B1 (30 pts; ⏱ ~18 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b2-20-pts-8-min">B2 (20 pts; ⏱ ~8 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-25-pts-8-min">B3 (25 pts; ⏱ ~8 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-25-pts-14-min">B4 (25 pts; ⏱ ~14 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-below-cell-for-visualization-after-running-please-collapse-the-code-cell-in-jupyterlab-click-the-small-arrow-to-the-left-of-the-cell-use-view-collapse-selected-code-or-click-the-vertical-bar-next-to-the-cell"><strong>!!!Run the below cell for visualization!!!</strong>  After running, please collapse the code cell (in JupyterLab, click the small arrow to the left of the cell, use View → Collapse Selected Code, or click the vertical bar next to the cell).</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chme-212-midterm-makeup-exam">
+<h1>CHME 212 — Midterm Makeup Exam<a class="headerlink" href="#chme-212-midterm-makeup-exam" title="Link to this heading">#</a></h1>
+<p><strong>Time allowed: 60 minutes (58 minutes for problem-solving, 2 minutes for submission preparation)</strong>
+<strong>Covers: Midterm 1 &amp; Midterm 2 material</strong>
+<strong>Open notes, closed internet.</strong></p>
+<hr class="docutils" />
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Submission:</strong> Enter all answers in the provided notebook (Canvas-Files-Exam) and submit it through <strong>Gradescope</strong> before time is called. Late submissions will not be accepted.</p></li>
+<li><p><strong>Electronic devices:</strong> All personal electronic devices (phones, tablets, smartwatches) are <strong>strictly prohibited</strong>. Internet access and AI/code assistant tools (ChatGPT, GitHub Copilot, etc.) are <strong>strictly prohibited</strong>. Any violation will be treated as a violation of academic integrity.</p></li>
+<li><p><strong>Open notes:</strong> You may use printed or handwritten notes only.</p></li>
+<li><p><strong>Before submitting:</strong> Restart the kernel and run all cells to confirm your notebook runs without errors.</p></li>
+</ol>
+</section>
+<section id="run-this-cell-if-package-installation-is-required-if-not-ignore">
+<h2>Run this cell if package installation is required. If not, ignore.<a class="headerlink" href="#run-this-cell-if-package-installation-is-required-if-not-ignore" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span> <span class="s2">&quot;scipy&quot;</span><span class="p">,</span> <span class="s2">&quot;-q&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="student-information">
+<h2>Student Information<a class="headerlink" href="#student-information" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>        <span class="c1"># Your full name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">trapezoid</span><span class="p">,</span> <span class="n">quad</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="part-a-fix-the-code-20-pts-5-pts-each-8-min">
+<h2>Part A — Fix the Code (20 pts, 5 pts each; ⏱ ~8 min)<a class="headerlink" href="#part-a-fix-the-code-20-pts-5-pts-each-8-min" title="Link to this heading">#</a></h2>
+<p>Each snippet below contains <strong>one bug</strong>. Write the corrected line(s) in the answer cell provided for each question.</p>
+<section id="a1">
+<h3>A1<a class="headerlink" href="#a1" title="Link to this heading">#</a></h3>
+<p>The following code should print <strong>“Number is smaller than 20”</strong>, but it raises an error. Fix it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">number</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number is smaller than 20&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number is smaller than 20&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number is smaller than 20&quot;</span><span class="p">)</span>
+    <span class="o">^</span>
+<span class="ne">IndentationError</span>: expected an indented block after &#39;if&#39; statement on line 2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a2">
+<h3>A2<a class="headerlink" href="#a2" title="Link to this heading">#</a></h3>
+<p>The following code should print the <strong>last element</strong> of the list, but it raises an error. Fix it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a3">
+<h3>A3<a class="headerlink" href="#a3" title="Link to this heading">#</a></h3>
+<p>The following code should retrieve the temperature from the dictionary, but it prints the wrong value. Fix it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stream</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Feed&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;vapor&quot;</span><span class="p">}</span>
+<span class="c1"># I want to retrieve the temperature value (350)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stream</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Feed&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;vapor&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a4">
+<h3>A4<a class="headerlink" href="#a4" title="Link to this heading">#</a></h3>
+<p>The following code should keep looping until <code class="docutils literal notranslate"><span class="pre">count</span></code> reaches 10, but it runs forever. Fix it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a5">
+<h3>A5<a class="headerlink" href="#a5" title="Link to this heading">#</a></h3>
+<p>The following code should compute the sum across the columns (i.e., sum each column separately). Fix it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">summation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">summation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">summation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a6">
+<h3>A6<a class="headerlink" href="#a6" title="Link to this heading">#</a></h3>
+<p>A project is organized like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reactor_tools</span><span class="o">/</span>
+    <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">kinetics</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">thermodynamics</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>The following code tries to import the <code class="docutils literal notranslate"><span class="pre">kinetics</span></code> module so you can call <code class="docutils literal notranslate"><span class="pre">kinetics.rate(T)</span></code> from outside the package. Fix it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kinetics</span><span class="w"> </span><span class="kn">import</span> <span class="n">reactor_tools</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kinetics</span><span class="w"> </span><span class="kn">import</span> <span class="n">reactor_tools</span> 
+<span class="c1"># it&#39;s not runnable, but just fix this to properly import the target function</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-b-coding-problems-80-pts">
+<h2>Part B — Coding Problems (80 pts)<a class="headerlink" href="#part-b-coding-problems-80-pts" title="Link to this heading">#</a></h2>
+<p>Read each problem carefully and complete the code as instructed. Do not modify the pre-provided lines.</p>
+<section id="b1-30-pts-18-min">
+<h3>B1 (30 pts; ⏱ ~18 min)<a class="headerlink" href="#b1-30-pts-18-min" title="Link to this heading">#</a></h3>
+<p>The van der Waals equation gives the pressure of a real gas:</p>
+<div class="math notranslate nohighlight">
+\[P = \frac{nRT}{V - nb} - \frac{n^2 a}{V^2}\]</div>
+<p>You are given the following CO₂ parameters and conditions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n = 1\)</span> mol, <span class="math notranslate nohighlight">\(R = 0.08206\)</span> L·atm/(mol·K)</p></li>
+<li><p><span class="math notranslate nohighlight">\(a = 3.640\)</span> L²·atm/mol², <span class="math notranslate nohighlight">\(b = 0.04267\)</span> L/mol</p></li>
+<li><p>Volume: <span class="math notranslate nohighlight">\(V = 1.5\)</span> L (fixed)</p></li>
+<li><p>Temperatures to test: <strong>[250, 300, 350, 400, 500]</strong> K</p></li>
+</ul>
+<p>Write a program that does <strong>all</strong> of the following.</p>
+<p><strong>(Task 1 — 20 pts):</strong> Compute the van der Waals pressure for each temperature, classify each result as <strong>“Low”</strong> (P &lt; 10 atm), <strong>“Medium”</strong> (10–20 atm), or <strong>“High”</strong> (&gt; 20 atm), and save all results to a file named <strong>vdw_results.txt</strong> in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="o">=</span><span class="mi">250</span> <span class="n">K</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">xx</span><span class="o">.</span><span class="n">xxxx</span> <span class="n">atm</span><span class="p">,</span> <span class="n">Low</span>
+<span class="n">T</span><span class="o">=</span><span class="mi">300</span> <span class="n">K</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">xx</span><span class="o">.</span><span class="n">xxxx</span> <span class="n">atm</span><span class="p">,</span> <span class="n">Medium</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Tip:</strong> Use a <em>for</em> loop over the temperature list and a <em>with open(filename, ‘w’)</em> block to write the file.</p>
+</div></blockquote>
+<p><strong>(Task 2 — 10 pts):</strong> For each temperature, compute the ideal gas pressure (<span class="math notranslate nohighlight">\(P_\text{ideal} = nRT/V\)</span>) alongside the van der Waals pressure, calculate the percent difference, and print the results in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">250</span> <span class="n">K</span><span class="p">,</span> <span class="n">P_ideal</span> <span class="o">=</span> <span class="n">xx</span><span class="o">.</span><span class="n">xxxx</span> <span class="n">atm</span><span class="p">,</span> <span class="n">P_vdW</span> <span class="o">=</span> <span class="n">xx</span><span class="o">.</span><span class="n">xxxx</span> <span class="n">atm</span><span class="p">,</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">xx</span><span class="o">.</span><span class="n">xx</span><span class="o">%</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\% \text{ difference} = \frac{|P_\text{ideal} - P_\text{vdW}|}{P_\text{vdW}} \times 100\]</div>
+<p><strong>(Task 3 - 5 pts)</strong> Write <strong>one or two sentences</strong> in the markdown cell discussing what the trend in percent difference tells you about when the ideal gas approximation breaks down.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.08206</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.04267</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+
+<span class="c1"># Task 1 — compute vdW pressure, classify, and write to file</span>
+<span class="c1"># Use &quot;line = f&quot;T={T} K, P={P:.4f} atm, {label}&quot; to format the output line </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 2 — compare ideal vs vdW and print percent difference</span>
+<span class="c1"># Use &quot;&quot;T = {T} K, P_ideal = {P_ideal:.4f} atm, P_vdW = {P_vdw:.4f} atm, diff = {diff:.2f}%&quot; to format the output line</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>(Type your solution for task 3)</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="b2-20-pts-8-min">
+<h3>B2 (20 pts; ⏱ ~8 min)<a class="headerlink" href="#b2-20-pts-8-min" title="Link to this heading">#</a></h3>
+<p>A combustion process requires heating nitrogen gas from 300 K to 900 K. The heat capacity <span class="math notranslate nohighlight">\(C_p\)</span> of N₂ was measured at seven temperatures:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span>  <span class="mi">400</span><span class="p">,</span>  <span class="mi">500</span><span class="p">,</span>  <span class="mi">600</span><span class="p">,</span>  <span class="mi">700</span><span class="p">,</span>  <span class="mi">800</span><span class="p">,</span>  <span class="mi">900</span><span class="p">])</span>  <span class="c1"># K</span>
+<span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">29.1</span><span class="p">,</span> <span class="mf">29.2</span><span class="p">,</span> <span class="mf">29.6</span><span class="p">,</span> <span class="mf">30.1</span><span class="p">,</span> <span class="mf">30.8</span><span class="p">,</span> <span class="mf">31.4</span><span class="p">,</span> <span class="mf">32.0</span><span class="p">])</span>  <span class="c1"># J/mol·K</span>
+</pre></div>
+</div>
+<p>The enthalpy change is <span class="math notranslate nohighlight">\(\Delta H = \displaystyle\int_{300}^{900} C_p(T)\,dT\)</span>.</p>
+<p><strong>(Task 1 — 7 pts):</strong> Using the trapezoidal rule on the tabulated data, compute <span class="math notranslate nohighlight">\(\Delta H\)</span> in J/mol directly from the tabulated data.</p>
+<p><strong>(Task 2 — 8 pts):</strong> Define a Python function <code class="docutils literal notranslate"><span class="pre">Cp_fit(T)</span></code> that <strong>evaluates</strong> the fitted polynomial, then recompute <span class="math notranslate nohighlight">\(\Delta H\)</span> in J/mol from the fitted curve.</p>
+<p><strong>(Task 3 — 5 pts):</strong> The two <span class="math notranslate nohighlight">\(\Delta H\)</span> values from Task 1 and Task 2 are close but not identical. In one or two sentences, explain <strong>why</strong> a small difference is expected and which method you would trust more if the true <span class="math notranslate nohighlight">\(C_p(T)\)</span> curve is smooth.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">trapezoid</span><span class="p">,</span> <span class="n">quad</span>
+
+<span class="n">T_data</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span>  <span class="mi">400</span><span class="p">,</span>  <span class="mi">500</span><span class="p">,</span>  <span class="mi">600</span><span class="p">,</span>  <span class="mi">700</span><span class="p">,</span>  <span class="mi">800</span><span class="p">,</span>  <span class="mi">900</span><span class="p">])</span>  <span class="c1"># K</span>
+<span class="n">Cp_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">29.1</span><span class="p">,</span> <span class="mf">29.2</span><span class="p">,</span> <span class="mf">29.6</span><span class="p">,</span> <span class="mf">30.1</span><span class="p">,</span> <span class="mf">30.8</span><span class="p">,</span> <span class="mf">31.4</span><span class="p">,</span> <span class="mf">32.0</span><span class="p">])</span>  <span class="c1"># J/mol·K</span>
+
+<span class="c1"># Task 1 — trapezoidal integration on tabulated data</span>
+<span class="n">dH_trap</span> <span class="o">=</span> <span class="n">TODO</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task 1  ΔH (trapezoid) = </span><span class="si">{</span><span class="n">dH_trap</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 2 — integrate the fitted polynomial with quad</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="n">TODO</span>  <span class="c1"># linear fit with 1st degree polynomial</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Cp_fit</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">TODO</span>
+
+<span class="n">dH_quad</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">TODO</span>  <span class="c1"># integrate Cp_fit from 300 to 900 K</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Task 2  ΔH (quad fit)  = </span><span class="si">{</span><span class="n">dH_quad</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+<span class="n">difference</span> <span class="o">=</span> <span class="n">TODO</span> <span class="c1"># Compute the absolute difference</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;        Difference     = </span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>(Task 3)</strong> Type your answer here.</p>
+</div></blockquote>
+<p>The trapezoidal rule approximates <span class="math notranslate nohighlight">\(C_p(T)\)</span> as piecewise-linear between the seven data points, so it slightly underestimates the area where the curve is concave-up. If the true <span class="math notranslate nohighlight">\(C_p(T)\)</span> is smooth, integrating the polynomial fit with quad is more accurate because the fit captures the curvature that the trapezoids miss.</p>
+</section>
+<hr class="docutils" />
+<section id="b3-25-pts-8-min">
+<h3>B3 (25 pts; ⏱ ~8 min)<a class="headerlink" href="#b3-25-pts-8-min" title="Link to this heading">#</a></h3>
+<p>A heat exchanger cools a reactor effluent stream. The outlet temperature is modeled as:</p>
+<div class="math notranslate nohighlight">
+\[T_{out} = T_{in} - \frac{Q}{\dot{m} \, c_p}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_{in} = 120\,°C\)</span> (fixed inlet temperature)</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q = 8000\,\text{W}\)</span> (fixed heat removed)</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_p = 3.80\,\text{J g}^{-1}\,°C^{-1}\)</span> (fixed heat capacity of the fluid)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dot{m} \sim \mathcal{N}(80,\;4^2)\,\text{g/s}\)</span> (mass flow rate, <strong>normally distributed</strong>)</p></li>
+</ul>
+<p>The outlet temperature must be <strong>no more than 95 °C</strong> to meet process safety requirements.</p>
+<p><strong>(Task 1 — 8 pts):</strong> Compute <span class="math notranslate nohighlight">\(T_{out}\)</span> at the mean flow rate <span class="math notranslate nohighlight">\(\dot{m} = 80\,\text{g/s}\)</span>. Check whether it meets the spec.</p>
+<p><strong>(Task 2 — 17 pts):</strong> Generate <span class="math notranslate nohighlight">\(N = 50{,}000\)</span> samples of <span class="math notranslate nohighlight">\(\dot{m}\)</span> and compute <span class="math notranslate nohighlight">\(T_{out}\)</span> for each. Then find:</p>
+<ul class="simple">
+<li><p>Mean and standard deviation of <span class="math notranslate nohighlight">\(T_{out}\)</span></p></li>
+<li><p>Fraction of runs where <span class="math notranslate nohighlight">\(T_{out} &gt; 95\,°C\)</span> (failure rate)</p></li>
+</ul>
+<p><strong>(Task 3 — discussion):</strong> If the standard deviation of <span class="math notranslate nohighlight">\(\dot{m}\)</span> is reduced from 4 g/s to 2 g/s (e.g., by installing a better flow controller), would you expect the failure rate to increase, decrease, or stay the same? Explain your reasoning in 1–2 sentences as a Python comment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">T_in</span>   <span class="o">=</span> <span class="mf">120.0</span>   <span class="c1"># °C</span>
+<span class="n">Q</span>      <span class="o">=</span> <span class="mf">8000.0</span>  <span class="c1"># W</span>
+<span class="n">cp</span>     <span class="o">=</span> <span class="mf">3.80</span>    <span class="c1"># J/(g·°C)</span>
+<span class="n">spec_T</span> <span class="o">=</span> <span class="mf">95.0</span>    <span class="c1"># °C  (must be ≤ this)</span>
+
+<span class="c1"># Task 1 — nominal outlet temperature at mean flow rate</span>
+<span class="n">mdot_mean</span> <span class="o">=</span> <span class="mf">80.0</span>   <span class="c1"># g/s</span>
+<span class="n">T_nominal</span> <span class="o">=</span> <span class="n">TODO</span>
+
+<span class="c1"># Check whether T_nominal meets the spec</span>
+<span class="c1"># If it meets the spec, write the code to print &quot;Yes, it meets the spec.&quot;</span>
+<span class="c1"># If not, write the code to print &quot;No, it does not meet the spec.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 2 — Monte Carlo</span>
+<span class="n">N</span>   <span class="o">=</span> <span class="mi">50_000</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Sample mdot from normal distribution</span>
+<span class="c1"># Do Monte Carlo to compute T_out for each sample</span>
+<span class="c1"># Compute mean, std, and failrue rate</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Monte Carlo results (N = </span><span class="si">{</span><span class="n">N</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean T_out   = </span><span class="si">{</span><span class="n">mean_T</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Std T_out    = </span><span class="si">{</span><span class="n">std_T</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Failure rate = </span><span class="si">{</span><span class="n">fail_rate</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="b4-25-pts-14-min">
+<h3>B4 (25 pts; ⏱ ~14 min)<a class="headerlink" href="#b4-25-pts-14-min" title="Link to this heading">#</a></h3>
+<p>A mixing unit combines two feed streams and produces a single outlet stream. Each stream carries three components (A, B, C) and has its own temperature.</p>
+<p><strong>Stream data:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Stream 1</p></th>
+<th class="head"><p>Stream 2</p></th>
+<th class="head"><p>Outlet</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Total flow (kg/h)</p></td>
+<td><p><span class="math notranslate nohighlight">\(F_1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(F_2\)</span></p></td>
+<td><p>600</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mass fraction A</p></td>
+<td><p>0.50</p></td>
+<td><p>0.10</p></td>
+<td><p>0.30</p></td>
+</tr>
+<tr class="row-even"><td><p>Mass fraction B</p></td>
+<td><p>0.35</p></td>
+<td><p>0.55</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mass fraction C</p></td>
+<td><p>0.15</p></td>
+<td><p>0.35</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>Temperature (°C)</p></td>
+<td><p>90</p></td>
+<td><p>30</p></td>
+<td><p><span class="math notranslate nohighlight">\(T_{out}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(c_p\)</span> (kJ/kg·°C)</p></td>
+<td><p>3.2</p></td>
+<td><p>4.5</p></td>
+<td><p>4.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The mixer operates at <strong>steady state</strong> with <strong>no heat loss</strong> to the surroundings.
+Assume constant heat capacities, negligible heat of mixing, and a common reference temperature for all streams. Use the given outlet <span class="math notranslate nohighlight">\(c_p\)</span> value directly in the energy balance.</p>
+<p><strong>(Task 1 — 10 pts):</strong> Set up and solve the <strong>2×2 linear system</strong> for <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> using the total mass balance and component A balance.</p>
+<p><strong>(Task 2 — 10 pts):</strong> Compute the outlet temperature <span class="math notranslate nohighlight">\(T_{out}\)</span> using the energy balance equation. Think about what “steady state, no heat loss” implies: all the thermal energy carried in by the feed streams must equal the thermal energy carried out by the outlet stream. Each stream’s thermal energy rate is proportional to its flow rate, heat capacity, and temperature.</p>
+<p><strong>(Task 3 — discussion):</strong> If <span class="math notranslate nohighlight">\(F_2\)</span> increases while <span class="math notranslate nohighlight">\(F_1\)</span> stays the same, would <span class="math notranslate nohighlight">\(T_{out}\)</span> go <strong>up or down</strong>? Explain briefly in a comment.</p>
+<section id="run-the-below-cell-for-visualization-after-running-please-collapse-the-code-cell-in-jupyterlab-click-the-small-arrow-to-the-left-of-the-cell-use-view-collapse-selected-code-or-click-the-vertical-bar-next-to-the-cell">
+<h4><strong>!!!Run the below cell for visualization!!!</strong>  After running, please collapse the code cell (in JupyterLab, click the small arrow to the left of the cell, use View → Collapse Selected Code, or click the vertical bar next to the cell).<a class="headerlink" href="#run-the-below-cell-for-visualization-after-running-please-collapse-the-code-cell-in-jupyterlab-click-the-small-arrow-to-the-left-of-the-cell-use-view-collapse-selected-code-or-click-the-vertical-bar-next-to-the-cell" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## !!!!!!! THIS IS NOT THE PROBLEM CODE!!!!!!!</span>
+<span class="c1">### ONLY FOR VISUALIZATION PURPOSES — COLLAPSE THIS CELL AFTER RUNNING !!!!!!! ###</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">box</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">FancyBboxPatch</span><span class="p">((</span><span class="mf">3.9</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">),</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">,</span>
+                               <span class="n">boxstyle</span><span class="o">=</span><span class="s2">&quot;round,pad=0.15&quot;</span><span class="p">,</span>
+                               <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#333333&#39;</span><span class="p">,</span>
+                               <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#dce8f5&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="s1">&#39;Mixing</span><span class="se">\n</span><span class="s1">Unit&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1a3a5c&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">3.9</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">),</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">5.85</span><span class="p">,</span> <span class="s1">&#39;Stream 1&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">5.45</span><span class="p">,</span> <span class="s1">&#39;$F_1$ = ? kg/h&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">5.08</span><span class="p">,</span> <span class="s1">&#39;$x_A$ = 0.50,  $x_B$ = 0.35,  $x_C$ = 0.15&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">4.72</span><span class="p">,</span> <span class="s1">&#39;$T_1$ = 90 °C,  $c_p$ = 3.2 kJ/kg·°C&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">3.9</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="s1">&#39;Stream 2&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;$F_2$ = ? kg/h&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.58</span><span class="p">,</span> <span class="s1">&#39;$x_A$ = 0.10,  $x_B$ = 0.55,  $x_C$ = 0.35&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="s1">&#39;$T_2$ = 30 °C,  $c_p$ = 4.5 kJ/kg·°C&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">6.1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2a7a2a&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.55</span><span class="p">,</span> <span class="mf">4.05</span><span class="p">,</span> <span class="s1">&#39;Outlet&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2a7a2a&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.55</span><span class="p">,</span> <span class="mf">3.65</span><span class="p">,</span> <span class="s1">&#39;$F_</span><span class="si">{out}</span><span class="s1">$ = 600 kg/h&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2a7a2a&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.55</span><span class="p">,</span> <span class="mf">3.28</span><span class="p">,</span> <span class="s1">&#39;$x_A$ = 0.30&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2a7a2a&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.55</span><span class="p">,</span> <span class="mf">2.92</span><span class="p">,</span> <span class="s1">&#39;$T_</span><span class="si">{out}</span><span class="s1">$ = ?  °C,  $c_p$ = 4.0 kJ/kg·°C&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2a7a2a&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="s1">&#39;Steady state · No heat loss&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">## !!!!!!! THIS IS NOT THE PROBLEM CODE!!!!!!!</span>
+<span class="c1">### ONLY FOR VISUALIZATION PURPOSES — COLLAPSE THIS CELL AFTER RUNNING !!!!!!! ###</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8cad9af21ad867163af8636a7be7bb07388e7b3e027272052519429cf8817e81.png" src="../../_images/8cad9af21ad867163af8636a7be7bb07388e7b3e027272052519429cf8817e81.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Known stream properties</span>
+<span class="n">F_out</span>  <span class="o">=</span> <span class="mf">600.0</span>   <span class="c1"># kg/h</span>
+<span class="n">xA_out</span> <span class="o">=</span> <span class="mf">0.30</span>    <span class="c1"># outlet mass fraction of A</span>
+
+<span class="n">cp1</span><span class="p">,</span> <span class="n">T1</span> <span class="o">=</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">90.0</span>   <span class="c1"># kJ/(kg·°C), °C</span>
+<span class="n">cp2</span><span class="p">,</span> <span class="n">T2</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">30.0</span>
+<span class="n">cp_out</span>  <span class="o">=</span> <span class="mf">4.0</span>          <span class="c1"># kJ/(kg·°C)</span>
+
+<span class="c1"># Task 1 — solve 2×2 system for F1 and F2</span>
+<span class="c1"># Compute F1 and F2 using mass balances and linear algebra</span>
+<span class="c1"># It&#39;s okay to derive the answer by your hand</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1 = </span><span class="si">{</span><span class="n">F1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F2 = </span><span class="si">{</span><span class="n">F2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Check: F1 + F2 = </span><span class="si">{</span><span class="n">F1</span><span class="o">+</span><span class="n">F2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> kg/h  (expected </span><span class="si">{</span><span class="n">F_out</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 2 — Outlet temperature from energy balance</span>
+<span class="c1"># Derive the formula for T_out from the energy balance and compute it</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Outlet temperature T_out = </span><span class="si">{</span><span class="n">T_out</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>(Task 3)</strong> Type your answer here.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/midterm-makeup"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-this-cell-if-package-installation-is-required-if-not-ignore">Run this cell if package installation is required. If not, ignore.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-information">Student Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-fix-the-code-20-pts-5-pts-each-8-min">Part A — Fix the Code (20 pts, 5 pts each; ⏱ ~8 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a1">A1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a2">A2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a3">A3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a4">A4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a5">A5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a6">A6</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-coding-problems-80-pts">Part B — Coding Problems (80 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b1-30-pts-18-min">B1 (30 pts; ⏱ ~18 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b2-20-pts-8-min">B2 (20 pts; ⏱ ~8 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-25-pts-8-min">B3 (25 pts; ⏱ ~8 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-25-pts-14-min">B4 (25 pts; ⏱ ~14 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-below-cell-for-visualization-after-running-please-collapse-the-code-cell-in-jupyterlab-click-the-small-arrow-to-the-left-of-the-cell-use-view-collapse-selected-code-or-click-the-vertical-bar-next-to-the-cell"><strong>!!!Run the below cell for visualization!!!</strong>  After running, please collapse the code cell (in JupyterLab, click the small arrow to the left of the cell, use View → Collapse Selected Code, or click the vertical bar next to the cell).</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
