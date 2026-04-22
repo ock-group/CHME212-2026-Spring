@@ -28,7 +28,7 @@ parts:
       - file: docs/chapter15/15_notebook
       - file: docs/chapter16/16_notebook
       - file: docs/chapter17/17_notebook
-  #     - file: docs/chapter18/18_notebook
+      - file: docs/chapter18/18_notebook
   # - caption: Advanced Topics & Applications
   #   chapters:
   #     - file: docs/chapter19/19_notebook (image analysis for particle/phase characterization)
@@ -46,3 +46,4 @@ parts:
       - file: docs/lab08/08_lab
       - file: docs/lab09/09_lab
       - file: docs/lab10/10_lab
+      - file: docs/lab11/11_lab
