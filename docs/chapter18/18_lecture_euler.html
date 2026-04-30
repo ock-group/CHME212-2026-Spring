@@ -1,0 +1,909 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lecture Script: 18.2 Euler’s Method &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter18/18_lecture_euler';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab11/11_lab.html">Lab 11: Root Finding</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter18/18_lecture_euler.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter18/18_lecture_euler.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lecture Script: 18.2 Euler’s Method</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#framing-2-min">Framing (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-time-grid-2-min">The time grid (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stepping-formula-built-from-scratch-6-min">The stepping formula — built from scratch (6 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-visualization-4-min">Reading the visualization (4 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-printed-table-2-min">The printed table (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis-how-does-error-scale-with-h-5-min">Error analysis — how does error scale with h? (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-of-step-size-the-convergence-plot-2-min">Effect of step size — the convergence plot (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-we-don-t-use-euler-in-practice-1-min">Why we don’t use Euler in practice (1 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-two-steps-by-hand-optional-if-time-allows">Worked example — two steps by hand (optional, if time allows)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-1-min">Closing (1 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-student-mistakes">Common Student Mistakes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exam-checklist">Exam Checklist</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-script-18-2-euler-s-method">
+<h1>Lecture Script: 18.2 Euler’s Method<a class="headerlink" href="#lecture-script-18-2-euler-s-method" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<p><strong>Section:</strong> 18.2<br />
+<strong>Estimated time:</strong> 25 minutes<br />
+<strong>Prerequisites:</strong> Students have just seen 18.1 — they know an ODE is dy/dt = f(t, y) with an initial condition y(t₀) = y₀, and that solving it means integrating forward from the starting point.</p>
+<hr class="docutils" />
+<section id="framing-2-min">
+<h2>Framing (2 min)<a class="headerlink" href="#framing-2-min" title="Link to this heading">#</a></h2>
+<p>Open by connecting back to where 18.1 ended:</p>
+<blockquote>
+<div><p>“At the end of 18.1 we said: solving an ODE means evaluating this integral —</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>y(t) = y₀ + ∫ f(τ, y(τ)) dτ
+</pre></div>
+</div>
+<p>— but we can’t do it directly because f depends on y, which is what we’re trying to find. It’s circular. So what do we do? We cheat — in a very controlled way. We pretend we know enough to take one small step forward, then use what we just found to take the next step, and repeat. That idea is Euler’s method.”</p>
+</div></blockquote>
+<p>Write on the board and leave it there for the whole section:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>The question: given dy/dt = f(t, y) and y₀, find y(t) for t &gt; t₀.
+The answer:   take small steps, each time using the current slope.
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="the-time-grid-2-min">
+<h2>The time grid (2 min)<a class="headerlink" href="#the-time-grid-2-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“The first thing Euler’s method does is discretize time. Instead of a continuous curve, we’re going to produce a sequence of values at specific time points.”</p>
+</div></blockquote>
+<p>Write on the board:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>t₀,   t₁ = t₀ + h,   t₂ = t₀ + 2h,   t₃ = t₀ + 3h,   ...
+</pre></div>
+</div>
+<blockquote>
+<div><p>“The gap between consecutive time points is h — the <strong>step size</strong>. We choose h. A smaller h gives more points and more accuracy; a larger h gives fewer points but more error. We’ll quantify that trade-off precisely in a moment.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Our goal is to find approximate values y₁, y₂, y₃, … that match the true solution y(t₁), y(t₂), y(t₃), … as closely as possible.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="the-stepping-formula-built-from-scratch-6-min">
+<h2>The stepping formula — built from scratch (6 min)<a class="headerlink" href="#the-stepping-formula-built-from-scratch-6-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Now for the key question: given that we’re at (t₀, y₀), how do we estimate y₁?”</p>
+</div></blockquote>
+<p>Write on the board:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>We know:   current time  t₀
+           current value y₀
+           current slope f(t₀, y₀)   ← the ODE tells us this for free
+</pre></div>
+</div>
+<blockquote>
+<div><p>“The slope tells us the direction the curve is heading right now. The simplest possible thing to do is: follow that slope in a straight line for a time h.”</p>
+</div></blockquote>
+<p>Draw a small sketch on the board — a smooth curve, a point on it, and a straight tangent line stepping forward:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>         /  ← exact curve curves upward
+        /
+       * ← y₁ (Euler estimate, below the true curve)
+      /  ← tangent line: slope = f(t₀, y₀)
+     *   ← y₀ (starting point, exact)
+     |
+     t₀  t₁
+</pre></div>
+</div>
+<blockquote>
+<div><p>“That straight-line step gives us:”</p>
+</div></blockquote>
+<p>Write this clearly, one piece at a time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>rise = slope × run
+     = f(t₀, y₀) × h
+
+y₁ = y₀ + h · f(t₀, y₀)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“That is the <strong>Euler formula</strong>. One line. We are adding the vertical rise of the tangent line to the current y value.”</p>
+</div></blockquote>
+<p>Now repeat the step from (t₁, y₁):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>y₂ = y₁ + h · f(t₁, y₁)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Notice: we use y₁ — the approximate value we just computed — not the true y(t₁). The error carries forward. Each step inherits the mistakes of all previous steps. That’s why errors accumulate.”</p>
+</div></blockquote>
+<p>Write the general pattern. This is the formula students should memorize:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>y₁  =  y₀  +  h · f(t₀, y₀)
+y₂  =  y₁  +  h · f(t₁, y₁)
+y₃  =  y₂  +  h · f(t₂, y₂)
+  ⋮
+yₙ  =  yₙ₋₁ + h · f(tₙ₋₁, yₙ₋₁)
+</pre></div>
+</div>
+<p><strong>Say this out loud and ask students to repeat it back:</strong></p>
+<blockquote>
+<div><p>“Each new value equals the previous value plus h times the slope at the previous point.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="reading-the-visualization-4-min">
+<h2>Reading the visualization (4 min)<a class="headerlink" href="#reading-the-visualization-4-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Now open the notebook and look at the figure for 18.2. The parameters are: ODE is dy/dt = k·y with k = 0.3, starting value y₀ = 0.5, step size h = 2. I made h deliberately large so all the labeled quantities are easy to see.”</p>
+</div></blockquote>
+<p>Walk through each labeled element one by one:</p>
+<p><strong>The black curve</strong> — the exact solution y(t) = 0.5 · e^(0.3t). This is what we are trying to approximate.</p>
+<p><strong>The blue dot at y₀</strong> — the starting point. This is exact — it’s given by the initial condition.</p>
+<p><strong>The blue arrow</strong> — the first Euler step. It is a straight line with slope f(t₀, y₀) = k · y₀ = 0.3 × 0.5 = 0.15. It travels horizontally from t₀ to t₁ = t₀ + h.</p>
+<p><strong>The gray horizontal bracket labeled h</strong> — the step size, the horizontal distance of each arrow. Here h = 2 min.</p>
+<p><strong>The blue vertical bracket labeled h·f(t₀, y₀)</strong> — the vertical rise of the first step. This is the amount we added to y₀ to get y₁. Here: h · f(t₀, y₀) = 2 × 0.15 = 0.30, so y₁ = 0.5 + 0.30 = 0.80.</p>
+<p><strong>The red square at t₁</strong> — the exact value of the solution at t₁. The exact answer is y(2) = 0.5 · e^(0.6) ≈ 0.911.</p>
+<p><strong>The red bracket labeled “error of y₁”</strong> — the gap between where Euler landed (0.80) and where the exact solution is (0.911). Error = 0.111.</p>
+<blockquote>
+<div><p>“Why is there a gap? Because the true solution is not a straight line — it curves upward. Euler assumed a constant slope equal to the slope at the start of the step. But the slope is actually increasing throughout the step, since dy/dt = k·y and y is growing. Euler underestimates the rise.”</p>
+</div></blockquote>
+<p><strong>The orange arrow</strong> — the second Euler step, starting from y₁ = 0.80 (already wrong). Slope at step 2 is f(t₁, y₁) = 0.3 × 0.80 = 0.24. Rise = 2 × 0.24 = 0.48. So y₂ = 0.80 + 0.48 = 1.28.</p>
+<p><strong>The exact value at t₂</strong> is y(4) = 0.5 · e^(1.2) ≈ 1.66. Error at step 2 = 0.38.</p>
+<blockquote>
+<div><p>“Notice the error grew — from 0.111 at step 1 to 0.38 at step 2. Two things are happening simultaneously: (1) each step introduces a new curvature error, and (2) the second step started from an already-wrong value. Errors pile up.”</p>
+</div></blockquote>
+<p><strong>Pose the question from the notebook:</strong></p>
+<blockquote>
+<div><p>“Looking at this picture — what would you do to reduce the error?”</p>
+</div></blockquote>
+<p>Wait for responses. Students will say: make h smaller. Yes. Ask: <em>“How much smaller?”</em> Guide toward: half the step size, half the error. We’ll verify that precisely.</p>
+</section>
+<hr class="docutils" />
+<section id="the-printed-table-2-min">
+<h2>The printed table (2 min)<a class="headerlink" href="#the-printed-table-2-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Below the figure the notebook prints a table. Let’s read it together.”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y0</span> <span class="o">=</span> <span class="mf">0.5000</span>   <span class="p">(</span><span class="n">exact</span><span class="p">:</span> <span class="mf">0.5000</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="mf">0.8000</span>   <span class="p">(</span><span class="n">exact</span><span class="p">:</span> <span class="mf">0.9111</span><span class="p">,</span>  <span class="n">error</span> <span class="o">=</span> <span class="mf">0.1111</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mf">1.2800</span>   <span class="p">(</span><span class="n">exact</span><span class="p">:</span> <span class="mf">1.6620</span><span class="p">,</span>  <span class="n">error</span> <span class="o">=</span> <span class="mf">0.3820</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Step 0 has zero error — it’s the initial condition, which is given exactly.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Step 1 error is 0.111. Step 2 error is 0.382 — about 3.4 times larger, even though we only took one more step. That’s because the curvature of an exponential grows as the function grows, so each step is worse than the last in absolute terms.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“In relative terms: step 1 error / exact value = 0.111 / 0.911 = 12%. Step 2 error / exact value = 0.382 / 1.662 = 23%. Getting worse.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“This is h = 2. Let’s think about what happens when we make h smaller.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="error-analysis-how-does-error-scale-with-h-5-min">
+<h2>Error analysis — how does error scale with h? (5 min)<a class="headerlink" href="#error-analysis-how-does-error-scale-with-h-5-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“We want to be precise about this. If I halve h from 2 to 1, how much better does my answer get?”</p>
+</div></blockquote>
+<p><strong>Where does the error in one step come from?</strong></p>
+<blockquote>
+<div><p>“The exact value at t + h is given by the Taylor series:”</p>
+</div></blockquote>
+<p>Write on the board:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>y(t + h) = y(t) + h·y&#39;(t) + (h²/2)·y&#39;&#39;(t) + (h³/6)·y&#39;&#39;&#39;(t) + ...
+                  ─────────  ──────────────────────────────────────
+                  kept by      dropped by Euler
+                  Euler
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Euler keeps only the first two terms. Everything from h² onward is thrown away. The leading dropped term is (h²/2)·y’’(t). That’s the <strong>local truncation error</strong> — the mistake in a single step:”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>e_local ≈ (h²/2) · y&#39;&#39;(t)   ~  O(h²)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Halving h makes the local error 4 times smaller — because h² appears.”</p>
+</div></blockquote>
+<p><strong>But the global error over the whole interval is only O(h), not O(h²).</strong> This is the key result.</p>
+<blockquote>
+<div><p>“Why? Over a total time T, we take N = T/h steps. Each step contributes roughly h²/2 · |y’’| of error. The total accumulated error is approximately:”</p>
+</div></blockquote>
+<p>Write the cancellation explicitly — make this unmissable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>e_global ≈  N  ×  e_local
+          =  T/h  ×  (h²/2) · |y&#39;&#39;|
+          =  (T/2) · h · |y&#39;&#39;|
+          ~  O(h)
+</pre></div>
+</div>
+<p>Draw a box around this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌──────────────────────────────────────────────────────────┐
+│  (T/h) × h²  =  T·h                                     │
+│                                                          │
+│  One power of h from step count cancels one from error.  │
+│  Net result: global error is O(h), not O(h²).            │
+└──────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+<blockquote>
+<div><p>“This is what <strong>first-order accuracy</strong> means. Halve h → half the error. Tenth of h → tenth the error. Ten times the work for ten times the accuracy.”</p>
+</div></blockquote>
+<p><strong>Summarize in a table on the board:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Quantity                        Order    Intuition
+─────────────────────────────────────────────────────────
+Local error per step            O(h²)    from Taylor: first dropped term ∝ h²
+Number of steps over [0, T]     O(1/h)   halving h doubles the steps
+Global error (accumulated)      O(h)     h² × (1/h) = h
+</pre></div>
+</div>
+<p><strong>Numerical check to make it concrete:</strong></p>
+<blockquote>
+<div><p>“For our ODE dy/dt = k·y, we can differentiate to find y’’ = k·y’ = k²·y. So the local error at step 1 is exactly:”</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>e_local = (h²/2) · k² · y₀
+         = (4/2) · (0.09) · 0.5
+         = 0.09     (h = 2)
+</pre></div>
+</div>
+<blockquote>
+<div><p>“The actual error was 0.111. Close — the formula is for the leading term only, higher-order terms contribute the rest. But the scaling is confirmed.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="effect-of-step-size-the-convergence-plot-2-min">
+<h2>Effect of step size — the convergence plot (2 min)<a class="headerlink" href="#effect-of-step-size-the-convergence-plot-2-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“The second notebook cell runs Euler with three different step sizes: h = 2.0, 1.0, 0.5. Look at the left panel.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“As h decreases, the Euler trajectory gets closer to the exact curve. Each halving of h cuts the error roughly in half — consistent with O(h).”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“The right panel is the <strong>convergence plot</strong>. x-axis is h (log scale), y-axis is the global error at t = 10 (log scale). The Euler errors fall along a straight line. The slope of that line on a log-log plot is 1 — the signature of first-order accuracy. The dashed reference line with slope 1 confirms this.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Read the convergence plot like this: every time h decreases by a factor of 10 (one unit left on the x-axis), the error decreases by a factor of 10 (one unit down on the y-axis). Straight diagonal line with slope 1.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="why-we-don-t-use-euler-in-practice-1-min">
+<h2>Why we don’t use Euler in practice (1 min)<a class="headerlink" href="#why-we-don-t-use-euler-in-practice-1-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Euler has three problems, and all three matter:”</p>
+</div></blockquote>
+<p>Write on the board:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Problem 1:  First-order accuracy only.
+            Need 10× more steps for 10× better answer.
+            Expensive.
+
+Problem 2:  Fixed step size.
+            Can&#39;t adapt when the solution changes fast in some regions
+            and slowly in others.
+
+Problem 3:  Single slope evaluation per step.
+            Uses only f(tₙ, yₙ) — ignores how the slope changes
+            within the interval [tₙ, tₙ₊₁].
+</pre></div>
+</div>
+<blockquote>
+<div><p>“All three of these are solved by <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>, which we cover next. Euler was never meant to be the final answer — it was meant to build intuition. And it did: now you know exactly what every ODE solver is doing. It is always some version of: evaluate the slope(s), take a step, repeat.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="worked-example-two-steps-by-hand-optional-if-time-allows">
+<h2>Worked example — two steps by hand (optional, if time allows)<a class="headerlink" href="#worked-example-two-steps-by-hand-optional-if-time-allows" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Let me do two Euler steps completely by hand so you can see the arithmetic. This is exactly what an exam problem might ask.”</p>
+</div></blockquote>
+<p><strong>Given:</strong> dy/dt = k·y, y(0) = 0.5, k = 0.3, h = 1.0.</p>
+<p><strong>Step 0 → 1:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>t₀ = 0,    y₀ = 0.5
+slope₀ = f(t₀, y₀) = k · y₀ = 0.3 × 0.5 = 0.15
+y₁ = y₀ + h · slope₀ = 0.5 + 1.0 × 0.15 = 0.65
+t₁ = 1.0
+</pre></div>
+</div>
+<p><strong>Step 1 → 2:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>t₁ = 1.0,  y₁ = 0.65
+slope₁ = f(t₁, y₁) = k · y₁ = 0.3 × 0.65 = 0.195
+y₂ = y₁ + h · slope₁ = 0.65 + 1.0 × 0.195 = 0.845
+t₂ = 2.0
+</pre></div>
+</div>
+<p><strong>Check against exact:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>y(1) = 0.5 · e^(0.3) ≈ 0.675    error = |0.65 - 0.675| = 0.025
+y(2) = 0.5 · e^(0.6) ≈ 0.911    error = |0.845 - 0.911| = 0.066
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Notice: halving h from 2 to 1 at step 1 reduced the error from 0.111 to 0.025 — a factor of about 4.5. Not exactly 4, because the local error formula is only approximate, but in the right ballpark for O(h²) local error.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="closing-1-min">
+<h2>Closing (1 min)<a class="headerlink" href="#closing-1-min" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“Euler’s method in one sentence: at every time step, evaluate the slope from the ODE, multiply by h, add it to the current value, advance time. That’s it.”</p>
+</div></blockquote>
+<p>Write the final boxed summary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌──────────────────────────────────────────────────────┐
+│                                                      │
+│    yₙ = yₙ₋₁ + h · f(tₙ₋₁, yₙ₋₁)                  │
+│                                                      │
+│    Global error ~ O(h)    (first-order accuracy)     │
+│    Halve h  →  half the error, twice the work        │
+│                                                      │
+└──────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+<blockquote>
+<div><p>“Next: <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> does the same forward march, but with four slope evaluations per step instead of one, combined optimally. That single change takes the error from O(h) to O(h⁴) — halving h improves accuracy by 16× instead of 2×. Let’s see how to use it.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="common-student-mistakes">
+<h2>Common Student Mistakes<a class="headerlink" href="#common-student-mistakes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mistake</p></th>
+<th class="head"><p>What happens</p></th>
+<th class="head"><p>Fix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Using h too large</p></td>
+<td><p>Large error, solution diverges from exact</p></td>
+<td><p>Reduce h; check against smaller h</p></td>
+</tr>
+<tr class="row-odd"><td><p>Forgetting to advance t</p></td>
+<td><p>Infinite loop at t₀</p></td>
+<td><p>Always append both t and y</p></td>
+</tr>
+<tr class="row-even"><td><p>Using exact y instead of Euler y for the next slope</p></td>
+<td><p>Not actually doing Euler</p></td>
+<td><p>Use yₙ, not y(tₙ), for the slope</p></td>
+</tr>
+<tr class="row-odd"><td><p>Confusing local and global error</p></td>
+<td><p>Wrong expectations about accuracy</p></td>
+<td><p>Local is O(h²); global is O(h)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="exam-checklist">
+<h2>Exam Checklist<a class="headerlink" href="#exam-checklist" title="Link to this heading">#</a></h2>
+<p>When asked to “apply Euler’s method” on an exam:</p>
+<ol class="arabic simple">
+<li><p>Write the formula: <code class="docutils literal notranslate"><span class="pre">yₙ</span> <span class="pre">=</span> <span class="pre">yₙ₋₁</span> <span class="pre">+</span> <span class="pre">h</span> <span class="pre">·</span> <span class="pre">f(tₙ₋₁,</span> <span class="pre">yₙ₋₁)</span></code></p></li>
+<li><p>Identify f(t, y) from the given ODE</p></li>
+<li><p>Plug in t₀, y₀, h and compute the slope: <code class="docutils literal notranslate"><span class="pre">slope</span> <span class="pre">=</span> <span class="pre">f(t₀,</span> <span class="pre">y₀)</span></code></p></li>
+<li><p>Compute y₁: <code class="docutils literal notranslate"><span class="pre">y₁</span> <span class="pre">=</span> <span class="pre">y₀</span> <span class="pre">+</span> <span class="pre">h</span> <span class="pre">·</span> <span class="pre">slope</span></code></p></li>
+<li><p>Advance time: <code class="docutils literal notranslate"><span class="pre">t₁</span> <span class="pre">=</span> <span class="pre">t₀</span> <span class="pre">+</span> <span class="pre">h</span></code></p></li>
+<li><p>Repeat from step 3 using t₁, y₁</p></li>
+</ol>
+<p>Show each intermediate value explicitly — partial credit depends on it.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter18"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#framing-2-min">Framing (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-time-grid-2-min">The time grid (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stepping-formula-built-from-scratch-6-min">The stepping formula — built from scratch (6 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-visualization-4-min">Reading the visualization (4 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-printed-table-2-min">The printed table (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis-how-does-error-scale-with-h-5-min">Error analysis — how does error scale with h? (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-of-step-size-the-convergence-plot-2-min">Effect of step size — the convergence plot (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-we-don-t-use-euler-in-practice-1-min">Why we don’t use Euler in practice (1 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example-two-steps-by-hand-optional-if-time-allows">Worked example — two steps by hand (optional, if time allows)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-1-min">Closing (1 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-student-mistakes">Common Student Mistakes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exam-checklist">Exam Checklist</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

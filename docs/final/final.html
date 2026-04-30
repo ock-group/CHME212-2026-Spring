@@ -1,0 +1,878 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CHME 212 – Final Examination &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/final/final';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab11/11_lab.html">Lab 11: Root Finding</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/final/final.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/final/final.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>CHME 212 – Final Examination</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-i-multiple-choice-2-pts-each-50-pts-total">Part I: Multiple Choice (2 pts each, 50 pts total)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fix-the-code-questions-questions-2125">“Fix the Code” Questions (Questions 21–25)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-ii-short-answer-concept-problems-60-pts">Part II: Short Answer / Concept Problems (60 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-newton-s-method-by-hand-12-pts">Problem 1 — Newton’s Method by Hand (12 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-bisection-method-8-pts">Problem 2 — Bisection Method (8 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-linear-algebra-mass-balances-10-pts">Problem 3 — Linear Algebra: Mass Balances (10 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-numerical-integration-pfr-sizing-10-pts">Problem 4 — Numerical Integration: PFR Sizing (10 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-ordinary-differential-equations-euler-s-method-10-pts">Problem 5 — Ordinary Differential Equations: Euler’s Method (10 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-monte-carlo-statistics-10-pts">Problem 6 — Monte Carlo &amp; Statistics (10 pts)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chme-212-final-examination">
+<h1>CHME 212 – Final Examination<a class="headerlink" href="#chme-212-final-examination" title="Link to this heading">#</a></h1>
+<p><strong>Name:</strong> _______________________________ <strong>Andrew ID:</strong> _________________</p>
+<p><strong>Date:</strong> ________________________________ <strong>Section:</strong> ___________________</p>
+<ul class="simple">
+<li><p>This is a <strong>closed-book, closed-notes</strong> exam. No electronic devices.</p></li>
+<li><p>Write all answers in the space provided. Show all work for full credit.</p></li>
+<li><p>Total: <strong>110 points</strong> | Time allowed: <strong>2 hours</strong></p></li>
+</ul>
+<hr class="docutils" />
+<section id="part-i-multiple-choice-2-pts-each-50-pts-total">
+<h2>Part I: Multiple Choice (2 pts each, 50 pts total)<a class="headerlink" href="#part-i-multiple-choice-2-pts-each-50-pts-total" title="Link to this heading">#</a></h2>
+<p><em>Circle the single best answer.</em></p>
+<hr class="docutils" />
+<p><strong>1.</strong> What is the output of the following Python expression?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">round</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(A) 2.5
+(B) 3
+(C) 2
+(D) 2.0</p>
+<hr class="docutils" />
+<p><strong>2.</strong> Which of the following correctly accesses the <strong>last</strong> element of a list <code class="docutils literal notranslate"><span class="pre">data</span></code>?</p>
+<p>(A) <code class="docutils literal notranslate"><span class="pre">data[last]</span></code>
+(B) <code class="docutils literal notranslate"><span class="pre">data[-1]</span></code>
+(C) <code class="docutils literal notranslate"><span class="pre">data[len(data)]</span></code>
+(D) <code class="docutils literal notranslate"><span class="pre">data.last()</span></code></p>
+<hr class="docutils" />
+<p><strong>3.</strong> A Python dictionary is best described as:</p>
+<p>(A) An ordered collection of items accessible by integer index
+(B) An immutable sequence of elements
+(C) A collection of key-value pairs
+(D) A set of unique, unordered values</p>
+<hr class="docutils" />
+<p><strong>4.</strong> Which f-string correctly formats the number <code class="docutils literal notranslate"><span class="pre">3.14159</span></code> to <strong>two decimal places</strong>?</p>
+<p>(A) <code class="docutils literal notranslate"><span class="pre">f&quot;{x:.2}&quot;</span></code>
+(B) <code class="docutils literal notranslate"><span class="pre">f&quot;{x:2f}&quot;</span></code>
+(C) <code class="docutils literal notranslate"><span class="pre">f&quot;{x:.2f}&quot;</span></code>
+(D) <code class="docutils literal notranslate"><span class="pre">f&quot;{x:0.2}&quot;</span></code></p>
+<hr class="docutils" />
+<p><strong>8.</strong> Given the 2-D NumPy array below, what does <code class="docutils literal notranslate"><span class="pre">A[1,</span> <span class="pre">2]</span></code> return?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>(A) 20
+(B) 70
+(C) 60
+(D) 50</p>
+<hr class="docutils" />
+<p><strong>11.</strong> Which goodness-of-fit metric is expressed as a <strong>dimensionless</strong> number between 0 and 1, where values closer to 1 indicate a better fit?</p>
+<p>(A) Mean Absolute Error (MAE)
+(B) Mean Squared Error (MSE)
+(C) Root Mean Squared Error (RMSE)
+(D) Coefficient of Determination (<span class="math notranslate nohighlight">\(R^2\)</span>)</p>
+<hr class="docutils" />
+<section id="fix-the-code-questions-questions-2125">
+<h3>“Fix the Code” Questions (Questions 21–25)<a class="headerlink" href="#fix-the-code-questions-questions-2125" title="Link to this heading">#</a></h3>
+<p><em>Each snippet below contains a single conceptual bug. Identify what is wrong and choose the corrected version.</em></p>
+<hr class="docutils" />
+<p><strong>21.</strong> A student implements bisection to find the root of <code class="docutils literal notranslate"><span class="pre">f</span></code> on <code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b]</span></code>. What is wrong with this code?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>      <span class="c1"># &lt;-- bug here?</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">m</span>
+    <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<p>(A) The midpoint formula <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b)</span> <span class="pre">/</span> <span class="pre">2</span></code> can cause floating-point overflow for large <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>
+(B) The update rule does not use the <strong>sign</strong> of <code class="docutils literal notranslate"><span class="pre">f(a)·f(m)</span></code> — it assumes the root is always where <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>, which breaks if the function approaches from the positive side
+(C) The loop should check <code class="docutils literal notranslate"><span class="pre">abs(f(m))</span> <span class="pre">&gt;</span> <span class="pre">tol</span></code>, not the bracket width
+(D) <code class="docutils literal notranslate"><span class="pre">m</span></code> should be updated as <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">(b</span> <span class="pre">-</span> <span class="pre">a)</span> <span class="pre">/</span> <span class="pre">2</span></code> to avoid overflow</p>
+<hr class="docutils" />
+<p><strong>23.</strong> A student uses <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> to find the conversion <span class="math notranslate nohighlight">\(X\)</span> where the equilibrium condition <span class="math notranslate nohighlight">\(K(X) - K_{eq} = 0\)</span> is satisfied, then immediately reports the answer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">fsolve</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">equation</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">K_eq</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">X</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">solution</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Equilibrium conversion: </span><span class="si">{</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What critical step is missing?</p>
+<p>(A) <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> requires an initial guess array, not a scalar
+(B) The function should return a list, not a scalar
+(C) The student never checks whether the returned <code class="docutils literal notranslate"><span class="pre">solution</span></code> actually satisfies <code class="docutils literal notranslate"><span class="pre">equation(solution)</span> <span class="pre">≈</span> <span class="pre">0</span></code> — <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> can silently return a non-solution if it fails to converge
+(D) <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> only works for polynomial equations; <code class="docutils literal notranslate"><span class="pre">brentq</span></code> should be used instead</p>
+<hr class="docutils" />
+<p><strong>24.</strong> The following code solves the ODE <span class="math notranslate nohighlight">\(\frac{dC}{dt} = -k C\)</span> using <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>, but it produces incorrect results. What is the bug?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rate</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">C</span>          <span class="c1"># returns a float</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>(A) The initial condition should be <code class="docutils literal notranslate"><span class="pre">y0=1.0</span></code> (a scalar), not <code class="docutils literal notranslate"><span class="pre">[1.0]</span></code> (a list)
+(B) <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> requires the function to accept <code class="docutils literal notranslate"><span class="pre">(y,</span> <span class="pre">t)</span></code> — the argument order is reversed from <code class="docutils literal notranslate"><span class="pre">(t,</span> <span class="pre">y)</span></code>
+(C) The derivative function must return a <strong>list</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">[-k</span> <span class="pre">*</span> <span class="pre">C]</span></code>), not a bare float; otherwise <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> cannot handle it as a system
+(D) <code class="docutils literal notranslate"><span class="pre">t_eval</span></code> must be the same length as <code class="docutils literal notranslate"><span class="pre">y0</span></code></p>
+<hr class="docutils" />
+<p><strong>25.</strong> A student writes a Newton’s method loop to find the root of <span class="math notranslate nohighlight">\(f(x) = x^2 - 4\)</span> starting from <span class="math notranslate nohighlight">\(x_0 = 3\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>       <span class="c1"># &lt;-- convergence check</span>
+        <span class="k">break</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The loop terminates early and prints a wrong answer. What is the conceptual mistake in the convergence check?</p>
+<p>(A) The loop should run <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">True</span></code> instead of <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(10)</span></code>
+(B) The convergence check tests <code class="docutils literal notranslate"><span class="pre">|x|</span></code> (the magnitude of the <strong>iterate</strong>) instead of <code class="docutils literal notranslate"><span class="pre">|f(x)|</span></code> or <code class="docutils literal notranslate"><span class="pre">|x_new</span> <span class="pre">−</span> <span class="pre">x_old|</span></code> (the size of the <strong>update or residual</strong>) — near the root <span class="math notranslate nohighlight">\(x = 2\)</span>, <span class="math notranslate nohighlight">\(|x|\)</span> is never small
+(C) <code class="docutils literal notranslate"><span class="pre">abs()</span></code> should be replaced with <code class="docutils literal notranslate"><span class="pre">np.abs()</span></code> for floating-point safety
+(D) The update formula should be <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">f(x)</span> <span class="pre">/</span> <span class="pre">df(x)</span></code> (addition, not subtraction)</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-ii-short-answer-concept-problems-60-pts">
+<h2>Part II: Short Answer / Concept Problems (60 pts)<a class="headerlink" href="#part-ii-short-answer-concept-problems-60-pts" title="Link to this heading">#</a></h2>
+<p><em>Show all work and write answers clearly. Partial credit is awarded.</em></p>
+<hr class="docutils" />
+<section id="problem-1-newton-s-method-by-hand-12-pts">
+<h3>Problem 1 — Newton’s Method by Hand (12 pts)<a class="headerlink" href="#problem-1-newton-s-method-by-hand-12-pts" title="Link to this heading">#</a></h3>
+<p>You want to find the root of <span class="math notranslate nohighlight">\(f(x) = x^3 - 2x - 5\)</span>.</p>
+<p><strong>(a)</strong> Compute <span class="math notranslate nohighlight">\(f'(x)\)</span>.</p>
+<p>\vspace{2cm}</p>
+<p><strong>(b)</strong> Starting from the initial guess <span class="math notranslate nohighlight">\(x_0 = 2\)</span>, perform <strong>two iterations</strong> of Newton’s method. Carry four significant figures throughout.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Iteration <span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(x_n\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(f(x_n)\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(f'(x_n)\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(x_{n+1}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>2.000</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>\vspace{2cm}</p>
+<p><strong>(c)</strong> After your two iterations, what is the approximate root? How would you verify that this is correct?</p>
+<p>\vspace{2cm}</p>
+<p><strong>(d)</strong> Newton’s method fails when <span class="math notranslate nohighlight">\(f'(x_n) \approx 0\)</span>. Describe geometrically what happens to the next iterate <span class="math notranslate nohighlight">\(x_{n+1}\)</span> in that situation.</p>
+<p>\vspace{2cm}</p>
+</section>
+<hr class="docutils" />
+<section id="problem-2-bisection-method-8-pts">
+<h3>Problem 2 — Bisection Method (8 pts)<a class="headerlink" href="#problem-2-bisection-method-8-pts" title="Link to this heading">#</a></h3>
+<p>Consider <span class="math notranslate nohighlight">\(g(x) = e^x - 3x\)</span>.</p>
+<p><strong>(a)</strong> Show by evaluation that <span class="math notranslate nohighlight">\(g(x)\)</span> has a root in <span class="math notranslate nohighlight">\([0, 2]\)</span>. (Compute <span class="math notranslate nohighlight">\(g(0)\)</span> and <span class="math notranslate nohighlight">\(g(2)\)</span> and apply the bracketing condition.)</p>
+<p>\vspace{2cm}</p>
+<p><strong>(b)</strong> Perform <strong>two iterations</strong> of bisection on <span class="math notranslate nohighlight">\([0, 2]\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Iteration</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(a\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(b\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(m = (a+b)/2\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(g(m)\)</span></p></th>
+<th class="head text-center"><p>New interval</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>\vspace{2cm}</p>
+<p><strong>(c)</strong> After <span class="math notranslate nohighlight">\(n\)</span> bisection steps starting from an interval of width <span class="math notranslate nohighlight">\(L\)</span>, what is the width of the remaining bracket? How many steps are needed to reduce the width of <span class="math notranslate nohighlight">\([0, 2]\)</span> below <span class="math notranslate nohighlight">\(10^{-4}\)</span>?</p>
+<p>\vspace{3cm}</p>
+</section>
+<hr class="docutils" />
+<section id="problem-3-linear-algebra-mass-balances-10-pts">
+<h3>Problem 3 — Linear Algebra: Mass Balances (10 pts)<a class="headerlink" href="#problem-3-linear-algebra-mass-balances-10-pts" title="Link to this heading">#</a></h3>
+<p>A three-stream mixing junction combines streams 1, 2, and 3 to produce an outlet stream. You are given the following species mass balances for components A and B, plus the overall balance:</p>
+<div class="math notranslate nohighlight">
+\[F_1 + F_2 + F_3 = 100 \text{ kg/h}\]</div>
+<div class="math notranslate nohighlight">
+\[0.30\,F_1 + 0.50\,F_2 + 0.20\,F_3 = 35 \text{ kg/h} \quad \text{(species A)}\]</div>
+<div class="math notranslate nohighlight">
+\[0.10\,F_1 + 0.20\,F_2 + 0.40\,F_3 = 24 \text{ kg/h} \quad \text{(species B)}\]</div>
+<p><strong>(a)</strong> Write this system in matrix form <span class="math notranslate nohighlight">\(A\mathbf{x} = \mathbf{b}\)</span>. Identify <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> explicitly.</p>
+<p>\vspace{4cm}</p>
+<p><strong>(b)</strong> A classmate tries to solve this by computing <code class="docutils literal notranslate"><span class="pre">np.linalg.inv(A)</span> <span class="pre">&#64;</span> <span class="pre">b</span></code>. This gives the correct numerical answer, but why is <code class="docutils literal notranslate"><span class="pre">np.linalg.solve(A,</span> <span class="pre">b)</span></code> generally preferred?</p>
+<p>\vspace{3cm}</p>
+<p><strong>(c)</strong> After obtaining the solution vector <span class="math notranslate nohighlight">\(\mathbf{x} = [F_1, F_2, F_3]^T\)</span>, how would you verify the solution is correct without re-solving?</p>
+<p>\vspace{2cm}</p>
+</section>
+<hr class="docutils" />
+<section id="problem-4-numerical-integration-pfr-sizing-10-pts">
+<h3>Problem 4 — Numerical Integration: PFR Sizing (10 pts)<a class="headerlink" href="#problem-4-numerical-integration-pfr-sizing-10-pts" title="Link to this heading">#</a></h3>
+<p>A plug flow reactor (PFR) is designed using the following design equation:</p>
+<div class="math notranslate nohighlight">
+\[V = F_{A0} \int_0^{X_f} \frac{dX}{-r_A(X)}\]</div>
+<p>The reaction rate is <span class="math notranslate nohighlight">\(-r_A = k C_{A0}^2 (1-X)^2\)</span> with <span class="math notranslate nohighlight">\(k = 0.5 \text{ L/(mol·min)}\)</span>, <span class="math notranslate nohighlight">\(C_{A0} = 2 \text{ mol/L}\)</span>, <span class="math notranslate nohighlight">\(F_{A0} = 4 \text{ mol/min}\)</span>, and the target conversion is <span class="math notranslate nohighlight">\(X_f = 0.8\)</span>.</p>
+<p><strong>(a)</strong> Write out the integrand <span class="math notranslate nohighlight">\(\frac{1}{-r_A(X)}\)</span> as a function of <span class="math notranslate nohighlight">\(X\)</span> (substitute and simplify).</p>
+<p>\vspace{2.5cm}</p>
+<p><strong>(b)</strong> Using the <strong>trapezoidal rule</strong> with two subintervals (i.e., <span class="math notranslate nohighlight">\(X = 0, 0.4, 0.8\)</span>), approximate <span class="math notranslate nohighlight">\(\int_0^{0.8} \frac{dX}{-r_A(X)}\)</span>.</p>
+<p>\vspace{4cm}</p>
+<p><strong>(c)</strong> Compute the reactor volume <span class="math notranslate nohighlight">\(V\)</span> using your result from (b).</p>
+<p>\vspace{2cm}</p>
+<p><strong>(d)</strong> Would using more subintervals increase or decrease the error of the trapezoidal approximation, and why?</p>
+<p>\vspace{2cm}</p>
+</section>
+<hr class="docutils" />
+<section id="problem-5-ordinary-differential-equations-euler-s-method-10-pts">
+<h3>Problem 5 — Ordinary Differential Equations: Euler’s Method (10 pts)<a class="headerlink" href="#problem-5-ordinary-differential-equations-euler-s-method-10-pts" title="Link to this heading">#</a></h3>
+<p>A batch reactor follows first-order kinetics:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dC_A}{dt} = -k\,C_A, \quad C_A(0) = 1.0 \text{ mol/L}, \quad k = 0.5 \text{ min}^{-1}\]</div>
+<p><strong>(a)</strong> Write the exact (analytical) solution <span class="math notranslate nohighlight">\(C_A(t)\)</span>.</p>
+<p>\vspace{2cm}</p>
+<p><strong>(b)</strong> Apply <strong>Euler’s method</strong> with step size <span class="math notranslate nohighlight">\(h = 1\)</span> min to estimate <span class="math notranslate nohighlight">\(C_A\)</span> at <span class="math notranslate nohighlight">\(t = 1, 2, 3\)</span> min. Fill in the table. Keep three decimal places.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(t_n\)</span> (min)</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C_A^{(n)}\)</span> (mol/L)</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(f(t_n, C_A^{(n)}) = -k\,C_A^{(n)}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C_A^{(n+1)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1.000</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>3</p></td>
+<td class="text-center"><p>—</p></td>
+<td class="text-center"><p>—</p></td>
+<td class="text-center"><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>\vspace{1cm}</p>
+<p><strong>(c)</strong> Using the exact solution, compute the true values <span class="math notranslate nohighlight">\(C_A(1)\)</span>, <span class="math notranslate nohighlight">\(C_A(2)\)</span>, <span class="math notranslate nohighlight">\(C_A(3)\)</span>. What is the <strong>absolute error</strong> at <span class="math notranslate nohighlight">\(t = 3\)</span> min?</p>
+<p>\vspace{3cm}</p>
+<p><strong>(d)</strong> If you halved the step size to <span class="math notranslate nohighlight">\(h = 0.5\)</span> min, how would you expect the global error at <span class="math notranslate nohighlight">\(t = 3\)</span> min to change? Justify using the order of accuracy of Euler’s method.</p>
+<p>\vspace{2cm}</p>
+</section>
+<hr class="docutils" />
+<section id="problem-6-monte-carlo-statistics-10-pts">
+<h3>Problem 6 — Monte Carlo &amp; Statistics (10 pts)<a class="headerlink" href="#problem-6-monte-carlo-statistics-10-pts" title="Link to this heading">#</a></h3>
+<p>A chemical process produces a product with purity governed by:</p>
+<div class="math notranslate nohighlight">
+\[\text{Purity} = 100\% \times \left(1 - 0.2\,e^{-k(\tau)}\right), \quad k = 0.03 \text{ min}^{-1}\]</div>
+<p>The residence time <span class="math notranslate nohighlight">\(\tau\)</span> is normally distributed: <span class="math notranslate nohighlight">\(\tau \sim \mathcal{N}(\mu = 120 \text{ min},\; \sigma = 10 \text{ min})\)</span>.</p>
+<p>The specification requires <strong>Purity <span class="math notranslate nohighlight">\(\geq\)</span> 97.5%</strong>.</p>
+<p><strong>(a)</strong> Compute the <strong>nominal purity</strong> (evaluated at the mean residence time <span class="math notranslate nohighlight">\(\tau = 120\)</span> min). Does the nominal operating point meet the spec?</p>
+<p>\vspace{3cm}</p>
+<p><strong>(b)</strong> Explain, in 2–3 sentences, why the <strong>fraction of batches failing the spec</strong> could still be significant even though the nominal purity passes. What Monte Carlo simulation allows you to estimate that the nominal calculation cannot.</p>
+<p>\vspace{3.5cm}</p>
+<p><strong>(c)</strong> In a Monte Carlo simulation with <span class="math notranslate nohighlight">\(N = 10{,}000\)</span> samples, 640 batches fail the spec. Estimate the <strong>failure probability</strong> and compute a rough <strong>95% confidence interval</strong> on that estimate using the normal approximation:</p>
+<div class="math notranslate nohighlight">
+\[\hat{p} \pm 1.96\sqrt{\frac{\hat{p}(1-\hat{p})}{N}}\]</div>
+<p>\vspace{3cm}</p>
+<p><strong>(d)</strong> How many samples would you need to <strong>halve</strong> the width of the confidence interval found in (c)? Explain your reasoning.</p>
+<p>\vspace{2cm}</p>
+<hr class="docutils" />
+<p><em>End of Examination. Check your work.</em></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/final"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-i-multiple-choice-2-pts-each-50-pts-total">Part I: Multiple Choice (2 pts each, 50 pts total)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fix-the-code-questions-questions-2125">“Fix the Code” Questions (Questions 21–25)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-ii-short-answer-concept-problems-60-pts">Part II: Short Answer / Concept Problems (60 pts)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-newton-s-method-by-hand-12-pts">Problem 1 — Newton’s Method by Hand (12 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-bisection-method-8-pts">Problem 2 — Bisection Method (8 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-linear-algebra-mass-balances-10-pts">Problem 3 — Linear Algebra: Mass Balances (10 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-numerical-integration-pfr-sizing-10-pts">Problem 4 — Numerical Integration: PFR Sizing (10 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-ordinary-differential-equations-euler-s-method-10-pts">Problem 5 — Ordinary Differential Equations: Euler’s Method (10 pts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-monte-carlo-statistics-10-pts">Problem 6 — Monte Carlo &amp; Statistics (10 pts)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

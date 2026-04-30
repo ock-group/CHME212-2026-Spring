@@ -199,16 +199,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -736,6 +733,32 @@ T=520 K, P=20.8907 atm, High
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.08206</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.640</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.04267</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">280</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">520</span><span class="p">]</span>
+
+<span class="c1"># Task 1 — compute vdW pressure, classify, and write to file</span>
+<span class="c1"># Use &quot;line = f&quot;T={T} K, P={P:.4f} atm, {label}&quot; to format the output line </span>
+<span class="c1"># Save file name: vdw_results.txt</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;vdw_results.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">n</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">V</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="n">P</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Low&quot;</span>
+        <span class="k">elif</span> <span class="n">P</span><span class="o">&lt;=</span><span class="mi">20</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Medium&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;High&quot;</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T=</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> K, P=</span><span class="si">{</span><span class="n">P</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> atm, </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 2 — compare ideal vs vdW and print percent difference</span>
 <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
     <span class="n">P_vdw</span>   <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span>
@@ -813,6 +836,40 @@ T = 520 K, P_ideal = 21.3356 atm, P_vdW = 20.8907 atm, diff = 2.13%
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task 2  ΔH (quad fit)  = 15200.446 J/mol
         Difference     = 4.5536 J/mol
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task 2 — integrate the fitted polynomial with quad</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">T_data</span><span class="p">,</span><span class="n">Cp_data</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># linear fit with 2nd degree polynomial</span>
+<span class="c1"># then, define a function to compute Cp from the fitted coefficients</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Cp_fit</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+<span class="c1"># T=350</span>
+<span class="n">dH_quad</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">Cp_fit</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span><span class="mi">350</span><span class="p">,</span><span class="mi">850</span><span class="p">)</span>  <span class="c1"># integrate Cp_fit from 350 to 850 K</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Task 2  ΔH (quad fit)  = </span><span class="si">{</span><span class="n">dH_quad</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+<span class="n">difference</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dH_quad</span> <span class="o">-</span> <span class="n">dH_trap</span><span class="p">)</span> <span class="c1"># Compute the absolute difference</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;        Difference     = </span><span class="si">{</span><span class="n">difference</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> J/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task 2  ΔH (quad fit)  = 15200.446 J/mol
+        Difference     = 4.5536 J/mol
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Cp_fit</span><span class="p">(</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>poly1d([ 5.89285714e-06, -1.21428571e-03,  2.88852679e+01])
 </pre></div>
 </div>
 </div>
@@ -917,6 +974,65 @@ No, it does not meet the spec.
   Mean T_out   = 103.46 °C
   Std T_out    = 1.49 °C
   Failure rate = 98.29%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fail_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">T_out_samples</span> <span class="o">&gt;</span> <span class="n">spec_T</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">T_out_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fail_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">T_out_samples</span> <span class="o">&gt;</span> <span class="n">spec_T</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">T_out_samples</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for /: &#39;tuple&#39; and &#39;int&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m_dot</span> <span class="o">&lt;</span> <span class="n">spec_T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True, ...,  True,  True,  True])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span>   <span class="o">=</span> <span class="mi">50_000</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">m_dot</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">T_nominal</span><span class="p">(</span><span class="n">m_dot</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">T_in</span> <span class="o">-</span> <span class="n">Q</span> <span class="o">/</span> <span class="p">(</span><span class="n">m_dot</span> <span class="o">*</span> <span class="n">cp</span><span class="p">)</span>
+
+<span class="n">T_out</span> <span class="o">=</span> <span class="n">T_nominal</span><span class="p">(</span><span class="n">m_dot</span><span class="p">)</span>
+
+<span class="n">below_spec</span> <span class="o">=</span> <span class="n">m_dot</span><span class="p">[</span><span class="n">m_dot</span> <span class="o">&lt;</span> <span class="n">spec_T</span><span class="p">]</span>
+
+<span class="n">mean_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">T_out</span><span class="p">)</span>
+<span class="n">std_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">T_out</span><span class="p">)</span>
+<span class="n">fail_rate</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">below_spec</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">m_dot</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">below_spec</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fail_rate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48827
+97.654
 </pre></div>
 </div>
 </div>

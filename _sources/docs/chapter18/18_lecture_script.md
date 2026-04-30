@@ -94,7 +94,7 @@ position   ↔   y(t)               (what we want)
 start loc  ↔   y(t₀) = y₀        (initial condition, given)
 ```
 
-**Pause and check:** Ask students: "In the batch reactor equation dC_A/dt = -k*C_A, what plays the role of f(t,y)?" Answer: f(t, C_A) = -k * C_A. Note that it doesn't actually depend on t here — that's common but not always the case.
+**Pause and check:** Ask students: "In the batch reactor equation dC_A/dt = -k*C_A, what plays the role of f(t,y)?" Answer: f(t, C_A) = -k * C_A.
 
 ---
 
@@ -182,69 +182,6 @@ d/dt [C_A0 * e^(-kt)] = -k * C_A0 * e^(-kt) = -k * C_A(t)  ✓
 
 > "Whenever you solve an ODE numerically, always ask yourself: does this limit case have an analytical solution I can use to verify my code? For first-order linear ODEs with constant coefficients, the answer is usually yes."
 
----
-
-## 18.1.5  Python syntax primer (5 min)
-
-> "Before we write a single solver call, I want to make sure everyone is comfortable translating a math equation into a Python function. This is a purely mechanical translation — once you see the pattern, it becomes automatic."
-
-Write the pattern on the board:
-
-```python
-def rhs(t, y):
-    # t : scalar — current time
-    # y : list   — current values of all variables
-    return [list of derivatives]
-```
-
-**Two rules. Repeat them.**
-
-Rule 1: `y` is always a list. Even if you only have one variable, you unpack it as `y[0]`.
-
-Rule 2: You always return a list. Even if you only have one derivative.
-
-Show a single-variable example first:
-
-```python
-# ODE: dC_A/dt = -k * C_A
-k = 0.3
-
-def rhs(t, y):
-    C_A = y[0]
-    return [-k * C_A]
-```
-
-Walk through it line by line:
-- `y[0]` unpacks C_A from the state list
-- `-k * C_A` is f(t, y) — the right-hand side of the ODE
-- We return it inside a list `[...]`
-
-Then show a two-variable example:
-
-```python
-# System: dC_A/dt = -k1*C_A
-#         dC_B/dt =  k1*C_A - k2*C_B
-k1, k2 = 0.4, 0.1
-
-def rhs_system(t, y):
-    C_A, C_B = y        # unpack both variables
-    return [-k1 * C_A,
-             k1 * C_A - k2 * C_B]
-```
-
-> "Notice: two variables go in, two derivatives come out. The list you return must always have the same number of entries as the list y."
-
-**Quick test for the room:** Write on the board: `dT/dt = (T_in - T) / tau`. Ask: "Write me the Python function for this ODE." Give 60 seconds. Expected answer:
-
-```python
-def rhs(t, y):
-    T = y[0]
-    return [(T_in - T) / tau]
-```
-
----
-
----
 
 # 18.2  Euler's Method (25 min)
 

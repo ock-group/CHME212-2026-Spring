@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Chapter 14: Monte Carlo Simulation" href="../chapter14/14_notebook.html" />
-    <link rel="prev" title="12.1 Motivation: Heat Capacity of CO\(_2\)" href="../chapter12/12_notebook.html" />
+    <link rel="prev" title="Chapter 12: Polynomial Fitting &amp; Interpolation" href="../chapter12/12_notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -199,13 +199,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -218,6 +218,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab11/11_lab.html">Lab 11: Root Finding</a></li>
 </ul>
 
     </div>
@@ -935,7 +937,7 @@ kurtosis : -0.7790   (0 = normal tail weight)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;d&#39;, &#39;a&#39;, &#39;c&#39;, &#39;b&#39;], dtype=&#39;&lt;U1&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;b&#39;, &#39;d&#39;, &#39;c&#39;, &#39;a&#39;], dtype=&#39;&lt;U1&#39;)
 </pre></div>
 </div>
 </div>
@@ -1126,7 +1128,7 @@ The shaded area in the PDF equals the CDF value at x=87.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x159711000&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x127d00f70&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/e88f5d07fea8126a9cff677abadefc2123c5a989a652b910be3a7c87ed0d8219.png" src="../../_images/e88f5d07fea8126a9cff677abadefc2123c5a989a652b910be3a7c87ed0d8219.png" />
@@ -1139,7 +1141,7 @@ The shaded area in the PDF equals the CDF value at x=87.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3612171798294611
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.866955708770458
 </pre></div>
 </div>
 </div>
@@ -1215,7 +1217,7 @@ Sample       mean = 4.9935,  std = 1.7449  (n=2000)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x159a8fac0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x127e7faf0&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/7ef579964c8ae2cbfd46cdc1b36b2b91d939063b19ffe113b935affb51a6cc0f.png" src="../../_images/7ef579964c8ae2cbfd46cdc1b36b2b91d939063b19ffe113b935affb51a6cc0f.png" />
@@ -1269,7 +1271,7 @@ P(\mu - 3\sigma &lt; X &lt; \mu + 3\sigma) \approx 99.7\%
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x159b282e0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x127f1c250&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/fba8a61561eb399311ad091f6c979b3c1b83b0bf4171b2c1709dadfe0cabc36d.png" src="../../_images/fba8a61561eb399311ad091f6c979b3c1b83b0bf4171b2c1709dadfe0cabc36d.png" />
@@ -1778,7 +1780,7 @@ scipy.stats.t.interval(0.95): [86.6950, 88.7316]%
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></p>
+        <p class="prev-next-title">Chapter 12: Polynomial Fitting &amp; Interpolation</p>
       </div>
     </a>
     <a class="right-next"

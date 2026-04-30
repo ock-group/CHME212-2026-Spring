@@ -198,16 +198,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="current nav bd-sidenav">
@@ -611,10 +608,42 @@ document.write(`
 <p>Consider the gas-phase reaction <span class="math notranslate nohighlight">\(\text{A} \rightleftharpoons 2\,\text{B}\)</span> at <span class="math notranslate nohighlight">\(P = 3\)</span> atm. The equilibrium constant varies with temperature as:</p>
 <div class="math notranslate nohighlight">
 \[K_{eq}(T) = \exp\!\left(4.0 - \frac{3000}{T}\right), \qquad T \text{ in K}\]</div>
-<p>The equilibrium condition (starting from pure A) is:</p>
+<p>Starting from pure A, the mole balance gives:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Species</p></th>
+<th class="head"><p>Initial</p></th>
+<th class="head"><p>Change</p></th>
+<th class="head"><p>At equilibrium</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(-X\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1 - X\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>0</p></td>
+<td><p><span class="math notranslate nohighlight">\(+2X\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2X\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(+X\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1 + X\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>So the mole fractions are <span class="math notranslate nohighlight">\(y_A = \dfrac{1-X}{1+X}\)</span> and <span class="math notranslate nohighlight">\(y_B = \dfrac{2X}{1+X}\)</span>, and the equilibrium condition is:</p>
 <div class="math notranslate nohighlight">
 \[f(X_e) = \frac{4 X_e^2}{1 - X_e^2} \cdot P - K_{eq}(T) = 0\]</div>
 <p><strong>(a)</strong> At <span class="math notranslate nohighlight">\(T = 800\)</span> K, plot <span class="math notranslate nohighlight">\(f(X_e)\)</span> on <span class="math notranslate nohighlight">\([0.01, 0.99]\)</span>, then use <code class="docutils literal notranslate"><span class="pre">brentq</span></code> to find the equilibrium conversion. Print <span class="math notranslate nohighlight">\(X_e\)</span>, the mole fractions of A and B, and the residual.</p>
+<p>Refer to this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">brentq</span><span class="p">(</span><span class="n">f_eq</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">end_point</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">T_val</span><span class="p">,))</span>
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -769,6 +798,42 @@ Residuals: [8.61940727125976e-18, -2.545696986544499e-11]
   (0.1, 310 K)             0.0003            300.01  [-2.2183860651225906e-15, -2.7684521342052903e-11]
   (0.5, 350 K)             0.0003            300.01  [8.61940727125976e-18, -2.545696986544499e-11]
   (0.9, 400 K)             0.0003            300.01  [-9.188659653037307e-12, 1.729816290207964e-11]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">fsolve</span>
+
+<span class="n">tau</span>     <span class="o">=</span> <span class="mf">100.0</span>       <span class="c1"># s</span>
+<span class="n">dHrxn</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">50000.0</span>    <span class="c1"># J/mol</span>
+<span class="n">rho_Cp</span>  <span class="o">=</span> <span class="mf">1000.0</span>      <span class="c1"># J/(L·K)</span>
+<span class="n">T_feed</span>  <span class="o">=</span> <span class="mf">300.0</span>       <span class="c1"># K</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">k_arr</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">8000.0</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="c1">#TODO</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cstr_balances</span><span class="p">(</span><span class="nb">vars</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="nb">vars</span>
+    <span class="n">mole_balance</span>   <span class="o">=</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">k_arr</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="n">X</span>  <span class="c1">#TODO</span>
+    <span class="n">energy_balance</span> <span class="o">=</span> <span class="n">X</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">dHrxn</span><span class="p">)</span> <span class="o">-</span> <span class="n">rho_Cp</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">T_feed</span><span class="p">)</span>  <span class="c1">#TODO</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">mole_balance</span><span class="p">,</span> <span class="n">energy_balance</span><span class="p">]</span>  <span class="c1">#TODO</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">cstr_balances</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">350</span><span class="p">])</span>  <span class="c1">#TODO</span>
+<span class="n">X_ss</span><span class="p">,</span> <span class="n">T_ss</span> <span class="o">=</span> <span class="n">sol</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steady-state conversion : X = </span><span class="si">{</span><span class="n">X_ss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">X_ss</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steady-state temperature: T = </span><span class="si">{</span><span class="n">T_ss</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Residuals: </span><span class="si">{</span><span class="n">cstr_balances</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Steady-state conversion : X = 0.0003  (0.0%)
+Steady-state temperature: T = 300.01 K
+Residuals: [8.61940727125976e-18, -2.545696986544499e-11]
 </pre></div>
 </div>
 </div>

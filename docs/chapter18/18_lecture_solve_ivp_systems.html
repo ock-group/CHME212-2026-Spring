@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lecture Script — 18.3 &amp; 18.4: solve_ivp and Systems of ODEs &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/chapter18/18_lecture_solve_ivp_systems';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab11/11_lab.html">Lab 11: Root Finding</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/chapter18/18_lecture_solve_ivp_systems.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/chapter18/18_lecture_solve_ivp_systems.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lecture Script — 18.3 & 18.4: solve_ivp and Systems of ODEs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-odes-in-python-with-solve-ivp">18.3 Solving ODEs in Python with <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opening">Opening</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-the-ode-as-a-python-function">18.3.1 Writing the ODE as a Python function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-solve-ivp-and-reading-the-result">18.3.2 Calling <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> and reading the result</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-solve-ivp-doing-optional">18.3.3 What is <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> doing? (Optional)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-parameters-with-args">18.3.4 Passing parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systems-of-odes">18.4 Systems of ODEs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-system-of-odes">What is a system of ODEs?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-reactions-a-b-c">18.4.1 Consecutive Reactions: A → B → C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-ode-controlled-tank-level">18.4.2 Second-Order ODE: Controlled Tank Level</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-script-18-3-18-4-solve-ivp-and-systems-of-odes">
+<h1>Lecture Script — 18.3 &amp; 18.4: <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> and Systems of ODEs<a class="headerlink" href="#lecture-script-18-3-18-4-solve-ivp-and-systems-of-odes" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="solving-odes-in-python-with-solve-ivp">
+<h2>18.3 Solving ODEs in Python with <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code><a class="headerlink" href="#solving-odes-in-python-with-solve-ivp" title="Link to this heading">#</a></h2>
+<section id="opening">
+<h3>Opening<a class="headerlink" href="#opening" title="Link to this heading">#</a></h3>
+<p>So far we’ve seen what an ODE is and how Euler’s method works step by step. Now we’re going to hand that work off to Python. The tool we’ll use is <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code>. It does exactly what the numerical ODE solver does — marches forward from an initial condition — but with a much smarter algorithm under the hood.</p>
+<p>There are three things to learn here:</p>
+<ol class="arabic simple">
+<li><p>How to write your ODE as a Python function</p></li>
+<li><p>How to call <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> and read what it gives back</p></li>
+<li><p>What the solver is actually doing (optional, but useful to know)</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="writing-the-ode-as-a-python-function">
+<h3>18.3.1 Writing the ODE as a Python function<a class="headerlink" href="#writing-the-ode-as-a-python-function" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> needs your ODE in a specific form. You write a function that takes the current time <code class="docutils literal notranslate"><span class="pre">t</span></code> and the current state <code class="docutils literal notranslate"><span class="pre">y</span></code>, and returns the derivatives:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dy_dt</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Two things that trip people up every time:</p>
+<p><strong>First:</strong> <code class="docutils literal notranslate"><span class="pre">y</span></code> is always a list, even when you only have one variable. So if there’s only one vairable, you may unpack it, like <code class="docutils literal notranslate"><span class="pre">C_A</span> <span class="pre">=</span> <span class="pre">y[0]</span></code>.</p>
+<p><strong>Second:</strong> you always return a list. Never return a bare number.</p>
+<p>Here’s the simplest example, first-order decay:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For two coupled variables, same idea — unpack both, return both derivatives:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">C_A</span><span class="p">,</span> <span class="n">C_B</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">,</span>
+             <span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">-</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">C_B</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The shape going in matches the shape coming out. That’s the rule.</p>
+</section>
+<hr class="docutils" />
+<section id="calling-solve-ivp-and-reading-the-result">
+<h3>18.3.2 Calling <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> and reading the result<a class="headerlink" href="#calling-solve-ivp-and-reading-the-result" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=...</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The four things you always pass:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>What it is</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fun</span></code></p></td>
+<td><p>your <code class="docutils literal notranslate"><span class="pre">rhs(t,</span> <span class="pre">y)</span></code> function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t_span</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(t_start,</span> <span class="pre">t_end)</span></code> — the integration window</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">y0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[initial_value,</span> <span class="pre">...]</span></code> — one entry per variable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t_eval</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.linspace(t0,</span> <span class="pre">tf,</span> <span class="pre">N)</span></code> — where you want output saved</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>And what comes back — the <code class="docutils literal notranslate"><span class="pre">sol</span></code> object:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>What it contains</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sol.t</span></code></p></td>
+<td><p>array of time points, shape <code class="docutils literal notranslate"><span class="pre">(N,)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sol.y</span></code></p></td>
+<td><p>solution array, shape <code class="docutils literal notranslate"><span class="pre">(n_vars,</span> <span class="pre">N)</span></code> — row <code class="docutils literal notranslate"><span class="pre">i</span></code> is variable <code class="docutils literal notranslate"><span class="pre">i</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sol.success</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the solver converged</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The indexing that gets people: <code class="docutils literal notranslate"><span class="pre">sol.y[0]</span></code> is the full trajectory of the first variable. <code class="docutils literal notranslate"><span class="pre">sol.y[0,</span> <span class="pre">-1]</span></code> is its final value. <code class="docutils literal notranslate"><span class="pre">sol.y[1]</span></code> is the second variable if you have a system.</p>
+<p>Quick example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">],</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>        <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>       <span class="c1"># C_A at t=10</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="what-is-solve-ivp-doing-optional">
+<h3>18.3.3 What is <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> doing? (Optional)<a class="headerlink" href="#what-is-solve-ivp-doing-optional" title="Link to this heading">#</a></h3>
+<p>The default method is <code class="docutils literal notranslate"><span class="pre">'RK45'</span></code>. It’s still doing what Euler does — stepping forward — but instead of one slope per step, it evaluates the slope four times per step and takes a weighted average:</p>
+<div class="math notranslate nohighlight">
+\[
+y_{n+1} = y_n + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\]</div>
+<p>That weighted average tracks the curve far better than Euler’s single slope.</p>
+<p>The “45” means it actually computes two estimates — 4th order and 5th order — and compares them. If they disagree too much, it rejects the step and tries a smaller <code class="docutils literal notranslate"><span class="pre">h</span></code>. If they agree closely, the next step uses a larger <code class="docutils literal notranslate"><span class="pre">h</span></code>. You never choose <code class="docutils literal notranslate"><span class="pre">h</span></code> yourself — the solver adapts it.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Error order</p></th>
+<th class="head"><p>Step size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Euler</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(h)\)</span></p></td>
+<td><p>fixed, you choose</p></td>
+</tr>
+<tr class="row-odd"><td><p>RK4</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(h^4)\)</span></p></td>
+<td><p>fixed, you choose</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>RK45</strong></p></td>
+<td><p>adaptive</p></td>
+<td><p><strong>automatic</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Two tolerances control accuracy:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rtol=1e-3</span></code> (default) — relative: error / |y| stays below this</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">atol=1e-6</span></code> (default) — absolute: guards when y is near zero</p></li>
+</ul>
+<p>Defaults are fine for most ChE problems. Tighten to <code class="docutils literal notranslate"><span class="pre">rtol=1e-6,</span> <span class="pre">atol=1e-9</span></code> when you need higher precision.</p>
+</section>
+<hr class="docutils" />
+<section id="passing-parameters-with-args">
+<h3>18.3.4 Passing parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code><a class="headerlink" href="#passing-parameters-with-args" title="Link to this heading">#</a></h3>
+<p>When your ODE has physical parameters — rate constants, temperatures — pass them through <code class="docutils literal notranslate"><span class="pre">args</span></code> instead of hard-coding them as globals:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,))</span>
+<span class="c1">#                                          ^^^^^ must be a tuple</span>
+</pre></div>
+</div>
+<p>The common mistake: <code class="docutils literal notranslate"><span class="pre">args=(k)</span></code> is just <code class="docutils literal notranslate"><span class="pre">k</span></code> in parentheses — not a tuple. Write <code class="docutils literal notranslate"><span class="pre">args=(k,)</span></code> with a trailing comma.</p>
+<p>Why bother? Because now you can sweep over parameter values without rewriting <code class="docutils literal notranslate"><span class="pre">rhs</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k_val</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k_val</span><span class="p">,),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;k = </span><span class="si">{</span><span class="n">k_val</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="systems-of-odes">
+<h2>18.4 Systems of ODEs<a class="headerlink" href="#systems-of-odes" title="Link to this heading">#</a></h2>
+<section id="what-is-a-system-of-odes">
+<h3>What is a system of ODEs?<a class="headerlink" href="#what-is-a-system-of-odes" title="Link to this heading">#</a></h3>
+<p>Up until now we’ve had one variable and one equation. A <strong>system of ODEs</strong> is when you have two or more equations, and they’re <strong>coupled</strong> — the rate of change of each variable depends on the current values of the others.</p>
+<p>Instead of one unknown <span class="math notranslate nohighlight">\(y(t)\)</span>, we track a vector <span class="math notranslate nohighlight">\(\mathbf{y}(t) = [y_1, y_2, \ldots, y_n]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy_1}{dt} = f_1(t,\, y_1, y_2, \ldots, y_n)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy_2}{dt} = f_2(t,\, y_1, y_2, \ldots, y_n)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\vdots
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy_n}{dt} = f_n(t,\, y_1, y_2, \ldots, y_n)
+\]</div>
+<p>In Python: <code class="docutils literal notranslate"><span class="pre">y</span></code> is a list, <code class="docutils literal notranslate"><span class="pre">rhs</span></code> returns a list of the same length. That’s it — <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> doesn’t care whether it’s one variable or ten.</p>
+<p>Two places systems come from in ChE:</p>
+<ol class="arabic simple">
+<li><p><strong>Multiple species</strong> — each component’s material balance is one ODE, coupled through shared reaction rates</p></li>
+<li><p><strong>Higher-order ODEs</strong> — a second-order ODE becomes two first-order ODEs by substituting <span class="math notranslate nohighlight">\(y_2 = dy_1/dt\)</span></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="consecutive-reactions-a-b-c">
+<h3>18.4.1 Consecutive Reactions: A → B → C<a class="headerlink" href="#consecutive-reactions-a-b-c" title="Link to this heading">#</a></h3>
+<p>Classic ChE system. Reactant A converts to intermediate B, which converts to product C:</p>
+<div class="math notranslate nohighlight">
+\[A \xrightarrow{k_1} B \xrightarrow{k_2} C\]</div>
+<p>Write the material balance for each species:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dC_A}{dt} = -k_1 C_A\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{dC_B}{dt} = k_1 C_A - k_2 C_B\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{dC_C}{dt} = k_2 C_B\]</div>
+<p>Three equations, three unknowns. In Python, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">[C_A,</span> <span class="pre">C_B,</span> <span class="pre">C_C]</span></code>.</p>
+<p>Notice the coupling: the <span class="math notranslate nohighlight">\(dC_B/dt\)</span> equation depends on <span class="math notranslate nohighlight">\(C_A\)</span>. And <span class="math notranslate nohighlight">\(dC_C/dt\)</span> depends on <span class="math notranslate nohighlight">\(C_B\)</span>. You can’t solve them independently — they’re linked. That’s what makes it a system.</p>
+<p>Also notice: <span class="math notranslate nohighlight">\(C_A + C_B + C_C = \text{const}\)</span> (total moles conserved). Always check this after solving — it’s a free verification of correctness.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">consecutive_rxn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">):</span>
+    <span class="n">C_A</span><span class="p">,</span> <span class="n">C_B</span><span class="p">,</span> <span class="n">C_C</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dCA</span> <span class="o">=</span> <span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span>
+    <span class="n">dCB</span> <span class="o">=</span>  <span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">-</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">C_B</span>
+    <span class="n">dCC</span> <span class="o">=</span>  <span class="n">k2</span> <span class="o">*</span> <span class="n">C_B</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dCA</span><span class="p">,</span> <span class="n">dCB</span><span class="p">,</span> <span class="n">dCC</span><span class="p">]</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">consecutive_rxn</span><span class="p">,</span>
+                <span class="n">t_span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+                <span class="n">y0</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+                <span class="n">t_eval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span>
+
+<span class="c1"># Verify mass conservation</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max deviation from 1.0: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What you’ll see in the plot: <span class="math notranslate nohighlight">\(C_A\)</span> decays monotonically. <span class="math notranslate nohighlight">\(C_B\)</span> rises, peaks, then falls as it gets consumed into <span class="math notranslate nohighlight">\(C_C\)</span>. The peak of <span class="math notranslate nohighlight">\(C_B\)</span> is where <span class="math notranslate nohighlight">\(dC_B/dt = 0\)</span>, i.e., where <span class="math notranslate nohighlight">\(k_1 C_A = k_2 C_B\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="second-order-ode-controlled-tank-level">
+<h3>18.4.2 Second-Order ODE: Controlled Tank Level<a class="headerlink" href="#second-order-ode-controlled-tank-level" title="Link to this heading">#</a></h3>
+<p><strong>The situation.</strong> A liquid tank has an inlet controlled by a spring-loaded valve. A sensor measures the tank level <span class="math notranslate nohighlight">\(h\)</span> and sends an error signal to the valve: if <span class="math notranslate nohighlight">\(h\)</span> is below the setpoint <span class="math notranslate nohighlight">\(h_{ss}\)</span>, open more; if above, close. This is the feedback controller.</p>
+<p>The valve has a physical plug with mass <span class="math notranslate nohighlight">\(m_v\)</span> and a spring with constant <span class="math notranslate nohighlight">\(k_s\)</span>. Because of that inertia, the valve can’t respond instantly — it accelerates toward the commanded position, then decelerates as it arrives. This mechanical lag introduces a second derivative into the level dynamics.</p>
+<p><strong>The ODE derivation.</strong> Start with the tank material balance:</p>
+<div class="math notranslate nohighlight">
+\[A_t \frac{dh}{dt} = F_{in}(t) - F_{out}\]</div>
+<p>The controller drives <span class="math notranslate nohighlight">\(F_{in}\)</span> based on the level error, but the valve dynamics obey a force balance:</p>
+<div class="math notranslate nohighlight">
+\[m_v \ddot{x} + b\dot{x} + k_s x = K_c(h_{ss} - h)\]</div>
+<p>where <span class="math notranslate nohighlight">\(x\)</span> is valve displacement and <span class="math notranslate nohighlight">\(b\)</span> is friction. Substituting <span class="math notranslate nohighlight">\(F_{in} \propto x\)</span> and rearranging in terms of <span class="math notranslate nohighlight">\(h\)</span> gives the standard second-order form:</p>
+<div class="math notranslate nohighlight">
+\[\tau^2 \frac{d^2h}{dt^2} + 2\zeta\tau\frac{dh}{dt} + h = h_{ss}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tau = \sqrt{m_v / k_s}\)</span> — the valve’s natural time constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(\zeta = b\,/\,(2\sqrt{m_v k_s})\)</span> — the damping ratio (friction relative to spring stiffness)</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(\zeta\)</span></p></th>
+<th class="head"><p>Valve character</p></th>
+<th class="head"><p>What the level does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(&lt; 1\)</span></p></td>
+<td><p>Lightly damped</p></td>
+<td><p>Overshoots, oscillates before settling</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(= 1\)</span></p></td>
+<td><p>Critically damped</p></td>
+<td><p>Reaches <span class="math notranslate nohighlight">\(h_{ss}\)</span> fastest, no overshoot</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(&gt; 1\)</span></p></td>
+<td><p>Heavily damped</p></td>
+<td><p>Creeps slowly to <span class="math notranslate nohighlight">\(h_{ss}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Reducing to a first-order system.</strong> <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> only handles first-order ODEs. Introduce:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y_1 = h\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y_2 = dh/dt\)</span></p></li>
+</ul>
+<p>Then:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dy_1}{dt} = y_2 \qquad \frac{dy_2}{dt} = \frac{1}{\tau^2}\left(h_{ss} - y_1 - 2\zeta\tau\, y_2\right)\]</div>
+<p>One second-order ODE → two first-order ODEs. Same trick works for any higher-order ODE.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">damped_oscillator</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">zeta</span><span class="p">,</span> <span class="n">h_ss</span><span class="p">):</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">dhdt</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">d2hdt2</span> <span class="o">=</span> <span class="p">(</span><span class="n">h_ss</span> <span class="o">-</span> <span class="n">h</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">zeta</span><span class="o">*</span><span class="n">tau</span><span class="o">*</span><span class="n">dhdt</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dhdt</span><span class="p">,</span> <span class="n">d2hdt2</span><span class="p">]</span>
+
+<span class="n">tau</span>  <span class="o">=</span> <span class="mf">2.0</span>   <span class="c1"># min</span>
+<span class="n">h_ss</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c1"># m — setpoint, step change from h=0</span>
+
+<span class="k">for</span> <span class="n">zeta</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">damped_oscillator</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">zeta</span><span class="p">,</span> <span class="n">h_ss</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ζ = </span><span class="si">{</span><span class="n">zeta</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Initial conditions <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">0.0]</span></code> mean: tank starts empty, valve at rest.</p>
+<p><strong>What to look for in the plot:</strong> all three curves start at 0 and end at 1. The underdamped (<span class="math notranslate nohighlight">\(\zeta = 0.3\)</span>) curve overshoots and rings. The critically damped (<span class="math notranslate nohighlight">\(\zeta = 1.0\)</span>) curve reaches the setpoint cleanest. The overdamped (<span class="math notranslate nohighlight">\(\zeta = 2.0\)</span>) curve barely makes it in the same window — the sluggish valve is the bottleneck.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Key point</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rhs(t,</span> <span class="pre">y)</span></code> signature</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y</span></code> is always a list; always return a list</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> output</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sol.y[i]</span></code> = trajectory of variable <code class="docutils literal notranslate"><span class="pre">i</span></code>; <code class="docutils literal notranslate"><span class="pre">sol.y[i,</span> <span class="pre">-1]</span></code> = final value</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">args</span></code></p></td>
+<td><p>pass parameters as a tuple <code class="docutils literal notranslate"><span class="pre">(k,)</span></code> — never <code class="docutils literal notranslate"><span class="pre">(k)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>System of ODEs</p></td>
+<td><p>one entry in <code class="docutils literal notranslate"><span class="pre">y0</span></code> per variable; <code class="docutils literal notranslate"><span class="pre">rhs</span></code> returns one derivative per variable</p></td>
+</tr>
+<tr class="row-even"><td><p>Higher-order ODE</p></td>
+<td><p>substitute <span class="math notranslate nohighlight">\(y_2 = \dot{y}_1\)</span> to reduce to first-order system</p></td>
+</tr>
+<tr class="row-odd"><td><p>Verify results</p></td>
+<td><p>check conservation laws (mass, energy) after solving</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/chapter18"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-odes-in-python-with-solve-ivp">18.3 Solving ODEs in Python with <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opening">Opening</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-the-ode-as-a-python-function">18.3.1 Writing the ODE as a Python function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-solve-ivp-and-reading-the-result">18.3.2 Calling <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> and reading the result</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-solve-ivp-doing-optional">18.3.3 What is <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> doing? (Optional)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-parameters-with-args">18.3.4 Passing parameters with <code class="docutils literal notranslate"><span class="pre">args</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systems-of-odes">18.4 Systems of ODEs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-system-of-odes">What is a system of ODEs?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consecutive-reactions-a-b-c">18.4.1 Consecutive Reactions: A → B → C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-ode-controlled-tank-level">18.4.2 Second-Order ODE: Controlled Tank Level</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

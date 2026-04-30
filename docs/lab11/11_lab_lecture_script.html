@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 11 Lecture Script — Root Finding &#8212; Introduction to Chemical Engineering Computation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/lab11/11_lab_lecture_script';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Introduction to Chemical Engineering Computation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Introduction to Chemical Engineering Computation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction/intro.html">
+                    Welcome to CHME 212 Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter00/00_notebook.html">Chapter 0: Introduction to Python &amp; Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter01/01_notebook.html">Chapter 1: Basic Python Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter02/02_notebook.html">Chapter 2: Working with Text (Strings)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter03/03_notebook.html">Chapter 3: Boolean Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter04/04_notebook.html">Chapter 4: Python Collections - Lists, Tuples, and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter05/05_notebook.html">Chapter 5: Control Flow - Making Decisions in Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter06/06_notebook.html">Chapter 6: File Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter07/07_notebook.html">Chapter 7. Functions/Modules/Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter08/08_notebook.html">Chapter 8: Programming Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter09/09_notebook.html">Chapter 9: Plotting &amp; Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Computation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lab01/01_lab.html">Lab 01: Python Fundamentals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab02/02_lab.html">Lab 02: Booleans and Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab03/03_lab.html">Lab 03: Control Flow, Loops, and Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab04/04_lab.html">Lab 04: File I/O and Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab05/05_lab.html">Lab 05: File I/O and Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab06/06_lab.html">Lab 06: NumPy Arrays and Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab07/07_lab.html">Lab 07: Polynomials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab08/08_lab.html">Lab 08: Statistics &amp; Random Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab09/09_lab.html">Lab 09: Monte Carlo Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/10_lab.html">Lab 10: Numerical Differentiation &amp; Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_lab.html">Lab 11: Root Finding</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ock-group/CHME212-2026-Spring/issues/new?title=Issue%20on%20page%20%2Fdocs/lab11/11_lab_lecture_script.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/lab11/11_lab_lecture_script.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 11 Lecture Script — Root Finding</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-class">Before Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-3-min">Opening (3 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-workflow-write-it-on-the-board-2-min">The Workflow — Write It on the Board (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-van-der-waals-molar-volume-with-brentq-10-min">Example 1: van der Waals Molar Volume with <code class="docutils literal notranslate"><span class="pre">brentq</span></code> (10 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-two-curves-intersecting-with-fsolve-8-min">Example 2: Two Curves Intersecting with <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> (8 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up-exercises-student-work-5-min">Warm-Up Exercises — Student Work (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-walkthrough-equilibrium-vs-temperature-5-min-intro">Problem 1 Walkthrough — Equilibrium vs. Temperature (5 min intro)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-walkthrough-cstr-multiple-steady-states-5-min-intro">Problem 2 Walkthrough — CSTR Multiple Steady States (5 min intro)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-2-min">Closing (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-questions">Common Questions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-11-lecture-script-root-finding">
+<h1>Lab 11 Lecture Script — Root Finding<a class="headerlink" href="#lab-11-lecture-script-root-finding" title="Link to this heading">#</a></h1>
+<p><strong>Course:</strong> CHME 212<br />
+<strong>Time:</strong> ~25–30 min demo + ~45 min student work</p>
+<hr class="docutils" />
+<section id="before-class">
+<h2>Before Class<a class="headerlink" href="#before-class" title="Link to this heading">#</a></h2>
+<p>Pull up <code class="docutils literal notranslate"><span class="pre">11_lab.ipynb</span></code>. Have the Chapter 16 notebook open in another tab as a reference. The key table to keep visible:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Tool</p></th>
+<th class="head"><p>Syntax</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Polynomial roots</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.roots</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">np.roots([c0,</span> <span class="pre">c1,</span> <span class="pre">...,</span> <span class="pre">cn])</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Single equation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">brentq</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">brentq(f,</span> <span class="pre">a,</span> <span class="pre">b)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>System of equations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fsolve</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fsolve(F,</span> <span class="pre">x0)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="opening-3-min">
+<h2>Opening (3 min)<a class="headerlink" href="#opening-3-min" title="Link to this heading">#</a></h2>
+<p>“Today we’re doing something different — we’re not computing <em>forward</em> from a known equation. Instead, we’re asking: <em>given that this equation equals zero, what is x?</em> That’s root finding.”</p>
+<p>“You’ve been doing this since high school with the quadratic formula. The quadratic formula is just a special case of root finding where someone worked out the algebra for you. For anything more complicated — cubic equations of state, equilibrium expressions, coupled reactor balances — there’s no formula. You hand it to an algorithm.”</p>
+<p>“We have three tools today. Let me show you each one on a real ChE example, then you’ll use all three on the practice problems.”</p>
+</section>
+<hr class="docutils" />
+<section id="the-workflow-write-it-on-the-board-2-min">
+<h2>The Workflow — Write It on the Board (2 min)<a class="headerlink" href="#the-workflow-write-it-on-the-board-2-min" title="Link to this heading">#</a></h2>
+<p>Before touching any code, write these four steps where students can see them the whole time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. Rewrite your equation as f(x) = 0
+2. PLOT f(x) — count roots, find brackets
+3. Choose your tool and solve
+4. VERIFY: print f(x*) — it must be ≈ 0
+</pre></div>
+</div>
+<p>“Step 4 is not optional. <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> in particular can give you a wrong answer with no warning. Always check.”</p>
+</section>
+<hr class="docutils" />
+<section id="example-1-van-der-waals-molar-volume-with-brentq-10-min">
+<h2>Example 1: van der Waals Molar Volume with <code class="docutils literal notranslate"><span class="pre">brentq</span></code> (10 min)<a class="headerlink" href="#example-1-van-der-waals-molar-volume-with-brentq-10-min" title="Link to this heading">#</a></h2>
+<p><strong>The physical setup:</strong></p>
+<p>“We have CO₂ at 310 K and 70 bar — that’s above room temperature, well above ambient pressure. We want to know the molar volume. The ideal gas law says <span class="math notranslate nohighlight">\(V = RT/P\)</span>, let’s compute that quickly.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V_ideal</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ideal gas V = </span><span class="si">{</span><span class="n">V_ideal</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> L/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>“We get about 0.37 L/mol. But CO₂ at 70 bar is not ideal — it’s being compressed significantly. The van der Waals equation corrects for molecular size and attractions.”</p>
+<p><strong>Step 1 — rewrite as f(V) = 0:</strong></p>
+<p>“We can’t solve van der Waals analytically for V — well, technically it’s a cubic so it has three roots, but the formula is a mess. Instead we rewrite it as f(V) = 0.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_vdw</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">P</span> <span class="o">+</span> <span class="n">a</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span>
+</pre></div>
+</div>
+<p>“f(V) is the left side minus the right side. When f(V) = 0, the equation is satisfied.”</p>
+<p><strong>Step 2 — plot:</strong></p>
+<p>“Before calling any solver, always plot. This is non-negotiable.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">V_range</span><span class="p">,</span> <span class="n">f_vdw</span><span class="p">(</span><span class="n">V_range</span><span class="p">),</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Molar volume V (L/mol)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;f(V)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;van der Waals: f(V) = 0&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>“What do I see? The function crosses zero somewhere around 0.2 L/mol. I can see f(0.1) is negative and f(0.5) is positive — that’s my bracket. Notice I started the range at b + 0.001, not zero, because the equation blows up when V = b.”</p>
+<p><strong>Step 3 — solve:</strong></p>
+<p>“Now <code class="docutils literal notranslate"><span class="pre">brentq</span></code>. It needs the function and a bracket — two x values where f has opposite signs.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V_root</span> <span class="o">=</span> <span class="n">brentq</span><span class="p">(</span><span class="n">f_vdw</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>“Note: <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> here are the bracket endpoints, not the van der Waals constants — different variable names, be careful.”</p>
+<p><strong>Step 4 — verify:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;van der Waals V = </span><span class="si">{</span><span class="n">V_root</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> L/mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ideal gas V     = </span><span class="si">{</span><span class="n">V_ideal</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> L/mol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Residual f(V*)  = </span><span class="si">{</span><span class="n">f_vdw</span><span class="p">(</span><span class="n">V_root</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compressibility Z = PV/RT = </span><span class="si">{</span><span class="n">P</span><span class="o">*</span><span class="n">V_root</span><span class="o">/</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>“Z is about 0.59 — CO₂ is much more compressed than ideal gas predicts. The residual is around 1e-14, essentially machine zero. That’s how you know the answer is right.”</p>
+<p><strong>Key point to emphasize:</strong></p>
+<p>“Why <code class="docutils literal notranslate"><span class="pre">brentq</span></code> and not Newton’s method? Because <code class="docutils literal notranslate"><span class="pre">brentq</span></code> is guaranteed to find a root as long as your bracket has a sign change. Newton can diverge. <code class="docutils literal notranslate"><span class="pre">brentq</span></code> combines bisection’s safety with near-Newton speed. It’s the practical workhorse for single-variable root finding.”</p>
+</section>
+<hr class="docutils" />
+<section id="example-2-two-curves-intersecting-with-fsolve-8-min">
+<h2>Example 2: Two Curves Intersecting with <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> (8 min)<a class="headerlink" href="#example-2-two-curves-intersecting-with-fsolve-8-min" title="Link to this heading">#</a></h2>
+<p><strong>The physical setup:</strong></p>
+<p>“Now we have <em>two</em> unknowns and <em>two</em> equations. Single-variable solvers can’t handle this — we need <code class="docutils literal notranslate"><span class="pre">fsolve</span></code>.”</p>
+<p>“Where does <span class="math notranslate nohighlight">\(y = x^2\)</span> intersect <span class="math notranslate nohighlight">\(y = 2 - x\)</span>? Geometrically it’s obvious — a parabola and a line. But if this were a CSTR mole balance and energy balance instead of algebra, we’d have to do this numerically.”</p>
+<p><strong>Step 1 — rewrite as F(x) = 0:</strong></p>
+<p>“The trick with <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> is packaging everything into one function that takes a <em>list</em> of unknowns and returns a <em>list</em> of residuals.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">equations</span><span class="p">(</span><span class="nb">vars</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">vars</span>
+    <span class="n">eq1</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>       <span class="c1"># parabola: y = x^2 rearranged</span>
+    <span class="n">eq2</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span>      <span class="c1"># line: y = 2-x rearranged</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>“Two unknowns in, two residuals out. Always match the count.”</p>
+<p><strong>Solving — initial guess matters:</strong></p>
+<p>“Unlike <code class="docutils literal notranslate"><span class="pre">brentq</span></code>, <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> doesn’t need a bracket. It needs an initial <em>guess</em>. And unlike <code class="docutils literal notranslate"><span class="pre">brentq</span></code>, it is not guaranteed to converge — or to find the root you want. Use different guesses to find different solutions.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sol1</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">equations</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">sol2</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">equations</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Step 4 — verify:</strong></p>
+<p>“This step is critical for <code class="docutils literal notranslate"><span class="pre">fsolve</span></code>. It can silently return a wrong answer.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution 1: x = </span><span class="si">{</span><span class="n">sol1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">, y = </span><span class="si">{</span><span class="n">sol1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  residuals: </span><span class="si">{</span><span class="n">equations</span><span class="p">(</span><span class="n">sol1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution 2: x = </span><span class="si">{</span><span class="n">sol2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">, y = </span><span class="si">{</span><span class="n">sol2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  residuals: </span><span class="si">{</span><span class="n">equations</span><span class="p">(</span><span class="n">sol2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>“Both residuals should be near 1e-12 or smaller. If you get residuals that are large, your solver converged to a non-solution.”</p>
+<p><strong>Visualize to confirm:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_p</span><span class="p">,</span> <span class="n">x_p</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>  <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>  <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$y = x^2$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_p</span><span class="p">,</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">x_p</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$y = 2 - x$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">sol1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sol2</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">sol1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sol2</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Solutions&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>When to use <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> vs <code class="docutils literal notranslate"><span class="pre">brentq</span></code>:</strong></p>
+<p>“If you have one equation and one unknown — use <code class="docutils literal notranslate"><span class="pre">brentq</span></code>. It’s safer. If you have N equations and N unknowns — <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> is your only option. Remember: always plot what you can before calling it, and always verify the residuals.”</p>
+</section>
+<hr class="docutils" />
+<section id="warm-up-exercises-student-work-5-min">
+<h2>Warm-Up Exercises — Student Work (5 min)<a class="headerlink" href="#warm-up-exercises-student-work-5-min" title="Link to this heading">#</a></h2>
+<p>“Three quick exercises to get the syntax in your fingers before the main problems. Work through them now — call me over if you’re stuck. Five minutes.”</p>
+<p><strong>What to watch for while circulating:</strong></p>
+<ul class="simple">
+<li><p><strong>Exercise 1:</strong> Students forgetting to plot before choosing a bracket. Make sure they identify where f changes sign visually.</p></li>
+<li><p><strong>Exercise 2:</strong> Students passing coefficients in the wrong order to <code class="docutils literal notranslate"><span class="pre">np.roots</span></code> (must be highest-to-lowest degree). The polynomial is <span class="math notranslate nohighlight">\(V^3 - 6V^2 + 11V - 6\)</span>, so coefficients are <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">-6,</span> <span class="pre">11,</span> <span class="pre">-6]</span></code>. Roots are 1, 2, 3.</p></li>
+<li><p><strong>Exercise 3:</strong> Students trying to find both solutions with the same initial guess. Stress that different guesses are needed for different roots.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="problem-1-walkthrough-equilibrium-vs-temperature-5-min-intro">
+<h2>Problem 1 Walkthrough — Equilibrium vs. Temperature (5 min intro)<a class="headerlink" href="#problem-1-walkthrough-equilibrium-vs-temperature-5-min-intro" title="Link to this heading">#</a></h2>
+<p>“Problem 1 is a gas-phase equilibrium: A ⇌ 2B at 3 atm. The equilibrium constant depends on temperature through <span class="math notranslate nohighlight">\(K_{eq}(T) = \exp(4.0 - 3000/T)\)</span>.”</p>
+<p><strong>Setting up f(X):</strong></p>
+<p>“The equilibrium condition gives us this expression for f(X):”</p>
+<div class="math notranslate nohighlight">
+\[f(X_e) = \frac{4X_e^2}{1 - X_e^2} \cdot P - K_{eq}(T)\]</div>
+<p>“Notice f depends on both X and T. In part (a) T is fixed at 800 K. In part (b) you loop over temperatures and solve for X at each one.”</p>
+<p><strong>Hint for part (a):</strong></p>
+<p>“Your <code class="docutils literal notranslate"><span class="pre">brentq</span></code> call will look like <code class="docutils literal notranslate"><span class="pre">brentq(lambda</span> <span class="pre">X:</span> <span class="pre">f_eq(X,</span> <span class="pre">T_val),</span> <span class="pre">0.01,</span> <span class="pre">0.99)</span></code>. The lambda wraps away the T argument so <code class="docutils literal notranslate"><span class="pre">brentq</span></code> only sees a function of X.”</p>
+<p><strong>Hint for part (b) — the loop:</strong></p>
+<p>“For the temperature sweep, you’re solving the same root-finding problem 200 times, once per temperature. Call <code class="docutils literal notranslate"><span class="pre">brentq</span></code> inside the loop with the current T value.”</p>
+<p><strong>Physical intuition to prompt students:</strong></p>
+<p>“As you plot the result, ask yourself: does conversion go up or down as temperature increases? And does that make sense given the sign of <span class="math notranslate nohighlight">\(\Delta H\)</span>? The <span class="math notranslate nohighlight">\(K_{eq}\)</span> formula here has a positive coefficient for T, meaning K increases with T, meaning equilibrium shifts toward products. That’s endothermic behavior.”</p>
+</section>
+<hr class="docutils" />
+<section id="problem-2-walkthrough-cstr-multiple-steady-states-5-min-intro">
+<h2>Problem 2 Walkthrough — CSTR Multiple Steady States (5 min intro)<a class="headerlink" href="#problem-2-walkthrough-cstr-multiple-steady-states-5-min-intro" title="Link to this heading">#</a></h2>
+<p>“Problem 2 is the most important one. Real CSTRs can have multiple steady states — same reactor, same operating conditions, but the system can sit at completely different temperatures and conversions depending on how you start it up.”</p>
+<p><strong>The equations:</strong></p>
+<p>“The mole balance says: rate of reaction times residence time equals conversion. The energy balance says: heat released by reaction equals heat absorbed by the fluid. Both depend on X and T simultaneously, so we need <code class="docutils literal notranslate"><span class="pre">fsolve</span></code>.”</p>
+<p><strong>Setting up the residuals:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cstr_balances</span><span class="p">(</span><span class="nb">vars</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="nb">vars</span>
+    <span class="n">mole_balance</span>   <span class="o">=</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">k_arr</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="n">X</span>
+    <span class="n">energy_balance</span> <span class="o">=</span> <span class="n">X</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">dHrxn</span><span class="p">)</span> <span class="o">-</span> <span class="n">rho_Cp</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">T_feed</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">mole_balance</span><span class="p">,</span> <span class="n">energy_balance</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>“Two equations, two unknowns. Always unpack the solution as <code class="docutils literal notranslate"><span class="pre">X_ss,</span> <span class="pre">T_ss</span> <span class="pre">=</span> <span class="pre">sol</span></code>.”</p>
+<p><strong>Part (b) — the interesting part:</strong></p>
+<p>“Try three very different initial guesses. You might get the same answer every time — or you might get different ones. Either result is informative. If you get the same answer, it suggests there’s only one stable steady state for these parameters. If you find multiple, you’ve discovered that this reactor has ignition/extinction behavior.”</p>
+<p>“The example output shows the solver converging to one low-conversion cold state regardless of guess — that’s a valid physical result. Different parameter sets will give multiple solutions. What matters is that you always verify residuals.”</p>
+<p><strong>Common mistake to warn about:</strong></p>
+<p>“If your residuals are large — like 1e-2 or bigger — <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> did not converge to a solution. Try a different initial guess. Don’t report a solution with bad residuals.”</p>
+</section>
+<hr class="docutils" />
+<section id="closing-2-min">
+<h2>Closing (2 min)<a class="headerlink" href="#closing-2-min" title="Link to this heading">#</a></h2>
+<p>“Let me summarize what we used today:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">np.roots</span></code></strong> — only works for polynomials, but finds <em>all</em> roots at once including complex ones. Filter for the physically meaningful real one.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">brentq</span></code></strong> — guaranteed convergence if you give it a valid bracket. The go-to for any single-equation problem.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">fsolve</span></code></strong> — handles systems but is not guaranteed. Always verify residuals. Use multiple initial guesses when you suspect multiple solutions.</p></li>
+</ul>
+<p>The workflow never changes: rewrite as f = 0, plot, choose your tool, verify. That order protects you from wrong answers.”</p>
+<p>“For the lab submission: complete the warm-up and both practice problems. Make sure every root-finding result has a residual printed next to it.”</p>
+</section>
+<hr class="docutils" />
+<section id="common-questions">
+<h2>Common Questions<a class="headerlink" href="#common-questions" title="Link to this heading">#</a></h2>
+<p><strong>“My brentq is giving a ValueError.”</strong><br />
+The bracket endpoints have the same sign. Go back and plot f(x) — find where it crosses zero and pick one point on each side.</p>
+<p><strong>“fsolve gave me an answer but the residuals are like 1e-2.”</strong><br />
+That is not a solution. Try a different initial guess. Sometimes the solver converges to a stationary point instead of a root.</p>
+<p><strong>“How do I know which root is the physical one from np.roots?”</strong><br />
+Filter by <code class="docutils literal notranslate"><span class="pre">np.isreal(r)</span></code> and <code class="docutils literal notranslate"><span class="pre">r.real</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> (or whatever physical constraint applies). For the van der Waals cubic you want the real positive root larger than b.</p>
+<p><strong>“My temperature sweep crashes with a ValueError in brentq.”</strong><br />
+f(0.01) and f(0.99) may have the same sign at some temperatures — meaning the equilibrium conversion falls outside your bracket. Add a try/except or check f at the bracket endpoints before calling brentq.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/lab11"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-class">Before Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-3-min">Opening (3 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-workflow-write-it-on-the-board-2-min">The Workflow — Write It on the Board (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-van-der-waals-molar-volume-with-brentq-10-min">Example 1: van der Waals Molar Volume with <code class="docutils literal notranslate"><span class="pre">brentq</span></code> (10 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-two-curves-intersecting-with-fsolve-8-min">Example 2: Two Curves Intersecting with <code class="docutils literal notranslate"><span class="pre">fsolve</span></code> (8 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up-exercises-student-work-5-min">Warm-Up Exercises — Student Work (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-walkthrough-equilibrium-vs-temperature-5-min-intro">Problem 1 Walkthrough — Equilibrium vs. Temperature (5 min intro)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-walkthrough-cstr-multiple-steady-states-5-min-intro">Problem 2 Walkthrough — CSTR Multiple Steady States (5 min intro)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-2-min">Closing (2 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-questions">Common Questions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Janghoon Ock
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2032, Janghoon Ock.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

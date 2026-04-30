@@ -199,16 +199,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter18/18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -537,6 +534,27 @@ Residual f(V_root) = -3.55e-15
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optional: Symbolic solution </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">P_val</span><span class="p">,</span> <span class="n">R_val</span><span class="p">,</span> <span class="n">T_val</span><span class="p">,</span> <span class="n">a_val</span><span class="p">,</span> <span class="n">b_val</span> <span class="o">=</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">0.08314</span><span class="p">,</span> <span class="mf">310.0</span><span class="p">,</span> <span class="mf">3.658</span><span class="p">,</span> <span class="mf">0.04286</span>
+
+<span class="n">P_val</span><span class="p">,</span> <span class="n">R_val</span><span class="p">,</span> <span class="n">T_val</span><span class="p">,</span> <span class="n">a_val</span><span class="p">,</span> <span class="n">b_val</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;P R T a b&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">V</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">f_vdw</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_val</span> <span class="o">+</span> <span class="n">a_val</span> <span class="o">/</span> <span class="n">V</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">b_val</span><span class="p">)</span> <span class="o">-</span> <span class="n">R_val</span> <span class="o">*</span> <span class="n">T_val</span>
+
+<span class="n">solutions</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">f_vdw</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+<span class="c1"># print(f&quot;Physical root: V = {solutions[0]:.5f} L/mol&quot;)</span>
+
+<span class="c1"># Physical root: V = 0.21940 L/mol</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="example-2-intersection-of-two-curves-fsolve">
 <h3>Example 2: Intersection of Two Curves (<code class="docutils literal notranslate"><span class="pre">fsolve</span></code>)<a class="headerlink" href="#example-2-intersection-of-two-curves-fsolve" title="Link to this heading">#</a></h3>
@@ -578,6 +596,24 @@ Solution 2: x = 1.000000,  y = 1.000000   residuals: [0.0, 0.0]
 </pre></div>
 </div>
 <img alt="../../_images/0e6cd6e2f7b044b8ce41847d5a27eadee454828c67b3fc2e3e5d742ccf97e21f.png" src="../../_images/0e6cd6e2f7b044b8ce41847d5a27eadee454828c67b3fc2e3e5d742ccf97e21f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+
+<span class="n">solutions</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">([</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solutions</span><span class="p">)</span>
+<span class="c1"># [{x: -2, y: 4}, {x: 1, y: 1}]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(-2, 4), (1, 1)]
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -741,6 +777,18 @@ Residual: -1.44e-14
 </div>
 </div>
 <p><strong>(b)</strong> Compute and plot <span class="math notranslate nohighlight">\(X_e\)</span> vs. <span class="math notranslate nohighlight">\(T\)</span> for temperatures from 500 K to 1200 K. Does conversion increase or decrease with temperature? Is this consistent with Le Chatelier’s principle for an endothermic reaction (<span class="math notranslate nohighlight">\(\Delta H &gt; 0\)</span>)?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brentq</span><span class="p">(</span><span class="n">f_eq</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">T_val</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.31090088715305914
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>

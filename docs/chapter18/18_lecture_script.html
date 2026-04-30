@@ -197,16 +197,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/10_notebook.html">Chapter 10: Basic Array Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_notebook.html">Chapter 11: Linear Algebra &amp; Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter11/11_rank_supplement.html">Supplementary Note: Matrix Rank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">12.1 Motivation: Heat Capacity of CO<span class="math notranslate nohighlight">\(_2\)</span></a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/12_notebook.html">Chapter 12: Polynomial Fitting &amp; Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/13_notebook.html">Chapter 13: Statistics &amp; Random Sampling &amp; Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter14/14_notebook.html">Chapter 14: Monte Carlo Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter15/15_notebook.html">Chapter 15: Numerical Integration and Differentiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter16/16_notebook.html">Chapter 16: Root Finding &amp; Newton’s Method</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter17/17_notebook.html">Chapter 17: Symbolic Mathematics with SymPy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="18_notebook.html">Chapter 18: Ordinary Differential Equations (Not the final version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_notebook.html">Chapter 18: Ordinary Differential Equations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lab Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -428,7 +425,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-an-ode-4-min">18.1.2  Order of an ODE (4 min)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-an-ode-integration-4-min">18.1.3  Solving an ODE = integration (4 min)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-an-analytical-solution-4-min">18.1.4  Verifying an analytical solution (4 min)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-syntax-primer-5-min">18.1.5  Python syntax primer (5 min)</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-method-25-min">18.2  Euler’s Method (25 min)</a><ul class="visible nav section-nav flex-column">
@@ -546,7 +542,7 @@ position   ↔   y(t)               (what we want)
 start loc  ↔   y(t₀) = y₀        (initial condition, given)
 </pre></div>
 </div>
-<p><strong>Pause and check:</strong> Ask students: “In the batch reactor equation dC_A/dt = -k*C_A, what plays the role of f(t,y)?” Answer: f(t, C_A) = -k * C_A. Note that it doesn’t actually depend on t here — that’s common but not always the case.</p>
+<p><strong>Pause and check:</strong> Ask students: “In the batch reactor equation dC_A/dt = -k*C_A, what plays the role of f(t,y)?” Answer: f(t, C_A) = -k * C_A.</p>
 </section>
 <hr class="docutils" />
 <section id="order-of-an-ode-4-min">
@@ -629,61 +625,7 @@ Then:
 <div><p>“Whenever you solve an ODE numerically, always ask yourself: does this limit case have an analytical solution I can use to verify my code? For first-order linear ODEs with constant coefficients, the answer is usually yes.”</p>
 </div></blockquote>
 </section>
-<hr class="docutils" />
-<section id="python-syntax-primer-5-min">
-<h2>18.1.5  Python syntax primer (5 min)<a class="headerlink" href="#python-syntax-primer-5-min" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p>“Before we write a single solver call, I want to make sure everyone is comfortable translating a math equation into a Python function. This is a purely mechanical translation — once you see the pattern, it becomes automatic.”</p>
-</div></blockquote>
-<p>Write the pattern on the board:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="c1"># t : scalar — current time</span>
-    <span class="c1"># y : list   — current values of all variables</span>
-    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span> <span class="n">of</span> <span class="n">derivatives</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><strong>Two rules. Repeat them.</strong></p>
-<p>Rule 1: <code class="docutils literal notranslate"><span class="pre">y</span></code> is always a list. Even if you only have one variable, you unpack it as <code class="docutils literal notranslate"><span class="pre">y[0]</span></code>.</p>
-<p>Rule 2: You always return a list. Even if you only have one derivative.</p>
-<p>Show a single-variable example first:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ODE: dC_A/dt = -k * C_A</span>
-<span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="n">C_A</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Walk through it line by line:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">y[0]</span></code> unpacks C_A from the state list</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-k</span> <span class="pre">*</span> <span class="pre">C_A</span></code> is f(t, y) — the right-hand side of the ODE</p></li>
-<li><p>We return it inside a list <code class="docutils literal notranslate"><span class="pre">[...]</span></code></p></li>
-</ul>
-<p>Then show a two-variable example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># System: dC_A/dt = -k1*C_A</span>
-<span class="c1">#         dC_B/dt =  k1*C_A - k2*C_B</span>
-<span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rhs_system</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="n">C_A</span><span class="p">,</span> <span class="n">C_B</span> <span class="o">=</span> <span class="n">y</span>        <span class="c1"># unpack both variables</span>
-    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span><span class="p">,</span>
-             <span class="n">k1</span> <span class="o">*</span> <span class="n">C_A</span> <span class="o">-</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">C_B</span><span class="p">]</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p>“Notice: two variables go in, two derivatives come out. The list you return must always have the same number of entries as the list y.”</p>
-</div></blockquote>
-<p><strong>Quick test for the room:</strong> Write on the board: <code class="docutils literal notranslate"><span class="pre">dT/dt</span> <span class="pre">=</span> <span class="pre">(T_in</span> <span class="pre">-</span> <span class="pre">T)</span> <span class="pre">/</span> <span class="pre">tau</span></code>. Ask: “Write me the Python function for this ODE.” Give 60 seconds. Expected answer:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">[(</span><span class="n">T_in</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">]</span>
-</pre></div>
-</div>
-<hr class="docutils" />
 </section>
-</section>
-<hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="euler-s-method-25-min">
 <h1>18.2  Euler’s Method (25 min)<a class="headerlink" href="#euler-s-method-25-min" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
@@ -1186,7 +1128,6 @@ A: Because it is the clearest possible illustration of the core idea — and eve
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-an-ode-4-min">18.1.2  Order of an ODE (4 min)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-an-ode-integration-4-min">18.1.3  Solving an ODE = integration (4 min)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-an-analytical-solution-4-min">18.1.4  Verifying an analytical solution (4 min)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-syntax-primer-5-min">18.1.5  Python syntax primer (5 min)</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-method-25-min">18.2  Euler’s Method (25 min)</a><ul class="visible nav section-nav flex-column">

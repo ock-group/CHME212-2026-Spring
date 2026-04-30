@@ -1,0 +1,45 @@
+Traceback (most recent call last):
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 1323, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/hoon/miniconda3/envs/chemcomp/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+t_eval = np.linspace(0, 10, 300)
+
+fig, ax = plt.subplots(figsize=(7, 4))
+for k_val, color in zip([0.1, 0.2, 0.3, 0.5], ['steelblue', 'seagreen', 'darkorange', 'tomato']):
+    sol = solve_ivp(rhs_param, (0, 10), [0.5], args=(k_val,), t_eval=t_eval)
+    ax.plot(sol.t, sol.y[0], color=color, lw=2, label=f'k = {k_val} min\u207b\xb9')
+
+ax.set_xlabel('Time (min)', fontsize=12)
+ax.set_ylabel('$C_A$ (mol/L)', fontsize=12)
+ax.set_title('Parameter sweep using args=(k,)', fontsize=12)
+ax.legend(fontsize=10)
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[12], line 5[0m
+[1;32m      3[0m fig, ax [38;5;241m=[39m plt[38;5;241m.[39msubplots(figsize[38;5;241m=[39m([38;5;241m7[39m, [38;5;241m4[39m))
+[1;32m      4[0m [38;5;28;01mfor[39;00m k_val, color [38;5;129;01min[39;00m [38;5;28mzip[39m([[38;5;241m0.1[39m, [38;5;241m0.2[39m, [38;5;241m0.3[39m, [38;5;241m0.5[39m], [[38;5;124m'[39m[38;5;124msteelblue[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mseagreen[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mdarkorange[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mtomato[39m[38;5;124m'[39m]):
+[0;32m----> 5[0m     sol [38;5;241m=[39m solve_ivp([43mrhs_param[49m, ([38;5;241m0[39m, [38;5;241m10[39m), [[38;5;241m0.5[39m], args[38;5;241m=[39m(k_val,), t_eval[38;5;241m=[39mt_eval)
+[1;32m      6[0m     ax[38;5;241m.[39mplot(sol[38;5;241m.[39mt, sol[38;5;241m.[39my[[38;5;241m0[39m], color[38;5;241m=[39mcolor, lw[38;5;241m=[39m[38;5;241m2[39m, label[38;5;241m=[39m[38;5;124mf[39m[38;5;124m'[39m[38;5;124mk = [39m[38;5;132;01m{[39;00mk_val[38;5;132;01m}[39;00m[38;5;124m min[39m[38;5;130;01m\u207b[39;00m[38;5;130;01m\xb9[39;00m[38;5;124m'[39m)
+[1;32m      8[0m ax[38;5;241m.[39mset_xlabel([38;5;124m'[39m[38;5;124mTime (min)[39m[38;5;124m'[39m, fontsize[38;5;241m=[39m[38;5;241m12[39m)
+
+[0;31mNameError[0m: name 'rhs_param' is not defined
+
